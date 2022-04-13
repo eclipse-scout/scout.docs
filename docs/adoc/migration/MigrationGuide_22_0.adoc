@@ -637,3 +637,11 @@ These packages are intended to be deleted in an upcoming release.
 ** Classes related to the `IDataModel` have been moved to this module
 * org.eclipse.scout.rt.datamodel.ui.html
 ** Json components of the `IComposerField` are located here
+
+== Keystroke adjustments for disabled widgets (since 22.0.3)
+
+If you created custom JavaScript keystrokes (extending from KeyStroke.js), you might experience a different behavior:
+the keystroke is now only active if the widget and every parent widget is enabled.
+Previously, the state of the parents was ignored, which was inconsistent.
+If your keystroke should be active even if the widget is disabled, you can set `inheritAccessibility = false` on your keystroke.
+For more details, see https://github.com/eclipse-scout/scout.rt/commit/91f8465564e718702920a28edbb559041cfeb752
