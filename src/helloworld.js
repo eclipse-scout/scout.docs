@@ -1,4 +1,4 @@
-import { scout, App as ScoutApp } from '@eclipse-scout/core';
+import { scout, App } from '@eclipse-scout/core';
 import { Desktop } from './desktop/Desktop'
 import { HelloForm } from './greeting/HelloForm'
 
@@ -10,8 +10,9 @@ window.helloworld = Object.assign(window.helloworld || {}, {
   HelloForm
 });
 
-new ScoutApp().init({
+new App().init({
   bootstrap: {
-    textsUrl: 'texts.json'
+    textsUrl: ['texts.json', 'helloworld-texts.json'],
+	localesUrl: 'locales.json'
   }
 });

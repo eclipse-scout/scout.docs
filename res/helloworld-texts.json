@@ -1,0 +1,6 @@
+{
+  "default": {
+    "helloworld.Name": "Name",
+	"helloworld.SayHello": "Say Hello"
+  }
+}

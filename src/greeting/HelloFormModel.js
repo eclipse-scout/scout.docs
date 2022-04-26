@@ -11,12 +11,12 @@ export default () => ({
       {
         id: 'NameField',
         objectType: 'StringField',
-        label: 'Name'
+        label: '${textKey:helloworld.Name}'
       },
       {
         id: 'GreetButton',
         objectType: 'Button',
-        label: 'Say Hello',
+        label: '${textKey:helloworld.SayHello}',
         keyStroke: 'enter',
         processButton: false
       }
