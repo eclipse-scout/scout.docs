@@ -19,7 +19,7 @@ https://eclipsescout.github.io/{doc-short-version}/getstarted.html[Get Started G
 The application will simply show a text field and a button.
 Once the user enters some text and presses the button, the application displays a message box including that text.
 
-The application does not require Maven or Java, only Node.js.
+The application does not require Maven or Java, only https://nodejs.org/en/[Node.js].
 Also, the tutorial does not require any specific IDE.
 
 The goal of this tutorial is to provide a first impression of the Scout JS framework.
@@ -27,7 +27,7 @@ We will start by getting the application running and then take a look at the cod
 
 == Prerequisites
 
-Make sure you have https://nodejs.org/dist/latest-v12.x/[Node.js] 12 installed.
+Make sure you have https://nodejs.org/dist/latest-v16.x/[Node.js] 16 installed.
 
 == Get the Code
 
@@ -46,7 +46,7 @@ After that, the file and folder structure of your local copy should look like th
 │
 ├───res
 │       index.html
-│       texts.json
+│       helloworld-texts.json
 │
 └───src
     │   helloworld.js
@@ -64,7 +64,7 @@ After that, the file and folder structure of your local copy should look like th
 
 == Build the Application
 
-In the main folder, where the file `package.json` is located, open a terminal and execute `**npm install**`.
+In the main folder, where the file `package.json` is located, open a terminal and execute `**npm install --ignore-scripts**`.
 
 This creates a folder `node_modules`, containing all (direct and transitive) dependencies,
 as well as a file `package-lock.json`, listing all the specific versions of these dependencies.
@@ -142,9 +142,8 @@ Scout provides a default webpack configuration which we use and adjust as follow
 include::{code-basedir}webpack.config.js[]
 ----
 
-The `**args.resDirArray**` defines the folders with static resources to be copied to `dist`.
-In addition to the static resources of our application, we also need Scout's static resources in
-`node_modules/@eclipse-scout/core/res`, mainly for the icon font `scoutIcons.woff`.
+The `**args.resDirArray**` defines the files or folders with static resources to be copied to `dist`.
+In addition to the static resources of our application, we also need Scout's static resources in `node_modules/@eclipse-scout/core/`.
 
 In `**config.entry**`, the entry points for bundling JavaScript and CSS files are defined.
 For our application, the target files `helloworld.js` and `helloworld-theme.css` (defined without the file extension)
@@ -174,10 +173,7 @@ The order of these elements is important.
 In particular, the `<div>` element with the class "scout" has to be placed before the inclusion of the scripts,
 since it is used to build the final DOM for our application.
 
-The other file in our `res/` folder, `**texts.json**`, contains all texts used in the Scout core module.
-In the future, this file should be part of `@eclipse-scout/core` and contain texts for multiple languages,
-but for now we have to place it next to our own static resources.
-You can get this file e.g. using Google Chrome's DevTools when loading the {jswidgets}[Scout JS Widgets] application.
+The other file in our `res/` folder, `**helloworld-texts.json**`, contains your own texts used in the application.
 
 === Source Files
 
@@ -190,9 +186,8 @@ include::{code-basedir}src/helloworld.js[]
 ----
 
 In our main JavaScript file, we import the `scout` namespace object as well as the class `App`.
-We import `App as ScoutApp` here to make it easier to distinguish it from our own classes, e.g. `Desktop`.
 
-Before we initialize an instance of the Scout application, providing the location of the texts file,
+Before we initialize an instance of the Scout application (passing the location of the text urls and the locales url)
 we do two other things:
 
 1. Use `scout.addObjectFactories` to register a function (identified by 'Desktop')
