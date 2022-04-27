@@ -491,7 +491,7 @@ The following classes were renamed:
 
 When raw deserializing json using Jackson (e.g. by using `JacksonDataObjectMapper#readValueRaw`) the behavior changed for floating point numbers:
 In former releases float numbers fitting into a `Double` have been mapped to `Double`. Now always a `BigDecimal` is used.
-This helps to clarify and stabilize the API (the datatype does not suddenly change if the numbers get bigger) and it helps to map the value from the json to a more precise Java representation (a `Double` cannot hold all floats exactl enough).
+This helps to clarify and stabilize the API (the datatype does not suddenly change if the numbers get bigger) and it helps to map the value from the json to a more precise Java representation (a `Double` cannot hold all floats exactly).
 
 Nothing changes if you deserialize json to a typed DataObject. Then the target type of the attribute in the DataObject is used.
 
