@@ -13,7 +13,7 @@ It also enables you to use modern code but still target older browsers by the us
 
 If you don't need all that and just want to include Scout as a script in your html page (as in the early days), you can do so, too!
 This article shows how to achieve this.
-A live demo of the app we'll create is published on https://codepen.io/cguglielmo/pen/jOVxpMZ[CodePen].
+A live demo of the app we'll create is published on https://codepen.io/eclipse-scout/pen/ZEvgmwv[CodePen].
 
 == Preparation
 
@@ -25,8 +25,8 @@ Or you could use a CDN and download them manually from there or even link to tha
 In this example we are going to use a CDN directly.
 
 There are several CDNs out there that serve the content of all npm modules.
-A popular one is https://www.jsdelivr.com/[jsDelivr].
-Using this CDN you can easily access all Scout assets: https://www.jsdelivr.com/package/npm/@eclipse-scout/core?path=dist[@eclipse-scout/core/dist].
+Popular are https://www.jsdelivr.com/[jsDelivr] or https://unpkg.com/[unpkg] which we will use here.
+Using such a CDN you can easily access all Scout assets: https://www.jsdelivr.com/package/npm/@eclipse-scout/core?path=dist[@eclipse-scout/core/dist].
 
 == Include Assets
 
@@ -44,7 +44,7 @@ Now let's create a new html file called `index.html` and paste the following con
 </head>
 <body>
   <div class="scout"></div>// <3>
-  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>// <2>
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>// <2>
   <script src="https://cdn.jsdelivr.net/npm/sourcemapped-stacktrace@1.1.11/dist/sourcemapped-stacktrace.js"></script>// <2>
   <script src="https://cdn.jsdelivr.net/npm/@eclipse-scout/core@{node-version}/dist/eclipse-scout-core.js"></script>// <1>
   <script src="hello.js"></script>// <4>
@@ -74,10 +74,7 @@ Furthermore, we have to include the `texts.json`.
 This file needs to be included to make sure the texts used by Scout can be resolved for the language the user is using.
 In this case it is necessary for the text `Ok` which is visible on the message box when you click the button.
 
-If you like to present dates and numbers using the format the user is used to, you could also include the `locales.json`.
-We do not need it for now so it is not included.
-
-The rest of the code looks pretty similar to regular Scout JS code but be aware that some newer JS features are used like `class` or the template syntax that may not be supported by every browser.
+Optionally the `locales.json` from Scout can be imported so that the application knows about locale dependent formatting (e.g. for numbers or dates).
 
 == Summary
 
