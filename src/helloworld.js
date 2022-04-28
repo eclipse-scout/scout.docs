@@ -13,6 +13,6 @@ window.helloworld = Object.assign(window.helloworld || {}, {
 new App().init({
   bootstrap: {
     textsUrl: ['texts.json', 'helloworld-texts.json'],
-	localesUrl: 'locales.json'
+    localesUrl: 'locales.json'
   }
 });
