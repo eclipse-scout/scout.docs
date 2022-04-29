@@ -148,8 +148,8 @@ The transition to `Jakarta EE 9.1` or newer is planned for a future release.
 
 The minimal supported browsers have been updated. Scout 22 has the following requirements:
 
-* Mozilla Firefox >= 55
-* Chromium (like Google Chrome, Microsoft Edge, Brave or Opera) >= 58
+* Mozilla Firefox >= 69
+* Chromium (like Google Chrome, Microsoft Edge, Brave or Opera) >= 71
 * Apple Safari >= 12.1
 
 Please note that Microsoft Internet Explorer and Microsoft Edge Legacy are no longer supported by Scout.

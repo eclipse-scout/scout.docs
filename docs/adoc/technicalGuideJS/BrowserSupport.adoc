@@ -16,8 +16,8 @@ The Scout HTML UI requires a web browser with modern built-in technologies: HTML
 Here is a non-exhaustive list of supported browsers:
 
 Desktop::
-* Mozilla Firefox >= 55
-* Chromium (like Google Chrome, Microsoft Edge, Brave or Opera) >= 58
+* Mozilla Firefox >= 69
+* Chromium (like Google Chrome, Microsoft Edge, Brave or Opera) >= 71
 * Apple Safari >= 12.1
 
 Mobile::
