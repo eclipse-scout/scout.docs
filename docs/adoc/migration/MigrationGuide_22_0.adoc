@@ -278,7 +278,7 @@ A _ITypeVersion_ represents a namespace/version and its dependencies.
 *Migration:*
 
 For each different String value used in type version annotation, create an implementation of `ITypeVersion` as described
-in <<../technicalGuide/DataObject.adoc#cha-namespace-and-itypeversion,Data Objects: Namespace and ITypeVersion>> in the technical documentation.
+in link:{techdoc}#cha-namespace-and-itypeversion[Data Objects: Namespace and ITypeVersion] in the technical documentation.
 
 `DataObjectInventory#getTypeVersion` now returns `NamespaceVersion` instead of `String`.
 Use `NamespaceVersion#unwrap` to access the text representation.
