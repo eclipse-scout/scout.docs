@@ -43,15 +43,10 @@ export default class LookupCallLookupCall extends StaticLookupCall {
 
   _data() {
     return [
-      [scout.create('jswidgets.LocaleLookupCall', {
-        session: this.session
-      }), 'jswidgets.LocaleLookupCall', 1],
-      [scout.create('jswidgets.RainbowLookupCall', {
-        session: this.session
-      }), 'jswidgets.RainbowLookupCall', 1],
-      [scout.create('jswidgets.SalutationLookupCall', {
-        session: this.session
-      }), 'jswidgets.SalutationLookupCall', 1]
+      [scout.create('jswidgets.LocaleLookupCall', {session: this.session}), 'jswidgets.LocaleLookupCall'],
+      [scout.create('jswidgets.RainbowLookupCall', {session: this.session}), 'jswidgets.RainbowLookupCall'],
+      [scout.create('jswidgets.SalutationLookupCall', {session: this.session}), 'jswidgets.SalutationLookupCall'],
+      [scout.create('jswidgets.WorldLookupCall', {session: this.session}), 'jswidgets.WorldLookupCall']
     ];
   }
 }

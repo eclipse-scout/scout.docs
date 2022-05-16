@@ -1,5 +1,3 @@
-import {FormField} from '@eclipse-scout/core';
-
 export default () => ({
   id: 'jswidgets.TreeBoxForm',
   type: 'model',
@@ -42,6 +40,12 @@ export default () => ({
             label: 'Properties',
             fields: [
               {
+                id: 'LookupCallField',
+                objectType: 'SmartField',
+                label: 'LookupCall',
+                lookupCall: 'jswidgets.LookupCallLookupCall'
+              },
+              {
                 id: 'PropertiesBox',
                 objectType: 'jswidgets.TreePropertiesBox',
                 labelVisible: false,
@@ -70,54 +74,6 @@ export default () => ({
             objectType: 'TabItem',
             label: 'Actions',
             fields: [
-              {
-                id: 'TreeBoxActionsBox',
-                objectType: 'GroupBox',
-                fields: [
-                  {
-                    id: 'InsertTreeNodesField',
-                    objectType: 'SequenceBox',
-                    label: 'Insert Nodes',
-                    fields: [
-                      {
-                        id: 'NodeCountField',
-                        objectType: 'NumberField',
-                        label: 'Node Count',
-                        labelVisible: false,
-                        statusVisible: false,
-                        labelPosition: FormField.LabelPosition.ON_FIELD
-                      },
-                      {
-                        id: 'DepthField',
-                        objectType: 'NumberField',
-                        label: 'Depth',
-                        labelVisible: false,
-                        statusVisible: false,
-                        labelPosition: FormField.LabelPosition.ON_FIELD
-                      },
-                      {
-                        id: 'DefaultExpandedField',
-                        objectType: 'CheckBoxField',
-                        label: 'Default expanded',
-                        labelVisible: false,
-                        statusVisible: false
-                      },
-                      {
-                        id: 'DefaultEnabledField',
-                        objectType: 'CheckBoxField',
-                        label: 'Default enabled',
-                        labelVisible: false,
-                        statusVisible: false
-                      },
-                      {
-                        id: 'GenerateTreeDataButton',
-                        objectType: 'Button',
-                        label: 'Generate Tree Data'
-                      }
-                    ]
-                  }
-                ]
-              },
               {
                 id: 'FormFieldActionsBox',
                 objectType: 'jswidgets.FormFieldActionsBox'

@@ -29,8 +29,8 @@ export default class ListBoxForm extends Form {
 
     this.lookupCallField = this.widget('LookupCallField');
     this.lookupCallField.setValue(this.listBox.lookupCall);
-    this.lookupCallField.on('propertyChange', this._onLookupCallFielChange.bind(this));
-    this.listBox.on('propertyChange', this._onListBoxChange.bind(this));
+    this.lookupCallField.on('propertyChange:value', event => this.listBox.setLookupCall(event.newValue));
+    this.listBox.on('propertyChange:lookupCall', event => this.lookupCallField.setValue(event.newValue));
 
     this.widget('ValueFieldPropertiesBox').setField(this.listBox);
     this.widget('FormFieldPropertiesBox').setField(this.listBox);
@@ -39,17 +39,5 @@ export default class ListBoxForm extends Form {
     this.widget('WidgetActionsBox').setField(this.listBox);
     this.widget('FormFieldActionsBox').setField(this.listBox);
     this.widget('EventsTab').setField(this.listBox);
-  }
-
-  _onListBoxChange(event) {
-    if (event.propertyName === 'lookupCall') {
-      this.lookupCallField.setValue(event.newValue);
-    }
-  }
-
-  _onLookupCallFielChange(event) {
-    if (event.propertyName === 'value') {
-      this.listBox.setLookupCall(event.newValue);
-    }
   }
 }

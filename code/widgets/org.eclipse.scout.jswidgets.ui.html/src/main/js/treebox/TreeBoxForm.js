@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {Form, models, ObjectFactory} from '@eclipse-scout/core';
+import {Form, models} from '@eclipse-scout/core';
 import TreeBoxFormModel from './TreeBoxFormModel';
 
 export default class TreeBoxForm extends Form {
@@ -25,10 +25,12 @@ export default class TreeBoxForm extends Form {
   _init(model) {
     super._init(model);
 
-    let generateButton = this.widget('GenerateTreeDataButton');
-    generateButton.on('click', this._onGenerateButtonClick.bind(this));
-
     this.treeBox = this.widget('TreeBox');
+
+    this.lookupCallField = this.widget('LookupCallField');
+    this.lookupCallField.setValue(this.treeBox.lookupCall);
+    this.lookupCallField.on('propertyChange:value', event => this.treeBox.setLookupCall(event.newValue));
+    this.treeBox.on('propertyChange:lookupCall', event => this.lookupCallField.setValue(event.newValue));
 
     this.widget('ValueFieldPropertiesBox').setField(this.treeBox);
     this.widget('FormFieldPropertiesBox').setField(this.treeBox);
@@ -37,52 +39,5 @@ export default class TreeBoxForm extends Form {
     this.widget('WidgetActionsBox').setField(this.treeBox);
     this.widget('FormFieldActionsBox').setField(this.treeBox);
     this.widget('EventsTab').setField(this.treeBox);
-
-    this.treeBox.tree.insertNodes(this.createModelNodes(2, 1, true, true), null);
-  }
-
-  _onGenerateButtonClick(event) {
-    let nodeCount = this.widget('NodeCountField').value;
-    let depth = this.widget('DepthField').value;
-    let defaultExpanded = this.widget('DefaultExpandedField').value;
-    let defaultEnabled = this.widget('DefaultEnabledField').value;
-    this.treeBox.tree.removeAllNodes();
-    this.treeBox.tree.insertNodes(this.createModelNodes(nodeCount, depth, defaultExpanded === true, defaultEnabled === true), null);
-  }
-
-  createModelNode(id, text, position, enabled) {
-    return {
-      id: id + '' || ObjectFactory.get().createUniqueId(),
-      text: text,
-      childNodeIndex: position ? position : 0,
-      enabled: enabled,
-      checked: false
-    };
-  }
-
-  createModelNodes(nodeCount, depth, expanded, enabled, parentNode) {
-    if (!nodeCount) {
-      return;
-    }
-
-    let nodes = [],
-      nodeId;
-    if (!depth) {
-      depth = 0;
-    }
-    for (let i = 0; i < nodeCount; i++) {
-      nodeId = i;
-      if (parentNode) {
-        nodeId = parentNode.id + '_' + nodeId;
-      }
-      nodes[i] = this.createModelNode(nodeId, 'node ' + nodeId, i, enabled);
-      nodes[i].expanded = expanded;
-      if (depth > 0) {
-        nodes[i].childNodes = this.createModelNodes(nodeCount, depth - 1, expanded, enabled, nodes[i]);
-      } else {
-        nodes[i].leaf = true;
-      }
-    }
-    return nodes;
   }
 }
