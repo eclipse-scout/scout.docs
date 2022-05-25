@@ -92,6 +92,8 @@ The following example adds two new fields for salary and birthday to a `PersonFo
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/person/PersonFormMainBoxExtension.java[tags=PersonFormMainBoxExtension]
 ----
 
+Beware: Field names must be unique throughout form and extensions (e.g. there may not be a field on the form or another extension contributing to the same form with the same field name). However, it is possible to create templates (e.g. a group box as container with its own @FormData annotation) which is added multiple times through a form or extensions.
+
 The extension data must be registered manually in the job like in the example before:
 
 [source,java,indent=0]
