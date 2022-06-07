@@ -12,12 +12,12 @@ ifndef::mdledir[:mdledir: .]
 :sdk_editor_nls: Scout NLS Editor
 
 // Constants
-:maven-version: 22.0.12
-:node-version: 22.0.12
+:maven-version: 22.0.15
+:node-version: 22.0.15
 :scout-previous-version: 11.0
 :scout-version: 22.0
-:simrel-name: 2022-03
-:simrel-date: March, 2022
+:simrel-name: 2022-06
+:simrel-date: June, 2022
 
 // Links
 :docroot: https://eclipsescout.github.io/{doc-short-version}/
