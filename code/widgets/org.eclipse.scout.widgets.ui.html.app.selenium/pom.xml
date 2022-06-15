@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright (c) 2020 BSI Business Systems Integration AG.
+  ~ Copyright (c) 2022 BSI Business Systems Integration AG.
   ~ All rights reserved. This program and the accompanying materials
   ~ are made available under the terms of the Eclipse Distribution License v1.0
   ~ which accompanies this distribution, and is available at
@@ -27,11 +27,11 @@
   <properties>
     <master_test_timeout>3600</master_test_timeout>
     <seleniumDrivers>${project.build.directory}/test-classes/seleniumDrivers</seleniumDrivers>
-    <!-- http://chromedriver.storage.googleapis.com/index.html -->
-    <chromedriver_base_url>http://chromedriver.storage.googleapis.com/78.0.3904.70</chromedriver_base_url>
-    <chromedriver_hash_linux64>37f077132433b20db3f0f5636e89f142</chromedriver_hash_linux64>
-    <chromedriver_hash_mac64>969163657458c7e298c50c914ff5c5c4</chromedriver_hash_mac64>
-    <chromedriver_hash_win32>40df8860f0dfad436665d9de7aa95082</chromedriver_hash_win32>
+    <!-- https://chromedriver.storage.googleapis.com/index.html -->
+    <chromedriver_base_url>https://chromedriver.storage.googleapis.com/102.0.5005.61</chromedriver_base_url>
+    <chromedriver_hash_linux64>29452b3ec1afadc764820f8894fd81ea</chromedriver_hash_linux64>
+    <chromedriver_hash_mac64>17c3e75d98e7787e5715e10f845c9d09</chromedriver_hash_mac64>
+    <chromedriver_hash_win32>21c5d8c3dd0a59d9c71148dfbdeea380</chromedriver_hash_win32>
   </properties>
 
   <build>
