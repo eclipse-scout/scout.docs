@@ -63,19 +63,23 @@ export default class ButtonForm extends Form {
     this.widget('EventsTab').setField(button);
   }
 
-  _onButtonClick(event) {
+  async _onButtonClick(event) {
     if (event.source.displayStyle === Button.DisplayStyle.TOGGLE) {
       // Don't show message box if it is a toggle button
       return;
     }
-    scout.create('DesktopNotification', {
-      parent: this,
-      duration: 7000,
-      status: {
-        severity: Status.Severity.OK,
-        message: this.session.text('ButtonClickMessage')
-      }
-    }).show();
+
+    let contrib = await import(/* webpackIgnore: true */ './contrib.js');
+    let Contribution = contrib.default;
+    new Contribution().sayHello();
+    // scout.create('DesktopNotification', {
+    //   parent: this,
+    //   duration: 7000,
+    //   status: {
+    //     severity: Status.Severity.OK,
+    //     message: this.session.text('ButtonClickMessage')
+    //   }
+    // }).show();
   }
 
   _onDefaultButtonPropertyChange(event) {
