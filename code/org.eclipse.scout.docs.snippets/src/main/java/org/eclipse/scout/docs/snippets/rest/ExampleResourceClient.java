@@ -9,6 +9,7 @@ import org.eclipse.scout.docs.snippets.dataobject.ExampleEntityDo;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.rest.client.IRestResourceClient;
+import org.eclipse.scout.rt.rest.client.RestClientProperties;
 
 //tag::class[]
 public class ExampleResourceClient implements IRestResourceClient {
@@ -19,8 +20,10 @@ public class ExampleResourceClient implements IRestResourceClient {
     return BEANS.get(ExampleRestClientHelper.class);
   }
 
+  //tag::property-request[]
   public ExampleEntityDo getExampleEntity(String id) {
     WebTarget target = helper().target(RESOURCE_PATH)
+        .property(RestClientProperties.FOLLOW_REDIRECTS, false)
         .path("/{id}")
         .resolveTemplate("id", id);
 
@@ -28,6 +31,7 @@ public class ExampleResourceClient implements IRestResourceClient {
         .accept(MediaType.APPLICATION_JSON)
         .get(ExampleEntityDo.class); // <1>
   }
+  //end::property-request[]
 
   public ExampleEntityDo updateExampleEntity(String id, ExampleEntityDo entity) {
     WebTarget target = helper().target(RESOURCE_PATH)
