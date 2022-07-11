@@ -213,7 +213,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 ----
 <1> Declare base uri.
 <2> Custom exception transformer that is used as default strategy for all invocations prepared by this helper. (This is just for demonstration. Better extend
-    `org.eclipse.scout.rt.rest.client.proxy.AbstractEntityRestClientExceptionTransformer`).
+`org.eclipse.scout.rt.rest.client.proxy.AbstractEntityRestClientExceptionTransformer`).
 
 Based on the helper class, an example REST resource client may be implemented:
 
@@ -225,9 +225,45 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 <1> HTTP GET example: Directly read response into an object. Exceptions are transformed transparently and the underlying resources are released (e.g. HTTP client).
 <2> HTTP POST example: Again, directly read the response into an object.
 <3> HTTP DELETE example: This delete operation does not send a response if it was successful. Hence close the returned `Response` explicitly to release underlying resources
-    (see next line). Note: Unsuccessful responses are already handled by the REST client proxy.
+(see next line). Note: Unsuccessful responses are already handled by the REST client proxy.
 <4> Use custom exception transformer.
 
+==== REST Client Properties ====
+
+The Scout REST Client implementation offers a set of properties to customize the underlying REST- and HTTP client, see `org.eclipse.scout.rt.rest.client.RestClientProperties` for a list of supported properties.
+
+Properties can be set on the REST client during initialization (valid for all requests):
+
+[source,java]
+.Setting properties for REST Client for all requests
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/rest/ExampleRestClientHelper.java[tags=client-properties]
+----
+
+Some properties (see JavaDoc for details) may also be set on a request level:
+
+[source,java]
+.Setting properties for REST Client for a single requests, e.g. setting `FOLLOW_REDIRECTS` to `false`
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/rest/ExampleResourceClient.java[tags=property-request]
+----
+
+==== REST Client HTTP Proxy ====
+
+There are multiple possibilities to configure a REST client to use a HTTP proxy:
+
+* Directly on REST client instance: see `org.eclipse.scout.rt.rest.client.RestClientProperties.PROXY_URI` (and `PROXY_USER` / `PROXY_PASSWORD` properties)
+* Using the dynamic Scout `org.eclipse.scout.rt.shared.http.proxy.ConfigurableProxySelector`, see example configuration:
+
+[source,properties]
+.Setting HTTP proxy for outgoing requests to *.example.com
+----
+scout.http.proxyPatterns[0]=.*\.example.com(:\d+)?=127.0.0.1:8888
+----
+
+NOTE: In order to use the configurable proxy selector property, make sure to enable the new Scout Apache HTTP client connector,
+either using the REST client property `org.eclipse.scout.rt.rest.client.RestClientProperties.USE_SCOUT_APACHE_CONNECTOR`
+or by setting the config property `scout.rest.useScoutApacheConnector=true`.
 
 === REST Cancellation Support ===
 
