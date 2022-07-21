@@ -9,10 +9,31 @@
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 import {App} from '@eclipse-scout/demo-jswidgets';
+import {ActionExt, scout} from '@eclipse-scout/core/src';
+import NoUniqueId from '@eclipse-scout/core/src/NoUniqueId';
 
-new App().init({
-  bootstrap: {
-    textsUrl: 'res/texts.json'
+start();
+
+async function start() {
+  await new App().init({
+    bootstrap: {
+      textsUrl: 'res/texts.json'
+    }
+  });
+
+  let action = scout.create(ActionExt, {
+    parent: scout.getSession().desktop
+  });
+  action.doAction();
+
+  @NoUniqueId
+  class MyObj {
+    constructor() {
+      console.log(this);
+    }
   }
-});
 
+  let obj = scout.create(MyObj);
+  console.log(obj);
+
+}

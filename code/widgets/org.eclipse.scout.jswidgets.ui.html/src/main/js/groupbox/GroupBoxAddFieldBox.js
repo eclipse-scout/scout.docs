@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {GroupBox, models, scout} from '@eclipse-scout/core';
+import {GroupBox, models} from '@eclipse-scout/core';
 import {FormFieldLookupCall} from '../index';
 import GroupBoxAddFieldBoxModel from './GroupBoxAddFieldBoxModel';
 

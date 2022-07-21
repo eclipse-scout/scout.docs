@@ -23,16 +23,16 @@ export default class Desktop extends Desktop_1 {
     denseModeMenu.on('action', this._onDenseMenuAction.bind(this));
 
     if (this.theme === 'dark') {
-      darkThemeMenu.setIconId(icons.CHECKED_BOLD);
+      darkThemeMenu.iconId = icons.CHECKED_BOLD;
     } else {
-      defaultThemeMenu.setIconId(icons.CHECKED_BOLD);
+      defaultThemeMenu.iconId = icons.CHECKED_BOLD;
     }
     if (this.dense) {
-      denseModeMenu.setIconId(icons.CHECKED_BOLD);
+      denseModeMenu.iconId = icons.CHECKED_BOLD;
     }
     this.on('propertyChange', event => {
       if (event.propertyName === 'dense') {
-        this.dense ? denseModeMenu.setIconId(icons.CHECKED_BOLD) : denseModeMenu.setIconId(null);
+        this.dense ? denseModeMenu.iconId = icons.CHECKED_BOLD : denseModeMenu.iconId = null;
       }
     });
   }
