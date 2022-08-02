@@ -1,6 +1,6 @@
 {
   "name": "@eclipse-scout/demo-jswidgets-app",
-  "version": "22.0.0-snapshot",
+  "version": "22.0.19",
   "description": "Eclipse Scout Demo Widgets",
   "author": "BSI Business Systems Integration AG",
   "homepage": "https://www.eclipse.org/scout",
@@ -36,12 +36,12 @@
     "version:release": "releng-scripts version:release"
   },
   "devDependencies": {
-    "@eclipse-scout/cli": ">=22.0.0-snapshot <22.0.0",
+    "@eclipse-scout/cli": "22.0.19",
     "@eclipse-scout/releng": "^22.0.0"
   },
   "dependencies": {
-    "@eclipse-scout/core": ">=22.0.0-snapshot <22.0.0",
-    "@eclipse-scout/chart": ">=22.0.0-snapshot <22.0.0",
-    "@eclipse-scout/demo-jswidgets": ">=22.0.0-snapshot <22.0.0"
+    "@eclipse-scout/core": "22.0.19",
+    "@eclipse-scout/chart": "22.0.19",
+    "@eclipse-scout/demo-jswidgets": "22.0.19"
   }
 }
