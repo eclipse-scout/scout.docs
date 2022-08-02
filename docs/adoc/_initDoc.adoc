@@ -12,8 +12,8 @@ ifndef::mdledir[:mdledir: .]
 :sdk_editor_nls: Scout NLS Editor
 
 // Constants
-:maven-version: 22.0.15
-:node-version: 22.0.15
+:maven-version: 22.0.19
+:node-version: 22.0.19
 :scout-previous-version: 11.0
 :scout-version: 22.0
 :simrel-name: 2022-06
