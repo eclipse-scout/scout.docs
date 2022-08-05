@@ -1,4 +1,4 @@
-import {models, PageWithTable, strings} from '@eclipse-scout/core';
+import {models, PageWithTable, scout, strings} from '@eclipse-scout/core';
 import SamplePageWithTableModel from './SamplePageWithTableModel';
 import $ from 'jquery';
 

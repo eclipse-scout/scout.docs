@@ -8,6 +8,9 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
+import {ObjectFactory} from '@eclipse-scout/core';
+import * as self from './index.js';
+
 export {default as App} from './App';
 export * from './objectFactories';
 export {default as AccordionForm} from './accordion/AccordionForm';
@@ -166,7 +169,5 @@ export {default as CheckableTreeStyleLookupCall} from './treebox/CheckableTreeSt
 export {default as BreadcrumbBarFieldForm} from './breadcrumbbar/BreadcrumbBarFieldForm';
 export {default as MessageBoxForm} from './messagebox/MessageBoxForm';
 
-import * as self from './index.js';
-
 export default self;
-window.jswidgets = Object.assign(window.jswidgets || {}, self);
+ObjectFactory.get().registerNamespace('jswidgets', self);

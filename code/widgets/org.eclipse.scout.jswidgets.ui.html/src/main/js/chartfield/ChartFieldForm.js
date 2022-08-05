@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {App, arrays, colorSchemes, DefaultStatus, Form, GridData, models, objects, Status, strings} from '@eclipse-scout/core';
+import {App, arrays, colorSchemes, DefaultStatus, Form, GridData, models, objects, scout, Status, strings} from '@eclipse-scout/core';
 import {Chart} from '@eclipse-scout/chart';
 import ChartFieldFormModel from './ChartFieldFormModel';
 import {ValuesProviderLookupCall} from '../index';

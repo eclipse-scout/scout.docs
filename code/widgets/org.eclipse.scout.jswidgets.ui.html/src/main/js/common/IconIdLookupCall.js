@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {StaticLookupCall, strings} from '@eclipse-scout/core';
+import {icons, StaticLookupCall, strings} from '@eclipse-scout/core';
 
 export default class IconIdLookupCall extends StaticLookupCall {
 
@@ -17,12 +17,12 @@ export default class IconIdLookupCall extends StaticLookupCall {
   }
 
   _data() {
-    return Object.keys(scout.icons)
+    return Object.keys(icons)
       .filter(name => {
-        let value = scout.icons[name];
+        let value = icons[name];
         return typeof value === 'string' && strings.startsWith(value, 'font:');
       }).map((name, i) => {
-        let iconId = scout.icons[name];
+        let iconId = icons[name];
         return [iconId, name];
       });
   }
