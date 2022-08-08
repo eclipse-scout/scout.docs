@@ -52,3 +52,54 @@ If you just want to play around with them without looking at the source code, yo
 * https://scout.bsi-software.com/jswidgets/
 
 // ----------------------------------------------------------------------------
+
+== ObjectType as Class Reference (Scout JS)
+It is now possible to use a class reference as `objectType`.
+An `objectType` is typically used when creating a new object using `scout.create(objectType)` or when defining a model.
+Using a class reference instead of a string will make the development easier because the IDE knows about the actual type and can provide
+code completion or and other assistance.
+
+It may even improve the tree shaking process of the bundler (webpack).
+Because using a class reference requires an `import`, the bundler automatically includes the imported module.
+
+So,
+[source, js]
+----
+scout.create('Button', {parent: this});
+----
+
+becomes this:
+
+[source, js]
+----
+import {Button} from '@eclipse-scout/core';
+
+scout.create(Button, {parent: this});
+----
+
+And this
+[source, js]
+----
+export default () => ({
+  objectType: 'Form',
+  rootGroupBox: {
+    objectType: 'GroupBox'
+  }
+});
+----
+
+becomes this:
+
+[source, js]
+----
+import {Form, GroupBox} from '@eclipse-scout/core';
+
+export default () => ({
+  objectType: Form,
+  rootGroupBox: {
+    objectType: GroupBox
+  }
+});
+----
+
+Please see the {migration-guide-link} for migration assistance.

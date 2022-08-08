@@ -90,3 +90,75 @@ To install the Scout SDK into your existing Eclipse IDE, use this P2 update site
 {scout-sdk-update-site}
 
 // ----------------------------------------------------------------------------
+
+== ObjectType as Class Reference (Scout JS)
+As described in the {release-notes-link}, it is now possible to use class references for the `objectType`.
+Even though the string based style still works and a migration is not necessary, the class reference style is the preferred way for the future.
+
+If you would like to migrate your code, here is how we did it (we used IntelliJ for the process).
+
+. Find and replace all occurrences of `scout.create()`, `objectType:` and `lookupCall:` (use Ctrl-Shift-R in IntelliJ and enable Regex).
++
+[source]
+----
+Find: scout.create\('(.*\.)?(.*)'
+Replace: scout.create\($2
+----
++
+[source]
+----
+Find: objectType: '(.*\.)?(.*)'
+Replace: objectType: $2
+----
++
+[source]
+----
+Find: lookupCall: '(.*\.)?(.*)'
+Replace: lookupCall: $2
+----
+The regex considers objectTypes with and without namespace.
+
+. Add imports  +
+Now we need to add the required imports.
+You can either manually add them, but with a lot of files it is a tedious task.
+Unfortunately, IntelliJ does not provide a possibility to automatically add all missing imports.
+But there is a trick: resolve multiple inspections at once using code analysis.
+
+.. Start the action `Run inspection by name` and select the inspection `Unresolved JavaScript variable`.
++
+.Start Action
+image::{mgimgsdir}/unresolved-variable-inspection.png[]
+.Select inspection
+image::{mgimgsdir}/unresolved-variable-inspection-1.png[]
+.. Select `Uncommitted files` and disable all inspection options, because the inspection is not limited to missing imports.
+Click OK to run the analysis.
++
+.Run Action
+image::{mgimgsdir}/unresolved-variable-inspection-2.png[]
+
+.. In the result view, select one or more problems and click the button `Missing import statement`.
++
+Note: Sometimes `Missing import statement` is located in a drop down called `Apply quick fixes to all the problems`.
++
+Note: Even though we disabled all inspection options, there may still be problems other than `Missing import statement`.
+If that is the case, resolving multiple problems is not possible unless you unselect these problems including theirs parent node.
++
+.Resolve problems
+image::{mgimgsdir}/unresolved-variable-inspection-3.png[]
+.Button in drop down
+image::{mgimgsdir}/unresolved-variable-inspection-3a.png[]
+
+.. Finally, you need to verify, whether the imports are correct.
+Please make sure all imports are present for every object type and the classes are imported from a module and not a single file.
++
+.Good import
+[source, js]
+----
+import {Button, GroupBox} from '@eclipse-scout/core';
+----
++
+.Bad import
+[source, js]
+----
+import Button from '@eclipse-scout/core/src/form/fields/button/Button.js';
+----
