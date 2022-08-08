@@ -13,4 +13,4 @@ ifndef::rnimgsdir[:rnimgsdir: {rndir}/imgs]
 //-----------------------------------------------------------------------------
 // This file contains the release notes
 //-----------------------------------------------------------------------------
-include::ReleaseNotes_22_0.adoc[]
+include::ReleaseNotes_23_1.adoc[]

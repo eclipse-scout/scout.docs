@@ -12,4 +12,4 @@ ifndef::mgimgsdir[:mgimgsdir: {mgdir}/imgs]
 //-----------------------------------------------------------------------------
 // This file contains the migration guide
 //-----------------------------------------------------------------------------
-include::MigrationGuide_22_0.adoc[]
+include::MigrationGuide_23_1.adoc[]
