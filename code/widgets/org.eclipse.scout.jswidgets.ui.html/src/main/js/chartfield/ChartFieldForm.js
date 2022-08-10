@@ -1,14 +1,14 @@
 /*
- * Copyright (c) 2021 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {App, arrays, colorSchemes, DefaultStatus, Form, GridData, models, objects, scout, Status, strings} from '@eclipse-scout/core';
+import {App, arrays, colorSchemes, Form, GridData, models, objects, scout, strings} from '@eclipse-scout/core';
 import {Chart} from '@eclipse-scout/chart';
 import ChartFieldFormModel from './ChartFieldFormModel';
 import {ValuesProviderLookupCall} from '../index';
@@ -1019,7 +1019,7 @@ export default class ChartFieldForm extends Form {
       return false;
     }
     if (chartData[0].length % 3 !== 1) {
-      this.chartDataTableField.addErrorStatus(this._createErrorStatus('A bubble chart needs a multiple of three values. These are interpreted as x, y and z'));
+      this.chartDataTableField.addErrorStatus('A bubble chart needs a multiple of three values. These are interpreted as x, y and z');
       return false;
     }
     if (!this._validateTableTypes(chartData)) {
@@ -1079,7 +1079,7 @@ export default class ChartFieldForm extends Form {
       value = chartData[1][2],
       max = chartData[1][3];
     if (value < min || max < value) {
-      this.chartDataTableField.addErrorStatus(this._createErrorStatus('The values min, value, max for a speedo chart need to fulfill min <= value <= max.'));
+      this.chartDataTableField.addErrorStatus('The values min, value, max for a speedo chart need to fulfill min <= value <= max.');
       return false;
     }
     this.chartDataTableField.clearErrorStatus();
@@ -1236,7 +1236,7 @@ export default class ChartFieldForm extends Form {
       return false;
     }
     if (chartData[0].length !== 2 && chartData[0].length !== 4 && chartData[0].length !== 8) {
-      this.chartDataTableField.addErrorStatus(this._createErrorStatus(dimensionError));
+      this.chartDataTableField.addErrorStatus(dimensionError);
       return false;
     }
     if (!this._validateTableTypes(chartData)) {
@@ -1283,17 +1283,17 @@ export default class ChartFieldForm extends Form {
 
   _validateTableDimensions(chartData, minRows, maxRows, errorRows, minCols, maxCols, errorCols) {
     if (objects.isNullOrUndefined(chartData)) {
-      this.chartDataTableField.addErrorStatus(this._createErrorStatus('No chart data.'));
+      this.chartDataTableField.addErrorStatus('No chart data.');
       return false;
     }
     // rows
     if (chartData.length < minRows || (maxRows > 0 && chartData.length > maxRows)) {
-      this.chartDataTableField.addErrorStatus(this._createErrorStatus(errorRows));
+      this.chartDataTableField.addErrorStatus(errorRows);
       return false;
     }
     // cols
     if (chartData[0].length < minCols || (maxCols > 0 && chartData[0].length > maxCols)) {
-      this.chartDataTableField.addErrorStatus(this._createErrorStatus(errorCols));
+      this.chartDataTableField.addErrorStatus(errorCols);
       return false;
     }
     return true;
@@ -1301,33 +1301,26 @@ export default class ChartFieldForm extends Form {
 
   _validateTableTypes(chartData) {
     if (objects.isNullOrUndefined(chartData) || chartData.length === 0 || chartData[0].length === 0) {
-      this.chartDataTableField.addErrorStatus(this._createErrorStatus('No chart data.'));
+      this.chartDataTableField.addErrorStatus('No chart data.');
       return false;
     }
     if (chartData[0].slice(1)
       .some(elem => !(typeof elem === 'string' || elem instanceof String))) {
-      this.chartDataTableField.addErrorStatus(this._createErrorStatus('Invalid data labels.'));
+      this.chartDataTableField.addErrorStatus('Invalid data labels.');
       return false;
     }
     if (chartData.slice(1)
       .map(arr => arr[0])
       .some(elem => !(typeof elem === 'string' || elem instanceof String))) {
-      this.chartDataTableField.addErrorStatus(this._createErrorStatus('Invalid dataset labels.'));
+      this.chartDataTableField.addErrorStatus('Invalid dataset labels.');
       return false;
     }
     if (arrays.flatMap(chartData.slice(1), arr => arr.slice(1))
       .some(elem => !(typeof elem === 'number' || elem instanceof Number))) {
-      this.chartDataTableField.addErrorStatus(this._createErrorStatus('Invalid values.'));
+      this.chartDataTableField.addErrorStatus('Invalid values.');
       return false;
     }
     return true;
-  }
-
-  _createErrorStatus(message) {
-    return new DefaultStatus({
-      severity: Status.Severity.ERROR,
-      message: message
-    });
   }
 
   _getTableChartData() {
