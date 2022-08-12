@@ -6,7 +6,7 @@ export default () => ({
   text: 'Page with Table',
   detailTable: {
     id: 'jswidgets.SamplePageWithTable.Table',
-    objectType: 'jswidgets.SamplePageWithTableDetailTable',
+    objectType: 'Table',
     columns: [
       {
         id: 'IdColumn',
@@ -82,7 +82,7 @@ export default () => ({
       },
       {
         id: 'TileToggleMenu',
-        objectType: 'jswidgets.SamplePageWithTableTileToggleMenu',
+        objectType: 'Menu',
         iconId: icons.SQUARE_BOLD,
         stackable: false,
         horizontalAlignment: 1,

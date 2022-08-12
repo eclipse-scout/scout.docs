@@ -158,9 +158,7 @@ export {default as CheckableStyleLookupCall} from './table/CheckableStyleLookupC
 export {default as GroupingStyleLookupCall} from './table/GroupingStyleLookupCall';
 export {default as WidgetsRoute} from './WidgetsRoute';
 export {default as SamplePageWithTable} from './page/SamplePageWithTable';
-export {default as SamplePageWithTableDetailTable} from './page/SamplePageWithTableDetailTable';
 export {default as SamplePageWithTableSearchForm} from './page/SamplePageWithTableSearchForm';
-export {default as SamplePageWithTableTileToggleMenu} from './page/SamplePageWithTableTileToggleMenu';
 export {default as SamplePageWithNodes} from './page/SamplePageWithNodes';
 export {default as TreeForm} from './tree/TreeForm';
 export {default as TreePropertiesBox} from './tree/TreePropertiesBox';
