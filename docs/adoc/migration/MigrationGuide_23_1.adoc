@@ -92,6 +92,7 @@ To install the Scout SDK into your existing Eclipse IDE, use this P2 update site
 // ----------------------------------------------------------------------------
 
 == ObjectType as Class Reference (Scout JS)
+
 As described in the {release-notes-link}, it is now possible to use class references for the `objectType`.
 Even though the string based style still works and a migration is not necessary, the class reference style is the preferred way for the future.
 
@@ -116,6 +117,7 @@ Replace: objectType: $2
 Find: lookupCall: '(.*\.)?(.*)'
 Replace: lookupCall: $2
 ----
+
 The regex considers objectTypes with and without namespace.
 
 . Add imports  +
@@ -152,13 +154,54 @@ image::{mgimgsdir}/unresolved-variable-inspection-3a.png[]
 Please make sure all imports are present for every object type and the classes are imported from a module and not a single file.
 +
 .Good import
-[source, js]
+[source,js]
 ----
 import {Button, GroupBox} from '@eclipse-scout/core';
 ----
 +
 .Bad import
-[source, js]
+[source,js]
 ----
 import Button from '@eclipse-scout/core/src/form/fields/button/Button.js';
 ----
+
+// ----------------------------------------------------------------------------
+
+== options-parameter for filter-methods in menus.js (Scout JS)
+
+The methods `filter` and `filterAccordingToSelection` in `menus.js` now have an options-parameter. This parameter combines the former parameters `onlyVisible`, `enableDisableKeyStrokes` and `notAllowedTypes`.
+The following are two migration examples:
+
+.Old
+[source,js]
+----
+let allowedTypes = ['Example.MenuType'],
+  onlyVisible = true,
+  enableDisableKeyStrokes = false;
+
+// example 1
+menus.filter(this.menus, allowedTypes, true, false);
+
+// example 2
+menus.filter(this.menus, allowedTypes, onlyVisible, enableDisableKeyStrokes);
+
+----
+
+.New
+[source,js]
+----
+let allowedTypes = ['Example.MenuType'],
+  onlyVisible = true,
+  enableDisableKeyStrokes = false;
+
+// example 1
+menus.filter(this.menus, allowedTypes, {
+  onlyVisible: true,
+  enableDisableKeyStrokes: false
+});
+
+// example 2
+menus.filter(this.menus, allowedTypes, {onlyVisible, enableDisableKeyStrokes});
+
+----
+
