@@ -165,8 +165,6 @@ import {Button, GroupBox} from '@eclipse-scout/core';
 import Button from '@eclipse-scout/core/src/form/fields/button/Button.js';
 ----
 
-// ----------------------------------------------------------------------------
-
 == options-parameter for filter-methods in menus.js (Scout JS)
 
 The methods `filter` and `filterAccordingToSelection` in `menus.js` now have an options-parameter. This parameter combines the former parameters `onlyVisible`, `enableDisableKeyStrokes` and `notAllowedTypes`.
@@ -204,4 +202,26 @@ menus.filter(this.menus, allowedTypes, {
 menus.filter(this.menus, allowedTypes, {onlyVisible, enableDisableKeyStrokes});
 
 ----
+
+=== Namespace
+
+TODO describe registerNamespace
+
+== JQuery
+
+The following functions have been removed because they are not in use anymore.
+
+. removeThis
+. suppressEventIfDisabled
+. colorOpacity
+. animateSVG
+. copyCssIfGreater
+. backupSelection
+. restoreSelection
+. onSingleOrDoubleClick
+
+The following functions have been renamed
+
+. widthToContent -> cssWidthToContentAnimated
+
 
