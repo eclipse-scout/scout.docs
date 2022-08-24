@@ -1,14 +1,14 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {arrays, Route, router, strings, Tree} from '@eclipse-scout/core';
+import {arrays, ObjectFactory, objects, Route, router, strings, Tree} from '@eclipse-scout/core';
 
 export default class WidgetsRoute extends Route {
 
@@ -77,13 +77,20 @@ export default class WidgetsRoute extends Route {
   }
 
   _objectTypeForNode(node) {
+    let objectType;
     if (node.detailForm) {
-      return node.detailForm.objectType;
+      objectType = node.detailForm.objectType;
+    } else if (node._detailFormModel) {
+      objectType = node._detailFormModel.objectType;
+    } else {
+      objectType = node.objectType;
     }
-    if (node._detailFormModel) {
-      return node._detailFormModel.objectType;
+
+    if (objects.isFunction(objectType)) {
+      objectType = ObjectFactory.get().getObjectType(objectType);
     }
-    return node.objectType;
+
+    return objectType;
   }
 
   _onPageChanged(event) {

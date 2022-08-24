@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2021 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
@@ -166,6 +166,8 @@ export {default as TreeBoxForm} from './treebox/TreeBoxForm';
 export {default as CheckableTreeStyleLookupCall} from './treebox/CheckableTreeStyleLookupCall';
 export {default as BreadcrumbBarFieldForm} from './breadcrumbbar/BreadcrumbBarFieldForm';
 export {default as MessageBoxForm} from './messagebox/MessageBoxForm';
+export {default as WrappedFormFieldForm} from './wrappedform/WrappedFormFieldForm';
+export {default as WrappedFormLookupCall} from './wrappedform/WrappedFormLookupCall';
 
 export default self;
 ObjectFactory.get().registerNamespace('jswidgets', self);
