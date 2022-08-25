@@ -90,7 +90,7 @@ export default () => ({
 
 becomes this:
 
-[source, js]
+[source,js]
 ----
 import {Form, GroupBox} from '@eclipse-scout/core';
 
@@ -103,3 +103,13 @@ export default () => ({
 ----
 
 Please see the {migration-guide-link} for migration assistance.
+
+== Typed NodeId for node identifier
+
+In previous versions several ways were used to create/use a node identfier (e.g. to identify a specific client/backend server):
+
+* A typed class NodeId existed, the current identifier was accessed using `org.eclipse.scout.rt.dataobject.id.NodeId.current()`
+* Node identifiers could be accessed as String using `org.eclipse.scout.rt.platform.context.NodeIdentifier.get()`
+* And another node identifier (default implementation random UUID) could be accessed using  `org.eclipse.scout.rt.shared.INode#ID`
+
+As of version 23.1 the typed `org.eclipse.scout.rt.dataobject.id.NodeId` is used wherever possible, the application scoped bean `org.eclipse.scout.rt.platform.context.NodeIdentifier` is still used for the computation of this typed `NodeId`. The `get()` method returning a `String` has been deprecated, the interface `org.eclipse.scout.rt.shared.INode` has been removed.
