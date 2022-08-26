@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2021 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
@@ -619,7 +619,7 @@ export default class ChartFieldForm extends Form {
       checkableCheckBox.setEnabled(!scout.isOneOf(type, Chart.Type.SALESFUNNEL, Chart.Type.FULFILLMENT, Chart.Type.SPEEDO, Chart.Type.VENN));
       legendVisibleBox.setEnabled(!scout.isOneOf(type, Chart.Type.SALESFUNNEL, Chart.Type.FULFILLMENT, Chart.Type.SPEEDO, Chart.Type.VENN));
       legendClickableCheckBox.setEnabled(!scout.isOneOf(type, Chart.Type.SALESFUNNEL, Chart.Type.FULFILLMENT, Chart.Type.SPEEDO, Chart.Type.VENN));
-      datalabelsVisibleCheckBox.setEnabled(!scout.isOneOf(type, Chart.Type.SALESFUNNEL, Chart.Type.FULFILLMENT, Chart.Type.SPEEDO, Chart.Type.VENN));
+      datalabelsVisibleCheckBox.setEnabled(!scout.isOneOf(type, Chart.Type.SALESFUNNEL, Chart.Type.FULFILLMENT, Chart.Type.SPEEDO, Chart.Type.VENN, Chart.Type.SCATTER));
       xAxisStackedCheckBox.setEnabled(scout.isOneOf(type, Chart.Type.BAR, Chart.Type.BAR_HORIZONTAL, Chart.Type.LINE, Chart.Type.COMBO_BAR_LINE));
       yAxisStackedCheckBox.setEnabled(scout.isOneOf(type, Chart.Type.BAR, Chart.Type.BAR_HORIZONTAL, Chart.Type.LINE, Chart.Type.COMBO_BAR_LINE));
       fillCheckBox.setEnabled(scout.isOneOf(type, Chart.Type.LINE, Chart.Type.COMBO_BAR_LINE, Chart.Type.RADAR));
@@ -632,7 +632,7 @@ export default class ChartFieldForm extends Form {
       minBubbleSizeField.setEnabled(scout.isOneOf(type, Chart.Type.BUBBLE));
       legendPositionField.setEnabled(!scout.isOneOf(type, Chart.Type.SALESFUNNEL, Chart.Type.FULFILLMENT, Chart.Type.SPEEDO, Chart.Type.VENN));
       this.chartDataTableField.setTooltipText(scout.isOneOf(type, Chart.Type.COMBO_BAR_LINE) ? 'Add \'|line\' to a dataset label if the dataset should be displayed as line.' : null);
-      valuesProviderField.setEnabled(scout.isOneOf(type, Chart.Type.LINE, Chart.Type.BAR, Chart.Type.BAR_HORIZONTAL, Chart.Type.COMBO_BAR_LINE, Chart.Type.BUBBLE));
+      valuesProviderField.setEnabled(scout.isOneOf(type, Chart.Type.LINE, Chart.Type.BAR, Chart.Type.BAR_HORIZONTAL, Chart.Type.COMBO_BAR_LINE, Chart.Type.BUBBLE, Chart.Type.SCATTER));
       maxSegmentsField.setEnabled(scout.isOneOf(type, Chart.Type.PIE, Chart.Type.DOUGHNUT, Chart.Type.POLAR_AREA, Chart.Type.RADAR));
 
       config = $.extend(true, {}, config, {
@@ -677,7 +677,8 @@ export default class ChartFieldForm extends Form {
         Chart.Type.DOUGHNUT,
         Chart.Type.POLAR_AREA,
         Chart.Type.RADAR,
-        Chart.Type.BUBBLE)) {
+        Chart.Type.BUBBLE,
+        Chart.Type.SCATTER)) {
         numberOfDatasetsField.setEnabled(this.random);
         numberOfDatasetsField.setMinValue(0);
         numberOfDatasetsField.setMaxValue(null);
@@ -738,6 +739,10 @@ export default class ChartFieldForm extends Form {
       case Chart.Type.BUBBLE:
         chartData = this._getBubbleChartData();
         chartBean = this._getBubbleChartBean(chartData);
+        break;
+      case Chart.Type.SCATTER:
+        chartData = this._getScatterChartData();
+        chartBean = this._getScatterChartBean(chartData);
         break;
       case Chart.Type.SPEEDO:
         chartData = this._getSpeedoChartData();
@@ -1020,6 +1025,88 @@ export default class ChartFieldForm extends Form {
     }
     if (chartData[0].length % 3 !== 1) {
       this.chartDataTableField.addErrorStatus(this._createErrorStatus('A bubble chart needs a multiple of three values. These are interpreted as x, y and z'));
+      return false;
+    }
+    if (!this._validateTableTypes(chartData)) {
+      return false;
+    }
+    this.chartDataTableField.clearErrorStatus();
+    return true;
+  }
+
+  _getScatterChartData() {
+    if (this.random) {
+      return this._getScatterChartDataRandom();
+    }
+    return this._getTableChartData();
+  }
+
+  _getScatterChartDataRandom() {
+    let numGroups = 6,
+      chartData = arrays.init(this.numberOfDatasets + 1, null);
+
+    for (let i = 0; i < chartData.length; i++) {
+      chartData[i] = arrays.init(numGroups * 2 + 1, null);
+    }
+
+    for (let i = 1; i < chartData[0].length; i = i + 2) {
+      chartData[0][i] = 'Test ' + i + ' (x)';
+      chartData[0][i + 1] = 'Test ' + i + ' (y)';
+    }
+
+    for (let i = 1; i < chartData.length; i++) {
+      chartData[i][0] = 'Dataset ' + i;
+    }
+
+    for (let i = 1; i < chartData.length; i++) {
+      for (let j = 1; j < chartData[i].length; j = j + 2) {
+        chartData[i][j] = this._chartValue();
+        chartData[i][j + 1] = this._chartValue();
+      }
+    }
+
+    return chartData;
+  }
+
+  _getScatterChartBean(chartData) {
+    if (!this._validateScatterTable(chartData)) {
+      return;
+    }
+
+    let chartValueGroups = [];
+
+    for (let i = 1; i < chartData.length; i++) {
+      let chartValueGroup = {values: []};
+      for (let j = 1; j < chartData[i].length; j = j + 2) {
+        let nTuple = {};
+        nTuple.x = chartData[i][j];
+        nTuple.y = chartData[i][j + 1];
+        chartValueGroup.values.push(nTuple);
+      }
+
+      chartValueGroup.groupName = chartData[i][0];
+      chartValueGroup.colorHexValue = this._randomHexColor();
+      chartValueGroups.push(chartValueGroup);
+    }
+
+    return {
+      data: {
+        axes: [],
+        chartValueGroups: chartValueGroups
+      },
+      config: {}
+    };
+  }
+
+  _validateScatterTable(chartData) {
+    this.chartDataTableField.clearErrorStatus();
+    if (!this._validateTableDimensions(chartData,
+      2, -1, 'No dataset.',
+      2, -1, 'No data.')) {
+      return false;
+    }
+    if (chartData[0].length % 2 !== 1) {
+      this.chartDataTableField.addErrorStatus(this._createErrorStatus('A scatter chart needs a multiple of two values. These are interpreted as x and y'));
       return false;
     }
     if (!this._validateTableTypes(chartData)) {
@@ -1411,6 +1498,7 @@ export default class ChartFieldForm extends Form {
       case Chart.Type.BAR_HORIZONTAL:
       case Chart.Type.COMBO_BAR_LINE:
       case Chart.Type.BUBBLE:
+      case Chart.Type.SCATTER:
       case Chart.Type.SPEEDO:
       case Chart.Type.SALESFUNNEL:
       case Chart.Type.PIE:
@@ -1438,6 +1526,7 @@ export default class ChartFieldForm extends Form {
       case Chart.Type.COMBO_BAR_LINE:
       case Chart.Type.SALESFUNNEL:
       case Chart.Type.BUBBLE:
+      case Chart.Type.SCATTER:
       default:
         return null;
     }

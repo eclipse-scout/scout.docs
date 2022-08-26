@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2021 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
@@ -454,6 +454,73 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
     return true;
   }
 
+  private Object[][] getScatterChartData() {
+    if (getRandomCheckBox().getValue()) {
+      return getScatterChartDataRandom();
+    }
+    return getChartDataTableField().getChartData();
+  }
+
+  private Object[][] getScatterChartDataRandom() {
+    int numGroups = 6;
+    Object[][] chartData = new Object[m_numberOfDatasets + 1][numGroups * 2 + 1];
+
+    for (int i = 1; i < chartData[0].length; i = i + 2) {
+      chartData[0][i] = "Test " + i + " (x)";
+      chartData[0][i + 1] = "Test " + i + " (y)";
+    }
+
+    for (int i = 1; i < chartData.length; i++) {
+      chartData[i][0] = "Dataset " + i;
+    }
+
+    for (int i = 1; i < chartData.length; i++) {
+      for (int j = 1; j < chartData[i].length; j = j + 2) {
+        chartData[i][j] = chartValue();
+        chartData[i][j + 1] = chartValue();
+      }
+    }
+
+    return chartData;
+  }
+
+  private ChartBean getScatterChartBean(Object[][] chartData) {
+    if (!validateScatterTable(chartData)) {
+      return null;
+    }
+    ChartBean bean = new ChartBean();
+
+    for (int i = 1; i < chartData.length; i++) {
+      NTupleChartValueGroupBean chartValue = new NTupleChartValueGroupBean(2, "x", "y");
+      for (int j = 1; j < chartData[i].length; j = j + 2) {
+        chartValue.add((BigDecimal) chartData[i][j], (BigDecimal) chartData[i][j + 1]);
+      }
+      chartValue.setGroupName((String) chartData[i][0]);
+      chartValue.setColorHexValue(randomHexColor());
+      bean.getData().getChartValueGroups().add(chartValue);
+    }
+
+    return bean;
+  }
+
+  private boolean validateScatterTable(Object[][] chartData) {
+    getChartDataTableField().clearErrorStatus();
+    if (!validateTableDimensions(chartData,
+        2, -1, "No dataset.",
+        2, -1, "No data.")) {
+      return false;
+    }
+    if (chartData[0].length % 2 != 1) {
+      getChartDataTableField().addErrorStatus("A scatter chart needs a multiple of two values. These are interpreted as x and y");
+      return false;
+    }
+    if (!validateTableTypes(chartData)) {
+      return false;
+    }
+    getChartDataTableField().clearErrorStatus();
+    return true;
+  }
+
   private Object[][] getFulfillmentChartData() {
     if (getRandomCheckBox().getValue()) {
       return getFulfillmentChartDataRandom();
@@ -799,6 +866,10 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
         chartData = getBubbleChartData();
         bean = getBubbleChartBean(chartData);
         break;
+      case IChartType.SCATTER:
+        chartData = getScatterChartData();
+        bean = getScatterChartBean(chartData);
+        break;
       case IChartType.SPEEDO:
         chartData = getSpeedoChartData();
         bean = getSpeedoChartBean(chartData);
@@ -839,6 +910,7 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
       case IChartType.BAR_HORIZONTAL:
       case IChartType.COMBO_BAR_LINE:
       case IChartType.BUBBLE:
+      case IChartType.SCATTER:
       case IChartType.SPEEDO:
       case IChartType.SALESFUNNEL:
       case IChartType.PIE:
@@ -866,6 +938,7 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
       case IChartType.COMBO_BAR_LINE:
       case IChartType.SALESFUNNEL:
       case IChartType.BUBBLE:
+      case IChartType.SCATTER:
       default:
         return null;
     }
@@ -1156,7 +1229,7 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
             @Override
             protected void execChangedMasterValue(Object newMasterValue) {
               setEnabled(ObjectUtility.isOneOf(newMasterValue, IChartType.PIE, IChartType.DOUGHNUT, IChartType.POLAR_AREA, IChartType.RADAR, IChartType.BAR, IChartType.BAR_HORIZONTAL, IChartType.LINE, IChartType.COMBO_BAR_LINE,
-                  IChartType.BUBBLE));
+                  IChartType.BUBBLE, IChartType.SCATTER));
             }
           }
 
@@ -1269,7 +1342,7 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
             @Override
             protected void execChangedMasterValue(Object newMasterValue) {
               setEnabled(ObjectUtility.isOneOf(newMasterValue, IChartType.PIE, IChartType.DOUGHNUT, IChartType.POLAR_AREA, IChartType.RADAR, IChartType.BAR, IChartType.BAR_HORIZONTAL, IChartType.LINE, IChartType.COMBO_BAR_LINE,
-                  IChartType.BUBBLE));
+                  IChartType.BUBBLE, IChartType.SCATTER));
             }
           }
 
@@ -1702,6 +1775,7 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
                 case IChartType.POLAR_AREA:
                 case IChartType.RADAR:
                 case IChartType.BUBBLE:
+                case IChartType.SCATTER:
                   IChartConfig config = chart.getConfig();
                   config.withType(chartType);
                   if (!getXAxisStackedCheckBox().isEnabled() && !getYAxisStackedCheckBox().isEnabled()) {
@@ -2914,7 +2988,7 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
             @Override
             protected void execChangedMasterValue(Object newMasterValue) {
               setEnabled(ObjectUtility.isOneOf(newMasterValue, IChartType.LINE, IChartType.BAR, IChartType.BAR_HORIZONTAL, IChartType.COMBO_BAR_LINE,
-                  IChartType.BUBBLE));
+                  IChartType.BUBBLE, IChartType.SCATTER));
             }
           }
 
@@ -2998,7 +3072,8 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
                     IChartType.DOUGHNUT,
                     IChartType.POLAR_AREA,
                     IChartType.RADAR,
-                    IChartType.BUBBLE)) {
+                    IChartType.BUBBLE,
+                    IChartType.SCATTER)) {
                   setEnabled(true);
                   setMinValue(0);
                   setMaxValue(null);
