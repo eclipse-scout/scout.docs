@@ -1,6 +1,6 @@
 {
   "name": "@eclipse-scout/demo-contacts",
-  "version": "22.0.0-snapshot",
+  "version": "22.0.26",
   "description": "Eclipse Scout Demo Contacts",
   "author": "BSI Business Systems Integration AG",
   "homepage": "https://www.eclipse.org/scout",
@@ -37,11 +37,11 @@
     "version:release": "releng-scripts version:release"
   },
   "devDependencies": {
-    "@eclipse-scout/cli": ">=22.0.0-snapshot <22.0.0",
+    "@eclipse-scout/cli": "22.0.26",
     "@eclipse-scout/releng": "^22.0.0"
   },
   "dependencies": {
-    "@eclipse-scout/core": ">=22.0.0-snapshot <22.0.0",
+    "@eclipse-scout/core": "22.0.26",
     "jquery": "3.6.0"
   }
 }
