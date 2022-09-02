@@ -194,7 +194,7 @@ Perform the following migration in all your `package.json` files:
 ----
 "jquery": "3.6.0"
 "jasmine-core": "3.10.1"
-"karma": "6.3.9"
+"karma": "6.3.20"
 "eslint": "8.10.0"
 
 ----
