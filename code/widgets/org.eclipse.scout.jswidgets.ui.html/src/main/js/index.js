@@ -160,6 +160,7 @@ export {default as WidgetsRoute} from './WidgetsRoute';
 export {default as SamplePageWithTable} from './page/SamplePageWithTable';
 export {default as SamplePageWithTableSearchForm} from './page/SamplePageWithTableSearchForm';
 export {default as SamplePageWithNodes} from './page/SamplePageWithNodes';
+export {default as TooltipForm} from './tooltip/TooltipForm';
 export {default as TreeForm} from './tree/TreeForm';
 export {default as TreePropertiesBox} from './tree/TreePropertiesBox';
 export {default as TreeBoxForm} from './treebox/TreeBoxForm';

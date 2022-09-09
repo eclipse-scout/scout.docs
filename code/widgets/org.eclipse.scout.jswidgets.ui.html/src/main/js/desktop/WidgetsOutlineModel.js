@@ -462,6 +462,15 @@ export default () => ({
     {
       objectType: 'PageWithNodes',
       leaf: true,
+      text: 'Tooltip',
+      detailForm: {
+        objectType: 'jswidgets.TooltipForm'
+      },
+      detailTableVisible: false
+    },
+    {
+      objectType: 'PageWithNodes',
+      leaf: true,
       text: 'Tree',
       detailForm: {
         objectType: 'jswidgets.TreeForm'
