@@ -31,10 +31,18 @@ export default () => ({
       labelVisible: false,
       fields: [
         {
-          id: 'MenuToDeleteField',
+          id: 'SelectedMenuField',
           objectType: 'SmartField',
           labelVisible: false,
           statusVisible: false
+        },
+        {
+          id: 'InsertChildMenuButton',
+          objectType: 'Button',
+          label: 'Insert child menu',
+          labelVisible: false,
+          processButton: false,
+          displayStyle: Button.DisplayStyle.LINK
         },
         {
           id: 'DeleteMenuButton',

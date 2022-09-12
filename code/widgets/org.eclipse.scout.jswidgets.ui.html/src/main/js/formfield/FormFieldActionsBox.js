@@ -41,11 +41,14 @@ export default class FormFieldActionsBox extends GroupBox {
     let insertMenuButton = this.widget('InsertMenuButton');
     insertMenuButton.on('click', this._onInsertMenuClick.bind(this));
 
+    let insertChildMenuButton = this.widget('InsertChildMenuButton');
+    insertChildMenuButton.on('click', this._onInsertChildMenuClick.bind(this));
+
     let deleteMenuButton = this.widget('DeleteMenuButton');
     deleteMenuButton.on('click', this._onDeleteMenuClick.bind(this));
 
-    let menuToDeleteField = this.widget('MenuToDeleteField');
-    menuToDeleteField.setLookupCall(new FormFieldMenuLookupCall(this.field));
+    let selectedMenuField = this.widget('SelectedMenuField');
+    selectedMenuField.setLookupCall(new FormFieldMenuLookupCall(this.field));
   }
 
   _onInsertMenuClick(event) {
@@ -55,18 +58,30 @@ export default class FormFieldActionsBox extends GroupBox {
     });
   }
 
+  _onInsertChildMenuClick(event) {
+    let selectedMenuField = this.widget('SelectedMenuField');
+    let menu = selectedMenuField.value;
+    if (!menu) {
+      return;
+    }
+    menu.insertChildAction({
+      objectType: 'Menu',
+      text: 'Child Menu ' + (menu.childActions.length + 1)
+    });
+  }
+
   _onDeleteMenuClick(event) {
-    let menuToDeleteField = this.widget('MenuToDeleteField');
-    let menu = menuToDeleteField.value;
+    let selectedMenuField = this.widget('SelectedMenuField');
+    let menu = selectedMenuField.value;
     this.field.deleteMenu(menu);
     // Select last entry in the lookup rows
-    menuToDeleteField.lookupCall.getAll().then(result => {
+    selectedMenuField.lookupCall.getAll().then(result => {
       let rows = result.lookupRows;
       let newValue = null;
       if (rows.length > 0) {
         newValue = rows[rows.length - 1].key;
       }
-      menuToDeleteField.setValue(newValue);
+      selectedMenuField.setValue(newValue);
     });
   }
 }
