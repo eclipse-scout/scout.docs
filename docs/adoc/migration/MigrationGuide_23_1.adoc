@@ -91,6 +91,11 @@ To install the Scout SDK into your existing Eclipse IDE, use this P2 update site
 
 // ----------------------------------------------------------------------------
 
+== Rename WidgetTooltip.widget (Scout JS)
+
+The `widget` property of `WidgetTooltip` has been renamed to `content`.
+Together with the property itself the corresponding setter has been renamed from `setWidget` to `setContent`.
+
 == ObjectType as Class Reference (Scout JS)
 
 As described in the {release-notes-link}, it is now possible to use class references for the `objectType`.
@@ -223,5 +228,3 @@ The following functions have been removed because they are not in use anymore.
 The following functions have been renamed
 
 . widthToContent -> cssWidthToContentAnimated
-
-
