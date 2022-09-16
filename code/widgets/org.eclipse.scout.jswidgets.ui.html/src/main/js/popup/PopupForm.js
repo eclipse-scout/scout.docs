@@ -121,7 +121,7 @@ export default class PopupForm extends Form {
       withArrow: this.widget('WithArrowField').value,
       withGlassPane: this.widget('WithGlassPaneField').value,
       cssClass: 'popup-form-popup',
-      widget: {
+      content: {
         objectType: 'Label',
         htmlEnabled: true,
         value: '<h2>Hi, I\'m a popup!</h2>' +
