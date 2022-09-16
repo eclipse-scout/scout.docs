@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2018 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
+ * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
@@ -477,7 +477,7 @@ public class PopupForm extends AbstractForm implements IAdvancedExampleForm {
     }
 
     @Override
-    protected Class<Label> getConfiguredWidget() {
+    protected Class<Label> getConfiguredContent() {
       return Label.class;
     }
 
@@ -500,7 +500,7 @@ public class PopupForm extends AbstractForm implements IAdvancedExampleForm {
   public static class GroupBoxWidgetPopup extends AbstractWidgetPopup<ContentGroupBox> {
 
     @Override
-    protected Class<ContentGroupBox> getConfiguredWidget() {
+    protected Class<ContentGroupBox> getConfiguredContent() {
       return ContentGroupBox.class;
     }
 
@@ -643,7 +643,7 @@ public class PopupForm extends AbstractForm implements IAdvancedExampleForm {
 
           @Order(30)
           @ClassId("993bd266-27e4-4618-9998-0190bfd64cc0")
-          public class ThirsStringField extends AbstractStringField {
+          public class ThirdStringField extends AbstractStringField {
             @Override
             protected String getConfiguredLabel() {
               return "Third field";
