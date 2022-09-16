@@ -212,6 +212,22 @@ menus.filter(this.menus, allowedTypes, {onlyVisible, enableDisableKeyStrokes});
 
 TODO describe registerNamespace
 
+== Rename WidgetPopup.widget (Scout JS & Scout Classic)
+
+The `widget` property on `WidgetPopup` classes (and all its subclasses) has been renamed to `content`:
+
+. Scout JS
+.. Update the `widget` property in all JS models creating WidgetPopups from `widget` to `content`.
+.. Rename the `_renderWidget` method on subclasses of `WidgetPopup` to `_renderContent`.
+.. `setWidget` on WidgetPopups has been renamed to `setContent`.
+. Scout Classic
+.. `IWidgetPopup#PROP_WIDGET` has been renamed to `IWidgetPopup#PROP_CONTENT`.
+.. `IWidgetPopup#getWidget` has been renamed to `IWidgetPopup#getContent`.
+.. `AbstractWidgetPopup#getConfiguredWidget` as been renamed to `AbstractWidgetPopup#getConfiguredContent`.
+.. `AbstractWidgetPopup#createWidget` as been renamed to `AbstractWidgetPopup#createContent`.
+.. `AbstractWidgetPopup#setWidget` as been renamed to `AbstractWidgetPopup#setContent`.
+
+
 == JQuery
 
 The following functions have been removed because they are not in use anymore.
