@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2021 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
@@ -38,6 +38,7 @@ public class ChartTypeLookupCall extends LocalLookupCall<String> {
     rows.add(new LookupRow<>(IChartType.POLAR_AREA, "Polar area"));
     rows.add(new LookupRow<>(IChartType.RADAR, "Radar"));
     rows.add(new LookupRow<>(IChartType.SALESFUNNEL, "Salesfunnel"));
+    rows.add(new LookupRow<>(IChartType.SCATTER, "Scatter"));
     rows.add(new LookupRow<>(IChartType.SPEEDO, "Speedo"));
     rows.add(new LookupRow<>(IChartType.VENN, "Venn"));
     return rows;
