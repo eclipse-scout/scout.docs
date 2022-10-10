@@ -244,3 +244,10 @@ The following functions have been removed because they are not in use anymore.
 The following functions have been renamed
 
 . widthToContent -> cssWidthToContentAnimated
+
+== Table (Scout JS)
+
+TableFilter.js has been removed because it is has no benefit.
+
+With TypeScript, the interface `Filter<TableRow>` should be used instead.
+With JavaScript, `extends from TableFilter` can be removed.
