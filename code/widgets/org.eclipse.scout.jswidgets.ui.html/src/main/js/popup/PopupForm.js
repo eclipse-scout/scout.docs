@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
@@ -36,6 +36,9 @@ export default class PopupForm extends Form {
 
     let anchorBoundsField = this.widget('AnchorBoundsField');
     anchorBoundsField.on('propertyChange', this._onAnchorBoundsChange.bind(this));
+
+    let modalField = this.widget('ModalField');
+    modalField.setValue(dummyPopup.modal);
 
     let closeOnAnchorMouseDownField = this.widget('CloseOnAnchorMouseDownField');
     closeOnAnchorMouseDownField.setValue(dummyPopup.closeOnAnchorMouseDown);
@@ -102,6 +105,7 @@ export default class PopupForm extends Form {
       parent: this,
       $anchor: $anchor,
       anchorBounds: anchorBounds,
+      modal: this.widget('ModalField').value,
       closeOnAnchorMouseDown: this.widget('CloseOnAnchorMouseDownField').value,
       closeOnMouseDownOutside: this.widget('CloseOnMouseDownOutsideField').value,
       closeOnOtherPopupOpen: this.widget('CloseOnOtherPopupOpenField').value,
