@@ -36,10 +36,13 @@ import org.eclipse.scout.rt.client.ui.form.fields.treefield.AbstractTreeField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
+import org.eclipse.scout.rt.platform.holders.IntegerHolder;
 import org.eclipse.scout.rt.platform.job.ExecutionTrigger;
 import org.eclipse.scout.rt.platform.job.Jobs;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
+import org.eclipse.scout.rt.platform.util.visitor.DepthFirstTreeVisitor;
+import org.eclipse.scout.rt.platform.util.visitor.TreeVisitResult;
 import org.eclipse.scout.rt.shared.services.common.code.ICode;
 import org.eclipse.scout.widgets.client.ui.desktop.menu.AbstractHierarchicalTreeMenu;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
@@ -52,6 +55,7 @@ import org.eclipse.scout.widgets.client.ui.forms.TreeFieldForm.MainBox.Configura
 import org.eclipse.scout.widgets.client.ui.forms.TreeFieldForm.MainBox.ExamplesBox;
 import org.eclipse.scout.widgets.client.ui.forms.TreeFieldForm.MainBox.ExamplesBox.DefaultField;
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractUserTreeField;
+import org.eclipse.scout.widgets.shared.Icons;
 import org.eclipse.scout.widgets.shared.services.code.IndustryICBCodeType;
 
 @Order(4000.0)
@@ -278,6 +282,60 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
                 else {
                   getTree().setDisplayStyle(ITree.DISPLAY_STYLE_DEFAULT);
                 }
+              }
+            }
+
+            @ClassId("bda89335-ef3f-4d41-a28e-8691215d3ff1")
+            public class ToggleNodeIconMenu extends AbstractMenu {
+              @Override
+              protected String getConfiguredText() {
+                return TEXTS.get("ToggleNodeIcon");
+              }
+
+              @Override
+              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+                return CollectionUtility.hashSet(TreeMenuType.SingleSelection);
+              }
+
+              @Override
+              protected void execAction() {
+                Cell cell = getTree().getSelectedNode().getCellForUpdate();
+                if (cell.getIconId() != null) {
+                  cell.setIconId(null);
+                }
+                else {
+                  cell.setIconId(Icons.Clock);
+                }
+              }
+            }
+
+            @Order(1000)
+            @ClassId("93ebc17e-4ac2-4073-9521-666ccbb6c9e1")
+            public class UpdateNodeTextsMenu extends AbstractMenu {
+              boolean m_reverse = false;
+
+              @Override
+              protected String getConfiguredText() {
+                return TEXTS.get("ChangeNodeTexts");
+              }
+
+              @Override
+              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+                return CollectionUtility.hashSet(TreeMenuType.EmptySpace);
+              }
+
+              @Override
+              protected void execAction() {
+                final IntegerHolder number = new IntegerHolder(m_reverse ? 500: 0);
+                getTree().visitTree(new DepthFirstTreeVisitor<>() {
+                  @Override
+                  public TreeVisitResult preVisit(ITreeNode node, int level, int index) {
+                    node.getCellForUpdate().setText("Dynamic Text " + number.getValue());
+                    number.setValue(m_reverse ? number.getValue() - 1: number.getValue() + 1);
+                    return TreeVisitResult.CONTINUE;
+                  }
+                });
+                m_reverse = !m_reverse;
               }
             }
           }
@@ -874,14 +932,10 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
     private void addCodesToTree(List<? extends ICode<Long>> list, ITreeNode parent, AbstractTree tree) {
       // create a tree node for each code
       for (final ICode<Long> code : list) {
-        AbstractTreeNode node = new AbstractTreeNode() {
-          @Override
-          protected void execDecorateCell(Cell cell) {
-            cell.setIconId(code.getIconId());
-            cell.setText(code.getText());
-            cell.setTooltipText(code.getTooltipText());
-          }
-        };
+        AbstractTreeNode node = new AbstractTreeNode() {};
+        node.getCellForUpdate().setIconId(code.getIconId());
+        node.getCellForUpdate().setText(code.getText());
+        node.getCellForUpdate().setTooltipText(code.getTooltipText());
 
         // add the tree node to the tree
         tree.addChildNode(parent, node);
