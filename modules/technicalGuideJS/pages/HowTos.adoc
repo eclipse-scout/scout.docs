@@ -1,0 +1,11 @@
+ifndef::finaldoc[]
+include::common:partial$_initDoc.adoc[]
+endif::finaldoc[]
+
+= How-Tos
+
+This chapter provides various small technical guides to very specific Scout JS subjects.
+
+include::howtosJS:FlipCard-HowTo.adoc[]
+
+include::howtosJS:Chart-HowTo.adoc[]

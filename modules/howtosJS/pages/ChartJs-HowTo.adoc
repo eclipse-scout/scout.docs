@@ -1,11 +1,7 @@
 ifndef::finaldoc[]
-include::../_initDoc.adoc[]
+include::common:partial$_initDoc.adoc[]
 endif::finaldoc[]
 
-//fallback for safe mode == secure:
-:imgsdir: ../../imgs
-:codedir: ../../../code
-ifndef::mdledir[:mdledir: .]
 :experimental:
 
 === How to integrate https://www.chartjs.org/[ChartJS] in a ScoutJS SPA
