@@ -1,13 +1,17 @@
-
 ifndef::finaldoc[]
-include::../_initDoc.adoc[]
+include::common:partial$_initDoc.adoc[]
 endif::finaldoc[]
 
-//fallback for safe mode == secure:
-:imgsdir: ../../imgs
-:codedir: ../../../code
-ifndef::mdledir[:mdledir: .]
-:experimental:
+= Eclipse ScoutJS: Technical Guide
+
+NOTE: Looking for something else? Visit https://eclipsescout.github.io for all Scout related documentation.
+
+== Introduction
+
+This technical guide documents the Scout JS architecture and describes important concepts.
+
+NOTE: This is the guide to Scout JS, the JavaScript part of Eclipse Scout. If you are looking for the Java part please see the technical guide for Scout Classic.
+// TODO: add link
 
 == Overview
 A classic Scout application has a client model written in Java, and a UI which is rendered using JavaScript. With this approach you can write your client code using a mature and type safe language. Unfortunately you cannot develop applications which have to run offline because the UI and the Java model need to be synchronized.
@@ -104,7 +108,7 @@ Now you can open the form using `form.open()` and it will look like this:
 
 [[img-scoutjs_myform]]
 .First form
-image::{imgsdir}/scoutjs_myform.png[]
+image::common:scoutjs_myform.png[]
 
 As soon as you would like to add some code that interacts with the fields or maybe just want to not always load the model manually when creating the form, you should create a file called `MyForm.js`. The content of that file would be a class `MyForm` that extends the `Form` from Scout and a method called `_jsonModel` that returns our model.
 
@@ -475,7 +479,7 @@ Every form field contains of the following parts:
 
 [[img-formfield, Figure 000]]
 .Parts of a form field
-image::{imgsdir}/formfield.png[]
+image::common:formfield.png[]
 
 Typical form fields are `StringField`, `DateField` or `TableField`. All these fields have the API of `FormField` in common (like `setLabel()`, `setErrorStatus()`, etc.) but also provide additional API.
 
@@ -559,7 +563,7 @@ This validator ensures that the user may not enter the current date. If he does,
 
 [[img-datefield-validation-error, Figure 000]]
 .Validation error of a date field
-image::{imgsdir}/datefield_validation_error.png[]
+image::common:datefield_validation_error.png[]
 
 As you can see in the example, in order to mark a value as invalid just throw the error message you want to show to the user. You could also throw an error or a `Status` object. In that case a generic error message will be displayed.
 
@@ -624,7 +628,7 @@ That's it! As you can see, changing this variable not only changes the backgroun
 
 [[img-navigation-background, Figure 000]]
 .Helloworld default and with a custom navigation background color
-image::{imgsdir}/custom_navigation_background.png[]
+image::common:custom_navigation_background.png[]
 
 In this example a color from the Scout color palette is used. You can also use a custom hex code instead of `@palette-red-4` or define a custom color palette, if you want to use the same colors for different rules.
 
@@ -833,19 +837,19 @@ A `Smart Field` provides a list of proposals the user can choose from to pick on
 
 [[img-smart_field]]
 .Smart Field
-image::{imgsdir}/smart_field.png[]
+image::common:smart_field.png[]
 
 If you don't need the search as you type feature, you can switch it off by setting the property `displayHint` to `dropdown` so that it behaves like a regular drop down list. This means the user cannot filter the values anymore using key board and can choose the values only by mouse / touch.
 
 [[img-drop_down_field]]
 .Smart Field with display style set to 'dropdown'
-image::{imgsdir}/drop_down_field.png[]
+image::common:drop_down_field.png[]
 
 Another type of Smart Field is the so called `Proposal Field`. A Proposal Field does not require the user to choose from the available proposals but allows him to enter custom text as well.
 
 [[img-proposal_field]]
 .Proposal Field
-image::{imgsdir}/proposal_field.png[]
+image::common:proposal_field.png[]
 
 In order to provide the proposals you can either use a <<Lookup Call>> or a `Code Type`.
 
@@ -961,7 +965,7 @@ The widgets `Table.js`, `Tree.js`, `TileGrid.js` and `TileAccordion.js` share a 
 This filter field is enabled by default and can be turned off using the property `textFilterEnabled`.
 
 .Filter field
-image::{imgsdir}/tree_box_with_filter_field.png[]
+image::common:tree_box_with_filter_field.png[]
 
 This filter field will filter the rows, nodes or tiles by their display text.
 This is simple for rows and nodes but quite complicated for tiles due to the large number of different types of tiles.
@@ -1588,8 +1592,3 @@ The only thing you need to do is to create that file and add a line with the wor
 
 For more details please see the official ESLint documentation at
 https://eslint.org/docs/user-guide/configuring#eslintignore.
-
-
-
-
-
