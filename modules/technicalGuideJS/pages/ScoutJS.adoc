@@ -2,16 +2,13 @@ ifndef::finaldoc[]
 include::common:partial$_initDoc.adoc[]
 endif::finaldoc[]
 
-= Eclipse ScoutJS: Technical Guide
+= Eclipse Scout JS: Technical Guide
 
 NOTE: Looking for something else? Visit https://eclipsescout.github.io for all Scout related documentation.
 
-== Introduction
-
 This technical guide documents the Scout JS architecture and describes important concepts.
 
-NOTE: This is the guide to Scout JS, the JavaScript part of Eclipse Scout. If you are looking for the Java part please see the technical guide for Scout Classic.
-// TODO: add link
+NOTE: This is the guide to Scout JS, the JavaScript part of Eclipse Scout. If you are looking for the Java part please see the xref:technicalGuide:Overview.adoc[technical guide for Scout Classic].
 
 == Overview
 A classic Scout application has a client model written in Java, and a UI which is rendered using JavaScript. With this approach you can write your client code using a mature and type safe language. Unfortunately you cannot develop applications which have to run offline because the UI and the Java model need to be synchronized.
