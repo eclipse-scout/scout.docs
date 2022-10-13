@@ -380,6 +380,8 @@ To minimize configuration files such entries should be removed from `config.prop
 [[sec-app.configProperties]]
 == Scout Config Properties
 
+// TODO: this table looks terrible
+
 [cols="2,4,1,1", options="header"]
 .Config Properties
 |===
