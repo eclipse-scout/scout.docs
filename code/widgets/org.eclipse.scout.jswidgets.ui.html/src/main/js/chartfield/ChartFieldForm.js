@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {App, arrays, colorSchemes, Form, GridData, models, objects, scout, strings} from '@eclipse-scout/core';
+import {App, arrays, colorSchemes, DesktopNotification, Form, GridData, models, objects, scout, Status, strings} from '@eclipse-scout/core';
 import {Chart} from '@eclipse-scout/chart';
 import ChartFieldFormModel from './ChartFieldFormModel';
 import {ValuesProviderLookupCall} from '../index';
@@ -72,6 +72,7 @@ export default class ChartFieldForm extends Form {
     let chartTile = this.widget('ChartTile');
     this.tileChartField = this.widget('TileChartField');
     this.tileChart = this.tileChartField.chart;
+    this.tileChart.on('valueClick', this._onChartValueClick.bind(this));
 
     this.fieldChart.on('propertyChange:config', event => {
       let colorScheme = ((event.newValue || {}).options || {}).colorScheme;
@@ -80,6 +81,7 @@ export default class ChartFieldForm extends Form {
       }
       chartTile.setColorScheme(colorScheme);
     });
+    this.fieldChart.on('valueClick', this._onChartValueClick.bind(this));
 
     let autoColorCheckBox = this.widget('AutoColorCheckBox');
     autoColorCheckBox.setValue((this._getChartConfig().options || {}).autoColor);
@@ -712,6 +714,22 @@ export default class ChartFieldForm extends Form {
       }
     });
     randomCheckBox.setValue(this.random);
+  }
+
+  _onChartValueClick(event) {
+    let clickedItem = event.data;
+    this.session.desktop.addNotification(scout.create(DesktopNotification, {
+      parent: this,
+      duration: 2000,
+      closable: true,
+      htmlEnabled: true,
+      status: Status.info('<h4>VALUE_CLICK event</h4><ul>'
+        + (!objects.isNullOrUndefined(clickedItem.xIndex) ? '<li>xIndex: ' + clickedItem.xIndex + '</li>' : '')
+        + (!objects.isNullOrUndefined(clickedItem.yIndex) ? '<li>yIndex: ' + clickedItem.yIndex + '</li>' : '')
+        + (!objects.isNullOrUndefined(clickedItem.datasetIndex) ? '<li>datasetIndex: ' + clickedItem.datasetIndex + '</li>' : '')
+        + (!objects.isNullOrUndefined(clickedItem.dataIndex) ? '<li>dataIndex: ' + clickedItem.dataIndex + '</li>' : '')
+        + '</ul>')
+    }));
   }
 
   _renewData() {
