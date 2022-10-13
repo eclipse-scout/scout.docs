@@ -154,7 +154,6 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
     return (MainBox) getRootGroupBox();
   }
 
-
   public ChartField getChartField() {
     return getFieldByClass(ChartField.class);
   }
@@ -958,9 +957,9 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
     IHtmlContent message = HTML.fragment(
         HTML.h4("VALUE_CLICK event"),
         HTML.ul(
-            HTML.li("xIndex: " + xIndex),
-            HTML.li("yIndex: " + yIndex),
-            HTML.li("datasetIndex: " + datasetIndex)));
+            xIndex != null ? HTML.li("xIndex: " + xIndex) : null,
+            yIndex != null ? HTML.li("yIndex: " + yIndex) : null,
+            datasetIndex != null ? HTML.li("datasetIndex: " + datasetIndex) : null));
     getDesktop().addNotification(new DesktopNotification(new Status(
         message.toHtml(), IStatus.INFO),
         TimeUnit.SECONDS.toMillis(2),
