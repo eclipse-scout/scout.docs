@@ -6,6 +6,6 @@ endif::finaldoc[]
 
 This chapter provides various small technical guides to very specific Scout JS subjects.
 
-include::howtosJS:FlipCard-HowTo.adoc[]
+include::partial$FlipCard-HowTo.adoc[]
 
-include::howtosJS:Chart-HowTo.adoc[]
+include::partial$Chart-HowTo.adoc[]

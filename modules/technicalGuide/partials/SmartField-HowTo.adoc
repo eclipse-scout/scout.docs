@@ -1,0 +1,51 @@
+ifndef::finaldoc[]
+include::common:partial$_initDoc.adoc[]
+endif::finaldoc[]
+
+:experimental:
+
+== SmartField: how to apply colors and styles from a lookup-row
+
+When a user selects a lookup-row from the proposal chooser in Scout versions <= 6.0, the properties `foregroundColor`, `backgroundColor`, `font` and `tooltipText` have been automatically copied from the lookup-row to the field. In some cases this was exactly what a specific application needed, but in other cases it was hard to implement a specific behavior without overriding internal methods from the `SmartField`. For instance it was not possible to have a lookup-row with background-color red in the proposal-chooser and at the same time avoid the background-color of the field changing to red, when that row was being selected.
+
+Since that automatic behavior didn't fit every business requirement, we removed it completely. This means a programmer must now implement specific code to read properties from the lookup-row and set them on the field. The following example is from the Scout widgets app. It changes the background-color of the field.
+
+[source,java]
+.Java example, set the background-color of the lookup-row on the field
+----
+@Override
+protected void execChangedValue() {
+  updateFieldBackgroundColor();
+}
+
+/**
+ * Sets the color of the field to the color of the selected lookup row.
+ */
+protected void updateFieldBackgroundColor() {
+  ILookupRow<?> lookupRow = getLookupRow();
+  String bgColor = lookupRow == null ? null : lookupRow.getBackgroundColor();
+  setBackgroundColor(bgColor);
+}
+----
+
+Since Scout 8.0 the property `cssClass` from the lookup-row is automatically applied to the .form-field DIV. This gives the programmer the flexibility to style either both, lookup-row and field, or only the lookup-row in the proposal-chooser via CSS/LESS.
+
+Here's a LESS example from the Scout widget app that sets the background-color of lookup-row and field. It is used for the `EventTypeCodeType` which defines 3 codes with the CSS classes public, private and external:
+
+[source,less]
+.LESS example, style lookup-row and field with the same CSS class
+----
+.form-field.public > .field, .table-row.public {
+  background-color: @palette-green-0;
+}
+
+.form-field.private > .field, .table-row.private {
+  background-color: @palette-orange-1;
+}
+
+.form-field.external > .field, .table-row.external {
+  background-color: @palette-gray-3;
+}
+----
+
+_Conclusion_: older Scout apps that rely on the automatic behavior for the properties mentioned above, should use CSS classes instead of the properties back-/foregroundColor or font. If that's not possible you should implement logic as shown in the example above where required, possibly moving that code in a class that extends `AbstractSmartField`, if the same code is required in multiple places.
