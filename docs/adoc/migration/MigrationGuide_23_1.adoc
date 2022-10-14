@@ -232,14 +232,14 @@ The `widget` property on `WidgetPopup` classes (and all its subclasses) has been
 
 The following functions have been removed because they are not in use anymore.
 
-. removeThis
-. suppressEventIfDisabled
-. colorOpacity
-. animateSVG
-. copyCssIfGreater
-. backupSelection
-. restoreSelection
-. onSingleOrDoubleClick
+- removeThis
+- suppressEventIfDisabled
+- colorOpacity
+- animateSVG
+- copyCssIfGreater
+- backupSelection
+- restoreSelection
+- onSingleOrDoubleClick
 
 The following functions have been renamed
 
@@ -251,3 +251,20 @@ TableFilter.js has been removed because it is has no benefit.
 
 With TypeScript, the interface `Filter<TableRow>` should be used instead.
 With JavaScript, `extends from TableFilter` can be removed.
+
+== karma-jasmine-scout (Scout JS)
+
+The following functions have been removed because they are not in use anymore.
+
+- stripCommentsFromJson
+- definedProperty
+- sameProperty
+- JQuery.triggerMouseMove
+- JQuery.triggerWithPosition
+
+The following functions have been renamed.
+
+- widgetCloneProperty
+
+The jquery-plugin jqueryExtensions has been refactored to a ES6 module to avoid pollution (of code completion) of the JQuery object outside test environment.
+In the rare case you used these functions for testing, you need to import them now, the JQuery-object does not contain them anymore.
