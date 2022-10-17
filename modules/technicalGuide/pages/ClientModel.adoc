@@ -1,10 +1,3 @@
-
-ifndef::finaldoc[]
-include::common:partial$_initDoc.adoc[]
-endif::finaldoc[]
-
-:experimental:
-
 = Client Model
 
 == Desktop
