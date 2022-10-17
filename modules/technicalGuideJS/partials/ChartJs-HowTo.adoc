@@ -1,9 +1,3 @@
-ifndef::finaldoc[]
-include::common:partial$_initDoc.adoc[]
-endif::finaldoc[]
-
-:experimental:
-
 === How to integrate https://www.chartjs.org/[ChartJS] in a ScoutJS SPA
 This cheat sheet shows how to integrate ChartJS charts into a ScoutJS single page application (SPA).
 
