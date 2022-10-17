@@ -119,3 +119,14 @@ As of version 23.1 the typed `org.eclipse.scout.rt.dataobject.id.NodeId` is used
 In previous versions the `IId` interface was typed with a generic `WRAPPED_TYPE extends Comparable<WRAPPED_TYPE>`.
 To be able to use the `IId` interface as general root for any kind of identifiers without having to deal with a concrete generic type, the generic type definition was removed and moved to the default implementation `AbstractId` and the typed sub-interfaces `IUuid`, `IStringId` and `ILongId`.
 
+== Calendar Widget
+
+The calendar component item of the calendar widget has new attributes:
+
+* subjectIconId - icon is showed in the calendar component in front of the subject
+* subjectLabel - label in tooltip on top of the subject
+* subjectAppLink - appLink in tooltip of calendar component
+* descriptionElements - list of `ICalendarItemDescriptionElement` which is displayed in the body of the tooltip of the calendar component
+
+.Calendar Component
+image::{rnimgsdir}/calendar_tooltip.png[]

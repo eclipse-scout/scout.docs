@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2019 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
@@ -11,6 +11,7 @@
 package org.eclipse.scout.widgets.client.ui.forms;
 
 import static java.util.Calendar.*;
+
 import java.util.Date;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -27,6 +28,7 @@ import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.calendarfield.AbstractCalendarField;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
+import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
@@ -35,11 +37,13 @@ import org.eclipse.scout.rt.platform.util.SleepUtil;
 import org.eclipse.scout.rt.platform.util.TriState;
 import org.eclipse.scout.rt.platform.util.date.DateUtility;
 import org.eclipse.scout.rt.shared.services.common.calendar.CalendarAppointment;
+import org.eclipse.scout.rt.shared.services.common.calendar.CalendarItemDescriptionElement;
 import org.eclipse.scout.rt.shared.services.common.calendar.ICalendarItem;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipse.scout.widgets.client.ui.forms.CalendarFieldForm.MainBox.CalendarField;
 import org.eclipse.scout.widgets.client.ui.forms.CalendarFieldForm.MainBox.CalendarField.Calendar;
 import org.eclipse.scout.widgets.client.ui.forms.CalendarFieldForm.MainBox.CloseButton;
+import org.eclipse.scout.widgets.shared.Icons;
 
 @Order(8200)
 @ClassId("0d17b2a7-99c6-4de4-b1fa-8e29a9482480")
@@ -127,23 +131,38 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
 
             String cssClass = "calendar-appointment";
             java.util.Calendar cal = getInstance();
+            cal.add(DAY_OF_YEAR, -2);
             DateUtility.truncCalendarToHour(cal);
             Date start = cal.getTime();
             Date end = cal.getTime();
-            result.add(new CalendarAppointment(0L, 0L, start, end, true, "Office Darmstadt", "Scout Course", "Learn Scout basics. Full day appointment for a single day", cssClass));
+            CalendarAppointment calendarAppointment = new CalendarAppointment(0L, 0L, start, end, true, null, "Scout Course", null, cssClass);
+            calendarAppointment.setSubjectLabel("Appointment");
+            calendarAppointment.getDescriptionElements().add(BEANS.get(CalendarItemDescriptionElement.class).withText("Office Darmstadt").withIconId(Icons.World));
+            calendarAppointment.getDescriptionElements().add(BEANS.get(CalendarItemDescriptionElement.class).withText("Learn Scout basics. Full day appointment for a single day").withIconId(Icons.List));
+            result.add(calendarAppointment);
 
             cal.add(DAY_OF_YEAR, -1);
             start = cal.getTime();
             cal.set(HOUR_OF_DAY, 14);
             end = cal.getTime();
-            result.add(new CalendarAppointment(1L, 2L, start, end, false, "Office Bern", "Software Architecture", "Create awesome software architecture for new Scout app", cssClass));
+            calendarAppointment = new CalendarAppointment(1L, 2L, start, end, false, null, "Software Architecture", null, cssClass);
+            calendarAppointment.setSubjectLabel("Appointment");
+            calendarAppointment.getDescriptionElements().add(BEANS.get(CalendarItemDescriptionElement.class).withText("Office Bern").withIconId(Icons.World));
+            calendarAppointment.getDescriptionElements().add(BEANS.get(CalendarItemDescriptionElement.class).withText("Create awesome software architecture for new Scout app").withIconId(Icons.List));
+            result.add(calendarAppointment);
 
             // Phone call
             cal.set(HOUR_OF_DAY, 13);
             start = cal.getTime();
             cal.add(MINUTE, 30);
             end = cal.getTime();
-            result.add(new CalendarAppointment(2L, 2L, start, end, false, "Office Baar", "Phone Call with Jeremy", "Inform Jeremy about news", cssClass));
+            calendarAppointment = new CalendarAppointment(2L, 2L, start, end, false, null, "Phone Call with Jeremy", null, cssClass);
+            calendarAppointment.setSubjectLabel("Appointment");
+            calendarAppointment.setSubjectIconId(Icons.Phone);
+            calendarAppointment.getDescriptionElements().add(BEANS.get(CalendarItemDescriptionElement.class).withText("Office Baar").withIconId(Icons.World));
+            calendarAppointment.getDescriptionElements().add(BEANS.get(CalendarItemDescriptionElement.class).withText("Inform Jeremy about news").withIconId(Icons.List));
+            calendarAppointment.getDescriptionElements().add(BEANS.get(CalendarItemDescriptionElement.class).withText("Jeremy Stone").withIconId(Icons.PersonSolid));
+            result.add(calendarAppointment);
 
             // Time blocker, spans over 2 days but it is not flagged as full-day appointment
             cal.setTime(new Date());
@@ -154,7 +173,11 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
             cal.set(HOUR_OF_DAY, 17);
             cal.add(DAY_OF_YEAR, 1);
             end = cal.getTime();
-            result.add(new CalendarAppointment(3L, 2L, start, end, false, "Office Zurich", "Time Blocker", "No other appointments", cssClass));
+            calendarAppointment = new CalendarAppointment(3L, 2L, start, end, false, null, "Time Blocker", null, cssClass);
+            calendarAppointment.setSubjectLabel("Appointment");
+            calendarAppointment.getDescriptionElements().add(BEANS.get(CalendarItemDescriptionElement.class).withText("Office Zurich").withIconId(Icons.World));
+            calendarAppointment.getDescriptionElements().add(BEANS.get(CalendarItemDescriptionElement.class).withText("No other appointments").withIconId(Icons.List));
+            result.add(calendarAppointment);
 
             // Daily meeting
             cal.add(DAY_OF_YEAR, 1);
@@ -162,7 +185,10 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
             start = cal.getTime();
             cal.add(HOUR_OF_DAY, 1);
             end = cal.getTime();
-            result.add(new CalendarAppointment(4L, 2L, start, end, false, null, "Daily Meeting BSI", "Daily stand-up meeting", cssClass));
+            calendarAppointment = new CalendarAppointment(4L, 2L, start, end, false, null, "Daily Meeting BSI", null, cssClass);
+            calendarAppointment.setSubjectLabel("Appointment");
+            calendarAppointment.getDescriptionElements().add(BEANS.get(CalendarItemDescriptionElement.class).withText("Daily stand-up meeting").withIconId(Icons.List));
+            result.add(calendarAppointment);
 
             // Education, full day appointment spans over 2 days
             cal.setTime(new Date());
@@ -171,7 +197,11 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
             start = cal.getTime();
             cal.add(DAY_OF_YEAR, 1);
             end = cal.getTime();
-            result.add(new CalendarAppointment(5L, 2L, start, end, true, "Auditorium", "Education", "Learn everything about Scout JS. Full day appointment, spans over 2 days", cssClass));
+            calendarAppointment = new CalendarAppointment(5L, 2L, start, end, true, null, "Education", null, cssClass);
+            calendarAppointment.setSubjectLabel("Appointment");
+            calendarAppointment.getDescriptionElements().add(BEANS.get(CalendarItemDescriptionElement.class).withText("Auditorium").withIconId(Icons.World));
+            calendarAppointment.getDescriptionElements().add(BEANS.get(CalendarItemDescriptionElement.class).withText("Learn everything about Scout JS. Full day appointment, spans over 2 days").withIconId(Icons.List));
+            result.add(calendarAppointment);
           }
 
           @Order(200)
@@ -207,7 +237,12 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
             start = cal.getTime();
             cal.add(MINUTE, 30);
             end = cal.getTime();
-            result.add(new CalendarAppointment(7L, 2L, start, end, false, "@Home", "Mechanic", "Fix broken fridge", cssClass));
+            CalendarAppointment calendarAppointment = new CalendarAppointment(7L, 2L, start, end, false, null, "Mechanic", null, cssClass);
+            calendarAppointment.setSubjectLabel("Private Appointment");
+            calendarAppointment.setSubjectIconId(Icons.ExclamationMarkCircle);
+            calendarAppointment.getDescriptionElements().add(BEANS.get(CalendarItemDescriptionElement.class).withText("@Home").withIconId(Icons.World));
+            calendarAppointment.getDescriptionElements().add(BEANS.get(CalendarItemDescriptionElement.class).withText("Fix broken fridge").withIconId(Icons.List));
+            result.add(calendarAppointment);
 
             cal.add(DAY_OF_YEAR, 3);
             cal.set(HOUR_OF_DAY, 18);
@@ -215,7 +250,11 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
             start = cal.getTime();
             cal.add(HOUR_OF_DAY, 3);
             end = cal.getTime();
-            result.add(new CalendarAppointment(8L, 2L, start, end, false, "Lucky Dumpling, Zurich", "Dinner with Lisa", "Dinner with Lisa", cssClass));
+            calendarAppointment = new CalendarAppointment(8L, 2L, start, end, false, null, "Dinner with Lisa", null, cssClass);
+            calendarAppointment.setSubjectLabel("Private Appointment");
+            calendarAppointment.getDescriptionElements().add(BEANS.get(CalendarItemDescriptionElement.class).withText("Lucky Dumpling, Zurich").withIconId(Icons.World));
+            calendarAppointment.getDescriptionElements().add(BEANS.get(CalendarItemDescriptionElement.class).withText("Lisa Turner").withIconId(Icons.PersonSolid));
+            result.add(calendarAppointment);
           }
 
           @Order(200)
