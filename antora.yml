@@ -5,7 +5,10 @@ asciidoc:
   attributes:
     source-language: asciidoc@
     experimental: true
+    sectanchors: true
+
 nav:
 - modules/ROOT/nav.adoc
 - modules/technicalGuide/nav.adoc
 - modules/technicalGuideJS/nav.adoc
+- modules/sdk/nav.adoc

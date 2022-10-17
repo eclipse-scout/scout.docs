@@ -9,5 +9,6 @@ If you want to get serious about Scout, you should definitely have a look at the
 
 You will learn about best practices and architecture details and even find How Tos for some specific topics. To learn more about the functionality of the Scout plugins for various IDEs, have a look at the Scout SDK documents.
 
-* xref:technicalGuide:Overview.adoc[Technical Guide to Scout Classic]
-* xref:technicalGuideJS:ScoutJS.adoc[Technical Guide to Scout JS]
+* xref:technicalGuide:Overview.adoc[Scout Classic Technical Guide]
+* xref:technicalGuideJS:ScoutJS.adoc[Scout JS Technical Guide]
+* xref:sdk:SdkEclipse.adoc[Scout SDK for Eclipse]

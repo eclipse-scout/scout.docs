@@ -1,25 +1,9 @@
-ifndef::finaldoc[]
-include::../_initDoc.adoc[]
-endif::finaldoc[]
-
-//fallback for safe mode == secure:
-ifndef::imgsdir[:imgsdir: ../imgs]
-ifndef::codedir[:codedir: ../../code]
-ifndef::mdledir[:mdledir: .]
-:experimental:
-
-//-----------------------------------------------------------------------------
-//Asciidoctor input file: "SDK - Wizard - Page"
-//
-//WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
-//-----------------------------------------------------------------------------
-
 The _New Scout Page_ wizard can be used to create a new page and related classes.
 To start the wizard use menu:File[New,Other...] or press kbd:[Ctrl,N].
 
 [[img-sdk_wizard_page]]
 .The new Page Wizard
-image::{imgsdir}/sdk_new_page.png[]
+image::common:sdk_new_page.png[]
 
 // TODO [7.0] mzi: replace *Name* field
 In the case of <<img-sdk_wizard_page>> the package `org.eclipse.scout.apps.helloworld.client.helloworld` has been selected in the Package Explorer.
