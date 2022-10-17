@@ -1,0 +1,7 @@
+// Names
+:sdk_wizard_nls-entry: New Text Entry Wizard
+:sdk_wizard_language: Add a Language Wizard
+:sdk_editor_nls: Scout NLS Editor
+
+// Constants
+:scout-version: 22.0
