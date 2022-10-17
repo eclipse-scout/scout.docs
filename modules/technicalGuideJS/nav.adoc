@@ -1,4 +1,3 @@
-.Technical Guide to Scout JS
-* xref:ScoutJS.adoc[Technical Guide]
-* xref:BrowserSupport.adoc[]
-* xref:HowTos.adoc[]
+* xref:ScoutJS.adoc[Eclipse Scout JS]
+** xref:BrowserSupport.adoc[]
+** xref:HowTos.adoc[]

@@ -1,9 +1,3 @@
-ifndef::finaldoc[]
-include::common:partial$_initDoc.adoc[]
-endif::finaldoc[]
-
-:experimental:
-
 [[cha-rest]]
 = REST
 

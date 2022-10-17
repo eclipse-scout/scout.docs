@@ -4,6 +4,7 @@ version: 22.0
 asciidoc:
   attributes:
     source-language: asciidoc@
+    experimental: true
 nav:
 - modules/ROOT/nav.adoc
 - modules/technicalGuide/nav.adoc

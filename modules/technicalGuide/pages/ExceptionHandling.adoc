@@ -1,14 +1,3 @@
-
-ifndef::finaldoc[]
-include::common:partial$_initDoc.adoc[]
-endif::finaldoc[]
-
-:experimental:
-
-//-----------------------------------------------------------------------------
-// This file describes exception handling
-//-----------------------------------------------------------------------------
-
 = Working with exceptions
 Exceptions can be logged via SLF4J Logger, or given to exception handler for centralized, consistent exception handling, or translated into other exceptions. Scout provides some few exceptions/errors, which are used by the framework.
 

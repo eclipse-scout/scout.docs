@@ -1,11 +1,4 @@
-
-ifndef::finaldoc[]
-include::common:partial$_initDoc.adoc[]
-endif::finaldoc[]
-
-:experimental:
-
-= Eclipse Scout: Technical Guide
+= Eclipse Scout Technical Guide
 
 NOTE: Looking for something else? Visit https://eclipsescout.github.io for all Scout related documentation.
 

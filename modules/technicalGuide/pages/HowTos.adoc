@@ -1,7 +1,3 @@
-ifndef::finaldoc[]
-include::common:partial$_initDoc.adoc[]
-endif::finaldoc[]
-
 = How-Tos
 
 This chapter provides various small technical guides to very specific Scout subjects.

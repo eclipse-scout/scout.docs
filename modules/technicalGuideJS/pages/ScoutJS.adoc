@@ -1,8 +1,4 @@
-ifndef::finaldoc[]
-include::common:partial$_initDoc.adoc[]
-endif::finaldoc[]
-
-= Eclipse Scout JS: Technical Guide
+= Eclipse Scout JS Technical Guide
 
 NOTE: Looking for something else? Visit https://eclipsescout.github.io for all Scout related documentation.
 
