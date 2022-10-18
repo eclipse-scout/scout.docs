@@ -11,9 +11,9 @@ Howto:
 - Use "title case" in chapter titles (https://english.stackexchange.com/questions/14/)
 ////
 
-== About This Release
-
 include::common:partial$Init.adoc[]
+
+== About This Release
 
 The latest version of this release is: {maven-version}.
 

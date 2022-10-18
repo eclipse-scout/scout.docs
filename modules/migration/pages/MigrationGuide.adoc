@@ -1,3 +1,7 @@
+= Eclipse Scout Migration Guide
+
+NOTE: Looking for something else? Visit https://eclipsescout.github.io for all Scout related documentation.
+
 ////
 Howto:
 - Write this document such that it helps people to migrate. Describe what they should do.
@@ -7,14 +11,10 @@ Howto:
 - Use "title case" in chapter titles (https://english.stackexchange.com/questions/14/)
 ////
 
-ifndef::finaldoc[]
-include::../_initDoc.adoc[]
-endif::finaldoc[]
+include::common:partial$Init.adoc[]
 
 // double underscore
 :dus: __
-
-== About This Document
 
 This document describes all relevant changes *from Eclipse Scout {scout-previous-version} to Eclipse Scout {scout-version}*. If existing code has to be migrated, instructions are provided here.
 
@@ -238,7 +238,7 @@ To do so, edit your launch configuration and change the regular expression of th
 Or remove the action completely if you prefer the launchers to be started in parallel.
 
 .Adjust Launch Group
-image::{mgimgsdir}/launch-group.png[]
+image::launch-group.png[]
 
 == Release engineering changes
 
