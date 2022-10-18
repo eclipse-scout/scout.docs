@@ -13,3 +13,4 @@ nav:
 - modules/technicalGuideJS/nav.adoc
 - modules/sdk/nav.adoc
 - modules/releasenotes/nav.adoc
+- modules/migration/nav.adoc
