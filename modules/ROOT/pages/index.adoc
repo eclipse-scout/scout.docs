@@ -2,6 +2,29 @@
 
 These pages document https://www.eclipse.org/scout/[Eclipse Scout].
 
+Here you will find all Scout 22 related documentation, from getting started to architecture details to release upgrades.
+
+== Get Started
+
+// TODO
+Read the [Get Started Guide] first to learn the difference between Scout Classic and Scout JS. This will help you to decide which tutorial is the right one to start with.
+
+Once you have completed the Hello Scout tutorial, you can continue with one of the following tutorials.
+
+
+[cols="1,1"]
+|===
+|Scout Classic Tutorials|Scout JS Tutorials
+
+|[Hello Scout Classic]
+|[Hello Scout JS]
+
+|[Deploy to Tomcat]
+|[Hello Scout JS Full Stack]
+
+|[One Day Tutorial]
+|[Hello Scout JS with CDN]
+|===
 
 == Deepen Your Knowledge
 
@@ -12,3 +35,12 @@ You will learn about best practices and architecture details and even find How T
 * xref:technicalGuide:Overview.adoc[Scout Classic Technical Guide]
 * xref:technicalGuideJS:ScoutJS.adoc[Scout JS Technical Guide]
 * xref:sdk:SdkEclipse.adoc[Scout SDK for Eclipse]
+
+== Upgrade Your Version
+
+Please read the following documents when doing a Scout release upgrade.
+
+The Release Notes describe the new features of the release. The Migration Guide explains how to migrate your code for a proper upgrade.
+
+* xref:releasenotes:ReleaseNotes.adoc[Release Notes]
+* xref:migration:MigrationGuide.adoc[Migration Guide]
