@@ -1,4 +1,4 @@
-:license_cc: https://creativecommons.org/licenses/by/3.0/
+:license_cc: https://creativecommons.org/licenses/by/4.0/
 :license_edl: https://www.eclipse.org/org/documents/edl-v10.php
 
 = Eclipse Scout - Docs
@@ -23,6 +23,6 @@ The demo applications are built with maven: check the link:code/README.adoc[READ
 == License
 
 * The example source code is licensed under link:{license_edl}[Eclipse Distribution License (EDL)]
-* The documentation text is licensed under link:{license_cc}[Creative Commons Attribution 3.0 (Unported) License]
+* The documentation text is licensed under link:{license_cc}[Creative Commons Attribution 4.0 (Unported) License]
 
 
