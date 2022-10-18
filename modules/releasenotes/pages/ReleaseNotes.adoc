@@ -1,3 +1,7 @@
+= Eclipse Scout Release Notes
+
+NOTE: Looking for something else? Visit https://eclipsescout.github.io for all Scout related documentation.
+
 ////
 Howto:
 - Write this document such that it helps people to discover new features and other important changes of this release.
@@ -7,11 +11,9 @@ Howto:
 - Use "title case" in chapter titles (https://english.stackexchange.com/questions/14/)
 ////
 
-ifndef::finaldoc[]
-include::../_initDoc.adoc[]
-endif::finaldoc[]
-
 == About This Release
+
+include::common:partial$Init.adoc[]
 
 The latest version of this release is: {maven-version}.
 
@@ -59,7 +61,7 @@ Modern design principles have been applied for a fresh look, an improved user gu
 Various widgets have been beautified like date field, smart field, table and many more.
 
 .Brush Up
-image::{rnimgsdir}/brush-up.png[]
+image::brush-up.png[]
 
 The following topics describe some notable features of the brush-up.
 
@@ -68,64 +70,64 @@ The following topics describe some notable features of the brush-up.
 Action elements like buttons, links, menus. etc. are now more user-friendly due to increased click area, clear hover effect and aligned colors.
 
 .Menu
-image::{rnimgsdir}/menu.png[]
+image::menu.png[]
 
 === Scroll Shadow
 
 There is now a scroll shadow on every scrollable element to indicate that not all elements are visible.
 
 .Scroll Shadow
-image::{rnimgsdir}/scroll-shadow.png[]
+image::scroll-shadow.png[]
 
 === Icons for Notification and Message Boxes
 
 Notifications in GroupBoxes (`IGroupBox.setNotification()`), desktop notifications (`IDesktop.addNotification`) and message boxes now support icons.
 
 .Notification
-image::{rnimgsdir}/notification.png[]
+image::notification.png[]
 
 === Consistent Severity Handling
 
 There is a consistent coloring across tooltips, notifications and message boxes.
 
-image::{rnimgsdir}/tooltip.png[float="left"]
+image::tooltip.png[float="left"]
 
-image::{rnimgsdir}/msgbox.png[]
+image::msgbox.png[]
 
 === Better Focus Indication
 
 Focus marker and table/tree selection have been improved to better guide the user.
 
 .List Box
-image::{rnimgsdir}/listbox.png[]
+image::listbox.png[]
 
 === Toggle Menu Support
 
 Toggleable menu items now correctly visualize the selected state.
 
 .Toggle Menu
-image::{rnimgsdir}/togglemenu.png[]
+image::togglemenu.png[]
 
 === Improved Combo Menu
 
 The combo menu got more flexible and can be used with the button style as well.
 
 .Combo Menu
-image::{rnimgsdir}/combomenu.png[]
+image::combomenu.png[]
 
 === Closable Views
 
 Views can now be closed using an "x" icon, even if they are not active.
 
 .Views
-image::{rnimgsdir}/view-tabs.png[]
+image::view-tabs.png[]
 
 === Better Popups
 
 Popups are now animated and have a cleaner look.
 
 .Popup
-image::{rnimgsdir}/popup.png[]
+image::popup.png[]
 
 == New 3rd Party requirements
 
@@ -161,7 +163,7 @@ It's now possible to send notifications via the https://developer.mozilla.org/en
 The `DesktopNotification` has some new properties to control the behavior: *nativeOnly*, *nativeNotificationVisibility* and more.
 
 .Native Notification
-image::{rnimgsdir}/native-notification.png[]
+image::native-notification.png[]
 
 // ----------------------------------------------------------------------------
 
@@ -232,10 +234,10 @@ The widgets `Table.js`, `Tree.js`, `TileGrid.js` and `TileAccordion.js` now supp
 This filter field is shown while typing if the widget is focused or can be opened by clicking the icon in the bottom right corner.
 
 .A TreeBox with the filter icon in the bottom right corner.
-image::{rnimgsdir}/tree_box_with_filter_field_icon.png[]
+image::tree_box_with_filter_field_icon.png[]
 
 .A TreeBox with the filter field, filtering all nodes for 'latin'.
-image::{rnimgsdir}/tree_box_with_filter_field.png[]
+image::tree_box_with_filter_field.png[]
 
 This feature is enabled by default and can be turned off using the property `textFilterEnabled`.
 For more information about the filter API and the filter field see link:{techdocjs}#filter-field[Technical Guide for Scout JS].
@@ -247,7 +249,7 @@ In order to generalize the functionality the menu support has been moved to `IFo
 This reduces duplicated code and enables menus on every form field, e.g. on a tree field.
 
 .A TreeField with Menus
-image::{rnimgsdir}/treefieldmenu.png[]
+image::treefieldmenu.png[]
 
 == Lazy Loading for Tables and Detail Forms (Scout JS)
 
