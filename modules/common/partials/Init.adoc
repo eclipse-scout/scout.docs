@@ -11,6 +11,7 @@
 :simrel-name: 2022-09
 :simrel-date: September, 2022
 :doc-short-version: {scout-version}
+:git-branch: releases/{scout-version}
 
 // Links
 :docroot: https://eclipsescout.github.io/{doc-short-version}/
