@@ -1,5 +1,5 @@
 name: scout-docs
-title: Eclipse Scout Docs
+title: Eclipse Scout Documentation
 version: 22.0
 asciidoc:
   attributes:
@@ -9,6 +9,7 @@ asciidoc:
 
 nav:
 - modules/ROOT/nav.adoc
+- modules/helloscout/nav.adoc
 - modules/technicalGuide/nav.adoc
 - modules/technicalGuideJS/nav.adoc
 - modules/sdk/nav.adoc

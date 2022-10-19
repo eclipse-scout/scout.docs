@@ -1,0 +1,2 @@
+.Scout Classic Tutorial
+* xref:helloscout.adoc[]
