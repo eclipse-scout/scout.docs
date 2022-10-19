@@ -1,0 +1,2 @@
+// The Deploy to Tomcat list item is included in helloscout/nav.adoc
+// because we want it to be a child of Scout Classic Tutorial.
