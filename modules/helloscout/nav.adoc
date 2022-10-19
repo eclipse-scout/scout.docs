@@ -1,3 +1,1 @@
-.Scout Classic Tutorial
 * xref:helloscout.adoc[]
-* xref:tomcat:deploy.adoc[Deploy to Tomcat]
