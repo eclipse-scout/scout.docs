@@ -1,10 +1,4 @@
-include::../../../common/src/docs/_folders.adoc[]
-
-//-----------------------------------------------------------------------------
-//Asciidoctor input file: "Export the hello scout application"
-//
-//WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
-//-----------------------------------------------------------------------------
+= Build Scout App and Deploy to Tomcat
 
 At some point during the application development you will want to install your software on a machine that is intended for productive use.
 This is the moment where you need to be able to build and package your Scout application in a way that can be deployed to an application server.
