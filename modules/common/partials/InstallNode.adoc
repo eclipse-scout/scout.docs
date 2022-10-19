@@ -1,16 +1,4 @@
-ifndef::finaldoc[]
-include::_initDoc.adoc[]
-endif::finaldoc[]
-
-//fallback for safe mode == secure:
-ifndef::imgsdir[:imgsdir: ../imgs]
-ifndef::codedir[:codedir: ../../code]
-ifndef::mdledir[:mdledir: .]
 :experimental:
-
-//-----------------------------------------------------------------------------
-//WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
-//-----------------------------------------------------------------------------
 
 First, Node.js needs to be installed as Scout uses it to build web assets.
 So if you don't have it yet, visit the https://nodejs.org/dist/latest-v16.x/[Node.js download site], choose the package for your platform and install it on your local machine.

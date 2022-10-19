@@ -1,16 +1,4 @@
-ifndef::finaldoc[]
-include::_initDoc.adoc[]
-endif::finaldoc[]
-
-//fallback for safe mode == secure:
-ifndef::imgsdir[:imgsdir: ../imgs]
-ifndef::codedir[:codedir: ../../code]
-ifndef::mdledir[:mdledir: .]
 :experimental:
-
-//-----------------------------------------------------------------------------
-//WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
-//-----------------------------------------------------------------------------
 
 Then download the `Eclipse IDE for Scout Developers` package for your platform by visiting the https://www.eclipse.org/downloads/packages[official Eclipse download page].
 After the package selection, confirm the suggested mirror and extract the downloaded archive to your local disk.

@@ -1,8 +1,9 @@
-= Eclipse Scout Documentation
+include::common:partial$Init.adoc[]
+= Version {scout-version}
 
 These pages document https://www.eclipse.org/scout/[Eclipse Scout].
 
-Here you will find all Scout 22 related documentation, from getting started to architecture details to release upgrades.
+Here you will find all Scout {scout-version} related documentation, from getting started to architecture details to release upgrades.
 
 == Get Started
 
@@ -13,7 +14,7 @@ Once you have completed the Hello Scout tutorial, you can continue with one of t
 
 Scout Classic Tutorials
 
-* [Hello Scout Classic]
+* xref:helloscout:helloscout.adoc[]
 * [Deploy to Tomcat]
 * [One Day Tutorial]
 
