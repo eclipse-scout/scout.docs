@@ -1,1 +1,1 @@
-* xref:deploy.adoc[]
+* xref:deploy.adoc[Deploy to Tomcat]

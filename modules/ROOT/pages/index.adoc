@@ -15,8 +15,8 @@ Once you have completed the Hello Scout tutorial, you can continue with one of t
 Scout Classic Tutorials
 
 * xref:helloscout:helloscout.adoc[]
-* [Deploy to Tomcat]
-* [One Day Tutorial]
+* xref:tomcat:deploy.adoc[Deploy to Tomcat]
+* xref:oneday:tutorial.adoc[One Day Tutorial]
 
 Scout JS Tutorials
 
