@@ -21,7 +21,7 @@ Scout JS Tutorials
 
 * xref:helloscout_js:helloscout-js.adoc[Hello Scout JS]
 * xref:helloscout_js_fullstack:helloscout-js-fullstack.adoc[Hello Scout JS Full Stack]
-* [Hello Scout JS with CDN]
+* xref:helloscout_cdn:helloscout-cdn.adoc[Hello Scout JS with CDN]
 
 == Deepen Your Knowledge
 
