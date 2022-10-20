@@ -1,1 +1,1 @@
-* xref:helloscout-js-fullstack.adoc[]
+// * xref:helloscout-js-fullstack.adoc[]
