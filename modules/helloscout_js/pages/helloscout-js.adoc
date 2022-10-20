@@ -1,18 +1,16 @@
 = Hello Scout JS
-// comment prevents empty line after formatting, needed for toc
-include::../../../common/src/docs/_header.adoc[]
+
+NOTE: Looking for something else? Visit https://eclipsescout.github.io for all Scout related documentation.
+
+include::common:partial$Init.adoc[]
 
 ifndef::source-highlighter[:source-highlighter: coderay]
-
-// NOTE: Don't forget to keep the code in the separate helloscoutjs repository in sync with this document
-
-:code-basedir: https://raw.githubusercontent.com/bsi-software/helloscoutjs/releases/{doc-short-version}/
-:jswidgets: https://scout.bsi-software.com/jswidgets_{doc-short-version-underlined}/
 
 == Introduction
 
 In this tutorial we will create your first Scout JS application.
 
+// TODO
 NOTE: If you don't know what Scout JS is yet, please read the
 https://eclipsescout.github.io/{doc-short-version}/getstarted.html[Get Started Guide] first.
 
