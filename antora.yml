@@ -13,6 +13,7 @@ nav:
 - modules/tomcat/nav.adoc
 - modules/oneday/nav.adoc
 - modules/helloscout_js/nav.adoc
+- modules/helloscout_js_fullstack/nav.adoc
 - modules/technicalGuide/nav.adoc
 - modules/technicalGuideJS/nav.adoc
 - modules/sdk/nav.adoc
