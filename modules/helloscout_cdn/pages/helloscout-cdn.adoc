@@ -64,6 +64,8 @@ These are the dependencies listed in the https://cdn.jsdelivr.net/npm/@eclipse-s
 
 Now create a file called `hello.js` and paste the following code:
 
+// ${name} is the one attribute we do not want replaced in the hello.js example.
+:name: \{name\}
 [source,javascript,indent=0]
 [subs="+attributes"]
 ----
