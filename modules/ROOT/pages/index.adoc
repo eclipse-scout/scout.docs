@@ -7,8 +7,7 @@ Here you will find all Scout {scout-version} related documentation, from getting
 
 == Get Started
 
-// TODO
-Read the [Get Started Guide] first to learn the difference between Scout Classic and Scout JS. This will help you to decide which tutorial is the right one to start with.
+Read the xref:getstarted:getstarted.adoc[Get Started Guide] first to learn the difference between Scout Classic and Scout JS. This will help you to decide which tutorial is the right one to start with.
 
 Once you have completed the Hello Scout tutorial, you can continue with one of the following tutorials.
 
