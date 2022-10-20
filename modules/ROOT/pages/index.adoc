@@ -20,7 +20,7 @@ Scout Classic Tutorials
 
 Scout JS Tutorials
 
-* [Hello Scout JS]
+* xref:helloscout_js:helloscout-js.adoc[Hello Scout JS]
 * [Hello Scout JS Full Stack]
 * [Hello Scout JS with CDN]
 
