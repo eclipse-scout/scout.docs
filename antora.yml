@@ -9,6 +9,7 @@ asciidoc:
 
 nav:
 - modules/ROOT/nav.adoc
+- modules/getstarted/nav.adoc
 - modules/helloscout/nav.adoc
 - modules/tomcat/nav.adoc
 - modules/oneday/nav.adoc
