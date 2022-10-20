@@ -227,6 +227,13 @@ The `widget` property on `WidgetPopup` classes (and all its subclasses) has been
 .. `AbstractWidgetPopup#createWidget` as been renamed to `AbstractWidgetPopup#createContent`.
 .. `AbstractWidgetPopup#setWidget` as been renamed to `AbstractWidgetPopup#setContent`.
 
+== Rename ProposalChooser.model (Scout JS)
+
+The `model` property on `ProposalChooser` classes (and all its subclasses) has been renamed to `content`:
+
+. Scout JS
+.. Rename the `_createModel` method on subclasses of `ProposalChooser` to `_createContent`.
+.. Rename the `_renderModel` method on subclasses of `ProposalChooser` to `_renderContent`.
 
 == JQuery
 
