@@ -1,0 +1,1 @@
+* xref:helloscout-cdn.adoc[]

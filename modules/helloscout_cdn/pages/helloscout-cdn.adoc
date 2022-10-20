@@ -1,10 +1,13 @@
 = Hello Scout JS with a CDN
-include::../../../common/src/docs/_header.adoc[]
+
+NOTE: Looking for something else? Visit https://eclipsescout.github.io for all Scout related documentation.
+
+include::common:partial$Init.adoc[]
 
 == Introduction
 
 A typical approach to work with Scout JS is to use a package manager (e.g. pnpm) to download the modules and a bundler (e.g. webpack) to build them.
-Thanks to the http://eclipsescout.github.io/{scout-version}/technical-guide-js.html#command-line-interface-cli[Scout CLI] this task is straightforward.
+Thanks to the xref:technicalGuideJS:ScoutJS.adoc#command-line-interface-cli[Scout CLI] this task is straightforward.
 
 The main advantage is the simplified development process.
 You can use Less variables from Scout (e.g. the color palette).
@@ -64,7 +67,7 @@ Now create a file called `hello.js` and paste the following code:
 [source,javascript,indent=0]
 [subs="+attributes"]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/js/helloscoutcdn/hello.js[tags=hello]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/js/helloscoutcdn/hello.js[tags=hello]
 ----
 
 As you can see, there are no imports at the top.
@@ -88,6 +91,3 @@ The procedure is the same: link to the `@eclipse-scout/chart` assets (script, st
 The result could look like this: https://codepen.io/cguglielmo/pen/qBqYMvp[Eclipse Scout Chart on CodePen].
 
 Have fun!
-
-:_footer-link-path: build/helloscout_cdn/src/docs/{docname}.adoc
-include::../../../common/src/docs/_footer.adoc[]
