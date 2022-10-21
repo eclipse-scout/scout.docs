@@ -56,6 +56,17 @@ export default () => ({
                     hasTime: true
                   },
                   {
+                    id: 'AllowedDatesField',
+                    objectType: 'StringField',
+                    label: 'Allowed Dates',
+                    cssClass: 'allowed-dates-field',
+                    menus: [{
+                      id: 'AllowedSampleDatesMenu',
+                      objectType: 'Menu',
+                      text: '${textKey:UseSampleDates}'
+                    }]
+                  },
+                  {
                     id: 'DateFormatField',
                     objectType: 'StringField',
                     label: 'Date Format'

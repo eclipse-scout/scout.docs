@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {dates, Form, models} from '@eclipse-scout/core';
+import {DateFormat, dates, Form, models} from '@eclipse-scout/core';
 import DateFieldFormModel from './DateFieldFormModel';
 
 export default class DateFieldForm extends Form {
@@ -50,6 +50,32 @@ export default class DateFieldForm extends Form {
     autoDateField.setValue(dateField.autoDate);
     autoDateField.on('propertyChange', this._onAutoDatePropertyChange.bind(this));
 
+    let allowedDatesField = this.widget('AllowedDatesField');
+    allowedDatesField.setValue(scout.nvl(dateField.allowedDates, []).map(date => this._dateFormat().format(date)));
+    allowedDatesField.on('propertyChange', this._onAllowedDatesPropertyChange.bind(this));
+    allowedDatesField.addValidator(value => {
+      if (!value) {
+        return '';
+      }
+      return value.split(',').map(text => {
+        let date = this._dateFormat().parse(text);
+        if (!date) {
+          throw `${text} is an invalid date`;
+        }
+        return this._dateFormat().format(date);
+      }).join(',');
+    });
+
+    this.widget('AllowedSampleDatesMenu').on('action', event => {
+      allowedDatesField.setValue([
+        this._dateFormat().format(dates.shift(new Date(), 0, 3, 1), false),
+        this._dateFormat().format(dates.shift(new Date(), 0, 2, 3), false),
+        this._dateFormat().format(new Date()),
+        this._dateFormat().format(dates.shift(new Date(), 0, 0, -1), false),
+        this._dateFormat().format(dates.shift(new Date(), 0, -2, -1), false)
+      ].join(','));
+    });
+
     let dontAllowCurrentDateField = this.widget('DontAllowCurrentDateField');
     this._dontAllowCurrentDateValidator = value => {
       if (dates.isSameDay(value, new Date())) {
@@ -65,6 +91,11 @@ export default class DateFieldForm extends Form {
     this.widget('WidgetActionsBox').setField(dateField);
     this.widget('FormFieldActionsBox').setField(dateField);
     this.widget('EventsTab').setField(dateField);
+  }
+
+  _dateFormat() {
+    let dateField = this.widget('DateField');
+    return new DateFormat(this.session.locale, dateField.dateFormatPattern + ' ' + dateField.timeFormatPattern);
   }
 
   _onHasDatePropertyChange(event) {
@@ -100,6 +131,12 @@ export default class DateFieldForm extends Form {
   _onAutoDatePropertyChange(event) {
     if (event.propertyName === 'value') {
       this.widget('DateField').setAutoDate(event.newValue);
+    }
+  }
+
+  _onAllowedDatesPropertyChange(event) {
+    if (event.propertyName === 'value') {
+      this.widget('DateField').setAllowedDates(event.newValue.split(',').map(dateStr => this._dateFormat().parse(dateStr)));
     }
   }
 
