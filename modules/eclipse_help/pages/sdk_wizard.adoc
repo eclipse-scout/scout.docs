@@ -1,12 +1,5 @@
-=== Scout Wizards
-:doctype: article
-:revnumber: {project-version}
-include::_initDoc.adoc[]
+= Scout Wizards
 
-//fallback for safe mode == secure:
-ifndef::imgsdir[:imgsdir: ../../../../imgs]
-ifndef::codedir[:codedir: ../../../../../code]
-ifndef::mdledir[:mdledir: ../../../../adoc]
 :experimental:
 
 The Scout SDK provides a set of wizards to create new Scout projects and various components for your Scout applications.
@@ -16,13 +9,13 @@ In the first wizard step type "_Scout_" into the *Wizards* field as shown in <<i
 
 [[img-sdk_wizard_new]]
 .Selecting Scout Wizards in the Eclipse wizard dialog
-image::{imgsdir}/sdk_new_wizard.png[]
+image::common:sdk_new_wizard.png[]
 
-==== New Project Wizard
+== New Project Wizard
 
 With the <<sdk_wizard_project.adoc#new-scout-project-wizard, New Project Wizard>> a new Scout client server application project is created from scratch.
 
-==== Wizards for Scout Components
+== Wizards for Scout Components
 
 To create new components such as Scout forms or pages the following component wizards are provided by the Scout SDK.
 
@@ -32,7 +25,7 @@ To create new components such as Scout forms or pages the following component wi
 * <<sdk_wizard_code-type.adoc#new-codetype-wizard, New CodeType Wizard>>
 * <<sdk_wizard_permission.adoc#new-permission-wizard, New Permission Wizard>>
 
-==== NLS Wizards
+== NLS Wizards
 
 For the Scout NLS support two additional wizards are provided by the Scout SDK.
 
@@ -41,6 +34,3 @@ Adding additional translated languages with the <<sdk_wizard_language.adoc#, Add
 
 '''
 Go back to the <<sdk.adoc#scout-tooling, Scout Tooling>>.
-
-:_footer-link-path: build/eclipse_help/src/docs/{docname}.adoc
-include::../../../common/src/docs/_footer-text.adoc[]

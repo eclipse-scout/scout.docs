@@ -1,19 +1,9 @@
 [#new-scout-project-wizard]
 ==== New Scout Project Wizard
-:doctype: article
-:revnumber: {project-version}
-include::_initDoc.adoc[]
 
-//fallback for safe mode == secure:
-ifndef::imgsdir[:imgsdir: ../../../../imgs]
-ifndef::codedir[:codedir: ../../../../../code]
-ifndef::mdledir[:mdledir: ../../../../adoc]
 :experimental:
 
-include::{mdledir}/sdk/SdkWizardProject.adoc[]
+include::sdk:partial$SdkWizardProject.adoc[]
 
 '''
 Go back to the <<sdk_wizard.adoc#scout-wizards, Scout Wizards>>.
-
-:_footer-link-path: build/eclipse_help/src/docs/{docname}.adoc
-include::../../../common/src/docs/_footer-text.adoc[]
