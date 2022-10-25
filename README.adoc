@@ -10,12 +10,26 @@ The documentation is published on link:https://eclipsescout.github.io/[GitHub pa
 
 == Organisation of this Repository
 
-* `docs` folder: contains the documentation source, link:docs/[read more],
-* `code` folder: contains demo applications (code snippets in the documentation items are extracted from this code base during the build)
+`modules` contains the documentation sources in a format suitable for an [https://antora.org/ Antora] playbook.
+
+The only tricky part is that _Hello Scout JS_ uses a git subtree to include the xref:https://github.com/bsi-software/helloscoutjs/[helloscoutjs] project as a source of examples.
+See xref:modules/helloscout_js/README.adoc[].
 
 == Build
 
-The documentation items are built with maven: check the link:docs/README.adoc[README of the docs folder].
+The documentation items are built with Antora. In your Antora playbook:
+
+[listing]
+site:
+  title: Eclipse Scout Documentation
+  start_page: index.adoc 
+content:
+  sources: 
+  - url: https://github.com/bsi-software/org.eclipse.scout.docs.git
+ui:
+  bundle:
+    url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/HEAD/raw/build/ui-bundle.zip?job=bundle-stable
+    snapshot: true
 
 The demo applications are built with maven: check the link:code/README.adoc[README of the code folder].
 
