@@ -1,0 +1,22 @@
+// TODO: Some of these files include files from elsewhere, with the
+// wrong heading levels. This is why these files don't have a heading
+// level of 0 (top level, "="). This in turn means that these files
+// don't get a name assigned by Antora and that's why we have to
+// provide those names, here. Or, alternatively, reorganise the Scout
+// documentation.
+* xref:scout_user_guide.adoc[]
+** xref:tutorial.adoc[]
+** xref:tutorial_helloworld.adoc[]
+** xref:tutorial_existingdemo.adoc[]
+** xref:sdk.adoc[]
+** xref:sdk_wizard.adoc[]
+** xref:sdk_wizard_code-type.adoc[]
+** xref:sdk_wizard_form.adoc[New Form Wizard]
+** xref:sdk_wizard_language.adoc[]
+** xref:sdk_wizard_lookupcall.adoc[]
+** xref:sdk_wizard_nls-entry.adoc[]
+** xref:sdk_wizard_page.adoc[New Page Wizard]
+** xref:sdk_wizard_permission.adoc[]
+** xref:sdk_wizard_project.adoc[New Scout Project Wizard]
+** xref:sdk_editor_java.adoc[Additions to the Java Editor]
+** xref:sdk_editor_nls.adoc[NLS Editor]
