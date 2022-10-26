@@ -1,0 +1,7 @@
+When a new Scout release begins:
+
+- Adjust constants and paths containing a version-number in "ReleaseNotes.adoc".
+
+- Delete content from the previous release.
+
+- Clean-up the images folder and delete all the files in it. They are no longer referenced.

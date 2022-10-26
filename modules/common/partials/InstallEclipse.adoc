@@ -1,0 +1,6 @@
+:experimental:
+
+Then download the `Eclipse IDE for Scout Developers` package for your platform by visiting the https://www.eclipse.org/downloads/packages[official Eclipse download page].
+After the package selection, confirm the suggested mirror and extract the downloaded archive to your local disk.
+
+Congratulations! You have successfully installed Eclipse for Scout development.

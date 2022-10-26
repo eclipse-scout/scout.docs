@@ -1,4 +1,0 @@
-ifndef::finaldoc[]
-include::_folders.adoc[]
-include::{mdledir}/_initDoc.adoc[]
-endif::finaldoc[]

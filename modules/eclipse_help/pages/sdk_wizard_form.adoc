@@ -1,0 +1,9 @@
+[#new-form-wizard]
+==== New Form Wizard
+
+:experimental:
+
+include::sdk:partial$SdkWizardForm.adoc[]
+
+'''
+Go back to the <<sdk_wizard.adoc#scout-wizards, Scout Wizards>>.

@@ -1,0 +1,86 @@
+include::common:partial$Init.adoc[]
+= Introduction
+
+== The "`Contacts`" Application
+
+The "`Contacts`" demo application is a client server application to manage personal contacts, organizations and events.
+The persistence of entered data is achieved via simple JDBC access to a Derby database.
+
+It is recommended that you first import the full "`Contacts`" demo application into a separate workspace.
+This gives you the possibility to check your source code against the full implementation during the various steps of the tutorial.
+To do so, just clone the Scout demo repository and import it into a new Eclipse workspace.
+
+ git clone https://github.com/bsi-software/org.eclipse.scout.docs.git
+
+Alternatively, you can also view the source code of the "`Contacts`" demo application on https://github.com/bsi-software/org.eclipse.scout.docs/tree/{git-branch}/code/contacts[Github].
+
+[[img-app_contacts_personpage]]
+.The "`Contacts`" application with the person page.
+image::common:app_contacts_personpage.png[]
+
+The "`Contacts`" application shows the basic user interface layout of a typical Scout application.
+The main areas of this layout are briefly introduced below.
+
+Outline Button:: In <<img-app_contacts_personpage>> the top left area shows a folder icon that represents the "Contacts" outline.
+The small down arrow at the folder icon indicates that additional outlines are available when clicking on this view button.
+On the right of the button with the folder icon is a second outline button that activates a search outline (not implemented yet).
+Navigation Tree:: The navigation tree on the left side of the layout shows the pages that are available for the selected outline.
+For the "Contacts" outline, the navigation tree provides access to the pages "Persons", "Organizations" and "Events".
+Selecting a page then shows associated information on the right side in the bench area.
+In the case of the selected "Persons" page the bench area shows a list of persons in the form of a table.
+Header:: The header area is located at the top and holds the available top level menus.
+In this example these are the "Quick access", "Options" menu points as well as a user menu that shows the username of the currently logged in user "mzi".
+Bench:: The bench represents the main display area of a Scout application.
+When selecting the "Persons" page, a table provides access to all available persons as shown in <<img-app_contacts_personpage>>
+Selecting a specific person provides access to all actions that are available for the selected person.
+The selected person can then be opened with the [menu]_Edit_ menu which opens the person in a view that is displayed in the bench area again as shown in <<img-app_contacts_personform>>
+
+For entering and editing of data in Scout applications views are used in most cases.
+Views are displayed in the bench area of a Scout application.
+Several views can also be opened simultaneously.
+To show a specific view the user has to click on the view button associated with the desired view.
+An example of an opened view is shown for person "Alice" in <<img-app_contacts_personform>>
+
+[[img-app_contacts_personform]]
+.The "`Contacts`" application with a person opened in a form.
+image::common:app_contacts_personform.png[]
+
+== Tutorial Overview
+
+This tutorial walks you through the implementation of a Scout application consisting of a frontend and a backend application.
+The frontend application contains outlines with navigation trees, pages to present information in tabular form, and forms to view and edit data.
+In the backend application the tutorial shows how to implement services, logging, database access, and several other aspects of Scout applications.
+
+The tutorial is organized as a sequence of consecutive steps as listed below.
+Each step is described in a individual section that results in a executable application that can be tested and compared against the full "Contacts" demo application.
+
+xref:step-1.adoc[]::
+We will create a new project and prepare the generated code base by adapting existing components and deleting unnecessary components.
+At the end of step one we have a project setup that allows us to start adding new components to the application.
+
+xref:step-2.adoc[]::
+The second step adds the user interface components to display persons and organizations.
+For this a "Persons" page and an "Organizations" page are created and added to the "Contacts" outline.
+
+xref:step-3.adoc[]::
+This step concentrates on the backend of the "Contacts" application.
+The covered topics include dealing with application properties, setup and access of a database and using the database to provide data for the person and organization page created in the previous step.
+
+xref:step-4.adoc[]::
+After having access to the database the components that allow a user to create and edit persons and organizations in the user interface of the "Contacts" application can be added.
+In addition, this tutorial step also demonstrates how to design and implement complex form layouts with the Scout framework.
+
+xref:step-5.adoc[]::
+This step provides an introduction into form field validation and the creation of template fields.
+Validation of user input is important for many business applications and template fields help to improve code quality with a mechanism to reuse application specific user interface components.
+
+xref:step-6.adoc[]::
+We create the organization form to create and enter organizations in the "Contacts" application.
+As we can reuse many of the components developed so far this is the shortest tutorial step.
+
+xref:step-7.adoc[]::
+In this step we modify the user interface to implement a 1:n relationship between organizations and persons.
+This includes the creation of a hierarchical page structure for organization, adding an organization column to the person page and adding an organization field to the person form to manage the association of a person to an organization.
+
+xref:step-8.adoc[]::
+The last tutorial part discusses the gap between the tutorial application and the complete "Contacts" demo application.

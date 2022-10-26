@@ -1,0 +1,253 @@
+= Security
+
+== Default HTTP Response Headers
+
+All Scout HTTP servlets delegate to a central authority to append HTTP response headers. This is the bean `HttpServletControl`.
+It enables developers to control which headers that should be added to the HTTP response for each servlet and request.
+
+The next sections describe the headers that are added to any response by default. Beside these also the following headers may be of interest for an end user application (consider adding them to your application if possible):
+
+* https://developer.mozilla.org/en-US/docs/Web/Security/Public_Key_Pinning[Public Key Pinning]
+* https://tools.ietf.org/html/rfc6797[Strict Transport Security (HSTS)]
+* https://msdn.microsoft.com/en-us/library/gg622941%28v=vs.85%29.aspx?f=255&MSPPError=-2147217396[X-Content-Type-Options]
+
+NOTE: Please note that not all headers are supported in all user agents!
+
+=== X-Frame-Options
+
+The X-Frame-Options HTTP response header footnote:[https://developer.mozilla.org/en-US/docs/Web/HTTP/X-Frame-Options] can be used to indicate whether or not a user agent should be allowed to render a page in a `<frame>`, `<iframe>` or `<object>`.
+Sites can use this to avoid clickjacking footnote:[https://en.wikipedia.org/wiki/Clickjacking] attacks, by ensuring that their content is not embedded into other sites.
+The X-Frame-Options header is described in RFC 7034 footnote:[https://tools.ietf.org/html/rfc7034].
+
+In Scout this header is set to `SAMEORIGIN` which allows the page to be displayed in a frame on the same origin (scheme, host and port) as the page itself only.
+
+=== X-XSS-Protection
+
+This header enables the XSS footnote:[https://en.wikipedia.org/wiki/Cross-site_scripting] filter built into most recent user agents.
+It's usually enabled by default anyway, so the role of this header is to re-enable the filter for the website if it was disabled by the user.
+The X-XSS-Protection header is described in https://blogs.msdn.microsoft.com/ieinternals/2011/01/31/controlling-the-xss-filter/[controlling-the-xss-filter].
+
+In Scout this header is configured to enable XSS protections and instructs the user-agent to block a page from loading if reflected XSS is detected.
+
+=== Content Security Policy
+
+Content Security Policy is a HTTP response header that helps you reduce XSS  risks on modern user agents by declaring what dynamic resources are allowed to load footnote:[http://content-security-policy.com/].
+The CSP header is described in http://www.w3.org/TR/CSP1/[Level 1] and http://www.w3.org/TR/CSP2/[Level 2]. There is also a working draft for a http://www.w3.org/TR/CSP3/[Level 3].
+
+Scout makes use of Level 1 (and one directive from Level 2) and sets by default the following settings:
+
+* JavaScript footnote:[https://en.wikipedia.org/wiki/JavaScript]: Only accepts JavaScript resources from the same origin (same scheme, host and port). Inline JavaScript is allowed and unsafe dynamic code evaluation (like `eval(string)`, `setTimeout(string)`, `setInterval(string)`, `new Function(string)`) is allowed as well.
+* Stylesheets (CSS) footnote:[https://en.wikipedia.org/wiki/Cascading_Style_Sheets]: Only accepts Stylesheet resources from the same origin (same scheme, host and port). Inline style attributes are allowed.
+* Frames footnote:[https://en.wikipedia.org/wiki/Framing_(World_Wide_Web)]: All sources are allowed because the iframes created by the Scout BrowserField run in the sandbox mode and therefore handle the security policy on their own.
+* All other types (Image, `WebSocket` footnote:[https://en.wikipedia.org/wiki/WebSocket], `EventSource` footnote:[https://developer.mozilla.org/en-US/docs/Web/API/EventSource], AJAX calls footnote:[https://en.wikipedia.org/wiki/Ajax_%28programming%29], fonts, `<object>` footnote:[https://developer.mozilla.org/en-US/docs/Web/HTML/Element/object], `<embed>` footnote:[https://developer.mozilla.org/en-US/docs/Web/HTML/Element/embed], `<applet>` footnote:[https://developer.mozilla.org/en-US/docs/Web/HTML/Element/applet], `<audio>` footnote:[https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio] and `<video>` footnote:[https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video]) only allow resources from the same origin (same scheme, host and port).
+
+If a resource is blocked because it violates the CSP a report is created and logged on server side using level `warning`. This is done in the class `ContentSecurityPolicyReportHandler`.
+This enables admins to monitor the application and to react if a CSP violation is detected.
+
+== Session Cookie (JSESSIONID Cookie) Configuration Validation
+The UiServlet checks if the session cookie is configured safely. The validation is only performed on first access to the `UiServlet`. There is no automatic validation on the backend server side or on any custom servlets!
+
+If the validation fails, a corresponding error message is logged to the server and an exception is thrown making the `UiServlet` inaccessible. Because of security reasons the exception shown to the user includes no details about the error. These can only be seen on the server side log.
+
+=== HttpOnly
+First the existence of the `HttpOnly` flag is checked. The servlet container will then add this flag to the `Set-Cookie` HTTP response header. If the user agent supports this flag, the cookie cannot be accessed through a client side script. As a result even if a cross-site scripting (XSS) flaw exists and a user accidentally accesses a link that exploits this flaw, the user agent will not reveal the cookie to a third party.
+For a list of user agents supporting this feature please refer to https://www.owasp.org/index.php/HTTPOnly#Browsers_Supporting_HttpOnly[OWASP].
+
+It is recommended to always enable this flag.
+
+Since Java Servlet 3.0 specification this property can be set in the configuration in the deployment descriptor `WEB-INF/web.xml`:
+
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee  http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0"
+         metadata-complete="true">
+  ...
+  <session-config>
+    ...
+    <cookie-config>
+      <http-only>true</http-only> <!--1-->
+      ...
+    </cookie-config>
+    ...
+  </session-config>
+  ...
+</web-app>
+----
+<1> The HttpOnly flag activated
+
+=== Secure
+Second the existence of the `Secure` flag is checked. The servlet container will then add this flag to the `Set-Cookie` HTTP response header. The purpose of the secure flag is to prevent cookies from being observed by unauthorized parties due to the transmission of a the cookie in clear text. Therefore setting this flag will prevent the user agent from transmitting the session id over an unencrypted channel.
+
+Since Java Servlet 3.0 specification this property can be set in the configuration in the deployment descriptor `WEB-INF/web.xml`:
+
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0"
+         metadata-complete="true">
+  ...
+  <session-config>
+    ...
+    <cookie-config>
+      <secure>true</secure> <!--1-->
+      ...
+    </cookie-config>
+    ...
+  </session-config>
+  ...
+</web-app>
+----
+<1> The Secure flag activated
+
+This of course only makes sense if the application is exposed to the end user using an encrypted channel like https://en.wikipedia.org/wiki/HTTPS[HTTPS] (which is strongly recommended).
+
+Unfortunately for the UI server it is not possible to detect if an application uses a secured channel. Consider the following example: The servlet container is protected by a reverse proxy. The communication between the user agent and the proxy is encrypted while the channel between the proxy and the servlet container is not. In this scenario the container cannot know that from a user agent point of view the channel is secured.
+
+Because of this the validation assumes that the channel from the user agent to the entering node is secured and by default checks for the `Secure` flag. In case this assumption is not true and an unencrypted channel must be used this validation step can be disabled by setting the following property in the `config.propertis` file:
+
+`scout.auth.cookieSessionValidateSecure=false`
+
+This skips the `Secure` flag check completely. In this scenario (not using https) it is also required to remove the secure tag from the cookie config in the `WEB-INF/web.xml`.
+
+
+== Secure Output
+This chapter describes how HTML Output can be handled in a secure way.
+
+Scout applications often display potentially dangerous data, e.g. user input or data from other systems.
+Encoding this input in such a way, that it can not be executed, prevents security vulnerabilities like cross-site scripting.
+
+=== Encoding by Default
+
+By default, all input in the Scout model is encoded. Examples are values/labels in value fields, cells in tables, message in message box.
+The reason behind this default choice is that developers do not have to think about output encoding in the standard case
+and are therefore less likely to forget output encoding and introduce a security vulnerability.
+
+Example: In the following label field, the HTML <b> tag is encoded as `\&lt;b\&gt;bold text\&lt;/b\&gt;`:
+
+image::common:encodedField.png[]
+
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/LabelFieldEncodingForm.java[tags=SecureOutput.encodingByDefault]
+
+=== Html Enabled
+
+Sometimes developers may want to use HTML in the Scout model.
+
+Examples are
+
+* Simple styling of dynamic content, such as addresses or texts in message boxes
+* Text containing application-internal or external links
+* Html or XML content received from other systems, such as e-mails or html pages
+
+Html input should only partially be encoded or not at all.
+
+To disable the encoding of the whole value, the property `HtmlEnabled` can be used:
+
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/LabelFieldEncodingForm.java[tags=SecureOutput.noEncodingField]
+
+There are several ways to implement the use cases above. Some typical implementations are described in the following sections.
+
+==== CSS Class and Other Model Properties
+
+Often using HTML in value fields or table cells is not necessary for styling. Very basic styling can be done for example by setting the CSS class.
+
+==== HTML Builder
+
+For creating simple HTML files or fragments with encoded user input, the class `org.eclipse.scout.rt.platform.html.HTML` can be used. It is also easily possible to create application internal and external link with this approach.
+
+==== Styling in the UI-Layer
+
+For more complex HTML, using `IBeanField` in the scout model and implementing the styling in the UI-Layer is often the preferred way.
+Links are possible as well.
+
+==== Manual Encoding
+
+It is also possible to encode any String manually using `StringUtility.htmlEncode(String)`. `org.eclipse.scout.rt.platform.html.HTML` uses this method internally for encoding.
+However, using `HTML` is recommended, where possible, because it is more concise and leads to less errors.
+
+==== Using a White-List Filter
+If HTML or XML from external sources or more complex HTML are used in the Scout model, using a white-list filter might be the best way to avoid security bugs.
+Libraries, such as http://jsoup.org/[JSoup] provide such a white-list filter. Scout currently does not include any services or utilities for using white-list filters,
+because the configuration and usage is very use-case-specific and would therefore not add much benefit.
+
+== Authorization (Granting)
+
+Scout uses the `java.security` API principles to grant access to a specific resource.
+
+Each user has a set of granted `java.security.Permission` instances.
+This set is a `java.security.PermissionCollection`.
+A call to `PermissionCollection.implies(Permission p)` does the access check.
+The argument `p` in this call is a new permission instance for which we want to do the access check and which is compared against the granted permissions.
+Usually, the permission collection implementation iterates through all granted permissions and calls on each `Permission.implies(Permission p)` until one call returns `true`.
+
+Scouts adds some concepts and helpers to this API:
+
+`IPermission`:: Unlike other permissions, a permission implementing this interface can only be implied by another `IPermission` *with the same name*.
+A permission used together with scouts security API does not have to implement the `IPermission` interface but it is recommended.
+`PermissionLevel`:: An `IPermission`, which is part of an `IPermissionCollection` has always a granted access level assigned (`IPermission.getLevel()`).
+If the granted level is `PermissionLevel.NONE`, any access checks will fail.
+`IAccessControlService`:: This service is responsible to provide and manage a users set of granted permissions.
+A scout application usually extends `AbstractAccessControlService` and implements `#execLoadPermissions`.
+`ACCESS`:: Provides a set of convenience methods to check access.
+
+Let us assume you require a permission to allow a user to access companies.
+
+[source,java,indent=0]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/AccessSnippet.java[tags=ReadCompanyPermission]
+----
+
+To check access one can use `ACCESS`.
+
+[source,java,indent=0]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/AccessSnippet.java[tags=ACCESS_A]
+----
+<1> Checks permission against granted permissions of current user.
+<2> Checks permission and if this check fails, throw an `AccessForbiddenException` with a default message.
+
+We can defined a default access check failed message for a permission.
+
+[source,java,indent=0]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/AccessSnippet.java[tags=CreateCompanyPermission]
+----
+
+`ACCESS` allows to check multiple permissions at once.
+
+[source,java,indent=0]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/AccessSnippet.java[tags=ACCESS_B]
+----
+
+We have seen some simple permission checks.
+Now let us assume, that some users may modify a company only if they have registered the company by themselves.
+For this use case we introduce a new permission level `ScoutdocPermissionLevels.OWN`.
+This is the permission level which is granted for those users.
+
+[source,java]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/ScoutdocPermissionLevels.java[tags=ScoutdocPermissionLevels]
+----
+
+In order to check access for this new level we have to override `AbstractPermission#evalPermission`.
+
+[source,java,indent=0]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/AccessSnippet.java[tags=UpdateCompanyPermission]
+----
+
+[source,java,indent=0]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/AccessSnippet.java[tags=ACCESS_C]
+----
+
+If such a service call would be expensive, one may cache the result of such a permission check.
+You have to implement this by yourself.
+A recommended solution is to create a wrapper around `IPermissionCollection` and this wrapper caches calls to `IPermissionCollection#implies` if required.

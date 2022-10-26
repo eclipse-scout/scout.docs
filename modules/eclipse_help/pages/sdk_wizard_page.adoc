@@ -1,0 +1,9 @@
+[#new-page-wizard]
+==== New Page Wizard
+
+:experimental:
+
+include::sdk:partial$SdkWizardPage.adoc[]
+
+'''
+Go back to the <<sdk_wizard.adoc#scout-wizards, Scout Wizards>>.

@@ -1,0 +1,17 @@
+include::common:partial$Init.adoc[]
+= Eclipse Scout One Day Tutorial
+
+[[cha-large_example]]
+In this tutorial we will create the "`Contacts`" Scout application.
+The goal of this application is to learn about the most prominent features of the Eclipse Scout framework using a fully functional application.
+
+The application is kept small enough to complete this tutorial within less than a day.
+An extended version of "`Contacts`" is available as a Scout sample application on link:https://github.com/bsi-software/org.eclipse.scout.docs/tree/{git-branch}/code/contacts[Github].
+
+This tutorial uses the Eclipse IDE and the Scout SDK.
+If you have successfully completed the http://eclipsescout.github.io/{scout-version}/helloscout.html[Hello Scout Tutorial] you should have a running Eclipse Scout installation.
+If not, then you should do the Hello Scout Tutorial now.
+
+The "`One Day Tutorial`" is organized as follows.
+In the first section, the finished "`Contacts`" application is explained from the user perspective.
+The remaining sections focus on the individual steps to implement the "`Contacts`" tutorial application.

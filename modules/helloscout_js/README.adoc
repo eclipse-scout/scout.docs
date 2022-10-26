@@ -1,0 +1,19 @@
+= Git Subtree
+
+Updating the example based on xref:https://github.com/bsi-software/helloscoutjs/[helloscoutjs], the Scout JS Hello World application.
+There's more info xref:https://docs.github.com/en/get-started/using-git/about-git-subtree-merges[About Git subtree merges].
+
+How it was added:
+
+[listing]
+git remote add -f helloscoutjs https://github.com/bsi-software/helloscoutjs.git
+git merge --strategy=ours --no-commit --allow-unrelated-histories helloscoutjs/releases/22.0
+git read-tree --prefix=modules/helloscout_js/examples/ -u helloscoutjs/releases/22.0
+git commit -m "Subtree merged in helloscoutjs"
+
+How to pull upstream changes:
+
+[listing]
+git pull --no-rebase --strategy=subtree helloscoutjs releases/22.0
+
+Please don't edit the example directly. If you do, you can see who to extract the commits in order to contribute them back upstream in the xref:https://www.atlassian.com/git/tutorials/git-subtree[git subtree] blog post.

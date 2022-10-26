@@ -1,0 +1,128 @@
+= RunContext
+Mostly, code is run on behalf of some semantic context, for example as a particular `Subject` and with some context related `ThreadLocals` set, e.g. the user's `session` and its `Locale`. Scout provides you with different `RunContexts`, such as `ClientRunContext` or `ServerRunContext`. They all share some common characteristics like `Subject`, `Locale` and `RunMonitor`, but also provide some additional functionality like transaction boundaries if using `ServerRunContext`. Also, a `RunContext` facilitates propagation of state among different threads. In order to ease readability, the 'setter-methods' of the `RunContext` support method chaining.
+
+All a `RunContext` does is to provide some setter methods to construct the context, and a `run` and `call` method to run an action on behalf of that context. Thereby, the only difference among those two methods is their argument. Whereas `run` takes a `IRunnable` instance, `call` takes a `Callable` to additionally return a result to the caller. The action is run in the current thread, meaning that the  caller is blocked until completion.
+
+By default, a `RunContext` is associated with a `RunMonitor`, and the monitor's cancellation status can be queried via `RunMonitor.CURRENT.get().isCancelled()`. The monitor allows for hard cancellation, meaning that the executing thread is interrupted upon cancellation. For instance if waiting on an interruptible construct like `Object.wait()` or `IFuture.awaitDone()`, the waiting thread returns with an interruption exception.
+
+== Factory methods to create a RunContext
+Typically, a `RunContext` is created from a respective factory like `RunContexts` to create a `RunContext`, or `ServerRunContexts` to create a `ServerRunContext`, or `ClientRunContexts` to create a `ClientRunContext`. Internally, the `BeanManager` is asked to provide a new instance of the `RunContext`, which allows you to replace the default implementation of a `RunContext` in an easy way. The factories declare two factory methods: `empty()` and `copyCurrent()`. Whereas `empty()` provides you an empty `RunContext`, `copyCurrent()` takes a snapshot of the current calling context and initializes the `RunContext` accordingly. That is useful if only some few values are to be changed, or, if using `ServerRunContext`, to run the code on behalf of a new transaction.
+
+The following <<lst-RunContexts.empty>> illustrates the creation of an empty `RunContext` initialized with a particular `Subject` and `Locale`.
+[[lst-RunContexts.empty]]
+[source,java,indent=0]
+.Creation of an empty `RunContext`
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/RunContextSnippet.java[tags=RunContexts.empty]
+----
+<1> create the `Subject` to do some work on behalf
+<2> Create and initialize the `RunContext`
+<3> This code is run on behalf of the `RunContext`
+
+The following <<lst-RunContexts.copyCurrent>> illustrates the creation of a 'snapshot' of the current calling `RunContext` with another `Locale` set.
+[[lst-RunContexts.copyCurrent]]
+[source,java,indent=0]
+.Create a copy of the current calling `RunContext`
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/RunContextSnippet.java[tags=RunContexts.copyCurrent]
+----
+
+An important difference is related to the `RunMonitor`. By using the `copyCurrent()` factory method, the context's monitor is additionally registered as child monitor of the monitor of the current calling context. That way, a cancellation request to the calling context is propagated down to this context as well. Of course, that behavior can be overwritten by providing another monitor yourself.
+
+== Properties of a RunContext
+The following properties are declared on a `RunContext` and are inherited by `ServerRunContext` and `ClientRunContext`.
+
+[cols="10%,80%,10%", options="header"]
+|===
+|property |description | accessibility
+
+|runMonitor
+|Monitor to query the cancellation status of the context.
+
+* must not be `null`
+* is automatically set if creating the context by its factory
+* is automatically registered as child monitor if creating the context by `copyCurrent()` factory method
+|RunMonitor.CURRENT.get()
+
+|subject
+|Subject to run the code on behalf
+|Subject.getSubject(AccessController.getContext())
+
+|locale
+|Locale to be bound to the Locale `ThreadLocal`
+|NlsLocale.CURRENT.get()
+
+|propertyMap
+|Properties to be bound to the Property  `ThreadLocal`
+|PropertyMap.CURRENT.get()
+|===
+
+== Properties of a ServerRunContext
+A `ServerRunContext` controls propagation of server-side state and sets the transaction boundaries, and is a specialization of `RunContext`.
+
+[cols="10%,80%,10%", options="header"]
+|===
+|property |description | accessibility
+
+|session
+|Session to be bound to Session `ThreadLocal`
+|ISession.CURRENT.get()
+
+|transactionScope
+|To control transaction boundaries. By default, a new transaction is started, and committed or rolled back upon completion.
+
+ * Use `TransactionScope.REQUIRES_NEW` to run the code in a new transaction (by default).
+ * Use `TransactionScope.REQUIRED` to only start a new transaction if not running in a transaction yet.
+ * Use `TransactionScope.MANDATORY` to enforce that the caller is already running in a transaction. Otherwise, a `TransactionRequiredException` is thrown.
+| ITransaction.CURRENT.get()
+
+|transaction
+|Sets the transaction to be used to run the runnable. Has only an effect, if transaction scope is set to TransactionScope.REQUIRED or TransactionScope.MANDATORY. Normally, this property should not be set manually.
+|ITransaction.CURRENT.get()
+
+|clientNotificationCollector
+|To associate the context with the given ClientNotificationCollector, meaning that any code running on behalf of this context has that collector set in ClientNotificationCollector.CURRENT thread-local. +
+That collector is used to collect all transactional client notifications, which are to be published upon successful commit of the associated transaction, and which are addressed to the client node which triggered processing (see withClientNodeId(String)). That way, transactional client notifications are not published immediately upon successful commit, but included in the client's response instead (piggyback). +
+Typically, that collector is set by ServiceTunnelServlet for the processing of a service request.
+|ClientNotificationCollector.CURRENT.get()
+
+|clientNodeId
+|Associates this context with the given 'client node ID', meaning that any code running on behalf of this context has that id set in IClientNodeId.CURRENT thread-local. +
+Every client node (that is every UI server node) has its unique 'node ID' which is included with every 'client-server' request, and is mainly used to publish client notifications. If transactional client notifications are issued by code running on behalf of this context, those will not be published to that client node, but included in the request's response instead (piggyback). +
+However, transactional notifications are only sent to clients upon successful commit of the transaction. +
+Typically, this node ID is set by ServiceTunnelServlet for the processing of a service request.
+|IClientNodeId.CURRENT.get()
+
+
+|===
+
+== Properties of a ClientRunContext
+A `ClientRunContext` controls propagation of client-side state, and is a specialization of `RunContext`.
+
+[cols="10%,80%,10%", options="header"]
+|===
+|property |description | accessibility
+
+|session
+|Session to be bound to Session `ThreadLocal`
+|ISession.CURRENT.get()
+
+|form
+|Associates this context with the given `IForm`, meaning that any code running on behalf of this context has that `IForm` set in `IForm.CURRENT` thread-local. +
+That information is mainly used to determine the current calling model context, e.g. when opening a message-box to associate it with the proper `IDisplayParent`. +
+Typically, that information is set by the UI facade when dispatching a request from UI, or when constructing UI model elements.
+|IForm.CURRENT.get()
+
+|outline
+|Associates this context with the given `IOutline`, meaning that any code running on behalf of this context has that `IOutline` set in `IOutline.CURRENT` thread-local. +
+That information is mainly used to determine the current calling model context, e.g. when opening a message-box to associate it with the proper `IDisplayParent`. +
+Typically, that information is set by the UI facade when dispatching a request from UI, or when constructing UI model elements.
+|IOutline.CURRENT.get()
+
+|desktop
+|Associates this context with the given `IDesktop`, meaning that any code running on behalf of this context has that `IDesktop` set in `IDesktop.CURRENT thread-local`. +
+That information is mainly used to determine the current calling model context, e.g. when opening a message-box to associate it with the proper `IDisplayParent`. +
+Typically, that information is set by the UI facade when dispatching a request from UI, or when constructing UI model elements.
+
+|IDesktop.CURRENT.get()
+|===

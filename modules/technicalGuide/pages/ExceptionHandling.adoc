@@ -1,0 +1,112 @@
+= Working with exceptions
+Exceptions can be logged via SLF4J Logger, or given to exception handler for centralized, consistent exception handling, or translated into other exceptions. Scout provides some few exceptions/errors, which are used by the framework.
+
+== Scout Throwables
+
+All scout throwables are unchecked and typically implementing the `IThrowableWithContextInfo` interface, which provides functionality for associating context information with the occurred error.
+
+Most scout throwables are runtime exceptions, and typically inherit from <<PlatformException,PlatformException>>. See <<Scout Runtime Exceptions>> for more information.
+
+Some scout throwables are instances of `java.lang.Error` by extending <<PlatformError,PlatformError>>. Those errors usually provide functionality to interrupt Jobs, for example when a user is canceling a long running operation. +
+Note: *<<PlatformError,PlatformErrors>> should never be catched by business logic!* See <<Scout Runtime Errors>> for more information.
+
+=== Scout Runtime Exceptions
+
+==== PlatformException
+
+Base runtime exception of the Scout platform, which allows for message formatting anchors and context information to be associated.
+
+There is a single constructor which accepts the exception's message, and optionally a variable number of arguments. Typically, a potential cause is given as its argument. The message allows further the use of formatting anchors in the form of {} pairs. The respective formatting arguments are provided via the constructor's _varArg_ parameter. If the last argument is of the type `Throwable` and not referenced as formatting anchor in the message, that `Throwable` is used as the exception's cause. Internally, SLF4J `MessageFormatter` is used to provide substitution functionality. Hence, The format is the very same as if using SLF4j Logger.
+
+Further, `PlatformException` allows to associate context information, which are available in SLF4J _diagnostic context map_ (MDC) upon logging the exception.
+
+[source,java,indent=0]
+.PlatformException examples
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/ExceptionHandlingSnippet.java[tags=PlatformException.constr]
+----
+
+==== ProcessingException
+
+Represents a <<PlatformException,PlatformException>> and is thrown in case of a processing failure, and which can be associated with an exception error code and severity.
+
+==== VetoException
+Represents a <<ProcessingException,ProcessingException>> with VETO character. If thrown server-side, exceptions of this type are transported to the client and typically visualized in the form of a message box.
+
+==== AssertionException
+Represents a <<PlatformException,PlatformException>> and indicates an assertion error about the application's assumptions about expected values.
+
+==== TransactionRequiredException
+Represents a <<PlatformException,PlatformException>> and is thrown  if a ServerRunContext requires a transaction to be available.
+
+=== Scout Runtime Errors
+
+Runtime Errors are used to indicate an error, that shouldn't be catched/treated by business logic and therefore bubble up to the appropriate <<Exception handling, exception handler>> in the scout framework. Because those errors are handled by the framework internals, they should never be catched on the server (Services etc.) nor on the client side (Pages, Forms, etc.).
+
+All Scout Runtime Errors extend <<PlatformError,PlatformError>>.
+
+==== PlatformError
+
+Like <<PlatformException,PlatformException>>, PlatformErrors implement `IThrowableWithContextInfo` for associating context information with the occurred error. See <<PlatformException,PlatformException>> for usage and example code.
+
+==== ThreadInterruptedError
+Represents a <<PlatformError,PlatformError>> and indicates that a thread was interrupted while waiting for some condition to become true, e.g. while waiting for a job to complete. Unlike `java.lang.InterruptedException`, the thread's interrupted status is not cleared when catching this exception.
+
+==== FutureCancelledError
+Represents a <<PlatformError,PlatformError>> and indicates that the result of a job cannot be retrieved, or the IFuture's completion not be awaited because the job was cancelled.
+
+==== TimedOutError
+Represents a <<PlatformError,PlatformError>> and indicates that the maximal wait time elapsed while waiting for some condition to become true, e.g. while waiting a job to complete.
+
+
+== Exception handling
+An exception handler is the central point for exception handling. It provides a single method 'handle' which accepts a `Throwable`, and which never throws an exception. It is implemented as a bean, meaning managed by the bean manager to allow easy replacement, e.g. to use a different handler when running client or server side.
+By default, a <<ProcessingException,ProcessingException>> is logged according to its severity, a <<VetoException,VetoException>>, <<ThreadInterruptedError,ThreadInterruptedError>> or <<FutureCancelledError,FutureCancelledError>> logged in _DEBUG_ level, and any other exception logged as an _ERROR_. If running client side, exceptions are additionally visualized and showed to the user.
+
+== Exception translation
+Exception translators are used to translate an exception into another exception.
+
+Also, they unwrap the cause of wrapper exceptions, like `UndeclaredThrowableException`, or `InvocationTargetException`, or `ExecutionException`. If the exception is of the type `Error`, it is normally not translated, but re-thrown instead. That is because an `Error` indicates a serious problem due to an abnormal condition.
+
+=== DefaultExceptionTranslator
+Use this translator to work with checked exceptions and runtime exceptions, but not with `Throwable`.
+
+If given an `Exception`, or a `RuntimeException`, or if being a subclass thereof, that exception is returned as given. Otherwise, a <<PlatformException,PlatformException>> is returned which wraps the given Throwable.
+
+=== DefaultRuntimeExceptionTranslator
+Use this translator to work with runtime exceptions. When working with <<RunContext,RunContext>> or <<IFuture,IFuture>>, some methods optionally accept a translator. If not specified, this translator is used by default.
+
+If given a `RuntimeException`, it is returned as given. For a checked exception, a <<PlatformException,PlatformException>> is returned which wraps the given checked exception.
+
+=== PlatformExceptionTranslator
+Use this translator to work with <<PlatformException,PlatformExceptions>>.
+
+If given a <<PlatformException,PlatformException>>, it is returned as given. For all other exceptions (checked or unchecked), a <<PlatformException,PlatformException>> is returned which wraps the given exception.
+
+Typically, this translator is used if you require to add some context information via `IThrowableWithContextInfo.withContextInfo(String, Object, Object)`.
+
+[source,java,indent=0]
+.PlatformException examples
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/ExceptionHandlingSnippet.java[tags=platformExceptionTranslator.example]
+----
+
+=== NullExceptionTranslator
+
+Use this translator to work with `Throwable` as given.
+
+Also, if given a wrapped exception like `UndeclaredThrowableException`, `InvocationTargetException` or `ExecutionException`, that exception is returned as given without unwrapping its cause.
+
+For instance, this translator can be used if working with the Job API, e.g. to distinguish between a <<FutureCancelledError,FutureCancelledError>> thrown by the job's runnable, or because the job was effectively cancelled.
+
+== Exception Logging
+
+The Scout framework logs via SLF4J (Simple Logging Facade for Java). It serves as a simple facade or abstraction for various logging frameworks (e.g. java.util.logging or logback) allowing the end user to plug in the desired logging framework at deployment time.
+
+SLF4J allows the use of formatting anchors in the form of {} pairs in the message which will be replaced by the respective argument. If the last argument is of the type Throwable and not referenced as formatting anchor in the message, that `Throwable` is used as the exception.
+
+[source,java,indent=0]
+.Logging examples
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/ExceptionHandlingSnippet.java[tags=slf4Jlogging]
+----

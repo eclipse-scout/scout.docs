@@ -1,0 +1,117 @@
+= Eclipse Scout Release Notes
+
+NOTE: Looking for something else? Visit https://eclipsescout.github.io for all Scout related documentation.
+
+////
+Howto:
+- Write this document such that it helps people to discover new features and other important changes of this release.
+- Chronological order is not necessary.
+- Describe necessary migration steps in the MigrationGuide document.
+- Use "WARNING: {NotReleasedWarning}" on its own line to mark parts about not yet released code (also add a "(since <version>)" suffix to the chapter title)
+- Use "title case" in chapter titles (https://english.stackexchange.com/questions/14/)
+////
+
+include::common:partial$Init.adoc[]
+
+== About This Release
+
+The latest version of this release is: {maven-version}.
+
+You can see the {github-changelog-link} on GitHub.
+
+Coming from an older Scout version? Check out the {migration-guide-link} for instructions on how to obtain the new version and upgrade existing applications.
+
+WARNING: {NotReleasedWarning}
+
+//The following enhancements were made after the initial {scout-version} release.
+//
+//==== 23.1.1
+//
+// The initial release of this version was *23.1.0.xyz* (Maven: 23.1.0.xyz_Simrel_2023.13).
+//
+//WARNING: {NotReleasedWarning}
+//
+//(Section intentionally left blank for possible future release)
+//
+// * <<New Feature (since 23.1.0.xyz)>>
+//
+// ==== Upcoming -- No Planned Release Date
+//
+// The following changes were made after the latest official release build. No release date has been fixed yet.
+//
+// WARNING: {NotReleasedWarning}
+//
+// * <<New Feature (since 23.1.0.xyz)>>
+
+== Demo Applications
+
+The demo applications for this version can be found on the {scout-docs-link} branch of our docs repository on GitHub.
+
+If you just want to play around with them without looking at the source code, you can always use the deployed versions:
+
+* https://scout.bsi-software.com/contacts/
+* https://scout.bsi-software.com/widgets/
+* https://scout.bsi-software.com/jswidgets/
+
+// ----------------------------------------------------------------------------
+
+== ObjectType as Class Reference (Scout JS)
+It is now possible to use a class reference as `objectType`.
+An `objectType` is typically used when creating a new object using `scout.create(objectType)` or when defining a model.
+Using a class reference instead of a string will make the development easier because the IDE knows about the actual type and can provide
+code completion or and other assistance.
+
+It may even improve the tree shaking process of the bundler (webpack).
+Because using a class reference requires an `import`, the bundler automatically includes the imported module.
+
+So,
+[source, js]
+----
+scout.create('Button', {parent: this});
+----
+
+becomes this:
+
+[source, js]
+----
+import {Button} from '@eclipse-scout/core';
+
+scout.create(Button, {parent: this});
+----
+
+And this
+[source, js]
+----
+export default () => ({
+  objectType: 'Form',
+  rootGroupBox: {
+    objectType: 'GroupBox'
+  }
+});
+----
+
+becomes this:
+
+[source,js]
+----
+import {Form, GroupBox} from '@eclipse-scout/core';
+
+export default () => ({
+  objectType: Form,
+  rootGroupBox: {
+    objectType: GroupBox
+  }
+});
+----
+
+Please see the {migration-guide-link} for migration assistance.
+
+== Typed NodeId for node identifier
+
+In previous versions several ways were used to create/use a node identfier (e.g. to identify a specific client/backend server):
+
+* A typed class NodeId existed, the current identifier was accessed using `org.eclipse.scout.rt.dataobject.id.NodeId.current()`
+* Node identifiers could be accessed as String using `org.eclipse.scout.rt.platform.context.NodeIdentifier.get()`
+* And another node identifier (default implementation random UUID) could be accessed using  `org.eclipse.scout.rt.shared.INode#ID`
+
+As of version 23.1 the typed `org.eclipse.scout.rt.dataobject.id.NodeId` is used wherever possible, the application scoped bean `org.eclipse.scout.rt.platform.context.NodeIdentifier` is still used for the computation of this typed `NodeId`. The `get()` method returning a `String` has been deprecated, the interface `org.eclipse.scout.rt.shared.INode` has been removed.

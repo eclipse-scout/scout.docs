@@ -1,0 +1,17 @@
+=== Additions to the Java Editor
+
+:experimental:
+
+Scout uses the standard Java Editor of the Eclipse IDE.
+To ease the development, the Scout SDK provides additional features for the Java Editor.
+
+include::sdk:partial$SdkContentAssist.adoc[]
+
+==== NLS-Entry support
+
+include::sdk:partial$SdkEditorNlsContentAssist.adoc[]
+
+Selecting "New text..." then opens the <<sdk_wizard_nls-entry.adoc#nls-entry-wizard, NLS Entry Wizard>>.
+
+'''
+Go back to the <<sdk.adoc#, Scout Tooling>>.

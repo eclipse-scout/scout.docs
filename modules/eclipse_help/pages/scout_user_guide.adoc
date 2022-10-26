@@ -1,0 +1,7 @@
+= Eclipse Scout User Guide
+
+This guide gets you through the "`Hello World`" Eclipse Scout application and shows you how to import the Scout demo application into your Eclipse IDE.
+In the second part, the Scout tooling available in the Eclipse IDE is described.
+
+* <<tutorial.adoc#getting-started, Getting Started>>
+* <<sdk.adoc#scout-tooling, Scout Tooling>>

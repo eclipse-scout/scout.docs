@@ -1,0 +1,19 @@
+:experimental:
+
+This section guides you through the installation of the tools required to start the `Hello Scout` application.
+
+Currently there is IDE support for Scout application development for IntelliJ IDEA and Eclipse.
+Such an IDE is not required but makes the development much easier.
+This tutorial describes the setup for both IDEs. Please choose the one you prefer.
+
+=== Node.js
+
+include::InstallNode.adoc[]
+
+=== IntelliJ
+
+include::InstallIntelliJ.adoc[]
+
+=== Eclipse
+
+include::InstallEclipse.adoc[]

@@ -1,7 +1,0 @@
-= Scout SDK for Eclipse
-:toclevels: 3
-include::../../../common/src/docs/_header.adoc[]
-include::_SdkEclipse.adoc[]
-
-:_footer-link-path: build/sdk_eclipse/src/docs/{docname}.adoc
-include::../../../common/src/docs/_footer.adoc[]

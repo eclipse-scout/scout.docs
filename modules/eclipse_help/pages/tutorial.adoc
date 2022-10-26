@@ -1,0 +1,9 @@
+[#getting-started]
+= Getting Started
+
+:experimental:
+
+To get started with Eclipse Scout, we propose that you first go through the "`Hello World`" tutorial and then follow the tutorial to import the existing Scout demo applications.
+
+* <<tutorial_helloworld.adoc#hello-world-tutorial, Hello World Tutorial>>
+* <<tutorial_existingdemo.adoc#import-the-scout-demo-applications, Import the Scout Demo Applications>>

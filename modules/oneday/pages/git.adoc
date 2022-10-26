@@ -1,0 +1,23 @@
+= Git configuration
+
+If you want to add the created application to a Git repository there might some configurations be helpful. If there are no plans to use Git, this chapter can be skipped.
+
+E.g. it is best practice to exclude some files from adding to a Git repository. These exclusions can be configured by creating a file named `.gitignore` in the root folder of the repository (see the https://git-scm.com/docs/gitignore[Git Documentation] for details).
+Here is a sample file that might be used as starting point:
+
+....
+# Git
+*.orig
+
+# Maven
+target/
+.surefire-*
+.flattened-pom.xml
+
+# Node
+node_modules/
+test-results/
+
+# Do not check in any log files
+*.log
+....

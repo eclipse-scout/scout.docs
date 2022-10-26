@@ -1,0 +1,7 @@
+= How-Tos
+
+This chapter provides various small technical guides to very specific Scout subjects.
+
+include::partial$SmartField-HowTo.adoc[]
+
+include::partial$Chart-HowTo.adoc[]

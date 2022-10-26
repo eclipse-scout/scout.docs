@@ -1,0 +1,12 @@
+:experimental:
+
+The Scout project creation depends on the IDE chosen.
+Therefore, please follow the instructions in the corresponding section below.
+
+=== IntelliJ
+
+include::CreateNewProjectIntelliJ.adoc[]
+
+=== Eclipse
+
+include::CreateNewProjectEclipse.adoc[]
