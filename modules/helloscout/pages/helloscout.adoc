@@ -8,8 +8,7 @@ include::common:partial$Init.adoc[]
 
 In this tutorial we will create your first Scout Classic application.
 
-// TODO
-NOTE: If you don't know what Scout Classic is yet, please read the https://eclipsescout.github.io/{doc-short-version}/getstarted.html[Get Started Guide] first.
+NOTE: If you don't know what Scout Classic is yet, please read xref:getstarted:getstarted.adoc[], first.
 
 We will create the application using Eclipse or IntelliJ.
 The generated application will consist of a client and server part and simply display a text sent from the server.
@@ -26,8 +25,7 @@ include::common:partial$CreateNewProject.adoc[]
 
 Congratulations! You have successfully created your first Scout Classic application.
 
-// TODO
-To gain experience working with Scout, we recommend going through the [One Day Tutorial].
+To gain experience working with Scout, we recommend going through the xref:oneday:tutorial.adoc[].
 
 If you are interested in Scout's concepts, architecture and features you probably want to have a look at the xref:technicalGuide:Overview.adoc[Technical Guide].
 
