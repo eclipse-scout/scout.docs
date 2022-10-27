@@ -279,7 +279,7 @@ See the https://git-scm.com/docs/gitignore[gitignore Documentation] for details.
 == What's Next?
 
 :jswidgets: https://scout.bsi-software.com/jswidgets_{doc-short-version-underlined}/
-:jswidgets-code: https://github.com/bsi-software/org.eclipse.scout.docs/tree/releases/{doc-short-version}/code/widgets
+:jswidgets-code: https://github.com/bsi-software/org.eclipse.scout.docs/tree/releases/{doc-short-version}/modules/common/examples/widgets
 :scout-forum: http://www.eclipse.org/forums/eclipse.scout
 
 Now that you have successfully created your first Scout JS application,

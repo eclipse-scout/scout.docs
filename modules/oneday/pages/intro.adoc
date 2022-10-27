@@ -12,7 +12,7 @@ To do so, just clone the Scout demo repository and import it into a new Eclipse 
 
  git clone https://github.com/bsi-software/org.eclipse.scout.docs.git
 
-Alternatively, you can also view the source code of the "`Contacts`" demo application on https://github.com/bsi-software/org.eclipse.scout.docs/tree/{git-branch}/code/contacts[Github].
+Alternatively, you can also view the source code of the "`Contacts`" demo application on https://github.com/bsi-software/org.eclipse.scout.docs/tree/{git-branch}/modules/common/examples/contacts[Github].
 
 [[img-app_contacts_personpage]]
 .The "`Contacts`" application with the person page.

@@ -13,7 +13,8 @@
 :simrel-date: September, 2022
 :doc-short-version: {scout-version}
 :doc-short-version-underlined: {scout-version-underlined}
-:git-branch: releases/{scout-version}
+// :git-branch: releases/{scout-version}
+:git-branch: features/asc/{scout-version}-antora
 
 // Links
 :docroot: https://eclipsescout.github.io/{doc-short-version}/
