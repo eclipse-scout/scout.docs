@@ -10,9 +10,8 @@ ifndef::source-highlighter[:source-highlighter: coderay]
 
 In this tutorial we will create your first Scout JS application.
 
-// TODO
 NOTE: If you don't know what Scout JS is yet, please read the
-https://eclipsescout.github.io/{doc-short-version}/getstarted.html[Get Started Guide] first.
+xref:getstarted:getstarted.adoc[], first.
 
 The application will simply show a text field and a button.
 Once the user enters some text and presses the button, the application displays a message box including that text.
@@ -286,9 +285,7 @@ See the https://git-scm.com/docs/gitignore[gitignore Documentation] for details.
 Now that you have successfully created your first Scout JS application,
 you might want to learn more about Scout JS.
 
-// TODO
-If you are interested in adding a REST backend you should have a look at
-https://eclipsescout.github.io/{doc-short-version}/helloscout-js-fullstack.html[Hello Scout JS Full Stack Tutorial].
+If you are interested in adding a REST backend you should have a look at xref:helloscout_js_fullstack:helloscout-js-fullstack.adoc[].
 
 To see more example code of Scout JS, we recommend looking at the {jswidgets}[Scout JS Widgets] application
 and its {jswidgets-code}[source code].

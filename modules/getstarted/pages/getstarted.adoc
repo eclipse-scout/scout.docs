@@ -75,5 +75,4 @@ https://www.jsdelivr.com/package/npm/@eclipse-scout/core?path=dist
 
 Even though this is a convenient way to get the Scout assets, we still recommend getting the artifacts via npm, because it gives you more control and flexibility to work with.
 
-// TODO
-If you want to learn more about using a CDN, please see http://eclipsescout.github.io/{scout-version}/helloscout-cdn.html[Hello Scout for CDN].
+If you want to learn more about using a CDN, please see xref:helloscout_cdn:helloscout-cdn.adoc[].
