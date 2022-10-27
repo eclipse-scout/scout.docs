@@ -35,7 +35,7 @@ include::common:partial$CreateNewJsProjectIntellij.adoc[]
 == What's Next?
 
 :jswidgets: https://scout.bsi-software.com/jswidgets_{doc-short-version-underlined}/
-:jswidgets-code: https://github.com/bsi-software/org.eclipse.scout.docs/tree/releases/{doc-short-version}/code/widgets
+:jswidgets-code: https://github.com/bsi-software/org.eclipse.scout.docs/tree/releases/{doc-short-version}/modules/common/examples/widgets
 
 To learn more about Scout JS, we recommend having a look at xref:technicalGuideJS:ScoutJS.adoc[].
 
