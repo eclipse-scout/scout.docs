@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2020 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
@@ -14,8 +14,7 @@ export default class FormFieldMenuLookupCall extends StaticLookupCall {
 
   constructor(formField) {
     super();
-    this._formFieldPropertyChangeHandler = this._onFormFieldPropertyChange.bind(this);
-    this._menuPropertyChangeHandler = this._onMenuPropertyChange.bind(this);
+    this._rebuildDataHandler = this._rebuildData.bind(this);
     this.data = [];
     this.setFormField(formField);
   }
@@ -26,15 +25,15 @@ export default class FormFieldMenuLookupCall extends StaticLookupCall {
 
   setFormField(formField) {
     if (this.formField) {
-      this.formField.off('propertyChange', this._formFieldPropertyChangeHandler);
+      this.formField.off('propertyChange:menus', this._rebuildDataHandler);
       this.formField.menus.forEach(function(menu) {
-        menu.off('propertyChange', this._menuPropertyChangeHandler);
+        menu.off('propertyChange:text', this._rebuildDataHandler);
       }, this);
     }
     this.formField = formField;
-    this.formField.on('propertyChange', this._formFieldPropertyChangeHandler);
+    this.formField.on('propertyChange:menus', this._rebuildDataHandler);
     this.formField.menus.forEach(function(menu) {
-      menu.on('propertyChange', this._menuPropertyChangeHandler);
+      menu.on('propertyChange:text', this._rebuildDataHandler);
     }, this);
     this._rebuildData();
   }
@@ -43,17 +42,5 @@ export default class FormFieldMenuLookupCall extends StaticLookupCall {
     this.data = this.formField.menus.map(menu => {
       return [menu, menu.text];
     });
-  }
-
-  _onFormFieldPropertyChange(event) {
-    if (event.propertyName === 'menus') {
-      this._rebuildData();
-    }
-  }
-
-  _onMenuPropertyChange(event) {
-    if (event.propertyName === 'text') {
-      this._rebuildData();
-    }
   }
 }

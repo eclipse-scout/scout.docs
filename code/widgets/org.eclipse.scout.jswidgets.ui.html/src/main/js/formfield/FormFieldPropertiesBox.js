@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2021 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
@@ -44,117 +44,73 @@ export default class FormFieldPropertiesBox extends GroupBox {
     this.field.on('drop', this._fileDropHandler);
     let enabledField = this.widget('EnabledField');
     enabledField.setValue(this.field.enabled);
-    enabledField.on('propertyChange', this._onPropertyChange.bind(this));
+    enabledField.on('propertyChange:value', event => this.field.setEnabled(event.newValue));
 
     let visibleField = this.widget('VisibleField');
     visibleField.setValue(this.field.visible);
-    visibleField.on('propertyChange', this._onPropertyChange.bind(this));
+    visibleField.on('propertyChange:value', event => this.field.setVisible(event.newValue));
 
     let labelVisibleField = this.widget('LabelVisibleField');
     labelVisibleField.setValue(this.field.labelVisible);
-    labelVisibleField.on('propertyChange', this._onPropertyChange.bind(this));
+    labelVisibleField.on('propertyChange:value', event => this.field.setLabelVisible(event.newValue));
 
     let statusVisibleField = this.widget('StatusVisibleField');
     statusVisibleField.setValue(this.field.statusVisible);
-    statusVisibleField.on('propertyChange', this._onPropertyChange.bind(this));
+    statusVisibleField.on('propertyChange:value', event => this.field.setStatusVisible(event.newValue));
 
     let mandatoryField = this.widget('MandatoryField');
     mandatoryField.setValue(this.field.mandatory);
-    mandatoryField.on('propertyChange', this._onPropertyChange.bind(this));
+    mandatoryField.on('propertyChange:value', event => this.field.setMandatory(event.newValue));
 
     let loadingField = this.widget('LoadingField');
     loadingField.setValue(this.field.loading);
-    loadingField.on('propertyChange', this._onPropertyChange.bind(this));
+    loadingField.on('propertyChange:value', event => this.field.setLoading(event.newValue));
 
     let labelHtmlEnabledField = this.widget('LabelHtmlEnabledField');
     labelHtmlEnabledField.setValue(this.field.labelHtmlEnabled);
-    labelHtmlEnabledField.on('propertyChange', this._onPropertyChange.bind(this));
+    labelHtmlEnabledField.on('propertyChange:value', event => this.field.setLabelHtmlEnabled(event.newValue));
 
     let inheritAccessibilityField = this.widget('InheritAccessibilityField');
     inheritAccessibilityField.setValue(this.field.inheritAccessibility);
-    inheritAccessibilityField.on('propertyChange', this._onPropertyChange.bind(this));
+    inheritAccessibilityField.on('propertyChange:value', event => this.field.setInheritAccessibility(event.newValue));
 
     let fieldStyleField = this.widget('FieldStyleField');
     fieldStyleField.setValue(this.field.fieldStyle);
-    fieldStyleField.on('propertyChange', this._onPropertyChange.bind(this));
+    fieldStyleField.on('propertyChange:value', event => this.field.setFieldStyle(event.newValue));
 
     let disabledStyleField = this.widget('DisabledStyleField');
     disabledStyleField.setValue(this.field.disabledStyle);
-    disabledStyleField.on('propertyChange', this._onPropertyChange.bind(this));
+    disabledStyleField.on('propertyChange:value', event => this.field.setDisabledStyle(event.newValue));
 
     let dropTypeField = this.widget('DropTypeField');
     dropTypeField.setValue(this.field.dropType);
-    dropTypeField.on('propertyChange', this._onPropertyChange.bind(this));
+    dropTypeField.on('propertyChange:value', event => this.field.setDropType(event.newValue));
 
     let dropMaximumSizeField = this.widget('DropMaximumSizeField');
     dropMaximumSizeField.setValue(this.field.dropMaximumSize);
-    dropMaximumSizeField.on('propertyChange', this._onPropertyChange.bind(this));
+    dropMaximumSizeField.on('propertyChange:value', event => this.field.setDropMaximumSize(event.newValue));
 
     let labelField = this.widget('LabelField');
     labelField.setValue(this.field.label);
-    labelField.on('propertyChange', this._onPropertyChange.bind(this));
+    labelField.on('propertyChange:value', event => this.field.setLabel(event.newValue));
 
     let labelPositionField = this.widget('LabelPositionField');
     labelPositionField.setValue(this.field.labelPosition);
-    labelPositionField.on('propertyChange', this._onPropertyChange.bind(this));
+    labelPositionField.on('propertyChange:value', event => this.field.setLabelPosition(event.newValue));
 
     let labelWidthInPixelField = this.widget('LabelWidthInPixelField');
     labelWidthInPixelField.setValue(this.field.labelWidthInPixel);
-    labelWidthInPixelField.on('propertyChange', this._onPropertyChange.bind(this));
-
-    let errorStatusField = this.widget('ErrorStatusField');
-    errorStatusField.setValue(this.field.errorStatus ? this.field.errorStatus.severity : null);
-    errorStatusField.on('propertyChange', this._onPropertyChange.bind(this));
-
-    let tooltipTextField = this.widget('TooltipTextField');
-    tooltipTextField.setValue(this.field.tooltipText);
-    tooltipTextField.on('propertyChange', this._onPropertyChange.bind(this));
-
-    let tooltipAnchorField = this.widget('TooltipAnchorField');
-    tooltipAnchorField.setValue(this.field.tooltipAnchor);
-    tooltipAnchorField.on('propertyChange', this._onPropertyChange.bind(this));
-
-    let statusPositionField = this.widget('StatusPositionField');
-    statusPositionField.setValue(this.field.statusPosition);
-    statusPositionField.on('propertyChange', this._onPropertyChange.bind(this));
-  }
-
-  _onPropertyChange(event) {
-    if (event.propertyName === 'value' && event.source.id === 'EnabledField') {
-      this.field.setEnabled(event.newValue);
-    } else if (event.propertyName === 'value' && event.source.id === 'VisibleField') {
-      this.field.setVisible(event.newValue);
-    } else if (event.propertyName === 'value' && event.source.id === 'LabelVisibleField') {
-      this.field.setLabelVisible(event.newValue);
-    } else if (event.propertyName === 'value' && event.source.id === 'LabelHtmlEnabledField') {
-      this.field.setLabelHtmlEnabled(event.newValue);
-    } else if (event.propertyName === 'value' && event.source.id === 'StatusVisibleField') {
-      this.field.setStatusVisible(event.newValue);
-    } else if (event.propertyName === 'value' && event.source.id === 'MandatoryField') {
-      this.field.setMandatory(event.newValue);
-    } else if (event.propertyName === 'value' && event.source.id === 'LoadingField') {
-      this.field.setLoading(event.newValue);
-    } else if (event.propertyName === 'value' && event.source.id === 'InheritAccessibilityField') {
-      this.field.setInheritAccessibility(event.newValue);
-    } else if (event.propertyName === 'value' && event.source.id === 'FieldStyleField') {
-      this.field.setFieldStyle(event.newValue);
-    } else if (event.propertyName === 'value' && event.source.id === 'DisabledStyleField') {
-      this.field.setDisabledStyle(event.newValue);
-    } else if (event.propertyName === 'value' && event.source.id === 'DropTypeField') {
-      this.field.setDropType(event.newValue);
-    } else if (event.propertyName === 'value' && event.source.id === 'DropMaximumSizeField') {
-      this.field.setDropMaximumSize(event.newValue);
-    } else if (event.propertyName === 'value' && event.source.id === 'LabelField') {
-      this.field.setLabel(event.newValue);
-    } else if (event.propertyName === 'value' && event.source.id === 'LabelPositionField') {
-      this.field.setLabelPosition(event.newValue);
-    } else if (event.propertyName === 'value' && event.source.id === 'LabelWidthInPixelField') {
+    labelWidthInPixelField.on('propertyChange:value', event => {
       if (event.source.lookupRow) {
         this.field.setLabelWidthInPixel(event.source.lookupRow.key);
       } else {
         this.field.setLabelWidthInPixel(numbers.ensure(event.newValue));
       }
-    } else if (event.propertyName === 'value' && event.source.id === 'ErrorStatusField') {
+    });
+
+    let errorStatusField = this.widget('ErrorStatusField');
+    errorStatusField.setValue(this.field.errorStatus ? this.field.errorStatus.severity : null);
+    errorStatusField.on('propertyChange:value', event => {
       this.field.removeErrorStatus(DefaultStatus);
       if (event.newValue) {
         this.field.setErrorStatus(new DefaultStatus({
@@ -162,13 +118,19 @@ export default class FormFieldPropertiesBox extends GroupBox {
           message: this.session.text('FormFieldStatusMessage', objects.keyByValue(Status.Severity, event.newValue))
         }));
       }
-    } else if (event.propertyName === 'value' && event.source.id === 'TooltipTextField') {
-      this.field.setTooltipText(event.newValue);
-    } else if (event.propertyName === 'value' && event.source.id === 'TooltipAnchorField') {
-      this.field.setTooltipAnchor(event.newValue);
-    } else if (event.propertyName === 'value' && event.source.id === 'StatusPositionField') {
-      this.field.setStatusPosition(event.newValue);
-    }
+    });
+
+    let tooltipTextField = this.widget('TooltipTextField');
+    tooltipTextField.setValue(this.field.tooltipText);
+    tooltipTextField.on('propertyChange:value', event => this.field.setTooltipText(event.newValue));
+
+    let tooltipAnchorField = this.widget('TooltipAnchorField');
+    tooltipAnchorField.setValue(this.field.tooltipAnchor);
+    tooltipAnchorField.on('propertyChange:value', event => this.field.setTooltipAnchor(event.newValue));
+
+    let statusPositionField = this.widget('StatusPositionField');
+    statusPositionField.setValue(this.field.statusPosition);
+    statusPositionField.on('propertyChange:value', event => this.field.setStatusPosition(event.newValue));
   }
 
   _onFileDrop(event) {

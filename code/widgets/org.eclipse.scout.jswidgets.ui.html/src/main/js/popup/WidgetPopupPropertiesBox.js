@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
@@ -40,24 +40,14 @@ export default class WidgetPopupPropertiesBox extends GroupBox {
     }
     let closableField = this.widget('ClosableField');
     closableField.setValue(this.field.closable);
-    closableField.on('propertyChange', this._onPropertyChange.bind(this));
+    closableField.on('propertyChange:value', event => this.field.setClosable(event.newValue));
 
     let movableField = this.widget('MovableField');
     movableField.setValue(this.field.movable);
-    movableField.on('propertyChange', this._onPropertyChange.bind(this));
+    movableField.on('propertyChange:value', event => this.field.setMovable(event.newValue));
 
     let resizableField = this.widget('ResizableField');
     resizableField.setValue(this.field.resizable);
-    resizableField.on('propertyChange', this._onPropertyChange.bind(this));
-  }
-
-  _onPropertyChange(event) {
-    if (event.propertyName === 'value' && event.source.id === 'ClosableField') {
-      this.field.setClosable(event.newValue);
-    } else if (event.propertyName === 'value' && event.source.id === 'MovableField') {
-      this.field.setMovable(event.newValue);
-    } else if (event.propertyName === 'value' && event.source.id === 'ResizableField') {
-      this.field.setResizable(event.newValue);
-    }
+    resizableField.on('propertyChange:value', event => this.field.setResizable(event.newValue));
   }
 }

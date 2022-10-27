@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
@@ -29,11 +29,11 @@ export default class LabelFieldForm extends Form {
 
     let wrapTextField = this.widget('WrapTextField');
     wrapTextField.setValue(labelField.wrapText);
-    wrapTextField.on('propertyChange', this._onWrapTextPropertyChange.bind(this));
+    wrapTextField.on('propertyChange:value', event => this.widget('LabelField').setWrapText(event.newValue));
 
     let htmlEnabledField = this.widget('HtmlEnabledField');
     htmlEnabledField.setValue(labelField.htmlEnabled);
-    htmlEnabledField.on('propertyChange', this._onHtmlEnabledPropertyChange.bind(this));
+    htmlEnabledField.on('propertyChange:value', event => this.widget('LabelField').setHtmlEnabled(event.newValue));
 
     this.widget('ValueField').setEnabled(true);
     this.widget('ValueFieldPropertiesBox').setField(labelField);
@@ -42,17 +42,5 @@ export default class LabelFieldForm extends Form {
     this.widget('WidgetActionsBox').setField(labelField);
     this.widget('FormFieldActionsBox').setField(labelField);
     this.widget('EventsTab').setField(labelField);
-  }
-
-  _onWrapTextPropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.widget('LabelField').setWrapText(event.newValue);
-    }
-  }
-
-  _onHtmlEnabledPropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.widget('LabelField').setHtmlEnabled(event.newValue);
-    }
   }
 }

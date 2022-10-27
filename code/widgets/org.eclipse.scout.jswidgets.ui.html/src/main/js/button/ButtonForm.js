@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
@@ -30,31 +30,45 @@ export default class ButtonForm extends Form {
 
     let defaultButtonField = this.widget('DefaultButtonField');
     defaultButtonField.setValue(button.defaultButton);
-    defaultButtonField.on('propertyChange', this._onDefaultButtonPropertyChange.bind(this));
+    defaultButtonField.on('propertyChange:value', event => this.widget('Button').setDefaultButton(event.newValue));
 
     let processButtonField = this.widget('ProcessButtonField');
     processButtonField.setValue(button.processButton);
-    processButtonField.on('propertyChange', this._onProcessButtonPropertyChange.bind(this));
+    processButtonField.on('propertyChange:value', event => {
+      let button = this.widget('Button');
+      // ProcessButton property may not be changed during run time officially
+      // As a workaround we need to adjust the group box state and rerender the whole group box
+      // DISCLAIMER: This is done for demo purpose, don't use it in production code since it is internal API
+      button.processButton = event.newValue;
+      button.parent._prepareFields();
+      button.parent._updateMenuBar();
+      this._rerenderGroupBox(button.parent);
+    });
 
     let selectedField = this.widget('SelectedField');
     selectedField.setValue(button.selected);
-    selectedField.on('propertyChange', this._onSelectedPropertyChange.bind(this));
+    selectedField.on('propertyChange:value', event => this.widget('Button').setSelected(event.newValue));
 
     let preventDoubleClickField = this.widget('PreventDoubleClickField');
     preventDoubleClickField.setValue(button.preventDoubleClick);
-    preventDoubleClickField.on('propertyChange', this._onPreventDoubleClickPropertyChange.bind(this));
+    preventDoubleClickField.on('propertyChange:value', event => this.widget('Button').setPreventDoubleClick(event.newValue));
 
     let iconIdField = this.widget('IconIdField');
     iconIdField.setValue(button.iconId);
-    iconIdField.on('propertyChange', this._onIconIdPropertyChange.bind(this));
+    iconIdField.on('propertyChange:value', event => this.widget('Button').setIconId(event.newValue));
 
     let keyStrokeField = this.widget('KeyStrokeField');
     keyStrokeField.setValue(button.keyStroke);
-    keyStrokeField.on('propertyChange', this._onKeyStrokePropertyChange.bind(this));
+    keyStrokeField.on('propertyChange:value', event => this.widget('Button').setKeyStroke(event.newValue));
 
     let displayStyleField = this.widget('DisplayStyleField');
     displayStyleField.setValue(button.displayStyle);
-    displayStyleField.on('propertyChange', this._onDisplayStylePropertyChange.bind(this));
+    displayStyleField.on('propertyChange:value', event => {
+      let button = this.widget('Button');
+      // DisplayStyle may not be changed during run time officially, use this little hack to work around by rerendering the whole group box
+      button.displayStyle = event.newValue;
+      this._rerenderGroupBox(button.parent);
+    });
 
     this.widget('FormFieldPropertiesBox').setField(button);
     this.widget('GridDataBox').setField(button);
@@ -76,58 +90,6 @@ export default class ButtonForm extends Form {
         message: this.session.text('ButtonClickMessage')
       }
     }).show();
-  }
-
-  _onDefaultButtonPropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.widget('Button').setDefaultButton(event.newValue);
-    }
-  }
-
-  _onProcessButtonPropertyChange(event) {
-    if (event.propertyName === 'value') {
-      let button = this.widget('Button');
-      // ProcessButton property may not be changed during run time officially
-      // As a work around we need to adjust the group box state and rerender the whole group box
-      // DISCLAIMER: This is done for demo purpose, don't use it in production code since it is internal API
-      button.processButton = event.newValue;
-      button.parent._prepareFields();
-      button.parent._updateMenuBar();
-      this._rerenderGroupBox(button.parent);
-    }
-  }
-
-  _onSelectedPropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.widget('Button').setSelected(event.newValue);
-    }
-  }
-
-  _onPreventDoubleClickPropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.widget('Button').setPreventDoubleClick(event.newValue);
-    }
-  }
-
-  _onIconIdPropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.widget('Button').setIconId(event.newValue);
-    }
-  }
-
-  _onKeyStrokePropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.widget('Button').setKeyStroke(event.newValue);
-    }
-  }
-
-  _onDisplayStylePropertyChange(event) {
-    if (event.propertyName === 'value') {
-      let button = this.widget('Button');
-      // DisplayStyle may not be changed during run time officially, use this little hack to work around by rerendering the whole group box
-      button.displayStyle = event.newValue;
-      this._rerenderGroupBox(button.parent);
-    }
   }
 
   _rerenderGroupBox(groupBox) {

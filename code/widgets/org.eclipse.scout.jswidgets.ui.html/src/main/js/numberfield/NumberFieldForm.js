@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
@@ -28,18 +28,18 @@ export default class NumberFieldForm extends Form {
     let numberField = this.widget('NumberField');
     let formatField = this.widget('FormatField');
     formatField.setValue(numberField.decimalFormat.pattern);
-    formatField.on('propertyChange', this._onFormatPropertyChange.bind(this));
+    formatField.on('propertyChange:value', event => this._updateFormat());
 
     let multiplierField = this.widget('MultiplierField');
     multiplierField.setValue(numberField.decimalFormat.multiplier);
-    multiplierField.on('propertyChange', this._onFormatPropertyChange.bind(this));
+    multiplierField.on('propertyChange:value', event => this._updateFormat());
 
     let minValueField = this.widget('MinValueField');
-    minValueField.on('propertyChange', this._onMinValueFieldPropertyChange.bind(this));
+    minValueField.on('propertyChange:value', event => this.widget('NumberField').setMinValue(event.newValue));
     minValueField.setValue(numberField.minValue);
 
     let maxValueField = this.widget('MaxValueField');
-    maxValueField.on('propertyChange', this._onMaxValueFieldPropertyChange.bind(this));
+    maxValueField.on('propertyChange:value', event => this.widget('NumberField').setMaxValue(event.newValue));
     maxValueField.setValue(numberField.maxValue);
 
     this.widget('ValueField').setEnabled(true);
@@ -51,27 +51,13 @@ export default class NumberFieldForm extends Form {
     this.widget('EventsTab').setField(numberField);
   }
 
-  _onFormatPropertyChange(event) {
-    if (event.propertyName === 'value') {
-      let multiplierField = this.widget('MultiplierField');
-      let formatField = this.widget('FormatField');
-      this.widget('NumberField').setDecimalFormat({
-        pattern: formatField.value,
-        multiplier: multiplierField.value
-      });
-      multiplierField.setValue(this.widget('NumberField').decimalFormat.multiplier);
-    }
-  }
-
-  _onMinValueFieldPropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.widget('NumberField').setMinValue(event.newValue);
-    }
-  }
-
-  _onMaxValueFieldPropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.widget('NumberField').setMaxValue(event.newValue);
-    }
+  _updateFormat() {
+    let multiplierField = this.widget('MultiplierField');
+    let formatField = this.widget('FormatField');
+    this.widget('NumberField').setDecimalFormat({
+      pattern: formatField.value,
+      multiplier: multiplierField.value
+    });
+    multiplierField.setValue(this.widget('NumberField').decimalFormat.multiplier);
   }
 }

@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
@@ -29,34 +29,15 @@ export default class LabelForm extends Form {
 
     let valueField = this.widget('ValueField');
     valueField.setValue(label.value);
-    valueField.on('propertyChange', this._onValuePropertyChange.bind(this));
+    valueField.on('propertyChange:value', event => this.widget('Label').setValue(event.newValue));
 
     let htmlEnabledField = this.widget('HtmlEnabledField');
     htmlEnabledField.setValue(label.htmlEnabled);
-    htmlEnabledField.on('propertyChange', this._onHtmlEnabledPropertyChange.bind(this));
+    htmlEnabledField.on('propertyChange:value', event => this.widget('Label').setHtmlEnabled(event.newValue));
 
     let scrollableField = this.widget('ScrollableField');
     scrollableField.setValue(label.scrollable);
-    scrollableField.on('propertyChange', this._onScrollablePropertyChange.bind(this));
-
-    this.widget('WidgetActionsBox').setField(label);
-    this.widget('EventsTab').setField(label);
-  }
-
-  _onValuePropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.widget('Label').setValue(event.newValue);
-    }
-  }
-
-  _onHtmlEnabledPropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.widget('Label').setHtmlEnabled(event.newValue);
-    }
-  }
-
-  _onScrollablePropertyChange(event) {
-    if (event.propertyName === 'value') {
+    scrollableField.on('propertyChange:value', event => {
       let label = this.widget('Label');
       label.setScrollable(event.newValue);
 
@@ -64,7 +45,10 @@ export default class LabelForm extends Form {
       let gridData = new GridData(label.parent.gridDataHints);
       gridData.heightInPixel = label.scrollable ? 50 : -1;
       label.parent.setGridDataHints(gridData);
-    }
+    });
+
+    this.widget('WidgetActionsBox').setField(label);
+    this.widget('EventsTab').setField(label);
   }
 
   _onLabelAppLinkAction(event) {

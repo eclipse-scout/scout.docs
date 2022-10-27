@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
@@ -39,49 +39,25 @@ export default class TabBoxProperties extends TabItem {
       return;
     }
 
-    this.tabBox.on('propertyChange', this._onTabBoxPropertyChange.bind(this));
+    this.tabBox.on('propertyChange:selectedTab', event => this._updateSelectedTab());
 
     this.selectedTabField = this.widget('TabBoxProperties.SelectedTabField');
     this.selectedTabField.lookupCall = new TabItemLookupCall(this.tabBox);
-    this.selectedTabField.on('propertyChange', this._onSelectedTabChange.bind(this));
+    this.selectedTabField.on('propertyChange:value', event => this.tabBox.setSelectedTab(event.newValue));
 
     this.tabAreaStyleField = this.widget('TabBoxProperties.TabAreaStyleField');
-    this.tabAreaStyleField.on('propertyChange', this._onTabAreaStyleChange.bind(this));
+    this.tabAreaStyleField.on('propertyChange:value', event => this.tabBox.setTabAreaStyle(event.newValue));
 
     this.showMenusField = this.widget('TabBoxProperties.ShowMenus');
-    this.showMenusField.on('propertyChange', this._onShowMenusChange.bind(this));
+    this.showMenusField.on('propertyChange:value', event => this.tabBox.menus.forEach(menu => {
+      menu.setVisible(this.showMenusField.value);
+    }));
     this.showMenusField.setValue(this.showMenus);
 
     this.widget('TabBoxProperties.FormFieldPropertiesBox').setField(this.tabBox);
     this.widget('TabBoxProperties.GridDataBox').setField(this.tabBox);
 
     this._updateSelectedTab();
-  }
-
-  _onSelectedTabChange(event) {
-    if (event.propertyName === 'value') {
-      this.tabBox.setSelectedTab(event.newValue);
-    }
-  }
-
-  _onTabAreaStyleChange(event) {
-    if (event.propertyName === 'value') {
-      this.tabBox.setTabAreaStyle(event.newValue);
-    }
-  }
-
-  _onTabBoxPropertyChange(event) {
-    if (event.propertyName === 'selectedTab') {
-      this._updateSelectedTab();
-    }
-  }
-
-  _onShowMenusChange(event) {
-    if (event.propertyName === 'value') {
-      this.tabBox.menus.forEach(function(m) {
-        m.setVisible(this.showMenusField.value);
-      }, this);
-    }
   }
 
   _updateSelectedTab() {

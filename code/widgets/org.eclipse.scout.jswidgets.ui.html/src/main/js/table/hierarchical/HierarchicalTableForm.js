@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
@@ -49,26 +49,17 @@ export default class HierarchicalTableForm extends Form {
 
     let targetField = this.widget('Column.TargetField');
     targetField.setLookupCall(new ColumnLookupCall(this.table));
-    targetField.setValue(this.table.columns[0]);
-    targetField.on('propertyChange', this._onTargetPropertyChange.bind(this));
-
-    this._onTargetPropertyChange({
-      propertyName: 'value',
-      newValue: targetField.value
-    });
-
-    this._insertFewRows();
-    this.table.expandAll();
-  }
-
-  _onTargetPropertyChange(event) {
-    if (event.propertyName === 'value') {
+    targetField.on('propertyChange:value', event => {
       let newColumn = event.newValue;
 
       let columnPropertiesBox = this.widget('Column.PropertiesBox');
       columnPropertiesBox.setColumn(newColumn);
       columnPropertiesBox.setEnabled(!!newColumn);
-    }
+    });
+    targetField.setValue(this.table.columns[0]);
+
+    this._insertFewRows();
+    this.table.expandAll();
   }
 
   _onRemoveAllRows() {

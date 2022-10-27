@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
@@ -35,15 +35,15 @@ export default class AccordionForm extends Form {
 
     let collapseStyleField = this.widget('CollapseStyleField');
     collapseStyleField.setValue(this.accordion.collapseStyle);
-    collapseStyleField.on('propertyChange', this._onCollapseStylePropertyChange.bind(this));
+    collapseStyleField.on('propertyChange:value', event => this.accordion.setCollapseStyle(event.newValue));
 
     let exclusiveExpandField = this.widget('ExclusiveExpandField');
     exclusiveExpandField.setValue(this.accordion.exclusiveExpand);
-    exclusiveExpandField.on('propertyChange', this._onExclusiveExpandPropertyChange.bind(this));
+    exclusiveExpandField.on('propertyChange:value', event => this.accordion.setExclusiveExpand(event.newValue));
 
     let scrollableField = this.widget('ScrollableField');
     scrollableField.setValue(this.accordion.scrollable);
-    scrollableField.on('propertyChange', this._onScrollablePropertyChange.bind(this));
+    scrollableField.on('propertyChange:value', event => this.accordion.setScrollable(event.newValue));
 
     // -- Actions
 
@@ -71,24 +71,6 @@ export default class AccordionForm extends Form {
     this.widget('WidgetActionsBox').setField(accordionField);
     this.widget('FormFieldActionsBox').setField(accordionField);
     this.widget('EventsTab').setField(this.accordion);
-  }
-
-  _onCollapseStylePropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.accordion.setCollapseStyle(event.newValue);
-    }
-  }
-
-  _onExclusiveExpandPropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.accordion.setExclusiveExpand(event.newValue);
-    }
-  }
-
-  _onScrollablePropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.accordion.setScrollable(event.newValue);
-    }
   }
 
   _onInsertMenuAction(event) {

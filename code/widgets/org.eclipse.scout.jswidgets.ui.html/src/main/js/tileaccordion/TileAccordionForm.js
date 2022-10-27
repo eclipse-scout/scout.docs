@@ -34,7 +34,11 @@ export default class TileAccordionForm extends Form {
     this.tileTypeField = this.widget('InsertTileTypeField');
 
     this.accordion = this.widget('Accordion');
-    this.accordion.on('propertyChange', this._onAccordionPropertyChange.bind(this));
+    this.accordion.on('propertyChange:tiles propertyChange:selectedTiles', event => this._updateStatus());
+    this.accordion.on('propertyChange:filteredTiles', event => {
+      this._updateStatus();
+      this._updateGroupVisibility();
+    });
 
     this._insertGroupWithTiles();
     this._insertGroupWithTiles();
@@ -44,35 +48,35 @@ export default class TileAccordionForm extends Form {
 
     let exclusiveExpandField = this.widget('ExclusiveExpandField');
     exclusiveExpandField.setValue(this.accordion.exclusiveExpand);
-    exclusiveExpandField.on('propertyChange', this._onExclusiveExpandPropertyChange.bind(this));
+    exclusiveExpandField.on('propertyChange:value', event => this.accordion.setExclusiveExpand(event.newValue));
 
     let scrollableField = this.widget('ScrollableField');
     scrollableField.setValue(this.accordion.scrollable);
-    scrollableField.on('propertyChange', this._onScrollablePropertyChange.bind(this));
+    scrollableField.on('propertyChange:value', event => this.accordion.setScrollable(event.newValue));
 
     let selectableField = this.widget('SelectableField');
     selectableField.setValue(this.accordion.selectable);
-    selectableField.on('propertyChange', this._onSelectablePropertyChange.bind(this));
+    selectableField.on('propertyChange:value', event => this.accordion.setSelectable(event.newValue));
 
     let multiSelectField = this.widget('MultiSelectField');
     multiSelectField.setValue(this.accordion.multiSelect);
-    multiSelectField.on('propertyChange', this._onMultiSelectPropertyChange.bind(this));
+    multiSelectField.on('propertyChange:value', event => this.accordion.setMultiSelect(event.newValue));
 
     let withPlaceholdersField = this.widget('WithPlaceholdersField');
     withPlaceholdersField.setValue(this.accordion.withPlaceholders);
-    withPlaceholdersField.on('propertyChange', this._onWithPlacehodersPropertyChange.bind(this));
+    withPlaceholdersField.on('propertyChange:value', event => this.accordion.setWithPlaceholders(event.newValue));
 
     let virtualField = this.widget('VirtualField');
     virtualField.setValue(this.accordion.virtual);
-    virtualField.on('propertyChange', this._onVirtualPropertyChange.bind(this));
+    virtualField.on('propertyChange:value', event => this.accordion.setVirtual(event.newValue));
 
     let textFilterEnabledField = this.widget('TextFilterEnabledField');
     textFilterEnabledField.setValue(this.accordion.textFilterEnabled);
-    textFilterEnabledField.on('propertyChange:value', this._onTextFilterEnabledValueChange.bind(this));
+    textFilterEnabledField.on('propertyChange:value', event => this.accordion.setTextFilterEnabled(event.newValue));
 
     let gridColumnCountField = this.widget('GridColumnCountField');
     gridColumnCountField.setValue(this.accordion.gridColumnCount);
-    gridColumnCountField.on('propertyChange', this._onGridColumnCountPropertyChange.bind(this));
+    gridColumnCountField.on('propertyChange:value', event => this.accordion.setGridColumnCount(event.newValue));
 
     // -- Actions
 
@@ -131,61 +135,6 @@ export default class TileAccordionForm extends Form {
     layoutConfigBox.setField(this.accordion);
     this._updateStatus();
     this._updateGroupVisibility();
-  }
-
-  _onAccordionPropertyChange(event) {
-    if (event.propertyName === 'tiles' || event.propertyName === 'selectedTiles' || event.propertyName === 'filteredTiles') {
-      this._updateStatus();
-    }
-    if (event.propertyName === 'filteredTiles') {
-      this._updateGroupVisibility();
-    }
-  }
-
-  _onExclusiveExpandPropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.accordion.setExclusiveExpand(event.newValue);
-    }
-  }
-
-  _onScrollablePropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.accordion.setScrollable(event.newValue);
-    }
-  }
-
-  _onGridColumnCountPropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.accordion.setGridColumnCount(event.newValue);
-    }
-  }
-
-  _onWithPlacehodersPropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.accordion.setWithPlaceholders(event.newValue);
-    }
-  }
-
-  _onVirtualPropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.accordion.setVirtual(event.newValue);
-    }
-  }
-
-  _onTextFilterEnabledValueChange(event) {
-    this.accordion.setTextFilterEnabled(event.newValue);
-  }
-
-  _onSelectablePropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.accordion.setSelectable(event.newValue);
-    }
-  }
-
-  _onMultiSelectPropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.accordion.setMultiSelect(event.newValue);
-    }
   }
 
   _onInsertMenuAction(event) {

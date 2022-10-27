@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
@@ -39,17 +39,7 @@ export default class SequenceBoxForm extends Form {
     // FieldProperties tab
     let targetField = this.widget('Field.TargetField');
     targetField.setLookupCall(new FormFieldLookupCall(sequenceBox));
-    targetField.on('propertyChange', this._onTargetPropertyChange.bind(this));
-    targetField.setValue(sequenceBox.fields[0]);
-
-    this._onTargetPropertyChange({
-      propertyName: 'value',
-      newValue: targetField.value
-    });
-  }
-
-  _onTargetPropertyChange(event) {
-    if (event.propertyName === 'value') {
+    targetField.on('propertyChange:value', event => {
       let targetField = event.newValue;
 
       let fieldPropertiesBox = this.widget('Field.FormFieldPropertiesBox');
@@ -59,6 +49,7 @@ export default class SequenceBoxForm extends Form {
       let fieldGridDataBox = this.widget('Field.GridDataBox');
       fieldGridDataBox.setField(targetField);
       fieldGridDataBox.setEnabled(!!targetField);
-    }
+    });
+    targetField.setValue(sequenceBox.fields[0]);
   }
 }

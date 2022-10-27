@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
@@ -40,10 +40,14 @@ export default class TabItemProperties extends TabItem {
 
     this.targetField = this.widget('TabItemProperties.TargetField');
     this.targetField.lookupCall = new TabItemLookupCall(this.tabBox);
-    this.targetField.on('propertyChange', this._onTargetTabItemChange.bind(this));
+    this.targetField.on('propertyChange:value', event => this.setTabItem(event.newValue));
 
     this.markedField = this.widget('TabItemProperties.MarkedField');
-    this.markedField.on('propertyChange', this._onCurrentTabMarkedChanged.bind(this));
+    this.markedField.on('propertyChange:value', event => {
+      if (this.tabItem) {
+        this.tabItem.setMarked(event.newValue);
+      }
+    });
 
     this.setTabItem(this.tabBox.selectedTab);
   }
@@ -63,17 +67,5 @@ export default class TabItemProperties extends TabItem {
     this.widget('TabItemProperties.GroupBoxPropertiesBox').setField(this.tabItem);
     this.widget('TabItemProperties.GridDataBox').setField(this.tabItem);
     this.widget('TabItemProperties.FormFieldPropertiesBox').setField(this.tabItem);
-  }
-
-  _onTargetTabItemChange(event) {
-    if (event.propertyName === 'value') {
-      this.setTabItem(event.newValue);
-    }
-  }
-
-  _onCurrentTabMarkedChanged(event) {
-    if (event.propertyName === 'value' && this.tabItem) {
-      this.tabItem.setMarked(event.newValue);
-    }
   }
 }

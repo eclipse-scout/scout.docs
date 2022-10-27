@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
@@ -27,15 +27,15 @@ export default class DesktopForm extends Form {
     let desktop = this.session.desktop;
     let navigationVisibleField = this.widget('NavigationVisibleField');
     navigationVisibleField.setValue(desktop.navigationVisible);
-    navigationVisibleField.on('propertyChange', this._onNavigationVisiblePropertyChange.bind(this));
+    navigationVisibleField.on('propertyChange:value', event => this.session.desktop.setNavigationVisible(event.newValue));
 
     let headerVisibleField = this.widget('HeaderVisibleField');
     headerVisibleField.setValue(desktop.headerVisible);
-    headerVisibleField.on('propertyChange', this._onHeaderVisiblePropertyChange.bind(this));
+    headerVisibleField.on('propertyChange:value', event => this.session.desktop.setHeaderVisible(event.newValue));
 
     let denseField = this.widget('DenseField');
     denseField.setValue(desktop.dense);
-    denseField.on('propertyChange', this._onDensePropertyChange.bind(this));
+    denseField.on('propertyChange:value', event => this.session.desktop.setDense(event.newValue));
 
     let openUriButton = this.widget('OpenUriButton');
     let uriField = this.widget('UriField');
@@ -44,23 +44,5 @@ export default class DesktopForm extends Form {
 
     this.widget('WidgetActionsBox').setField(desktop);
     this.widget('EventsTab').setField(desktop);
-  }
-
-  _onNavigationVisiblePropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.session.desktop.setNavigationVisible(event.newValue);
-    }
-  }
-
-  _onHeaderVisiblePropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.session.desktop.setHeaderVisible(event.newValue);
-    }
-  }
-
-  _onDensePropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.session.desktop.setDense(event.newValue);
-    }
   }
 }

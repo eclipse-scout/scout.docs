@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
@@ -14,8 +14,7 @@ export default class GroupLookupCall extends StaticLookupCall {
 
   constructor(accordion) {
     super();
-    this._accordionPropertyChangeHandler = this._onAccordionPropertyChange.bind(this);
-    this._groupPropertyChangeHandler = this._onGroupPropertyChange.bind(this);
+    this._rebuildDataHandler = this._rebuildData.bind(this);
     this.data = [];
     this.setAccordion(accordion);
   }
@@ -26,15 +25,15 @@ export default class GroupLookupCall extends StaticLookupCall {
 
   setAccordion(accordion) {
     if (this.accordion) {
-      this.accordion.off('propertyChange', this._accordionPropertyChangeHandler);
+      this.accordion.off('propertyChange:groups', this._rebuildDataHandler);
       this.accordion.groups.forEach(function(group) {
-        group.off('propertyChange', this._groupPropertyChangeHandler);
+        group.off('propertyChange:title', this._rebuildDataHandler);
       }, this);
     }
     this.accordion = accordion;
-    this.accordion.on('propertyChange', this._accordionPropertyChangeHandler);
+    this.accordion.on('propertyChange:groups', this._rebuildDataHandler);
     this.accordion.groups.forEach(function(group) {
-      group.on('propertyChange', this._groupPropertyChangeHandler);
+      group.on('propertyChange:title', this._rebuildDataHandler);
     }, this);
     this._rebuildData();
   }
@@ -43,17 +42,5 @@ export default class GroupLookupCall extends StaticLookupCall {
     this.data = this.accordion.groups.map(group => {
       return [group, group.title];
     });
-  }
-
-  _onAccordionPropertyChange(event) {
-    if (event.propertyName === 'groups') {
-      this._rebuildData();
-    }
-  }
-
-  _onGroupPropertyChange(event) {
-    if (event.propertyName === 'title') {
-      this._rebuildData();
-    }
   }
 }

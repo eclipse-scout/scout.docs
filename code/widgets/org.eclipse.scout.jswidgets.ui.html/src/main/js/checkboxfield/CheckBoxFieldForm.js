@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
@@ -29,15 +29,15 @@ export default class CheckBoxFieldForm extends Form {
 
     let triStateEnabledField = this.widget('TriStateEnabledField');
     triStateEnabledField.setValue(field.triStateEnabled);
-    triStateEnabledField.on('propertyChange', this._onTriStateEnabledPropertyChange.bind(this));
+    triStateEnabledField.on('propertyChange:value', event => this.widget('CheckBoxField').setTriStateEnabled(event.newValue));
 
     let wrapTextEnabledField = this.widget('WrapTextField');
     wrapTextEnabledField.setValue(field.wrapText);
-    wrapTextEnabledField.on('propertyChange', this._onWrapTextPropertyChange.bind(this));
+    wrapTextEnabledField.on('propertyChange:value', event => this.widget('CheckBoxField').setWrapText(event.newValue));
 
     let keyStrokeField = this.widget('KeyStrokeField');
     keyStrokeField.setValue(field.keyStroke);
-    keyStrokeField.on('propertyChange', this._onKeyStrokePropertyChange.bind(this));
+    keyStrokeField.on('propertyChange:value', event => this.widget('CheckBoxField').setKeyStroke(event.newValue));
 
     this.widget('ValueFieldPropertiesBox').setField(field);
     this.widget('FormFieldPropertiesBox').setField(field);
@@ -45,23 +45,5 @@ export default class CheckBoxFieldForm extends Form {
     this.widget('WidgetActionsBox').setField(field);
     this.widget('FormFieldActionsBox').setField(field);
     this.widget('EventsTab').setField(field);
-  }
-
-  _onTriStateEnabledPropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.widget('CheckBoxField').setTriStateEnabled(event.newValue);
-    }
-  }
-
-  _onWrapTextPropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.widget('CheckBoxField').setWrapText(event.newValue);
-    }
-  }
-
-  _onKeyStrokePropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.widget('CheckBoxField').setKeyStroke(event.newValue);
-    }
   }
 }

@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
@@ -39,91 +39,59 @@ export default class GroupBoxPropertiesBox extends GroupBox {
 
     let subLabelField = this.widget('SubLabelField');
     subLabelField.setValue(this.field.subLabel);
-    subLabelField.on('propertyChange', this._onPropertyChange.bind(this));
+    subLabelField.on('propertyChange:value', event => this.field.setSubLabel(event.newValue));
 
     let borderVisibleField = this.widget('BorderVisibleField');
     borderVisibleField.setValue(this.field.borderVisible);
-    borderVisibleField.on('propertyChange', this._onPropertyChange.bind(this));
+    borderVisibleField.on('propertyChange:value', event => this.field.setBorderVisible(event.newValue));
 
     let borderDecorationField = this.widget('BorderDecorationField');
     borderDecorationField.setValue(this.field.borderDecoration);
-    borderDecorationField.on('propertyChange', this._onPropertyChange.bind(this));
+    borderDecorationField.on('propertyChange:value', event => this.field.setBorderDecoration(event.newValue));
 
     let expandableField = this.widget('ExpandableField');
     expandableField.setValue(this.field.expandable);
-    expandableField.on('propertyChange', this._onPropertyChange.bind(this));
+    expandableField.on('propertyChange:value', event => this.field.setExpandable(event.newValue));
 
     let expandedField = this.widget('ExpandedField');
     expandedField.setValue(this.field.expanded);
-    expandedField.on('propertyChange', this._onPropertyChange.bind(this));
+    expandedField.on('propertyChange:value', event => this.field.setExpanded(event.newValue));
 
     let responsiveField = this.widget('ResponsiveField');
     responsiveField.setValue(this.field.responsive);
-    responsiveField.on('propertyChange', this._onPropertyChange.bind(this));
+    responsiveField.on('propertyChange:value', event => this.field.setResponsive(event.newValue));
 
     let scrollableField = this.widget('ScrollableField');
     scrollableField.setValue(this.field.scrollable);
-    scrollableField.on('propertyChange', this._onPropertyChange.bind(this));
+    scrollableField.on('propertyChange:value', event => this.field.setScrollable(event.newValue));
 
     let gridColumnCountField = this.widget('GridColumnCountField');
     gridColumnCountField.setValue(this.field.gridColumnCount);
-    gridColumnCountField.on('propertyChange', this._onPropertyChange.bind(this));
+    gridColumnCountField.on('propertyChange:value', event => this.field.setGridColumnCount(event.newValue));
 
     let logicalGridField = this.widget('LogicalGridField');
     logicalGridField.setValue(this.field.logicalGrid ? this.field.logicalGrid.objectType : null);
-    logicalGridField.on('propertyChange', this._onPropertyChange.bind(this));
+    logicalGridField.on('propertyChange:value', event => this.field.setLogicalGrid(event.newValue));
 
     let notificationField = this.widget('NotificationField');
     notificationField.setValue(this.field.notification ? this.field.notification.status.severity : null);
-    notificationField.on('propertyChange', this._onPropertyChange.bind(this));
+    notificationField.on('propertyChange:value', event => this.field.setNotification(this._createNotification()));
 
     let notificationIconField = this.widget('NotificationIconField');
     notificationIconField.setValue(this.field.notification ? this.field.notification.iconId : null);
-    notificationIconField.on('propertyChange', this._onPropertyChange.bind(this));
+    notificationIconField.on('propertyChange:value', event => this.field.setNotification(this._createNotification()));
 
     let menuBarVisibleField = this.widget('MenuBarVisibleField');
     menuBarVisibleField.setValue(this.field.menuBarVisible);
-    menuBarVisibleField.on('propertyChange', this._onPropertyChange.bind(this));
+    menuBarVisibleField.on('propertyChange:value', event => this.field.setMenuBarVisible(event.newValue));
 
     let menuBarPositionField = this.widget('MenuBarPositionField');
     menuBarPositionField.setValue(this.field.menuBarPosition);
-    menuBarPositionField.on('propertyChange', this._onPropertyChange.bind(this));
+    menuBarPositionField.on('propertyChange:value', event => this.field.setMenuBarPosition(event.newValue));
 
     let menuBarEllipsisPositionField = this.widget('MenuBarEllipsisPositionField');
     menuBarEllipsisPositionField.setValue(this.field.menuBarEllipsisPosition);
-    menuBarEllipsisPositionField.on('propertyChange', this._onPropertyChange.bind(this));
-  }
-
-  _onPropertyChange(event) {
-    if (event.propertyName === 'value' && event.source.id === 'SubLabelField') {
-      this.field.setSubLabel(event.newValue);
-    } else if (event.propertyName === 'value' && event.source.id === 'BorderVisibleField') {
-      this.field.setBorderVisible(event.newValue);
-    } else if (event.propertyName === 'value' && event.source.id === 'BorderDecorationField') {
-      this.field.setBorderDecoration(event.newValue);
-    } else if (event.propertyName === 'value' && event.source.id === 'ExpandableField') {
-      this.field.setExpandable(event.newValue);
-    } else if (event.propertyName === 'value' && event.source.id === 'ExpandedField') {
-      this.field.setExpanded(event.newValue);
-    } else if (event.propertyName === 'value' && event.source.id === 'ResponsiveField') {
-      this.field.setResponsive(event.newValue);
-    } else if (event.propertyName === 'value' && event.source.id === 'ScrollableField') {
-      this.field.setScrollable(event.newValue);
-    } else if (event.propertyName === 'value' && event.source.id === 'GridColumnCountField') {
-      this.field.setGridColumnCount(event.newValue);
-    } else if (event.propertyName === 'value' && event.source.id === 'LogicalGridField') {
-      this.field.setLogicalGrid(event.newValue);
-    } else if (event.propertyName === 'value' && event.source.id === 'NotificationField') {
-      this.field.setNotification(this._createNotification());
-    } else if (event.propertyName === 'value' && event.source.id === 'NotificationIconField') {
-      this.field.setNotification(this._createNotification());
-    } else if (event.propertyName === 'value' && event.source.id === 'MenuBarVisibleField') {
-      this.field.setMenuBarVisible(event.newValue);
-    } else if (event.propertyName === 'value' && event.source.id === 'MenuBarPositionField') {
-      this.field.setMenuBarPosition(event.newValue);
-    } else if (event.propertyName === 'value' && event.source.id === 'MenuBarEllipsisPositionField') {
-      this.field.setMenuBarEllipsisPosition(event.newValue);
-    }
+    menuBarEllipsisPositionField.on('propertyChange:value', event => this.field.setMenuBarEllipsisPosition(event.newValue));
   }
 
   _createNotification() {

@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
@@ -29,21 +29,5 @@ export default class WatchFieldForm extends Form {
     this.widget('GridDataBox').setField(watchField);
     this.widget('WidgetActionsBox').setField(watchField);
     this.widget('EventsTab').setField(watchField);
-  }
-
-  _onSelectedTabChange(event) {
-    if (event.propertyName === 'value') {
-      if (event.newValue) {
-        this.widget('TabBox').selectTabById(event.newValue);
-      } else {
-        this.widget('TabBox').setSelectedTab();
-      }
-    }
-  }
-
-  _onFieldPropertyChange(event) {
-    if (event.propertyName === 'selectedTab') {
-      this.widget('SelectedTabField').setValue((event.newValue) ? (event.newValue.id) : (null));
-    }
   }
 }

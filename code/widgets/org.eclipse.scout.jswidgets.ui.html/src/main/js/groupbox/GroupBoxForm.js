@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
@@ -31,10 +31,16 @@ export default class GroupBoxForm extends Form {
     menu1.on('action', this._onMenuAction.bind(this));
 
     let configurationBox = this.widget('ConfigurationBox');
-    configurationBox.on('propertyChange', this._onConfigurationBoxPropertyChange.bind(this));
+    configurationBox.on('propertyChange:selectedTab', event => {
+      let targetField = this.widget('Field.TargetField').value;
+      if (!targetField) {
+        return;
+      }
+      this._updateHighlightedField(targetField);
+    });
 
     let groupBox = this.widget('DetailBox');
-    groupBox.on('propertyChange', this._onGroupBoxPropertyChange.bind(this));
+    groupBox.on('propertyChange:fields', event => this._initFields(event.source.fields));
     this._initFields(groupBox.fields);
 
     // GroupBox Properties tab
@@ -60,13 +66,20 @@ export default class GroupBoxForm extends Form {
     // Field tab
     let targetField = this.widget('Field.TargetField');
     targetField.setLookupCall(new FormFieldLookupCall(groupBox));
-    targetField.setValue(groupBox.fields[0]);
-    targetField.on('propertyChange', this._onTargetPropertyChange.bind(this));
+    targetField.on('propertyChange:value', event => {
+      let oldField = event.oldValue;
+      let newField = event.newValue;
 
-    this._onTargetPropertyChange({
-      propertyName: 'value',
-      newValue: targetField.value
+      let fieldPropertiesBox = this.widget('Field.FormFieldPropertiesBox');
+      fieldPropertiesBox.setField(newField);
+      fieldPropertiesBox.setEnabled(!!newField);
+
+      let fieldGridDataBox = this.widget('Field.GridDataBox');
+      fieldGridDataBox.setField(newField);
+      fieldGridDataBox.setEnabled(!!newField);
+      this._updateHighlightedField(newField, oldField);
     });
+    targetField.setValue(groupBox.fields[0]);
   }
 
   _initFields(fields) {
@@ -80,22 +93,6 @@ export default class GroupBoxForm extends Form {
     MessageBoxes.createOk(this)
       .withBody('Menu with label \'' + event.source.text + '\' has been activated.')
       .buildAndOpen();
-  }
-
-  _onTargetPropertyChange(event) {
-    if (event.propertyName === 'value') {
-      let oldField = event.oldValue;
-      let newField = event.newValue;
-
-      let fieldPropertiesBox = this.widget('Field.FormFieldPropertiesBox');
-      fieldPropertiesBox.setField(newField);
-      fieldPropertiesBox.setEnabled(!!newField);
-
-      let fieldGridDataBox = this.widget('Field.GridDataBox');
-      fieldGridDataBox.setField(newField);
-      fieldGridDataBox.setEnabled(!!newField);
-      this._updateHighlightedField(newField, oldField);
-    }
   }
 
   _updateHighlightedField(newTargetField, oldTargetField) {
@@ -125,21 +122,5 @@ export default class GroupBoxForm extends Form {
     this.widget('Field.TargetField').setValue(field);
     this.widget('Actions.AddFieldBox').setTargetField(field);
     this.widget('Actions.DeleteFieldBox').setTargetField(field);
-  }
-
-  _onConfigurationBoxPropertyChange(event) {
-    if (event.propertyName === 'selectedTab') {
-      let targetField = this.widget('Field.TargetField').value;
-      if (!targetField) {
-        return;
-      }
-      this._updateHighlightedField(targetField);
-    }
-  }
-
-  _onGroupBoxPropertyChange(event) {
-    if (event.propertyName === 'fields') {
-      this._initFields(event.source.fields);
-    }
   }
 }

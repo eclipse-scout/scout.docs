@@ -28,20 +28,16 @@ export default class LogicalGridForm extends Form {
     super._init(model);
 
     let groupBox = this.widget('DetailBox');
-    groupBox.on('propertyChange', this._onGroupBoxPropertyChange.bind(this));
+    groupBox.on('propertyChange:fields', event => this._initFields(event.source.fields));
     this._initFields(groupBox.fields);
 
     let targetField = this.widget('TargetField');
     targetField.lookupCall = new FormFieldLookupCall(groupBox);
-    targetField.on('propertyChange', this._onTargetFieldPropertyChange.bind(this));
-    this.widget('StringField1').on('propertyChange', this._onFieldPropertyChange.bind(this));
-    this.widget('StringField2').on('propertyChange', this._onFieldPropertyChange.bind(this));
-    this.widget('StringField3').on('propertyChange', this._onFieldPropertyChange.bind(this));
-    this.widget('StringField4').on('propertyChange', this._onFieldPropertyChange.bind(this));
+    targetField.on('propertyChange:value', this._onTargetFieldValueChange.bind(this));
 
     let logicalGridField = this.widget('LogicalGridField');
     logicalGridField.setValue(groupBox.logicalGrid ? groupBox.logicalGrid.objectType : null);
-    logicalGridField.on('propertyChange', this._onLogicalGridChange.bind(this));
+    logicalGridField.on('propertyChange:value', event => this.widget('DetailBox').setLogicalGrid(event.newValue));
 
     this.widget('GridDataBox').setEnabled(!!targetField.value);
 
@@ -61,32 +57,17 @@ export default class LogicalGridForm extends Form {
     event.source.$field.on('focus', this._fieldFocusHandler);
   }
 
-  _onGroupBoxPropertyChange(event) {
-    if (event.propertyName === 'fields') {
-      this._initFields(event.source.fields);
+  _onTargetFieldValueChange(event) {
+    let oldField = event.oldValue;
+    let newField = event.newValue;
+    this.widget('GridDataBox').setField(newField);
+    this.widget('GridDataBox').setEnabled(!!newField);
+    this.widget('CalculatedGridDataBox').setField(newField);
+    if (oldField) {
+      oldField.removeCssClass('field-highlighted');
     }
-  }
-
-  _onTargetFieldPropertyChange(event) {
-    if (event.propertyName === 'value') {
-      let oldField = event.oldValue;
-      let newField = event.newValue;
-      this.widget('GridDataBox').setField(newField);
-      this.widget('GridDataBox').setEnabled(!!newField);
-      this.widget('CalculatedGridDataBox').setField(newField);
-      if (oldField) {
-        oldField.removeCssClass('field-highlighted');
-      }
-      if (newField) {
-        newField.addCssClass('field-highlighted');
-      }
-    }
-  }
-
-  _onFieldPropertyChange(event) {
-    if (event.propertyName === 'gridData' && event.source === this.widget('TargetField')) {
-      let gridDataBox = this.widget('CalculatedGridDataBox');
-      gridDataBox.reloadGridData();
+    if (newField) {
+      newField.addCssClass('field-highlighted');
     }
   }
 
@@ -95,11 +76,5 @@ export default class LogicalGridForm extends Form {
     this.widget('TargetField').setValue(field);
     this.widget('Actions.AddFieldBox').setTargetField(field);
     this.widget('Actions.DeleteFieldBox').setTargetField(field);
-  }
-
-  _onLogicalGridChange(event) {
-    if (event.propertyName === 'value') {
-      this.widget('DetailBox').setLogicalGrid(event.newValue);
-    }
   }
 }

@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2021 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
@@ -32,49 +32,59 @@ export default class TileGridForm extends Form {
     this.tileTypeField = this.widget('TileTypeField');
 
     this.tileGrid = this.widget('TileGrid');
-    this.tileGrid.on('propertyChange', this._onTileGridPropertyChange.bind(this));
+    this.tileGrid.on('propertyChange:tiles propertyChange:selectedTiles propertyChange:filteredTiles', event => this.updateStatus());
 
     // -- Properties
 
     let gridColumnCountField = this.widget('GridColumnCountField');
     gridColumnCountField.setValue(this.tileGrid.gridColumnCount);
-    gridColumnCountField.on('propertyChange', this._onGridColumnCountPropertyChange.bind(this));
+    gridColumnCountField.on('propertyChange:value', event => this.tileGrid.setGridColumnCount(event.newValue));
 
     let logicalGridField = this.widget('LogicalGridField');
     logicalGridField.setValue(this.tileGrid.logicalGrid ? this.tileGrid.logicalGrid.objectType : null);
-    logicalGridField.on('propertyChange', this._onLogicalGridChange.bind(this));
+    logicalGridField.on('propertyChange:value', event => this.tileGrid.setLogicalGrid(event.newValue));
 
     let withPlaceholdersField = this.widget('WithPlaceholdersField');
     withPlaceholdersField.setValue(this.tileGrid.withPlaceholders);
-    withPlaceholdersField.on('propertyChange', this._onWithPlacehodersPropertyChange.bind(this));
+    withPlaceholdersField.on('propertyChange:value', event => this.tileGrid.setWithPlaceholders(event.newValue));
 
     let virtualField = this.widget('VirtualField');
     virtualField.setValue(this.tileGrid.virtual);
-    virtualField.on('propertyChange', this._onVirtualPropertyChange.bind(this));
+    virtualField.on('propertyChange:value', event => this.tileGrid.setVirtual(event.newValue));
 
     let textFilterEnabledField = this.widget('TextFilterEnabledField');
     textFilterEnabledField.setValue(this.tileGrid.textFilterEnabled);
-    textFilterEnabledField.on('propertyChange:value', this._onTextFilterEnabledValueChange.bind(this));
+    textFilterEnabledField.on('propertyChange:value', event => this.tileGrid.setTextFilterEnabled(event.newValue));
 
     let colorSchemeField = this.widget('ColorSchemeField');
     colorSchemeField.setValue(this.tileGrid.tiles[0].colorScheme.scheme);
-    colorSchemeField.on('propertyChange', this._onColorSchemePropertyChange.bind(this));
+    colorSchemeField.on('propertyChange:value', event => this.tileGrid.tiles.forEach(tile => {
+      let scheme = $.extend({}, tile.colorScheme, {
+        scheme: event.newValue
+      });
+      tile.setColorScheme(scheme);
+    }));
 
     let invertColorsField = this.widget('InvertColorsField');
     invertColorsField.setValue(this.tileGrid.tiles[0].colorScheme.inverted);
-    invertColorsField.on('propertyChange', this._onInvertColorsPropertyChange.bind(this));
+    invertColorsField.on('propertyChange:value', event => this.tileGrid.tiles.forEach(tile => {
+      let scheme = $.extend({}, tile.colorScheme, {
+        inverted: event.newValue
+      });
+      tile.setColorScheme(scheme);
+    }));
 
     let selectableField = this.widget('SelectableField');
     selectableField.setValue(this.tileGrid.selectable);
-    selectableField.on('propertyChange', this._onSelectablePropertyChange.bind(this));
+    selectableField.on('propertyChange:value', event => this.tileGrid.setSelectable(event.newValue));
 
     let multiSelectField = this.widget('MultiSelectField');
     multiSelectField.setValue(this.tileGrid.multiSelect);
-    multiSelectField.on('propertyChange', this._onMultiSelectPropertyChange.bind(this));
+    multiSelectField.on('propertyChange:value', event => this.tileGrid.setMultiSelect(event.newValue));
 
     let scrollableField = this.widget('ScrollableField');
     scrollableField.setValue(this.tileGrid.scrollable);
-    scrollableField.on('propertyChange', this._onScrollablePropertyChange.bind(this));
+    scrollableField.on('propertyChange:value', event => this.tileGrid.setScrollable(event.newValue));
 
     // -- Actions
 
@@ -111,80 +121,6 @@ export default class TileGridForm extends Form {
     this.widget('FormFieldActionsBox').setField(tileField);
     this.widget('EventsTab').setField(this.tileGrid);
     this.updateStatus();
-  }
-
-  _onTileGridPropertyChange(event) {
-    if (event.propertyName === 'tiles' || event.propertyName === 'selectedTiles' || event.propertyName === 'filteredTiles') {
-      this.updateStatus();
-    }
-  }
-
-  _onGridColumnCountPropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.tileGrid.setGridColumnCount(event.newValue);
-    }
-  }
-
-  _onLogicalGridChange(event) {
-    if (event.propertyName === 'value') {
-      this.tileGrid.setLogicalGrid(event.newValue);
-    }
-  }
-
-  _onWithPlacehodersPropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.tileGrid.setWithPlaceholders(event.newValue);
-    }
-  }
-
-  _onVirtualPropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.tileGrid.setVirtual(event.newValue);
-    }
-  }
-
-  _onTextFilterEnabledValueChange(event) {
-    this.tileGrid.setTextFilterEnabled(event.newValue);
-  }
-
-  _onColorSchemePropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.tileGrid.tiles.forEach(tile => {
-        let scheme = $.extend({}, tile.colorScheme, {
-          scheme: event.newValue
-        });
-        tile.setColorScheme(scheme);
-      });
-    }
-  }
-
-  _onInvertColorsPropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.tileGrid.tiles.forEach(tile => {
-        let scheme = $.extend({}, tile.colorScheme, {
-          inverted: event.newValue
-        });
-        tile.setColorScheme(scheme);
-      });
-    }
-  }
-
-  _onSelectablePropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.tileGrid.setSelectable(event.newValue);
-    }
-  }
-
-  _onMultiSelectPropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.tileGrid.setMultiSelect(event.newValue);
-    }
-  }
-
-  _onScrollablePropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.tileGrid.setScrollable(event.newValue);
-    }
   }
 
   _onInsertMenuAction(event) {

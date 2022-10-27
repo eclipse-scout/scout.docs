@@ -1,12 +1,12 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG. All rights reserved.
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Distribution License v1.0 which accompanies this
- * distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Distribution License v1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
- * Contributors: BSI Business Systems Integration AG - initial API and
- * implementation
+ * Contributors:
+ *     BSI Business Systems Integration AG - initial API and implementation
  */
 import {dates, Form, icons, MessageBoxes, models, scout} from '@eclipse-scout/core';
 import {ColumnLookupCall, LocaleLookupCall} from '../index';
@@ -50,30 +50,7 @@ export default class TableForm extends Form {
 
     let targetField = this.widget('Column.TargetField');
     targetField.setLookupCall(new ColumnLookupCall(this.table));
-    targetField.setValue(this.table.columns[0]);
-    targetField.on('propertyChange', this._onTargetPropertyChange.bind(this));
-
-    this._onTargetPropertyChange({
-      propertyName: 'value',
-      newValue: targetField.value
-    });
-
-    this.table.insertRows([this._createRow(), this._createRow(), this._createRow()]);
-
-    this.table.createTileForRow = function(row) {
-      let icon = icons.parseIconId(row.cells[5].iconId);
-      let model = {
-        parent: this,
-        content: '<div style="text-align: center;"><p>' + row.cells[0].text + '</p></div>' +
-          '<div class="font-icon" style="font-size: 50px; text-align: center;">' + icon.iconCharacter + '</div>' +
-          '<div style="text-align: center;"><p>' + row.cells[1].text + '</p></div>'
-      };
-      return scout.create('HtmlTile', model);
-    };
-  }
-
-  _onTargetPropertyChange(event) {
-    if (event.propertyName === 'value') {
+    targetField.on('propertyChange:value', event => {
       let newColumn = event.newValue;
 
       let columnPropertiesBox = this.widget('Column.PropertiesBox');
@@ -87,7 +64,21 @@ export default class TableForm extends Form {
         newPropertiesBoxField.setColumn(newColumn);
       }
       this._removePropertiesBoxes(newColumn.objectType, columnPropertyTab);
-    }
+    });
+    targetField.setValue(this.table.columns[0]);
+
+    this.table.insertRows([this._createRow(), this._createRow(), this._createRow()]);
+
+    this.table.createTileForRow = function(row) {
+      let icon = icons.parseIconId(row.cells[5].iconId);
+      let model = {
+        parent: this,
+        content: '<div style="text-align: center;"><p>' + row.cells[0].text + '</p></div>' +
+          '<div class="font-icon" style="font-size: 50px; text-align: center;">' + icon.iconCharacter + '</div>' +
+          '<div style="text-align: center;"><p>' + row.cells[1].text + '</p></div>'
+      };
+      return scout.create('HtmlTile', model);
+    };
   }
 
   _createPropertiesBox(newColumn, parent) {

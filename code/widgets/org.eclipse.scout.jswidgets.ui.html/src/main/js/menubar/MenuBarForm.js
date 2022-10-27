@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
@@ -26,19 +26,19 @@ export default class MenuBarForm extends Form {
     super._init(model);
 
     let selectedMenuField = this.widget('SelectedMenuField');
-    selectedMenuField.on('propertyChange', this._onSelectedMenuFieldPropertyChange.bind(this));
+    selectedMenuField.on('propertyChange:value', event => this._updateSelectedMenu());
 
     let actionTargetField = this.widget('ActionTargetField');
-    actionTargetField.on('propertyChange', this._onActionTargetFieldPropertyChange.bind(this));
+    actionTargetField.on('propertyChange:value', event => this._updateActionTarget());
 
     let shrinkableField = this.widget('ShrinkableField');
-    shrinkableField.on('propertyChange', this._onShrinkableFieldPropertyChange.bind(this));
+    shrinkableField.on('propertyChange:value', event => this.currentMenu.setShrinkable(event.newValue));
 
     let stackableField = this.widget('StackableField');
-    stackableField.on('propertyChange', this._onStackableFieldPropertyChange.bind(this));
+    stackableField.on('propertyChange:value', event => this.currentMenu.setStackable(event.newValue));
 
     let subMenuVisibilityField = this.widget('SubMenuVisibilityField');
-    subMenuVisibilityField.on('propertyChange', this._onSubMenuVisibilityFieldPropertyChange.bind(this));
+    subMenuVisibilityField.on('propertyChange:value', event => this.currentMenu.setSubMenuVisibility(event.newValue));
 
     this.replaceMenu = this.widget('ReplaceMenu');
     this.replaceMenu.on('action', event => {
@@ -65,10 +65,10 @@ export default class MenuBarForm extends Form {
 
     menus.forEach(menu => {
       menu.on('action', this._onMenuAction.bind(this));
-      menu.on('propertyChange', this._onMenuPropertyChange.bind(this));
+      menu.on('propertyChange:text', event => this._fillSelectedMenuField());
       menu.visitChildMenus(menu => {
         menu.on('action', this._onMenuAction.bind(this));
-        menu.on('propertyChange', this._onMenuPropertyChange.bind(this));
+        menu.on('propertyChange:text', event => this._fillSelectedMenuField());
       });
     });
 
@@ -111,42 +111,6 @@ export default class MenuBarForm extends Form {
         message: this.session.text('MenuClickMessage', event.source.text)
       }
     }).show();
-  }
-
-  _onMenuPropertyChange(event) {
-    if (event.propertyName === 'text') {
-      this._fillSelectedMenuField();
-    }
-  }
-
-  _onShrinkableFieldPropertyChange(event) {
-    if (event.propertyName === 'value' && event.source.id === 'ShrinkableField') {
-      this.currentMenu.setShrinkable(event.newValue);
-    }
-  }
-
-  _onStackableFieldPropertyChange(event) {
-    if (event.propertyName === 'value' && event.source.id === 'StackableField') {
-      this.currentMenu.setStackable(event.newValue);
-    }
-  }
-
-  _onSubMenuVisibilityFieldPropertyChange(event) {
-    if (event.propertyName === 'value' && event.source.id === 'SubMenuVisibilityField') {
-      this.currentMenu.setSubMenuVisibility(event.newValue);
-    }
-  }
-
-  _onSelectedMenuFieldPropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this._updateSelectedMenu();
-    }
-  }
-
-  _onActionTargetFieldPropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this._updateActionTarget();
-    }
   }
 
   /**

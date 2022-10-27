@@ -32,10 +32,20 @@ export default class PopupForm extends Form {
     this.widget('OpenPopupButton').on('click', this._onOpenPopupButtonClick.bind(this));
 
     let useButtonAsAnchorField = this.widget('UseButtonAsAnchorField');
-    useButtonAsAnchorField.on('propertyChange', this._onUseButtonAsAnchorChange.bind(this));
+    useButtonAsAnchorField.on('propertyChange:value', event => {
+      if (!this.popup) {
+        return;
+      }
+
+      let $anchor = null;
+      if (this.widget('UseButtonAsAnchorField').value) {
+        $anchor = this.widget('OpenPopupButton').$field;
+      }
+      this.popup.set$Anchor($anchor);
+    });
 
     let anchorBoundsField = this.widget('AnchorBoundsField');
-    anchorBoundsField.on('propertyChange', this._onAnchorBoundsChange.bind(this));
+    anchorBoundsField.on('propertyChange', event => this._updateAnchor());
 
     let modalField = this.widget('ModalField');
     modalField.setValue(dummyPopup.modal);
@@ -51,31 +61,66 @@ export default class PopupForm extends Form {
 
     let horizontalAlignmentField = this.widget('HorizontalAlignmentField');
     horizontalAlignmentField.setValue(dummyPopup.horizontalAlignment);
-    horizontalAlignmentField.on('propertyChange', this._onHorizontalAlignmentPropertyChange.bind(this));
+    horizontalAlignmentField.on('propertyChange:value', event => {
+      if (!this.popup) {
+        return;
+      }
+      this.popup.setHorizontalAlignment(event.newValue);
+    });
 
     let verticalAlignmentField = this.widget('VerticalAlignmentField');
     verticalAlignmentField.setValue(dummyPopup.verticalAlignment);
-    verticalAlignmentField.on('propertyChange', this._onVerticalAlignmentPropertyChange.bind(this));
+    verticalAlignmentField.on('propertyChange:value', event => {
+      if (!this.popup) {
+        return;
+      }
+      this.popup.setVerticalAlignment(event.newValue);
+    });
 
     let horizontalSwitchField = this.widget('HorizontalSwitchField');
     horizontalSwitchField.setValue(dummyPopup.horizontalSwitch);
-    horizontalSwitchField.on('propertyChange', this._onHorizontalSwitchPropertyChange.bind(this));
+    horizontalSwitchField.on('propertyChange:value', event => {
+      if (!this.popup) {
+        return;
+      }
+      this.popup.setHorizontalSwitch(event.newValue);
+    });
 
     let verticalSwitchField = this.widget('VerticalSwitchField');
     verticalSwitchField.setValue(dummyPopup.verticalSwitch);
-    verticalSwitchField.on('propertyChange', this._onVerticalSwitchPropertyChange.bind(this));
+    verticalSwitchField.on('propertyChange:value', event => {
+      if (!this.popup) {
+        return;
+      }
+      this.popup.setVerticalSwitch(event.newValue);
+    });
 
     let trimWidthField = this.widget('TrimWidthField');
     trimWidthField.setValue(dummyPopup.trimWidth);
-    trimWidthField.on('propertyChange', this._onTrimWidthPropertyChange.bind(this));
+    trimWidthField.on('propertyChange:value', event => {
+      if (!this.popup) {
+        return;
+      }
+      this.popup.setTrimWidth(event.newValue);
+    });
 
     let trimHeightField = this.widget('TrimHeightField');
     trimHeightField.setValue(dummyPopup.trimHeight);
-    trimHeightField.on('propertyChange', this._onTrimHeightPropertyChange.bind(this));
+    trimHeightField.on('propertyChange:value', event => {
+      if (!this.popup) {
+        return;
+      }
+      this.popup.setTrimHeight(event.newValue);
+    });
 
     let withArrowField = this.widget('WithArrowField');
     withArrowField.setValue(dummyPopup.withArrow);
-    withArrowField.on('propertyChange', this._onWithArrowPropertyChange.bind(this));
+    withArrowField.on('propertyChange:value', event => {
+      if (!this.popup) {
+        return;
+      }
+      this.popup.setWithArrow(event.newValue);
+    });
 
     this.widget('WidgetPopupPropertiesBox').setField(dummyPopup);
 
@@ -136,20 +181,6 @@ export default class PopupForm extends Form {
     this.popup.open();
   }
 
-  _onUseButtonAsAnchorChange(event) {
-    if (event.propertyName === 'value' && this.popup) {
-      let $anchor = null;
-      if (this.widget('UseButtonAsAnchorField').value) {
-        $anchor = this.widget('OpenPopupButton').$field;
-      }
-      this.popup.set$Anchor($anchor);
-    }
-  }
-
-  _onAnchorBoundsChange(event) {
-    this._updateAnchor();
-  }
-
   _getAnchorBounds(event) {
     let anchorBoundsRaw = this.widget('AnchorBoundsField').value;
     if (anchorBoundsRaw) {
@@ -170,48 +201,6 @@ export default class PopupForm extends Form {
         this.$popupAnchor = this.session.$entryPoint.appendDiv('popup-anchor');
       }
       graphics.setBounds(this.$popupAnchor, anchorBounds);
-    }
-  }
-
-  _onHorizontalAlignmentPropertyChange(event) {
-    if (event.propertyName === 'value' && this.popup) {
-      this.popup.setHorizontalAlignment(event.newValue);
-    }
-  }
-
-  _onVerticalAlignmentPropertyChange(event) {
-    if (event.propertyName === 'value' && this.popup) {
-      this.popup.setVerticalAlignment(event.newValue);
-    }
-  }
-
-  _onHorizontalSwitchPropertyChange(event) {
-    if (event.propertyName === 'value' && this.popup) {
-      this.popup.setHorizontalSwitch(event.newValue);
-    }
-  }
-
-  _onTrimWidthPropertyChange(event) {
-    if (event.propertyName === 'value' && this.popup) {
-      this.popup.setTrimWidth(event.newValue);
-    }
-  }
-
-  _onTrimHeightPropertyChange(event) {
-    if (event.propertyName === 'value' && this.popup) {
-      this.popup.setTrimHeight(event.newValue);
-    }
-  }
-
-  _onVerticalSwitchPropertyChange(event) {
-    if (event.propertyName === 'value' && this.popup) {
-      this.popup.setVerticalSwitch(event.newValue);
-    }
-  }
-
-  _onWithArrowPropertyChange(event) {
-    if (event.propertyName === 'value' && this.popup) {
-      this.popup.setWithArrow(event.newValue);
     }
   }
 }

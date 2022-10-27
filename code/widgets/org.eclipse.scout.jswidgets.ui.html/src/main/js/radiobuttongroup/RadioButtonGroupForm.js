@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
@@ -26,16 +26,22 @@ export default class RadioButtonGroupForm extends Form {
     super._init(model);
 
     let group = this.widget('RadioButtonGroup');
-    group.on('propertyChange', this._onRadioButtonGroupPropertyChange.bind(this));
+    group.on('propertyChange:selectedButton', event => this.widget('SelectedButtonField').setValue(event.newValue));
+    group.on('propertyChange:gridColumnCount', event => this.widget('GridColumnCountField').setValue(event.newValue));
 
     let selectedButtonField = this.widget('SelectedButtonField');
     selectedButtonField.setLookupCall(new FormFieldLookupCall(group));
     selectedButtonField.setValue(group.selectedButton);
-    selectedButtonField.on('propertyChange', this._onSelectedButtonPropertyChange.bind(this));
+    selectedButtonField.on('propertyChange:value', event => this.widget('RadioButtonGroup').selectButton(event.newValue));
 
     let gridColumnCountField = this.widget('GridColumnCountField');
     gridColumnCountField.setValue(group.gridColumnCount);
-    gridColumnCountField.on('propertyChange', this._onGridColumnCountPropertyChange.bind(this));
+    gridColumnCountField.on('propertyChange:value', event => {
+      let newVal = event.newValue;
+      if (newVal > 0 || newVal === RadioButtonGroup.DEFAULT_GRID_COLUMN_COUNT) {
+        this.widget('RadioButtonGroup').setGridColumnCount(newVal);
+      }
+    });
 
     this.widget('ValueField').setEnabled(true);
     this.widget('ValueFieldPropertiesBox').parseValue = newValue => {
@@ -57,52 +63,7 @@ export default class RadioButtonGroupForm extends Form {
     let targetField = this.widget('Button.TargetField');
     targetField.setLookupCall(new FormFieldLookupCall(group));
     targetField.setValue(group.radioButtons[0]);
-    targetField.on('propertyChange', this._onTargetPropertyChange.bind(this));
-
-    let keyStrokeField = this.widget('Button.KeyStrokeField');
-    keyStrokeField.setValue(targetField.value.keyStroke);
-    keyStrokeField.on('propertyChange', this._onKeyStrokePropertyChange.bind(this));
-
-    let selectedField = this.widget('Button.SelectedField');
-    selectedField.setValue(targetField.value.selected);
-    selectedField.on('propertyChange', this._onSelectedPropertyChange.bind(this));
-
-    let wrapTextField = this.widget('Button.WrapTextField');
-    wrapTextField.setValue(targetField.value.wrapText);
-    wrapTextField.on('propertyChange', this._onWrapTextPropertyChange.bind(this));
-
-    this.widget('Button.PropertiesBox').setEnabled(!!targetField.value);
-    this.widget('Button.FormFieldPropertiesBox').setField(targetField.value);
-    this.widget('Button.FormFieldPropertiesBox').setEnabled(!!targetField.value);
-    this.widget('Button.GridDataBox').setField(targetField.value);
-    this.widget('Button.GridDataBox').setEnabled(!!targetField.value);
-  }
-
-  _onRadioButtonGroupPropertyChange(event) {
-    if (event.propertyName === 'selectedButton') {
-      this.widget('SelectedButtonField').setValue(event.newValue);
-    } else if (event.propertyName === 'gridColumnCount') {
-      this.widget('GridColumnCountField').setValue(event.newValue);
-    }
-  }
-
-  _onSelectedButtonPropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.widget('RadioButtonGroup').selectButton(event.newValue);
-    }
-  }
-
-  _onGridColumnCountPropertyChange(event) {
-    if (event.propertyName === 'value') {
-      let newVal = event.newValue;
-      if (newVal > 0 || newVal === RadioButtonGroup.DEFAULT_GRID_COLUMN_COUNT) {
-        this.widget('RadioButtonGroup').setGridColumnCount(newVal);
-      }
-    }
-  }
-
-  _onTargetPropertyChange(event) {
-    if (event.propertyName === 'value') {
+    targetField.on('propertyChange:value', event => {
       let button = event.newValue;
       if (button) {
         this.widget('Button.KeyStrokeField').setValue(button.keyStroke);
@@ -114,33 +75,39 @@ export default class RadioButtonGroupForm extends Form {
       this.widget('Button.FormFieldPropertiesBox').setEnabled(!!button);
       this.widget('Button.GridDataBox').setField(button);
       this.widget('Button.GridDataBox').setEnabled(!!button);
-    }
-  }
+    });
 
-  _onKeyStrokePropertyChange(event) {
-    if (event.propertyName === 'value') {
+    let keyStrokeField = this.widget('Button.KeyStrokeField');
+    keyStrokeField.setValue(targetField.value.keyStroke);
+    keyStrokeField.on('propertyChange:value', event => {
       let button = this.widget('Button.TargetField').value;
       if (button) {
         button.setKeyStroke(event.newValue);
       }
-    }
-  }
+    });
 
-  _onSelectedPropertyChange(event) {
-    if (event.propertyName === 'value') {
+    let selectedField = this.widget('Button.SelectedField');
+    selectedField.setValue(targetField.value.selected);
+    selectedField.on('propertyChange:value', event => {
       let button = this.widget('Button.TargetField').value;
       if (button) {
         button.setSelected(event.newValue);
       }
-    }
-  }
+    });
 
-  _onWrapTextPropertyChange(event) {
-    if (event.propertyName === 'value') {
+    let wrapTextField = this.widget('Button.WrapTextField');
+    wrapTextField.setValue(targetField.value.wrapText);
+    wrapTextField.on('propertyChange:value', event => {
       let button = this.widget('Button.TargetField').value;
       if (button) {
         button.setWrapText(event.newValue);
       }
-    }
+    });
+
+    this.widget('Button.PropertiesBox').setEnabled(!!targetField.value);
+    this.widget('Button.FormFieldPropertiesBox').setField(targetField.value);
+    this.widget('Button.FormFieldPropertiesBox').setEnabled(!!targetField.value);
+    this.widget('Button.GridDataBox').setField(targetField.value);
+    this.widget('Button.GridDataBox').setEnabled(!!targetField.value);
   }
 }

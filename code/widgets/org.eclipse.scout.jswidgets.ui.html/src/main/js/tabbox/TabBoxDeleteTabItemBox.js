@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
@@ -41,16 +41,10 @@ export default class TabBoxDeleteTabItemBox extends GroupBox {
 
     this.tabItemField = this.widget('DeleteTabItem.TabItem');
     this.tabItemField.lookupCall = new TabItemLookupCall(this.tabBox);
-    this.tabItemField.on('propertyChange', this._onTabItemFieldPropertyChange.bind(this));
+    this.tabItemField.on('propertyChange:value', event => this.deleteButton.setEnabled(!!event.newValue));
 
     this.deleteButton = this.widget('DeleteTabItem.DeleteButton');
     this.deleteButton.on('click', this._onDeleteTabItemButtonClick.bind(this));
-  }
-
-  _onTabItemFieldPropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.deleteButton.setEnabled(!!event.newValue);
-    }
   }
 
   _onDeleteTabItemButtonClick(event) {

@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
@@ -26,11 +26,11 @@ export default class LogicalGridLayoutConfigBox extends GroupBox {
     super._init(model);
 
     this._setField(this.field);
-    this.widget('HGapField').on('propertyChange', this._onPropertyChange.bind(this));
-    this.widget('VGapField').on('propertyChange', this._onPropertyChange.bind(this));
-    this.widget('RowHeightField').on('propertyChange', this._onPropertyChange.bind(this));
-    this.widget('ColumnWidthField').on('propertyChange', this._onPropertyChange.bind(this));
-    this.widget('MinWidthField').on('propertyChange', this._onPropertyChange.bind(this));
+    this.widget('HGapField').on('propertyChange:value', event => this._updateLayoutConfigByEvent(event));
+    this.widget('VGapField').on('propertyChange:value', event => this._updateLayoutConfigByEvent(event));
+    this.widget('RowHeightField').on('propertyChange:value', event => this._updateLayoutConfigByEvent(event));
+    this.widget('ColumnWidthField').on('propertyChange:value', event => this._updateLayoutConfigByEvent(event));
+    this.widget('MinWidthField').on('propertyChange:value', event => this._updateLayoutConfigByEvent(event));
   }
 
   setField(field) {
@@ -55,10 +55,7 @@ export default class LogicalGridLayoutConfigBox extends GroupBox {
     this.widget('MinWidthField').setValue(bodyLayout.minWidth);
   }
 
-  _onPropertyChange(event) {
-    if (event.propertyName !== 'value') {
-      return;
-    }
+  _updateLayoutConfigByEvent(event) {
     let layoutConfig = this.getLayoutConfig().clone();
     this._fillLayoutConfigByEvent(layoutConfig, event);
     this.setLayoutConfig(layoutConfig);

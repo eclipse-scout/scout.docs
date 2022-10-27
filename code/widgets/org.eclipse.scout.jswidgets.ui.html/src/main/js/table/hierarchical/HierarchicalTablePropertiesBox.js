@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
@@ -42,22 +42,10 @@ export default class HierarchicalTablePropertiesBox extends TablePropertiesBox {
 
     let hierarchicalStyleField = this.widget('HierarchicalStyleField');
     hierarchicalStyleField.setValue(this.table.hierarchicalStyle);
-    hierarchicalStyleField.on('propertyChange', this._onHierarchicalStylePropertyChange.bind(this));
+    hierarchicalStyleField.on('propertyChange:value', event => this.table.setHierarchicalStyle(event.newValue));
 
     let extendedHierarchyPaddingField = this.widget('ExtendedHierarchyPaddingField');
     extendedHierarchyPaddingField.setValue(this.table.cssClassAsArray().indexOf('extended-row-level-padding') > -1);
-    extendedHierarchyPaddingField.on('propertyChange', this._onExtendedHierarchyPaddingPropertyChange.bind(this));
-  }
-
-  _onHierarchicalStylePropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.table.setHierarchicalStyle(event.newValue);
-    }
-  }
-
-  _onExtendedHierarchyPaddingPropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.table.toggleCssClass('extended-row-level-padding', event.newValue);
-    }
+    extendedHierarchyPaddingField.on('propertyChange:value', event => this.table.toggleCssClass('extended-row-level-padding', event.newValue));
   }
 }

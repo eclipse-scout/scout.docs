@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
@@ -29,11 +29,11 @@ export default class FileChooserFieldForm extends Form {
 
     let acceptTypesField = this.widget('AcceptTypesField');
     acceptTypesField.setValue(fileChooserField.acceptTypes);
-    acceptTypesField.on('propertyChange', this._onAcceptTypesPropertyChange.bind(this));
+    acceptTypesField.on('propertyChange:value', event => this.widget('FileChooserField').setAcceptTypes(event.newValue));
 
     let maximumUploadSizeField = this.widget('MaximumUploadSizeField');
     maximumUploadSizeField.setValue(fileChooserField.maximumUploadSize);
-    maximumUploadSizeField.on('propertyChange', this._onMaximumUploadSizePropertyChange.bind(this));
+    maximumUploadSizeField.on('propertyChange:value', event => this.widget('FileChooserField').setMaximumUploadSize(event.newValue));
 
     this.widget('ValueFieldPropertiesBox').setField(fileChooserField);
     this.widget('FormFieldPropertiesBox').setField(fileChooserField);
@@ -41,17 +41,5 @@ export default class FileChooserFieldForm extends Form {
     this.widget('WidgetActionsBox').setField(fileChooserField);
     this.widget('FormFieldActionsBox').setField(fileChooserField);
     this.widget('EventsTab').setField(fileChooserField);
-  }
-
-  _onAcceptTypesPropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.widget('FileChooserField').setAcceptTypes(event.newValue);
-    }
-  }
-
-  _onMaximumUploadSizePropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.widget('FileChooserField').setMaximumUploadSize(event.newValue);
-    }
   }
 }

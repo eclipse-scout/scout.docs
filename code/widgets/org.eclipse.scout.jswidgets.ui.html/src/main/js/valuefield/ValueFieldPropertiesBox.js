@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
@@ -39,44 +39,27 @@ export default class ValueFieldPropertiesBox extends GroupBox {
     if (!this.field) {
       return;
     }
-    this.field.on('propertyChange', this._onFieldPropertyChange.bind(this));
+    this.field.on('propertyChange:value', event => this.widget('ValueField').setValue(event.newValue));
+    this.field.on('propertyChange:displayText', event => this.widget('DisplayTextField').setValue(event.newValue));
 
     let valueField = this.widget('ValueField');
     valueField.setValue(this.field.value);
     if (valueField.enabled) {
-      valueField.on('propertyChange', this._onPropertyChange.bind(this));
+      valueField.on('propertyChange:value', event => this.field.setValue(this.parseValue(event.newValue)));
     }
 
     let displayTextField = this.widget('DisplayTextField');
     displayTextField.setValue(this.field.displayText);
     if (displayTextField.enabled) {
-      displayTextField.on('propertyChange', this._onPropertyChange.bind(this));
+      displayTextField.on('propertyChange:value', event => this.field.setDisplayText(event.newValue));
     }
 
     let clearableField = this.widget('ClearableField');
     clearableField.setValue(this.field.clearable);
-    clearableField.on('propertyChange', this._onPropertyChange.bind(this));
-  }
-
-  _onFieldPropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.widget('ValueField').setValue(event.newValue);
-    } else if (event.propertyName === 'displayText') {
-      this.widget('DisplayTextField').setValue(event.newValue);
-    }
+    clearableField.on('propertyChange:value', event => this.field.setClearable(event.newValue));
   }
 
   parseValue(newValue) {
     return newValue;
-  }
-
-  _onPropertyChange(event) {
-    if (event.propertyName === 'value' && event.source.id === 'ValueField') {
-      this.field.setValue(this.parseValue(event.newValue));
-    } else if (event.propertyName === 'value' && event.source.id === 'DisplayTextField') {
-      this.field.setDisplayText(event.newValue);
-    } else if (event.propertyName === 'value' && event.source.id === 'ClearableField') {
-      this.field.setClearable(event.newValue);
-    }
   }
 }

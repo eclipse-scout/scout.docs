@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
@@ -29,15 +29,15 @@ export default class FileChooserButtonForm extends Form {
 
     let acceptTypesField = this.widget('AcceptTypesField');
     acceptTypesField.setValue(fileChooserButton.acceptTypes);
-    acceptTypesField.on('propertyChange', this._onAcceptTypesPropertyChange.bind(this));
+    acceptTypesField.on('propertyChange:value', event => this.widget('FileChooserButton').setAcceptTypes(event.newValue));
 
     let maximumUploadSizeField = this.widget('MaximumUploadSizeField');
     maximumUploadSizeField.setValue(fileChooserButton.maximumUploadSize);
-    maximumUploadSizeField.on('propertyChange', this._onMaximumUploadSizePropertyChange.bind(this));
+    maximumUploadSizeField.on('propertyChange:value', event => this.widget('FileChooserButton').setMaximumUploadSize(event.newValue));
 
     let iconIdField = this.widget('IconIdField');
     iconIdField.setValue(fileChooserButton.iconId);
-    iconIdField.on('propertyChange', this._onIconIdPropertyChange.bind(this));
+    iconIdField.on('propertyChange:value', event => this.widget('FileChooserButton').setIconId(event.newValue));
 
     this.widget('ValueFieldPropertiesBox').setField(fileChooserButton);
     this.widget('FormFieldPropertiesBox').setField(fileChooserButton);
@@ -45,23 +45,5 @@ export default class FileChooserButtonForm extends Form {
     this.widget('WidgetActionsBox').setField(fileChooserButton);
     this.widget('FormFieldActionsBox').setField(fileChooserButton);
     this.widget('EventsTab').setField(fileChooserButton);
-  }
-
-  _onAcceptTypesPropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.widget('FileChooserButton').setAcceptTypes(event.newValue);
-    }
-  }
-
-  _onMaximumUploadSizePropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.widget('FileChooserButton').setMaximumUploadSize(event.newValue);
-    }
-  }
-
-  _onIconIdPropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.widget('FileChooserButton').setIconId(event.newValue);
-    }
   }
 }

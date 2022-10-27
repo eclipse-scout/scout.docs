@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2021 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
@@ -40,50 +40,26 @@ export default class TreePropertiesBox extends GroupBox {
 
     let autoCheckChildrenField = this.widget('AutoCheckChildrenField');
     autoCheckChildrenField.setValue(this.tree.autoResizeColumns);
-    autoCheckChildrenField.on('propertyChange', this._onAutoCheckChildrenPropertyChange.bind(this));
+    autoCheckChildrenField.on('propertyChange:value', event => {
+      this.tree.autoCheckChildren = event.newValue;
+    });
 
     let checkableField = this.widget('CheckableField');
     checkableField.setValue(this.tree.checkable);
-    checkableField.on('propertyChange', this._onCheckablePropertyChange.bind(this));
+    checkableField.on('propertyChange:value', event => this.tree.setCheckable(event.newValue));
 
     let multiCheckField = this.widget('MultiCheckField');
     multiCheckField.setValue(this.tree.multiCheck);
-    multiCheckField.on('propertyChange', this._onMultiCheckPropertyChange.bind(this));
+    multiCheckField.on('propertyChange:value', event => {
+      this.tree.multiCheck = event.newValue;
+    });
 
     let textFilterEnabledField = this.widget('TextFilterEnabledField');
     textFilterEnabledField.setValue(this.tree.textFilterEnabled);
-    textFilterEnabledField.on('propertyChange:value', this._onTextFilterEnabledValueChange.bind(this));
+    textFilterEnabledField.on('propertyChange:value', event => this.tree.setTextFilterEnabled(event.newValue));
 
     let checkableStyleField = this.widget('CheckableStyleField');
     checkableStyleField.setValue(this.tree.checkableStyle);
-    checkableStyleField.on('propertyChange', this._onCheckableStylePropertyChange.bind(this));
-  }
-
-  _onAutoCheckChildrenPropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.tree.autoCheckChildren = event.newValue;
-    }
-  }
-
-  _onCheckablePropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.tree.setCheckable(event.newValue);
-    }
-  }
-
-  _onMultiCheckPropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.tree.multiCheck = event.newValue;
-    }
-  }
-
-  _onTextFilterEnabledValueChange(event) {
-    this.tree.setTextFilterEnabled(event.newValue);
-  }
-
-  _onCheckableStylePropertyChange(event) {
-    if (event.propertyName === 'value') {
-      this.tree.setCheckableStyle(event.newValue);
-    }
+    checkableStyleField.on('propertyChange:value', event => this.tree.setCheckableStyle(event.newValue));
   }
 }

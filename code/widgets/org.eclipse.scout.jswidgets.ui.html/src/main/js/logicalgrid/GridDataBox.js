@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
@@ -33,20 +33,20 @@ export default class GridDataBox extends GroupBox {
       return;
     }
 
-    this.widget('WField').on('propertyChange', this._onPropertyChange.bind(this));
-    this.widget('HField').on('propertyChange', this._onPropertyChange.bind(this));
-    this.widget('XField').on('propertyChange', this._onPropertyChange.bind(this));
-    this.widget('YField').on('propertyChange', this._onPropertyChange.bind(this));
-    this.widget('WeightXField').on('propertyChange', this._onPropertyChange.bind(this));
-    this.widget('WeightYField').on('propertyChange', this._onPropertyChange.bind(this));
-    this.widget('UseUiWidthField').on('propertyChange', this._onPropertyChange.bind(this));
-    this.widget('UseUiHeightField').on('propertyChange', this._onPropertyChange.bind(this));
-    this.widget('HorizontalAlignmentField').on('propertyChange', this._onPropertyChange.bind(this));
-    this.widget('VerticalAlignmentField').on('propertyChange', this._onPropertyChange.bind(this));
-    this.widget('FillHorizontalField').on('propertyChange', this._onPropertyChange.bind(this));
-    this.widget('FillVerticalField').on('propertyChange', this._onPropertyChange.bind(this));
-    this.widget('WidthInPixelField').on('propertyChange', this._onPropertyChange.bind(this));
-    this.widget('HeightInPixelField').on('propertyChange', this._onPropertyChange.bind(this));
+    this.widget('WField').on('propertyChange:value', event => this._updateGridDataByEvent(event));
+    this.widget('HField').on('propertyChange:value', event => this._updateGridDataByEvent(event));
+    this.widget('XField').on('propertyChange:value', event => this._updateGridDataByEvent(event));
+    this.widget('YField').on('propertyChange:value', event => this._updateGridDataByEvent(event));
+    this.widget('WeightXField').on('propertyChange:value', event => this._updateGridDataByEvent(event));
+    this.widget('WeightYField').on('propertyChange:value', event => this._updateGridDataByEvent(event));
+    this.widget('UseUiWidthField').on('propertyChange:value', event => this._updateGridDataByEvent(event));
+    this.widget('UseUiHeightField').on('propertyChange:value', event => this._updateGridDataByEvent(event));
+    this.widget('HorizontalAlignmentField').on('propertyChange:value', event => this._updateGridDataByEvent(event));
+    this.widget('VerticalAlignmentField').on('propertyChange:value', event => this._updateGridDataByEvent(event));
+    this.widget('FillHorizontalField').on('propertyChange:value', event => this._updateGridDataByEvent(event));
+    this.widget('FillVerticalField').on('propertyChange:value', event => this._updateGridDataByEvent(event));
+    this.widget('WidthInPixelField').on('propertyChange:value', event => this._updateGridDataByEvent(event));
+    this.widget('HeightInPixelField').on('propertyChange:value', event => this._updateGridDataByEvent(event));
   }
 
   setField(field) {
@@ -82,11 +82,13 @@ export default class GridDataBox extends GroupBox {
     this.widget('HeightInPixelField').setValue(gridData.heightInPixel);
   }
 
-  _onPropertyChange(event) {
-    if (event.propertyName !== 'value') {
-      return;
-    }
+  _updateGridDataByEvent(event) {
     let gridData = new GridData(this.field.gridDataHints);
+    this._fillGridDataByEvent(gridData, event);
+    this.field.setGridDataHints(gridData);
+  }
+
+  _fillGridDataByEvent(gridData, event) {
     if (event.source.id === 'WField') {
       gridData.w = event.newValue;
     } else if (event.source.id === 'HField') {
@@ -116,6 +118,5 @@ export default class GridDataBox extends GroupBox {
     } else if (event.source.id === 'HeightInPixelField') {
       gridData.heightInPixel = event.newValue;
     }
-    this.field.setGridDataHints(gridData);
   }
 }
