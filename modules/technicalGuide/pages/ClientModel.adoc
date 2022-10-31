@@ -1,5 +1,7 @@
 = Client Model
 
+include::common:partial$Init.adoc[]
+
 == Desktop
 
 === Desktop Bench Layout

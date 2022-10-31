@@ -1,4 +1,7 @@
 [[cha-rest]]
+
+include::common:partial$Init.adoc[]
+
 = REST
 
 == REST Resource Conventions

@@ -1,5 +1,7 @@
 = Adding a Form to Create/Edit Persons
 
+include::common:partial$Init.adoc[]
+
 In this tutorial step we add the Scout forms that are used to create and edit persons and organizations in the user interface.
 This tutorial step also provides an introduction into the design and implementation of complex form layouts with the Scout framework.
 

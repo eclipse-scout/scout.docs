@@ -1,5 +1,7 @@
 = How-Tos
 
+include::common:partial$Init.adoc[]
+
 This chapter provides various small technical guides to very specific Scout JS subjects.
 
 include::partial$FlipCard-HowTo.adoc[]

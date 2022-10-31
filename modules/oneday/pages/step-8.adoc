@@ -1,5 +1,7 @@
 = Additional Concepts and Features
 
+include::common:partial$Init.adoc[]
+
 This last part of the "Contacts" tutorial discusses the gap between the tutorial application and the complete "Contacts" demo application.
 In a number of aspects the full "Contacts" demo application comes with additional features and improvements over the functionality of its tutorial version.
 

@@ -1,5 +1,7 @@
 = Linking Organizations and Persons
 
+include::common:partial$Init.adoc[]
+
 In this step we modify the user interface to represent the 1:n relationship between organizations and persons.
 For the implementation of this 1:n relation we follow the Scout standard pattern.
 

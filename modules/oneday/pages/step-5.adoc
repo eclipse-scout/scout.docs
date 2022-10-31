@@ -1,5 +1,7 @@
 = Form Field Validation and Template Fields
 
+include::common:partial$Init.adoc[]
+
 This tutorial step introduces two additional concepts that are used in most Scout applications.
 Form field validation and template fields.
 Form field validation helps to keep data quality high and template fields are used to increase the code quality of a Scout application.

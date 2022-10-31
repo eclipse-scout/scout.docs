@@ -1,4 +1,7 @@
 = Working with exceptions
+
+include::common:partial$Init.adoc[]
+
 Exceptions can be logged via SLF4J Logger, or given to exception handler for centralized, consistent exception handling, or translated into other exceptions. Scout provides some few exceptions/errors, which are used by the framework.
 
 == Scout Throwables

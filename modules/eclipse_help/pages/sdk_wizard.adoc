@@ -1,6 +1,6 @@
 = Scout Wizards
 
-:experimental:
+include::common:partial$Init.adoc[]
 
 The Scout SDK provides a set of wizards to create new Scout projects and various components for your Scout applications.
 

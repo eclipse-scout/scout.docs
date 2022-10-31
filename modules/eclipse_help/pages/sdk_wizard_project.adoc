@@ -1,8 +1,8 @@
 [#new-scout-project-wizard]
+
 ==== New Scout Project Wizard
 
-:experimental:
-
+include::common:partial$Init.adoc[]
 include::sdk:partial$SdkWizardProject.adoc[]
 
 '''

@@ -1,4 +1,7 @@
 = JobManager
+
+include::common:partial$Init.adoc[]
+
 Scout provides a job manager based on Java Executors framework to run tasks in parallel, and on Quartz Trigger API to support for schedule plans and to compute firing times. A task (aka job) can be scheduled to commence execution either immediately upon being scheduled, or delayed some time in the future. A job can be single executing, or recurring based on some schedule plan. The job manager itself is implemented as an application scoped bean, meaning that it is a singleton which exists once in the web application.
 
 == Functionality

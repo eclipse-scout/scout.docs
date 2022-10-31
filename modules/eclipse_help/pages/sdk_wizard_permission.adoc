@@ -1,6 +1,6 @@
 = New Permission Wizard
 
-:experimental:
+include::common:partial$Init.adoc[]
 
 The _New Scout Permission_ wizard can be used to create a new permission classes.
 To start the wizard use menu:File[New,Other...] or press kbd:[Ctrl,N] as described in section <<sdk_wizard.adoc#scout-wizards, Scout Wizards>>.

@@ -1,5 +1,7 @@
 = Creating and Accessing the Database
 
+include::common:partial$Init.adoc[]
+
 This tutorial step shows how Scout applications can interact with databases via JDBC.
 Due to the clean layering implemented in the "Contacts" application only the Scout backend server connects to the database.
 We therefore focus on the Scout backend in this part of the tutorial.

@@ -1,5 +1,7 @@
 = Setting up the Initial Project
 
+include::common:partial$Init.adoc[]
+
 This section deals with setting up the initial workspace and code base for the "Contacts" application.
 
 == Creating the initial Codebase

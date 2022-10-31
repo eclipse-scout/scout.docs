@@ -1,5 +1,7 @@
 = Lookup Call
 
+include::common:partial$Init.adoc[]
+
 Lookup calls are mainly used by SmartFields and SmartColumns to look up single or multiple LookupRows.
 
 Class: `LookupCall`

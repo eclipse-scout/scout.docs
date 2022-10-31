@@ -1,5 +1,7 @@
 = Security
 
+include::common:partial$Init.adoc[]
+
 == Default HTTP Response Headers
 
 All Scout HTTP servlets delegate to a central authority to append HTTP response headers. This is the bean `HttpServletControl`.

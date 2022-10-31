@@ -1,7 +1,5 @@
 == NLS Editor
 
-:experimental:
-
 include::common:partial$Init.adoc[]
 
 The NLS Editor allows to edit the different properties files containing the translated text entries.

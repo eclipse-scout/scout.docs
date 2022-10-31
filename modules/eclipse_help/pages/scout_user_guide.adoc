@@ -1,5 +1,7 @@
 = Eclipse Scout User Guide
 
+include::common:partial$Init.adoc[]
+
 This guide gets you through the "`Hello World`" Eclipse Scout application and shows you how to import the Scout demo application into your Eclipse IDE.
 In the second part, the Scout tooling available in the Eclipse IDE is described.
 

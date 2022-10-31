@@ -1,4 +1,7 @@
 = RunContext
+
+include::common:partial$Init.adoc[]
+
 Mostly, code is run on behalf of some semantic context, for example as a particular `Subject` and with some context related `ThreadLocals` set, e.g. the user's `session` and its `Locale`. Scout provides you with different `RunContexts`, such as `ClientRunContext` or `ServerRunContext`. They all share some common characteristics like `Subject`, `Locale` and `RunMonitor`, but also provide some additional functionality like transaction boundaries if using `ServerRunContext`. Also, a `RunContext` facilitates propagation of state among different threads. In order to ease readability, the 'setter-methods' of the `RunContext` support method chaining.
 
 All a `RunContext` does is to provide some setter methods to construct the context, and a `run` and `call` method to run an action on behalf of that context. Thereby, the only difference among those two methods is their argument. Whereas `run` takes a `IRunnable` instance, `call` takes a `Callable` to additionally return a result to the caller. The action is run in the current thread, meaning that the  caller is blocked until completion.

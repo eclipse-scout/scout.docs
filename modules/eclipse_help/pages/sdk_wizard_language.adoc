@@ -1,6 +1,6 @@
 = Add a Language Wizard
 
-:experimental:
+include::common:partial$Init.adoc[]
 
 The _Add a Language_ wizard can be used to create additional translation files in order to localize the user interface.
 It can be started from the <<sdk_editor_nls.adoc#nls-editor, The NLS Editor>>.

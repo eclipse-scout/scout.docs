@@ -1,5 +1,7 @@
 = Browser Support
 
+include::common:partial$Init.adoc[]
+
 The Scout HTML UI requires a web browser with modern built-in technologies: HTML 5, CSS 3, JavaScript (ECMAScript 5). Scout does its best to support all browsers widely in use today by making use of vendor-specific prefixes, polyfills or other workarounds. However, some older or obscure browsers are not supported deliberately, simply because they are lacking basic capabilities or the required effort would be beyond reason.
 
 Here is a non-exhaustive list of supported browsers:

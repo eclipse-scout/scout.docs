@@ -1,6 +1,6 @@
 = Scout Tooling
 
-:experimental:
+include::common:partial$Init.adoc[]
 
 The Eclipse Scout package also includes Scout specific tooling, the Scout SDK that is available for the Eclipse IDE.
 

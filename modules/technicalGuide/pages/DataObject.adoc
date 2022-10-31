@@ -1,5 +1,7 @@
 = Data Objects
 
+include::common:partial$Init.adoc[]
+
 Data objects are Scout beans, which are used as data transfer objects for synchronous REST and asynchronous MOM interfaces.
 Furthermore, they can be used as domain objects within business logic.
 

@@ -1,5 +1,7 @@
 = Eclipse Scout Technical Guide
 
+include::common:partial$Init.adoc[]
+
 NOTE: Looking for something else? Visit https://eclipsescout.github.io for all Scout related documentation.
 
 This technical guide documents the Scout architecture and describes important concepts used in Scout.

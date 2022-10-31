@@ -1,5 +1,7 @@
 = Build Scout App and Deploy to Tomcat
 
+include::common:partial$Init.adoc[]
+
 NOTE: Looking for something else? Visit https://eclipsescout.github.io for all Scout related documentation.
 
 At some point during the application development you will want to install your software on a machine that is intended for productive use.

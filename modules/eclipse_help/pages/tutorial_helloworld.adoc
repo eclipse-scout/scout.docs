@@ -1,6 +1,6 @@
 = Hello World Tutorial
 
-:experimental:
+include::common:partial$Init.adoc[]
 
 With this tutorial you will learn how to create your first Scout application.
 

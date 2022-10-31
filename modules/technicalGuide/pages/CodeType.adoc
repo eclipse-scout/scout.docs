@@ -1,5 +1,7 @@
 = Code Type
 
+include::common:partial$Init.adoc[]
+
 A CodeType is a structure to represent a tree key-code association. They are used in SmartField and SmartColumn.
 
 * implements: `ICodeType<T>`

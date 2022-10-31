@@ -1,5 +1,7 @@
 = Mobile Support
 
+include::common:partial$Init.adoc[]
+
 [[img-mobile-support]]
 .Scout apps run on desktops, tablets and mobile phones
 image::common:multi_device.png[]

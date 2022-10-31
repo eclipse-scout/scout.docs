@@ -1,5 +1,7 @@
 = Adding the Company Form
 
+include::common:partial$Init.adoc[]
+
 This section describes the implementation of the organization form.
 For the implementation of the organization form we can apply many of the concepts we have learned in the previous sections.
 As a result, the descriptions of this section can be kept on a much higher level.

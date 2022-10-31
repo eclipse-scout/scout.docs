@@ -1,3 +1,13 @@
+:experimental:
+
+// https://docs.asciidoctor.org/asciidoc/latest/sections/section-ref/#section-attributes
+:idprefix:
+:idseparator: -
+
+// https://docs.asciidoctor.org/asciidoc/latest/macros/xref-text-and-style/#cross-reference-styles
+:listing-caption: Listing
+:xrefstyle: short
+
 // Names
 :sdk_wizard_nls-entry: New Text Entry Wizard
 :sdk_wizard_language: Add a Language Wizard

@@ -1,4 +1,7 @@
 = Manual Installation
+
+include::common:partial$Init.adoc[]
+
 == Prerequisites
 
 Before you can install the Scout SDK make sure that you have a working Java Development Kit (JDK) installation version 11 or 17.

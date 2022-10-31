@@ -1,5 +1,7 @@
 = Extensibility
 
+include::common:partial$Init.adoc[]
+
 NOTE: Required version: The API described here requires Scout version 4.2 or newer.
 
 == Overview

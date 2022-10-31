@@ -1,6 +1,6 @@
 === Additions to the Java Editor
 
-:experimental:
+include::common:partial$Init.adoc[]
 
 Scout uses the standard Java Editor of the Eclipse IDE.
 To ease the development, the Scout SDK provides additional features for the Java Editor.

@@ -1,5 +1,7 @@
 = Icons
 
+include::common:partial$Init.adoc[]
+
 A lot of Scout widgets support icons. For instance a menu item can show an icon
 next to the menu text. Icons in Scout can be either a bitmap image (GIF, PNG,
 JPEG, etc.), an SVG or a character from an icon-font. An example for an icon-font is

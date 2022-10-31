@@ -1,8 +1,8 @@
 [#new-page-wizard]
+
 ==== New Page Wizard
 
-:experimental:
-
+include::common:partial$Init.adoc[]
 include::sdk:partial$SdkWizardPage.adoc[]
 
 '''

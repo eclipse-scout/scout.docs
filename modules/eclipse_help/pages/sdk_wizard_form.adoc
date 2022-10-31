@@ -1,8 +1,8 @@
 [#new-form-wizard]
+
 ==== New Form Wizard
 
-:experimental:
-
+include::common:partial$Init.adoc[]
 include::sdk:partial$SdkWizardForm.adoc[]
 
 '''

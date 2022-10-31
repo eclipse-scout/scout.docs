@@ -1,4 +1,7 @@
 = SmtpHelper
+
+include::common:partial$Init.adoc[]
+
 The `org.eclipse.scout.rt.mail.smtp.SmtpHelper` is an `@ApplicationScoped` Bean that provides means of sending emails described by `javax.mail.internet.MimeMessage` objects via SMTP.
 The SMTP connection can either be provided as a `org.eclipse.scout.rt.mail.smtp.SmtpServerConfig` object containing all the required connection parameters or as an already created `javax.mail.Session` object.
 The `SmtpHelper` also supports pooling of SMTP connections as described in the section <<connection-pooling-chapter>>.

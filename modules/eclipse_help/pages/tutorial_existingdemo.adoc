@@ -1,6 +1,6 @@
 = Import the Scout Demo Applications
 
-:experimental:
+include::common:partial$Init.adoc[]
 
 With this tutorial you will learn how to import the Scout Demo applications into your workspace.
 The tutorial consists of the following two parts:

@@ -1,5 +1,7 @@
 = Client Notifications
 
+include::common:partial$Init.adoc[]
+
 In a scout application, typically, the scout client requests some data from the scout server. Sometimes, however, the communication needs go the other way:
 The scout server needs to inform the scout client about something.
 With client notifications it is possible to do so.

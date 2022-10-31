@@ -1,5 +1,7 @@
 = Adding the Person and Organization Page
 
+include::common:partial$Init.adoc[]
+
 In the second step of the Scout tutorial the components to display persons and organizations are added to the "Contacts" outline of the user interface of the Scout application.
 Specifically, a "Persons" page and an "Organizations" page are created and added to the navigation tree of the "Contacts" outline.
 

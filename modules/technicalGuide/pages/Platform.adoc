@@ -1,5 +1,7 @@
 = Scout Platform
 
+include::common:partial$Init.adoc[]
+
 Scout contains a platform which provides basic functionality required by many software applications. The following list gives some examples for which tasks the platform is responsible for:
 
 * <<sec-app.lifecycle,Application Lifecycle Management>>
