@@ -652,3 +652,9 @@ the keystroke is now only active if the widget and every parent widget is enable
 Previously, the state of the parents was ignored, which was inconsistent.
 If your keystroke should be active even if the widget is disabled, you can set `inheritAccessibility = false` on your keystroke.
 For more details, see https://github.com/eclipse-scout/scout.rt/commit/91f8465564e718702920a28edbb559041cfeb752
+
+== Removal of ApplicationScoped annotation to support multiple instances of BearerAuthAccessController (since 22.0.35)
+
+If you are implementing one of the interfaces `ITokenVerifier` or `ITokenPrincipalProducer`, you must add either the `@ApplicationScope` or `@Bean` annotation to your implementation class.
+Previously, the interfaces itself were annotated with `@ApplicationScope`, which is too strict.
+This prevents having multiple instances of BearerAuthAccessController with different configurations/states of an `ITokenVerifier` or `ITokenPrincipalProducer`.
