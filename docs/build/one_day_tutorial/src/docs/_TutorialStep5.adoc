@@ -135,8 +135,7 @@ We are now ready to implement the template field class according to the followin
 
 . Navigate to the client module of the "Contacts" application
 . Select package `org.eclipse.scout.contacts.client.common` in folder `src/main/java`
-. Create class `AbstractUrlImageField` using kbd:[Ctrl+N]
-. Update the implementation according to <<lst-contacts_refactor_picture>>
+. Create a new Java class called `AbstractUrlImageField` and update the implementation according to <<lst-contacts_refactor_picture>>
 
 [[lst-contacts_refactor_picture]]
 [source,java]
@@ -175,15 +174,19 @@ This process remains the same for refactoring container fields into template fie
 === Adding a simple URL Input Form to the Picture Field
 
 Using the refactored picture template field we want the user to be able to enter and update the URL of the shown picture.
-For this we add a simple form with a single field and a context menu to the picture template field using the Scout new form wizard as shown in <<img-sdk_new_form_pictureurl>>.
 
-* Verify that you use the correct source folder and package name.
-* In the [element]_Name_ field enter "PictureUrl".
-* In section [element]_Additional Components_ deselect all checkboxes.
-* Click btn:[Finish] to let the wizard implement the form.
+* We create a new form called `PictureUrl` as we've done before as shown in <<img-sdk_new_form_pictureurl_Intellij>> (IntelliJ) or <<img-sdk_new_form_pictureurl>> (Eclipse).
+* For Eclipse:
+** Verify that you use the correct source folder and package name.
+** In the [element]_Name_ field enter "PictureUrl".
+** In section [element]_Additional Components_ deselect all checkboxes.
+** Click btn:[Finish] to let the wizard implement the form.
 
+[[img-sdk_new_form_pictureurl_Intellij]]
+.Creating the picture URL form with the new form wizard in IntelliJ.
+image::{imgsdir}/sdk_new_form_pictureurl_Intellij.png[]
 [[img-sdk_new_form_pictureurl]]
-.Creating the picture URL form with the new form wizard.
+.Creating the picture URL form with the new form wizard in Eclipse.
 image::{imgsdir}/sdk_new_form_pictureurl.png[]
 
 Now adapt the content of the URL form according to <<lst-contacts_form_pictureurl>>.

@@ -17,31 +17,36 @@ This first step of the "Contacts" tutorial ends with a review of the results of 
 [[sec-contacts_initial_codebase]]
 === Creating the initial Codebase
 
-In case your workspace contains modules from the "`Hello World`" tutorial, you may want to multi-select them and to either close them by invoking the context menu "`Close Projects`" or to delete them by invoking the context menu "`Delete`".
+If you are using Eclipse and your workspace contains modules from the "`Hello World`" tutorial, you may want to multi-select them and to either close them by invoking the context menu "`Close Projects`" or to delete them by invoking the context menu "`Delete`".
 The initial code for the "`Contacts`" application is then generated using the [wizard]_New Scout Project_ wizard.
-For the wizard fields you may use the values below and as shown in <<img-sdk_new_project_tutorial>>
+For the wizard fields you may use the values below and as shown in <<img-sdk_new_project_tutorial_Intellij>> (IntelliJ) and <<img-sdk_new_project_tutorial>> (Eclipse).
 
 * [field]_Group Id_: `org.eclipse.scout`
 * [field]_Artifact Id_: `contacts`
 * [field]_Display Name_: "Contacts Application"
 
-
+[[img-sdk_new_project_tutorial_Intellij]]
+.The creation of the initial "Contacts" application in IntelliJ.
+image::{imgsdir}/sdk_new_project_tutorial_Intellij.png[]
 [[img-sdk_new_project_tutorial]]
-.The creation of the initial "Contacts" application.
+.The creation of the initial "Contacts" application in Eclipse.
 image::{imgsdir}/sdk_new_project_tutorial.png[]
 
-To create this initial application click on btn:[Finish].
-The project wizard then creates a number of Maven modules as shown in <<img-contacts_package_explorer>>.
+To create this initial application click on btn:[Next/Finish].
+The project wizard then creates a number of Maven modules as shown in <<img-contacts_package_explorer_Intellij>> (IntelliJ) and <<img-contacts_package_explorer>> (Eclipse).
 
+[[img-contacts_package_explorer_Intellij]]
+.The package explorer with the initial Maven modules created for the "Contacts" application in IntelliJ.
+image::{imgsdir}/app_contacts_package_explorer_initial_Intellij.png[]
 [[img-contacts_package_explorer]]
-.The package explorer with the initial Maven modules created for the "Contacts" application.
+.The package explorer with the initial Maven modules created for the "Contacts" application in Eclipse.
 image::{imgsdir}/app_contacts_package_explorer_initial.png[]
 
 [[sec-contacts_remove_stuff]]
 === Removing unnecessary Components
 
 We start with removing the `\*.helloworld` and `\*.settings` packages in all Maven modules of the "Contacts" application.
-To delete packages, first select an individual package or packages in the Eclipse package explorer as shown in <<img-contacts_package_explorer>> and then hit the kbd:[Delete] key.
+To delete packages, first select an individual package or packages in the package explorer as shown in <<img-contacts_package_explorer>> (IntelliJ) and <<img-contacts_package_explorer>> (Eclipse) and then hit the kbd:[Delete] key.
 
 The packages to delete is provided per Maven module in the list below.
 
@@ -78,54 +83,57 @@ For this, we perform the following modifications to class `WorkOutline`.
 * Change the outline title to "Contacts"
 * Change the outline icon to `Icons.Folder`
 
-To quickly find class `WorkOutline` we first open the [wizard]_Open Type_ dialog from the Eclipse IDE by hitting kbd:[Ctrl+Shift+T] and enter "workoutline" into the search field as shown in <<img-eclipse_open_type>>.
-In the result list, we select the desired class and click the btn:[OK] button to open the file `WorkOutline.java` in the Java editor of the Eclipse IDE.
+To quickly find the class `WorkOutline` we first open the [wizard]_Open Type_ dialog by hitting kbd:[Ctrl+Shift+N] in IntelliJ or kbd:[Ctrl+Shift+T] in Eclipse and enter "workoutline" into the search field as shown in <<img-eclipse_open_type_Intellij>> (IntelliJ) and <<img-eclipse_open_type>> (Eclipse).
+In the result list, we select the desired class and click the btn:[OK] button to open the file `WorkOutline.java` in the Java editor of your IDE.
 
+[[img-eclipse_open_type_Intellij]]
+.Use the Open Type dialog to quickly find java types in IntelliJ.
+image::{imgsdir}/eclipse_open_type_Intellij.png[]
 [[img-eclipse_open_type]]
-.Use the Open Type dialog to quickly find java types in the Eclipse IDE.
+.Use the Open Type dialog to quickly find java types in Eclipse.
 image::{imgsdir}/eclipse_open_type.png[]
 
 We start with the package rename.
-To rename the package `org.eclipse.scout.contacts.client.work` to `org.eclipse.scout.contacts.client.contact` click into the word "work" of the package name and hit kbd:[Alt+Shift+R].
-This opens the package rename dialog as shown in <<img-sdk_rename_package>> where we replace "work" by "contact" in the [element]_New name_ field.
-After pressing the btn:[Ok] button Eclipse informs the programmer that the code modification may not be accurate as the resource has compile errors.
+To rename the package `org.eclipse.scout.contacts.client.work` to `org.eclipse.scout.contacts.client.contact` click into the word "work" of the package name and hit kbd:[Shift+F6] (Eclipse: kbd:[Alt+Shift+R]).
+This opens the package rename dialog as shown in <<img-sdk_rename_package_Intellij>> (IntelliJ) and <<img-sdk_rename_package>> (Eclipse), where we replace "work" by "contact" in the [element]_New name_ field.
+After pressing the btn:[Ok] button your IDE informs the programmer that the code modification may not be accurate as the resource has compile errors.
 This warning can be acknowledged by clicking btn:[Continue].
 
+[[img-sdk_rename_package_Intellij]]
+.Use the IntelliJ Rename Package dialog to rename a Java package in IntelliJ.
+image::{imgsdir}/sdk_rename_package_Intellij.png[]
 [[img-sdk_rename_package]]
-.Use the Eclipse Rename Package dialog to rename a Java package.
+.Use the Eclipse Rename Package dialog to rename a Java package in Eclipse.
 image::{imgsdir}/sdk_rename_package.png[]
 
 In next step we rename class `WorkOutline` to `ContactOutline`.
-In the Java editor we can rename the class by clicking into the class identifier `WorkOutline` and hitting kbd:[Alt+Shift+R].
+In the Java editor we can rename the class by clicking into the class identifier `WorkOutline` and hitting kbd:[Shift+F6] (Eclipse: kbd:[Alt+Shift+R]).
 Inside the edit box we can then change the class name to `ContactOutline` and hit the btn:[Enter] key to execute the change.
-If Eclipse shows a Rename Type dialog just hit button btn:[Continue] to let Eclipse complete the rename operation.
+If your IDE shows a Rename Type dialog just hit button btn:[Continue] to complete the rename operation.
 To get rid of the compile error in method `execCreateChildPages` we simply delete the content in the method body.
 
-Next, we change the outline title in method `getConfiguredTitle` by replacing the string "Work" with "Contacts", setting the cursor at the end of the word "Contacts" and hitting kbd:[Ctrl+Space] to open the Scout content assist as shown in <<img-sdk_new_text_entry_contact>>.
+Next, we change the outline title in method `getConfiguredTitle`.
 
+. Replace the string "Work" with "Contacts".
+. Set the cursor at the end of the word "Contacts" and hit kbd:[Ctrl+Space].
+. For Eclipse:
+** Double-click on the proposal [element]_New text..._ to open the Scout new entry wizard as shown in <<img-sdk_new_text_entry_contact>> and  <<img-sdk_new_text_entry_contact_wizard>>.
+. Enter the text "Contacts" as shown in <<img-sdk_new_text_entry_contact_wizard_IntelliJ>> (IntelliJ) and <<img-sdk_new_text_entry_contact_wizard>> (Eclipse) and click btn:[Ok].
+
+[[img-sdk_new_text_entry_contact_wizard_IntelliJ]]
+.Use the Scout new entry wizard to add translated texts to the application in IntelliJ.
+image::{imgsdir}/sdk_new_text_entry_contact_wizard_IntelliJ.png[]
 [[img-sdk_new_text_entry_contact]]
 .Use the Scout content assist to add new translations.
 image::{imgsdir}/sdk_new_text_entry_contact.png[]
-
-To enter a new translated text we double click on the proposal [element]_New text..._ to open the Scout new entry wizard as shown in <<img-sdk_new_text_entry_contact_wizard>>.
-
 [[img-sdk_new_text_entry_contact_wizard]]
-.Use the Scout new entry wizard to add translated texts to the application.
+.Use the Scout new entry wizard to add translated texts to the application in Eclipse.
 image::{imgsdir}/sdk_new_text_entry_contact_wizard.png[]
 
 As the last modification we change the return value of method `getConfiguredIconId` to value `Icons.Folder` and end with the code shown in <<lst-contacts_outline>>.
 
-To conclude the modifications we must get rid of the faulty import statement.
-To do this we could in principle press kbd:[Ctrl+Shift+O] to organize the imports automatically.
-However, we want to register the organization of imports as a so-called "`Save Action`".
-This can be done in the Eclipse preferences.
-
-Invoke the top-level menu "`Window/Preferences`" and enter "`Save Action`" as a filter text to narrow down the tree on the left side of the preferences window.
-Then, chose the "`Java/Editor/Save Actions`" node and check the boxes "[x] Format Source Code" and "[x] Organize imports".
-As you may have guessed, this formats the source code and organizes the import statements every time the user saves a Java class.
-
-After having done so, perform a dummy modification in the class `ContactOutline` (e.g. add a space somewhere in the class body) and save the file.
-As a consequence, the faulty import statement at the beginning of the class file should have vanished and the class should show no compile errors anymore.
+NOTE: In IntelliJ, the import for the Icons class should be added automatically. If not, check your settings for auto import or use `Alt enter` to import it manually. +
+In Eclipse, you can use kbd:[Ctrl+Shift+O] to add the imports manually.
 
 [[lst-contacts_outline]]
 [source,java]
@@ -143,7 +151,7 @@ This class is implemented exactly once in each Scout application and holds the a
 For the "Contacts" application we adapt the initial implementation to have outline view buttons for the "Contacts" and "Search" outlines.
 The top level menus are then adapted to hold the menus "Quick Access", "Options" and a menu for the logged in user.
 
-Start with opening the class in the Java editor using kbd:[Ctrl+Shift+T] to quickly access the class.
+Start with opening the class in the Java editor using kbd:[Ctrl+Shift+N] (Eclipse: kbd:[Ctrl+Shift+T]) to quickly access the class.
 In the source code of method `getConfiguredOutlines` remove `SettingsOutline.class` from the list of return values as shown in <<lst-contacts_getConfiguredOutlines>>.
 
 [[lst-contacts_getConfiguredOutlines]]

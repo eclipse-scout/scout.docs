@@ -45,20 +45,33 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.server/pom.xml[tags=Derby
 <1> Add the `derby` and the `org.eclipse.scout.rt.server.jdbc` dependencies to the pom.xml of your "Contacts" server module.
 
 After adding the database dependencies to the server's pom.xml file we need to update all Maven server modules for the "Contacts" app.
-To do this, select the three modules `org.eclipse.scout.contacts.server.*` and hit kbd:[Alt+F5] as shown in <<img-contacts_tutorial_update_server_modules>>.
-Start the update with btn:[OK].
+To do this:
 
+* For IntelliJ, press the Maven button on the right side as shown in <<img-contacts_tutorial_maven_modules_Intellij>> to open up the Maven modules and then press the refresh button on the left side as shown in <<img-contacts_tutorial_update_server_modules_Intellij>>.
+* For Eclipse, select the three modules `org.eclipse.scout.contacts.server.*` and hit kbd:[Alt+F5] as shown in <<img-contacts_tutorial_update_server_modules>> and start the update with btn:[OK].
+
+[[img-contacts_tutorial_maven_modules_Intellij]]
+.Locate the Maven server modules in IntelliJ.
+image::{imgsdir}/contacts_tutorial_maven_modules_Intellij.png[]
+[[img-contacts_tutorial_update_server_modules_Intellij]]
+.Update the Maven server modules for the "Contacts" application in IntelliJ.
+image::{imgsdir}/contacts_tutorial_update_server_modules_Intellij.png[]
 [[img-contacts_tutorial_update_server_modules]]
-.Update the Maven server modules for the "Contacts" application.
+.Update the Maven server modules for the "Contacts" application in Eclipse.
 image::{imgsdir}/contacts_tutorial_update_server_modules.png[]
 
 The next step is to create the `org.eclipse.scout.contacts.server.sql` package.
 
 * Expand folder `src/main/java` of Maven module `contacts.server`
-* Select the existing package `org.eclipse.scout.contacts.server` and hit kbd:[Ctrl+N]
-* This opens the dialog to select a wizard. Enter "package" into the search field
-* Select the [wizard]_New Java Package_ wizard with a double click on the Java [element]_Package_ proposal
-* Enter `org.eclipse.scout.contacts.server.sql` into the [field]_Name_ field of the wizard and click btn:[Finish]
+* Select the existing package `org.eclipse.scout.contacts.server`
+* For IntelliJ:
+** Right click on it and select `New -> Package`
+** Enter `org.eclipse.scout.contacts.server.sql` into the [field]_Name_ field and hit btn:[Enter]
+* For Eclipse:
+** Hit kbd:[Ctrl+N] on it
+** This opens the dialog to select a wizard. Enter "package" into the search field
+** Select the [wizard]_New Java Package_ wizard with a double click on the Java [element]_Package_ proposal
+** Enter `org.eclipse.scout.contacts.server.sql` into the [field]_Name_ field of the wizard and click btn:[Finish]
 
 We are now ready to copy the classes related to the database infrastructure from the "Contacts" demo application to our tutorial workspace.
 
@@ -66,10 +79,13 @@ The simplest way to do this is to open a second Eclipse IDE with the workspace w
 If you have not done this yet go to the beginning of this tutorial <<cha-large_example>> and catch up now.
 
 In the demo application workspace navigate to the same package `org.eclipse.scout.contacts.server.sql` and copy over all its classes.
-After copying these classes make sure that the structure of your server Maven module looks as shown in <<img-contacts_tutorial_copied_db_classes>>.
+After copying these classes make sure that the structure of your server Maven module looks as shown in <<img-contacts_tutorial_copied_db_classes_intellij>> (IntelliJ) and <<img-contacts_tutorial_copied_db_classes>> (Eclipse).
 
+[[img-contacts_tutorial_copied_db_classes_intellij]]
+.The copied database classes in the tutorial workspace in IntelliJ.
+image::{imgsdir}/contacts_tutorial_copied_db_classes_intellij.png[]
 [[img-contacts_tutorial_copied_db_classes]]
-.The copied database classes in the tutorial workspace.
+.The copied database classes in the tutorial workspace in Eclipse.
 image::{imgsdir}/contacts_tutorial_copied_db_classes.png[]
 
 The imported classes are described in the following sections.
