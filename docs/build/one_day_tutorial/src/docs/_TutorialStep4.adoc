@@ -67,19 +67,29 @@ In the next section we will start to implement the person form with the layout d
 
 In this section we implement the person form with its container widgets as described in the previous section.
 To be able to use the form to create and edit persons we will add "New" and "Edit" context menus to the table in the person page.
-Finally we will also add a "Create Person" entry to the the "Quick Access" top level menu of the application.
+Finally, we will also add a "Create Person" entry to the "Quick Access" top level menu of the application.
 
 Start the form creation with the Scout new form wizard following the steps listed below.
 
-. Expand the Maven module `contacts.client` in the Eclipse package explorer
+. Expand the Maven module `contacts.client` in the package explorer
 . Select package `org.eclipse.scout.contacts.client.person` in folder `src/main/java`
-. Press kbd:[Ctrl+N] and enter "form" into the search field of the wizard selection dialog
-. Select the [element]_Scout Form_ proposal and click the btn:[Next] button
-. Enter "Person" into the [field]_Name_ and verify that the field contents match <<img-contacts_create_new_person_form>>
-. Click btn:[Finish] to start the creation of the form and its related components
+. For IntelliJ:
+** Create a new Scout form by right-clicking on the package and selecting `New -> Scout Element -> Form` as shown in <<img-contacts_create_new_form_Intellij>>
+** Enter "Person" into the [field]_Name_ as shown in <<img-contacts_create_new_person_form_Intellij>> and then hit btn:[Enter]
+. For Eclipse:
+** Press kbd:[Ctrl+N] and enter "form" into the search field of the wizard selection dialog
+** Select the [element]_Scout Form_ proposal and click the btn:[Next] button
+** Enter "Person" into the [field]_Name_ and verify that the field contents match <<img-contacts_create_new_person_form>>
+** Click btn:[Finish] to start the creation of the form and its related components
 
+[[img-contacts_create_new_form_Intellij]]
+.Create a New Scout Form in IntelliJ.
+image::{imgsdir}/contacts_create_new_form_Intellij.png[]
+[[img-contacts_create_new_person_form_Intellij]]
+.Use the [wizard]_New Scout Form_ to create the person form in IntelliJ.
+image::{imgsdir}/contacts_create_new_person_form_Intellij.png[]
 [[img-contacts_create_new_person_form]]
-.Use the [wizard]_New Scout Form_ to create the person form.
+.Use the [wizard]_New Scout Form_ to create the person form in Eclipse.
 image::{imgsdir}/contacts_create_new_person_form.png[]
 
 Now open the newly created class `PersonForm` in the Java editor and perform the changes listed below as shown in <<lst-contacts_form_init>>.
@@ -151,6 +161,7 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/
 
 We have now created the initial implementation of the person form including context menus to open the form from the person page and the "Quick Access" top level menu of the "Contacts" application.
 At this point it is already possible to verify that the person form can be opened on the user interface via the context menus.
+
 A screenshot of the current state is shown in <<img-contacts_tutorial_result_step_4_intermediate>>.
 
 [[img-contacts_tutorial_result_step_4_intermediate]]
@@ -174,17 +185,27 @@ As the gender code type is related to persons we will implement this class in th
 
 Follow the steps described below to create the gender code type.
 
-. Expand the Maven module `contacts.shared` in the Eclipse package explorer
+. Expand the Maven module `contacts.shared` in the package explorer
 . Select package `org.eclipse.scout.contacts.shared.person` in folder `src/main/java`
-. Press kbd:[Ctrl+N] and enter "code" into the search field of the wizard selection dialog
-. Select the [element]_Scout CodeType_ proposal and click the btn:[Next] button
-. Enter "Gender" into the [field]_Name_ field and use the type `String` for the first and second type argument according to <<img-contacts_tutorial_new_gender_codetype>>
+. For IntelliJ:
+** Create a new Scout code type by right-clicking on the package and selecting `New -> Scout Element -> Code Type` as shown in <<img-contacts_tutorial_create_new_gender_codetype_Intellij>>
+** Enter "Gender" into the [field]_Name_ as shown in <<img-contacts_tutorial_new_gender_codetype_Intellij>> and then hit btn:[Enter]
+. For Eclipse:
+** Press kbd:[Ctrl+N] and enter "code" into the search field of the wizard selection dialog
+** Select the [element]_Scout CodeType_ proposal and click the btn:[Next] button
+** Enter "Gender" into the [field]_Name_ field and use the type `String` for the first and second type argument according to <<img-contacts_tutorial_new_gender_codetype>>
+** Click btn:[Finish].
 
+[[img-contacts_tutorial_create_new_gender_codetype_Intellij]]
+.Create the gender code in IntelliJ.
+image::{imgsdir}/contacts_tutorial_create_new_gender_codetype_Intellij.png[]
+[[img-contacts_tutorial_new_gender_codetype_Intellij]]
+.Create the gender code using the Scout new code wizard in IntelliJ.
+image::{imgsdir}/contacts_tutorial_new_gender_codetype_Intellij.png[]
 [[img-contacts_tutorial_new_gender_codetype]]
-.Create the gender code using the Scout new code wizard.
+.Create the gender code using the Scout new code wizard in Eclipse.
 image::{imgsdir}/contacts_tutorial_new_gender_codetype.png[]
 
-Now click button btn:[Finish] to start the wizard.
 Then, open the newly created class `GenderCodeType` in the Java editor and set the `ID` constant to "Gender".
 The created class will then look like <<lst-contacts_gender_code>> except for the missing inner code classes.
 We will add these inner codes as the next step.

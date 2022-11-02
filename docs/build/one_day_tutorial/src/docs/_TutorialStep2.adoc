@@ -30,13 +30,21 @@ This person package can be created with the following steps.
 
 * Open the "Contacts" Maven module `contacts.client` in the Eclipse Package Explorer
 * Select the Java package `org.eclipse.scout.contacts.client` in folder `src/main/java`
-* Press kbd:[Ctrl]+kbd:[N], enter "package" into the search field
-* Select the [wizard]_Package_ wizard in the proposal box and click [button]_Next_
-* Enter `org.eclipse.scout.contacts.client.person` and click [button]_Finish_ as shown in <<img-contacts_person_package>>
-* Make sure the newly created person package is selected in the Eclipse Package Explorer
+* For IntelliJ:
+** Create a package by right-clicking on the Java package and selecting `New -> Package` as shown in <<img-contacts_person_package_Intellij>>
+** Enter `org.eclipse.scout.contacts.client.person` and press [button]_Enter_ as shown in <<img-contacts_person_package_wizard_Intellij>>.
+* For Eclipse:
+** Press kbd:[Ctrl]+kbd:[N], enter "package" into the search field and select the [wizard]_Package_ wizard in the proposal box and click [button]_Next_
+** Press [button]_Finish_ as shown in <<img-contacts_person_package>>.
 
+[[img-contacts_person_package_Intellij]]
+.Create the person package in IntelliJ.
+image::{imgsdir}/sdk_new_package_Intellij.png[]
+[[img-contacts_person_package_wizard_Intellij]]
+.Add the person package to the "Contacts" application in IntelliJ.
+image::{imgsdir}/sdk_new_package_wizard_Intellij.png[]
 [[img-contacts_person_package]]
-.Add the person package to the "Contacts" application.
+.Add the person package to the "Contacts" application in Eclipse.
 image::{imgsdir}/sdk_new_package_wizard.png[]
 
 We will also need a separate package for organizations and some common elements.
@@ -74,13 +82,21 @@ This "Persons" page is then added to the navigation tree below the "Contacts" ou
 We can now add the Scout person page as described below.
 
 * Select the newly created package `org.eclipse.scout.contacts.client.person` in the Package Explorer
-* Press kbd:[Ctrl]+kbd:[N], enter "scout page" into the search field
-* Select the [wizard]_Scout Page_ wizard in the proposal box and click [button]_Next_
-* Un-check the _Create an Abstract Super Page_ option, as we don't need an additional abstract super class for our new page
-* Enter `PersonTablePage` as the class name and click [button]_Finish_ as shown in <<img-contacts_new_person_page>>
+* For IntelliJ
+** Create a new Scout page by right-clicking on the package and selecting `New -> Scout Element -> Page` as shown in <<img-contacts_create_new_person_page_Intellij>>
+* For Eclipse
+** Press kbd:[Ctrl]+kbd:[N], enter "scout page" into the search field and select the [wizard]_Scout Page_ wizard in the proposal box and click [button].
+** Un-check the _Create an Abstract Super Page_ option, as we don't need an additional abstract super class for our new page.
+** Enter `PersonTablePage` as the class name and click [button]_Finish_ as shown in <<img-contacts_new_person_page>>
 
+[[img-contacts_create_new_person_page_Intellij]]
+.Create the person page in IntelliJ.
+image::{imgsdir}/sdk_create_new_personpage_wizard_Intellij.png[]
+[[img-contacts_new_person_page_Intellij]]
+.Add the person page to the "Contacts" application in IntelliJ.
+image::{imgsdir}/sdk_new_personpage_wizard_Intellij.png[]
 [[img-contacts_new_person_page]]
-.Add the person page to the "Contacts" application.
+.Add the person page to the "Contacts" application in Eclipse.
 image::{imgsdir}/sdk_new_personpage_wizard.png[]
 
 The Scout [wizard]_New Page Wizard_ then creates an initial implementation for the `PersonTablePage` class very similar to the listing provided in <<lst-contacts_PersonTable>> below.
@@ -134,16 +150,22 @@ TIP:  Make sure to use column class names exactly as indicated above.
 Working with different names is possible but requires additional work later in the tutorial when the data retrieved from the database is mapped to these column class names.
 
 To add the first column `PersonIdColumn` we open class `PersonTablePage` in the Java editor and place the cursor inside of the body of the inner `Table` class.
-We then open the Scout content assist with kbd:[Ctrl+Space] and select the [element]_Column_ proposal as shown in <<img-sdk_new_page_column_contacts>>.
+We then open the Scout content assist with kbd:[Ctrl+Space] and select the [element]_Column_ proposal as shown in <<img-sdk_new_page_column_contacts_IntelliJ>> (IntelliJ) and <<img-sdk_new_page_column_contacts>> (Eclipse).
 
+[[img-sdk_new_page_column_contacts_IntelliJ]]
+.Adding a column to the person page table in IntelliJ.
+image::{imgsdir}/sdk_new_page_column_contacts_IntelliJ.png[]
 [[img-sdk_new_page_column_contacts]]
-.Adding a column to the person page table.
+.Adding a column to the person page table in Eclipse.
 image::{imgsdir}/sdk_new_page_column_contacts.png[]
 
-In the first edit box we type "PersonId" as shown in <<img-sdk_new_page_column_personid>> and press kbd:[Enter].
+In the first edit box we type "PersonId" as shown in <<img-sdk_new_page_column_personid_Intellij>> (IntelliJ) and <<img-sdk_new_page_column_personid>> (Eclipse) and press kbd:[Enter].
 
+[[img-sdk_new_page_column_personid_Intellij]]
+.Adding a column to the person page table in IntelliJ.
+image::{imgsdir}/sdk_new_page_column_personid_Intellij.png[]
 [[img-sdk_new_page_column_personid]]
-.Adding a column to the person page table.
+.Adding a column to the person page table in Eclipse.
 image::{imgsdir}/sdk_new_page_column_personid.png[]
 
 To configure this column as an invisible primary key we modify the newly created column class according to <<lst-contacts_PersonIdColumn>>.
@@ -198,9 +220,8 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/
 
 <1> Returning `false` hides the column initially. Using the table control the user can then make this column visible in the user interface.
 
-TIP: Use the Eclipse content assist to efficiently add method `getConfiguredVisible`.
-Place the cursor after method `getConfiguredHeaderText`, type "getConVis" and hit kbd:[Ctrl+Space].
-Then select the proposal [element]_getConfiguredVisible_ with kbd:[Enter] and the method is inserted for you.
+TIP: Use the content assist to efficiently add method `getConfiguredVisible`.
+Place the cursor after method `getConfiguredHeaderText`, type "getConVis" and hit kbd:[Ctrl+Space] and the method is inserted for you.
 
 We have now created a person page with corresponding table columns.
 However, this new UI component is not yet visible in the user interface.
