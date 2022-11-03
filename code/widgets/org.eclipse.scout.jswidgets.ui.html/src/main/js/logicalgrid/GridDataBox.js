@@ -27,6 +27,12 @@ export default class GridDataBox extends GroupBox {
     super._init(model);
 
     this._setField(this.field);
+    this._setEnabled(this.useHints);
+
+    if (!this.useHints) {
+      return;
+    }
+
     this.widget('WField').on('propertyChange', this._onPropertyChange.bind(this));
     this.widget('HField').on('propertyChange', this._onPropertyChange.bind(this));
     this.widget('XField').on('propertyChange', this._onPropertyChange.bind(this));
