@@ -8,20 +8,30 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {Form, models, scout} from '@eclipse-scout/core';
+import {Button, Form, FormModel, InitModelOf, models, scout, SmartField, WrappedFormField} from '@eclipse-scout/core';
 import WrappedFormFieldFormModel from './WrappedFormFieldFormModel';
+import {EventsTab, FormFieldPropertiesBox, GridDataBox, WidgetActionsBox, WrappedFormFieldFormWidgetMap} from '../index';
 
-export default class WrappedFormFieldForm extends Form {
+export class WrappedFormFieldForm extends Form {
+  declare widgetMap: WrappedFormFieldFormWidgetMap;
+
+  innerFormField: SmartField<Form>;
+  closeInnerFormButton: Button;
+  wrappedFormField: WrappedFormField;
+  formFieldPropertiesBox: FormFieldPropertiesBox;
+  gridDataBox: GridDataBox;
+  widgetActionsBox: WidgetActionsBox;
+  eventsTab: EventsTab;
 
   constructor() {
     super();
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): FormModel {
     return models.get(WrappedFormFieldFormModel);
   }
 
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
     this.innerFormField = this.widget('InnerFormField');

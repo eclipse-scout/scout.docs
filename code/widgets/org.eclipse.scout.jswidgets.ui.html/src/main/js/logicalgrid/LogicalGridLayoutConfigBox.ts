@@ -8,21 +8,25 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {GroupBox, models} from '@eclipse-scout/core';
+import {FormField, GroupBox, GroupBoxModel, InitModelOf, LogicalGridLayout, LogicalGridLayoutConfig, models, PropertyChangeEvent, RadioButtonGroup, SequenceBox, TileAccordion, TileGrid} from '@eclipse-scout/core';
 import LogicalGridLayoutConfigBoxModel from './LogicalGridLayoutConfigBoxModel';
+import {LogicalGridLayoutConfigBoxWidgetMap} from '../index';
 
-export default class LogicalGridLayoutConfigBox extends GroupBox {
+export class LogicalGridLayoutConfigBox extends GroupBox {
+  declare widgetMap: LogicalGridLayoutConfigBoxWidgetMap;
+
+  field: GroupBox | SequenceBox | RadioButtonGroup<any> | TileGrid | TileAccordion;
 
   constructor() {
     super();
     this.field = null;
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): GroupBoxModel {
     return models.get(LogicalGridLayoutConfigBoxModel);
   }
 
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
     this._setField(this.field);
@@ -33,11 +37,11 @@ export default class LogicalGridLayoutConfigBox extends GroupBox {
     this.widget('MinWidthField').on('propertyChange:value', event => this._updateLayoutConfigByEvent(event));
   }
 
-  setField(field) {
+  setField(field: GroupBox | SequenceBox | RadioButtonGroup<any> | TileGrid | TileAccordion) {
     this.setProperty('field', field);
   }
 
-  _setField(field) {
+  protected _setField(field: GroupBox | SequenceBox | RadioButtonGroup<any> | TileGrid | TileAccordion) {
     this._setProperty('field', field);
     if (!this.field) {
       return;
@@ -55,13 +59,13 @@ export default class LogicalGridLayoutConfigBox extends GroupBox {
     this.widget('MinWidthField').setValue(bodyLayout.minWidth);
   }
 
-  _updateLayoutConfigByEvent(event) {
+  protected _updateLayoutConfigByEvent(event: PropertyChangeEvent<any, FormField>) {
     let layoutConfig = this.getLayoutConfig().clone();
     this._fillLayoutConfigByEvent(layoutConfig, event);
     this.setLayoutConfig(layoutConfig);
   }
 
-  _fillLayoutConfigByEvent(layoutConfig, event) {
+  protected _fillLayoutConfigByEvent(layoutConfig: LogicalGridLayoutConfig, event: PropertyChangeEvent<any, FormField>) {
     if (event.source.id === 'HGapField') {
       layoutConfig.hgap = event.newValue;
     } else if (event.source.id === 'VGapField') {
@@ -78,15 +82,15 @@ export default class LogicalGridLayoutConfigBox extends GroupBox {
   /**
    * Return the body layout of the widget. Used to initialized the config box with the default values.
    */
-  getBodyLayout() {
-    return this.field.htmlBody.layout;
+  getBodyLayout(): LogicalGridLayout {
+    return (this.field as GroupBox | SequenceBox | RadioButtonGroup<any>).htmlBody.layout as LogicalGridLayout;
   }
 
-  getLayoutConfig() {
-    return this.field.layoutConfig;
+  getLayoutConfig(): LogicalGridLayoutConfig {
+    return (this.field as SequenceBox | RadioButtonGroup<any> | TileGrid).layoutConfig;
   }
 
-  setLayoutConfig(layoutConfig) {
-    this.field.setLayoutConfig(layoutConfig);
+  setLayoutConfig(layoutConfig: LogicalGridLayoutConfig) {
+    (this.field as SequenceBox | RadioButtonGroup<any>).setLayoutConfig(layoutConfig);
   }
 }

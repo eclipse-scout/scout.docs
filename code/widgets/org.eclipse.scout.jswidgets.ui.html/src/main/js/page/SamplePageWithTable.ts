@@ -1,18 +1,29 @@
-import {models, PageWithTable, scout, strings} from '@eclipse-scout/core';
+/*
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Distribution License v1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/org/documents/edl-v10.html
+ *
+ * Contributors:
+ *     BSI Business Systems Integration AG - initial API and implementation
+ */
+import {HtmlTile, models, Page, PageModel, PageWithTable, scout, strings, TableRow, TableRowModel, Tile} from '@eclipse-scout/core';
 import SamplePageWithTableModel from './SamplePageWithTableModel';
 import $ from 'jquery';
+import {MiniForm, SamplePageWithNodes, SamplePageWithTableTable} from '../index';
 
-export default class SamplePageWithTable extends PageWithTable {
+export class SamplePageWithTable extends PageWithTable {
 
   constructor() {
     super();
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): PageModel {
     return models.get(SamplePageWithTableModel);
   }
 
-  _initDetailTable(table) {
+  protected override _initDetailTable(table: SamplePageWithTableTable) {
     super._initDetailTable(table);
 
     table.widget('AddRowMenu').on('action', this._onAddRowMenuAction.bind(this));
@@ -22,15 +33,15 @@ export default class SamplePageWithTable extends PageWithTable {
     let formMenu = table.widget('FormMenu');
     formMenu.on('propertyChange:selected', event => {
       if (event.newValue && !formMenu.form) {
-        formMenu.setForm(scout.create('jswidgets.MiniForm', {
+        formMenu.setForm(scout.create(MiniForm, {
           parent: formMenu
         }));
       }
     });
-    table.setTileProducer(row => this.createTileForRow(row));
+    table.setTileProducer((row: TableRow & { data: Record<string, string> }) => this.createTileForRow(row));
   }
 
-  createTileForRow(row) {
+  createTileForRow(row: TableRow & { data: Record<string, string> }): Tile {
     let model = {
       parent: this.detailTable,
       content: '<br><b>ID:</b> ' +
@@ -39,14 +50,14 @@ export default class SamplePageWithTable extends PageWithTable {
         row.data.number + '<br><b>Boolean Column:</b> ' +
         row.data.bool
     };
-    return scout.create('HtmlTile', model);
+    return scout.create(HtmlTile, model);
   }
 
-  _onAddRowMenuAction() {
+  protected _onAddRowMenuAction() {
     this.detailTable.insertRow(this._createRow());
   }
 
-  _onAddManyMenuAction() {
+  protected _onAddManyMenuAction() {
     let rows = [];
     for (let i = 0; i < 10; i++) {
       rows.push(this._createRow(this.detailTable.rows.length + i));
@@ -54,15 +65,15 @@ export default class SamplePageWithTable extends PageWithTable {
     this.detailTable.insertRows(rows);
   }
 
-  _onDeleteRowMenuAction() {
+  protected _onDeleteRowMenuAction() {
     this.detailTable.deleteRows(this.detailTable.selectedRows);
   }
 
-  _onTileToggleMenuAction() {
+  protected _onTileToggleMenuAction() {
     this.detailTable.setTileMode(!this.detailTable.tileMode);
   }
 
-  _createRow(rowNo) {
+  protected _createRow(rowNo?: number): TableRowModel {
     rowNo = scout.nvl(rowNo, this.detailTable.rows.length + 1);
     let smartValues = [null, 'es_CR', null, 'pt_BR', 'ro_RO'];
 
@@ -85,7 +96,7 @@ export default class SamplePageWithTable extends PageWithTable {
     };
   }
 
-  _loadTableData(searchFilter) {
+  protected override _loadTableData(searchFilter: any): JQuery.Deferred<any> {
     let searchFormStringFieldValue = searchFilter.stringField;
     let filter = element => {
       if (!strings.hasText(searchFormStringFieldValue)) {
@@ -124,10 +135,10 @@ export default class SamplePageWithTable extends PageWithTable {
       number: 959161,
       bool: true
     }];
-    return $.resolvedPromise(data.filter(filter));
+    return $.resolvedDeferred(data.filter(filter));
   }
 
-  _transformTableDataToTableRows(tableData) {
+  protected override _transformTableDataToTableRows(tableData: any): TableRow[] {
     return tableData
       .map(row => {
         return {
@@ -143,8 +154,8 @@ export default class SamplePageWithTable extends PageWithTable {
       });
   }
 
-  createChildPage(row) {
-    return scout.create('jswidgets.SamplePageWithNodes', {
+  override createChildPage(row: TableRow): Page {
+    return scout.create(SamplePageWithNodes, {
       parent: this.getOutline()
     });
   }

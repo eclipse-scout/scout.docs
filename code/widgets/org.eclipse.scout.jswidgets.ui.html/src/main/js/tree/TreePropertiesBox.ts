@@ -9,37 +9,41 @@
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 import TreePropertiesBoxModel from './TreePropertiesBoxModel';
-import {GroupBox, models} from '@eclipse-scout/core';
+import {TreePropertiesBoxWidgetMap} from '../index';
+import {GroupBox, GroupBoxModel, InitModelOf, models, Tree} from '@eclipse-scout/core';
 
-export default class TreePropertiesBox extends GroupBox {
+export class TreePropertiesBox extends GroupBox {
+  declare widgetMap: TreePropertiesBoxWidgetMap;
+
+  tree: Tree;
 
   constructor() {
     super();
     this.tree = null;
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): GroupBoxModel {
     return models.get(TreePropertiesBoxModel);
   }
 
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
     this._setTree(this.tree);
   }
 
-  setTree(tree) {
+  setTree(tree: Tree) {
     this.setProperty('tree', tree);
   }
 
-  _setTree(tree) {
+  protected _setTree(tree: Tree) {
     this._setProperty('tree', tree);
     if (!this.tree) {
       return;
     }
 
     let autoCheckChildrenField = this.widget('AutoCheckChildrenField');
-    autoCheckChildrenField.setValue(this.tree.autoResizeColumns);
+    autoCheckChildrenField.setValue(this.tree.autoCheckChildren);
     autoCheckChildrenField.on('propertyChange:value', event => {
       this.tree.autoCheckChildren = event.newValue;
     });

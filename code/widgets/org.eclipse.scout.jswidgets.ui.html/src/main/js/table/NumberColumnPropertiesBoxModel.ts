@@ -1,37 +1,56 @@
-export default () => ({
+/*
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Distribution License v1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/org/documents/edl-v10.html
+ *
+ * Contributors:
+ *     BSI Business Systems Integration AG - initial API and implementation
+ */
+import {GroupBox, GroupBoxModel, NumberColumnBackgroundEffect, NumberField, SmartField, StringField} from '@eclipse-scout/core';
+
+export default (): GroupBoxModel => ({
   id: 'jswidgets.NumberColumnPropertiesBox',
-  type: 'model',
-  objectType: 'GroupBox',
+  objectType: GroupBox,
   gridColumnCount: 2,
   label: 'NumberColumn Properties',
   expandable: true,
   fields: [
     {
       id: 'MinValueField',
-      objectType: 'NumberField',
+      objectType: NumberField,
       label: 'Min Value'
     },
     {
       id: 'MaxValueField',
-      objectType: 'NumberField',
+      objectType: NumberField,
       label: 'Max Value'
     },
     {
       id: 'MultiplierField',
-      objectType: 'NumberField',
+      objectType: NumberField,
       label: 'Multiplier'
     },
     {
       id: 'FormatField',
-      objectType: 'StringField',
+      objectType: StringField,
       label: 'Format'
     },
     {
       id: 'BackgroundEffectField',
-      objectType: 'SmartField',
+      objectType: SmartField,
       lookupCall: 'jswidgets.BackgroundEffectLookupCall',
       label: 'Background Effect',
       displayStyle: 'default'
     }
   ]
 });
+
+export type NumberColumnPropertiesBoxWidgetMap = {
+  'MinValueField': NumberField;
+  'MaxValueField': NumberField;
+  'MultiplierField': NumberField;
+  'FormatField': StringField;
+  'BackgroundEffectField': SmartField<NumberColumnBackgroundEffect>;
+};

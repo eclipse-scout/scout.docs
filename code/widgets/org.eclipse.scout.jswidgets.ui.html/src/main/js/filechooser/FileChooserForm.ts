@@ -1,28 +1,29 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 import FileChooserFormModel from './FileChooserFormModel';
-import {FileInput, Form, models, scout, strings} from '@eclipse-scout/core';
-import {DisplayParentLookupCall} from '../index';
+import {Button, Event, FileChooser, FileInput, Form, FormModel, HtmlField, HtmlFieldAppLinkActionEvent, InitModelOf, models, scout, strings} from '@eclipse-scout/core';
+import {DisplayParentLookupCall, FileChooserFormWidgetMap} from '../index';
 
-export default class FileChooserForm extends Form {
+export class FileChooserForm extends Form {
+  declare widgetMap: FileChooserFormWidgetMap;
 
   constructor() {
     super();
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): FormModel {
     return models.get(FileChooserFormModel);
   }
 
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
     let button = this.widget('Button');
@@ -32,8 +33,8 @@ export default class FileChooserForm extends Form {
     this._updateChosenFiles([]);
   }
 
-  _onButtonClick(event) {
-    let fileChooser = scout.create('FileChooser', {
+  protected _onButtonClick(event: Event<Button>) {
+    let fileChooser = scout.create(FileChooser, {
       parent: this.session.desktop,
       acceptTypes: this.widget('AcceptTypesField').value,
       displayParent: DisplayParentLookupCall.displayParentForType(this, this.widget('DisplayParentField').value),
@@ -48,7 +49,7 @@ export default class FileChooserForm extends Form {
     });
   }
 
-  _updateChosenFiles(files) {
+  protected _updateChosenFiles(files: File[]) {
     let chosenFilesText = '';
     if (files.length === 0) {
       chosenFilesText = this.session.text('FileChooserNoFilesChosen');
@@ -65,14 +66,19 @@ export default class FileChooserForm extends Form {
       fileDescriptions.push(html);
     }
 
-    let chosenFilesField = this.widget('ChosenFilesField');
+    let chosenFilesField: HtmlFieldWithFiles = this.widget('ChosenFilesField');
     chosenFilesField.files = files; // remember files to handle app link action
     chosenFilesField.setValue(chosenFilesText + ' ' + fileDescriptions.join(', '));
   }
 
-  _onChosenFilesAppLinkAction(event) {
-    let file = this.widget('ChosenFilesField').files[event.ref];
+  protected _onChosenFilesAppLinkAction(event: HtmlFieldAppLinkActionEvent) {
+    let chosenFilesField: HtmlFieldWithFiles = this.widget('ChosenFilesField');
+    let file = chosenFilesField.files[event.ref];
     let url = URL.createObjectURL(file);
     this.session.desktop.openUri(url);
   }
 }
+
+type HtmlFieldWithFiles = HtmlField & {
+  files?: File[];
+};

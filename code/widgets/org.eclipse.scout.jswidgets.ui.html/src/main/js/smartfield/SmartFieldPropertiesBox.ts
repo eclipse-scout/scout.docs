@@ -8,31 +8,35 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {GroupBox, models} from '@eclipse-scout/core';
+import {GroupBox, GroupBoxModel, InitModelOf, models, SmartField} from '@eclipse-scout/core';
 import SmartFieldPropertiesBoxModel from './SmartFieldPropertiesBoxModel';
+import {SmartFieldPropertiesBoxWidgetMap} from '../index';
 
-export default class SmartFieldPropertiesBox extends GroupBox {
+export class SmartFieldPropertiesBox extends GroupBox {
+  declare widgetMap: SmartFieldPropertiesBoxWidgetMap;
+
+  field: SmartField<any>;
 
   constructor() {
     super();
     this.field = null;
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): GroupBoxModel {
     return models.get(SmartFieldPropertiesBoxModel);
   }
 
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
     this._setField(this.field);
   }
 
-  setField(field) {
+  setField(field: SmartField<any>) {
     this.setProperty('field', field);
   }
 
-  _setField(field) {
+  protected _setField(field: SmartField<any>) {
     this._setProperty('field', field);
     if (!this.field) {
       return;
@@ -47,7 +51,7 @@ export default class SmartFieldPropertiesBox extends GroupBox {
     displayStyleField.setValue(this.field.displayStyle);
     displayStyleField.on('propertyChange:value', event => {
       this.field.displayStyle = event.newValue;
-      this.field.parent.rerenderControls();
+      (this.field.parent as GroupBox).rerenderControls();
     });
 
     let browseMaxRowCountField = this.widget('BrowseMaxRowCountField');

@@ -8,10 +8,15 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {GridData, GroupBox, models} from '@eclipse-scout/core';
+import {FormField, GridData, GroupBox, GroupBoxModel, InitModelOf, models, PropertyChangeEvent} from '@eclipse-scout/core';
 import GridDataBoxModel from './GridDataBoxModel';
+import {GridDataBoxWidgetMap} from '../index';
 
-export default class GridDataBox extends GroupBox {
+export class GridDataBox extends GroupBox {
+  declare widgetMap: GridDataBoxWidgetMap;
+
+  field: FormField;
+  useHints: boolean;
 
   constructor() {
     super();
@@ -19,11 +24,11 @@ export default class GridDataBox extends GroupBox {
     this.useHints = true;
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): GroupBoxModel {
     return models.get(GridDataBoxModel);
   }
 
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
     this._setField(this.field);
@@ -49,11 +54,11 @@ export default class GridDataBox extends GroupBox {
     this.widget('HeightInPixelField').on('propertyChange:value', event => this._updateGridDataByEvent(event));
   }
 
-  setField(field) {
+  setField(field: FormField) {
     this.setProperty('field', field);
   }
 
-  _setField(field) {
+  protected _setField(field: FormField) {
     this._setProperty('field', field);
     if (!this.field) {
       return;
@@ -82,13 +87,13 @@ export default class GridDataBox extends GroupBox {
     this.widget('HeightInPixelField').setValue(gridData.heightInPixel);
   }
 
-  _updateGridDataByEvent(event) {
+  protected _updateGridDataByEvent(event: PropertyChangeEvent<any, FormField>) {
     let gridData = new GridData(this.field.gridDataHints);
     this._fillGridDataByEvent(gridData, event);
     this.field.setGridDataHints(gridData);
   }
 
-  _fillGridDataByEvent(gridData, event) {
+  protected _fillGridDataByEvent(gridData: GridData, event: PropertyChangeEvent<any, FormField>) {
     if (event.source.id === 'WField') {
       gridData.w = event.newValue;
     } else if (event.source.id === 'HField') {

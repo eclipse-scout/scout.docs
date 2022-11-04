@@ -8,481 +8,486 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {PageWithNodes} from '@eclipse-scout/core';
-import {WrappedFormFieldForm} from '../index';
+import {OutlineModel, PageWithNodes} from '@eclipse-scout/core';
+import {
+  AccordionForm, BreadcrumbBarFieldForm, BrowserFieldForm, ButtonForm, CarouselForm, ChartFieldForm, CheckBoxFieldForm, DateFieldForm, DesktopForm, DesktopNotificationForm, EditableTableForm, FileChooserButtonForm, FileChooserFieldForm,
+  FileChooserForm, FormForm, GroupBoxForm, HierarchicalTableForm, ImageFieldForm, ImageForm, IntegerFieldForm, LabelFieldForm, LabelForm, ListBoxForm, LogicalGridForm, MenuBarForm, MessageBoxForm, ModeSelectorForm, MultilineSmartFieldForm,
+  MultilineStringFieldForm, NumberFieldForm, PopupForm, ProposalFieldForm, RadioButtonGroupForm, RestForm, SamplePageWithNodes, SamplePageWithTable, SequenceBoxForm, SmartFieldForm, StringFieldForm, TabBoxForm, TableForm,
+  TableSmartFieldForm, TagFieldForm, TileAccordionForm, TileGridForm, TooltipForm, TreeBoxForm, TreeForm, TreeSmartFieldForm, VirtualTileGridForm, WatchFieldForm, WidgetsOutlineOverview, WrappedFormFieldForm
+} from '../index';
 
-export default () => ({
+export default (): OutlineModel => ({
   id: 'jswidgets.WidgetsOutline',
   title: '${textKey:Widgets}',
   outlineOverview: {
-    objectType: 'jswidgets.WidgetsOutlineOverview'
+    objectType: WidgetsOutlineOverview
   },
   nodes: [
     {
-      objectType: 'PageWithNodes',
+      objectType: PageWithNodes,
       leaf: true,
       text: 'Accordion',
       detailForm: {
-        objectType: 'jswidgets.AccordionForm'
+        objectType: AccordionForm
       },
       detailTableVisible: false
     },
     {
-      objectType: 'PageWithNodes',
+      objectType: PageWithNodes,
       leaf: true,
       text: 'Breadcrumb Bar Field',
       detailForm: {
-        objectType: 'jswidgets.BreadcrumbBarFieldForm'
+        objectType: BreadcrumbBarFieldForm
       },
       detailTableVisible: false
     },
     {
-      objectType: 'PageWithNodes',
+      objectType: PageWithNodes,
       leaf: true,
       text: 'Button',
       detailForm: {
-        objectType: 'jswidgets.ButtonForm'
+        objectType: ButtonForm
       },
       detailTableVisible: false
     },
     {
-      objectType: 'PageWithNodes',
+      objectType: PageWithNodes,
       leaf: true,
       text: 'Browser Field',
       detailForm: {
-        objectType: 'jswidgets.BrowserFieldForm'
+        objectType: BrowserFieldForm
       },
       detailTableVisible: false
     },
     {
-      objectType: 'PageWithNodes',
+      objectType: PageWithNodes,
       leaf: true,
       text: 'Carousel',
       detailForm: {
-        objectType: 'jswidgets.CarouselForm'
+        objectType: CarouselForm
       },
       detailTableVisible: false
     },
     {
-      objectType: 'PageWithNodes',
+      objectType: PageWithNodes,
       leaf: true,
       text: 'Chart Field',
       detailForm: {
-        objectType: 'jswidgets.ChartFieldForm'
+        objectType: ChartFieldForm
       },
       detailTableVisible: false
     },
     {
-      objectType: 'PageWithNodes',
+      objectType: PageWithNodes,
       leaf: true,
       text: 'Check Box Field',
       detailForm: {
-        objectType: 'jswidgets.CheckBoxFieldForm'
+        objectType: CheckBoxFieldForm
       },
       detailTableVisible: false
     },
     {
-      objectType: 'PageWithNodes',
+      objectType: PageWithNodes,
       expanded: true,
       text: 'Custom Fields',
       childNodes: [
         {
-          objectType: 'PageWithNodes',
+          objectType: PageWithNodes,
           leaf: true,
           text: 'Watch Field',
           detailForm: {
-            objectType: 'jswidgets.WatchFieldForm'
+            objectType: WatchFieldForm
           },
           detailTableVisible: false
         }
       ]
     },
     {
-      objectType: 'PageWithNodes',
+      objectType: PageWithNodes,
       leaf: true,
       text: 'Date Field',
       detailForm: {
-        objectType: 'jswidgets.DateFieldForm'
+        objectType: DateFieldForm
       },
       detailTableVisible: false
     },
     {
-      objectType: 'PageWithNodes',
+      objectType: PageWithNodes,
       leaf: true,
       text: 'Desktop',
       detailForm: {
-        objectType: 'jswidgets.DesktopForm'
+        objectType: DesktopForm
       },
       detailTableVisible: false
     },
     {
-      objectType: 'PageWithNodes',
+      objectType: PageWithNodes,
       leaf: true,
       text: 'Desktop Notification',
       detailForm: {
-        objectType: 'jswidgets.DesktopNotificationForm'
+        objectType: DesktopNotificationForm
       },
       detailTableVisible: false
     },
     {
-      objectType: 'PageWithNodes',
+      objectType: PageWithNodes,
       leaf: true,
       text: 'Form',
       detailForm: {
-        objectType: 'jswidgets.FormForm',
+        objectType: FormForm,
         detailForm: true
       },
       detailTableVisible: false
     },
     {
-      objectType: 'PageWithNodes',
+      objectType: PageWithNodes,
       expanded: true,
       text: 'File Chooser Field',
       detailForm: {
-        objectType: 'jswidgets.FileChooserFieldForm'
+        objectType: FileChooserFieldForm
       },
       childNodes: [
         {
-          objectType: 'PageWithNodes',
+          objectType: PageWithNodes,
           leaf: true,
           text: 'File Chooser Button',
           detailForm: {
-            objectType: 'jswidgets.FileChooserButtonForm'
+            objectType: FileChooserButtonForm
           },
           detailTableVisible: false
         },
         {
-          objectType: 'PageWithNodes',
+          objectType: PageWithNodes,
           leaf: true,
           text: 'File Chooser',
           detailForm: {
-            objectType: 'jswidgets.FileChooserForm'
+            objectType: FileChooserForm
           },
           detailTableVisible: false
         }
       ]
     },
     {
-      objectType: 'PageWithNodes',
+      objectType: PageWithNodes,
       leaf: true,
       text: 'Group Box',
       detailForm: {
-        objectType: 'jswidgets.GroupBoxForm'
+        objectType: GroupBoxForm
       },
       detailTableVisible: false
     },
     {
-      objectType: 'PageWithNodes',
+      objectType: PageWithNodes,
       leaf: true,
       text: 'Image',
       detailForm: {
-        objectType: 'jswidgets.ImageForm'
+        objectType: ImageForm
       },
       detailTableVisible: false
     },
     {
-      objectType: 'PageWithNodes',
+      objectType: PageWithNodes,
       leaf: true,
       text: 'Image Field',
       detailForm: {
-        objectType: 'jswidgets.ImageFieldForm'
+        objectType: ImageFieldForm
       },
       detailTableVisible: false
     },
     {
-      objectType: 'PageWithNodes',
+      objectType: PageWithNodes,
       leaf: true,
       text: 'Label',
       detailForm: {
-        objectType: 'jswidgets.LabelForm'
+        objectType: LabelForm
       },
       detailTableVisible: false
     },
     {
-      objectType: 'PageWithNodes',
+      objectType: PageWithNodes,
       leaf: true,
       text: 'Label Field',
       detailForm: {
-        objectType: 'jswidgets.LabelFieldForm'
+        objectType: LabelFieldForm
       },
       detailTableVisible: false
     },
     {
-      objectType: 'PageWithNodes',
+      objectType: PageWithNodes,
       leaf: true,
       text: 'List Box',
       detailForm: {
-        objectType: 'jswidgets.ListBoxForm'
+        objectType: ListBoxForm
       },
       detailTableVisible: false
     },
     {
-      objectType: 'PageWithNodes',
+      objectType: PageWithNodes,
       leaf: true,
       text: 'Logical Grid',
       detailForm: {
-        objectType: 'jswidgets.LogicalGridForm'
+        objectType: LogicalGridForm
       },
       detailTableVisible: false
     },
     {
-      objectType: 'PageWithNodes',
+      objectType: PageWithNodes,
       leaf: true,
       text: 'Menu Bar',
       detailForm: {
-        objectType: 'jswidgets.MenuBarForm'
+        objectType: MenuBarForm
       },
       detailTableVisible: false
     },
     {
-      objectType: 'PageWithNodes',
+      objectType: PageWithNodes,
       leaf: true,
       text: 'MessageBox',
       detailForm: {
-        objectType: 'jswidgets.MessageBoxForm'
+        objectType: MessageBoxForm
       },
       detailTableVisible: false
     },
     {
-      objectType: 'PageWithNodes',
+      objectType: PageWithNodes,
       leaf: true,
       text: 'Mode Selector',
       detailForm: {
-        objectType: 'jswidgets.ModeSelectorForm'
+        objectType: ModeSelectorForm
       },
       detailTableVisible: false
     },
     {
-      objectType: 'PageWithNodes',
+      objectType: PageWithNodes,
       text: 'Number Field',
       detailForm: {
-        objectType: 'jswidgets.NumberFieldForm'
+        objectType: NumberFieldForm
       },
       expanded: true,
       childNodes: [
         {
-          objectType: 'PageWithNodes',
+          objectType: PageWithNodes,
           leaf: true,
           text: 'Integer Field',
           detailForm: {
-            objectType: 'jswidgets.IntegerFieldForm'
+            objectType: IntegerFieldForm
           },
           detailTableVisible: false
         }
       ]
     },
     {
-      objectType: 'PageWithNodes',
+      objectType: PageWithNodes,
       text: 'Pages',
       expanded: true,
       childNodes: [
         {
-          objectType: 'jswidgets.SamplePageWithTable'
+          objectType: SamplePageWithTable
         },
         {
-          objectType: 'jswidgets.SamplePageWithNodes'
+          objectType: SamplePageWithNodes
         }
       ]
     },
     {
-      objectType: 'PageWithNodes',
+      objectType: PageWithNodes,
       leaf: true,
       text: 'Popup',
       detailForm: {
-        objectType: 'jswidgets.PopupForm'
+        objectType: PopupForm
       },
       detailTableVisible: false
     },
     {
-      objectType: 'PageWithNodes',
+      objectType: PageWithNodes,
       leaf: true,
       text: 'Radio Button Group',
       detailForm: {
-        objectType: 'jswidgets.RadioButtonGroupForm'
+        objectType: RadioButtonGroupForm
       },
       detailTableVisible: false
     },
     {
-      objectType: 'PageWithNodes',
+      objectType: PageWithNodes,
       leaf: true,
       text: 'Rest',
       detailForm: {
-        objectType: 'jswidgets.RestForm'
+        objectType: RestForm
       },
       detailTableVisible: false
     },
     {
-      objectType: 'PageWithNodes',
+      objectType: PageWithNodes,
       leaf: true,
       text: 'Sequence Box',
       detailForm: {
-        objectType: 'jswidgets.SequenceBoxForm'
+        objectType: SequenceBoxForm
       },
       detailTableVisible: false
     },
     {
-      objectType: 'PageWithNodes',
+      objectType: PageWithNodes,
       text: 'Smart Field',
       expanded: true,
       detailForm: {
-        objectType: 'jswidgets.SmartFieldForm'
+        objectType: SmartFieldForm
       },
       childNodes: [
         {
-          objectType: 'PageWithNodes',
+          objectType: PageWithNodes,
           leaf: true,
           text: 'Proposal Field',
           detailForm: {
-            objectType: 'jswidgets.ProposalFieldForm'
+            objectType: ProposalFieldForm
           },
           detailTableVisible: false
         },
         {
-          objectType: 'PageWithNodes',
+          objectType: PageWithNodes,
           leaf: true,
           text: 'Multiline Smart Field',
           detailForm: {
-            objectType: 'jswidgets.MultilineSmartFieldForm'
+            objectType: MultilineSmartFieldForm
           },
           detailTableVisible: false
         },
         {
-          objectType: 'PageWithNodes',
+          objectType: PageWithNodes,
           leaf: true,
           text: 'Table Smart Field',
           detailForm: {
-            objectType: 'jswidgets.TableSmartFieldForm'
+            objectType: TableSmartFieldForm
           },
           detailTableVisible: false
         },
         {
-          objectType: 'PageWithNodes',
+          objectType: PageWithNodes,
           leaf: true,
           text: 'Tree Smart Field',
           detailForm: {
-            objectType: 'jswidgets.TreeSmartFieldForm'
+            objectType: TreeSmartFieldForm
           },
           detailTableVisible: false
         }
       ]
     },
     {
-      objectType: 'PageWithNodes',
+      objectType: PageWithNodes,
       text: 'String Field',
       expanded: true,
       detailForm: {
-        objectType: 'jswidgets.StringFieldForm'
+        objectType: StringFieldForm
       },
       childNodes: [
         {
-          objectType: 'PageWithNodes',
+          objectType: PageWithNodes,
           leaf: true,
           text: 'Multiline String Field',
           detailForm: {
-            objectType: 'jswidgets.MultilineStringFieldForm'
+            objectType: MultilineStringFieldForm
           },
           detailTableVisible: false
         }
       ]
     },
     {
-      objectType: 'PageWithNodes',
+      objectType: PageWithNodes,
       leaf: true,
       text: 'Tab Box',
       detailForm: {
-        objectType: 'jswidgets.TabBoxForm'
+        objectType: TabBoxForm
       },
       detailTableVisible: false
     },
     {
-      objectType: 'PageWithNodes',
+      objectType: PageWithNodes,
       text: 'Table',
       expanded: true,
       detailForm: {
-        objectType: 'jswidgets.TableForm'
+        objectType: TableForm
       },
       childNodes: [
         {
-          objectType: 'PageWithNodes',
+          objectType: PageWithNodes,
           leaf: true,
           text: 'Editable Table',
           detailForm: {
-            objectType: 'jswidgets.EditableTableForm'
+            objectType: EditableTableForm
           },
           detailTableVisible: false
         },
         {
-          objectType: 'PageWithNodes',
+          objectType: PageWithNodes,
           leaf: true,
           text: 'Hierarchical Table',
           detailForm: {
-            objectType: 'jswidgets.HierarchicalTableForm'
+            objectType: HierarchicalTableForm
           },
           detailTableVisible: false
         }
       ]
     },
     {
-      objectType: 'PageWithNodes',
+      objectType: PageWithNodes,
       leaf: true,
       text: 'Tag Field',
       detailForm: {
-        objectType: 'jswidgets.TagFieldForm'
+        objectType: TagFieldForm
       },
       detailTableVisible: false
     },
     {
-      objectType: 'PageWithNodes',
+      objectType: PageWithNodes,
       text: 'Tile Grid',
       expanded: true,
       detailForm: {
-        objectType: 'jswidgets.TileGridForm'
+        objectType: TileGridForm
       },
       childNodes: [
         {
-          objectType: 'PageWithNodes',
+          objectType: PageWithNodes,
           leaf: true,
           text: 'Virtual Tile Grid',
           detailForm: {
-            objectType: 'jswidgets.VirtualTileGridForm'
+            objectType: VirtualTileGridForm
           },
           detailTableVisible: false
         }
       ]
     },
     {
-      objectType: 'PageWithNodes',
+      objectType: PageWithNodes,
       leaf: true,
       text: 'Tile Accordion',
       detailForm: {
-        objectType: 'jswidgets.TileAccordionForm'
+        objectType: TileAccordionForm
       },
       detailTableVisible: false
     },
     {
-      objectType: 'PageWithNodes',
+      objectType: PageWithNodes,
       leaf: true,
       text: 'Tooltip',
       detailForm: {
-        objectType: 'jswidgets.TooltipForm'
+        objectType: TooltipForm
       },
       detailTableVisible: false
     },
     {
-      objectType: 'PageWithNodes',
+      objectType: PageWithNodes,
       leaf: true,
       text: 'Tree',
       detailForm: {
-        objectType: 'jswidgets.TreeForm'
+        objectType: TreeForm
       },
       detailTableVisible: false
     },
     {
-      objectType: 'PageWithNodes',
+      objectType: PageWithNodes,
       leaf: true,
       text: 'Tree Box',
       detailForm: {
-        objectType: 'jswidgets.TreeBoxForm'
+        objectType: TreeBoxForm
       },
       detailTableVisible: false
     },

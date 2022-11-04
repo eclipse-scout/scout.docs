@@ -8,58 +8,65 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-export default () => ({
+import {CheckBoxField, FormModel, GroupBox, LabelField, Menu, NumberField, SmartField, TabItem, TileField, TileGrid} from '@eclipse-scout/core';
+import {
+  ConfigurationBox, CustomTile, EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, TileGridLayoutConfigBox,
+  WidgetActionsBox, WidgetActionsBoxWidgetMap
+} from '../index';
+import {TileGridLayoutConfigBoxWidgetMap} from './TileGridLayoutConfigBoxModel';
+
+export default (): FormModel => ({
   id: 'jswidgets.TileGridForm',
   displayHint: 'view',
   rootGroupBox: {
     id: 'MainBox',
-    objectType: 'GroupBox',
+    objectType: GroupBox,
     fields: [
       {
         id: 'DetailBox',
-        objectType: 'GroupBox',
+        objectType: GroupBox,
         gridColumnCount: 1,
         menus: [
           {
             id: 'InsertMenu',
-            objectType: 'Menu',
+            objectType: Menu,
             text: 'Insert tile',
             keyStroke: 'insert'
           },
           {
             id: 'InsertManyMenu',
-            objectType: 'Menu',
+            objectType: Menu,
             text: 'Insert many tiles'
           },
           {
             id: 'DeleteMenu',
-            objectType: 'Menu',
+            objectType: Menu,
             text: 'Delete selected tiles',
             keyStroke: 'delete'
           },
           {
             id: 'SelectNextMenu',
-            objectType: 'Menu',
+            objectType: Menu,
             text: 'Select next tile'
           },
           {
             id: 'SelectAllMenu',
-            objectType: 'Menu',
+            objectType: Menu,
             text: 'Select all tiles'
           },
           {
             id: 'SortMenu',
-            objectType: 'Menu',
+            objectType: Menu,
             text: 'Sort',
             childActions: [
               {
                 id: 'SortAscMenu',
-                objectType: 'Menu',
+                objectType: Menu,
                 text: 'Ascending'
               },
               {
                 id: 'SortDescMenu',
-                objectType: 'Menu',
+                objectType: Menu,
                 text: 'Descending'
               }
             ]
@@ -68,14 +75,14 @@ export default () => ({
         fields: [
           {
             id: 'TileField',
-            objectType: 'TileField',
+            objectType: TileField,
             labelVisible: false,
             gridDataHints: {
               h: 8
             },
             tileGrid: {
               id: 'TileGrid',
-              objectType: 'TileGrid',
+              objectType: TileGrid,
               scrollable: true,
               textFilterEnabled: true,
               cssClass: 'has-custom-tiles',
@@ -86,23 +93,23 @@ export default () => ({
               },
               tiles: [
                 {
-                  objectType: 'jswidgets.CustomTile',
+                  objectType: CustomTile,
                   label: 'Tile 1'
                 },
                 {
-                  objectType: 'jswidgets.CustomTile',
+                  objectType: CustomTile,
                   label: 'Tile 2'
                 },
                 {
-                  objectType: 'jswidgets.CustomTile',
+                  objectType: CustomTile,
                   label: 'Tile 3'
                 },
                 {
-                  objectType: 'jswidgets.CustomTile',
+                  objectType: CustomTile,
                   label: 'Tile 4'
                 },
                 {
-                  objectType: 'jswidgets.CustomTile',
+                  objectType: CustomTile,
                   label: 'Tile 5'
                 }
               ]
@@ -110,7 +117,7 @@ export default () => ({
           },
           {
             id: 'StatusField',
-            objectType: 'LabelField',
+            objectType: LabelField,
             labelVisible: false,
             gridDataHints: {
               horizontalAlignment: 1
@@ -120,54 +127,54 @@ export default () => ({
       },
       {
         id: 'ConfigurationBox',
-        objectType: 'jswidgets.ConfigurationBox',
+        objectType: ConfigurationBox,
         selectedTab: 'PropertiesTab',
         tabItems: [
           {
             id: 'PropertiesTab',
-            objectType: 'TabItem',
+            objectType: TabItem,
             label: 'Properties',
             fields: [
               {
                 id: 'PropertiesBox',
-                objectType: 'GroupBox',
+                objectType: GroupBox,
                 label: 'Properties',
                 labelVisible: false,
                 borderVisible: false,
                 fields: [
                   {
                     id: 'SelectableField',
-                    objectType: 'CheckBoxField',
+                    objectType: CheckBoxField,
                     label: 'Selectable',
                     labelVisible: false
                   },
                   {
                     id: 'MultiSelectField',
-                    objectType: 'CheckBoxField',
+                    objectType: CheckBoxField,
                     label: 'Multi Select',
                     labelVisible: false
                   },
                   {
                     id: 'ScrollableField',
-                    objectType: 'CheckBoxField',
+                    objectType: CheckBoxField,
                     label: 'Scrollable',
                     labelVisible: false
                   },
                   {
                     id: 'InvertColorsField',
-                    objectType: 'CheckBoxField',
+                    objectType: CheckBoxField,
                     label: 'Invert Colors',
                     labelVisible: false
                   },
                   {
                     id: 'WithPlaceholdersField',
-                    objectType: 'CheckBoxField',
+                    objectType: CheckBoxField,
                     label: 'With Placeholders',
                     labelVisible: false
                   },
                   {
                     id: 'VirtualField',
-                    objectType: 'CheckBoxField',
+                    objectType: CheckBoxField,
                     label: 'Virtual',
                     labelVisible: false,
                     tooltipText: '${textKey:TileGridVirtualTooltip}',
@@ -177,31 +184,31 @@ export default () => ({
                   },
                   {
                     id: 'TextFilterEnabledField',
-                    objectType: 'CheckBoxField',
+                    objectType: CheckBoxField,
                     label: 'Text Filter Enabled',
                     labelVisible: false
                   },
                   {
                     id: 'GridColumnCountField',
-                    objectType: 'NumberField',
+                    objectType: NumberField,
                     label: 'Grid Column Count'
                   },
                   {
                     id: 'LogicalGridField',
-                    objectType: 'SmartField',
+                    objectType: SmartField,
                     label: 'Logical Grid',
                     lookupCall: 'jswidgets.LogicalGridLookupCall',
                     tooltipText: '${textKey:LogicalGridWithRefTooltip}'
                   },
                   {
                     id: 'ColorSchemeField',
-                    objectType: 'SmartField',
+                    objectType: SmartField,
                     label: 'Color Scheme',
                     lookupCall: 'jswidgets.ColorSchemeLookupCall'
                   },
                   {
                     id: 'TileTypeField',
-                    objectType: 'SmartField',
+                    objectType: SmartField,
                     displayStyle: 'dropdown',
                     label: 'Tile Type',
                     tooltipText: '${textKey:TileTypeTooltip}',
@@ -212,43 +219,83 @@ export default () => ({
               },
               {
                 id: 'FormFieldPropertiesBox',
-                objectType: 'jswidgets.FormFieldPropertiesBox',
+                objectType: FormFieldPropertiesBox,
                 expanded: false
               },
               {
                 id: 'GridDataBox',
-                objectType: 'jswidgets.GridDataBox',
+                objectType: GridDataBox,
                 label: 'Grid Data Hints',
                 expanded: false
               },
               {
                 id: 'LayoutConfigBox',
-                objectType: 'jswidgets.TileGridLayoutConfigBox',
+                objectType: TileGridLayoutConfigBox,
                 expanded: false
               }
             ]
           },
           {
             id: 'ActionsTab',
-            objectType: 'TabItem',
+            objectType: TabItem,
             label: 'Actions',
             fields: [
               {
                 id: 'FormFieldActionsBox',
-                objectType: 'jswidgets.FormFieldActionsBox'
+                objectType: FormFieldActionsBox
               },
               {
                 id: 'WidgetActionsBox',
-                objectType: 'jswidgets.WidgetActionsBox'
+                objectType: WidgetActionsBox
               }
             ]
           },
           {
             id: 'EventsTab',
-            objectType: 'jswidgets.EventsTab'
+            objectType: EventsTab
           }
         ]
       }
     ]
   }
 });
+
+export type TileGridFormWidgetMap =
+  {
+    'MainBox': GroupBox;
+    'DetailBox': GroupBox;
+    'InsertMenu': Menu;
+    'InsertManyMenu': Menu;
+    'DeleteMenu': Menu;
+    'SelectNextMenu': Menu;
+    'SelectAllMenu': Menu;
+    'SortMenu': Menu;
+    'SortAscMenu': Menu;
+    'SortDescMenu': Menu;
+    'TileField': TileField;
+    'TileGrid': TileGrid;
+    'StatusField': LabelField;
+    'ConfigurationBox': ConfigurationBox;
+    'PropertiesTab': TabItem;
+    'PropertiesBox': GroupBox;
+    'SelectableField': CheckBoxField;
+    'MultiSelectField': CheckBoxField;
+    'ScrollableField': CheckBoxField;
+    'InvertColorsField': CheckBoxField;
+    'WithPlaceholdersField': CheckBoxField;
+    'VirtualField': CheckBoxField;
+    'TextFilterEnabledField': CheckBoxField;
+    'GridColumnCountField': NumberField;
+    'LogicalGridField': SmartField<string>;
+    'ColorSchemeField': SmartField<string>;
+    'TileTypeField': SmartField<'default' | 'simple'>;
+    'FormFieldPropertiesBox': FormFieldPropertiesBox;
+    'GridDataBox': GridDataBox;
+    'LayoutConfigBox': TileGridLayoutConfigBox;
+    'ActionsTab': TabItem;
+    'FormFieldActionsBox': FormFieldActionsBox;
+    'WidgetActionsBox': WidgetActionsBox;
+    'EventsTab': EventsTab;
+  }
+  & FormFieldPropertiesBoxWidgetMap & GridDataBoxWidgetMap & TileGridLayoutConfigBoxWidgetMap
+  & FormFieldActionsBoxWidgetMap & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;

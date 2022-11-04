@@ -8,22 +8,24 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {StaticLookupCall} from '@eclipse-scout/core';
+import {StaticLookupCall, TabBox, TabItem} from '@eclipse-scout/core';
 
-export default class TabItemLookupCall extends StaticLookupCall {
+export class TabItemLookupCall extends StaticLookupCall<TabItem> {
+  tabBox: TabBox;
+  protected _rebuildDataHandler: () => void;
 
-  constructor(tabBox) {
+  constructor(tabBox: TabBox) {
     super();
     this._rebuildDataHandler = this._rebuildData.bind(this);
     this.data = [];
     this.setTabBox(tabBox);
   }
 
-  _data() {
+  protected override _data(): any[] {
     return this.data;
   }
 
-  setTabBox(tabBox) {
+  setTabBox(tabBox: TabBox) {
     if (this.tabBox) {
       this.tabBox.off('propertyChange:tabItems', this._rebuildDataHandler);
       this.tabBox.tabItems.forEach(function(tabItem) {
@@ -38,7 +40,7 @@ export default class TabItemLookupCall extends StaticLookupCall {
     this._rebuildData();
   }
 
-  _rebuildData() {
+  protected _rebuildData() {
     this.data = this.tabBox.tabItems.map(tabItem => {
       return [tabItem, tabItem.label];
     });

@@ -8,20 +8,18 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {Form, models} from '@eclipse-scout/core';
+import {Form, FormModel, InitModelOf, models} from '@eclipse-scout/core';
 import MiniFormModel from './MiniFormModel';
+import {MiniFormWidgetMap} from '../index';
 
-export default class MiniForm extends Form {
+export class MiniForm extends Form {
+  declare widgetMap: MiniFormWidgetMap;
 
-  constructor() {
-    super();
-  }
-
-  _jsonModel() {
+  protected override _jsonModel(): FormModel {
     return models.get(MiniFormModel);
   }
 
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
     this.widget('CloseButton').on('click', () => this.close());
   }

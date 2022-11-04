@@ -8,31 +8,34 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {GroupBox, models} from '@eclipse-scout/core';
+import {Button, Event, GroupBox, GroupBoxModel, InitModelOf, LabelField, models, Widget} from '@eclipse-scout/core';
 import WidgetActionsBoxModel from './WidgetActionsBoxModel';
+import {WidgetActionsBoxWidgetMap} from '../index';
 
-export default class WidgetActionsBox extends GroupBox {
+export class WidgetActionsBox extends GroupBox {
+  declare widgetMap: WidgetActionsBoxWidgetMap;
+  field: Widget;
 
   constructor() {
     super();
     this.field = null;
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): GroupBoxModel {
     return models.get(WidgetActionsBoxModel);
   }
 
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
     this._setField(this.field);
   }
 
-  setField(field) {
+  setField(field: Widget) {
     this.setProperty('field', field);
   }
 
-  _setField(field) {
+  protected _setField(field: Widget) {
     this._setProperty('field', field);
     if (!this.field) {
       return;
@@ -57,19 +60,19 @@ export default class WidgetActionsBox extends GroupBox {
     scrollTopField.on('propertyChange:value', event => this.field.setScrollTop(event.newValue));
   }
 
-  _onFocusButtonClick(event) {
+  protected _onFocusButtonClick(event: Event<Button>) {
     let returned = this.field.focus();
     let returnField = this.widget('FocusReturnField');
     this._updateBooleanReturnValue(returnField, returned);
   }
 
-  _onIsFocusableButtonClick(event) {
+  protected _onIsFocusableButtonClick(event: Event<Button>) {
     let returned = this.field.isFocusable();
     let returnField = this.widget('IsFocusableReturnField');
     this._updateBooleanReturnValue(returnField, returned);
   }
 
-  _updateBooleanReturnValue(returnField, returned) {
+  protected _updateBooleanReturnValue(returnField: LabelField, returned: boolean) {
     if (returned) {
       returnField.setValue('-> returned true');
     } else {
@@ -79,15 +82,15 @@ export default class WidgetActionsBox extends GroupBox {
     returnField.toggleCssClass('action-return-fail', !returned);
   }
 
-  _onRevealButtonClick(event) {
-    this.field.reveal();
+  protected _onRevealButtonClick(event: Event<Button>) {
+    this.field.reveal(null);
   }
 
-  _onScrollToTopButtonClick(event) {
+  protected _onScrollToTopButtonClick(event: Event<Button>) {
     this.field.scrollToTop();
   }
 
-  _onScrollToBottomButtonClick(event) {
+  protected _onScrollToBottomButtonClick(event: Event<Button>) {
     this.field.scrollToBottom();
   }
 }

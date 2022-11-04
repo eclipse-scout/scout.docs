@@ -1,39 +1,42 @@
 /*
- * Copyright (c) 2020 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {GroupBox, models} from '@eclipse-scout/core';
+import {Button, Event, FormField, GroupBox, GroupBoxModel, InitModelOf, Menu, models} from '@eclipse-scout/core';
 import FormFieldActionsBoxModel from './FormFieldActionsBoxModel';
-import {FormFieldMenuLookupCall} from '../index';
+import {FormFieldActionsBoxWidgetMap, FormFieldMenuLookupCall} from '../index';
 
-export default class FormFieldActionsBox extends GroupBox {
+export class FormFieldActionsBox extends GroupBox {
+  declare widgetMap: FormFieldActionsBoxWidgetMap;
+
+  field: FormField;
 
   constructor() {
     super();
     this.field = null;
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): GroupBoxModel {
     return models.get(FormFieldActionsBoxModel);
   }
 
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
     this._setField(this.field);
   }
 
-  setField(field) {
+  setField(field: FormField) {
     this.setProperty('field', field);
   }
 
-  _setField(field) {
+  protected _setField(field: FormField) {
     this._setProperty('field', field);
     if (!this.field) {
       return;
@@ -48,14 +51,14 @@ export default class FormFieldActionsBox extends GroupBox {
     menuToDeleteField.setLookupCall(new FormFieldMenuLookupCall(this.field));
   }
 
-  _onInsertMenuClick(event) {
+  protected _onInsertMenuClick(event: Event<Button>) {
     this.field.insertMenu({
-      objectType: 'Menu',
+      objectType: Menu,
       text: 'Menu ' + (this.field.menus.length + 1)
     });
   }
 
-  _onDeleteMenuClick(event) {
+  protected _onDeleteMenuClick(event: Event<Button>) {
     let menuToDeleteField = this.widget('MenuToDeleteField');
     let menu = menuToDeleteField.value;
     this.field.deleteMenu(menu);

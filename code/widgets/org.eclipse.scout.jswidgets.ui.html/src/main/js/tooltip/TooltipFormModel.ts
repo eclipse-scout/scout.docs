@@ -1,13 +1,26 @@
-export default () => ({
+/*
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Distribution License v1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/org/documents/edl-v10.html
+ *
+ * Contributors:
+ *     BSI Business Systems Integration AG - initial API and implementation
+ */
+import {Button, CheckBoxField, FormModel, GroupBox, SmartField, StatusSeverity, StringField, TabItem} from '@eclipse-scout/core';
+import {ConfigurationBox, EventsTab, EventsTabWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap} from '../index';
+
+export default (): FormModel => ({
   id: 'jswidgets.TooltipForm',
   displayHint: 'view',
   rootGroupBox: {
     id: 'MainBox',
-    objectType: 'GroupBox',
+    objectType: GroupBox,
     fields: [
       {
         id: 'DetailBox',
-        objectType: 'GroupBox',
+        objectType: GroupBox,
         gridColumnCount: 1,
         gridDataHints: {
           weightY: 1
@@ -15,7 +28,7 @@ export default () => ({
         fields: [
           {
             id: 'OpenTooltipButton',
-            objectType: 'Button',
+            objectType: Button,
             label: '${textKey:OpenTooltip}',
             cssClass: 'open-form-button',
             processButton: false,
@@ -31,42 +44,42 @@ export default () => ({
       },
       {
         id: 'ConfigurationBox',
-        objectType: 'jswidgets.ConfigurationBox',
+        objectType: ConfigurationBox,
         selectedTab: 'PropertiesTab',
         tabItems: [
           {
             id: 'PropertiesTab',
-            objectType: 'TabItem',
+            objectType: TabItem,
             label: 'Properties',
             fields: [
               {
                 id: 'PropertiesBox',
-                objectType: 'GroupBox',
+                objectType: GroupBox,
                 label: 'Properties',
                 labelVisible: false,
                 borderVisible: false,
                 fields: [
                   {
                     id: 'AutoRemoveField',
-                    objectType: 'CheckBoxField',
+                    objectType: CheckBoxField,
                     label: 'Auto Remove',
                     labelVisible: false
                   },
                   {
                     id: 'HtmlEnabledField',
-                    objectType: 'CheckBoxField',
+                    objectType: CheckBoxField,
                     label: 'Html Enabled',
                     labelVisible: false
                   },
                   {
                     id: 'TextField',
-                    objectType: 'StringField',
+                    objectType: StringField,
                     label: 'Text',
                     value: '${textKey:TooltipText}'
                   },
                   {
                     id: 'SeverityField',
-                    objectType: 'SmartField',
+                    objectType: SmartField,
                     lookupCall: 'jswidgets.StatusSeverityLookupCall',
                     label: 'Severity'
                   }
@@ -76,21 +89,37 @@ export default () => ({
           },
           {
             id: 'ActionsTab',
-            objectType: 'TabItem',
+            objectType: TabItem,
             label: 'Actions',
             fields: [
               {
                 id: 'WidgetActionsBox',
-                objectType: 'jswidgets.WidgetActionsBox'
+                objectType: WidgetActionsBox
               }
             ]
           },
           {
             id: 'EventsTab',
-            objectType: 'jswidgets.EventsTab'
+            objectType: EventsTab
           }
         ]
       }
     ]
   }
 });
+
+export type TooltipFormWidgetMap = {
+  'MainBox': GroupBox;
+  'DetailBox': GroupBox;
+  'OpenTooltipButton': Button;
+  'ConfigurationBox': ConfigurationBox;
+  'PropertiesTab': TabItem;
+  'PropertiesBox': GroupBox;
+  'AutoRemoveField': CheckBoxField;
+  'HtmlEnabledField': CheckBoxField;
+  'TextField': StringField;
+  'SeverityField': SmartField<StatusSeverity>;
+  'ActionsTab': TabItem;
+  'WidgetActionsBox': WidgetActionsBox;
+  'EventsTab': EventsTab;
+} & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;

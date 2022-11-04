@@ -8,21 +8,25 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {GroupBox, models} from '@eclipse-scout/core';
+import {GroupBox, GroupBoxModel, InitModelOf, models, ValueField} from '@eclipse-scout/core';
 import ValueFieldPropertiesBoxModel from './ValueFieldPropertiesBoxModel';
+import {ValueFieldPropertiesBoxWidgetMap} from '../index';
 
-export default class ValueFieldPropertiesBox extends GroupBox {
+export class ValueFieldPropertiesBox extends GroupBox {
+  declare widgetMap: ValueFieldPropertiesBoxWidgetMap;
+
+  field: ValueField<any>;
 
   constructor() {
     super();
     this.field = null;
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): GroupBoxModel {
     return models.get(ValueFieldPropertiesBoxModel);
   }
 
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
     this._setField(this.field);
@@ -30,11 +34,11 @@ export default class ValueFieldPropertiesBox extends GroupBox {
     this.widget('DisplayTextField').setTrimText(false);
   }
 
-  setField(field) {
+  setField(field: ValueField<any>) {
     this.setProperty('field', field);
   }
 
-  _setField(field) {
+  protected _setField(field: ValueField<any>) {
     this._setProperty('field', field);
     if (!this.field) {
       return;
@@ -59,7 +63,7 @@ export default class ValueFieldPropertiesBox extends GroupBox {
     clearableField.on('propertyChange:value', event => this.field.setClearable(event.newValue));
   }
 
-  parseValue(newValue) {
+  parseValue(newValue: string): any {
     return newValue;
   }
 }

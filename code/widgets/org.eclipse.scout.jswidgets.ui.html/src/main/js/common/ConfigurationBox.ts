@@ -8,19 +8,22 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {GridData, icons, scout, TabBox} from '@eclipse-scout/core';
+import {Action, Event, GridData, icons, InitModelOf, Menu, scout, TabBox} from '@eclipse-scout/core';
 
-export default class ConfigurationBox extends TabBox {
+export class ConfigurationBox extends TabBox {
+
+  toggleMenu: Menu;
+  protected _origWeightY: number;
 
   constructor() {
     super();
     this.cssClass = 'jswidgets-configuration';
   }
 
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
-    this.toggleMenu = scout.create('Menu', {
+    this.toggleMenu = scout.create(Menu, {
       parent: this,
       cssClass: 'configuration-box-toggle-menu',
       menuTypes: [
@@ -32,15 +35,14 @@ export default class ConfigurationBox extends TabBox {
     this.setMenus([this.toggleMenu]);
   }
 
-  _onToggleMenuAction(event) {
+  protected _onToggleMenuAction(event: Event<Action>) {
     let expanded = !this.tabItems[0].expanded;
     this.tabItems.forEach(tab => {
       tab.setExpanded(expanded);
     });
     let gridData = new GridData(this.gridDataHints);
-    let weightY;
     if (expanded) {
-      if (this._origWeightY !== undefined) {
+      if (this._origWeightY) {
         gridData.weightY = this._origWeightY;
       }
     } else {
@@ -51,7 +53,7 @@ export default class ConfigurationBox extends TabBox {
     this._updateToggleIcon();
   }
 
-  _updateToggleIcon() {
+  protected _updateToggleIcon() {
     let iconId = icons.ANGLE_DOWN;
     if (!this.tabItems[0].expanded) {
       iconId = icons.ANGLE_UP;

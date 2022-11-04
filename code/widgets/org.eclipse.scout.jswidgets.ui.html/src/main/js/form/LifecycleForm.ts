@@ -8,21 +8,23 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {Form, models} from '@eclipse-scout/core';
+import {Form, FormModel, InitModelOf, models} from '@eclipse-scout/core';
 import $ from 'jquery';
 import LifecycleFormModel from './LifecycleFormModel';
+import {LifecycleFormWidgetMap} from '../index';
 
-export default class LifecycleForm extends Form {
+export class LifecycleForm extends Form {
+  declare widgetMap: LifecycleFormWidgetMap;
 
   constructor() {
     super();
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): FormModel {
     return models.get(LifecycleFormModel);
   }
 
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
     this.widget('HasCloseButtonField').on('propertyChange:value', event => this.widget('CloseMenu').setVisible(event.newValue));
@@ -32,19 +34,19 @@ export default class LifecycleForm extends Form {
     askIfNeedSaveField.on('propertyChange:value', event => this.setAskIfNeedSave(event.newValue));
   }
 
-  importData() {
+  override importData() {
     this.widget('NameField').setValue(this.data.name);
     this.widget('BirthdayField').setValue(this.data.birthday);
   }
 
-  exportData() {
+  override exportData(): LifecycleFormData {
     return {
       name: this.widget('NameField').value,
       birthday: this.widget('BirthdayField').value
     };
   }
 
-  _save(data) {
+  protected override _save(data: LifecycleFormData) {
     if (!this.widget('ExceptionField').value) {
       return super._save(data);
     }
@@ -54,3 +56,8 @@ export default class LifecycleForm extends Form {
     });
   }
 }
+
+export type LifecycleFormData = {
+  name?: string;
+  birthday?: Date;
+};

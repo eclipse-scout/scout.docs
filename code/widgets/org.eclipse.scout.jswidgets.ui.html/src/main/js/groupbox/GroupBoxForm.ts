@@ -8,11 +8,15 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {Form, MessageBoxes, models, scout} from '@eclipse-scout/core';
-import {FormFieldLookupCall} from '../index';
+import {Event, EventHandler, Form, FormField, FormModel, InitModelOf, Menu, MessageBoxes, models, scout} from '@eclipse-scout/core';
+import {FormFieldLookupCall, GroupBoxFormWidgetMap} from '../index';
 import GroupBoxFormModel from './GroupBoxFormModel';
 
-export default class GroupBoxForm extends Form {
+export class GroupBoxForm extends Form {
+  declare widgetMap: GroupBoxFormWidgetMap;
+
+  protected _fieldFocusHandler: (event: JQuery.FocusEvent) => void;
+  protected _fieldRenderHandler: EventHandler<Event<FormField>>;
 
   constructor() {
     super();
@@ -20,11 +24,11 @@ export default class GroupBoxForm extends Form {
     this._fieldRenderHandler = this._onFieldRender.bind(this);
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): FormModel {
     return models.get(GroupBoxFormModel);
   }
 
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
     let menu1 = this.widget('Menu1');
@@ -82,20 +86,20 @@ export default class GroupBoxForm extends Form {
     targetField.setValue(groupBox.fields[0]);
   }
 
-  _initFields(fields) {
+  protected _initFields(fields: FormField[]) {
     fields.forEach(function(field) {
       field.off('render', this._fieldRenderHandler);
       field.on('render', this._fieldRenderHandler);
     }, this);
   }
 
-  _onMenuAction(event) {
+  protected _onMenuAction(event: Event<Menu>) {
     MessageBoxes.createOk(this)
       .withBody('Menu with label \'' + event.source.text + '\' has been activated.')
       .buildAndOpen();
   }
 
-  _updateHighlightedField(newTargetField, oldTargetField) {
+  protected _updateHighlightedField(newTargetField: FormField, oldTargetField?: FormField) {
     let configurationBox = this.widget('ConfigurationBox');
     if (oldTargetField) {
       oldTargetField.removeCssClass('field-highlighted');
@@ -112,13 +116,13 @@ export default class GroupBoxForm extends Form {
     }
   }
 
-  _onFieldRender(event) {
+  protected _onFieldRender(event: Event<FormField>) {
     event.source.$field.off('focus', this._fieldFocusHandler);
     event.source.$field.on('focus', this._fieldFocusHandler);
   }
 
-  _onFieldFocus(event) {
-    let field = scout.widget(event.currentTarget);
+  protected _onFieldFocus(event: JQuery.FocusEvent) {
+    let field: FormField = scout.widget(event.currentTarget);
     this.widget('Field.TargetField').setValue(field);
     this.widget('Actions.AddFieldBox').setTargetField(field);
     this.widget('Actions.DeleteFieldBox').setTargetField(field);

@@ -8,25 +8,30 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {arrays, comparators, Form, models, scout} from '@eclipse-scout/core';
+import {arrays, comparators, Event, Form, FormModel, HtmlTile, HtmlTileModel, InitModelOf, Menu, models, scout, SmartField, TileGrid} from '@eclipse-scout/core';
 import TileGridFormModel from './TileGridFormModel';
 import $ from 'jquery';
+import {CustomTile, CustomTileModel, TileGridFormWidgetMap} from '../index';
 
-export default class TileGridForm extends Form {
+export class TileGridForm extends Form {
+  declare widgetMap: TileGridFormWidgetMap;
+
+  insertedTileCount: number;
+  tileTypeField: SmartField<'default' | 'simple'>;
+  tileGrid: TileGrid;
 
   constructor() {
     super();
     this.insertedTileCount = 0;
-    this.tileFilter = null;
     this.tileTypeField = null;
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): FormModel {
     return models.get(TileGridFormModel);
   }
 
   // noinspection DuplicatedCode
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
     this.tileTypeField = this.widget('TileTypeField');
@@ -123,12 +128,12 @@ export default class TileGridForm extends Form {
     this.updateStatus();
   }
 
-  _onInsertMenuAction(event) {
+  protected _onInsertMenuAction(event: Event<Menu>) {
     let tile = this._createTile();
     this.tileGrid.insertTile(tile);
   }
 
-  _createTile(model) {
+  protected _createTile(model?: HtmlTileModel | CustomTileModel): HtmlTile | CustomTile {
     let defaults;
     let tileType = this.tileTypeField.value;
     if (tileType === 'default') {
@@ -137,17 +142,17 @@ export default class TileGridForm extends Form {
         content: 'New <i>Html Tile</i> ' + this.insertedTileCount++
       };
       model = $.extend({}, defaults, model);
-      return scout.create('HtmlTile', model);
+      return scout.create(HtmlTile, model as InitModelOf<HtmlTile>);
     }
     defaults = {
       parent: this.tileGrid,
       label: 'New Tile ' + this.insertedTileCount++
     };
     model = $.extend({}, defaults, model);
-    return scout.create('jswidgets.CustomTile', model);
+    return scout.create(CustomTile, model as InitModelOf<CustomTile>);
   }
 
-  _onInsertManyMenuAction(event) {
+  protected _onInsertManyMenuAction(event: Event<Menu>) {
     let tiles = [];
     for (let i = 0; i < 50; i++) {
       tiles.push(this._createTile());
@@ -155,14 +160,14 @@ export default class TileGridForm extends Form {
     this.tileGrid.insertTiles(tiles);
   }
 
-  _onDeleteMenuAction(event) {
+  protected _onDeleteMenuAction(event: Event<Menu>) {
     this.tileGrid.deleteTiles(this.tileGrid.selectedTiles);
     if (this.tileGrid.tiles.length === 0) {
       this.insertedTileCount = 0;
     }
   }
 
-  _onSelectNextMenuAction(event) {
+  protected _onSelectNextMenuAction(event: Event<Menu>) {
     if (this.tileGrid.filteredTiles.length === 0) {
       return;
     }
@@ -172,16 +177,16 @@ export default class TileGridForm extends Form {
     this.tileGrid.selectTile(this.tileGrid.filteredTiles[selectedTileIndex + 1] || this.tileGrid.filteredTiles[0]);
   }
 
-  _onSelectAllMenuAction(event) {
+  protected _onSelectAllMenuAction(event: Event<Menu>) {
     this.tileGrid.selectAllTiles();
   }
 
-  _onSortAscMenuAction(event) {
+  protected _onSortAscMenuAction(event: Event<Menu>) {
     this._sortTiles(true);
   }
 
-  _onSortDescMenuAction(event) {
-    this._sortTiles();
+  protected _onSortDescMenuAction(event: Event<Menu>) {
+    this._sortTiles(false);
   }
 
   updateStatus() {
@@ -189,10 +194,10 @@ export default class TileGridForm extends Form {
   }
 
   // noinspection DuplicatedCode
-  _sortTiles(asc) {
+  protected _sortTiles(asc: boolean) {
     let comparator = comparators.ALPHANUMERIC;
     comparator.install(this.session);
-    this.tileGrid.setComparator((tile1, tile2) => {
+    this.tileGrid.setComparator((tile1: (HtmlTile & { label?: string }) | CustomTile, tile2: (HtmlTile & { label?: string }) | CustomTile) => {
       let result = comparator.compare(tile1.label, tile2.label);
       if (!asc) {
         result = -result;

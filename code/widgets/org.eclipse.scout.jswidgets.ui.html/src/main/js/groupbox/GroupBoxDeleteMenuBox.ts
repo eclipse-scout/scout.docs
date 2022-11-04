@@ -8,11 +8,17 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {GroupBox, models} from '@eclipse-scout/core';
-import {FormFieldMenuLookupCall} from '../index';
+import {Button, GroupBox, GroupBoxModel, InitModelOf, Menu, models, SmartField} from '@eclipse-scout/core';
+import {FormFieldMenuLookupCall, GroupBoxDeleteMenuBoxWidgetMap} from '../index';
 import GroupBoxDeleteMenuBoxModel from './GroupBoxDeleteMenuBoxModel';
 
-export default class GroupBoxDeleteMenuBox extends GroupBox {
+export class GroupBoxDeleteMenuBox extends GroupBox {
+  declare widgetMap: GroupBoxDeleteMenuBoxWidgetMap;
+
+  field: GroupBox;
+  targetField: SmartField<Menu>;
+  deleteFieldButton: Button;
+  dynamicMenuCounter: number;
 
   constructor() {
     super();
@@ -20,20 +26,20 @@ export default class GroupBoxDeleteMenuBox extends GroupBox {
     this.dynamicMenuCounter = 0;
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): GroupBoxModel {
     return models.get(GroupBoxDeleteMenuBoxModel);
   }
 
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
     this._setField(this.field);
   }
 
-  setField(field) {
+  setField(field: GroupBox) {
     this.setProperty('field', field);
   }
 
-  _setField(field) {
+  protected _setField(field: GroupBox) {
     this._setProperty('field', field);
     if (!this.field) {
       return;
@@ -47,7 +53,7 @@ export default class GroupBoxDeleteMenuBox extends GroupBox {
     this.deleteFieldButton.on('click', this._onDeleteMenuButtonClick.bind(this));
   }
 
-  _onDeleteMenuButtonClick() {
+  protected _onDeleteMenuButtonClick() {
     let newMenuItems = this.field.menuBar.menuItems.slice(),
       index = this.field.menuBar.menuItems.indexOf(this.targetField.value);
 
@@ -56,7 +62,7 @@ export default class GroupBoxDeleteMenuBox extends GroupBox {
     }
 
     newMenuItems.splice(index, 1);
-    this.field._setMenus(newMenuItems);
+    this.field.setMenus(newMenuItems);
 
     this.targetField.setValue(null);
   }

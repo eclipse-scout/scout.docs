@@ -8,22 +8,23 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {Form, models} from '@eclipse-scout/core';
-import {FormFieldLookupCall} from '../index';
+import {Form, FormModel, InitModelOf, models} from '@eclipse-scout/core';
+import {FormFieldLookupCall, SequenceBoxFormWidgetMap} from '../index';
 import SequenceBoxFormModel from './SequenceBoxFormModel';
 
-export default class SequenceBoxForm extends Form {
+export class SequenceBoxForm extends Form {
+  declare widgetMap: SequenceBoxFormWidgetMap;
 
   constructor() {
     super();
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): FormModel {
     return models.get(SequenceBoxFormModel);
   }
 
   // noinspection DuplicatedCode
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
     let sequenceBox = this.widget('SequenceBox');

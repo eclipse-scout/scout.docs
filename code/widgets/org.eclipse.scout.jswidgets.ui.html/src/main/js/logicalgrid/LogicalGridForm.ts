@@ -8,11 +8,15 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {Form, models, scout} from '@eclipse-scout/core';
+import {Event, EventHandler, Form, FormField, FormModel, InitModelOf, models, PropertyChangeEvent, scout} from '@eclipse-scout/core';
 import LogicalGridFormModel from './LogicalGridFormModel';
-import {FormFieldLookupCall} from '../index';
+import {FormFieldLookupCall, LogicalGridFormWidgetMap} from '../index';
 
-export default class LogicalGridForm extends Form {
+export class LogicalGridForm extends Form {
+  declare widgetMap: LogicalGridFormWidgetMap;
+
+  protected _fieldFocusHandler: (event: JQuery.FocusEvent) => void;
+  protected _fieldRenderHandler: EventHandler<Event<FormField>>;
 
   constructor() {
     super();
@@ -20,11 +24,11 @@ export default class LogicalGridForm extends Form {
     this._fieldRenderHandler = this._onFieldRender.bind(this);
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): FormModel {
     return models.get(LogicalGridFormModel);
   }
 
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
     let groupBox = this.widget('DetailBox');
@@ -45,19 +49,19 @@ export default class LogicalGridForm extends Form {
     this.widget('Actions.DeleteFieldBox').setField(groupBox);
   }
 
-  _initFields(fields) {
+  protected _initFields(fields: FormField[]) {
     fields.forEach(function(field) {
       field.off('render', this._fieldRenderHandler);
       field.on('render', this._fieldRenderHandler);
     }, this);
   }
 
-  _onFieldRender(event) {
+  protected _onFieldRender(event: Event<FormField>) {
     event.source.$field.off('focus', this._fieldFocusHandler);
     event.source.$field.on('focus', this._fieldFocusHandler);
   }
 
-  _onTargetFieldValueChange(event) {
+  protected _onTargetFieldValueChange(event: PropertyChangeEvent<FormField>) {
     let oldField = event.oldValue;
     let newField = event.newValue;
     this.widget('GridDataBox').setField(newField);
@@ -71,8 +75,8 @@ export default class LogicalGridForm extends Form {
     }
   }
 
-  _onFieldFocus(event) {
-    let field = scout.widget(event.currentTarget);
+  protected _onFieldFocus(event: JQuery.FocusEvent) {
+    let field: FormField = scout.widget(event.currentTarget);
     this.widget('TargetField').setValue(field);
     this.widget('Actions.AddFieldBox').setTargetField(field);
     this.widget('Actions.DeleteFieldBox').setTargetField(field);

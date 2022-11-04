@@ -1,43 +1,57 @@
-import {icons} from '@eclipse-scout/core';
+/*
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Distribution License v1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/org/documents/edl-v10.html
+ *
+ * Contributors:
+ *     BSI Business Systems Integration AG - initial API and implementation
+ */
+import {FormModel, GroupBox, icons, Menu, TabBox, TabItem} from '@eclipse-scout/core';
+import {
+  DynamicTab, EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, TabBoxAddTabItemBox, TabBoxAddTabItemBoxWidgetMap, TabBoxDeleteTabItemBox, TabBoxDeleteTabItemBoxWidgetMap, TabBoxProperties,
+  TabBoxPropertiesWidgetMap, TabItemProperties, TabItemPropertiesWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap
+} from '../index';
 
-export default () => ({
+export default (): FormModel => ({
   id: 'jswidgets.TabBoxForm',
   displayHint: 'view',
   cssClass: 'tab-box-form',
   rootGroupBox: {
     id: 'MainBox',
-    objectType: 'GroupBox',
+    objectType: GroupBox,
     fields: [
       {
         id: 'DetailBox',
-        objectType: 'GroupBox',
+        objectType: GroupBox,
         gridColumnCount: 1,
         fields: [
           {
             id: 'TabBox',
-            objectType: 'TabBox',
+            objectType: TabBox,
             selectedTab: 'TabItem1',
             tabItems: [
               {
                 id: 'TabItem1',
-                objectType: 'jswidgets.DynamicTab',
+                objectType: DynamicTab,
                 label: 'First Tab'
               },
               {
                 id: 'TabItem2',
-                objectType: 'jswidgets.DynamicTab',
+                objectType: DynamicTab,
                 label: 'Second Tab'
               },
               {
                 id: 'TabItem3',
-                objectType: 'jswidgets.DynamicTab',
+                objectType: DynamicTab,
                 label: 'Third Tab'
               }
             ],
             menus: [
               {
                 id: 'AddTabMenu',
-                objectType: 'Menu',
+                objectType: Menu,
                 text: 'Add tab item',
                 iconId: icons.PLUS,
                 stackable: true,
@@ -48,7 +62,7 @@ export default () => ({
               },
               {
                 id: 'DeleteTabMenu',
-                objectType: 'Menu',
+                objectType: Menu,
                 text: 'Delete tab item',
                 iconId: icons.MINUS,
                 stackable: true,
@@ -59,7 +73,7 @@ export default () => ({
               },
               {
                 id: 'SettingsMenu',
-                objectType: 'Menu',
+                objectType: Menu,
                 iconId: icons.GEAR,
                 stackable: false,
                 menuTypes: [
@@ -73,48 +87,72 @@ export default () => ({
       },
       {
         id: 'ConfigurationBox',
-        objectType: 'TabBox',
+        objectType: TabBox,
         cssClass: 'jswidgets-configuration',
         selectedTab: 'Properties.TabBox',
         tabItems: [
           {
             id: 'Properties.TabBox',
-            objectType: 'jswidgets.TabBoxProperties'
+            objectType: TabBoxProperties
           },
           {
             id: 'Properties.TabItem',
-            objectType: 'jswidgets.TabItemProperties'
+            objectType: TabItemProperties
           },
           {
             id: 'ActionsBox',
-            objectType: 'TabItem',
+            objectType: TabItem,
             label: 'Actions',
             gridColumnCount: 2,
             fields: [
               {
                 id: 'ActionBox.AddTabItem',
-                objectType: 'jswidgets.TabBoxAddTabItemBox'
+                objectType: TabBoxAddTabItemBox
               },
               {
                 id: 'ActionBox.DeleteTabItem',
-                objectType: 'jswidgets.TabBoxDeleteTabItemBox'
+                objectType: TabBoxDeleteTabItemBox
               },
               {
                 id: 'FormFieldActionsBox',
-                objectType: 'jswidgets.FormFieldActionsBox'
+                objectType: FormFieldActionsBox
               },
               {
                 id: 'WidgetActionsBox',
-                objectType: 'jswidgets.WidgetActionsBox'
+                objectType: WidgetActionsBox
               }
             ]
           },
           {
             id: 'EventsTab',
-            objectType: 'jswidgets.EventsTab'
+            objectType: EventsTab
           }
         ]
       }
     ]
   }
 });
+
+export type TabBoxFormWidgetMap =
+  {
+    'MainBox': GroupBox;
+    'DetailBox': GroupBox;
+    'TabBox': TabBox;
+    'TabItem1': DynamicTab;
+    'TabItem2': DynamicTab;
+    'TabItem3': DynamicTab;
+    'AddTabMenu': Menu;
+    'DeleteTabMenu': Menu;
+    'SettingsMenu': Menu;
+    'ConfigurationBox': TabBox;
+    'Properties.TabBox': TabBoxProperties;
+    'Properties.TabItem': TabItemProperties;
+    'ActionsBox': TabItem;
+    'ActionBox.AddTabItem': TabBoxAddTabItemBox;
+    'ActionBox.DeleteTabItem': TabBoxDeleteTabItemBox;
+    'FormFieldActionsBox': FormFieldActionsBox;
+    'WidgetActionsBox': WidgetActionsBox;
+    'EventsTab': EventsTab;
+  }
+  & TabBoxPropertiesWidgetMap & TabItemPropertiesWidgetMap & TabBoxAddTabItemBoxWidgetMap & TabBoxDeleteTabItemBoxWidgetMap
+  & FormFieldActionsBoxWidgetMap & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;

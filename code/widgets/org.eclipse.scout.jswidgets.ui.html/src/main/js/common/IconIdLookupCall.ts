@@ -8,15 +8,11 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {icons, StaticLookupCall, strings} from '@eclipse-scout/core';
+import {icons, LookupRow, StaticLookupCall, strings} from '@eclipse-scout/core';
 
-export default class IconIdLookupCall extends StaticLookupCall {
+export class IconIdLookupCall extends StaticLookupCall<string> {
 
-  constructor() {
-    super();
-  }
-
-  _data() {
+  protected override _data(): any[] {
     return Object.keys(icons)
       .filter(name => {
         let value = icons[name];
@@ -29,7 +25,7 @@ export default class IconIdLookupCall extends StaticLookupCall {
       });
   }
 
-  _dataToLookupRow(data) {
+  protected override _dataToLookupRow(data: any[], index?: number): LookupRow<string> {
     let lookupRow = super._dataToLookupRow(data);
     if (lookupRow && lookupRow.key) {
       lookupRow.iconId = lookupRow.key;

@@ -8,20 +8,22 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {Form, models} from '@eclipse-scout/core';
+import {Form, InitModelOf, models} from '@eclipse-scout/core';
 import WatchFieldFormModel from './WatchFieldFormModel';
+import {WatchFieldFormWidgetMap} from '../../index';
 
-export default class WatchFieldForm extends Form {
+export class WatchFieldForm extends Form {
+  declare widgetMap: WatchFieldFormWidgetMap;
 
   constructor() {
     super();
   }
 
-  _jsonModel() {
+  protected override _jsonModel() {
     return models.get(WatchFieldFormModel);
   }
 
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
     let watchField = this.widget('WatchField');
 

@@ -1,28 +1,32 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {Form, models} from '@eclipse-scout/core';
+import {Form, FormModel, InitModelOf, models, SmartFieldMultiline} from '@eclipse-scout/core';
 import MultilineSmartFieldFormModel from './MultilineSmartFieldFormModel';
+import {MultilineSmartFieldFormWidgetMap} from '../../index';
 
-export default class MultilineSmartFieldForm extends Form {
+export class MultilineSmartFieldForm extends Form {
+  declare widgetMap: MultilineSmartFieldFormWidgetMap;
+
+  smartField: SmartFieldMultiline<number>;
 
   constructor() {
     super();
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): FormModel {
     return models.get(MultilineSmartFieldFormModel);
   }
 
   // noinspection DuplicatedCode
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
     this.smartField = this.widget('MultilineSmartField');

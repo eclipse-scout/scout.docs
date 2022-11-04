@@ -8,21 +8,25 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {DateFormat, dates, Form, models, scout} from '@eclipse-scout/core';
+import {DateFormat, dates, Form, FormModel, InitModelOf, models, scout, ValueFieldValidator} from '@eclipse-scout/core';
 import DateFieldFormModel from './DateFieldFormModel';
+import {DateFieldFormWidgetMap} from '../index';
 
-export default class DateFieldForm extends Form {
+export class DateFieldForm extends Form {
+  declare widgetMap: DateFieldFormWidgetMap;
+
+  protected _dontAllowCurrentDateValidator: ValueFieldValidator<Date>;
 
   constructor() {
     super();
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): FormModel {
     return models.get(DateFieldFormModel);
   }
 
   // noinspection DuplicatedCode
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
     let dateField = this.widget('DateField');
@@ -100,7 +104,7 @@ export default class DateFieldForm extends Form {
     this.widget('EventsTab').setField(dateField);
   }
 
-  _dateFormat() {
+  protected _dateFormat(): DateFormat {
     let dateField = this.widget('DateField');
     return new DateFormat(this.session.locale, dateField.dateFormatPattern + ' ' + dateField.timeFormatPattern);
   }

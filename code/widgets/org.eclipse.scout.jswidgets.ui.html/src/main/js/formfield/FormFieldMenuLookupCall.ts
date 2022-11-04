@@ -8,22 +8,24 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {StaticLookupCall} from '@eclipse-scout/core';
+import {FormField, Menu, StaticLookupCall} from '@eclipse-scout/core';
 
-export default class FormFieldMenuLookupCall extends StaticLookupCall {
+export class FormFieldMenuLookupCall extends StaticLookupCall<Menu> {
+  formField: FormField;
+  protected _rebuildDataHandler: () => void;
 
-  constructor(formField) {
+  constructor(formField: FormField) {
     super();
     this._rebuildDataHandler = this._rebuildData.bind(this);
     this.data = [];
     this.setFormField(formField);
   }
 
-  _data() {
+  protected override _data(): any[] {
     return this.data;
   }
 
-  setFormField(formField) {
+  setFormField(formField: FormField) {
     if (this.formField) {
       this.formField.off('propertyChange:menus', this._rebuildDataHandler);
       this.formField.menus.forEach(function(menu) {
@@ -38,7 +40,7 @@ export default class FormFieldMenuLookupCall extends StaticLookupCall {
     this._rebuildData();
   }
 
-  _rebuildData() {
+  protected _rebuildData() {
     this.data = this.formField.menus.map(menu => {
       return [menu, menu.text];
     });

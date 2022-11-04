@@ -8,22 +8,24 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {StaticLookupCall} from '@eclipse-scout/core';
+import {Mode, ModeSelector, StaticLookupCall} from '@eclipse-scout/core';
 
-export default class ModeLookupCall extends StaticLookupCall {
+export class ModeLookupCall extends StaticLookupCall<Mode> {
+  modeSelector: ModeSelector;
+  protected _rebuildDataHandler: () => void;
 
-  constructor(modeSelector) {
+  constructor(modeSelector: ModeSelector) {
     super();
     this._rebuildDataHandler = this._rebuildData.bind(this);
     this.data = [];
     this.setModeSelector(modeSelector);
   }
 
-  _data() {
+  protected override _data(): any[] {
     return this.data;
   }
 
-  setModeSelector(modeSelector) {
+  setModeSelector(modeSelector: ModeSelector) {
     if (this.modeSelector) {
       this.modeSelector.off('propertyChange:modes', this._rebuildDataHandler);
       this.modeSelector.modes.forEach(function(mode) {
@@ -38,7 +40,7 @@ export default class ModeLookupCall extends StaticLookupCall {
     this._rebuildData();
   }
 
-  _rebuildData() {
+  protected _rebuildData() {
     this.data = this.modeSelector.modes.map(mode => {
       return [mode, mode.text];
     });

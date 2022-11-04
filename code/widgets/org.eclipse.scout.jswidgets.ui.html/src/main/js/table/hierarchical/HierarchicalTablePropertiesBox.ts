@@ -8,32 +8,33 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {models} from '@eclipse-scout/core';
+import {GroupBoxModel, InitModelOf, models, Table} from '@eclipse-scout/core';
 import HierarchicalTablePropertiesBoxModel from './HierarchicalTablePropertiesBoxModel';
-import {TablePropertiesBox} from '../../index';
+import {HierarchicalTablePropertiesBoxWidgetMap, TablePropertiesBox} from '../../index';
 
-export default class HierarchicalTablePropertiesBox extends TablePropertiesBox {
+export class HierarchicalTablePropertiesBox extends TablePropertiesBox {
+  declare widgetMap: HierarchicalTablePropertiesBoxWidgetMap;
 
   constructor() {
     super();
     this.table = null;
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): GroupBoxModel {
     return models.extend(HierarchicalTablePropertiesBoxModel, super._jsonModel());
   }
 
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
     this._setTable(this.table);
   }
 
-  setTable(table) {
+  override setTable(table: Table) {
     this.setProperty('table', table);
   }
 
-  _setTable(table) {
+  protected override _setTable(table: Table) {
     super._setTable(table);
     this._setProperty('table', table);
     if (!this.table) {

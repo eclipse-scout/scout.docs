@@ -8,11 +8,18 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {models, TabItem} from '@eclipse-scout/core';
+import {CheckBoxField, InitModelOf, models, SmartField, TabAreaStyle, TabBox, TabItem, TabItemModel} from '@eclipse-scout/core';
 import TabBoxPropertiesModel from './TabBoxPropertiesModel';
-import {TabItemLookupCall} from '../index';
+import {TabBoxPropertiesWidgetMap, TabItemLookupCall} from '../index';
 
-export default class TabBoxProperties extends TabItem {
+export class TabBoxProperties extends TabItem {
+  declare widgetMap: TabBoxPropertiesWidgetMap;
+
+  tabBox: TabBox;
+  showMenus: boolean;
+  selectedTabField: SmartField<TabItem>;
+  tabAreaStyleField: SmartField<TabAreaStyle>;
+  showMenusField: CheckBoxField;
 
   constructor() {
     super();
@@ -20,20 +27,20 @@ export default class TabBoxProperties extends TabItem {
     this.showMenus = true;
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): TabItemModel {
     return models.get(TabBoxPropertiesModel);
   }
 
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
     this._setTabBox(this.tabBox);
   }
 
-  setTabBox(tabBox) {
+  setTabBox(tabBox: TabBox) {
     this.setProperty('tabBox', tabBox);
   }
 
-  _setTabBox(tabBox) {
+  protected _setTabBox(tabBox: TabBox) {
     this._setProperty('tabBox', tabBox);
     if (!this.tabBox) {
       return;
@@ -60,7 +67,7 @@ export default class TabBoxProperties extends TabItem {
     this._updateSelectedTab();
   }
 
-  _updateSelectedTab() {
+  protected _updateSelectedTab() {
     let selectedTab = this.tabBox.selectedTab;
     this.selectedTabField.setValue(selectedTab);
     this.selectedTabField.setEnabled(this.tabBox.tabItems.length > 0);

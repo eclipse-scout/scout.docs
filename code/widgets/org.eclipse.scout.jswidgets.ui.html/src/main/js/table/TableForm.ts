@@ -8,11 +8,16 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {dates, Form, icons, MessageBoxes, models, scout} from '@eclipse-scout/core';
-import {ColumnLookupCall, LocaleLookupCall} from '../index';
+import {Column, dates, Form, FormModel, GroupBox, HtmlTile, icons, InitModelOf, MessageBoxes, models, scout, TabItem, Table, TableAppLinkActionEvent, TableRowModel} from '@eclipse-scout/core';
+import {BooleanColumnPropertiesBox, ColumnLookupCall, DateColumnPropertiesBox, LocaleLookupCall, NumberColumnPropertiesBox, SmartColumnPropertiesBox, TableFormWidgetMap} from '../index';
 import TableFormModel from './TableFormModel';
 
-export default class TableForm extends Form {
+export class TableForm extends Form {
+  declare widgetMap: TableFormWidgetMap;
+
+  table: Table;
+  rowNo: number;
+  groupNo: number;
 
   constructor() {
     super();
@@ -23,12 +28,12 @@ export default class TableForm extends Form {
 
   static GROUP_SIZE = 2;
 
-  _jsonModel() {
+  protected override _jsonModel(): FormModel {
     return models.get(TableFormModel);
   }
 
   // noinspection DuplicatedCode
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
     this.table = this.widget('Table');
@@ -58,12 +63,12 @@ export default class TableForm extends Form {
       columnPropertiesBox.setEnabled(!!newColumn);
 
       let columnPropertyTab = this.widget('ColumnProperties');
-      let newPropertiesBoxField = this._createPropertiesBox(newColumn, columnPropertyTab);
+      let newPropertiesBoxField = this._createPropertiesBox(newColumn, columnPropertyTab) as ColumnPropertiesBox;
       if (newPropertiesBoxField !== null) {
         columnPropertyTab.insertFieldBefore(newPropertiesBoxField, columnPropertiesBox);
         newPropertiesBoxField.setColumn(newColumn);
       }
-      this._removePropertiesBoxes(newColumn.objectType, columnPropertyTab);
+      this._removePropertiesBoxes(newColumn.objectType as string, columnPropertyTab);
     });
     targetField.setValue(this.table.columns[0]);
 
@@ -77,32 +82,32 @@ export default class TableForm extends Form {
           '<div class="font-icon" style="font-size: 50px; text-align: center;">' + icon.iconCharacter + '</div>' +
           '<div style="text-align: center;"><p>' + row.cells[1].text + '</p></div>'
       };
-      return scout.create('HtmlTile', model);
+      return scout.create(HtmlTile, model);
     };
   }
 
-  _createPropertiesBox(newColumn, parent) {
+  protected _createPropertiesBox(newColumn: Column, parent: TabItem): GroupBox {
     switch (newColumn.objectType) {
       case 'BooleanColumn':
-        return scout.create('jswidgets.BooleanColumnPropertiesBox', {
+        return scout.create(BooleanColumnPropertiesBox, {
           id: 'BooleanColumnPropertyField',
           label: 'Boolean Column Properties',
           parent: parent
         });
       case 'DateColumn':
-        return scout.create('jswidgets.DateColumnPropertiesBox', {
+        return scout.create(DateColumnPropertiesBox, {
           id: 'DateColumnPropertyField',
           label: 'Date Column Properties',
           parent: parent
         });
       case 'NumberColumn':
-        return scout.create('jswidgets.NumberColumnPropertiesBox', {
+        return scout.create(NumberColumnPropertiesBox, {
           id: 'NumberColumnPropertyField',
           label: 'Number Column Properties',
           parent: parent
         });
       case 'SmartColumn':
-        return scout.create('jswidgets.SmartColumnPropertiesBox', {
+        return scout.create(SmartColumnPropertiesBox, {
           id: 'SmartColumnPropertyField',
           label: 'Smart Column Properties',
           parent: parent
@@ -112,7 +117,7 @@ export default class TableForm extends Form {
     }
   }
 
-  _removePropertiesBoxes(newColumnTypeName, tabBox) {
+  protected _removePropertiesBoxes(newColumnTypeName: string, tabBox: TabItem) {
     if (newColumnTypeName !== 'BooleanColumn') {
       this._removePropertyBox('BooleanColumnPropertyField', tabBox);
     }
@@ -122,17 +127,20 @@ export default class TableForm extends Form {
     if (newColumnTypeName !== 'DateColumn') {
       this._removePropertyBox('DateColumnPropertyField', tabBox);
     }
+    if (newColumnTypeName !== 'SmartColumn') {
+      this._removePropertyBox('SmartColumnPropertyField', tabBox);
+    }
   }
 
-  _removePropertyBox(propertyBoxId, tabBox) {
-    let boxToRemove = this.widget(propertyBoxId);
+  protected _removePropertyBox(propertyBoxId: string, tabBox: TabItem) {
+    let boxToRemove = this.widget(propertyBoxId, GroupBox) as ColumnPropertiesBox;
     if (boxToRemove) {
       boxToRemove.setColumn(null);
       tabBox.deleteField(boxToRemove);
     }
   }
 
-  _createRow() {
+  protected _createRow(): TableRowModel {
     let date = new Date();
     let iconList = [icons.STAR, icons.CLOCK, icons.FOLDER];
     let locales = LocaleLookupCall.DATA.map(lookupRow => {
@@ -159,33 +167,37 @@ export default class TableForm extends Form {
     };
   }
 
-  _onAddRowMenuAction() {
+  protected _onAddRowMenuAction() {
     this.table.insertRow(this._createRow());
   }
 
-  _onMoveToTopMenuAction() {
+  protected _onMoveToTopMenuAction() {
     this.table.moveRowToTop(this.table.selectedRows[0]);
   }
 
-  _onMoveUpMenuAction() {
+  protected _onMoveUpMenuAction() {
     this.table.moveVisibleRowUp(this.table.selectedRows[0]);
   }
 
-  _onMoveDownMenuAction() {
+  protected _onMoveDownMenuAction() {
     this.table.moveVisibleRowDown(this.table.selectedRows[0]);
   }
 
-  _onMoveToBottomMenuAction() {
+  protected _onMoveToBottomMenuAction() {
     this.table.moveRowToBottom(this.table.selectedRows[0]);
   }
 
-  _onDeleteRowMenuAction() {
+  protected _onDeleteRowMenuAction() {
     this.table.deleteRows(this.table.selectedRows);
   }
 
-  _onAppLinkAction(event) {
+  protected _onAppLinkAction(event: TableAppLinkActionEvent) {
     MessageBoxes.createOk(this)
       .withBody('Link with ref \'' + event.ref + '\' has been clicked.')
       .buildAndOpen();
   }
 }
+
+type ColumnPropertiesBox = GroupBox & {
+  setColumn(column: Column);
+};

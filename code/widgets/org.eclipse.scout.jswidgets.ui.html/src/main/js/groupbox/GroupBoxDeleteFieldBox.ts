@@ -8,11 +8,17 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {GroupBox, models} from '@eclipse-scout/core';
-import {FormFieldLookupCall} from '../index';
+import {Button, Event, FormField, GroupBox, GroupBoxModel, InitModelOf, models, SmartField} from '@eclipse-scout/core';
+import {FormFieldLookupCall, GroupBoxDeleteFieldBoxWidgetMap} from '../index';
 import GroupBoxDeleteFieldBoxModel from './GroupBoxDeleteFieldBoxModel';
 
-export default class GroupBoxDeleteFieldBox extends GroupBox {
+export class GroupBoxDeleteFieldBox extends GroupBox {
+  declare widgetMap: GroupBoxDeleteFieldBoxWidgetMap;
+
+  field: GroupBox;
+  targetField: SmartField<FormField>;
+  deleteFieldButton: Button;
+  dynamicFieldCounter: number;
 
   constructor() {
     super();
@@ -20,20 +26,20 @@ export default class GroupBoxDeleteFieldBox extends GroupBox {
     this.dynamicFieldCounter = 0;
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): GroupBoxModel {
     return models.get(GroupBoxDeleteFieldBoxModel);
   }
 
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
     this._setField(this.field);
   }
 
-  setField(field) {
+  setField(field: GroupBox) {
     this.setProperty('field', field);
   }
 
-  _setField(field) {
+  protected _setField(field: GroupBox) {
     this._setProperty('field', field);
     if (!this.field) {
       return;
@@ -47,12 +53,12 @@ export default class GroupBoxDeleteFieldBox extends GroupBox {
     this.deleteFieldButton.on('click', this._onDeleteFormFieldButtonClick.bind(this));
   }
 
-  _onDeleteFormFieldButtonClick(event) {
+  protected _onDeleteFormFieldButtonClick(event: Event<Button>) {
     this.field.deleteField(this.targetField.value);
     this.targetField.setValue(null);
   }
 
-  setTargetField(field) {
+  setTargetField(field: FormField) {
     this.targetField.setValue(field);
   }
 }

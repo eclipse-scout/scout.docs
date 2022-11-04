@@ -9,31 +9,40 @@
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 import TileGridLayoutConfigBoxModel from './TileGridLayoutConfigBoxModel';
-import {models} from '@eclipse-scout/core';
-import {LogicalGridLayoutConfigBox} from '../index';
+import {FormField, GroupBoxModel, InitModelOf, models, PropertyChangeEvent, TileGridLayout, TileGridLayoutConfig} from '@eclipse-scout/core';
+import {LogicalGridLayoutConfigBox, TileGridLayoutConfigBoxWidgetMap} from '../index';
 
-export default class TileGridLayoutConfigBox extends LogicalGridLayoutConfigBox {
+export class TileGridLayoutConfigBox extends LogicalGridLayoutConfigBox {
+  declare widgetMap: TileGridLayoutConfigBoxWidgetMap;
 
   constructor() {
     super();
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): GroupBoxModel {
     return models.extend(TileGridLayoutConfigBoxModel, super._jsonModel());
   }
 
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
     this.widget('MaxWidthField').on('propertyChange:value', event => this._updateLayoutConfigByEvent(event));
   }
 
-  initLayoutDefaults() {
+  override initLayoutDefaults() {
     super.initLayoutDefaults();
     this.widget('MaxWidthField').setValue(this.getBodyLayout().maxWidth);
   }
 
-  _fillLayoutConfigByEvent(layoutConfig, event) {
+  override getBodyLayout(): TileGridLayout {
+    return super.getBodyLayout() as TileGridLayout;
+  }
+
+  override getLayoutConfig(): TileGridLayoutConfig {
+    return super.getLayoutConfig() as TileGridLayoutConfig;
+  }
+
+  protected override _fillLayoutConfigByEvent(layoutConfig: TileGridLayoutConfig, event: PropertyChangeEvent<any, FormField>) {
     super._fillLayoutConfigByEvent(layoutConfig, event);
     if (event.source.id === 'MaxWidthField') {
       layoutConfig.maxWidth = event.newValue;

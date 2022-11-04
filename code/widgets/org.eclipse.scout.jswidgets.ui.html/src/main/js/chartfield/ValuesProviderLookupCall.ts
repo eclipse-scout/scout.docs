@@ -10,13 +10,13 @@
  */
 import {StaticLookupCall} from '@eclipse-scout/core';
 
-export default class ValuesProviderLookupCall extends StaticLookupCall {
+export class ValuesProviderLookupCall extends StaticLookupCall<number> {
 
   constructor() {
     super();
   }
 
-  _data() {
+  protected override _data(): any[] {
     return ValuesProviderLookupCall.DATA;
   }
 

@@ -8,10 +8,15 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {Form, graphics, models, Rectangle, scout} from '@eclipse-scout/core';
+import {Form, FormModel, graphics, InitModelOf, Label, models, Rectangle, scout, WidgetPopup} from '@eclipse-scout/core';
 import PopupFormModel from './PopupFormModel';
+import {PopupFormWidgetMap} from '../index';
 
-export default class PopupForm extends Form {
+export class PopupForm extends Form {
+  declare widgetMap: PopupFormWidgetMap;
+
+  popup: WidgetPopup;
+  $popupAnchor: JQuery;
 
   constructor() {
     super();
@@ -19,14 +24,14 @@ export default class PopupForm extends Form {
     this.popup = null;
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): FormModel {
     return models.get(PopupFormModel);
   }
 
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
-    let dummyPopup = scout.create('WidgetPopup', {
+    let dummyPopup = scout.create(WidgetPopup, {
       parent: this
     });
     this.widget('OpenPopupButton').on('click', this._onOpenPopupButtonClick.bind(this));
@@ -127,12 +132,12 @@ export default class PopupForm extends Form {
     dummyPopup.close();
   }
 
-  _render() {
+  protected override _render() {
     super._render();
     this._updateAnchor();
   }
 
-  _remove() {
+  protected override _remove() {
     if (this.$popupAnchor) {
       this.$popupAnchor.remove();
       this.$popupAnchor = null;
@@ -140,13 +145,13 @@ export default class PopupForm extends Form {
     super._remove();
   }
 
-  _onOpenPopupButtonClick(model) {
+  protected _onOpenPopupButtonClick() {
     let $anchor;
     if (this.widget('UseButtonAsAnchorField').value) {
       $anchor = this.widget('OpenPopupButton').$field;
     }
     let anchorBounds = this._getAnchorBounds();
-    this.popup = scout.create('WidgetPopup', {
+    this.popup = scout.create(WidgetPopup, {
       parent: this,
       $anchor: $anchor,
       anchorBounds: anchorBounds,
@@ -167,7 +172,7 @@ export default class PopupForm extends Form {
       withGlassPane: this.widget('WithGlassPaneField').value,
       cssClass: 'popup-form-popup',
       content: {
-        objectType: 'Label',
+        objectType: Label,
         htmlEnabled: true,
         value: '<h2>Hi, I\'m a popup!</h2>' +
           '<p>This widget popup contains a label to display some text.</p>' +
@@ -181,15 +186,15 @@ export default class PopupForm extends Form {
     this.popup.open();
   }
 
-  _getAnchorBounds(event) {
+  protected _getAnchorBounds(): Rectangle {
     let anchorBoundsRaw = this.widget('AnchorBoundsField').value;
     if (anchorBoundsRaw) {
-      anchorBoundsRaw = anchorBoundsRaw.split(',');
-      return new Rectangle(Number(anchorBoundsRaw[0]), Number(anchorBoundsRaw[1]), Number(anchorBoundsRaw[2]), Number(anchorBoundsRaw[3]));
+      let anchorBoundsRawSplit = anchorBoundsRaw.split(',');
+      return new Rectangle(Number(anchorBoundsRawSplit[0]), Number(anchorBoundsRawSplit[1]), Number(anchorBoundsRawSplit[2]), Number(anchorBoundsRawSplit[3]));
     }
   }
 
-  _updateAnchor() {
+  protected _updateAnchor() {
     let anchorBounds = this._getAnchorBounds();
     if (!anchorBounds) {
       if (this.$popupAnchor) {

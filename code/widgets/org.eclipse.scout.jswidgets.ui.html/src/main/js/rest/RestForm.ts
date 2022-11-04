@@ -1,27 +1,29 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {ajax, Form, models} from '@eclipse-scout/core';
+import {ajax, AjaxError, Button, Event, Form, FormModel, InitModelOf, models} from '@eclipse-scout/core';
 import RestFormModel from './RestFormModel';
+import {RestFormWidgetMap} from '../index';
 
-export default class RestForm extends Form {
+export class RestForm extends Form {
+  declare widgetMap: RestFormWidgetMap;
 
   constructor() {
     super();
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): FormModel {
     return models.get(RestFormModel);
   }
 
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
     let getButton = this.widget('GetButton');
@@ -36,7 +38,7 @@ export default class RestForm extends Form {
     failButton.on('click', this._onFailButtonClick.bind(this));
   }
 
-  _addLogEntry(message) {
+  protected _addLogEntry(message: string) {
     let logField = this.widget('LogField');
     let log = logField.value || '';
     if (log) {
@@ -46,43 +48,47 @@ export default class RestForm extends Form {
     logField.setValue(log);
   }
 
-  _onGetButtonClick(event) {
+  protected _onGetButtonClick(event: Event<Button>) {
     ajax.getJson('api/example')
       .then(this._onSuccess.bind(this))
       .catch(this._onFail.bind(this));
   }
 
-  _onPostButtonClick(event) {
+  protected _onPostButtonClick(event: Event<Button>) {
     ajax.postJson('api/example', {
       hello: 'server'
     }).then(this._onSuccess.bind(this))
       .catch(this._onFail.bind(this));
   }
 
-  _onPutButtonClick(event) {
+  protected _onPutButtonClick(event: Event<Button>) {
     ajax.putJson('api/example', {
       hello: 'server'
     }).then(this._onSuccess.bind(this))
       .catch(this._onFail.bind(this));
   }
 
-  _onDeleteButtonClick(event) {
+  protected _onDeleteButtonClick(event: Event<Button>) {
     ajax.removeJson('api/example')
       .then(this._onSuccess.bind(this))
       .catch(this._onFail.bind(this));
   }
 
-  _onFailButtonClick(event) {
+  protected _onFailButtonClick(event: Event<Button>) {
     ajax.get('api/notexistingurl')
       .then(this._onSuccess.bind(this))
       .catch(this._onFail.bind(this));
   }
 
-  _onSuccess(result, textStatus, jqXHR) {
+  protected _onSuccess(result: Response, textStatus: string, jqXHR: JQuery.jqXHR) {
     this._addLogEntry('Request successful. HTTP-Status: ' + jqXHR.status + '. Response: ' + JSON.stringify(result));
   }
 
-  _onFail(ajaxError) {
+  protected _onFail(ajaxError: AjaxError) {
     this._addLogEntry('Request failed! HTTP-Status: ' + ajaxError.jqXHR.status + '. TextStatus: ' + ajaxError.textStatus + '. ErrorThrown: ' + ajaxError.errorThrown + '. RequestOptions: ' + JSON.stringify(ajaxError.requestOptions));
   }
 }
+
+type Response = {
+  message: string;
+};

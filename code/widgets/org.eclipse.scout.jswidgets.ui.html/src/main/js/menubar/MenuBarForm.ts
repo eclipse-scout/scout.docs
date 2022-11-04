@@ -8,21 +8,27 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {EllipsisMenu, Form, Menu, MenuBar, models, scout, Status} from '@eclipse-scout/core';
+import {DesktopNotification, EllipsisMenu, Event, Form, FormFieldMenu, FormModel, InitModelOf, Menu, MenuBar, models, scout, Status} from '@eclipse-scout/core';
 import MenuBarFormModel from './MenuBarFormModel';
+import {MenuBarFormWidgetMap, MenuItemLookupCall, MiniForm} from '../index';
 
-export default class MenuBarForm extends Form {
+export class MenuBarForm extends Form {
+  declare widgetMap: MenuBarFormWidgetMap;
+
+  currentMenu: any;
+  replaceMenu: Menu;
+  hierarchicalMenu: Menu;
 
   constructor() {
     super();
     this.currentMenu = null;
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): FormModel {
     return models.get(MenuBarFormModel);
   }
 
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
     let selectedMenuField = this.widget('SelectedMenuField');
@@ -50,7 +56,7 @@ export default class MenuBarForm extends Form {
     let formMenu = this.widget('FormMenu');
     formMenu.on('propertyChange:selected', event => {
       if (event.newValue && !formMenu.form) {
-        formMenu.setForm(scout.create('jswidgets.MiniForm', {
+        formMenu.setForm(scout.create(MiniForm, {
           parent: formMenu
         }));
       }
@@ -79,7 +85,7 @@ export default class MenuBarForm extends Form {
     actionTargetField.setValue(detailBox.menus[0]);
   }
 
-  _onReplaceChildActionsClick(event, menu) {
+  protected _onReplaceChildActionsClick(event: Event<Menu>, menu: Menu) {
     let i = 1,
       menuCount = Math.floor(Math.random() * 10) + i,
       newMenus = [];
@@ -89,7 +95,7 @@ export default class MenuBarForm extends Form {
         newMenus.push(this.replaceMenu);
       }
       for (; i < menuCount; i++) {
-        newMenus.push(scout.create('Menu', {
+        newMenus.push(scout.create(Menu, {
           parent: this,
           text: 'DynMenu ' + i,
           enabled: true
@@ -99,12 +105,12 @@ export default class MenuBarForm extends Form {
     }
   }
 
-  _onMenuAction(event) {
+  protected _onMenuAction(event: Event<Menu>) {
     if (event.source.isToggleAction()) {
       // Don't show message box if it is a toggle action
       return;
     }
-    scout.create('DesktopNotification', {
+    scout.create(DesktopNotification, {
       parent: this,
       status: {
         severity: Status.Severity.OK,
@@ -116,7 +122,7 @@ export default class MenuBarForm extends Form {
   /**
    * Collects every menu of the group box and updates lookup call of the SelectedMenuField
    */
-  _fillSelectedMenuField() {
+  protected _fillSelectedMenuField() {
     let selectedMenuField = this.widget('SelectedMenuField');
     let detailBox = this.widget('DetailBox');
     let menus = [];
@@ -125,19 +131,19 @@ export default class MenuBarForm extends Form {
         menus.push(menu);
       }
     });
-    selectedMenuField.lookupCall.data = [];
+    (selectedMenuField.lookupCall as MenuItemLookupCall).data = [];
     menus.forEach(menu => {
-      selectedMenuField.lookupCall.data.push([menu, scout.nvl(menu.text, menu.id)]);
+      (selectedMenuField.lookupCall as MenuItemLookupCall).data.push([menu, scout.nvl(menu.text, menu.id)]);
     });
     let actionTargetField = this.widget('ActionTargetField');
-    actionTargetField.lookupCall.data = [];
-    actionTargetField.lookupCall.data.push([this.widget('DetailBox').menuBar, 'Menu Bar']);
+    (actionTargetField.lookupCall as MenuItemLookupCall).data = [];
+    (actionTargetField.lookupCall as MenuItemLookupCall).data.push([this.widget('DetailBox').menuBar, 'Menu Bar']);
     menus.forEach(menu => {
-      actionTargetField.lookupCall.data.push([menu, scout.nvl(menu.text, menu.id)]);
+      (actionTargetField.lookupCall as MenuItemLookupCall).data.push([menu, scout.nvl(menu.text, menu.id)]);
     });
   }
 
-  _updateSelectedMenu() {
+  protected _updateSelectedMenu() {
     let selectedMenuField = this.widget('SelectedMenuField');
     let formFieldPropertiesBox = this.widget('FormFieldPropertiesBox');
     let menu = selectedMenuField.value;
@@ -147,18 +153,18 @@ export default class MenuBarForm extends Form {
     this.widget('ActionPropertiesBox').setField(menu);
     this.widget('EventsTab').setField(menu);
     this.widget('WidgetActionsBox').setField(menu);
-    formFieldPropertiesBox.setVisible(!!menu.field);
+    formFieldPropertiesBox.setVisible(!!(menu as FormFieldMenu).field);
     this.currentMenu = menu;
     this.widget('ShrinkableField').setValue(this.currentMenu.shrinkable);
     this.widget('StackableField').setValue(this.currentMenu.stackable);
     this.widget('SubMenuVisibilityField').setValue(this.currentMenu.subMenuVisibility);
-    if (menu.field) {
+    if ((menu as FormFieldMenu).field) {
       // form field widget
-      formFieldPropertiesBox.setField(menu.field);
+      formFieldPropertiesBox.setField((menu as FormFieldMenu).field);
     }
   }
 
-  _updateActionTarget() {
+  protected _updateActionTarget() {
     let menu = this.widget('ActionTargetField').value;
     this.widget('Actions.MenuActionsBox').setMenu(menu instanceof Menu ? menu : null);
     this.widget('Actions.MenuActionsBox').setVisible(menu instanceof Menu);

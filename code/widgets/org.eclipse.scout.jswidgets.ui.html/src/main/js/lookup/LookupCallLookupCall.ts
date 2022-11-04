@@ -1,30 +1,32 @@
 /*
- * Copyright (c) 2014-2018 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
+ * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {arrays, LookupCall, QueryBy, scout, StaticLookupCall} from '@eclipse-scout/core';
+import {arrays, LookupCall, LookupResult, LookupRow, QueryBy, scout, StaticLookupCall} from '@eclipse-scout/core';
+import {LocaleLookupCall, RainbowLookupCall, SalutationLookupCall, WorldLookupCall} from '../index';
+import Deferred = JQuery.Deferred;
 
-export default class LookupCallLookupCall extends StaticLookupCall {
+export class LookupCallLookupCall extends StaticLookupCall<LookupCall<any>> {
 
   constructor() {
     super();
   }
 
-  _queryByKey(deferred, key) {
+  protected override _queryByKey(deferred: Deferred<LookupResult<LookupCall<any>>>, key: LookupCall<any>) {
     if (key instanceof LookupCall) {
       deferred.resolve({
         queryBy: QueryBy.KEY,
         lookupRows: [{
           key: key,
-          text: key.objectType,
+          text: key.objectType as string,
           enabled: true
-        }]
+        } as LookupRow<LookupCall<any>>]
       });
       return;
     }
@@ -41,12 +43,12 @@ export default class LookupCallLookupCall extends StaticLookupCall {
     }
   }
 
-  _data() {
+  protected override _data(): any[] {
     return [
-      [scout.create('jswidgets.LocaleLookupCall', {session: this.session}), 'jswidgets.LocaleLookupCall'],
-      [scout.create('jswidgets.RainbowLookupCall', {session: this.session}), 'jswidgets.RainbowLookupCall'],
-      [scout.create('jswidgets.SalutationLookupCall', {session: this.session}), 'jswidgets.SalutationLookupCall'],
-      [scout.create('jswidgets.WorldLookupCall', {session: this.session}), 'jswidgets.WorldLookupCall']
+      [scout.create(LocaleLookupCall, {session: this.session}), 'jswidgets.LocaleLookupCall'],
+      [scout.create(RainbowLookupCall, {session: this.session}), 'jswidgets.RainbowLookupCall'],
+      [scout.create(SalutationLookupCall, {session: this.session}), 'jswidgets.SalutationLookupCall'],
+      [scout.create(WorldLookupCall, {session: this.session}), 'jswidgets.WorldLookupCall']
     ];
   }
 }

@@ -8,22 +8,23 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {Form, models} from '@eclipse-scout/core';
-import {ModeLookupCall} from '../index';
+import {Form, FormModel, InitModelOf, Mode, models, PropertyChangeEvent} from '@eclipse-scout/core';
+import {ModeLookupCall, ModeSelectorFormWidgetMap} from '../index';
 import ModeSelectorFormModel from './ModeSelectorFormModel';
 
-export default class ModeSelectorForm extends Form {
+export class ModeSelectorForm extends Form {
+  declare widgetMap: ModeSelectorFormWidgetMap;
 
   constructor() {
     super();
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): FormModel {
     return models.get(ModeSelectorFormModel);
   }
 
   // noinspection DuplicatedCode
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
     let modeSelectorField = this.widget('ModeSelectorField');
@@ -109,7 +110,7 @@ export default class ModeSelectorForm extends Form {
     this.widget('EventsTab').setField(modeSelectorField);
   }
 
-  _onModeChange(mode, event) {
+  protected _onModeChange(mode: Mode, event: PropertyChangeEvent<boolean, Mode>) {
     let targetMode = this.widget('TargetField').value;
     if (mode === targetMode) {
       this.widget('SelectedField').setValue(mode.selected);

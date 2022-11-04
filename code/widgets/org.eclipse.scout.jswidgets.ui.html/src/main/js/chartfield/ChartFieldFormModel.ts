@@ -8,22 +8,26 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {FormField, icons} from '@eclipse-scout/core';
+import {
+  Button, CheckBoxField, Column, FormField, FormModel, GroupBox, icons, IntegerField, LabelField, Menu, NumberField, SmartField, StringField, TabBox, TabItem, Table, TableField, TileField, TileGrid, ValueField
+} from '@eclipse-scout/core';
+import {Chart, ChartField, ChartFieldTile, ChartPosition, ChartType, GreenAreaPosition} from '@eclipse-scout/chart';
+import {EventsTab, EventsTabWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap} from '../index';
 
-export default () => ({
+export default (): FormModel => ({
   id: 'jswidgets.ChartFieldForm',
   displayHint: 'view',
   rootGroupBox: {
     id: 'MainBox',
-    objectType: 'GroupBox',
+    objectType: GroupBox,
     fields: [
       {
         id: 'DetailBox',
-        objectType: 'GroupBox',
+        objectType: GroupBox,
         fields: [
           {
             id: 'ChartField',
-            objectType: 'ChartField',
+            objectType: ChartField,
             gridDataHints: {
               h: 10,
               weightY: 0
@@ -32,7 +36,7 @@ export default () => ({
             statusVisible: false,
             chart: {
               id: 'Chart',
-              objectType: 'Chart',
+              objectType: Chart,
               config: {
                 options: {
                   elements: {
@@ -45,7 +49,7 @@ export default () => ({
             }
           }, {
             id: 'ChartTileBox',
-            objectType: 'TileField',
+            objectType: TileField,
             gridDataHints: {
               h: 10,
               weightY: 0
@@ -55,24 +59,24 @@ export default () => ({
             visible: false,
             tileGrid: {
               id: 'TileGrid',
-              objectType: 'TileGrid',
+              objectType: TileGrid,
               scrollable: false,
               tiles: [
                 {
                   id: 'ChartTile',
-                  objectType: 'ChartFieldTile',
+                  objectType: ChartFieldTile,
                   labelVisible: false,
                   gridDataHints: {
                     weightY: 1
                   },
                   tileWidget: {
                     id: 'TileChartField',
-                    objectType: 'ChartField',
+                    objectType: ChartField,
                     labelVisible: false,
                     statusVisible: false,
                     chart: {
                       id: 'TileChart',
-                      objectType: 'Chart',
+                      objectType: Chart,
                       config: {
                         options: {
                           elements: {
@@ -91,18 +95,18 @@ export default () => ({
         ]
       }, {
         id: 'ConfigurationBox',
-        objectType: 'TabBox',
+        objectType: TabBox,
         cssClass: 'jswidgets-configuration',
         selectedTab: 'ChartPropertiesBox',
         tabItems: [{
           id: 'ChartPropertiesBox',
-          objectType: 'TabItem',
+          objectType: TabItem,
           label: 'Properties',
           gridColumnCount: 4,
           fields: [
             {
-              id: 'LeftBox',
-              objectType: 'GroupBox',
+              id: 'ChartPropertiesBox.LeftBox',
+              objectType: GroupBox,
               gridDataHints: {
                 w: 2
               },
@@ -111,101 +115,101 @@ export default () => ({
               fields: [
                 {
                   id: 'AutoColorCheckBox',
-                  objectType: 'CheckBoxField',
+                  objectType: CheckBoxField,
                   label: 'Auto Color',
                   labelVisible: false
                 },
                 {
                   id: 'ClickableCheckBox',
-                  objectType: 'CheckBoxField',
+                  objectType: CheckBoxField,
                   label: 'Clickable',
                   labelVisible: false
                 },
                 {
                   id: 'CheckableCheckBox',
-                  objectType: 'CheckBoxField',
+                  objectType: CheckBoxField,
                   label: 'Checkable',
                   labelVisible: false
                 },
                 {
                   id: 'AnimatedCheckBox',
-                  objectType: 'CheckBoxField',
+                  objectType: CheckBoxField,
                   label: 'Animated',
                   labelVisible: false
                 },
                 {
                   id: 'LegendVisibleBox',
-                  objectType: 'CheckBoxField',
+                  objectType: CheckBoxField,
                   label: 'Legend visible',
                   labelVisible: false
                 },
                 {
                   id: 'LegendClickableCheckBox',
-                  objectType: 'CheckBoxField',
+                  objectType: CheckBoxField,
                   label: 'Legend clickable',
                   tooltipText: 'Datasets can be shown and hidden using the legend',
                   labelVisible: false
                 },
                 {
                   id: 'TooltipsEnabledBox',
-                  objectType: 'CheckBoxField',
+                  objectType: CheckBoxField,
                   label: 'Tooltips enabled',
                   labelVisible: false
                 },
                 {
                   id: 'DatalabelsVisibleCheckBox',
-                  objectType: 'CheckBoxField',
+                  objectType: CheckBoxField,
                   label: 'Datalabels visible',
                   labelVisible: false
                 },
                 {
                   id: 'XAxisStackedCheckBox',
-                  objectType: 'CheckBoxField',
+                  objectType: CheckBoxField,
                   label: 'x-Axis stacked',
                   labelVisible: false
                 },
                 {
                   id: 'YAxisStackedCheckBox',
-                  objectType: 'CheckBoxField',
+                  objectType: CheckBoxField,
                   label: 'y-Axis stacked',
                   labelVisible: false
                 },
                 {
                   id: 'FillCheckBox',
-                  objectType: 'CheckBoxField',
+                  objectType: CheckBoxField,
                   label: 'Fill',
                   labelVisible: false
                 },
                 {
                   id: 'TransparentCheckBox',
-                  objectType: 'CheckBoxField',
+                  objectType: CheckBoxField,
                   label: 'Transparent',
                   labelVisible: false
                 },
                 {
                   id: 'AccordingToValuesCheckbox',
-                  objectType: 'CheckBoxField',
+                  objectType: CheckBoxField,
                   label: 'Normalized',
                   labelVisible: false
                 },
                 {
                   id: 'FulfillmentStartValuePropertyCheckbox',
-                  objectType: 'CheckBoxField',
+                  objectType: CheckBoxField,
                   label: 'Use start value property',
                   tooltipText: 'If set animation starts from the current value. If not set, the animation returns to 0 and starts from 0.',
                   labelVisible: false
                 },
                 {
                   id: 'TileCheckBox',
-                  objectType: 'CheckBoxField',
+                  objectType: CheckBoxField,
                   label: 'Show inside tile',
                   labelVisible: false
                 }
               ]
             },
             {
-              id: 'RightBox',
-              objectType: 'GroupBox',
+              id: 'ChartPropertiesBox.RightBox',
+              objectType: GroupBox,
               gridDataHints: {
                 w: 2
               },
@@ -214,7 +218,7 @@ export default () => ({
               fields: [
                 {
                   id: 'ChartTypeField',
-                  objectType: 'SmartField',
+                  objectType: SmartField,
                   label: 'Chart Type',
                   labelPosition: FormField.LabelPosition.TOP,
                   lookupCall: 'jswidgets.ChartTypeLookupCall',
@@ -222,7 +226,7 @@ export default () => ({
                 },
                 {
                   id: 'ColorSchemeField',
-                  objectType: 'SmartField',
+                  objectType: SmartField,
                   label: 'Chart Scheme',
                   labelPosition: FormField.LabelPosition.TOP,
                   lookupCall: 'jswidgets.ColorSchemeLookupCall',
@@ -230,7 +234,7 @@ export default () => ({
                 },
                 {
                   id: 'TensionField',
-                  objectType: 'NumberField',
+                  objectType: NumberField,
                   label: 'Tension',
                   labelPosition: FormField.LabelPosition.TOP,
                   gridDataHints: {
@@ -242,7 +246,7 @@ export default () => ({
                 },
                 {
                   id: 'GreenAreaPositionField',
-                  objectType: 'SmartField',
+                  objectType: SmartField,
                   label: 'Green area position',
                   labelPosition: FormField.LabelPosition.TOP,
                   lookupCall: 'jswidgets.SpeedoGreenAreaPositionLookupCall',
@@ -250,7 +254,7 @@ export default () => ({
                 },
                 {
                   id: 'SizeOfLargestBubbleField',
-                  objectType: 'NumberField',
+                  objectType: NumberField,
                   label: 'Size of largest bubble',
                   labelPosition: FormField.LabelPosition.TOP,
                   gridDataHints: {
@@ -261,7 +265,7 @@ export default () => ({
                 },
                 {
                   id: 'MinBubbleSizeField',
-                  objectType: 'NumberField',
+                  objectType: NumberField,
                   label: 'Min bubble size',
                   labelPosition: FormField.LabelPosition.TOP,
                   gridDataHints: {
@@ -272,7 +276,7 @@ export default () => ({
                 },
                 {
                   id: 'LegendPositionField',
-                  objectType: 'SmartField',
+                  objectType: SmartField,
                   label: 'Legend position',
                   labelPosition: FormField.LabelPosition.TOP,
                   lookupCall: 'jswidgets.LegendPositionLookupCall',
@@ -281,7 +285,7 @@ export default () => ({
             },
             {
               id: 'CustomChartPropertiesBox',
-              objectType: 'GroupBox',
+              objectType: GroupBox,
               label: 'Custom Chart Properties',
               gridColumnCount: 1,
               gridDataHints: {
@@ -292,7 +296,7 @@ export default () => ({
               fields: [
                 {
                   id: 'InfoField',
-                  objectType: 'LabelField',
+                  objectType: LabelField,
                   labelVisible: false,
                   htmlEnabled: true,
                   wrapText: true,
@@ -303,7 +307,7 @@ export default () => ({
                 },
                 {
                   id: 'CustomChartPropertiesField',
-                  objectType: 'StringField',
+                  objectType: StringField,
                   labelVisible: false,
                   gridDataHints: {
                     h: 6
@@ -317,23 +321,23 @@ export default () => ({
             },
             {
               id: 'FormFieldPropertiesBox',
-              objectType: 'jswidgets.FormFieldPropertiesBox',
+              objectType: FormFieldPropertiesBox,
               expanded: false
             },
             {
               id: 'GridDataBox',
-              objectType: 'jswidgets.GridDataBox',
+              objectType: GridDataBox,
               label: 'Grid Data Hints'
             }
           ]
         }, {
           id: 'ChartDataBox',
-          objectType: 'TabItem',
+          objectType: TabItem,
           label: 'Data',
           gridColumnCount: 3,
           fields: [{
-            id: 'LeftBox',
-            objectType: 'GroupBox',
+            id: 'ChartDataBox.LeftBox',
+            objectType: GroupBox,
             gridDataHints: {
               w: 2,
               weightY: 1
@@ -342,18 +346,18 @@ export default () => ({
             borderVisible: false,
             fields: [{
               id: 'ChartDataTableField',
-              objectType: 'TableField',
+              objectType: TableField,
               labelVisible: false,
               enabled: false,
               table: {
-                id: 'Table',
-                objectType: 'Table',
+                id: 'ChartDataTableField.Table',
+                objectType: Table,
                 sortEnabled: false,
                 headerMenusEnabled: false,
                 columns: [
                   {
                     id: 'DatasetLabelColumn',
-                    objectType: 'Column',
+                    objectType: Column,
                     editable: true,
                     width: 250,
                     fixedPosition: true,
@@ -363,7 +367,7 @@ export default () => ({
                 menus: [
                   {
                     id: 'AddDatasetMenu',
-                    objectType: 'Menu',
+                    objectType: Menu,
                     text: 'Add dataset',
                     menuTypes: [
                       'Table.EmptySpace',
@@ -373,7 +377,7 @@ export default () => ({
                   },
                   {
                     id: 'RemoveDatasetMenu',
-                    objectType: 'Menu',
+                    objectType: Menu,
                     text: 'Remove dataset',
                     menuTypes: [
                       'Table.SingleSelection',
@@ -382,7 +386,7 @@ export default () => ({
                   },
                   {
                     id: 'AddDataMenu',
-                    objectType: 'Menu',
+                    objectType: Menu,
                     iconId: icons.PLUS,
                     tooltipText: 'Add data',
                     menuTypes: [
@@ -391,7 +395,7 @@ export default () => ({
                   },
                   {
                     id: 'RemoveDataMenu',
-                    objectType: 'Menu',
+                    objectType: Menu,
                     iconId: icons.MINUS,
                     tooltipText: 'Remove data',
                     enabled: false,
@@ -403,8 +407,8 @@ export default () => ({
               }
             }]
           }, {
-            id: 'RightBox',
-            objectType: 'GroupBox',
+            id: 'ChartDataBox.RightBox',
+            objectType: GroupBox,
             gridDataHints: {
               w: 1,
               weightY: 1
@@ -413,19 +417,19 @@ export default () => ({
             borderVisible: false,
             fields: [{
               id: 'RandomCheckBox',
-              objectType: 'CheckBoxField',
+              objectType: CheckBoxField,
               label: 'Random',
               labelVisible: false,
               statusVisible: false
             }, {
               id: 'FillTableCheckBox',
-              objectType: 'CheckBoxField',
+              objectType: CheckBoxField,
               label: 'Fill Table',
               labelVisible: false,
               statusVisible: false
             }, {
               id: 'RandomDataButton',
-              objectType: 'Button',
+              objectType: Button,
               label: 'Generate random data',
               keyStroke: 'enter',
               gridDataHints: {
@@ -434,7 +438,7 @@ export default () => ({
               processButton: false
             }, {
               id: 'ValuesProviderField',
-              objectType: 'SmartField',
+              objectType: SmartField,
               label: 'Values',
               labelPosition: FormField.LabelPosition.TOP,
               gridDataHints: {
@@ -444,7 +448,7 @@ export default () => ({
               displayStyle: 'dropdown'
             }, {
               id: 'NumberOfDatasetsField',
-              objectType: 'IntegerField',
+              objectType: IntegerField,
               label: 'Number of datasets',
               labelPosition: FormField.LabelPosition.TOP,
               gridDataHints: {
@@ -455,14 +459,15 @@ export default () => ({
               menus: [
                 {
                   id: 'RandomNumberOfDatasetsMenu',
-                  objectType: 'Menu',
+                  objectType: Menu,
                   text: 'Set random number'
                 }]
             }, {
               id: 'MaxSegmentsField',
-              objectType: 'IntegerField',
+              objectType: IntegerField,
               label: 'Max. segments',
               labelPosition: FormField.LabelPosition.TOP,
+              clearable: ValueField.Clearable.NEVER,
               gridDataHints: {
                 w: 4,
                 horizontalAlignment: -1
@@ -473,12 +478,12 @@ export default () => ({
           }]
         }, {
           id: 'ActionsTab',
-          objectType: 'TabItem',
+          objectType: TabItem,
           label: 'Actions',
           fields: [
             {
               id: 'WidgetActionsBox',
-              objectType: 'jswidgets.WidgetActionsBox',
+              objectType: WidgetActionsBox,
               expandable: false,
               labelVisible: false,
               borderVisible: false
@@ -486,9 +491,79 @@ export default () => ({
           ]
         }, {
           id: 'EventsTab',
-          objectType: 'jswidgets.EventsTab'
+          objectType: EventsTab
         }]
       }
     ]
   }
 });
+
+export type ChartFieldFormWidgetMap = {
+  'MainBox': GroupBox;
+  'DetailBox': GroupBox;
+  'ChartField': ChartField;
+  'Chart': Chart;
+  'ChartTileBox': TileField;
+  'TileGrid': TileGrid;
+  'ChartTile': ChartFieldTile;
+  'TileChartField': ChartField;
+  'TileChart': Chart;
+  'ConfigurationBox': TabBox;
+  'ChartPropertiesBox': TabItem;
+  'ChartPropertiesBox.LeftBox': GroupBox;
+  'AutoColorCheckBox': CheckBoxField;
+  'ClickableCheckBox': CheckBoxField;
+  'CheckableCheckBox': CheckBoxField;
+  'AnimatedCheckBox': CheckBoxField;
+  'LegendVisibleBox': CheckBoxField;
+  'LegendClickableCheckBox': CheckBoxField;
+  'TooltipsEnabledBox': CheckBoxField;
+  'DatalabelsVisibleCheckBox': CheckBoxField;
+  'XAxisStackedCheckBox': CheckBoxField;
+  'YAxisStackedCheckBox': CheckBoxField;
+  'FillCheckBox': CheckBoxField;
+  'TransparentCheckBox': CheckBoxField;
+  'AccordingToValuesCheckbox': CheckBoxField;
+  'FulfillmentStartValuePropertyCheckbox': CheckBoxField;
+  'TileCheckBox': CheckBoxField;
+  'ChartPropertiesBox.RightBox': GroupBox;
+  'ChartTypeField': SmartField<ChartType>;
+  'ColorSchemeField': SmartField<string>;
+  'TensionField': NumberField;
+  'GreenAreaPositionField': SmartField<GreenAreaPosition>;
+  'SizeOfLargestBubbleField': NumberField;
+  'MinBubbleSizeField': NumberField;
+  'LegendPositionField': SmartField<ChartPosition>;
+  'CustomChartPropertiesBox': GroupBox;
+  'InfoField': LabelField;
+  'CustomChartPropertiesField': StringField;
+  'FormFieldPropertiesBox': FormFieldPropertiesBox;
+  'GridDataBox': GridDataBox;
+  'ChartDataBox': TabItem;
+  'ChartDataBox.LeftBox': GroupBox;
+  'ChartDataTableField': TableField;
+  'ChartDataTableField.Table': ChartDataTableFieldTable;
+  'AddDatasetMenu': Menu;
+  'RemoveDatasetMenu': Menu;
+  'AddDataMenu': Menu;
+  'RemoveDataMenu': Menu;
+  'ChartDataBox.RightBox': GroupBox;
+  'RandomCheckBox': CheckBoxField;
+  'FillTableCheckBox': CheckBoxField;
+  'RandomDataButton': Button;
+  'ValuesProviderField': SmartField<number>;
+  'NumberOfDatasetsField': IntegerField;
+  'RandomNumberOfDatasetsMenu': Menu;
+  'MaxSegmentsField': IntegerField;
+  'ActionsTab': TabItem;
+  'WidgetActionsBox': WidgetActionsBox;
+  'EventsTab': EventsTab;
+} & FormFieldPropertiesBoxWidgetMap & GridDataBoxWidgetMap & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;
+
+export type ChartDataTableFieldTableColumnMap = {
+  'DatasetLabelColumn': Column<string>;
+};
+
+export class ChartDataTableFieldTable extends Table {
+  declare columnMap: ChartDataTableFieldTableColumnMap;
+}

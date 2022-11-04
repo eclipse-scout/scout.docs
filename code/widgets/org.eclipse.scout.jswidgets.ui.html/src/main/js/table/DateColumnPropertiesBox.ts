@@ -8,31 +8,35 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {GroupBox, models} from '@eclipse-scout/core';
+import {DateColumn, GroupBox, GroupBoxModel, InitModelOf, models} from '@eclipse-scout/core';
 import DateColumnPropertiesBoxModel from './DateColumnPropertiesBoxModel';
+import {DateColumnPropertiesBoxWidgetMap} from '../index';
 
-export default class DateColumnPropertiesBox extends GroupBox {
+export class DateColumnPropertiesBox extends GroupBox {
+  declare widgetMap: DateColumnPropertiesBoxWidgetMap;
+
+  column: DateColumn;
 
   constructor() {
     super();
     this.column = null;
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): GroupBoxModel {
     return models.get(DateColumnPropertiesBoxModel);
   }
 
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
     this._setColumn(this.column);
   }
 
-  setColumn(column) {
+  setColumn(column: DateColumn) {
     this.setProperty('column', column);
   }
 
-  _setColumn(column) {
+  protected _setColumn(column: DateColumn) {
     this._setProperty('column', column);
     if (!this.column) {
       return;
@@ -50,14 +54,14 @@ export default class DateColumnPropertiesBox extends GroupBox {
     hasDateField.setValue(this.column.hasDate);
     hasDateField.on('propertyChange:value', event => {
       this.column.hasDate = event.newValue;
-      this.column.setFormat();
+      this.column.setFormat(null);
     });
 
     let hasTimeField = this.widget('HasTimeField');
     hasTimeField.setValue(this.column.hasTime);
     hasTimeField.on('propertyChange:value', event => {
       this.column.hasTime = event.newValue;
-      this.column.setFormat();
+      this.column.setFormat(null);
     });
   }
 }

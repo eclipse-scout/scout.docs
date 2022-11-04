@@ -8,30 +8,34 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {GroupBox, models, objects, scout, Status} from '@eclipse-scout/core';
+import {GroupBox, GroupBoxModel, InitModelOf, models, Notification, objects, scout, Status} from '@eclipse-scout/core';
 import GroupBoxPropertiesBoxModel from './GroupBoxPropertiesBoxModel';
+import {GroupBoxPropertiesBoxWidgetMap} from '../index';
 
-export default class GroupBoxPropertiesBox extends GroupBox {
+export class GroupBoxPropertiesBox extends GroupBox {
+  declare widgetMap: GroupBoxPropertiesBoxWidgetMap;
+
+  field: GroupBox;
 
   constructor() {
     super();
     this.field = null;
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): GroupBoxModel {
     return models.get(GroupBoxPropertiesBoxModel);
   }
 
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
     this._setField(this.field);
   }
 
-  setField(field) {
+  setField(field: GroupBox) {
     this.setProperty('field', field);
   }
 
-  _setField(field) {
+  protected _setField(field: GroupBox) {
     this._setProperty('field', field);
     if (!this.field) {
       return;
@@ -78,7 +82,7 @@ export default class GroupBoxPropertiesBox extends GroupBox {
     notificationField.on('propertyChange:value', event => this.field.setNotification(this._createNotification()));
 
     let notificationIconField = this.widget('NotificationIconField');
-    notificationIconField.setValue(this.field.notification ? this.field.notification.iconId : null);
+    notificationIconField.setValue(this.field.notification ? this.field.notification.status.iconId : null);
     notificationIconField.on('propertyChange:value', event => this.field.setNotification(this._createNotification()));
 
     let menuBarVisibleField = this.widget('MenuBarVisibleField');
@@ -94,12 +98,12 @@ export default class GroupBoxPropertiesBox extends GroupBox {
     menuBarEllipsisPositionField.on('propertyChange:value', event => this.field.setMenuBarEllipsisPosition(event.newValue));
   }
 
-  _createNotification() {
+  protected _createNotification(): Notification {
     let severity = this.widget('NotificationField').value;
     if (!severity) {
       return null;
     }
-    return scout.create('Notification', {
+    return scout.create(Notification, {
       parent: this,
       severity: severity,
       iconId: this.widget('NotificationIconField').value,

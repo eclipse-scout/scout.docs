@@ -8,21 +8,24 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-export default () => ({
+import {Button, CheckBoxField, FormModel, GroupBox, NativeNotificationVisibility, NumberField, SmartField, StatusSeverity, StringField, TabBox, TabItem} from '@eclipse-scout/core';
+import {EventsTab, EventsTabWidgetMap} from '../index';
+
+export default (): FormModel => ({
   id: 'jswidgets.DesktopNotificationForm',
   displayHint: 'view',
   rootGroupBox: {
     id: 'MainBox',
-    objectType: 'GroupBox',
+    objectType: GroupBox,
     fields: [
       {
         id: 'DetailBox',
-        objectType: 'GroupBox',
+        objectType: GroupBox,
         gridColumnCount: 1,
         fields: [
           {
             id: 'Button',
-            objectType: 'Button',
+            objectType: Button,
             label: 'Show Notification',
             processButton: false,
             gridDataHints: {
@@ -33,92 +36,92 @@ export default () => ({
       },
       {
         id: 'ConfigurationBox',
-        objectType: 'TabBox',
+        objectType: TabBox,
         cssClass: 'jswidgets-configuration',
         selectedTab: 'PropertiesTab',
         tabItems: [
           {
             id: 'PropertiesTab',
-            objectType: 'TabItem',
+            objectType: TabItem,
             label: 'Properties',
             fields: [
               {
                 id: 'PropertiesBox',
-                objectType: 'GroupBox',
+                objectType: GroupBox,
                 label: 'Properties',
                 labelVisible: false,
                 borderVisible: false,
                 fields: [
                   {
                     id: 'MessageField',
-                    objectType: 'StringField',
+                    objectType: StringField,
                     label: 'Message'
                   },
                   {
                     id: 'StatusSeverityField',
-                    objectType: 'SmartField',
+                    objectType: SmartField,
                     lookupCall: 'jswidgets.StatusSeverityLookupCall',
                     label: 'Severity'
                   },
                   {
                     id: 'DurationField',
-                    objectType: 'NumberField',
+                    objectType: NumberField,
                     label: 'Duration',
                     tooltipText: '${textKey:DurationTooltip}'
                   },
                   {
                     id: 'IconField',
-                    objectType: 'SmartField',
+                    objectType: SmartField,
                     lookupCall: 'jswidgets.IconIdLookupCall',
                     label: 'Icon'
                   },
                   {
                     id: 'ClosableField',
-                    objectType: 'CheckBoxField',
+                    objectType: CheckBoxField,
                     label: 'Closable',
                     labelVisible: false
                   },
                   {
                     id: 'LoadingField',
-                    objectType: 'CheckBoxField',
+                    objectType: CheckBoxField,
                     label: 'Loading',
                     labelVisible: false
                   },
                   {
                     id: 'HtmlEnabledField',
-                    objectType: 'CheckBoxField',
+                    objectType: CheckBoxField,
                     label: 'HTML Enabled',
                     labelVisible: false
                   },
                   {
                     id: 'NativeOnlyField',
-                    objectType: 'CheckBoxField',
+                    objectType: CheckBoxField,
                     label: 'Native Only',
                     labelVisible: false,
                     tooltipText: '${textKey:NativeOnlyTooltip}'
                   },
                   {
                     id: 'NativeNotificationTitleField',
-                    objectType: 'StringField',
+                    objectType: StringField,
                     label: 'Native Notification Title',
                     labelWidthInPixel: 170
                   },
                   {
                     id: 'NativeNotificationMessageField',
-                    objectType: 'StringField',
+                    objectType: StringField,
                     label: 'Native Notification Message',
                     labelWidthInPixel: 170
                   },
                   {
                     id: 'NativeNotificationIconIdField',
-                    objectType: 'SmartField',
+                    objectType: SmartField,
                     lookupCall: 'jswidgets.ImageLookupCall',
                     label: 'Native Notification Icon Id',
                     labelWidthInPixel: 170
                   },
                   {
                     id: 'NativeNotificationVisibilityField',
-                    objectType: 'SmartField',
+                    objectType: SmartField,
                     lookupCall: 'jswidgets.NativeNotificationVisibilityLookupCall',
                     label: 'Native Notification Visibility',
                     labelWidthInPixel: 170,
@@ -126,7 +129,7 @@ export default () => ({
                   },
                   {
                     id: 'DelayField',
-                    objectType: 'NumberField',
+                    objectType: NumberField,
                     label: 'Delay',
                     labelWidthInPixel: 170,
                     tooltipText: '${textKey:DelayTooltip}'
@@ -137,10 +140,33 @@ export default () => ({
           },
           {
             id: 'EventsTab',
-            objectType: 'jswidgets.EventsTab'
+            objectType: EventsTab
           }
         ]
       }
     ]
   }
 });
+
+export type DesktopNotificationFormWidgetMap = {
+  'MainBox': GroupBox;
+  'DetailBox': GroupBox;
+  'Button': Button;
+  'ConfigurationBox': TabBox;
+  'PropertiesTab': TabItem;
+  'PropertiesBox': GroupBox;
+  'MessageField': StringField;
+  'StatusSeverityField': SmartField<StatusSeverity>;
+  'DurationField': NumberField;
+  'IconField': SmartField<string>;
+  'ClosableField': CheckBoxField;
+  'LoadingField': CheckBoxField;
+  'HtmlEnabledField': CheckBoxField;
+  'NativeOnlyField': CheckBoxField;
+  'NativeNotificationTitleField': StringField;
+  'NativeNotificationMessageField': StringField;
+  'NativeNotificationIconIdField': SmartField<string>;
+  'NativeNotificationVisibilityField': SmartField<NativeNotificationVisibility>;
+  'DelayField': NumberField;
+  'EventsTab': EventsTab;
+} & EventsTabWidgetMap;

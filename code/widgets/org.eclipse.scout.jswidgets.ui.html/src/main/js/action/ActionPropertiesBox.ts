@@ -8,34 +8,38 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {GroupBox, MenuBarBox, models} from '@eclipse-scout/core';
+import {Action, Alignment, GroupBox, GroupBoxModel, InitModelOf, MenuBarBox, models} from '@eclipse-scout/core';
+import {ActionPropertiesBoxWidgetMap} from '../index';
 import ActionPropertiesBoxModel from './ActionPropertiesBoxModel';
 
-export default class ActionPropertiesBox extends GroupBox {
+export class ActionPropertiesBox extends GroupBox {
+  declare widgetMap: ActionPropertiesBoxWidgetMap;
+
+  field: Action;
 
   constructor() {
     super();
     this.field = null;
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): GroupBoxModel {
     return models.get(ActionPropertiesBoxModel);
   }
 
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
     this._setField(this.field);
   }
 
-  setField(field) {
+  setField(field: Action) {
     this.setProperty('field', field);
   }
 
   // noinspection DuplicatedCode
-  _setField(field) {
+  protected _setField(field: Action) {
     this._setProperty('field', field);
-    this.setEnabled(this.field);
+    this.setEnabled(!!this.field);
     if (!this.field) {
       return;
     }
@@ -85,7 +89,7 @@ export default class ActionPropertiesBox extends GroupBox {
 
     let horizontalAlignmentField = this.widget('HorizontalAlignmentField');
     horizontalAlignmentField.setValue(this.field.horizontalAlignment);
-    horizontalAlignmentField.on('propertyChange:value', event => this.field.setHorizontalAlignment(event.newValue));
+    horizontalAlignmentField.on('propertyChange:value', event => this.field.setHorizontalAlignment(Math.sign(event.newValue) as Alignment));
 
     let actionStyleField = this.widget('ActionStyleField');
     actionStyleField.setValue(this.field.actionStyle);

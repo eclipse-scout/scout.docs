@@ -1,32 +1,39 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {Form, models, scout} from '@eclipse-scout/core';
-import {DisplayParentLookupCall} from '../index';
+import {Button, Event, Form, FormModel, InitModelOf, models, scout} from '@eclipse-scout/core';
+import {DisplayParentLookupCall, FormFormWidgetMap, FormPropertiesBox, LifecycleForm, LifecycleFormData} from '../index';
 import FormFormModel from './FormFormModel';
 
-export default class FormForm extends Form {
+export class FormForm extends Form {
+  declare widgetMap: FormFormWidgetMap;
+
+  openedByButton: boolean;
+  currentFormPropertiesBox: FormPropertiesBox;
+  lifecycleData: LifecycleFormData;
+  closeMenuVisible: boolean;
+  propertiesBox: FormPropertiesBox;
 
   constructor() {
     super();
     this.openedByButton = false;
     this.currentFormPropertiesBox = null;
-    this.LifecycleData = {};
+    this.lifecycleData = {};
     this.closeMenuVisible = false;
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): FormModel {
     return models.get(FormFormModel);
   }
 
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
     this.widget('OpenFormButton').on('click', this._onOpenFormButtonClick.bind(this));
@@ -34,7 +41,7 @@ export default class FormForm extends Form {
 
     // form properties of the form will be opened with OpenFormButton
     this.propertiesBox = this.widget('PropertiesBox');
-    this.propertiesBox.setForm(scout.create('Form', {parent: this}));
+    this.propertiesBox.setForm(scout.create(Form, {parent: this}));
     this.propertiesBox.titleField.setValue('Title');
 
     // form properties of current form
@@ -56,8 +63,8 @@ export default class FormForm extends Form {
     }
   }
 
-  _onOpenFormButtonClick(model) {
-    let form = scout.create('jswidgets.FormForm', $.extend({
+  protected _onOpenFormButtonClick(model: Event<Button>) {
+    let form = scout.create(FormForm, $.extend({
       parent: this,
       openedByButton: true,
       closeMenuVisible: true
@@ -67,10 +74,10 @@ export default class FormForm extends Form {
     form.open();
   }
 
-  _onOpenLifecycleFormButtonClick(model) {
-    let form = scout.create('jswidgets.LifecycleForm', $.extend({
+  protected _onOpenLifecycleFormButtonClick(model: Event<Button>) {
+    let form = scout.create(LifecycleForm, $.extend({
       parent: this,
-      data: this.LifecycleData
+      data: this.lifecycleData
     }, this._settings()));
     this.widget('EventsTab').setField(form);
 
@@ -104,11 +111,11 @@ export default class FormForm extends Form {
     form.open();
   }
 
-  lifecycleDataToString(data) {
+  lifecycleDataToString(data: LifecycleFormData) {
     return 'Name: ' + data.name + ', Birthday: ' + data.birthday;
   }
 
-  _settings() {
+  protected _settings(): FormModel {
     return {
       title: this.propertiesBox.titleField.value,
       subTitle: this.propertiesBox.subTitleField.value,

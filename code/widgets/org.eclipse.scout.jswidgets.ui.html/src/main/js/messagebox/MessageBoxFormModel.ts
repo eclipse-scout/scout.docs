@@ -8,21 +8,23 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-export default () => ({
+import {Button, CheckBoxField, FormModel, GroupBox, SmartField, StatusSeverity, StringField} from '@eclipse-scout/core';
+
+export default (): FormModel => ({
   id: 'jswidgets.MessageBoxForm',
   displayHint: 'view',
   rootGroupBox: {
     id: 'MainBox',
-    objectType: 'GroupBox',
+    objectType: GroupBox,
     fields: [
       {
         id: 'DetailBox',
-        objectType: 'GroupBox',
+        objectType: GroupBox,
         gridColumnCount: 1,
         fields: [
           {
             id: 'Button',
-            objectType: 'Button',
+            objectType: Button,
             label: 'Open MessageBox',
             processButton: false,
             gridDataHints: {
@@ -33,23 +35,23 @@ export default () => ({
       },
       {
         id: 'PropertiesBox',
-        objectType: 'GroupBox',
+        objectType: GroupBox,
         label: 'Properties',
         fields: [
           {
             id: 'SeverityField',
-            objectType: 'SmartField',
+            objectType: SmartField,
             lookupCall: 'jswidgets.StatusSeverityLookupCall',
             label: 'Severity'
           },
           {
             id: 'HeaderField',
-            objectType: 'StringField',
+            objectType: StringField,
             label: 'Header'
           },
           {
             id: 'BodyField',
-            objectType: 'StringField',
+            objectType: StringField,
             label: 'Body',
             multilineText: true,
             gridDataHints: {
@@ -58,33 +60,33 @@ export default () => ({
           },
           {
             id: 'HtmlField',
-            objectType: 'CheckBoxField',
+            objectType: CheckBoxField,
             label: 'Body is HTML'
           },
           {
             id: 'IconField',
-            objectType: 'SmartField',
+            objectType: SmartField,
             lookupCall: 'jswidgets.IconIdLookupCall',
             label: 'Icon'
           },
           {
             id: 'YesButtonTextField',
-            objectType: 'StringField',
+            objectType: StringField,
             label: 'Yes-Button Text'
           },
           {
             id: 'NoButtonTextField',
-            objectType: 'StringField',
+            objectType: StringField,
             label: 'No-Button Text'
           },
           {
             id: 'CancelButtonTextField',
-            objectType: 'StringField',
+            objectType: StringField,
             label: 'Cancel-Button Text'
           },
           {
             id: 'ResultField',
-            objectType: 'StringField',
+            objectType: StringField,
             label: 'Result',
             enabled: false
           }
@@ -93,3 +95,19 @@ export default () => ({
     ]
   }
 });
+
+export type MessageBoxFormWidgetMap = {
+  'MainBox': GroupBox;
+  'DetailBox': GroupBox;
+  'Button': Button;
+  'PropertiesBox': GroupBox;
+  'SeverityField': SmartField<StatusSeverity>;
+  'HeaderField': StringField;
+  'BodyField': StringField;
+  'HtmlField': CheckBoxField;
+  'IconField': SmartField<string>;
+  'YesButtonTextField': StringField;
+  'NoButtonTextField': StringField;
+  'CancelButtonTextField': StringField;
+  'ResultField': StringField;
+};

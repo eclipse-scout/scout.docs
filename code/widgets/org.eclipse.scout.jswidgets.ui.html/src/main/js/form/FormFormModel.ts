@@ -1,24 +1,37 @@
-export default () => ({
+/*
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Distribution License v1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/org/documents/edl-v10.html
+ *
+ * Contributors:
+ *     BSI Business Systems Integration AG - initial API and implementation
+ */
+import {Button, CloseMenu, FormModel, GroupBox, LabelField, TabBox, TabItem} from '@eclipse-scout/core';
+import {EventsTab, EventsTabWidgetMap, FormPropertiesBox, FormPropertiesBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap} from '../index';
+
+export default (): FormModel => ({
   id: 'jswidgets.FormForm',
   displayHint: 'view',
   rootGroupBox: {
     id: 'MainBox',
-    objectType: 'GroupBox',
+    objectType: GroupBox,
     menus: [{
       id: 'CloseMenu',
-      objectType: 'CloseMenu',
+      objectType: CloseMenu,
       tooltipText: '${textKey:CloseMenuTooltip}',
       visible: false
     }],
     fields: [
       {
         id: 'DetailBox',
-        objectType: 'GroupBox',
+        objectType: GroupBox,
         gridColumnCount: 1,
         fields: [
           {
             id: 'OpenFormButton',
-            objectType: 'Button',
+            objectType: Button,
             label: '${textKey:OpenForm}',
             cssClass: 'open-form-button',
             processButton: false,
@@ -28,7 +41,7 @@ export default () => ({
           },
           {
             id: 'OpenLifecycleFormButton',
-            objectType: 'Button',
+            objectType: Button,
             label: '${textKey:OpenLifecycleForm}',
             processButton: false,
             gridDataHints: {
@@ -37,7 +50,7 @@ export default () => ({
           },
           {
             id: 'LifecycleDataField',
-            objectType: 'LabelField',
+            objectType: LabelField,
             label: '${textKey:LifecycleData}',
             visible: false,
             gridDataHints: {
@@ -49,49 +62,66 @@ export default () => ({
       },
       {
         id: 'ConfigurationBox',
-        objectType: 'TabBox',
+        objectType: TabBox,
         cssClass: 'jswidgets-configuration',
         selectedTab: 'PropertiesTab',
         tabItems: [
           {
             id: 'PropertiesTab',
-            objectType: 'TabItem',
+            objectType: TabItem,
             label: 'Properties',
             fields: [
               {
                 id: 'PropertiesBox',
-                objectType: 'jswidgets.FormPropertiesBox'
+                objectType: FormPropertiesBox
               }
             ]
           },
           {
             id: 'CurrentFormPropertiesTab',
-            objectType: 'TabItem',
+            objectType: TabItem,
             label: 'Properties current form',
             fields: [
               {
                 id: 'CurrentFormPropertiesBox',
-                objectType: 'jswidgets.FormPropertiesBox'
+                objectType: FormPropertiesBox
               }
             ]
           },
           {
             id: 'ActionsTab',
-            objectType: 'TabItem',
+            objectType: TabItem,
             label: 'Actions',
             fields: [
               {
                 id: 'WidgetActionsBox',
-                objectType: 'jswidgets.WidgetActionsBox'
+                objectType: WidgetActionsBox
               }
             ]
           },
           {
             id: 'EventsTab',
-            objectType: 'jswidgets.EventsTab'
+            objectType: EventsTab
           }
         ]
       }
     ]
   }
 });
+
+export type FormFormWidgetMap = {
+  'MainBox': GroupBox;
+  'CloseMenu': CloseMenu;
+  'DetailBox': GroupBox;
+  'OpenFormButton': Button;
+  'OpenLifecycleFormButton': Button;
+  'LifecycleDataField': LabelField;
+  'ConfigurationBox': TabBox;
+  'PropertiesTab': TabItem;
+  'PropertiesBox': FormPropertiesBox;
+  'CurrentFormPropertiesTab': TabItem;
+  'CurrentFormPropertiesBox': FormPropertiesBox;
+  'ActionsTab': TabItem;
+  'WidgetActionsBox': WidgetActionsBox;
+  'EventsTab': EventsTab;
+} & FormPropertiesBoxWidgetMap & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;

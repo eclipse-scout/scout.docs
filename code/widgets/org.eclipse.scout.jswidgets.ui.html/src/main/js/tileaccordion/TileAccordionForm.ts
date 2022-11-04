@@ -8,12 +8,19 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {arrays, comparators, Form, models, scout} from '@eclipse-scout/core';
+import {arrays, Button, comparators, Event, Form, FormModel, Group, HtmlTile, HtmlTileModel, InitModelOf, Menu, models, scout, SmartField, TileAccordion, TileGrid} from '@eclipse-scout/core';
 import TileAccordionFormModel from './TileAccordionFormModel';
-import {GroupLookupCall} from '../index';
+import {CustomTile, CustomTileModel, GroupLookupCall, TileAccordionFormWidgetMap} from '../index';
 import $ from 'jquery';
 
-export default class TileAccordionForm extends Form {
+export class TileAccordionForm extends Form {
+  declare widgetMap: TileAccordionFormWidgetMap;
+
+  accordion: TileAccordion;
+  insertedGroupCount: number;
+  insertedTilesCount: number;
+  tileFilter: any;
+  tileTypeField: SmartField<'default' | 'simple'>;
 
   constructor() {
     super();
@@ -23,12 +30,12 @@ export default class TileAccordionForm extends Form {
     this.tileTypeField = null;
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): FormModel {
     return models.get(TileAccordionFormModel);
   }
 
   // noinspection DuplicatedCode
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
     this.tileTypeField = this.widget('InsertTileTypeField');
@@ -137,42 +144,42 @@ export default class TileAccordionForm extends Form {
     this._updateGroupVisibility();
   }
 
-  _onInsertMenuAction(event) {
+  protected _onInsertMenuAction(event: Event<Menu>) {
     this._insertGroupWithTiles();
   }
 
-  _onDeleteFirstMenuAction(event) {
+  protected _onDeleteFirstMenuAction(event: Event<Menu>) {
     this.accordion.deleteGroup(this.accordion.groups[0]);
     if (this.accordion.groups.length === 0) {
       this.insertedGroupCount = 0;
     }
   }
 
-  _onSortAscMenuAction(event) {
+  protected _onSortAscMenuAction(event: Event<Menu>) {
     this._sortTiles(true);
   }
 
-  _onSortDescMenuAction(event) {
-    this._sortTiles();
+  protected _onSortDescMenuAction(event: Event<Menu>) {
+    this._sortTiles(false);
   }
 
-  _onDeleteAllSelectedTilesMenuAction(event) {
+  protected _onDeleteAllSelectedTilesMenuAction(event: Event<Menu>) {
     this.accordion.deleteTiles(this.accordion.getSelectedTiles());
   }
 
-  _onInsertTileIntoGroup0MenuAction(event) {
+  protected _onInsertTileIntoGroup0MenuAction(event: Event<Menu>) {
     if (this.accordion.groups.length > 0) {
       this.accordion.groups[0].body.insertTile(this._createTile());
     }
   }
 
-  _onInsertTileIntoGroup1MenuAction(event) {
+  protected _onInsertTileIntoGroup1MenuAction(event: Event<Menu>) {
     if (this.accordion.groups.length > 1) {
       this.accordion.groups[1].body.insertTile(this._createTile());
     }
   }
 
-  _onInsertTileButtonClick(event) {
+  protected _onInsertTileButtonClick(event: Event<Button>) {
     let count = this.widget('InsertTileCountField').value;
     let group = this.widget('InsertTileTargetField').value;
     let tiles = [];
@@ -182,7 +189,7 @@ export default class TileAccordionForm extends Form {
     group.body.insertTiles(tiles);
   }
 
-  _onSelectNextMenuAction(event) {
+  protected _onSelectNextMenuAction(event: Event<Menu>) {
     let filteredTiles = this.accordion.getFilteredTiles();
     if (filteredTiles.length === 0) {
       return;
@@ -193,11 +200,11 @@ export default class TileAccordionForm extends Form {
     this.accordion.selectTile(filteredTiles[selectedTileIndex + 1] || filteredTiles[0]);
   }
 
-  _onSelectAllMenuAction(event) {
+  protected _onSelectAllMenuAction(event: Event<Menu>) {
     this.accordion.selectAllTiles();
   }
 
-  _insertGroupWithTiles() {
+  protected _insertGroupWithTiles() {
     let tiles = [];
     let maxTiles = Math.floor(Math.random() * 30);
     for (let i = 0; i < maxTiles; i++) {
@@ -205,11 +212,11 @@ export default class TileAccordionForm extends Form {
         label: 'Tile ' + i
       }));
     }
-    let group = scout.create('Group', {
+    let group = scout.create(Group, {
       parent: this.accordion,
       title: 'Group ' + this.insertedGroupCount++,
       body: {
-        objectType: 'TileGrid',
+        objectType: TileGrid,
         gridColumnCount: 6,
         layoutConfig: {
           columnWidth: 100,
@@ -227,7 +234,7 @@ export default class TileAccordionForm extends Form {
     this.accordion.insertGroup(group);
   }
 
-  _createTile(model) {
+  protected _createTile(model?: HtmlTileModel | CustomTileModel): HtmlTile | CustomTile {
     let defaults;
     let tileType = this.tileTypeField.value;
     if (tileType === 'default') {
@@ -239,7 +246,7 @@ export default class TileAccordionForm extends Form {
         }
       };
       model = $.extend({}, defaults, model);
-      return scout.create('HtmlTile', model);
+      return scout.create(HtmlTile, model as InitModelOf<HtmlTile>);
     }
     defaults = {
       parent: this.accordion,
@@ -250,14 +257,14 @@ export default class TileAccordionForm extends Form {
       colorScheme: this.accordion.groups.length % 2 === 0 ? 'default' : 'alternative'
     };
     model = $.extend({}, defaults, model);
-    return scout.create('jswidgets.CustomTile', model);
+    return scout.create(CustomTile, model as InitModelOf<CustomTile>);
   }
 
-  _updateStatus() {
+  protected _updateStatus() {
     this.widget('StatusField').setValue(this.session.text('TileGridStatus', this.accordion.getTileCount(), this.accordion.getFilteredTileCount(), this.accordion.getSelectedTileCount()));
   }
 
-  _updateGroupVisibility() {
+  protected _updateGroupVisibility() {
     this.accordion.groups.forEach(group => {
       // Make groups invisible if a tile filter is active and no tiles match (= no tiles are visible)
       let groupEmpty = group.body.filters.length > 0 && group.body.filteredTiles.length === 0;
@@ -265,10 +272,10 @@ export default class TileAccordionForm extends Form {
     });
   }
 
-  _sortTiles(asc) {
+  protected _sortTiles(asc: boolean) {
     let comparator = comparators.ALPHANUMERIC;
     comparator.install(this.session);
-    this.accordion.setTileComparator((tile1, tile2) => {
+    this.accordion.setTileComparator((tile1: (HtmlTile & { label?: string }) | CustomTile, tile2: (HtmlTile & { label?: string }) | CustomTile) => {
       let result = comparator.compare(tile1.label, tile2.label);
       if (!asc) {
         result = -result;

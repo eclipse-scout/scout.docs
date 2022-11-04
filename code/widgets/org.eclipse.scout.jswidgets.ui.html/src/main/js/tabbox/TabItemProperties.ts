@@ -8,31 +8,38 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {models, TabItem} from '@eclipse-scout/core';
+import {CheckBoxField, FormField, InitModelOf, models, SmartField, TabBox, TabItem, TabItemModel} from '@eclipse-scout/core';
 import TabItemPropertiesModel from './TabItemPropertiesModel';
-import {TabItemLookupCall} from '../index';
+import {TabItemLookupCall, TabItemPropertiesWidgetMap} from '../index';
 
-export default class TabItemProperties extends TabItem {
+export class TabItemProperties extends TabItem {
+  declare widgetMap: TabItemPropertiesWidgetMap;
+
+  tabBox: TabBox;
+  tabItem: TabItem;
+  field: FormField;
+  targetField: SmartField<TabItem>;
+  markedField: CheckBoxField;
 
   constructor() {
     super();
     this.field = null;
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): TabItemModel {
     return models.get(TabItemPropertiesModel);
   }
 
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
     this._setTabBox(this.tabBox);
   }
 
-  setTabBox(tabBox) {
+  setTabBox(tabBox: TabBox) {
     this.setProperty('tabBox', tabBox);
   }
 
-  _setTabBox(tabBox) {
+  protected _setTabBox(tabBox: TabBox) {
     this._setProperty('tabBox', tabBox);
     if (!this.tabBox) {
       return;
@@ -52,11 +59,11 @@ export default class TabItemProperties extends TabItem {
     this.setTabItem(this.tabBox.selectedTab);
   }
 
-  setTabItem(tabItem) {
+  setTabItem(tabItem: TabItem) {
     this.setProperty('tabItem', tabItem);
   }
 
-  _setTabItem(tabItem) {
+  protected _setTabItem(tabItem: TabItem) {
     this._setProperty('tabItem', tabItem);
     this.targetField.setValue(this.tabItem);
     if (!this.tabItem) {

@@ -8,33 +8,37 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {GroupBox, models} from '@eclipse-scout/core';
+import {GroupBox, GroupBoxModel, InitModelOf, models, WidgetPopup} from '@eclipse-scout/core';
 import WidgetPopupPropertiesBoxModel from './WidgetPopupPropertiesBoxModel';
+import {WidgetPopupPropertiesBoxWidgetMap} from '../index';
 
-export default class WidgetPopupPropertiesBox extends GroupBox {
+export class WidgetPopupPropertiesBox extends GroupBox {
+  declare widgetMap: WidgetPopupPropertiesBoxWidgetMap;
+
+  field: WidgetPopup;
 
   constructor() {
     super();
     this.field = null;
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): GroupBoxModel {
     return models.get(WidgetPopupPropertiesBoxModel);
   }
 
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
     this._setField(this.field);
   }
 
-  setField(field) {
+  setField(field: WidgetPopup) {
     this.setProperty('field', field);
   }
 
-  _setField(field) {
+  protected _setField(field: WidgetPopup) {
     this._setProperty('field', field);
-    this.setEnabled(this.field);
+    this.setEnabled(!!this.field);
     if (!this.field) {
       return;
     }

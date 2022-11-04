@@ -8,31 +8,35 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {GroupBox, models} from '@eclipse-scout/core';
+import {BooleanColumn, GroupBox, GroupBoxModel, InitModelOf, models} from '@eclipse-scout/core';
 import BooleanColumnPropertiesBoxModel from './BooleanColumnPropertiesBoxModel';
+import {BooleanColumnPropertiesBoxWidgetMap} from '../index';
 
-export default class BooleanColumnPropertiesBox extends GroupBox {
+export class BooleanColumnPropertiesBox extends GroupBox {
+  declare widgetMap: BooleanColumnPropertiesBoxWidgetMap;
+
+  column: BooleanColumn;
 
   constructor() {
     super();
     this.column = null;
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): GroupBoxModel {
     return models.get(BooleanColumnPropertiesBoxModel);
   }
 
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
     this._setColumn(this.column);
   }
 
-  setColumn(column) {
+  setColumn(column: BooleanColumn) {
     this.setProperty('column', column);
   }
 
-  _setColumn(column) {
+  protected _setColumn(column: BooleanColumn) {
     this._setProperty('column', column);
     if (!this.column) {
       return;

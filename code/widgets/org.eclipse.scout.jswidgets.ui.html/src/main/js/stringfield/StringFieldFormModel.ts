@@ -1,36 +1,52 @@
-export default () => ({
+/*
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Distribution License v1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/org/documents/edl-v10.html
+ *
+ * Contributors:
+ *     BSI Business Systems Integration AG - initial API and implementation
+ */
+import {CheckBoxField, FormModel, GroupBox, NumberField, SmartField, StringField, StringFieldFormat, TabBox, TabItem} from '@eclipse-scout/core';
+import {
+  EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, ValueFieldPropertiesBox, ValueFieldPropertiesBoxWidgetMap,
+  WidgetActionsBox, WidgetActionsBoxWidgetMap
+} from '../index';
+
+export default (): FormModel => ({
   id: 'jswidgets.StringFieldForm',
   displayHint: 'view',
   rootGroupBox: {
     id: 'MainBox',
-    objectType: 'GroupBox',
+    objectType: GroupBox,
     fields: [
       {
         id: 'DetailBox',
-        objectType: 'GroupBox',
+        objectType: GroupBox,
         gridColumnCount: 1,
         fields: [
           {
             id: 'StringField',
-            objectType: 'StringField',
+            objectType: StringField,
             label: '${textKey:StringField}'
           }
         ]
       },
       {
         id: 'ConfigurationBox',
-        objectType: 'TabBox',
+        objectType: TabBox,
         cssClass: 'jswidgets-configuration',
         selectedTab: 'PropertiesTab',
         tabItems: [
           {
             id: 'PropertiesTab',
-            objectType: 'TabItem',
+            objectType: TabItem,
             label: 'Properties',
             fields: [
               {
                 id: 'PropertiesBox',
-                objectType: 'GroupBox',
+                objectType: GroupBox,
                 expandable: true,
                 label: 'Properties',
                 labelVisible: false,
@@ -38,25 +54,25 @@ export default () => ({
                 fields: [
                   {
                     id: 'HasActionField',
-                    objectType: 'CheckBoxField',
+                    objectType: CheckBoxField,
                     label: 'Has Action',
                     labelVisible: false
                   },
                   {
                     id: 'InputMaskedField',
-                    objectType: 'CheckBoxField',
+                    objectType: CheckBoxField,
                     label: 'Input Masked',
                     labelVisible: false
                   },
                   {
                     id: 'MultilineTextField',
-                    objectType: 'CheckBoxField',
+                    objectType: CheckBoxField,
                     label: 'Multiline Text',
                     labelVisible: false
                   },
                   {
                     id: 'SpellCheckEnabledField',
-                    objectType: 'CheckBoxField',
+                    objectType: CheckBoxField,
                     label: 'Spell Check Enabled',
                     labelVisible: false,
                     tooltipText: '${textKey:SpellCheckEnabledTooltip}',
@@ -66,55 +82,55 @@ export default () => ({
                   },
                   {
                     id: 'TrimTextField',
-                    objectType: 'CheckBoxField',
+                    objectType: CheckBoxField,
                     label: 'Trim Text',
                     labelVisible: false
                   },
                   {
                     id: 'UpdateDisplayTextOnModifyField',
-                    objectType: 'CheckBoxField',
+                    objectType: CheckBoxField,
                     label: 'Update Display Text On Modify',
                     labelVisible: false
                   },
                   {
                     id: 'FormatField',
-                    objectType: 'SmartField',
+                    objectType: SmartField,
                     lookupCall: 'jswidgets.StringFormatLookupCall',
                     label: 'Format'
                   },
                   {
                     id: 'MaxLengthField',
-                    objectType: 'NumberField',
+                    objectType: NumberField,
                     label: 'Max Length'
                   },
                   {
                     id: 'SelectionTrackingEnabledField',
-                    objectType: 'CheckBoxField',
+                    objectType: CheckBoxField,
                     label: 'Selection Tracking Enabled',
                     labelVisible: false
                   },
                   {
                     id: 'SelectionStartField',
-                    objectType: 'NumberField',
+                    objectType: NumberField,
                     label: 'Selection Start'
                   },
                   {
                     id: 'SelectionEndField',
-                    objectType: 'NumberField',
+                    objectType: NumberField,
                     label: 'Selection End'
                   }
                 ]
               },
               {
                 id: 'CustomizationBox',
-                objectType: 'GroupBox',
+                objectType: GroupBox,
                 expandable: true,
                 gridColumnCount: 2,
                 label: 'Customization Examples',
                 fields: [
                   {
                     id: 'BlockFormatField',
-                    objectType: 'CheckBoxField',
+                    objectType: CheckBoxField,
                     label: 'Make 4 character blocks',
                     labelVisible: false,
                     tooltipText: '${textKey:BlockFormatTooltip}',
@@ -124,40 +140,72 @@ export default () => ({
               },
               {
                 id: 'ValueFieldPropertiesBox',
-                objectType: 'jswidgets.ValueFieldPropertiesBox'
+                objectType: ValueFieldPropertiesBox
               },
               {
                 id: 'FormFieldPropertiesBox',
-                objectType: 'jswidgets.FormFieldPropertiesBox'
+                objectType: FormFieldPropertiesBox
               },
               {
                 id: 'GridDataBox',
-                objectType: 'jswidgets.GridDataBox',
+                objectType: GridDataBox,
                 label: 'Grid Data Hints'
               }
             ]
           },
           {
             id: 'ActionsTab',
-            objectType: 'TabItem',
+            objectType: TabItem,
             label: 'Actions',
             fields: [
               {
                 id: 'FormFieldActionsBox',
-                objectType: 'jswidgets.FormFieldActionsBox'
+                objectType: FormFieldActionsBox
               },
               {
                 id: 'WidgetActionsBox',
-                objectType: 'jswidgets.WidgetActionsBox'
+                objectType: WidgetActionsBox
               }
             ]
           },
           {
             id: 'EventsTab',
-            objectType: 'jswidgets.EventsTab'
+            objectType: EventsTab
           }
         ]
       }
     ]
   }
 });
+
+export type StringFieldFormWidgetMap =
+  {
+    'MainBox': GroupBox;
+    'DetailBox': GroupBox;
+    'StringField': StringField;
+    'ConfigurationBox': TabBox;
+    'PropertiesTab': TabItem;
+    'PropertiesBox': GroupBox;
+    'HasActionField': CheckBoxField;
+    'InputMaskedField': CheckBoxField;
+    'MultilineTextField': CheckBoxField;
+    'SpellCheckEnabledField': CheckBoxField;
+    'TrimTextField': CheckBoxField;
+    'UpdateDisplayTextOnModifyField': CheckBoxField;
+    'FormatField': SmartField<StringFieldFormat>;
+    'MaxLengthField': NumberField;
+    'SelectionTrackingEnabledField': CheckBoxField;
+    'SelectionStartField': NumberField;
+    'SelectionEndField': NumberField;
+    'CustomizationBox': GroupBox;
+    'BlockFormatField': CheckBoxField;
+    'ValueFieldPropertiesBox': ValueFieldPropertiesBox;
+    'FormFieldPropertiesBox': FormFieldPropertiesBox;
+    'GridDataBox': GridDataBox;
+    'ActionsTab': TabItem;
+    'FormFieldActionsBox': FormFieldActionsBox;
+    'WidgetActionsBox': WidgetActionsBox;
+    'EventsTab': EventsTab;
+  }
+  & ValueFieldPropertiesBoxWidgetMap & FormFieldPropertiesBoxWidgetMap & GridDataBoxWidgetMap
+  & FormFieldActionsBoxWidgetMap & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;

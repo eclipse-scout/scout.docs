@@ -8,20 +8,22 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {App, Desktop as Desktop_1, icons, models, scout} from '@eclipse-scout/core';
+import {Desktop as Desktop_1, DesktopModel as DesktopModel_1, Event, Form, GroupBox, icons, InitModelOf, LabelField, Menu, models, scout} from '@eclipse-scout/core';
 import DesktopModel from './DesktopModel';
+import {App, DesktopWidgetMap} from '../index';
 
-export default class Desktop extends Desktop_1 {
+export class Desktop extends Desktop_1 {
+  declare widgetMap: DesktopWidgetMap;
 
   constructor() {
     super();
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): DesktopModel_1 {
     return models.get(DesktopModel);
   }
 
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
     this.on('logoAction', this._onLogoAction.bind(this));
@@ -43,28 +45,28 @@ export default class Desktop extends Desktop_1 {
     this.on('propertyChange:dense', event => this.dense ? denseModeMenu.setIconId(icons.CHECKED_BOLD) : denseModeMenu.setIconId(null));
   }
 
-  _onDefaultThemeMenuAction(event) {
+  protected _onDefaultThemeMenuAction(event: Event<Menu>) {
     this.setTheme('default');
   }
 
-  _onDarkThemeMenuAction(event) {
+  protected _onDarkThemeMenuAction(event: Event<Menu>) {
     this.setTheme('dark');
   }
 
-  _onDenseMenuAction(event) {
+  protected _onDenseMenuAction(event: Event<Menu>) {
     this.setDense(!this.dense);
   }
 
-  _onLogoAction(event) {
-    let form = scout.create('Form', {
+  protected _onLogoAction(event: Event<Desktop>) {
+    let form = scout.create(Form, {
       parent: this,
       resizable: false,
       title: 'Scout JS Widgets Application',
       rootGroupBox: {
-        objectType: 'GroupBox',
+        objectType: GroupBox,
         borderDecoration: 'empty',
         fields: [{
-          objectType: 'LabelField',
+          objectType: LabelField,
           value: this.session.text('AboutText', App.get().scoutVersion),
           labelVisible: false,
           wrapText: true,

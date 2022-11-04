@@ -1,39 +1,45 @@
 /*
- * Copyright (c) 2020 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-export default () => ({
+import {FormModel, GroupBox, Menu, TabItem, Tree, TreeField} from '@eclipse-scout/core';
+import {
+  ConfigurationBox, EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, TreePropertiesBox, TreePropertiesBoxWidgetMap,
+  WidgetActionsBox, WidgetActionsBoxWidgetMap
+} from '../index';
+
+export default (): FormModel => ({
   id: 'jswidgets.TreeForm',
   displayHint: 'view',
   rootGroupBox: {
     id: 'MainBox',
-    objectType: 'GroupBox',
+    objectType: GroupBox,
     fields: [
       {
         id: 'DetailBox',
-        objectType: 'GroupBox',
+        objectType: GroupBox,
         gridColumnCount: 1,
         fields: [
           {
             id: 'TreeField',
-            objectType: 'TreeField',
+            objectType: TreeField,
             labelVisible: false,
             gridDataHints: {
               h: 10
             },
             tree: {
               id: 'Tree',
-              objectType: 'Tree',
+              objectType: Tree,
               menus: [
                 {
                   id: 'AddNodeMenu',
-                  objectType: 'Menu',
+                  objectType: Menu,
                   text: '${textKey:AddNode}',
                   menuTypes: [
                     'Tree.EmptySpace'
@@ -42,7 +48,7 @@ export default () => ({
                 },
                 {
                   id: 'AddChildNodeMenu',
-                  objectType: 'Menu',
+                  objectType: Menu,
                   text: '${textKey:AddChildNode}',
                   menuTypes: [
                     'Tree.EmptySpace'
@@ -51,7 +57,7 @@ export default () => ({
                 },
                 {
                   id: 'DeleteNodeMenu',
-                  objectType: 'Menu',
+                  objectType: Menu,
                   text: '${textKey:DeleteNode}',
                   menuTypes: [
                     'Tree.SingleSelection',
@@ -61,7 +67,7 @@ export default () => ({
                 },
                 {
                   id: 'DeleteAllMenu',
-                  objectType: 'Menu',
+                  objectType: Menu,
                   text: '${textKey:DeleteAll}',
                   menuTypes: [
                     'Tree.EmptySpace'
@@ -69,7 +75,7 @@ export default () => ({
                   childActions: [
                     {
                       id: 'DeleteAllNodesMenu',
-                      objectType: 'Menu',
+                      objectType: Menu,
                       text: '${textKey:DeleteAllNodes}',
                       menuTypes: [
                         'Tree.EmptySpace'
@@ -77,7 +83,7 @@ export default () => ({
                     },
                     {
                       id: 'DeleteAllChildNodesMenu',
-                      objectType: 'Menu',
+                      objectType: Menu,
                       text: '${textKey:DeleteAllChildNodes}',
                       menuTypes: [
                         'Tree.EmptySpace'
@@ -92,29 +98,29 @@ export default () => ({
       },
       {
         id: 'ConfigurationBox',
-        objectType: 'jswidgets.ConfigurationBox',
+        objectType: ConfigurationBox,
         selectedTab: 'PropertiesTab',
         tabItems: [
           {
             id: 'PropertiesTab',
-            objectType: 'TabItem',
+            objectType: TabItem,
             label: 'Properties',
             fields: [
               {
                 id: 'PropertiesBox',
-                objectType: 'jswidgets.TreePropertiesBox',
+                objectType: TreePropertiesBox,
                 label: 'Properties',
                 labelVisible: false,
                 borderVisible: false
               },
               {
                 id: 'FormFieldPropertiesBox',
-                objectType: 'jswidgets.FormFieldPropertiesBox',
+                objectType: FormFieldPropertiesBox,
                 expanded: false
               },
               {
                 id: 'GridDataBox',
-                objectType: 'jswidgets.GridDataBox',
+                objectType: GridDataBox,
                 label: 'Grid Data Hints',
                 expanded: false
               }
@@ -122,25 +128,50 @@ export default () => ({
           },
           {
             id: 'ActionsTab',
-            objectType: 'TabItem',
+            objectType: TabItem,
             label: 'Actions',
             fields: [
               {
                 id: 'FormFieldActionsBox',
-                objectType: 'jswidgets.FormFieldActionsBox'
+                objectType: FormFieldActionsBox
               },
               {
                 id: 'WidgetActionsBox',
-                objectType: 'jswidgets.WidgetActionsBox'
+                objectType: WidgetActionsBox
               }
             ]
           },
           {
             id: 'EventsTab',
-            objectType: 'jswidgets.EventsTab'
+            objectType: EventsTab
           }
         ]
       }
     ]
   }
 });
+
+export type TreeFormWidgetMap =
+  {
+    'MainBox': GroupBox;
+    'DetailBox': GroupBox;
+    'TreeField': TreeField;
+    'Tree': Tree;
+    'AddNodeMenu': Menu;
+    'AddChildNodeMenu': Menu;
+    'DeleteNodeMenu': Menu;
+    'DeleteAllMenu': Menu;
+    'DeleteAllNodesMenu': Menu;
+    'DeleteAllChildNodesMenu': Menu;
+    'ConfigurationBox': ConfigurationBox;
+    'PropertiesTab': TabItem;
+    'PropertiesBox': TreePropertiesBox;
+    'FormFieldPropertiesBox': FormFieldPropertiesBox;
+    'GridDataBox': GridDataBox;
+    'ActionsTab': TabItem;
+    'FormFieldActionsBox': FormFieldActionsBox;
+    'WidgetActionsBox': WidgetActionsBox;
+    'EventsTab': EventsTab;
+  }
+  & TreePropertiesBoxWidgetMap & FormFieldPropertiesBoxWidgetMap & GridDataBoxWidgetMap
+  & FormFieldActionsBoxWidgetMap & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;

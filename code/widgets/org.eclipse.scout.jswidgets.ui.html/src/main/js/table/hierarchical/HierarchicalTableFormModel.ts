@@ -1,79 +1,95 @@
-export default () => ({
+/*
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Distribution License v1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/org/documents/edl-v10.html
+ *
+ * Contributors:
+ *     BSI Business Systems Integration AG - initial API and implementation
+ */
+import {AggregateTableControl, BooleanColumn, Column, FormModel, GroupBox, Menu, SmartField, TabItem, Table, TableField} from '@eclipse-scout/core';
+import {
+  ColumnPropertiesBox, ColumnPropertiesBoxWidgetMap, ConfigurationBox, EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox,
+  GridDataBoxWidgetMap, HierarchicalTablePropertiesBox, HierarchicalTablePropertiesBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap
+} from '../../index';
+
+export default (): FormModel => ({
   id: 'jswidgets.HierarchicalTableForm',
   displayHint: 'view',
   rootGroupBox: {
     id: 'MainBox',
-    objectType: 'GroupBox',
+    objectType: GroupBox,
     fields: [
       {
         id: 'DetailBox',
-        objectType: 'GroupBox',
+        objectType: GroupBox,
         gridColumnCount: 1,
         fields: [
           {
             id: 'TableField',
-            objectType: 'TableField',
+            objectType: TableField,
             labelVisible: false,
             gridDataHints: {
               h: 10
             },
             table: {
               id: 'Table',
-              objectType: 'Table',
+              objectType: Table,
               columns: [
                 {
                   text: '${textKey:Name}',
                   id: 'Name',
                   width: 200,
-                  objectType: 'Column'
+                  objectType: Column
                 },
                 {
                   text: '${textKey:Detail}',
                   id: 'Detail',
                   width: 175,
-                  objectType: 'Column'
+                  objectType: Column
                 },
                 {
                   text: 'Date',
                   id: 'Date',
                   width: 200,
-                  objectType: 'Column'
+                  objectType: Column
                 },
                 {
                   text: 'Active',
                   id: 'Active',
                   width: 100,
-                  objectType: 'BooleanColumn'
+                  objectType: BooleanColumn
                 }
               ],
               tableControls: [
                 {
                   id: 'AggregateTableControl',
-                  objectType: 'AggregateTableControl'
+                  objectType: AggregateTableControl
                 }
               ],
               menus: [
                 {
                   id: 'ContentMenu',
-                  objectType: 'Menu',
+                  objectType: Menu,
                   text: 'Content',
                   menuTypes: ['Table.EmptySpace'],
                   childActions: [
                     {
                       id: 'RemoveAll',
-                      objectType: 'Menu',
+                      objectType: Menu,
                       text: 'Remove all rows',
                       menuTypes: ['Table.EmptySpace']
                     },
                     {
                       id: 'InsertFew',
-                      objectType: 'Menu',
+                      objectType: Menu,
                       text: 'Insert few',
                       menuTypes: ['Table.EmptySpace']
                     },
                     {
                       id: 'InsertMany',
-                      objectType: 'Menu',
+                      objectType: Menu,
                       text: 'Insert many',
                       menuTypes: ['Table.EmptySpace']
                     }
@@ -81,14 +97,14 @@ export default () => ({
                 },
                 {
                   id: 'AddRowMenu',
-                  objectType: 'Menu',
+                  objectType: Menu,
                   text: '${textKey:AddRow}',
                   menuTypes: ['Table.EmptySpace'],
                   keyStroke: 'insert'
                 },
                 {
                   id: 'DeleteRowMenu',
-                  objectType: 'Menu',
+                  objectType: Menu,
                   text: '${textKey:DeleteRow}',
                   menuTypes: ['Table.SingleSelection', 'Table.MultiSelection'],
                   keyStroke: 'delete'
@@ -100,29 +116,29 @@ export default () => ({
       },
       {
         id: 'ConfigurationBox',
-        objectType: 'jswidgets.ConfigurationBox',
+        objectType: ConfigurationBox,
         selectedTab: 'PropertiesTab',
         tabItems: [
           {
             id: 'PropertiesTab',
-            objectType: 'TabItem',
+            objectType: TabItem,
             label: 'Properties',
             fields: [
               {
                 id: 'PropertiesBox',
-                objectType: 'jswidgets.HierarchicalTablePropertiesBox',
+                objectType: HierarchicalTablePropertiesBox,
                 label: 'Properties',
                 labelVisible: false,
                 borderVisible: false
               },
               {
                 id: 'FormFieldPropertiesBox',
-                objectType: 'jswidgets.FormFieldPropertiesBox',
+                objectType: FormFieldPropertiesBox,
                 expanded: false
               },
               {
                 id: 'GridDataBox',
-                objectType: 'jswidgets.GridDataBox',
+                objectType: GridDataBox,
                 label: 'Grid Data Hints',
                 expanded: false
               }
@@ -130,42 +146,82 @@ export default () => ({
           },
           {
             id: 'ColumnProperties',
-            objectType: 'TabItem',
+            objectType: TabItem,
             label: 'Column Properties',
             fields: [
               {
                 id: 'Column.TargetField',
-                objectType: 'SmartField',
+                objectType: SmartField,
                 label: 'Target'
               },
               {
                 id: 'Column.PropertiesBox',
-                objectType: 'jswidgets.ColumnPropertiesBox',
+                objectType: ColumnPropertiesBox,
                 labelVisible: false
               }
             ]
           },
           {
             id: 'ActionsTab',
-            objectType: 'TabItem',
+            objectType: TabItem,
             label: 'Actions',
             fields: [
               {
                 id: 'FormFieldActionsBox',
-                objectType: 'jswidgets.FormFieldActionsBox'
+                objectType: FormFieldActionsBox
               },
               {
                 id: 'WidgetActionsBox',
-                objectType: 'jswidgets.WidgetActionsBox'
+                objectType: WidgetActionsBox
               }
             ]
           },
           {
             id: 'EventsTab',
-            objectType: 'jswidgets.EventsTab'
+            objectType: EventsTab
           }
         ]
       }
     ]
   }
 });
+
+export type HierarchicalTableFormWidgetMap =
+  {
+    'MainBox': GroupBox;
+    'DetailBox': GroupBox;
+    'TableField': TableField;
+    'Table': HierarchicalTableFieldTable;
+    'AggregateTableControl': AggregateTableControl;
+    'ContentMenu': Menu;
+    'RemoveAll': Menu;
+    'InsertFew': Menu;
+    'InsertMany': Menu;
+    'AddRowMenu': Menu;
+    'DeleteRowMenu': Menu;
+    'ConfigurationBox': ConfigurationBox;
+    'PropertiesTab': TabItem;
+    'PropertiesBox': HierarchicalTablePropertiesBox;
+    'FormFieldPropertiesBox': FormFieldPropertiesBox;
+    'GridDataBox': GridDataBox;
+    'ColumnProperties': TabItem;
+    'Column.TargetField': SmartField<Column>;
+    'Column.PropertiesBox': ColumnPropertiesBox;
+    'ActionsTab': TabItem;
+    'FormFieldActionsBox': FormFieldActionsBox;
+    'WidgetActionsBox': WidgetActionsBox;
+    'EventsTab': EventsTab;
+  }
+  & HierarchicalTablePropertiesBoxWidgetMap & FormFieldPropertiesBoxWidgetMap & GridDataBoxWidgetMap & ColumnPropertiesBoxWidgetMap & FormFieldActionsBoxWidgetMap
+  & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;
+
+export type HierarchicalTableFieldTableColumnMap = {
+  'Name': Column;
+  'Detail': Column;
+  'Date': Column;
+  'Active': BooleanColumn;
+};
+
+export class HierarchicalTableFieldTable extends Table {
+  declare columnMap: HierarchicalTableFieldTableColumnMap;
+}

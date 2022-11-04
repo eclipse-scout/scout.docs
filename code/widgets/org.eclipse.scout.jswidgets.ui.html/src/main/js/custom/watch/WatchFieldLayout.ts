@@ -1,13 +1,25 @@
+/*
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Distribution License v1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/org/documents/edl-v10.html
+ *
+ * Contributors:
+ *     BSI Business Systems Integration AG - initial API and implementation
+ */
 import {NullLayout} from '@eclipse-scout/core';
+import {WatchField} from './WatchField';
 
-export default class WatchFieldLayout extends NullLayout {
+export class WatchFieldLayout extends NullLayout {
+  watchField: WatchField;
 
-  constructor(watchField) {
+  constructor(watchField: WatchField) {
     super();
     this.watchField = watchField;
   }
 
-  layout($container) {
+  override layout($container: JQuery) {
     let containerHeight = $container.height(),
       containerWidth = $container.width(),
       size = Math.min(containerHeight, containerWidth),

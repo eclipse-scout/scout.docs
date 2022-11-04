@@ -1,16 +1,16 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {icons, StaticLookupCall} from '@eclipse-scout/core';
+import {icons, LookupRow, StaticLookupCall} from '@eclipse-scout/core';
 
-export default class WorldLookupCall extends StaticLookupCall {
+export class WorldLookupCall extends StaticLookupCall<string> {
 
   constructor() {
     super();
@@ -19,40 +19,11 @@ export default class WorldLookupCall extends StaticLookupCall {
     this.setHierarchical(true);
   }
 
-  _data() {
+  protected override _data(): any[] {
     return WorldLookupCall.DATA;
   }
 
-  _queryAll(deferred) {
-    let lookupRows;
-    if (this.loadIncremental) {
-      // only select root nodes
-      lookupRows = [];
-      this._data().forEach(function(data) {
-        if (data[2] === null) {
-          lookupRows.push(this._dataToLookupRow(data));
-        }
-      }, this);
-    } else {
-      lookupRows = this._data().map(this._dataToLookupRow);
-    }
-    deferred.resolve({
-      lookupRows: lookupRows
-    });
-  }
-
-  /**
-   * Creates a map that contains all data elements, for easier access by key (index 1)
-   */
-  _createDataMap() {
-    let dataMap = {};
-    this._data().forEach(data => {
-      dataMap[data[0]] = data;
-    });
-    return dataMap;
-  }
-
-  _dataToLookupRow(data) {
+  protected override _dataToLookupRow(data: any[]): LookupRow<string> {
     let lookupRow = super._dataToLookupRow(data);
     if (lookupRow.parentKey) {
       lookupRow.iconId = icons.WORLD;

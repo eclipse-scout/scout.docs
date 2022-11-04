@@ -9,20 +9,22 @@
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 import CarouselFormModel from './CarouselFormModel';
-import {Form, models} from '@eclipse-scout/core';
+import {CarouselFormWidgetMap} from '../index';
+import {Form, FormModel, InitModelOf, models} from '@eclipse-scout/core';
 
-export default class CarouselForm extends Form {
+export class CarouselForm extends Form {
+  declare widgetMap: CarouselFormWidgetMap;
 
   constructor() {
     super();
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): FormModel {
     return models.get(CarouselFormModel);
   }
 
   // noinspection DuplicatedCode
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
     let carousel = this.widget('Carousel');

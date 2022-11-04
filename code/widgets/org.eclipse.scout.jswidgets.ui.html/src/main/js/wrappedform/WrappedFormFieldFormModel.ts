@@ -8,10 +8,10 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {Button, GroupBox, SmartField, TabItem, WrappedFormField} from '@eclipse-scout/core';
-import {WrappedFormLookupCall} from '../index';
+import {Button, Form, FormModel, GroupBox, SmartField, TabBox, TabItem, WrappedFormField} from '@eclipse-scout/core';
+import {EventsTab, EventsTabWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap, WrappedFormLookupCall} from '../index';
 
-export default () => ({
+export default (): FormModel => ({
   id: 'jswidgets.WrappedFormFieldForm',
   displayHint: 'view',
   rootGroupBox: {
@@ -36,7 +36,7 @@ export default () => ({
       },
       {
         id: 'ConfigurationBox',
-        objectType: 'TabBox',
+        objectType: TabBox,
         cssClass: 'jswidgets-configuration',
         selectedTab: 'WrappedFormFieldPropertiesBox',
         tabItems: [{
@@ -63,23 +63,23 @@ export default () => ({
             },
             {
               id: 'FormFieldPropertiesBox',
-              objectType: 'jswidgets.FormFieldPropertiesBox',
+              objectType: FormFieldPropertiesBox,
               expanded: false
             },
             {
               id: 'GridDataBox',
-              objectType: 'jswidgets.GridDataBox',
+              objectType: GridDataBox,
               label: 'Grid Data Hints'
             }
           ]
         }, {
           id: 'ActionsTab',
-          objectType: 'TabItem',
+          objectType: TabItem,
           label: 'Actions',
           fields: [
             {
               id: 'WidgetActionsBox',
-              objectType: 'jswidgets.WidgetActionsBox',
+              objectType: WidgetActionsBox,
               expandable: false,
               labelVisible: false,
               borderVisible: false
@@ -87,9 +87,24 @@ export default () => ({
           ]
         }, {
           id: 'EventsTab',
-          objectType: 'jswidgets.EventsTab'
+          objectType: EventsTab
         }]
       }
     ]
   }
 });
+
+export type WrappedFormFieldFormWidgetMap = {
+  'MainBox': GroupBox;
+  'WrappedFormFieldBox': GroupBox;
+  'WrappedFormField': WrappedFormField;
+  'ConfigurationBox': TabBox;
+  'WrappedFormFieldPropertiesBox': TabItem;
+  'InnerFormField': SmartField<Form>;
+  'CloseInnerFormButton': Button;
+  'FormFieldPropertiesBox': FormFieldPropertiesBox;
+  'GridDataBox': GridDataBox;
+  'ActionsTab': TabItem;
+  'WidgetActionsBox': WidgetActionsBox;
+  'EventsTab': EventsTab;
+} & FormFieldPropertiesBoxWidgetMap & GridDataBoxWidgetMap & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;

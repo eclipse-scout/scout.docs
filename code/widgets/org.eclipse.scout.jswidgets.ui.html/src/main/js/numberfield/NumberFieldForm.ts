@@ -9,20 +9,22 @@
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 import NumberFieldFormModel from './NumberFieldFormModel';
-import {Form, models} from '@eclipse-scout/core';
+import {NumberFieldFormWidgetMap} from '../index';
+import {Form, FormModel, InitModelOf, models} from '@eclipse-scout/core';
 
-export default class NumberFieldForm extends Form {
+export class NumberFieldForm extends Form {
+  declare widgetMap: NumberFieldFormWidgetMap;
 
   constructor() {
     super();
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): FormModel {
     return models.get(NumberFieldFormModel);
   }
 
   // noinspection DuplicatedCode
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
     let numberField = this.widget('NumberField');
@@ -51,7 +53,7 @@ export default class NumberFieldForm extends Form {
     this.widget('EventsTab').setField(numberField);
   }
 
-  _updateFormat() {
+  protected _updateFormat() {
     let multiplierField = this.widget('MultiplierField');
     let formatField = this.widget('FormatField');
     this.widget('NumberField').setDecimalFormat({

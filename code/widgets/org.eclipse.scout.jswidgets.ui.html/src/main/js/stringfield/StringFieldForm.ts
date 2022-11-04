@@ -8,21 +8,23 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {Form, models, scout} from '@eclipse-scout/core';
+import {Event, Form, FormModel, GroupBox, InitModelOf, MessageBox, models, scout, StringField, StringFieldSelectionChangeEvent, ValueFieldFormatter, ValueFieldParser} from '@eclipse-scout/core';
 import StringFieldFormModel from './StringFieldFormModel';
+import {StringFieldFormWidgetMap} from '../index';
 
-export default class StringFieldForm extends Form {
+export class StringFieldForm extends Form {
+  declare widgetMap: StringFieldFormWidgetMap;
 
   constructor() {
     super();
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): FormModel {
     return models.get(StringFieldFormModel);
   }
 
   // noinspection DuplicatedCode
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
     let stringField = this.widget('StringField');
@@ -30,7 +32,7 @@ export default class StringFieldForm extends Form {
     stringField.on('action', this._onFieldAction.bind(this));
 
     let hasActionField = this.widget('HasActionField');
-    hasActionField.setValue(stringField.hasActionField);
+    hasActionField.setValue(stringField.hasAction);
     hasActionField.on('propertyChange:value', event => this.widget('StringField').setHasAction(event.newValue));
 
     let inputMaskedField = this.widget('InputMaskedField');
@@ -41,8 +43,8 @@ export default class StringFieldForm extends Form {
     multilineTextField.setValue(stringField.multilineText);
     multilineTextField.on('propertyChange:value', event => {
       let field = this.widget('StringField');
-      field._setMultilineText(event.newValue);
-      field.parent.rerenderControls();
+      field.setMultilineText(event.newValue);
+      (field.parent as GroupBox).rerenderControls();
     });
 
     let spellCheckEnabledField = this.widget('SpellCheckEnabledField');
@@ -86,7 +88,7 @@ export default class StringFieldForm extends Form {
     });
 
     let blockFormatField = this.widget('BlockFormatField');
-    blockFormatField.setValue(stringField.format);
+    blockFormatField.setValue(!!stringField.format);
     blockFormatField.on('propertyChange:value', event => {
       let stringField = this.widget('StringField');
       if (event.newValue) {
@@ -107,8 +109,8 @@ export default class StringFieldForm extends Form {
     this.widget('EventsTab').setField(stringField);
   }
 
-  _onFieldAction(event) {
-    let msgBox = scout.create('scout.MessageBox', {
+  protected _onFieldAction(event: Event<StringField>) {
+    let msgBox = scout.create(MessageBox, {
       parent: this,
       yesButtonText: this.session.text('Thanks') + '!',
       body: this.session.text('StringFieldHasActionMessage')
@@ -119,22 +121,22 @@ export default class StringFieldForm extends Form {
     });
   }
 
-  _onFieldSelectionChange(event) {
+  protected _onFieldSelectionChange(event: StringFieldSelectionChangeEvent) {
     let selectionStartField = this.widget('SelectionStartField');
     selectionStartField.setValue(event.selectionStart);
     let selectionEndField = this.widget('SelectionEndField');
     selectionEndField.setValue(event.selectionEnd);
   }
 
-  static blockFormatter(value, defaultFormatter) {
-    let displayText = defaultFormatter(value);
+  static blockFormatter(value: string, defaultFormatter: ValueFieldFormatter<string>): string {
+    let displayText = defaultFormatter(value) as string;
     if (!displayText) {
       return displayText;
     }
     return displayText.match(/.{4}/g).join('-');
   }
 
-  static blockParser(displayText, defaultParser) {
+  static blockParser(displayText: string, defaultParser: ValueFieldParser<string>): string {
     if (displayText) {
       return displayText.replace(/-/g, '');
     }

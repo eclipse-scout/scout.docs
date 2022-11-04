@@ -8,16 +8,16 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {StaticLookupCall} from '@eclipse-scout/core';
+import {Form, StaticLookupCall} from '@eclipse-scout/core';
 import {LifecycleForm, MiniForm} from '../index';
 
-export default class WrappedFormLookupCall extends StaticLookupCall {
+export class WrappedFormLookupCall extends StaticLookupCall<Form> {
 
   constructor() {
     super();
   }
 
-  _data() {
+  protected override _data(): any[] {
     return WrappedFormLookupCall.DATA;
   }
 

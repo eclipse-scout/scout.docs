@@ -8,11 +8,14 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {arrays, ObjectFactory, objects, Route, router, strings, Tree} from '@eclipse-scout/core';
+import {arrays, ObjectFactory, objects, Page, Route, router, strings, Tree, TreeNodesSelectedEvent} from '@eclipse-scout/core';
+import {Desktop} from './index';
 
-export default class WidgetsRoute extends Route {
+export class WidgetsRoute extends Route {
+  desktop: Desktop;
+  routes: [string, string][];
 
-  constructor(desktop) {
+  constructor(desktop: Desktop) {
     super();
 
     this.desktop = desktop;
@@ -27,10 +30,10 @@ export default class WidgetsRoute extends Route {
    * 0: routeRef
    * 1: objectType of the detail form of a node in FormFieldOutline
    */
-  _createRoutes(desktop) {
+  protected _createRoutes(desktop: Desktop): [string, string][] {
     let regex = /^jswidgets\.(\w*)(Form|PageWithTable|PageWithNodes)$/;
     let routes = [];
-    Tree.visitNodes(node => {
+    Tree.visitNodes((node: Page) => {
       let routeRef = null;
       let objectType = this._objectTypeForNode(node);
 
@@ -43,11 +46,11 @@ export default class WidgetsRoute extends Route {
     return routes;
   }
 
-  matches(location) {
+  override matches(location: string): boolean {
     return !!this._getRouteData(location);
   }
 
-  _getRouteData(location) {
+  protected _getRouteData(location: string): [string, string] {
     if (strings.empty(location)) {
       return null;
     }
@@ -56,18 +59,18 @@ export default class WidgetsRoute extends Route {
     });
   }
 
-  _getRouteDataByObjectType(objectType) {
+  protected _getRouteDataByObjectType(objectType: string): [string, string] {
     return arrays.find(this.routes, routeData => {
       return routeData[1] === objectType;
     });
   }
 
-  activate(location) {
+  override activate(location: string) {
     super.activate(location);
 
     let objectType = this._getRouteData(location)[1];
     let foundNode = null;
-    Tree.visitNodes(node => {
+    Tree.visitNodes((node: Page) => {
       if (this._objectTypeForNode(node) === objectType) {
         foundNode = node;
         return false;
@@ -76,7 +79,7 @@ export default class WidgetsRoute extends Route {
     this.desktop.outline.selectNode(foundNode);
   }
 
-  _objectTypeForNode(node) {
+  protected _objectTypeForNode(node: Page): string {
     let objectType;
     if (node.detailForm) {
       objectType = node.detailForm.objectType;
@@ -93,8 +96,8 @@ export default class WidgetsRoute extends Route {
     return objectType;
   }
 
-  _onPageChanged(event) {
-    let page = event.source.selectedNode();
+  protected _onPageChanged(event: TreeNodesSelectedEvent) {
+    let page = event.source.selectedNode() as Page;
     if (page) {
       let objectType;
       if (page.detailForm) {

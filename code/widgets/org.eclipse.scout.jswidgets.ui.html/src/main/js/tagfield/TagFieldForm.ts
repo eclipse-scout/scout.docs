@@ -1,28 +1,30 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 import TagFieldFormModel from './TagFieldFormModel';
-import {Form, models, scout, Status} from '@eclipse-scout/core';
+import {TagFieldFormWidgetMap} from '../index';
+import {DesktopNotification, Form, FormModel, InitModelOf, models, scout, Status, TagBarTagClickEvent} from '@eclipse-scout/core';
 
-export default class TagFieldForm extends Form {
+export class TagFieldForm extends Form {
+  declare widgetMap: TagFieldFormWidgetMap;
 
   constructor() {
     super();
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): FormModel {
     return models.get(TagFieldFormModel);
   }
 
   // noinspection DuplicatedCode
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
     let tagField = this.widget('TagField');
@@ -51,8 +53,8 @@ export default class TagFieldForm extends Form {
     this.widget('EventsTab').setField(tagField);
   }
 
-  _onTagClick(event) {
-    scout.create('DesktopNotification', {
+  protected _onTagClick(event: TagBarTagClickEvent) {
+    scout.create(DesktopNotification, {
       parent: this,
       duration: 7000,
       status: {

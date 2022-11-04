@@ -8,31 +8,35 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {GroupBox, models} from '@eclipse-scout/core';
+import {Alignment, Column, GroupBox, GroupBoxModel, InitModelOf, models, TableColumnResizedEvent, TableGroupEvent, TableSortEvent} from '@eclipse-scout/core';
 import ColumnPropertiesBoxModel from './ColumnPropertiesBoxModel';
+import {ColumnPropertiesBoxWidgetMap} from '../index';
 
-export default class ColumnPropertiesBox extends GroupBox {
+export class ColumnPropertiesBox extends GroupBox {
+  declare widgetMap: ColumnPropertiesBoxWidgetMap;
+
+  column: Column;
 
   constructor() {
     super();
     this.column = null;
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): GroupBoxModel {
     return models.get(ColumnPropertiesBoxModel);
   }
 
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
     this._setColumn(this.column);
   }
 
-  setColumn(column) {
+  setColumn(column: Column) {
     this.setProperty('column', column);
   }
 
-  _setColumn(column) {
+  protected _setColumn(column: Column) {
     this._setProperty('column', column);
     if (!this.column) {
       return;
@@ -122,7 +126,7 @@ export default class ColumnPropertiesBox extends GroupBox {
       } else if (hAlign > 0) {
         hAlign = 1;
       }
-      this.column.setHorizontalAlignment(hAlign);
+      this.column.setHorizontalAlignment(hAlign as Alignment);
     });
 
     let textField = this.widget('TextField');
@@ -160,15 +164,15 @@ export default class ColumnPropertiesBox extends GroupBox {
     column.table.on('columnResized', this._onColumnResized.bind(this));
   }
 
-  _onColumnResized(data) {
-    if (this.column === data.column) {
+  protected _onColumnResized(event: TableColumnResizedEvent) {
+    if (this.column === event.column) {
       let widthField = this.widget('WidthField');
       widthField.setValue(this.column.width);
     }
   }
 
-  _onSort(data) {
-    if (this.column === data.column) {
+  protected _onSort(event: TableSortEvent) {
+    if (this.column === event.column) {
       let sortActiveField = this.widget('SortActiveField');
       sortActiveField.setValue(this.column.sortActive);
       let sortAscendingField = this.widget('SortAscendingField');
@@ -178,8 +182,8 @@ export default class ColumnPropertiesBox extends GroupBox {
     }
   }
 
-  _onGroup(data) {
-    if (this.column === data.column) {
+  protected _onGroup(event: TableGroupEvent) {
+    if (this.column === event.column) {
       let groupedField = this.widget('GroupedField');
       groupedField.setValue(this.column.grouped);
     }

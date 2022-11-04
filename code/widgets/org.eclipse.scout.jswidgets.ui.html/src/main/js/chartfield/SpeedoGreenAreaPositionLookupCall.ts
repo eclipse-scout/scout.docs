@@ -9,21 +9,21 @@
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 import {StaticLookupCall} from '@eclipse-scout/core';
-import {Chart} from '@eclipse-scout/chart';
+import {GreenAreaPosition, SpeedoChartRenderer} from '@eclipse-scout/chart';
 
-export default class SpeedoGreenAreaPositionLookupCall extends StaticLookupCall {
+export class SpeedoGreenAreaPositionLookupCall extends StaticLookupCall<GreenAreaPosition> {
 
   constructor() {
     super();
   }
 
-  _data() {
+  protected override _data(): any[] {
     return SpeedoGreenAreaPositionLookupCall.DATA;
   }
 
   static DATA = [
-    [Chart.Position.LEFT, 'Left'],
-    [Chart.Position.CENTER, 'Center'],
-    [Chart.Position.RIGHT, 'Right']
+    [SpeedoChartRenderer.Position.LEFT, 'Left'],
+    [SpeedoChartRenderer.Position.CENTER, 'Center'],
+    [SpeedoChartRenderer.Position.RIGHT, 'Right']
   ];
 }

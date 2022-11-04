@@ -8,22 +8,24 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {StaticLookupCall} from '@eclipse-scout/core';
+import {Group, StaticLookupCall, TileAccordion, TileGrid} from '@eclipse-scout/core';
 
-export default class GroupLookupCall extends StaticLookupCall {
+export class GroupLookupCall extends StaticLookupCall<Group<TileGrid>> {
+  accordion: TileAccordion;
+  protected _rebuildDataHandler: () => void;
 
-  constructor(accordion) {
+  constructor(accordion: TileAccordion) {
     super();
     this._rebuildDataHandler = this._rebuildData.bind(this);
     this.data = [];
     this.setAccordion(accordion);
   }
 
-  _data() {
+  protected override _data(): any[] {
     return this.data;
   }
 
-  setAccordion(accordion) {
+  setAccordion(accordion: TileAccordion) {
     if (this.accordion) {
       this.accordion.off('propertyChange:groups', this._rebuildDataHandler);
       this.accordion.groups.forEach(function(group) {
@@ -38,7 +40,7 @@ export default class GroupLookupCall extends StaticLookupCall {
     this._rebuildData();
   }
 
-  _rebuildData() {
+  protected _rebuildData() {
     this.data = this.accordion.groups.map(group => {
       return [group, group.title];
     });

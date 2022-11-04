@@ -8,31 +8,35 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {GroupBox, models} from '@eclipse-scout/core';
+import {GroupBox, GroupBoxModel, InitModelOf, models, Table} from '@eclipse-scout/core';
 import TablePropertiesBoxModel from './TablePropertiesBoxModel';
+import {TablePropertiesBoxWidgetMap} from '../index';
 
-export default class TablePropertiesBox extends GroupBox {
+export class TablePropertiesBox extends GroupBox {
+  declare widgetMap: TablePropertiesBoxWidgetMap;
+
+  table: Table;
 
   constructor() {
     super();
     this.table = null;
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): GroupBoxModel {
     return models.get(TablePropertiesBoxModel);
   }
 
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
     this._setTable(this.table);
   }
 
-  setTable(table) {
+  setTable(table: Table) {
     this.setProperty('table', table);
   }
 
-  _setTable(table) {
+  protected _setTable(table: Table) {
     this._setProperty('table', table);
     if (!this.table) {
       return;

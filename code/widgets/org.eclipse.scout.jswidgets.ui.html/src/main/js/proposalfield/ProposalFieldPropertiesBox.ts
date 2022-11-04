@@ -8,26 +8,28 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {models} from '@eclipse-scout/core';
+import {GroupBoxModel, InitModelOf, models, ProposalField} from '@eclipse-scout/core';
 import ProposalFieldPropertiesBoxModel from './ProposalFieldPropertiesBoxModel';
-import {SmartFieldPropertiesBox} from '../index';
+import {ProposalFieldPropertiesBoxWidgetMap, SmartFieldPropertiesBox} from '../index';
 
-export default class ProposalFieldPropertiesBox extends SmartFieldPropertiesBox {
+export class ProposalFieldPropertiesBox extends SmartFieldPropertiesBox {
+  declare widgetMap: ProposalFieldPropertiesBoxWidgetMap;
+  declare field: ProposalField;
 
   constructor() {
     super();
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): GroupBoxModel {
     return models.extend(ProposalFieldPropertiesBoxModel, super._jsonModel());
   }
 
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
     this.widget('DisplayStyleField').setVisible(false);
   }
 
-  _setField(field) {
+  protected override _setField(field: ProposalField) {
     super._setField(field);
     if (!this.field) {
       return;

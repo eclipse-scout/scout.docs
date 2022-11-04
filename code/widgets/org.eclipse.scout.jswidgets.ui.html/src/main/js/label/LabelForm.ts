@@ -9,19 +9,21 @@
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 import LabelFormModel from './LabelFormModel';
-import {Form, GridData, MessageBoxes, models} from '@eclipse-scout/core';
+import {LabelFormWidgetMap} from '../index';
+import {Form, FormModel, GridData, GroupBox, InitModelOf, LabelAppLinkActionEvent, MessageBoxes, models} from '@eclipse-scout/core';
 
-export default class LabelForm extends Form {
+export class LabelForm extends Form {
+  declare widgetMap: LabelFormWidgetMap;
 
   constructor() {
     super();
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): FormModel {
     return models.get(LabelFormModel);
   }
 
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
     let label = this.widget('Label');
@@ -42,16 +44,17 @@ export default class LabelForm extends Form {
       label.setScrollable(event.newValue);
 
       // Fix height if it is scrollable
-      let gridData = new GridData(label.parent.gridDataHints);
+      let parent = label.parent as GroupBox,
+        gridData = new GridData(parent.gridDataHints);
       gridData.heightInPixel = label.scrollable ? 50 : -1;
-      label.parent.setGridDataHints(gridData);
+      parent.setGridDataHints(gridData);
     });
 
     this.widget('WidgetActionsBox').setField(label);
     this.widget('EventsTab').setField(label);
   }
 
-  _onLabelAppLinkAction(event) {
+  protected _onLabelAppLinkAction(event: LabelAppLinkActionEvent) {
     MessageBoxes.createOk(this)
       .withBody(this.session.text('ThanksForClickingMe'))
       .withYes(this.session.text('YoureWelcome'))

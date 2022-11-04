@@ -1,13 +1,25 @@
+/*
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Distribution License v1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/org/documents/edl-v10.html
+ *
+ * Contributors:
+ *     BSI Business Systems Integration AG - initial API and implementation
+ */
 import {FormField, HtmlComponent} from '@eclipse-scout/core';
 import {WatchFieldLayout} from '../../index';
 
-export default class WatchField extends FormField {
+export class WatchField extends FormField {
+
+  $canvas: JQuery<HTMLCanvasElement>;
 
   constructor() {
     super();
   }
 
-  _render() {
+  protected override _render() {
     // create the field container
     this.addContainer(this.$parent, 'watch-field');
     // create a label
@@ -19,7 +31,7 @@ export default class WatchField extends FormField {
     let htmlField = HtmlComponent.install(this.$field, this.session);
 
     // watch canvas
-    this.$canvas = this.$field.makeElement('<canvas>', 'clock');
+    this.$canvas = this.$field.makeElement('<canvas>', 'clock') as JQuery<HTMLCanvasElement>;
     this.$field.append(this.$canvas);
 
     // layout
@@ -33,6 +45,7 @@ export default class WatchField extends FormField {
     setInterval(this._paintWatch.bind(this), 1000);
   }
 
+  /** @internal */
   _paintWatch() {
     let context = this.$canvas[0].getContext('2d');
     let radius = this.$canvas.height() / 2;
@@ -45,7 +58,7 @@ export default class WatchField extends FormField {
     this._paintTime(context, radius);
   }
 
-  _paintBackground(context, radius) {
+  protected _paintBackground(context: CanvasRenderingContext2D, radius: number) {
     let strokeStyle;
 
     context.beginPath();
@@ -62,7 +75,7 @@ export default class WatchField extends FormField {
     context.stroke();
   }
 
-  _paintNumbers(context, radius) {
+  protected _paintNumbers(context: CanvasRenderingContext2D, radius: number) {
     let ang;
     let hour;
     context.font = radius * 0.15 + 'px arial';
@@ -88,7 +101,7 @@ export default class WatchField extends FormField {
     }
   }
 
-  _paintTime(context, radius) {
+  protected _paintTime(context: CanvasRenderingContext2D, radius: number) {
     let now = new Date(),
       hour = now.getHours(),
       minute = now.getMinutes(),
@@ -105,10 +118,10 @@ export default class WatchField extends FormField {
     // minute
     this._paintLine(context, minuteAngle, 0, radius * 0.8, radius * 0.04);
     // second
-    this._paintLine(context, secondAngle, radius * 0.7, radius * 1, radius * 0.02);
+    this._paintLine(context, secondAngle, radius * 0.7, radius, radius * 0.02);
   }
 
-  _paintLine(context, angle, begin, length, width) {
+  protected _paintLine(context: CanvasRenderingContext2D, angle: number, begin: number, length: number, width: number) {
     context.beginPath();
     context.strokeStyle = '#014786';
     context.lineWidth = width;

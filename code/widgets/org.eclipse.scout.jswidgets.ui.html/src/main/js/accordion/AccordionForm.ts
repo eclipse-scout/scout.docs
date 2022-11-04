@@ -8,23 +8,29 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {comparators, Form, models, scout} from '@eclipse-scout/core';
+import {Accordion, comparators, Event, Form, FormModel, Group, Menu, models, scout, TileGrid} from '@eclipse-scout/core';
 import AccordionFormModel from './AccordionFormModel';
 import $ from 'jquery';
+import {InitModelOf} from '@eclipse-scout/core/src/scout';
+import {AccordionFormWidgetMap, CustomTile} from '../index';
 
-export default class AccordionForm extends Form {
+export class AccordionForm extends Form {
+  declare widgetMap: AccordionFormWidgetMap;
+
+  accordion: Accordion;
+  insertedGroupCount: number;
 
   constructor() {
     super();
     this.insertedGroupCount = 0;
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): FormModel {
     return models.get(AccordionFormModel);
   }
 
   // noinspection DuplicatedCode
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
     this.accordion = this.widget('Accordion');
@@ -73,39 +79,39 @@ export default class AccordionForm extends Form {
     this.widget('EventsTab').setField(this.accordion);
   }
 
-  _onInsertMenuAction(event) {
+  protected _onInsertMenuAction(event: Event<Menu>) {
     this._insertGroupWithTiles();
   }
 
-  _onDeleteFirstMenuAction(event) {
+  protected _onDeleteFirstMenuAction(event: Event<Menu>) {
     this.accordion.deleteGroup(this.accordion.groups[0]);
     if (this.accordion.groups.length === 0) {
       this.insertedGroupCount = 0;
     }
   }
 
-  _onCollapseExpandFirstMenuAction(event) {
+  protected _onCollapseExpandFirstMenuAction(event: Event<Menu>) {
     if (this.accordion.groups.length === 0) {
       return;
     }
     this.accordion.groups[0].toggleCollapse();
   }
 
-  _onCollapseAllMenuAction(event) {
+  protected _onCollapseAllMenuAction(event: Event<Menu>) {
     this.accordion.groups.forEach(group => {
       group.setCollapsed(true);
     });
   }
 
-  _onSortAscMenuAction(event) {
+  protected _onSortAscMenuAction(event: Event<Menu>) {
     this._sortGroups(true);
   }
 
-  _onSortDescMenuAction(event) {
-    this._sortGroups();
+  protected _onSortDescMenuAction(event: Event<Menu>) {
+    this._sortGroups(false);
   }
 
-  _insertGroupWithTiles() {
+  protected _insertGroupWithTiles() {
     let tiles = [];
     let maxTiles = Math.floor(Math.random() * 30);
     for (let i = 0; i < maxTiles; i++) {
@@ -117,11 +123,11 @@ export default class AccordionForm extends Form {
     if (this.insertedGroupCount > 0) {
       title += ' ' + this.insertedGroupCount;
     }
-    let group = scout.create('Group', {
+    let group = scout.create(Group, {
       parent: this.accordion,
       title: title,
       body: {
-        objectType: 'TileGrid',
+        objectType: TileGrid,
         gridColumnCount: 6,
         layoutConfig: {
           columnWidth: 100,
@@ -135,7 +141,7 @@ export default class AccordionForm extends Form {
     this.insertedGroupCount++;
   }
 
-  _createTile(model) {
+  protected _createTile(m: Omit<InitModelOf<CustomTile>, 'parent'>): CustomTile {
     let defaults = {
       parent: this,
       gridDataHints: {
@@ -143,12 +149,12 @@ export default class AccordionForm extends Form {
       },
       colorScheme: this.accordion.groups.length % 2 === 0 ? 'default' : 'alternative'
     };
-    model = $.extend({}, defaults, model);
-    return scout.create('jswidgets.CustomTile', model);
+    let model = $.extend({}, defaults, m);
+    return scout.create(CustomTile, model);
   }
 
   // noinspection DuplicatedCode
-  _sortGroups(asc) {
+  protected _sortGroups(asc: boolean) {
     let comparator = comparators.ALPHANUMERIC;
     comparator.install(this.session);
     this.accordion.setComparator((group1, group2) => {

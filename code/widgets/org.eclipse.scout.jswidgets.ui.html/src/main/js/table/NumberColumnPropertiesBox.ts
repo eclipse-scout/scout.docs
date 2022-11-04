@@ -8,31 +8,35 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {GroupBox, models} from '@eclipse-scout/core';
+import {GroupBox, GroupBoxModel, InitModelOf, models, NumberColumn} from '@eclipse-scout/core';
 import NumberColumnPropertiesBoxModel from './NumberColumnPropertiesBoxModel';
+import {NumberColumnPropertiesBoxWidgetMap} from '../index';
 
-export default class NumberColumnPropertiesBox extends GroupBox {
+export class NumberColumnPropertiesBox extends GroupBox {
+  declare widgetMap: NumberColumnPropertiesBoxWidgetMap;
+
+  column: NumberColumn;
 
   constructor() {
     super();
     this.column = null;
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): GroupBoxModel {
     return models.get(NumberColumnPropertiesBoxModel);
   }
 
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
     this._setColumn(this.column);
   }
 
-  setColumn(column) {
+  setColumn(column: NumberColumn) {
     this.setProperty('column', column);
   }
 
-  _setColumn(column) {
+  protected _setColumn(column: NumberColumn) {
     this._setProperty('column', column);
     if (!this.column) {
       return;

@@ -8,31 +8,35 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {GroupBox, models} from '@eclipse-scout/core';
+import {GroupBox, GroupBoxModel, InitModelOf, models, SmartColumn} from '@eclipse-scout/core';
 import SmartColumnPropertiesBoxModel from './SmartColumnPropertiesBoxModel';
+import {SmartColumnPropertiesBoxWidgetMap} from '../index';
 
-export default class SmartColumnPropertiesBox extends GroupBox {
+export class SmartColumnPropertiesBox extends GroupBox {
+  declare widgetMap: SmartColumnPropertiesBoxWidgetMap;
+
+  column: SmartColumn<any>;
 
   constructor() {
     super();
     this.column = null;
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): GroupBoxModel {
     return models.get(SmartColumnPropertiesBoxModel);
   }
 
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
     this._setColumn(this.column);
   }
 
-  setColumn(column) {
+  setColumn(column: SmartColumn<any>) {
     this.setProperty('column', column);
   }
 
-  _setColumn(column) {
+  protected _setColumn(column: SmartColumn<any>) {
     this._setProperty('column', column);
     if (!this.column) {
       return;

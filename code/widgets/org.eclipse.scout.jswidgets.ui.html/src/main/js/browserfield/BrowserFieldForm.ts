@@ -8,21 +8,25 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {dates, Form, models, numbers} from '@eclipse-scout/core';
+import {BrowserField, Button, dates, Event, Form, FormModel, GroupBox, InitModelOf, models, numbers} from '@eclipse-scout/core';
 import BrowserFieldFormModel from './BrowserFieldFormModel';
+import {BrowserFieldFormWidgetMap} from '../index';
 
-export default class BrowserFieldForm extends Form {
+export class BrowserFieldForm extends Form {
+  declare widgetMap: BrowserFieldFormWidgetMap;
+
+  browserField: BrowserField;
 
   constructor() {
     super();
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): FormModel {
     return models.get(BrowserFieldFormModel);
   }
 
   // noinspection DuplicatedCode
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
     this.browserField = this.widget('BrowserField');
@@ -51,7 +55,7 @@ export default class BrowserFieldForm extends Form {
     showInExternalWindowField.setValue(this.browserField.showInExternalWindow);
     showInExternalWindowField.on('propertyChange:value', event => {
       this.browserField.showInExternalWindow = event.newValue;
-      this.browserField.parent.rerenderControls();
+      (this.browserField.parent as GroupBox).rerenderControls();
     });
 
     let autoCloseExternalWindowField = this.widget('AutoCloseExternalWindowField');
@@ -78,12 +82,12 @@ export default class BrowserFieldForm extends Form {
     this.widget('EventsTab').setField(this.browserField);
   }
 
-  _onPostTextMessageButtonClick(event) {
+  protected _onPostTextMessageButtonClick(event: Event<Button>) {
     let msg = 'Lucky number: ' + (Math.floor(Math.random() * 100) + 1);
     this.browserField.postMessage(msg, '/');
   }
 
-  _onPostJsonMessageButtonClick(event) {
+  protected _onPostJsonMessageButtonClick(event: Event<Button>) {
     let msg = {
       'id': numbers.randomId(),
       'name': 'Test',

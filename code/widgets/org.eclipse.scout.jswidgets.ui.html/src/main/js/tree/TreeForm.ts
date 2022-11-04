@@ -1,17 +1,22 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG. All rights reserved.
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Distribution License v1.0 which accompanies this
- * distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Distribution License v1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
- * Contributors: BSI Business Systems Integration AG - initial API and
- * implementation
+ * Contributors:
+ *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {Form, icons, models} from '@eclipse-scout/core';
+import {Form, FormModel, icons, InitModelOf, models, Tree, TreeNodeModel} from '@eclipse-scout/core';
 import TreeFormModel from './TreeFormModel';
+import {TreeFormWidgetMap} from '../index';
 
-export default class TreeForm extends Form {
+export class TreeForm extends Form {
+  declare widgetMap: TreeFormWidgetMap;
+
+  tree: Tree;
+  nodeNo: number;
 
   constructor() {
     super();
@@ -19,12 +24,12 @@ export default class TreeForm extends Form {
     this.nodeNo = 0;
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): FormModel {
     return models.get(TreeFormModel);
   }
 
   // noinspection DuplicatedCode
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
     this.tree = this.widget('Tree');
@@ -45,7 +50,7 @@ export default class TreeForm extends Form {
     this.tree.insertNodes([this._createNodeWithChildren(), this._createNodeWithChildren(), this._createNodeWithChildren()]);
   }
 
-  _createNode() {
+  protected _createNode(): TreeNodeModel {
     let iconList = [icons.STAR, icons.CLOCK, icons.FOLDER];
 
     let icon = iconList[this.nodeNo % iconList.length];
@@ -58,29 +63,29 @@ export default class TreeForm extends Form {
     };
   }
 
-  _createNodeWithChildren() {
+  protected _createNodeWithChildren(): TreeNodeModel {
     let node = this._createNode();
     node.childNodes = [this._createNode(), this._createNode(), this._createNode()];
     return node;
   }
 
-  _onAddNodeMenuAction() {
+  protected _onAddNodeMenuAction() {
     this.tree.insertNode(this._createNode());
   }
 
-  _onAddChildNodeMenuAction() {
+  protected _onAddChildNodeMenuAction() {
     this.tree.insertNode(this._createNode(), this.tree.selectedNodes[0]);
   }
 
-  _onDeleteNodeMenuAction() {
+  protected _onDeleteNodeMenuAction() {
     this.tree.deleteNodes(this.tree.selectedNodes);
   }
 
-  _onDeleteAllNodesMenuAction() {
+  protected _onDeleteAllNodesMenuAction() {
     this.tree.deleteAllNodes();
   }
 
-  _onDeleteAllChildNodesMenuAction() {
+  protected _onDeleteAllChildNodesMenuAction() {
     this.tree.deleteAllChildNodes(this.tree.selectedNodes[0]);
   }
 }

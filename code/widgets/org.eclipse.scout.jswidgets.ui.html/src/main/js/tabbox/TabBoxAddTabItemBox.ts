@@ -1,39 +1,46 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {GroupBox, models, scout} from '@eclipse-scout/core';
-import {TabItemLookupCall} from '../index';
+import {Button, Event, GroupBox, GroupBoxModel, InitModelOf, models, scout, SmartField, StringField, TabBox, TabItem} from '@eclipse-scout/core';
+import {DynamicTab, TabBoxAddTabItemBoxWidgetMap, TabItemLookupCall} from '../index';
 import TabBoxAddTabItemBoxModel from './TabBoxAddTabItemBoxModel';
 
-export default class TabBoxAddTabItemBox extends GroupBox {
+export class TabBoxAddTabItemBox extends GroupBox {
+  declare widgetMap: TabBoxAddTabItemBoxWidgetMap;
+
+  tabBox: TabBox;
+  dynamicTabCounter: number;
+  labelField: StringField;
+  subLabelField: StringField;
+  beforeField: SmartField<TabItem>;
+  addTabItemButton: Button;
 
   constructor() {
     super();
-    this.field = null;
     this.dynamicTabCounter = 0;
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): GroupBoxModel {
     return models.get(TabBoxAddTabItemBoxModel);
   }
 
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
     this._setTabBox(this.tabBox);
   }
 
-  setTabBox(tabBox) {
+  setTabBox(tabBox: TabBox) {
     this.setProperty('tabBox', tabBox);
   }
 
-  _setTabBox(tabBox) {
+  protected _setTabBox(tabBox: TabBox) {
     this._setProperty('tabBox', tabBox);
     if (!this.tabBox) {
       return;
@@ -52,14 +59,14 @@ export default class TabBoxAddTabItemBox extends GroupBox {
     this._updateAddTabLabel();
   }
 
-  _onAddTabItemButtonClick(event) {
+  protected _onAddTabItemButtonClick(event: Event<Button>) {
     this.addTabItem(this.labelField.value, this.subLabelField.value, this.beforeField.value);
   }
 
-  addTabItem(label, subLabel, beforeTabItem) {
+  addTabItem(label?: string, subLabel?: string, beforeTabItem?: TabItem) {
     let tabItems = this.tabBox.tabItems || [],
       beforeIndex,
-      tabItem = scout.create('jswidgets.DynamicTab', {
+      tabItem = scout.create(DynamicTab, {
         parent: this.tabBox,
         label: label || 'DynTab ' + this.dynamicTabCounter,
         subLabel: subLabel
@@ -73,7 +80,7 @@ export default class TabBoxAddTabItemBox extends GroupBox {
     this._updateAddTabLabel();
   }
 
-  _updateAddTabLabel() {
+  protected _updateAddTabLabel() {
     this.labelField.setValue('DynTab ' + this.dynamicTabCounter);
   }
 }

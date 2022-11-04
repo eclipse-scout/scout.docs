@@ -3,30 +3,30 @@
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-
-import {Button, Form, models, scout} from '@eclipse-scout/core';
+import {Button, DesktopNotification, Event, Form, FormModel, InitModelOf, models, scout} from '@eclipse-scout/core';
 import DesktopNotificationFormModel from './DesktopNotificationFormModel';
-import DesktopNotification from '@eclipse-scout/core/src/desktop/notification/DesktopNotification';
+import {DesktopNotificationFormWidgetMap} from '../index';
 
-export default class DesktopNotificationForm extends Form {
+export class DesktopNotificationForm extends Form {
+  declare widgetMap: DesktopNotificationFormWidgetMap;
 
   constructor() {
     super();
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): FormModel {
     return models.get(DesktopNotificationFormModel);
   }
 
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
-    let notification = scout.create('DesktopNotification', {parent: this});
+    let notification = scout.create(DesktopNotification, {parent: this});
     this.widget('ClosableField').setValue(notification.closable);
     this.widget('MessageField').setValue('Hi there!');
     this.widget('DurationField').setValue(notification.duration);
@@ -43,8 +43,8 @@ export default class DesktopNotificationForm extends Form {
     button.on('click', this._onButtonClick.bind(this));
   }
 
-  _onButtonClick(event) {
-    let notification = scout.create('DesktopNotification', {
+  protected _onButtonClick(event: Event<Button>) {
+    let notification = scout.create(DesktopNotification, {
       parent: this,
       closable: this.widget('ClosableField').value,
       duration: this.widget('DurationField').value,

@@ -1,22 +1,25 @@
 /*
- * Copyright (c) 2021 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {App, HtmlComponent, scout, TileOutlineOverview} from '@eclipse-scout/core';
+import {HtmlComponent, PageTileGrid, scout, TileOutlineOverview} from '@eclipse-scout/core';
+import {App} from '../index';
 
-export default class WidgetsOutlineOverview extends TileOutlineOverview {
+export class WidgetsOutlineOverview extends TileOutlineOverview {
+
+  $description: JQuery;
 
   constructor() {
     super();
   }
 
-  _render() {
+  protected override _render() {
     super._render();
     this.$container.addClass('widgets-outline-overview');
 
@@ -29,8 +32,8 @@ export default class WidgetsOutlineOverview extends TileOutlineOverview {
     HtmlComponent.install(this.$description, this.session);
   }
 
-  _createPageTileGrid() {
-    return scout.create('PageTileGrid', {
+  protected override _createPageTileGrid(): PageTileGrid {
+    return scout.create(PageTileGrid, {
       parent: this,
       outline: this.outline,
       layoutConfig: {
@@ -42,7 +45,7 @@ export default class WidgetsOutlineOverview extends TileOutlineOverview {
     });
   }
 
-  _updateTitle() {
+  protected override _updateTitle(animated = true) {
     // NOP
   }
 }

@@ -9,15 +9,15 @@
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 import {StaticLookupCall} from '@eclipse-scout/core';
-import {Chart} from '@eclipse-scout/chart';
+import {Chart, ChartPosition} from '@eclipse-scout/chart';
 
-export default class LegendPositionLookupCall extends StaticLookupCall {
+export class LegendPositionLookupCall extends StaticLookupCall<ChartPosition> {
 
   constructor() {
     super();
   }
 
-  _data() {
+  protected override _data(): any[] {
     return LegendPositionLookupCall.DATA;
   }
 

@@ -8,14 +8,16 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-export default () => ({
+import {CheckBoxField, GroupBox, GroupBoxModel, NumberField, SmartField, TableCheckableStyle, TableGroupingStyle} from '@eclipse-scout/core';
+
+export default (): GroupBoxModel => ({
   id: 'jswidgets.TablePropertiesBox',
-  objectType: 'GroupBox',
+  objectType: GroupBox,
   label: 'Table Properties',
   fields: [
     {
       id: 'AutoResizeColumnsField',
-      objectType: 'CheckBoxField',
+      objectType: CheckBoxField,
       label: 'Auto Resize Columns',
       tooltipText: '${textKey:AutoResizeColumnsTooltip}',
       labelVisible: false,
@@ -25,7 +27,7 @@ export default () => ({
     },
     {
       id: 'AutoOptimizeColumnWidthsField',
-      objectType: 'CheckBoxField',
+      objectType: CheckBoxField,
       label: 'Auto Optimize Column Widths',
       tooltipText: '${textKey:AutoOptimizeColumnWidthsTooltip}',
       labelVisible: false,
@@ -35,117 +37,141 @@ export default () => ({
     },
     {
       id: 'CheckableField',
-      objectType: 'CheckBoxField',
+      objectType: CheckBoxField,
       label: 'Checkable',
       labelVisible: false
     },
     {
       id: 'CompactField',
-      objectType: 'CheckBoxField',
+      objectType: CheckBoxField,
       label: 'Compact',
       labelVisible: false
     },
     {
       id: 'HeaderEnabledField',
-      objectType: 'CheckBoxField',
+      objectType: CheckBoxField,
       label: 'Header Enabled',
       labelVisible: false
     },
     {
       id: 'HeaderVisibleField',
-      objectType: 'CheckBoxField',
+      objectType: CheckBoxField,
       label: 'Header Visible',
       labelVisible: false
     },
     {
       id: 'HeaderMenusEnabledField',
-      objectType: 'CheckBoxField',
+      objectType: CheckBoxField,
       label: 'Header Menus Enabled',
       labelVisible: false
     },
     {
       id: 'MenuBarVisibleField',
-      objectType: 'CheckBoxField',
+      objectType: CheckBoxField,
       label: 'Menu Bar Visible',
       labelVisible: false
     },
     {
       id: 'MultiCheckField',
-      objectType: 'CheckBoxField',
+      objectType: CheckBoxField,
       label: 'Multi Check',
       labelVisible: false
     },
     {
       id: 'MultiSelectField',
-      objectType: 'CheckBoxField',
+      objectType: CheckBoxField,
       label: 'Multi Select',
       labelVisible: false
     },
     {
       id: 'MultilineTextField',
-      objectType: 'CheckBoxField',
+      objectType: CheckBoxField,
       label: 'Multiline Text',
       labelVisible: false
     },
     {
       id: 'TruncatedCellTooltipEnabledField',
-      objectType: 'CheckBoxField',
+      objectType: CheckBoxField,
       label: 'Truncated Cell Tooltip Enabled',
       labelVisible: false,
       triStateEnabled: true
     },
     {
       id: 'ScrollToSelectionField',
-      objectType: 'CheckBoxField',
+      objectType: CheckBoxField,
       label: 'Scroll To Selection',
       labelVisible: false
     },
     {
       id: 'SortEnabledField',
-      objectType: 'CheckBoxField',
+      objectType: CheckBoxField,
       label: 'Sort Enabled',
       labelVisible: false
     },
     {
       id: 'FooterVisibleField',
-      objectType: 'CheckBoxField',
+      objectType: CheckBoxField,
       label: 'Footer Visible',
       labelVisible: false
     },
     {
       id: 'RowIconVisibleField',
-      objectType: 'CheckBoxField',
+      objectType: CheckBoxField,
       label: 'Row Icon Visible',
       labelVisible: false
     },
     {
       id: 'RowIconColumnWidthField',
-      objectType: 'NumberField',
+      objectType: NumberField,
       label: 'Row Icon Column Width'
     },
     {
       id: 'CheckableStyleField',
-      objectType: 'SmartField',
+      objectType: SmartField,
       label: 'Checkable Style',
       lookupCall: 'jswidgets.CheckableStyleLookupCall'
     },
     {
       id: 'GroupingStyleField',
-      objectType: 'SmartField',
+      objectType: SmartField,
       label: 'Grouping Style',
       lookupCall: 'jswidgets.GroupingStyleLookupCall'
     },
     {
       id: 'TileModeField',
-      objectType: 'CheckBoxField',
+      objectType: CheckBoxField,
       label: 'Tile Mode',
       labelVisible: false
     },
     {
       id: 'TextFilterEnabledField',
-      objectType: 'CheckBoxField',
+      objectType: CheckBoxField,
       label: 'Text Filter Enabled',
       labelVisible: false
     }
   ]
 });
+
+export type TablePropertiesBoxWidgetMap = {
+  'AutoResizeColumnsField': CheckBoxField;
+  'AutoOptimizeColumnWidthsField': CheckBoxField;
+  'CheckableField': CheckBoxField;
+  'CompactField': CheckBoxField;
+  'HeaderEnabledField': CheckBoxField;
+  'HeaderVisibleField': CheckBoxField;
+  'HeaderMenusEnabledField': CheckBoxField;
+  'MenuBarVisibleField': CheckBoxField;
+  'MultiCheckField': CheckBoxField;
+  'MultiSelectField': CheckBoxField;
+  'MultilineTextField': CheckBoxField;
+  'TruncatedCellTooltipEnabledField': CheckBoxField;
+  'ScrollToSelectionField': CheckBoxField;
+  'SortEnabledField': CheckBoxField;
+  'FooterVisibleField': CheckBoxField;
+  'RowIconVisibleField': CheckBoxField;
+  'RowIconColumnWidthField': NumberField;
+  'CheckableStyleField': SmartField<TableCheckableStyle>;
+  'GroupingStyleField': SmartField<TableGroupingStyle>;
+  'TileModeField': CheckBoxField;
+  'TextFilterEnabledField': CheckBoxField;
+};

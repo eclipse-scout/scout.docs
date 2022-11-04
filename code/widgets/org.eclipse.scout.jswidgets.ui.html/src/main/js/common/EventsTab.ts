@@ -8,10 +8,15 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {App, comparators, models, TabItem, Widget} from '@eclipse-scout/core';
+import {Button, comparators, Event, EventEmitter, EventListener, GroupBoxModel, InitModelOf, models, TabItem, Widget} from '@eclipse-scout/core';
 import EventsTabModel from './EventsTabModel';
+import {App, EventsTabWidgetMap} from '../index';
 
-export default class EventsTab extends TabItem {
+export class EventsTab extends TabItem {
+  declare widgetMap: EventsTabWidgetMap;
+
+  field: EventEmitter;
+  protected _listener: EventListener;
 
   constructor() {
     super();
@@ -21,11 +26,11 @@ export default class EventsTab extends TabItem {
     };
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): GroupBoxModel {
     return models.get(EventsTabModel);
   }
 
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
     this._setField(this.field);
@@ -33,11 +38,11 @@ export default class EventsTab extends TabItem {
     this.widget('ClearEventLogButton').on('click', this._onClearEventLogClick.bind(this));
   }
 
-  setField(field) {
+  setField(field: EventEmitter) {
     this.setProperty('field', field);
   }
 
-  _setField(field) {
+  protected _setField(field: EventEmitter) {
     if (this.field) {
       this.field.removeListener(this._listener);
     }
@@ -48,7 +53,7 @@ export default class EventsTab extends TabItem {
     this.field.addListener(this._listener);
   }
 
-  _onEvent(event) {
+  protected _onEvent(event: Event<EventEmitter>) {
     if (event.type === 'destroy') {
       this.field.removeListener(this._listener);
     }
@@ -83,7 +88,8 @@ export default class EventsTab extends TabItem {
     logField.setValue(log);
   }
 
-  _createPropertySortFunc(order) {
+  // noinspection DuplicatedCode
+  protected _createPropertySortFunc(order: string[]): (a: string, b: string) => number {
     return (a, b) => {
       let ia = order.indexOf(a);
       let ib = order.indexOf(b);
@@ -100,7 +106,7 @@ export default class EventsTab extends TabItem {
     };
   }
 
-  _onClearEventLogClick(event) {
+  protected _onClearEventLogClick(event: Event<Button>) {
     this.widget('EventLogField').setValue('');
   }
 }

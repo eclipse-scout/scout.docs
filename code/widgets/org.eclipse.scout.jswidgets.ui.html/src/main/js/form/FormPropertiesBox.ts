@@ -8,11 +8,28 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {GroupBox, models} from '@eclipse-scout/core';
+import {CheckBoxField, DisplayHint, DisplayViewId, Form, GroupBox, GroupBoxModel, InitModelOf, models, SmartField, StringField} from '@eclipse-scout/core';
 import FormPropertiesBoxModel from './FormPropertiesBoxModel';
-import {DisplayParentLookupCall} from '../index';
+import {DisplayParentLookupCall, FormPropertiesBoxWidgetMap} from '../index';
 
-export default class FormPropertiesBox extends GroupBox {
+export class FormPropertiesBox extends GroupBox {
+  declare widgetMap: FormPropertiesBoxWidgetMap;
+
+  form: Form;
+  titleField: StringField;
+  subTitleField: StringField;
+  iconIdField: SmartField<string>;
+  askIfNeedSaveField: CheckBoxField;
+  cacheBoundsField: CheckBoxField;
+  closableField: CheckBoxField;
+  movableField: CheckBoxField;
+  resizableField: CheckBoxField;
+  modalField: CheckBoxField;
+  displayHintField: SmartField<DisplayHint>;
+  displayViewIdField: SmartField<DisplayViewId>;
+  displayParentField: SmartField<string>;
+  headerVisibleField: CheckBoxField;
+  maximizedField: CheckBoxField;
 
   // noinspection DuplicatedCode
   constructor() {
@@ -34,11 +51,11 @@ export default class FormPropertiesBox extends GroupBox {
     this.maximizedField = null;
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): GroupBoxModel {
     return models.get(FormPropertiesBoxModel);
   }
 
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
     this.titleField = this.widget('TitleField');
     this.subTitleField = this.widget('SubTitleField');
@@ -57,12 +74,12 @@ export default class FormPropertiesBox extends GroupBox {
     this._setForm(this.form);
   }
 
-  setForm(form) {
+  setForm(form: Form) {
     this.setProperty('form', form);
   }
 
   // noinspection DuplicatedCode
-  _setForm(form) {
+  protected _setForm(form: Form) {
     this._setProperty('form', form);
     if (!this.form) {
       return;

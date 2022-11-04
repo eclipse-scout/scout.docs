@@ -1,31 +1,35 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {Form, models, scout, Tooltip} from '@eclipse-scout/core';
+import {Form, FormModel, InitModelOf, models, scout, Tooltip} from '@eclipse-scout/core';
 import TooltipFormModel from './TooltipFormModel';
+import {TooltipFormWidgetMap} from '../index';
 
-export default class TooltipForm extends Form {
+export class TooltipForm extends Form {
+  declare widgetMap: TooltipFormWidgetMap;
+
+  tooltip: Tooltip;
 
   constructor() {
     super();
     this.tooltip = null;
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): FormModel {
     return models.get(TooltipFormModel);
   }
 
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
-    let dummyTooltip = scout.create('Tooltip', {
+    let dummyTooltip = scout.create(Tooltip, {
       parent: this
     });
     this.widget('OpenTooltipButton').on('click', this._onOpenTooltipButtonClick.bind(this));
@@ -46,7 +50,7 @@ export default class TooltipForm extends Form {
     dummyTooltip.destroy();
   }
 
-  _render() {
+  protected override _render() {
     super._render();
     if (this.tooltip) {
       this.tooltip.$anchor = this.widget('OpenTooltipButton').$field;
@@ -55,7 +59,7 @@ export default class TooltipForm extends Form {
     }
   }
 
-  _onOpenTooltipButtonClick(model) {
+  protected _onOpenTooltipButtonClick() {
     let $anchor = this.widget('OpenTooltipButton').$field;
     if (this.tooltip) {
       this.tooltip.destroy();

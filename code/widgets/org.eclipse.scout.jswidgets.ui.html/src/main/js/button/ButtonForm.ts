@@ -9,20 +9,22 @@
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 import ButtonFormModel from './ButtonFormModel';
-import {Button, Form, models, scout, Status} from '@eclipse-scout/core';
+import {ButtonFormWidgetMap} from '../index';
+import {Button, DesktopNotification, Event, Form, FormModel, GroupBox, InitModelOf, models, scout, Status} from '@eclipse-scout/core';
 
-export default class ButtonForm extends Form {
+export class ButtonForm extends Form {
+  declare widgetMap: ButtonFormWidgetMap;
 
   constructor() {
     super();
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): FormModel {
     return models.get(ButtonFormModel);
   }
 
   // noinspection DuplicatedCode
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
     let button = this.widget('Button');
@@ -40,9 +42,10 @@ export default class ButtonForm extends Form {
       // As a workaround we need to adjust the group box state and rerender the whole group box
       // DISCLAIMER: This is done for demo purpose, don't use it in production code since it is internal API
       button.processButton = event.newValue;
-      button.parent._prepareFields();
-      button.parent._updateMenuBar();
-      this._rerenderGroupBox(button.parent);
+      let parent = button.parent as GroupBox;
+      parent._prepareFields();
+      parent._updateMenuBar();
+      this._rerenderGroupBox(parent);
     });
 
     let selectedField = this.widget('SelectedField');
@@ -67,7 +70,7 @@ export default class ButtonForm extends Form {
       let button = this.widget('Button');
       // DisplayStyle may not be changed during run time officially, use this little hack to work around by rerendering the whole group box
       button.displayStyle = event.newValue;
-      this._rerenderGroupBox(button.parent);
+      this._rerenderGroupBox(button.parent as GroupBox);
     });
 
     this.widget('FormFieldPropertiesBox').setField(button);
@@ -77,12 +80,12 @@ export default class ButtonForm extends Form {
     this.widget('EventsTab').setField(button);
   }
 
-  _onButtonClick(event) {
+  protected _onButtonClick(event: Event<Button>) {
     if (event.source.displayStyle === Button.DisplayStyle.TOGGLE) {
       // Don't show message box if it is a toggle button
       return;
     }
-    scout.create('DesktopNotification', {
+    scout.create(DesktopNotification, {
       parent: this,
       duration: 7000,
       status: {
@@ -92,8 +95,8 @@ export default class ButtonForm extends Form {
     }).show();
   }
 
-  _rerenderGroupBox(groupBox) {
-    let mainBox = groupBox.parent;
+  protected _rerenderGroupBox(groupBox: GroupBox) {
+    let mainBox = groupBox.parent as GroupBox;
     // Owner is the main box by default.
     // In that case the group box would be destroyed when calling deleteField and therefore could not be used anymore -> Set form as owner temporarily.
     groupBox.setOwner(this);

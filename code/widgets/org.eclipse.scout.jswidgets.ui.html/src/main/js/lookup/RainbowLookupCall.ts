@@ -1,22 +1,22 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {icons, scout, StaticLookupCall} from '@eclipse-scout/core';
+import {icons, InitModelOf, LookupRow, scout, StaticLookupCall} from '@eclipse-scout/core';
 
-export default class RainbowLookupCall extends StaticLookupCall {
+export class RainbowLookupCall extends StaticLookupCall<string> {
 
   constructor() {
     super();
   }
 
-  _data() {
+  protected override _data(): any[] {
     return RainbowLookupCall.DATA;
   }
 
@@ -39,8 +39,8 @@ export default class RainbowLookupCall extends StaticLookupCall {
     ['FFDB9D', icons.ANGLE_RIGHT]
   ];
 
-  _dataToLookupRow(data, index) {
-    let model = {
+  protected override _dataToLookupRow(data: any[], index?: number): LookupRow<string> {
+    let model: InitModelOf<LookupRow<string>> = {
       key: data[0],
       text: data[0],
       backgroundColor: data[0],
@@ -52,6 +52,6 @@ export default class RainbowLookupCall extends StaticLookupCall {
     if (index % 2 === 0) {
       model.foregroundColor = 'blue';
     }
-    return scout.create('LookupRow', model);
+    return scout.create(LookupRow, model) as LookupRow<string>;
   }
 }

@@ -8,32 +8,37 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {GroupBox, models} from '@eclipse-scout/core';
+import {Button, Event, GroupBox, GroupBoxModel, InitModelOf, models, SmartField, TabBox, TabItem} from '@eclipse-scout/core';
 import TabBoxDeleteTabItemBoxModel from './TabBoxDeleteTabItemBoxModel';
-import {TabItemLookupCall} from '../index';
+import {TabBoxDeleteTabItemBoxWidgetMap, TabItemLookupCall} from '../index';
 
-export default class TabBoxDeleteTabItemBox extends GroupBox {
+export class TabBoxDeleteTabItemBox extends GroupBox {
+  declare widgetMap: TabBoxDeleteTabItemBoxWidgetMap;
+
+  tabBox: TabBox;
+  dynamicTabCounter: number;
+  tabItemField: SmartField<TabItem>;
+  deleteButton: Button;
 
   constructor() {
     super();
-    this.field = null;
     this.dynamicTabCounter = 0;
   }
 
-  _jsonModel() {
+  protected override _jsonModel(): GroupBoxModel {
     return models.get(TabBoxDeleteTabItemBoxModel);
   }
 
-  _init(model) {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
     this._setTabBox(this.tabBox);
   }
 
-  setTabBox(tabBox) {
+  setTabBox(tabBox: TabBox) {
     this.setProperty('tabBox', tabBox);
   }
 
-  _setTabBox(tabBox) {
+  protected _setTabBox(tabBox: TabBox) {
     this._setProperty('tabBox', tabBox);
     if (!this.tabBox) {
       return;
@@ -47,11 +52,11 @@ export default class TabBoxDeleteTabItemBox extends GroupBox {
     this.deleteButton.on('click', this._onDeleteTabItemButtonClick.bind(this));
   }
 
-  _onDeleteTabItemButtonClick(event) {
+  protected _onDeleteTabItemButtonClick(event: Event<Button>) {
     this.deleteTabItem(this.tabItemField.value);
   }
 
-  deleteTabItem(tabItem) {
+  deleteTabItem(tabItem: TabItem) {
     if (tabItem) {
       this.tabBox.deleteTabItem(tabItem);
       this.tabItemField.setValue(null);
