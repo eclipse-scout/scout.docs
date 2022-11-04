@@ -113,3 +113,9 @@ In previous versions several ways were used to create/use a node identfier (e.g.
 * And another node identifier (default implementation random UUID) could be accessed using  `org.eclipse.scout.rt.shared.INode#ID`
 
 As of version 23.1 the typed `org.eclipse.scout.rt.dataobject.id.NodeId` is used wherever possible, the application scoped bean `org.eclipse.scout.rt.platform.context.NodeIdentifier` is still used for the computation of this typed `NodeId`. The `get()` method returning a `String` has been deprecated, the interface `org.eclipse.scout.rt.shared.INode` has been removed.
+
+== IId interface
+
+In previous versions the `IId` interface was typed with a generic `WRAPPED_TYPE extends Comparable<WRAPPED_TYPE>`.
+To be able to use the `IId` interface as general root for any kind of identifiers without having to deal with a concrete generic type, the generic type definition was removed and moved to the default implementation `AbstractId` and the typed sub-interfaces `IUuid`, `IStringId` and `ILongId`.
+
