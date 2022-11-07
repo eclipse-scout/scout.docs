@@ -12,7 +12,9 @@ package org.eclipse.scout.widgets.client.ui.forms;
 
 import static java.util.Calendar.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -38,6 +40,7 @@ import org.eclipse.scout.rt.platform.util.TriState;
 import org.eclipse.scout.rt.platform.util.date.DateUtility;
 import org.eclipse.scout.rt.shared.services.common.calendar.CalendarAppointment;
 import org.eclipse.scout.rt.shared.services.common.calendar.CalendarItemDescriptionElement;
+import org.eclipse.scout.rt.shared.services.common.calendar.ICalendarAppointment;
 import org.eclipse.scout.rt.shared.services.common.calendar.ICalendarItem;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipse.scout.widgets.client.ui.forms.CalendarFieldForm.MainBox.CalendarField;
@@ -95,6 +98,8 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
     @ClassId("63311e33-b5d9-422c-915f-9aa7cd44a4f0")
     public class CalendarField extends AbstractCalendarField<Calendar> {
 
+      private List<ICalendarAppointment> m_configuredAppointments = new ArrayList<>();
+
       @Override
       protected int getConfiguredGridW() {
         return 0;
@@ -117,6 +122,11 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
         @Override
         protected void execInitCalendar() {
           setMenuInjectionTarget(getMainBox());
+        }
+
+        @Override
+        protected boolean getConfiguredRangeSelectionAllowed() {
+          return true;
         }
 
         /**
@@ -255,6 +265,8 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
             calendarAppointment.getDescriptionElements().add(BEANS.get(CalendarItemDescriptionElement.class).withText("Lucky Dumpling, Zurich").withIconId(Icons.World));
             calendarAppointment.getDescriptionElements().add(BEANS.get(CalendarItemDescriptionElement.class).withText("Lisa Turner").withIconId(Icons.PersonSolid));
             result.add(calendarAppointment);
+
+            result.addAll(m_configuredAppointments);
           }
 
           @Order(200)
@@ -285,6 +297,33 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
           @Override
           protected Set<? extends IMenuType> getConfiguredMenuTypes() {
             return CollectionUtility.hashSet(CalendarMenuType.EmptySpace);
+          }
+
+          @Override
+          protected void execAction() {
+            CalendarComponentForm form = new CalendarComponentForm();
+            form.start();
+            if (getCalendar().getSelectedRange() != null) {
+              form.getStartDateField().setValue(getCalendar().getSelectedRange().getFrom());
+              form.getEndDateField().setValue(getCalendar().getSelectedRange().getTo());
+            }
+            form.waitFor();
+            if (form.isFormStored()) {
+              String cssClass = "calendar-appointment";
+              Date start = form.getStartDateField().getValue();
+              Date end = form.getEndDateField().getValue();
+              ICalendarAppointment calendarAppointment = new CalendarAppointment(0L, 0L, start, end, false, null, form.getSubjectField().getValue(), null, cssClass);
+              calendarAppointment.setSubjectLabel("Appointment");
+              if (form.getLocationField().getValue() != null) {
+                calendarAppointment.getDescriptionElements().add(BEANS.get(CalendarItemDescriptionElement.class).withText(form.getLocationField().getValue()).withIconId(Icons.World));
+              }
+              if (form.getDescriptionField().getValue() != null) {
+                calendarAppointment.getDescriptionElements().add(BEANS.get(CalendarItemDescriptionElement.class).withText(form.getDescriptionField().getValue()).withIconId(Icons.List));
+              }
+              m_configuredAppointments.add(calendarAppointment);
+              getCalendar().reloadCalendarItems();
+              getCalendar().setSelectedRange(null);
+            }
           }
         }
       }
