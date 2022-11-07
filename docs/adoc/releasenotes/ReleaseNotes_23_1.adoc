@@ -130,3 +130,5 @@ The calendar component item of the calendar widget has new attributes:
 
 .Calendar Component
 image::{rnimgsdir}/calendar_tooltip.png[]
+
+Further the calendar provides now a time range selection in the day, work week and week mode. By default, this feature is disabled, it can be configured with the `rangeSelectionAllowed` property. The start point and end point of the current selected time range can be accessed with the `selectedRange` property.
