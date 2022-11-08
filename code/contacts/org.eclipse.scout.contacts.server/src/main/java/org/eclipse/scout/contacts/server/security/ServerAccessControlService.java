@@ -16,6 +16,7 @@ import org.eclipse.scout.rt.platform.Replace;
 import org.eclipse.scout.rt.security.AllPermissionCollection;
 import org.eclipse.scout.rt.security.IPermissionCollection;
 
+// tag::access_control[]
 @Replace
 public class ServerAccessControlService extends AccessControlService {
 
@@ -24,3 +25,4 @@ public class ServerAccessControlService extends AccessControlService {
     return BEANS.get(AllPermissionCollection.class);
   }
 }
+// end::access_control[]
