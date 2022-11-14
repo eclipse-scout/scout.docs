@@ -21,9 +21,19 @@ export default class IconIdLookupCall extends StaticLookupCall {
       .filter(name => {
         let value = icons[name];
         return typeof value === 'string' && strings.startsWith(value, 'font:');
-      }).map((name, i) => {
+      })
+      .sort((name1, name2) => strings.nvl(name1).localeCompare(strings.nvl(name2)))
+      .map(name => {
         let iconId = icons[name];
         return [iconId, name];
       });
+  }
+
+  _dataToLookupRow(data) {
+    let lookupRow = super._dataToLookupRow(data);
+    if (lookupRow && lookupRow.key) {
+      lookupRow.iconId = lookupRow.key;
+    }
+    return lookupRow;
   }
 }
