@@ -45,6 +45,6 @@
     "@eclipse-scout/chart": ">=23.1.0-snapshot <23.1.0",
     "@eclipse-scout/demo-widgets": ">=23.1.0-snapshot <23.1.0",
     "@eclipse-scout/demo-widgets-heatmap": ">=23.1.0-snapshot <23.1.0",
-    "leaflet": "1.7.1"
+    "leaflet": "1.9.2"
   }
 }
