@@ -9,6 +9,9 @@
     "url": "https://github.com/bsi-software/org.eclipse.scout.docs"
   },
   "license": "EDL-1.0",
+  "publishConfig": {
+    "main": "./target/dist/dev/eclipse-scout-demo-widgets.js"
+  },
   "engines": {
     "node": ">=18.12.1",
     "npm": ">=9.1.1",
@@ -17,7 +20,8 @@
   "main": "./src/main/js/index.js",
   "files": [
     "src/main/resources/WebContent",
-    "src/main/js"
+    "src/main/js",
+    "target/dist"
   ],
   "scripts": {
     "testserver:start": "scout-scripts test-server:start",

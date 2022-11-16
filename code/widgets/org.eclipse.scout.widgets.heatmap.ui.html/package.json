@@ -17,7 +17,8 @@
   "main": "./src/main/js/index.js",
   "files": [
     "src/main/resources/WebContent",
-    "src/main/js"
+    "src/main/js",
+    "target/dist"
   ],
   "scripts": {
     "testserver:start": "scout-scripts test-server:start",

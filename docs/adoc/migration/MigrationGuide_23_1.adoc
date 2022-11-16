@@ -346,10 +346,38 @@ The jquery-plugin jqueryExtensions has been refactored to a ES6 module to avoid 
 In the rare case you used these functions for testing, you need to import them now, the JQuery-object does not contain them anymore.
 
 == Various Widget Adjustments (Scout JS)
+
 The following model properties have been removed because they are not in use.
 
 - WidgetModel.loadJsonModel
 - TooltipSupportOptions.$parent
+
+== JS Build Improvements
+
+=== Imports
+
+Scout JS files cannot be imported directly anymore and need to be imported from the scout module.
+You are probably using the correct import style already, since file based import was bad practise anyway.
+In case there are file based imports, just adjust them as follows:
+
+.Old
+[source,js]
+----
+import Table from '@eclipse-scout/core/src/table/Table'
+----
+
+.New
+[source,js]
+----
+import {Table} from '@eclipse-scout/core'
+----
+
+The following modules are affected:
+
+- @eclipse-scout/core/src -> @eclipse-scout/core
+- @eclipse-scout/core/src/testing -> @eclipse-scout/core/testing
+
+IMPORTANT: This applies only to imports of `js` files. Imports to `less` files should stay untouched (for now).
 
 == IId types, IdFactory and IdExternalFormatter
 
@@ -403,6 +431,3 @@ Removals (see deprecation warning in 22.0 for further information):
 * DoStructureMigrator#migrateDataObject(DataObjectMigrationContext, IDataObject, IDataObjectMigrationLocalContextData...)
 * DoStructureMigrator#migrateDataObject(DataObjectMigrationContext, IDataObject, NamespaceVersion, IDataObjectMigrationLocalContextData...)
 * TestDoStructureMigrationInventory#TestDoStructureMigrationInventory(List<INamespace>, Collection<ITypeVersion>, Collection<Class<? extends IDoStructureMigrationTargetContextData>>, IDoStructureMigrationHandler...)
-
-
-
