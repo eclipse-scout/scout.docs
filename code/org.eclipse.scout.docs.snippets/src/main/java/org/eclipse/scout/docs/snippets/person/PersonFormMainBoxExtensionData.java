@@ -48,3 +48,4 @@ public class PersonFormMainBoxExtensionData extends AbstractFormFieldData {
     private static final long serialVersionUID = 1L;
   }
 }
+// end::PersonFormMainBoxExtensionData[]
