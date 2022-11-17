@@ -9,7 +9,9 @@
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 import {Button, CheckBoxField, FormModel, GroupBox, PopupAlignment, SmartField, StringField, TabItem} from '@eclipse-scout/core';
-import {ConfigurationBox, EventsTab, EventsTabWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap, WidgetPopupPropertiesBox, WidgetPopupPropertiesBoxWidgetMap} from '../index';
+import {
+  ConfigurationBox, EventsTab, EventsTabWidgetMap, PopupHorizontalAlignLookupCall, PopupVerticalAlignLookupCall, WidgetActionsBox, WidgetActionsBoxWidgetMap, WidgetPopupPropertiesBox, WidgetPopupPropertiesBoxWidgetMap
+} from '../index';
 
 export default (): FormModel => ({
   id: 'jswidgets.PopupForm',
@@ -135,13 +137,13 @@ export default (): FormModel => ({
                   {
                     id: 'HorizontalAlignmentField',
                     objectType: SmartField,
-                    lookupCall: 'jswidgets.PopupHorizontalAlignLookupCall',
+                    lookupCall: PopupHorizontalAlignLookupCall,
                     label: 'Horizontal Alignment'
                   },
                   {
                     id: 'VerticalAlignmentField',
                     objectType: SmartField,
-                    lookupCall: 'jswidgets.PopupVerticalAlignLookupCall',
+                    lookupCall: PopupVerticalAlignLookupCall,
                     label: 'Vertical Alignment'
                   }
                 ]

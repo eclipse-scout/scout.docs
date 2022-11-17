@@ -11,7 +11,7 @@
 import {FormModel, GroupBox, ProposalField, TabBox, TabItem} from '@eclipse-scout/core';
 import {
   EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, ProposalFieldPropertiesBox, ProposalFieldPropertiesBoxWidgetMap,
-  ValueFieldPropertiesBox, ValueFieldPropertiesBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap
+  SalutationLookupCall, ValueFieldPropertiesBox, ValueFieldPropertiesBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap
 } from '../index';
 
 export default (): FormModel => ({
@@ -29,7 +29,7 @@ export default (): FormModel => ({
           {
             id: 'ProposalField',
             objectType: ProposalField,
-            lookupCall: 'jswidgets.SalutationLookupCall',
+            lookupCall: SalutationLookupCall,
             label: 'Proposal Field'
           }
         ]

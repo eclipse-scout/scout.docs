@@ -9,7 +9,7 @@
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 import {Button, CheckBoxField, FormModel, GroupBox, HtmlField, NumberField, SmartField, StringField, TabBox, TabItem} from '@eclipse-scout/core';
-import {EventsTab, EventsTabWidgetMap} from '../index';
+import {DisplayParentLookupCall, EventsTab, EventsTabWidgetMap} from '../index';
 
 export default (): FormModel => ({
   id: 'jswidgets.FileChooserForm',
@@ -62,7 +62,7 @@ export default (): FormModel => ({
                   {
                     id: 'DisplayParentField',
                     objectType: SmartField,
-                    lookupCall: 'jswidgets.DisplayParentLookupCall',
+                    lookupCall: DisplayParentLookupCall,
                     label: 'Display Parent'
                   },
                   {

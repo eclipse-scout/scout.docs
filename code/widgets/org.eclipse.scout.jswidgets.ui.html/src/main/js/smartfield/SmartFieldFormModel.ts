@@ -10,8 +10,21 @@
  */
 import {FormModel, GroupBox, Menu, SmartField, StatusMenuMapping, TabBox, TabItem} from '@eclipse-scout/core';
 import {
-  EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, SmartFieldPropertiesBox, SmartFieldPropertiesBoxWidgetMap,
-  ValueFieldPropertiesBox, ValueFieldPropertiesBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap
+  EventsTab,
+  EventsTabWidgetMap,
+  FormFieldActionsBox,
+  FormFieldActionsBoxWidgetMap,
+  FormFieldPropertiesBox,
+  FormFieldPropertiesBoxWidgetMap,
+  GridDataBox,
+  GridDataBoxWidgetMap,
+  LocaleLookupCall,
+  SmartFieldPropertiesBox,
+  SmartFieldPropertiesBoxWidgetMap,
+  ValueFieldPropertiesBox,
+  ValueFieldPropertiesBoxWidgetMap,
+  WidgetActionsBox,
+  WidgetActionsBoxWidgetMap
 } from '../index';
 
 export default (): FormModel => ({
@@ -29,7 +42,7 @@ export default (): FormModel => ({
           {
             id: 'SmartField',
             objectType: SmartField,
-            lookupCall: 'jswidgets.LocaleLookupCall',
+            lookupCall: LocaleLookupCall,
             label: 'Smart Field',
             menus: [
               {

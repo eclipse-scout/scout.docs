@@ -10,8 +10,19 @@
  */
 import {CheckBoxField, FormModel, GroupBox, TabBox, TabItem, TagField} from '@eclipse-scout/core';
 import {
-  EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, ValueFieldPropertiesBox, ValueFieldPropertiesBoxWidgetMap,
-  WidgetActionsBox, WidgetActionsBoxWidgetMap
+  EventsTab,
+  EventsTabWidgetMap,
+  FormFieldActionsBox,
+  FormFieldActionsBoxWidgetMap,
+  FormFieldPropertiesBox,
+  FormFieldPropertiesBoxWidgetMap,
+  GridDataBox,
+  GridDataBoxWidgetMap,
+  TagLookupCall,
+  ValueFieldPropertiesBox,
+  ValueFieldPropertiesBoxWidgetMap,
+  WidgetActionsBox,
+  WidgetActionsBoxWidgetMap
 } from '../index';
 
 export default (): FormModel => ({
@@ -29,7 +40,7 @@ export default (): FormModel => ({
           {
             id: 'TagField',
             objectType: TagField,
-            lookupCall: 'jswidgets.TagLookupCall',
+            lookupCall: TagLookupCall,
             label: 'Tag Field',
             clickable: true
           }

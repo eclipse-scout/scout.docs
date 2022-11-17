@@ -9,6 +9,7 @@
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 import {Button, CheckBoxField, GroupBox, GroupBoxModel, NumberField, SmartField, StringField} from '@eclipse-scout/core';
+import {IconIdLookupCall, MenuBarItemTypeLookupCall} from '../index';
 
 export default (): GroupBoxModel => ({
   id: 'jswidgets.GroupBoxAddMenuBox',
@@ -25,13 +26,13 @@ export default (): GroupBoxModel => ({
     {
       id: 'MenuBarItemType',
       objectType: SmartField,
-      lookupCall: 'jswidgets.MenuBarItemTypeLookupCall',
+      lookupCall: MenuBarItemTypeLookupCall,
       label: 'Type'
     },
     {
       id: 'IconIdField',
       objectType: SmartField,
-      lookupCall: 'jswidgets.IconIdLookupCall',
+      lookupCall: IconIdLookupCall,
       label: 'Icon Id'
     },
     {

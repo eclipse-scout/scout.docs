@@ -9,6 +9,7 @@
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 import {CheckBoxField, GroupBox, GroupBoxModel, SmartField, TreeCheckableStyle} from '@eclipse-scout/core';
+import {CheckableTreeStyleLookupCall} from '../index';
 
 export default (): GroupBoxModel => ({
   id: 'jswidgets.TreePropertiesBox',
@@ -46,7 +47,7 @@ export default (): GroupBoxModel => ({
       id: 'CheckableStyleField',
       objectType: SmartField,
       label: 'Checkable Style',
-      lookupCall: 'jswidgets.CheckableTreeStyleLookupCall'
+      lookupCall: CheckableTreeStyleLookupCall
     }
   ]
 });

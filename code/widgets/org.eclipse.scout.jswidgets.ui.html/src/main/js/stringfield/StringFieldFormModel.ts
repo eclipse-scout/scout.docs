@@ -10,8 +10,19 @@
  */
 import {CheckBoxField, FormModel, GroupBox, NumberField, SmartField, StringField, StringFieldFormat, TabBox, TabItem} from '@eclipse-scout/core';
 import {
-  EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, ValueFieldPropertiesBox, ValueFieldPropertiesBoxWidgetMap,
-  WidgetActionsBox, WidgetActionsBoxWidgetMap
+  EventsTab,
+  EventsTabWidgetMap,
+  FormFieldActionsBox,
+  FormFieldActionsBoxWidgetMap,
+  FormFieldPropertiesBox,
+  FormFieldPropertiesBoxWidgetMap,
+  GridDataBox,
+  GridDataBoxWidgetMap,
+  StringFormatLookupCall,
+  ValueFieldPropertiesBox,
+  ValueFieldPropertiesBoxWidgetMap,
+  WidgetActionsBox,
+  WidgetActionsBoxWidgetMap
 } from '../index';
 
 export default (): FormModel => ({
@@ -95,7 +106,7 @@ export default (): FormModel => ({
                   {
                     id: 'FormatField',
                     objectType: SmartField,
-                    lookupCall: 'jswidgets.StringFormatLookupCall',
+                    lookupCall: StringFormatLookupCall,
                     label: 'Format'
                   },
                   {

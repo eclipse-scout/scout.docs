@@ -9,7 +9,7 @@
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 import {Button, CheckBoxField, FormModel, GroupBox, NativeNotificationVisibility, NumberField, SmartField, StatusSeverity, StringField, TabBox, TabItem} from '@eclipse-scout/core';
-import {EventsTab, EventsTabWidgetMap} from '../index';
+import {EventsTab, EventsTabWidgetMap, IconIdLookupCall, ImageLookupCall, NativeNotificationVisibilityLookupCall, StatusSeverityLookupCall} from '../index';
 
 export default (): FormModel => ({
   id: 'jswidgets.DesktopNotificationForm',
@@ -60,7 +60,7 @@ export default (): FormModel => ({
                   {
                     id: 'StatusSeverityField',
                     objectType: SmartField,
-                    lookupCall: 'jswidgets.StatusSeverityLookupCall',
+                    lookupCall: StatusSeverityLookupCall,
                     label: 'Severity'
                   },
                   {
@@ -72,7 +72,7 @@ export default (): FormModel => ({
                   {
                     id: 'IconField',
                     objectType: SmartField,
-                    lookupCall: 'jswidgets.IconIdLookupCall',
+                    lookupCall: IconIdLookupCall,
                     label: 'Icon'
                   },
                   {
@@ -115,14 +115,14 @@ export default (): FormModel => ({
                   {
                     id: 'NativeNotificationIconIdField',
                     objectType: SmartField,
-                    lookupCall: 'jswidgets.ImageLookupCall',
+                    lookupCall: ImageLookupCall,
                     label: 'Native Notification Icon Id',
                     labelWidthInPixel: 170
                   },
                   {
                     id: 'NativeNotificationVisibilityField',
                     objectType: SmartField,
-                    lookupCall: 'jswidgets.NativeNotificationVisibilityLookupCall',
+                    lookupCall: NativeNotificationVisibilityLookupCall,
                     label: 'Native Notification Visibility',
                     labelWidthInPixel: 170,
                     tooltipText: '${textKey:NativeNotificationVisibilityTooltip}'

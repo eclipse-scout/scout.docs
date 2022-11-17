@@ -8,10 +8,10 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-
 import {Accordion, AccordionField, CheckBoxField, FormModel, Group, GroupBox, GroupCollapseStyle, ImageField, LabelField, Menu, SmartField, TabItem} from '@eclipse-scout/core';
 import {
-  ConfigurationBox, EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap
+  CollapseStyleLookupCall, ConfigurationBox, EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, WidgetActionsBox,
+  WidgetActionsBoxWidgetMap
 } from '../index';
 
 export default (): FormModel => ({
@@ -142,7 +142,7 @@ export default (): FormModel => ({
                     id: 'CollapseStyleField',
                     objectType: SmartField,
                     label: 'Collapse Style',
-                    lookupCall: 'jswidgets.CollapseStyleLookupCall'
+                    lookupCall: CollapseStyleLookupCall
                   }
                 ]
               },

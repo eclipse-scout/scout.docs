@@ -9,6 +9,7 @@
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 import {GroupBox, GroupBoxModel, SmartField, StringField, ValueFieldClearable} from '@eclipse-scout/core';
+import {ClearableStyleLookupCall} from '../index';
 
 export default (): GroupBoxModel => ({
   id: 'jswidgets.ValueFieldPropertiesBox',
@@ -32,7 +33,7 @@ export default (): GroupBoxModel => ({
     {
       id: 'ClearableField',
       objectType: SmartField,
-      lookupCall: 'jswidgets.ClearableStyleLookupCall',
+      lookupCall: ClearableStyleLookupCall,
       label: 'Clearable',
       displayStyle: 'dropdown'
     }

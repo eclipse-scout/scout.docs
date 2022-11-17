@@ -9,7 +9,7 @@
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 import {CheckBoxField, FormModel, GroupBox, Image, ProposalField, TabBox, TabItem, WidgetField} from '@eclipse-scout/core';
-import {EventsTab, EventsTabWidgetMap, GridDataBox, GridDataBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap} from '../index';
+import {EventsTab, EventsTabWidgetMap, GridDataBox, GridDataBoxWidgetMap, ImageLookupCall, WidgetActionsBox, WidgetActionsBoxWidgetMap} from '../index';
 
 export default (): FormModel => ({
   id: 'jswidgets.ImageForm',
@@ -68,7 +68,7 @@ export default (): FormModel => ({
                     id: 'ImageUrlField',
                     objectType: ProposalField,
                     label: 'Image Url',
-                    lookupCall: 'jswidgets.ImageLookupCall'
+                    lookupCall: ImageLookupCall
                   }
                 ]
               },

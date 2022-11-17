@@ -10,8 +10,20 @@
  */
 import {AccordionField, Button, CheckBoxField, FormModel, Group, GroupBox, LabelField, Menu, NumberField, SequenceBox, SmartField, TabItem, TileAccordion, TileGrid} from '@eclipse-scout/core';
 import {
-  ConfigurationBox, EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, TileGridLayoutConfigBox,
-  TileGridLayoutConfigBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap
+  ConfigurationBox,
+  EventsTab,
+  EventsTabWidgetMap,
+  FormFieldActionsBox,
+  FormFieldActionsBoxWidgetMap,
+  FormFieldPropertiesBox,
+  FormFieldPropertiesBoxWidgetMap,
+  GridDataBox,
+  GridDataBoxWidgetMap,
+  TileGridLayoutConfigBox,
+  TileGridLayoutConfigBoxWidgetMap,
+  TileTypeLookupCall,
+  WidgetActionsBox,
+  WidgetActionsBoxWidgetMap
 } from '../index';
 
 export default (): FormModel => ({
@@ -239,7 +251,7 @@ export default (): FormModel => ({
                         label: 'Tile Type',
                         labelVisible: false,
                         statusVisible: false,
-                        lookupCall: 'jswidgets.TileTypeLookupCall',
+                        lookupCall: TileTypeLookupCall,
                         value: 'simple'
                       }
                     ]

@@ -9,6 +9,7 @@
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 import {ActionStyle, ActionTextPosition, CheckBoxField, GroupBox, GroupBoxModel, NumberField, SmartField, StringField} from '@eclipse-scout/core';
+import {ActionStyleLookupCall, IconIdLookupCall, TextPositionLookupCall} from '../index';
 
 export default (): GroupBoxModel => ({
   id: 'jswidgets.ActionPropertiesBox',
@@ -56,7 +57,7 @@ export default (): GroupBoxModel => ({
     {
       id: 'IconIdField',
       objectType: SmartField,
-      lookupCall: 'jswidgets.IconIdLookupCall',
+      lookupCall: IconIdLookupCall,
       label: 'Icon Id'
     },
     {
@@ -72,7 +73,7 @@ export default (): GroupBoxModel => ({
     {
       id: 'TextPositionField',
       objectType: SmartField,
-      lookupCall: 'jswidgets.TextPositionLookupCall',
+      lookupCall: TextPositionLookupCall,
       displayStyle: 'dropdown',
       label: 'Text Position'
     },
@@ -89,7 +90,7 @@ export default (): GroupBoxModel => ({
     {
       id: 'ActionStyleField',
       objectType: SmartField,
-      lookupCall: 'jswidgets.ActionStyleLookupCall',
+      lookupCall: ActionStyleLookupCall,
       label: 'Action Style',
       displayStyle: 'dropdown'
     }

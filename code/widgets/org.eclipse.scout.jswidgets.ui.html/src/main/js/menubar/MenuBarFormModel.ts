@@ -11,7 +11,7 @@
 import {CheckBoxField, ComboMenu, FormField, FormFieldMenu, FormMenu, FormModel, GroupBox, icons, LabelField, Menu, SmartField, SubMenuVisibility, TabBox, TabItem} from '@eclipse-scout/core';
 import {
   ActionPropertiesBox, ActionPropertiesBoxWidgetMap, EventsTab, EventsTabWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GroupBoxAddMenuBox, GroupBoxAddMenuBoxWidgetMap, GroupBoxDeleteMenuBox,
-  GroupBoxDeleteMenuBoxWidgetMap, MenuActionsBox, MenuActionsBoxWidgetMap, MiniForm, WidgetActionsBox, WidgetActionsBoxWidgetMap
+  GroupBoxDeleteMenuBoxWidgetMap, LocaleLookupCall, MenuActionsBox, MenuActionsBoxWidgetMap, MenuItemLookupCall, MiniForm, SubMenuVisibilityLookupCall, WidgetActionsBox, WidgetActionsBoxWidgetMap
 } from '../index';
 
 export default (): FormModel => ({
@@ -134,7 +134,7 @@ export default (): FormModel => ({
               id: 'SmartField',
               objectType: SmartField,
               label: 'Form Field Menu',
-              lookupCall: 'jswidgets.LocaleLookupCall',
+              lookupCall: LocaleLookupCall,
               labelVisible: false,
               statusVisible: false,
               labelPosition: FormField.LabelPosition.ON_FIELD,
@@ -167,7 +167,7 @@ export default (): FormModel => ({
                     id: 'SelectedMenuField',
                     objectType: SmartField,
                     label: 'Target',
-                    lookupCall: 'jswidgets.MenuItemLookupCall'
+                    lookupCall: MenuItemLookupCall
                   },
                   {
                     id: 'MenuPropertiesBox',
@@ -198,7 +198,7 @@ export default (): FormModel => ({
                       {
                         id: 'SubMenuVisibilityField',
                         objectType: SmartField,
-                        lookupCall: 'jswidgets.SubMenuVisibilityLookupCall',
+                        lookupCall: SubMenuVisibilityLookupCall,
                         label: 'Sub Menu Visibility'
                       }
                     ]
@@ -224,7 +224,7 @@ export default (): FormModel => ({
                 id: 'ActionTargetField',
                 objectType: SmartField,
                 label: 'Target',
-                lookupCall: 'jswidgets.MenuItemLookupCall'
+                lookupCall: MenuItemLookupCall
               },
               {
                 id: 'Actions.MenuActionsBox',

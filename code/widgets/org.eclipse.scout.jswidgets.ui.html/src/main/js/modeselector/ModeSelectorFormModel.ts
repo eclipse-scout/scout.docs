@@ -10,7 +10,7 @@
  */
 import {CheckBoxField, FormModel, GroupBox, Mode, ModeSelector, ModeSelectorField, SmartField, StringField, TabBox, TabItem} from '@eclipse-scout/core';
 import {
-  EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap
+  EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, IconIdLookupCall, WidgetActionsBox, WidgetActionsBoxWidgetMap
 } from '../index';
 
 export default (): FormModel => ({
@@ -82,7 +82,7 @@ export default (): FormModel => ({
                   {
                     id: 'IconIdField',
                     objectType: SmartField,
-                    lookupCall: 'jswidgets.IconIdLookupCall',
+                    lookupCall: IconIdLookupCall,
                     label: 'Icon Id'
                   },
                   {

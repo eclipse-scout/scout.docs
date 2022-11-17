@@ -10,7 +10,7 @@
  */
 import {CheckBoxField, FormModel, GroupBox, ImageField, ProposalField, TabBox, TabItem} from '@eclipse-scout/core';
 import {
-  EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap
+  EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, ImageLookupCall, WidgetActionsBox, WidgetActionsBoxWidgetMap
 } from '../index';
 
 export default (): FormModel => ({
@@ -78,7 +78,7 @@ export default (): FormModel => ({
                     id: 'ImageUrlField',
                     objectType: ProposalField,
                     label: 'Image Url',
-                    lookupCall: 'jswidgets.ImageLookupCall'
+                    lookupCall: ImageLookupCall
                   }
                 ]
               },

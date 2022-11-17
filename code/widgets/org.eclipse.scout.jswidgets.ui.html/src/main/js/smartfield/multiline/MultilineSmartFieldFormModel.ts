@@ -10,8 +10,8 @@
  */
 import {FormModel, GroupBox, SmartFieldMultiline, TabBox, TabItem} from '@eclipse-scout/core';
 import {
-  EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, SmartFieldPropertiesBox, SmartFieldPropertiesBoxWidgetMap,
-  ValueFieldPropertiesBox, ValueFieldPropertiesBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap
+  EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, MultilinePersonLookupCall, SmartFieldPropertiesBox,
+  SmartFieldPropertiesBoxWidgetMap, ValueFieldPropertiesBox, ValueFieldPropertiesBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap
 } from '../../index';
 
 export default (): FormModel => ({
@@ -29,7 +29,7 @@ export default (): FormModel => ({
           {
             id: 'MultilineSmartField',
             objectType: SmartFieldMultiline,
-            lookupCall: 'jswidgets.MultilinePersonLookupCall',
+            lookupCall: MultilinePersonLookupCall,
             label: 'Multiline Smart Field',
             gridDataHints: {
               h: 2,

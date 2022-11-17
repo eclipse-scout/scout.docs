@@ -9,6 +9,7 @@
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 import {CheckBoxField, DisplayHint, DisplayViewId, GroupBox, GroupBoxModel, SmartField, StringField} from '@eclipse-scout/core';
+import {DisplayParentLookupCall, FormDisplayHintLookupCall, FormDisplayViewIdLookupCall, IconIdLookupCall} from '../index';
 
 export default (): GroupBoxModel => ({
   id: 'jswidgets.FormPropertiesBox',
@@ -30,25 +31,25 @@ export default (): GroupBoxModel => ({
     {
       id: 'IconIdField',
       objectType: SmartField,
-      lookupCall: 'jswidgets.IconIdLookupCall',
+      lookupCall: IconIdLookupCall,
       label: 'Icon Id'
     },
     {
       id: 'DisplayHintField',
       objectType: SmartField,
-      lookupCall: 'jswidgets.FormDisplayHintLookupCall',
+      lookupCall: FormDisplayHintLookupCall,
       label: 'Display Hint'
     },
     {
       id: 'DisplayViewIdField',
       objectType: SmartField,
-      lookupCall: 'jswidgets.FormDisplayViewIdLookupCall',
+      lookupCall: FormDisplayViewIdLookupCall,
       label: 'Display View Id'
     },
     {
       id: 'DisplayParentField',
       objectType: SmartField,
-      lookupCall: 'jswidgets.DisplayParentLookupCall',
+      lookupCall: DisplayParentLookupCall,
       label: 'Display Parent'
     },
     {

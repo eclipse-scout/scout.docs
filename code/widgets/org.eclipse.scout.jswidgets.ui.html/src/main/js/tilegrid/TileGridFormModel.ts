@@ -10,8 +10,22 @@
  */
 import {CheckBoxField, FormModel, GroupBox, LabelField, Menu, NumberField, SmartField, TabItem, TileField, TileGrid} from '@eclipse-scout/core';
 import {
-  ConfigurationBox, CustomTile, EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, TileGridLayoutConfigBox,
-  WidgetActionsBox, WidgetActionsBoxWidgetMap
+  ColorSchemeLookupCall,
+  ConfigurationBox,
+  CustomTile,
+  EventsTab,
+  EventsTabWidgetMap,
+  FormFieldActionsBox,
+  FormFieldActionsBoxWidgetMap,
+  FormFieldPropertiesBox,
+  FormFieldPropertiesBoxWidgetMap,
+  GridDataBox,
+  GridDataBoxWidgetMap,
+  LogicalGridLookupCall,
+  TileGridLayoutConfigBox,
+  TileTypeLookupCall,
+  WidgetActionsBox,
+  WidgetActionsBoxWidgetMap
 } from '../index';
 import {TileGridLayoutConfigBoxWidgetMap} from './TileGridLayoutConfigBoxModel';
 
@@ -197,14 +211,14 @@ export default (): FormModel => ({
                     id: 'LogicalGridField',
                     objectType: SmartField,
                     label: 'Logical Grid',
-                    lookupCall: 'jswidgets.LogicalGridLookupCall',
+                    lookupCall: LogicalGridLookupCall,
                     tooltipText: '${textKey:LogicalGridWithRefTooltip}'
                   },
                   {
                     id: 'ColorSchemeField',
                     objectType: SmartField,
                     label: 'Color Scheme',
-                    lookupCall: 'jswidgets.ColorSchemeLookupCall'
+                    lookupCall: ColorSchemeLookupCall
                   },
                   {
                     id: 'TileTypeField',
@@ -212,7 +226,7 @@ export default (): FormModel => ({
                     displayStyle: 'dropdown',
                     label: 'Tile Type',
                     tooltipText: '${textKey:TileTypeTooltip}',
-                    lookupCall: 'jswidgets.TileTypeLookupCall',
+                    lookupCall: TileTypeLookupCall,
                     value: 'simple'
                   }
                 ]

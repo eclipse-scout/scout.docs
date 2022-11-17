@@ -9,7 +9,7 @@
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 import {FormField, FormModel, GroupBox, SmartField, StringField, TabBox, TabItem} from '@eclipse-scout/core';
-import {GridDataBox, GridDataBoxWidgetMap, GroupBoxAddFieldBox, GroupBoxAddFieldBoxWidgetMap, GroupBoxDeleteFieldBox, GroupBoxDeleteFieldBoxWidgetMap} from '../index';
+import {GridDataBox, GridDataBoxWidgetMap, GroupBoxAddFieldBox, GroupBoxAddFieldBoxWidgetMap, GroupBoxDeleteFieldBox, GroupBoxDeleteFieldBoxWidgetMap, LogicalGridLookupCall} from '../index';
 
 export default (): FormModel => ({
   id: 'jswidgets.LogicalGridForm',
@@ -71,7 +71,7 @@ export default (): FormModel => ({
                     id: 'LogicalGridField',
                     objectType: SmartField,
                     label: 'Logical Grid',
-                    lookupCall: 'jswidgets.LogicalGridLookupCall',
+                    lookupCall: LogicalGridLookupCall,
                     tooltipText: '${textKey:LogicalGridTooltip}'
                   }
                 ]

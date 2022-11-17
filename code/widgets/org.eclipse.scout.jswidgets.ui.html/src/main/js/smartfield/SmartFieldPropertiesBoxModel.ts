@@ -9,6 +9,11 @@
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 import {CheckBoxField, GroupBox, GroupBoxModel, LookupCall, NumberField, SmartField, SmartFieldActiveFilter, SmartFieldDisplayStyle} from '@eclipse-scout/core';
+import {
+  LookupCallLookupCall,
+  SmartFieldActiveFilterLookupCall,
+  SmartFieldDisplayStyleLookupCall
+} from '../index';
 
 export default (): GroupBoxModel => ({
   id: 'jswidgets.SmartFieldPropertiesBox',
@@ -20,12 +25,12 @@ export default (): GroupBoxModel => ({
       id: 'LookupCallField',
       objectType: SmartField,
       label: 'LookupCall',
-      lookupCall: 'jswidgets.LookupCallLookupCall'
+      lookupCall: LookupCallLookupCall
     },
     {
       id: 'DisplayStyleField',
       objectType: SmartField,
-      lookupCall: 'jswidgets.SmartFieldDisplayStyleLookupCall',
+      lookupCall: SmartFieldDisplayStyleLookupCall,
       label: 'Display Style'
     },
     {
@@ -47,7 +52,7 @@ export default (): GroupBoxModel => ({
       id: 'ActiveFilterField',
       objectType: SmartField,
       displayStyle: SmartField.DisplayStyle.DROPDOWN,
-      lookupCall: 'jswidgets.SmartFieldActiveFilterLookupCall',
+      lookupCall: SmartFieldActiveFilterLookupCall,
       label: 'Active Filter'
     }
   ]

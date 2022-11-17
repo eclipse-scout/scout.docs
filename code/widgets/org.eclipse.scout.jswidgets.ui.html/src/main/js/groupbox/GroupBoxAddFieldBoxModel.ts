@@ -9,6 +9,7 @@
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 import {Button, FormField, GroupBox, GroupBoxModel, SmartField, StringField} from '@eclipse-scout/core';
+import {FormFieldTypeLookupCall} from '../index';
 
 export default (): GroupBoxModel => ({
   id: 'jswidgets.GroupBoxAddFieldBox',
@@ -30,7 +31,7 @@ export default (): GroupBoxModel => ({
     {
       id: 'LabelType',
       objectType: SmartField,
-      lookupCall: 'jswidgets.FormFieldTypeLookupCall',
+      lookupCall: FormFieldTypeLookupCall,
       label: 'Type'
     },
     {

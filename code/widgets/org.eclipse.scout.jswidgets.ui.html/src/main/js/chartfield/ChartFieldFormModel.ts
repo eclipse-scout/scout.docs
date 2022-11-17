@@ -12,7 +12,10 @@ import {
   Button, CheckBoxField, Column, FormField, FormModel, GroupBox, icons, IntegerField, LabelField, Menu, NumberField, SmartField, StringField, TabBox, TabItem, Table, TableField, TileField, TileGrid, ValueField
 } from '@eclipse-scout/core';
 import {Chart, ChartField, ChartFieldTile, ChartPosition, ChartType, GreenAreaPosition} from '@eclipse-scout/chart';
-import {EventsTab, EventsTabWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap} from '../index';
+import {
+  ChartTypeLookupCall, ColorSchemeLookupCall, EventsTab, EventsTabWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, LegendPositionLookupCall, SpeedoGreenAreaPositionLookupCall,
+  ValuesProviderLookupCall, WidgetActionsBox, WidgetActionsBoxWidgetMap
+} from '../index';
 
 export default (): FormModel => ({
   id: 'jswidgets.ChartFieldForm',
@@ -221,7 +224,7 @@ export default (): FormModel => ({
                   objectType: SmartField,
                   label: 'Chart Type',
                   labelPosition: FormField.LabelPosition.TOP,
-                  lookupCall: 'jswidgets.ChartTypeLookupCall',
+                  lookupCall: ChartTypeLookupCall,
                   displayStyle: 'dropdown'
                 },
                 {
@@ -229,7 +232,7 @@ export default (): FormModel => ({
                   objectType: SmartField,
                   label: 'Chart Scheme',
                   labelPosition: FormField.LabelPosition.TOP,
-                  lookupCall: 'jswidgets.ColorSchemeLookupCall',
+                  lookupCall: ColorSchemeLookupCall,
                   displayStyle: 'dropdown'
                 },
                 {
@@ -249,7 +252,7 @@ export default (): FormModel => ({
                   objectType: SmartField,
                   label: 'Green area position',
                   labelPosition: FormField.LabelPosition.TOP,
-                  lookupCall: 'jswidgets.SpeedoGreenAreaPositionLookupCall',
+                  lookupCall: SpeedoGreenAreaPositionLookupCall,
                   displayStyle: 'dropdown'
                 },
                 {
@@ -279,7 +282,7 @@ export default (): FormModel => ({
                   objectType: SmartField,
                   label: 'Legend position',
                   labelPosition: FormField.LabelPosition.TOP,
-                  lookupCall: 'jswidgets.LegendPositionLookupCall',
+                  lookupCall: LegendPositionLookupCall,
                   displayStyle: 'dropdown'
                 }]
             },
@@ -444,7 +447,7 @@ export default (): FormModel => ({
               gridDataHints: {
                 w: 4
               },
-              lookupCall: 'jswidgets.ValuesProviderLookupCall',
+              lookupCall: ValuesProviderLookupCall,
               displayStyle: 'dropdown'
             }, {
               id: 'NumberOfDatasetsField',

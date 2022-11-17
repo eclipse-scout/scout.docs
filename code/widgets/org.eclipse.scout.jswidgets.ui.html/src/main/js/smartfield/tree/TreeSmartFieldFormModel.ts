@@ -11,7 +11,7 @@
 import {FormModel, GroupBox, SmartField, TabBox, TabItem} from '@eclipse-scout/core';
 import {
   EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, TreeSmartFieldPropertiesBox,
-  TreeSmartFieldPropertiesBoxWidgetMap, ValueFieldPropertiesBox, ValueFieldPropertiesBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap
+  TreeSmartFieldPropertiesBoxWidgetMap, ValueFieldPropertiesBox, ValueFieldPropertiesBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap, WorldLookupCall
 } from '../../index';
 
 export default (): FormModel => ({
@@ -29,7 +29,7 @@ export default (): FormModel => ({
           {
             id: 'TreeSmartField',
             objectType: SmartField,
-            lookupCall: 'jswidgets.WorldLookupCall',
+            lookupCall: WorldLookupCall,
             label: 'Tree Smart Field',
             browseHierarchy: true
           }

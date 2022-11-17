@@ -9,6 +9,7 @@
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 import {CheckBoxField, GroupBox, GroupBoxBorderDecoration, GroupBoxMenuBarPosition, GroupBoxModel, MenuBarEllipsisPosition, NumberField, SmartField, StatusSeverity, StringField} from '@eclipse-scout/core';
+import {BorderDecorationLookupCall, IconIdLookupCall, LogicalGridLookupCall, MenuBarEllipsisPositionLookupCall, MenuBarPositionLookupCall, StatusSeverityLookupCall} from '../index';
 
 export default (): GroupBoxModel => ({
   id: 'jswidgets.GroupBoxPropertiesBox',
@@ -37,7 +38,7 @@ export default (): GroupBoxModel => ({
       id: 'BorderDecorationField',
       objectType: SmartField,
       label: 'Border Decoration',
-      lookupCall: 'jswidgets.BorderDecorationLookupCall',
+      lookupCall: BorderDecorationLookupCall,
       visible: false // Temporarily made invisible because it is confusing what the property really does
     },
     {
@@ -72,19 +73,19 @@ export default (): GroupBoxModel => ({
       id: 'LogicalGridField',
       objectType: SmartField,
       label: 'Logical Grid',
-      lookupCall: 'jswidgets.LogicalGridLookupCall',
+      lookupCall: LogicalGridLookupCall,
       tooltipText: '${textKey:LogicalGridWithRefTooltip}'
     },
     {
       id: 'NotificationField',
       objectType: SmartField,
-      lookupCall: 'jswidgets.StatusSeverityLookupCall',
+      lookupCall: StatusSeverityLookupCall,
       label: 'Notification'
     },
     {
       id: 'NotificationIconField',
       objectType: SmartField,
-      lookupCall: 'jswidgets.IconIdLookupCall',
+      lookupCall: IconIdLookupCall,
       label: 'Notification Icon'
     },
     {
@@ -97,13 +98,13 @@ export default (): GroupBoxModel => ({
       id: 'MenuBarPositionField',
       objectType: SmartField,
       label: 'Menu Bar Position',
-      lookupCall: 'jswidgets.MenuBarPositionLookupCall'
+      lookupCall: MenuBarPositionLookupCall
     },
     {
       id: 'MenuBarEllipsisPositionField',
       objectType: SmartField,
       label: 'Menu Bar Ellipsis Position',
-      lookupCall: 'jswidgets.MenuBarEllipsisPositionLookupCall'
+      lookupCall: MenuBarEllipsisPositionLookupCall
     }
   ]
 });

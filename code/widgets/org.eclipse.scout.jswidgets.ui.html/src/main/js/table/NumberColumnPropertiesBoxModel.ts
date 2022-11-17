@@ -9,6 +9,7 @@
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 import {GroupBox, GroupBoxModel, NumberColumnBackgroundEffect, NumberField, SmartField, StringField} from '@eclipse-scout/core';
+import {BackgroundEffectLookupCall} from '../index';
 
 export default (): GroupBoxModel => ({
   id: 'jswidgets.NumberColumnPropertiesBox',
@@ -40,7 +41,7 @@ export default (): GroupBoxModel => ({
     {
       id: 'BackgroundEffectField',
       objectType: SmartField,
-      lookupCall: 'jswidgets.BackgroundEffectLookupCall',
+      lookupCall: BackgroundEffectLookupCall,
       label: 'Background Effect',
       displayStyle: 'default'
     }

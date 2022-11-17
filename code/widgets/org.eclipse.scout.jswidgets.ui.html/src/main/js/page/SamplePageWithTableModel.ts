@@ -9,7 +9,7 @@
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 import {AggregateTableControl, BooleanColumn, Column, FormMenu, FormTableControl, icons, Menu, NumberColumn, PageModel, PageWithTable, SmartColumn, Table} from '@eclipse-scout/core';
-import {MiniForm, SamplePageWithTableSearchForm, SamplePageWithTableSearchFormWidgetMap} from '../index';
+import {LocaleLookupCall, MiniForm, SamplePageWithTableSearchForm, SamplePageWithTableSearchFormWidgetMap} from '../index';
 
 export default (): PageModel => ({
   id: 'jswidgets.SamplePageWithTable',
@@ -35,7 +35,7 @@ export default (): PageModel => ({
       {
         id: 'SmartColumn',
         objectType: SmartColumn,
-        lookupCall: 'jswidgets.LocaleLookupCall',
+        lookupCall: LocaleLookupCall,
         text: 'Smart Column',
         width: 300
       },

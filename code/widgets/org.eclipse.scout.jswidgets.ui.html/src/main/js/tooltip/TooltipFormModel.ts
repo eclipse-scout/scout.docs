@@ -9,7 +9,14 @@
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 import {Button, CheckBoxField, FormModel, GroupBox, SmartField, StatusSeverity, StringField, TabItem} from '@eclipse-scout/core';
-import {ConfigurationBox, EventsTab, EventsTabWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap} from '../index';
+import {
+  ConfigurationBox,
+  EventsTab,
+  EventsTabWidgetMap,
+  StatusSeverityLookupCall,
+  WidgetActionsBox,
+  WidgetActionsBoxWidgetMap
+} from '../index';
 
 export default (): FormModel => ({
   id: 'jswidgets.TooltipForm',
@@ -80,7 +87,7 @@ export default (): FormModel => ({
                   {
                     id: 'SeverityField',
                     objectType: SmartField,
-                    lookupCall: 'jswidgets.StatusSeverityLookupCall',
+                    lookupCall: StatusSeverityLookupCall,
                     label: 'Severity'
                   }
                 ]

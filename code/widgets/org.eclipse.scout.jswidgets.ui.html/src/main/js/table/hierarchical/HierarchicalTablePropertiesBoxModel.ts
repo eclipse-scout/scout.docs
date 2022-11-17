@@ -9,7 +9,7 @@
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 import {CheckBoxField, ExtensionModel, SmartField, TableHierarchicalStyle} from '@eclipse-scout/core';
-import {TablePropertiesBoxWidgetMap} from '../../index';
+import {HierarchicalStyleLookupCall, TablePropertiesBoxWidgetMap} from '../../index';
 
 export default (): ExtensionModel => ({
   id: 'jswidgets.HierarchicalTablePropertiesBox',
@@ -27,7 +27,7 @@ export default (): ExtensionModel => ({
           id: 'HierarchicalStyleField',
           objectType: SmartField,
           label: 'Hierarchical Style',
-          lookupCall: 'jswidgets.HierarchicalStyleLookupCall'
+          lookupCall: HierarchicalStyleLookupCall
         },
         {
           id: 'ExtendedHierarchyPaddingField',

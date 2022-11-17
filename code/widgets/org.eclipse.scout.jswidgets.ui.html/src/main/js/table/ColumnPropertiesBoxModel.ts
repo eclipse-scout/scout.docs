@@ -9,6 +9,7 @@
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 import {CheckBoxField, GroupBox, GroupBoxModel, NumberField, SmartField, StringField} from '@eclipse-scout/core';
+import {IconIdLookupCall} from '../index';
 
 export default (): GroupBoxModel => ({
   id: 'jswidgets.ColumnPropertiesBox',
@@ -154,7 +155,7 @@ export default (): GroupBoxModel => ({
     {
       id: 'HeaderIconIdField',
       objectType: SmartField,
-      lookupCall: 'jswidgets.IconIdLookupCall',
+      lookupCall: IconIdLookupCall,
       label: 'Header Icon Id'
     },
     {

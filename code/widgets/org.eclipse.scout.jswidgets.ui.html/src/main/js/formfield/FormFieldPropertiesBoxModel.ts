@@ -12,6 +12,7 @@ import {
   CheckBoxField, DisabledStyle, dragAndDrop, DropType, FormFieldLabelPosition, FormFieldStatusPosition, FormFieldStyle, FormFieldTooltipAnchor, GroupBox, GroupBoxModel, NumberField, ProposalField, SmartField, StaticLookupCall,
   StatusSeverity, StringField
 } from '@eclipse-scout/core';
+import {DisabledStyleLookupCall, FieldStyleLookupCall, LabelPositionLookupCall, LabelWidthInPixelLookupCall, StatusPositionLookupCall, StatusSeverityLookupCall, TooltipAnchorLookupCall} from '../index';
 
 export default (): GroupBoxModel => ({
   id: 'jswidgets.FormFieldPropertiesBox',
@@ -75,14 +76,14 @@ export default (): GroupBoxModel => ({
     {
       id: 'FieldStyleField',
       objectType: SmartField,
-      lookupCall: 'jswidgets.FieldStyleLookupCall',
+      lookupCall: FieldStyleLookupCall,
       label: 'Field Style',
       displayStyle: 'dropdown'
     },
     {
       id: 'DisabledStyleField',
       objectType: SmartField,
-      lookupCall: 'jswidgets.DisabledStyleLookupCall',
+      lookupCall: DisabledStyleLookupCall,
       label: 'Disabled Style',
       displayStyle: 'dropdown'
     },
@@ -113,14 +114,14 @@ export default (): GroupBoxModel => ({
     {
       id: 'LabelPositionField',
       objectType: SmartField,
-      lookupCall: 'jswidgets.LabelPositionLookupCall',
+      lookupCall: LabelPositionLookupCall,
       label: 'Label Position',
       displayStyle: 'dropdown'
     },
     {
       id: 'LabelWidthInPixelField',
       objectType: ProposalField,
-      lookupCall: 'jswidgets.LabelWidthInPixelLookupCall',
+      lookupCall: LabelWidthInPixelLookupCall,
       label: 'Label Width in Pixel'
     },
     {
@@ -131,20 +132,20 @@ export default (): GroupBoxModel => ({
     {
       id: 'TooltipAnchorField',
       objectType: SmartField,
-      lookupCall: 'jswidgets.TooltipAnchorLookupCall',
+      lookupCall: TooltipAnchorLookupCall,
       label: 'Tooltip Anchor',
       displayStyle: 'dropdown'
     },
     {
       id: 'ErrorStatusField',
       objectType: SmartField,
-      lookupCall: 'jswidgets.StatusSeverityLookupCall',
+      lookupCall: StatusSeverityLookupCall,
       label: 'Error Status'
     },
     {
       id: 'StatusPositionField',
       objectType: SmartField,
-      lookupCall: 'jswidgets.StatusPositionLookupCall',
+      lookupCall: StatusPositionLookupCall,
       label: 'Status Position',
       displayStyle: 'dropdown'
     }

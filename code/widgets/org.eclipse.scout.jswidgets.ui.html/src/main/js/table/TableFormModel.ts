@@ -10,8 +10,22 @@
  */
 import {AggregateTableControl, BooleanColumn, Column, DateColumn, FormModel, GroupBox, IconColumn, Menu, NumberColumn, SmartColumn, SmartField, TabItem, Table, TableField} from '@eclipse-scout/core';
 import {
-  ColumnPropertiesBox, ColumnPropertiesBoxWidgetMap, ConfigurationBox, EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox,
-  GridDataBoxWidgetMap, TablePropertiesBox, TablePropertiesBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap
+  ColumnPropertiesBox,
+  ColumnPropertiesBoxWidgetMap,
+  ConfigurationBox,
+  EventsTab,
+  EventsTabWidgetMap,
+  FormFieldActionsBox,
+  FormFieldActionsBoxWidgetMap,
+  FormFieldPropertiesBox,
+  FormFieldPropertiesBoxWidgetMap,
+  GridDataBox,
+  GridDataBoxWidgetMap,
+  LocaleLookupCall,
+  TablePropertiesBox,
+  TablePropertiesBoxWidgetMap,
+  WidgetActionsBox,
+  WidgetActionsBoxWidgetMap
 } from '../index';
 
 export default (): FormModel => ({
@@ -59,7 +73,7 @@ export default (): FormModel => ({
                   id: 'SmartColumn',
                   objectType: SmartColumn,
                   text: 'Smart Column',
-                  lookupCall: 'jswidgets.LocaleLookupCall',
+                  lookupCall: LocaleLookupCall,
                   width: 120
                 },
                 {
