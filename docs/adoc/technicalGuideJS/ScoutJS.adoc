@@ -1504,8 +1504,8 @@ In order to use the Scout eslint-config, you need to add devDependencies to the 
 .ESLint Dependencies
 ----
 "devDependencies": {
-  "@eclipse-scout/eslint-config": "22.0.0",
-  "eslint": "8.10.0"
+  "@eclipse-scout/eslint-config": "23.1.0",
+  "eslint": "8.27.0"
 }
 ----
 
@@ -1539,46 +1539,9 @@ Now run the command again to make the linebreak errors disappear.
 
 NOTE: If you plan to configure your IDE to use the UNIX linebreak format, we recommend having a look at https://editorconfig.org/[Editor Config]. The file can be interpreted by various IDEs. Just add `end_of_line=lf` to that file and you are done.
 
-==== Babel Dependency
-If you use some bleeding edge EcmaScript features that are not yet part of the official specification but already supported by Babel, you should add a dependency to the https://www.npmjs.com/package/babel-eslint[babel-eslint] plugin. Otherwise the analysis will probably report an error regarding these features.
+==== TypeScript Support
 
-One example of such a feature is `class properties`. This allows the definition of static class members. Scout itself uses that feature, that is why the Scout CLI has a dependency to https://babeljs.io/docs/en/babel-plugin-proposal-class-properties[babel-plugin-proposal-class-properties].
-
-[source,JavaScript]
-.Class properties
-----
-class Example {
-  static anObject = {};
-}
-----
-
-If you plan to use such features too, you should enable the babel eslint parser. To do that, add the following devDependencies to your `package.json`:
-
-[source,JSON]
-.Babel-eslint dependencies
-----
-"devDependencies": {
-  "@babel/eslint-parser": "7.16.5",
-  "@babel/eslint-plugin": "7.16.5"
-}
-----
-
-To enable it, configure your `.eslintrc.js` in the following way:
-
-[source,JavaScript]
-.Babel-eslint configuration
-----
-  plugins: ['@babel'],
-  parser: '@babel/eslint-parser',
-  parserOptions: {
-    requireConfigFile: false
-  }
-----
-
-That's it.
-
-Remember: ESLint itself already supports a lot of modern EcmaScript code.
-You only need to enable the babel eslint parser if you want to use the latest features which are not yet supported by ESLint.
+FIXME CGU describe
 
 ==== ESLint Ignore
 
