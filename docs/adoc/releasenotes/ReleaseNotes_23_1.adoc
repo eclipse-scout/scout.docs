@@ -114,10 +114,41 @@ In previous versions several ways were used to create/use a node identfier (e.g.
 
 As of version 23.1 the typed `org.eclipse.scout.rt.dataobject.id.NodeId` is used wherever possible, the application scoped bean `org.eclipse.scout.rt.platform.context.NodeIdentifier` is still used for the computation of this typed `NodeId`. The `get()` method returning a `String` has been deprecated, the interface `org.eclipse.scout.rt.shared.INode` has been removed.
 
-== IId interface
+== IId interface, new IRootId and ICompositeId
 
 In previous versions the `IId` interface was typed with a generic `WRAPPED_TYPE extends Comparable<WRAPPED_TYPE>`.
-To be able to use the `IId` interface as general root for any kind of identifiers without having to deal with a concrete generic type, the generic type definition was removed and moved to the default implementation `AbstractId` and the typed sub-interfaces `IUuid`, `IStringId` and `ILongId`.
+To be able to use the `IId` interface as general root for any kind of identifiers without having to deal with a concrete generic type, the generic type definition was removed and moved to the default implementation `AbstractRootId` and the typed sub-interfaces `IUuid`, `IStringId` and `ILongId`.
+
+As new feature IIds may consist of multiple wrapped components (e.g. composite ids). Use `ICompositeId` and `AbstractCompositeId` as base to build own composite types.
+Based on the adapted serialization mechanism (see `IdFactory` and IdCodec` classes) composite ids may also be used in data objects and REST APIs like the existing root ids.
+
+[source,java]
+.Example composite id based on an example string id and an example uuid
+----
+@IdTypeName("example.ExampleCompositeId")
+public final class ExampleCompositeId extends AbstractCompositeId {
+  private static final long serialVersionUID = 1L;
+
+  private ExampleCompositeId(ExampleStringId c1, ExampleUuId c2) {
+    super(c1, c2);
+  }
+
+  @RawTypes
+  public static ExampleCompositeId of(String c1, UUID c2) {
+    if (StringUtility.isNullOrEmpty(c1) || c2 == null) {
+      return null;
+    }
+    return new ExampleCompositeId(ExampleStringId.of(c1), ExampleUuId.of(c2));
+  }
+
+  public static ExampleCompositeId of(ExampleStringId c1, ExampleUuId c2) {
+    if (c1 == null || c2 == null) {
+      return null;
+    }
+    return new ExampleCompositeId(c1, c2);
+  }
+}
+----
 
 == Calendar Widget
 
