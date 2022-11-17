@@ -13,27 +13,27 @@ ifndef::mdledir[:mdledir: .]
 //-----------------------------------------------------------------------------
 
 First, Node.js needs to be installed as Scout uses it to build web assets.
-So if you don't have it yet, visit the https://nodejs.org/dist/latest-v16.x/[Node.js download site], choose the package for your platform and install it on your local machine.
+So if you don't have it yet, visit the https://nodejs.org/dist/latest-v18.x/[Node.js download site], choose the package for your platform and install it on your local machine.
 
 Make sure the Node.js installation is on the PATH. You can verify it by using your command line:
 
 ----
 c:\> node -v
-v16.13.0
+v18.12.1
 ----
 
 ==== Add pnpm
 
-Scout uses https://pnpm.io/[pnpm 6] as package manager.
+Scout uses https://pnpm.io/[pnpm 7] as package manager.
 Therefore, install it into your Node installation by using your command line:
 
 ----
-npm install -g pnpm
+npm install -g pnpm@7.16.0
 ----
 
 and verify that it was installed successfully with:
 
 ----
 c:\> pnpm -v
-6.22.2
+7.16.0
 ----
