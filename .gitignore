@@ -5,6 +5,10 @@
 node_modules/
 dist/
 test-results/
+package-lock.json
 
 # Do not check in any log files
 *.log
+
+# IDEs
+.idea
