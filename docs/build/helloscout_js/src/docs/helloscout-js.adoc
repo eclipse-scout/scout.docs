@@ -46,7 +46,6 @@ After that, the file and folder structure of your local copy should look like th
 │
 ├───res
 │       index.html
-│       helloworld-texts.json
 │
 └───src
     │   helloworld.js
