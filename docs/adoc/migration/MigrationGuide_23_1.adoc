@@ -205,3 +205,22 @@ menus.filter(this.menus, allowedTypes, {onlyVisible, enableDisableKeyStrokes});
 
 ----
 
+== IId types, IdFactory and IdExternalFormatter
+
+Up to release 2022 the support for typed identifiers (IId) was limited to root ids wrapping one specific Java identifier.
+The support was extended to include composite ids wrapping multiple java identifiers.
+As part of this new feature a refactoring of the existing id classes was done which may require some migration steps:
+
+* `IId` was typed with a generic parameter `<WRAPPED_TYPE>` which was removed and moved to `AbstractRootId`. If you need this generic parameter, change your code to use `AbstractRootId` instead of `IId` or consider removing the generic parameter at interface-level in your code as well.
+* `IId` up to release 2022 were limited to wrap a single value. If your code rely on a single wrapped value, replace `IId` by `IRootId` and `AbstractId` by `AbstractRootId`. If you don't change your code type and use `IId` you implicitly add support for composite types in your APIs.
+* Some factory methods for building ids and serialization where moved between classes and/or renamed (the serialized string representation is identical):
+** `IdExternalFormatter.getTypeName()` -> `IdInventory.getTypeName()`
+** `IdExternalFormatter.getIdClass()` -> `IdInventory.getIdClass()`
+** `IdExternalFormatter.toExternalForm()` -> `IdCodec.toQualified()`
+** `IdExternalFormatter.fromExternalForm()` -> `IdCodec.fromQualified()`
+** `IdExternalFormatter.fromExternalFormLenient()` -> `IdCodec.fromQualifiedLenient()`
+** `IId.unwrapAsString()` -> `IdCodec.toUnqualified()` (Note: Unwrap as string is still available for `IRootId` but according to the javadoc should only be used for logging and debugging purpose)
+** `IdFactory.createFromString()` -> `IdCodec.fromUnqualified()`
+* Completeness test for ids was improved. Use `AbstractIdStructureTest` as base for id completeness tests in own maven modules.
+** Implementations of `AbstractStringId` are required to create a null-id instance if invoked with an empty string (e.g. use `if (StringUtility.isNullOrEmpty(id)) { return null; }` in your static `of()` method, see `FixtureStringId` as example)
+** The former base classes `AbstractUuIdStructureTest` and `AbstractStringIdStructureTest` were integrated and removed
