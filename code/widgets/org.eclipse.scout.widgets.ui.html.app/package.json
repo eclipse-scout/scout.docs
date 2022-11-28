@@ -9,9 +9,6 @@
     "url": "https://github.com/bsi-software/org.eclipse.scout.docs"
   },
   "license": "EDL-1.0",
-  "publishConfig": {
-    "registry": "https://scout.bsiag.com/repository/api/npm/org.eclipse.scout-npm-local/"
-  },
   "engines": {
     "node": ">=18.12.1",
     "npm": ">=9.1.1",
