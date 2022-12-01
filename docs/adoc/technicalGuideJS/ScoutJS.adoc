@@ -1539,10 +1539,6 @@ Now run the command again to make the linebreak errors disappear.
 
 NOTE: If you plan to configure your IDE to use the UNIX linebreak format, we recommend having a look at https://editorconfig.org/[Editor Config]. The file can be interpreted by various IDEs. Just add `end_of_line=lf` to that file and you are done.
 
-==== TypeScript Support
-
-FIXME CGU describe
-
 ==== ESLint Ignore
 
 Similar to `.gitignore`, you can create a file called `.eslintignore` to exclude specific files or directories from the analysis.
@@ -1552,7 +1548,10 @@ The only thing you need to do is to create that file and add a line with the wor
 For more details please see the official ESLint documentation at
 https://eslint.org/docs/user-guide/configuring#eslintignore.
 
+=== TypeScript Support
 
+// FIXME CGU describe
 
+=== Authoring Libraries
 
-
+// FIXME CGU describe
