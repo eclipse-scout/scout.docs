@@ -224,3 +224,39 @@ As part of this new feature a refactoring of the existing id classes was done wh
 * Completeness test for ids was improved. Use `AbstractIdStructureTest` as base for id completeness tests in own maven modules.
 ** Implementations of `AbstractStringId` are required to create a null-id instance if invoked with an empty string (e.g. use `if (StringUtility.isNullOrEmpty(id)) { return null; }` in your static `of()` method, see `FixtureStringId` as example)
 ** The former base classes `AbstractUuIdStructureTest` and `AbstractStringIdStructureTest` were integrated and removed
+
+== Renaming of DoStructureMigration to DataObjectMigration
+
+Because the `DoStructureMigrator` executes value migrations too (`IDoValueMigrationHandler`), several renamings were applied.
+
+Classes:
+
+* DoStructureMigrationContext -> DataObjectMigrationContext
+* DoStructureMigrationCountingPassThroughLogger -> DataObjectMigrationCountingPassThroughLogger
+* DoStructureMigrationInventory -> DataObjectMigrationInventory
+* DoStructureMigrationPassThroughLogger -> DataObjectMigrationPassThroughLogger
+* DoStructureMigrationStatsContextData -> DataObjectMigrationStatsContextData
+* DoStructureMigrator -> DataObjectMigrator
+* IDoStructureMigrationGlobalContextData -> IDataObjectMigrationGlobalContextData
+* IDoStructureMigrationLocalContextData -> IDataObjectMigrationLocalContextData
+* IDoStructureMigrationLogger -> IDataObjectMigrationLogger
+
+Test classes:
+
+* TestDoStructureMigrationInventory -> TestDataObjectMigrationInventory
+* TestDoStructureMigrator -> TestDataObjectMigrator
+
+Methods:
+
+* DataObjectMigrationInventory#getMigrationHandlers -> #getStructureMigrationHandlers
+* DataObjectMigrationInventory#getDoMigrationContextValues -> #getDoStructureMigrationTargetContextDatas
+
+Removals (see deprecation warning in 22.0 for further information):
+
+* DoStructureMigrator#migrateDataObject(DataObjectMigrationContext, IDataObject)
+* DoStructureMigrator#migrateDataObject(DataObjectMigrationContext, IDataObject, IDataObjectMigrationLocalContextData...)
+* DoStructureMigrator#migrateDataObject(DataObjectMigrationContext, IDataObject, NamespaceVersion, IDataObjectMigrationLocalContextData...)
+* TestDoStructureMigrationInventory#TestDoStructureMigrationInventory(List<INamespace>, Collection<ITypeVersion>, Collection<Class<? extends IDoStructureMigrationTargetContextData>>, IDoStructureMigrationHandler...)
+
+
+
