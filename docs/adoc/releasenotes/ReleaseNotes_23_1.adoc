@@ -313,3 +313,17 @@ The calendar component item of the calendar widget has new attributes:
 image::{rnimgsdir}/calendar_tooltip.png[]
 
 Further the calendar provides now a time range selection in the day, work week and week mode. By default, this feature is disabled, it can be configured with the `rangeSelectionAllowed` property. The start point and end point of the current selected time range can be accessed with the `selectedRange` property.
+
+== Categories for health checkers
+
+For the health check servlet `org.eclipse.scout.rt.server.commons.healthcheck.AbstractHealthCheckServlet` a new query parameter _category_ has been introduced to create the possibility to check only some specific health checkers for a specific category. If a category is supplied using the parameter, the actual `IHealthChecker` checkers are filtered using the method `org.eclipse.scout.rt.server.commons.healthcheck.IHealthChecker.acceptCategory(HealthCheckCategoryId)`.
+
+If no category is provided there is no change in behavior and all checkers are executed.
+If an invalid category is provided an error is logged and the same behavior is executed as no category was provided.
+
+=== API changes:
+
+* New method `org.eclipse.scout.rt.server.commons.healthcheck.IHealthChecker.acceptCategory(HealthCheckCategoryId)` was added, default implementation always returns `true`
+* Parameter `HealthCheckCategoryId` was added for `org.eclipse.scout.rt.server.commons.healthcheck.IHealthChecker.checkHealth(RunContext, HealthCheckCategoryId)`; if health check itself does not rely on a specific category ignore this parameter
+* Parameter `HealthCheckCategoryId` was added for `org.eclipse.scout.rt.server.commons.healthcheck.AbstractHealthChecker.execCheckHealth(HealthCheckCategoryId)`; if health check itself does not rely on a specific category ignore this parameter
+
