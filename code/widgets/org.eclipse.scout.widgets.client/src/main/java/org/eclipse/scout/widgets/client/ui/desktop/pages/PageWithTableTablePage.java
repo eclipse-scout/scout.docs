@@ -446,7 +446,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
 
       @Order(10)
       @ClassId("9d88f3f6-4cc4-45be-82f5-a59d4692615b")
-      public class SubSingleMenu extends AbstractMenu {
+      public class SubSingle1Menu extends AbstractMenu {
 
         @Override
         protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -455,7 +455,37 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
 
         @Override
         protected String getConfiguredText() {
-          return "SubSingle";
+          return "SubSingle1";
+        }
+      }
+
+      @Order(11)
+      @ClassId("0af9ea5f-bac5-4c98-9aa4-6dece36d9510")
+      public class SubSingle2Menu extends AbstractMenu {
+
+        @Override
+        protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+          return CollectionUtility.<IMenuType> hashSet(TableMenuType.SingleSelection);
+        }
+
+        @Override
+        protected String getConfiguredText() {
+          return "SubSingle2";
+        }
+      }
+
+      @Order(12)
+      @ClassId("079c5be8-9a2e-444a-a571-7690582634d0")
+      public class SubSingle3Menu extends AbstractMenu {
+
+        @Override
+        protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+          return CollectionUtility.<IMenuType> hashSet(TableMenuType.SingleSelection);
+        }
+
+        @Override
+        protected String getConfiguredText() {
+          return "SubSingle3";
         }
       }
 
