@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2015 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
@@ -66,14 +66,14 @@ public class Desktop extends AbstractDesktop {
   // outline buttons of the application
   @Order(1)
   @ClassId("9405937b-66e8-491a-831d-69adca724b90")
-  public class ContactOutlineViewButton extends AbstractOutlineViewButton {
+  public class ContactsOutlineViewButton extends AbstractOutlineViewButton {
     //end::DesktopInit[]
 
-    public ContactOutlineViewButton() {
+    public ContactsOutlineViewButton() {
       this(ContactOutline.class);
     }
 
-    protected ContactOutlineViewButton(Class<? extends ContactOutline> outlineClass) {
+    protected ContactsOutlineViewButton(Class<? extends ContactOutline> outlineClass) {
       super(Desktop.this, outlineClass);
     }
 
