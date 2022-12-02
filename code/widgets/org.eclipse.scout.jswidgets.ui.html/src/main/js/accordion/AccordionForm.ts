@@ -8,10 +8,9 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {Accordion, comparators, Event, Form, FormModel, Group, Menu, models, scout, TileGrid} from '@eclipse-scout/core';
+import {Accordion, comparators, Event, Form, FormModel, Group, InitModelOf, Menu, models, scout, TileGrid} from '@eclipse-scout/core';
 import AccordionFormModel from './AccordionFormModel';
 import $ from 'jquery';
-import {InitModelOf} from '@eclipse-scout/core/src/scout';
 import {AccordionFormWidgetMap, CustomTile} from '../index';
 
 export class AccordionForm extends Form {
