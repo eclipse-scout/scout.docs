@@ -157,7 +157,7 @@ Then, perform the following changes in class `Desktop`
 
 * Delete the inner class `SettingOutlineViewButton`
 * Delete the inner class `UserProfileMenu`.
-* Rename inner class WorkOutlineViewButton to `ContactsOutlineViewButton`
+* Rename inner class WorkOutlineViewButton to `ContactOutlineViewButton`
 * Create a new inner class called `QuickAccessMenu` after the `SearchOutlineViewButton`.
 For this navigate the cursor after the `SearchOutlineViewButton` class, press kbd:[Ctrl+Space] and select the `Menu` entry.
 Adapt the created code until it matches the template as shown in <<lst-contacts_desktop>>.
