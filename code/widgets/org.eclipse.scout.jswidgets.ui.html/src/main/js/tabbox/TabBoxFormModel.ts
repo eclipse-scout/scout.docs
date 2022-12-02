@@ -56,7 +56,7 @@ export default (): FormModel => ({
                 iconId: icons.PLUS,
                 stackable: true,
                 menuTypes: [
-                  'TabBox.Header'
+                  TabBox.MenuTypes.Header
                 ],
                 keyStroke: 'insert'
               },
@@ -67,7 +67,7 @@ export default (): FormModel => ({
                 iconId: icons.MINUS,
                 stackable: true,
                 menuTypes: [
-                  'TabBox.Header'
+                  TabBox.MenuTypes.Header
                 ],
                 keyStroke: 'insert'
               },
@@ -77,7 +77,7 @@ export default (): FormModel => ({
                 iconId: icons.GEAR,
                 stackable: false,
                 menuTypes: [
-                  'TabBox.Header'
+                  TabBox.MenuTypes.Header
                 ],
                 horizontalAlignment: 1
               }

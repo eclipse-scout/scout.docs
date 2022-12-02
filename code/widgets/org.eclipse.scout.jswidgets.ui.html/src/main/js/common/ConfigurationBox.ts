@@ -27,7 +27,7 @@ export class ConfigurationBox extends TabBox {
       parent: this,
       cssClass: 'configuration-box-toggle-menu',
       menuTypes: [
-        'TabBox.Header'
+        TabBox.MenuTypes.Header
       ]
     });
     this.toggleMenu.on('action', this._onToggleMenuAction.bind(this));

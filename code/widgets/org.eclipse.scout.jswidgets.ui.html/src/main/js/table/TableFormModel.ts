@@ -10,22 +10,8 @@
  */
 import {AggregateTableControl, BooleanColumn, Column, DateColumn, FormModel, GroupBox, IconColumn, Menu, NumberColumn, SmartColumn, SmartField, TabItem, Table, TableField} from '@eclipse-scout/core';
 import {
-  ColumnPropertiesBox,
-  ColumnPropertiesBoxWidgetMap,
-  ConfigurationBox,
-  EventsTab,
-  EventsTabWidgetMap,
-  FormFieldActionsBox,
-  FormFieldActionsBoxWidgetMap,
-  FormFieldPropertiesBox,
-  FormFieldPropertiesBoxWidgetMap,
-  GridDataBox,
-  GridDataBoxWidgetMap,
-  LocaleLookupCall,
-  TablePropertiesBox,
-  TablePropertiesBoxWidgetMap,
-  WidgetActionsBox,
-  WidgetActionsBoxWidgetMap
+  ColumnPropertiesBox, ColumnPropertiesBoxWidgetMap, ConfigurationBox, EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox,
+  GridDataBoxWidgetMap, LocaleLookupCall, TablePropertiesBox, TablePropertiesBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap
 } from '../index';
 
 export default (): FormModel => ({
@@ -108,7 +94,7 @@ export default (): FormModel => ({
                   objectType: Menu,
                   text: '${textKey:AddRow}',
                   menuTypes: [
-                    'Table.EmptySpace'
+                    Table.MenuTypes.EmptySpace
                   ],
                   keyStroke: 'insert'
                 },
@@ -117,7 +103,7 @@ export default (): FormModel => ({
                   objectType: Menu,
                   text: '${textKey:Move}',
                   menuTypes: [
-                    'Table.SingleSelection'
+                    Table.MenuTypes.SingleSelection
                   ],
                   childActions: [
                     {
@@ -125,7 +111,7 @@ export default (): FormModel => ({
                       objectType: Menu,
                       text: '${textKey:MoveToTop}',
                       menuTypes: [
-                        'Table.SingleSelection'
+                        Table.MenuTypes.SingleSelection
                       ]
                     },
                     {
@@ -133,7 +119,7 @@ export default (): FormModel => ({
                       objectType: Menu,
                       text: '${textKey:MoveUp}',
                       menuTypes: [
-                        'Table.SingleSelection'
+                        Table.MenuTypes.SingleSelection
                       ]
                     },
                     {
@@ -141,7 +127,7 @@ export default (): FormModel => ({
                       objectType: Menu,
                       text: '${textKey:MoveDown}',
                       menuTypes: [
-                        'Table.SingleSelection'
+                        Table.MenuTypes.SingleSelection
                       ]
                     },
                     {
@@ -149,7 +135,7 @@ export default (): FormModel => ({
                       objectType: Menu,
                       text: '${textKey:MoveToBottom}',
                       menuTypes: [
-                        'Table.SingleSelection'
+                        Table.MenuTypes.SingleSelection
                       ]
                     }
                   ]
@@ -159,8 +145,8 @@ export default (): FormModel => ({
                   objectType: Menu,
                   text: '${textKey:DeleteRow}',
                   menuTypes: [
-                    'Table.SingleSelection',
-                    'Table.MultiSelection'
+                    Table.MenuTypes.SingleSelection,
+                    Table.MenuTypes.MultiSelection
                   ],
                   keyStroke: 'delete'
                 }

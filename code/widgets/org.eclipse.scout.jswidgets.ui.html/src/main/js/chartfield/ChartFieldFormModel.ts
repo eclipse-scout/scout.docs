@@ -373,9 +373,9 @@ export default (): FormModel => ({
                     objectType: Menu,
                     text: 'Add dataset',
                     menuTypes: [
-                      'Table.EmptySpace',
-                      'Table.SingleSelection',
-                      'Table.MultiSelection'
+                      Table.MenuTypes.EmptySpace,
+                      Table.MenuTypes.SingleSelection,
+                      Table.MenuTypes.MultiSelection
                     ]
                   },
                   {
@@ -383,8 +383,8 @@ export default (): FormModel => ({
                     objectType: Menu,
                     text: 'Remove dataset',
                     menuTypes: [
-                      'Table.SingleSelection',
-                      'Table.MultiSelection'
+                      Table.MenuTypes.SingleSelection,
+                      Table.MenuTypes.MultiSelection
                     ]
                   },
                   {
@@ -393,7 +393,7 @@ export default (): FormModel => ({
                     iconId: icons.PLUS,
                     tooltipText: 'Add data',
                     menuTypes: [
-                      'Table.Header'
+                      Table.MenuTypes.Header
                     ]
                   },
                   {
@@ -403,7 +403,7 @@ export default (): FormModel => ({
                     tooltipText: 'Remove data',
                     enabled: false,
                     menuTypes: [
-                      'Table.Header'
+                      Table.MenuTypes.Header
                     ]
                   }
                 ]

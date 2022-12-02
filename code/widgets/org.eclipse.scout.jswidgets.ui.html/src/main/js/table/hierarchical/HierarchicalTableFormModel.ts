@@ -73,25 +73,25 @@ export default (): FormModel => ({
                   id: 'ContentMenu',
                   objectType: Menu,
                   text: 'Content',
-                  menuTypes: ['Table.EmptySpace'],
+                  menuTypes: [Table.MenuTypes.EmptySpace],
                   childActions: [
                     {
                       id: 'RemoveAll',
                       objectType: Menu,
                       text: 'Remove all rows',
-                      menuTypes: ['Table.EmptySpace']
+                      menuTypes: [Table.MenuTypes.EmptySpace]
                     },
                     {
                       id: 'InsertFew',
                       objectType: Menu,
                       text: 'Insert few',
-                      menuTypes: ['Table.EmptySpace']
+                      menuTypes: [Table.MenuTypes.EmptySpace]
                     },
                     {
                       id: 'InsertMany',
                       objectType: Menu,
                       text: 'Insert many',
-                      menuTypes: ['Table.EmptySpace']
+                      menuTypes: [Table.MenuTypes.EmptySpace]
                     }
                   ]
                 },
@@ -99,14 +99,14 @@ export default (): FormModel => ({
                   id: 'AddRowMenu',
                   objectType: Menu,
                   text: '${textKey:AddRow}',
-                  menuTypes: ['Table.EmptySpace'],
+                  menuTypes: [Table.MenuTypes.EmptySpace],
                   keyStroke: 'insert'
                 },
                 {
                   id: 'DeleteRowMenu',
                   objectType: Menu,
                   text: '${textKey:DeleteRow}',
-                  menuTypes: ['Table.SingleSelection', 'Table.MultiSelection'],
+                  menuTypes: [Table.MenuTypes.SingleSelection, Table.MenuTypes.MultiSelection],
                   keyStroke: 'delete'
                 }
               ]
