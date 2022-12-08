@@ -9,12 +9,10 @@
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 import {RemoteApp} from '@eclipse-scout/core';
-import * as ref0 from '@eclipse-scout/svg';
-import * as ref1 from '@eclipse-scout/chart';
-import * as ref2 from '@eclipse-scout/demo-widgets';
-import * as ref3 from '@eclipse-scout/demo-widgets-heatmap';
-
-Object.assign({}, ref0, ref1, ref2, ref3); // workaround so that the imports are not unused
+import '@eclipse-scout/svg';
+import '@eclipse-scout/chart';
+import '@eclipse-scout/demo-widgets';
+import '@eclipse-scout/demo-widgets-heatmap';
 
 new RemoteApp().init({
   bootstrap: {
