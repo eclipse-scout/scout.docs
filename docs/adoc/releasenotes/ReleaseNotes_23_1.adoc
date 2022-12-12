@@ -200,6 +200,58 @@ export default () => ({
 
 Please see the {migration-guide}#ObjectType%20as%20Class%20Reference%20(Scout%20JS)[Migration Guide] for migration assistance.
 
+=== MenuTypes
+
+==== Constants
+
+Constants have been added for all menu types of
+
+* Calendar
+* ImageField
+* Planner
+* TabBox
+* Table
+* Tree
+* ValueField
+
+Instead of using string literals in e.g. a `MenuModel` one can use these constants now. Therefore, this
+
+[source,ts]
+----
+import {Menu} from '@eclipse-scout/core';
+
+{
+  id: 'ExampleMenu',
+  text: 'Example',
+  objectType: Menu,
+  menuTypes: [
+    'Table.SingleSelection'
+  ]
+}
+----
+
+becomes this:
+
+[source,ts]
+----
+import {Menu, Table} from '@eclipse-scout/core';
+
+{
+  id: 'ExampleMenu',
+  text: 'Example',
+  objectType: Menu,
+  menuTypes: [
+    Table.MenuTypes.SingleSelection
+  ]
+}
+----
+
+==== Menu type support for ValueField and ImageField
+
+Menu type support has been added to the `ValueField` and the `ImageField`.
+This means that e.g. the `ValueField` will display different menus whether a value is set or not.
+For more information about the menuType support of `ValueField` and `ImageField` see link:{techdocjs}#menu-types[Technical Guide for Scout JS].
+
 == JavaScript Code Migration Tool
 
 It is normal that code changes from time to time even on a larger scale.

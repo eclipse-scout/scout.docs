@@ -1139,6 +1139,48 @@ In order to use the filter field the widget needs an `isTextFilterFieldVisible()
 The `isTextFilterFieldVisible()`-method is used to determine whether the filter field needs to be added to or removed from the `$container` when `filterSupport.renderFilterField()` is called.
 The `KeyStrokeContext` is needed to register KeyStrokes that move the focus towards the filter field while typing.
 
+[#menu-types]
+=== MenuTypes
+
+A menu type provides a way to control the visibility of a menu for common use cases.
+For example: a menu should be displayed only if an item is selected or a value present.
+Menu types are context specific and interpreted by the menu container (e.g. by a table or value field).
+
+Please refer to the respective container for the available menu types and their functions.
+
+==== ValueField
+
+The `ValueField` support the menu types `ValueField.MenuTypes.Null` and `ValueField.MenuTypes.NotNull`.
+This means that the `ValueField` will only display menus with `ValueField.MenuTypes.Null` if the value is `null` or those with `ValueField.MenuTypes.NotNull` if the value is set.
+
+Menus added to a `ValueField` that need to be visible all the time do not need to specify all possible menu types.
+The `ValueField` will treat a menu without menu types as if it had set all menu types and therefore will always display it.
+
+[source,ts]
+----
+import {Menu, ValueField} from '@eclipse-scout/core';
+
+[
+  {
+    id: 'AlwaysVisibleMenu',
+    text: 'Always visible',
+    objectType: Menu
+  },
+  {
+    id: 'VisibleIfNullMenu',
+    text: 'Visible if value is null',
+    objectType: Menu,
+    menuTypes: [
+      ValueField.MenuTypes.Null
+    ]
+  }
+]
+----
+
+==== ImageField
+
+The `ImageField` supports the menu types `ImageField.MenuTypes.ImageUrl` and `ImageField.MenuTypes.Null`.
+
 == HTML Document Parser
 
 The HTML document parser is only available in the Scout UI server. If your Scout JS application uses a different backend, you cannot use the features described in this chapter.
