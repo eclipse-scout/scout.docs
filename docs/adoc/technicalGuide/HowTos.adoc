@@ -11,3 +11,5 @@ This chapter provides various small technical guides to very specific Scout subj
 include::{howtodir}/SmartField-HowTo.adoc[]
 
 include::{howtodir}/Chart-HowTo.adoc[]
+
+include::{howtodir}/JsForm-HowTo.adoc[]

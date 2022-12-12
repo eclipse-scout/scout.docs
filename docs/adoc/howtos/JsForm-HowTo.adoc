@@ -1,0 +1,102 @@
+ifndef::finaldoc[]
+include::../_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+:imgsdir: ../../imgs
+:codedir: ../../../code
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
+[#how-to-js-form]
+=== How to open a Scout JS form in a Scout Classic application
+
+A Scout Classic application is able to open a form implemented in Scout JS. This works via the JsForm, a Java form wrapping a form implemented in JS.
+The next few code snippets demonstrate how to use the JsForm.
+
+[source,java]
+.Example of a simple JsForm
+----
+package example.client;
+
+import org.eclipse.scout.rt.client.ui.form.js.AbstractJsForm;
+
+public class ExampleJsForm extends AbstractJsForm<ExampleJsFormDo, ExampleJsFormDo> {
+
+  @Override
+  protected String getConfiguredJsFormObjectType() {
+    return "example.ExampleJsForm";
+  }
+}
+----
+
+The form can be started handing over some input data in the form of an `IDoEntity` and the whole lifecycle (close, cancel, save, ...) of this form will be handled by Scout JS.
+If the form is saved the data of the Scout JS form will be available on to the Java form as output data.
+
+[source,java]
+.Use of a JsForm
+----
+ExampleJsForm exampleJsForm = new ExampleJsForm();
+exampleJsForm.setInputData(getExampleJsFormInputData());
+exampleJsForm.start();
+exampleJsForm.waitFor();
+if (exampleJsForm.isFormStored()) {
+  ExampleJsFormDo outputData = exampleJsForm.getOutputData();
+  // ...
+}
+----
+
+The complete form and its business logic is implemented in JS in the same way a form is implemented in a Scout JS application.
+The only property that needs to be set in Java is the `displayHint` of the form.
+
+[source,ts]
+.Implementation of the form in Scout JS
+----
+import {Form, models, StringField} from '@eclipse-scout/core';
+import ExampleJsFormModel from './ExampleJsFormModel';
+
+export class ExampleJsForm extends Form {
+  declare data: ExampleJsFormDo;
+
+  exampleId: string;
+  exampleField: StringField;
+
+  constructor() {
+    super();
+
+    this.exampleId = null;
+    this.exampleField = null;
+  }
+
+  protected override _jsonModel(): FormModel {
+    return models.get(ExampleJsFormModel);
+  }
+
+  protected override _init(model: InitModelOf<this>) {
+    super._init(model);
+
+    this.exampleField = this.widget('ExampleField');
+  }
+
+  override importData() {
+    if (!this.data) {
+      return;
+    }
+
+    this.exampleId = this.data.exampleId;
+    this.exampleField.setValue(this.data.example);
+  }
+
+  override exportData(): ExampleJsFormDo {
+    return {
+      exampleId: this.exampleId,
+      example: this.exampleField.value
+    };
+  }
+}
+
+export type ExampleJsFormDo = {
+  exampleId: string;
+  example: string;
+};
+----

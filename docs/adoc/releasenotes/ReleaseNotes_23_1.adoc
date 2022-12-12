@@ -327,3 +327,7 @@ If an invalid category is provided an error is logged and the same behavior is e
 * Parameter `HealthCheckCategoryId` was added for `org.eclipse.scout.rt.server.commons.healthcheck.IHealthChecker.checkHealth(RunContext, HealthCheckCategoryId)`; if health check itself does not rely on a specific category ignore this parameter
 * Parameter `HealthCheckCategoryId` was added for `org.eclipse.scout.rt.server.commons.healthcheck.AbstractHealthChecker.execCheckHealth(HealthCheckCategoryId)`; if health check itself does not rely on a specific category ignore this parameter
 
+== JsForm
+
+The JsForm is a Java-form that wraps a form implemented in JS. This allows a Scout Classic application to open a Scout JS form.
+For more information about the JsForm see link:{techdoc}#how-to-js-form[Technical Guide].
