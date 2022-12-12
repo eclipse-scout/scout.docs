@@ -178,35 +178,7 @@ We highly recommend you migrate your code, so you can benefit of the improved ty
 To do so, you can use the Scout migration tool, which migrates the strings and also tries to add the required imports automatically.
 Alternatively, you can do it by yourself using your IDE and Find/Replace.
 
-To use the migration tool, follow these steps:
-
-. Open the `package.json` of your ui module (e.g. `your.project.ui.html`).
-. Add a devDependency to `@eclipse-scout/migrate` with the version `~23.1.0`.
-. Add a script as described in <<lst-objectTypeMigration>>.
-. Adjust the `moduleMap` argument by replacing `yourNamespace` with the namespace in your `index.js` file and `your.project.ui.html` with the name of your module. +
-The moduleMap entry is used to add imports to your index.js automatically.
-. If you have dependencies to other Scout based modules, you can add them to the `moduleMap` to have the imports to these modules created automatically.
-Just add the namespace of the other module and the name of the npm package as follows: `--moduleMap.otherNamespace @other/npm-module`
-. Add a devDependency to `@eclipse-scout/tsconfig`.
-. Create a `tsconfig.json` beside your `package.json` according to the `Readme.md` of the `@eclipse-scout/tsconfig` module.
-. Run the `migrate` script by pressing the play button next to it in IntelliJ or using the command line: `npm run migrate`
-. Review the changes and add the missing imports, if there are any.
-. Remove the script and added dependencies from you `package.json`.
-Also remove the `tsconfig.json` unless you want to use TypeScript anyway.
-
-[[lst-objectTypeMigration]]
-.Object Type Migration Script
-[source,json]
-----
-{
-  "scripts": {
-    "migrate": "migrate --migrate objectType --sources src/main/js/**/*.js --moduleMap.yourNamespace path:your.project.ui.html/src/main/js/index.js"
-  },
-  "devDependencies": {
-    "@eclipse-scout/migrate": "~23.1.0"
-  }
-}
-----
+To use the migration tool, follow the steps described here: https://www.npmjs.com/package/@eclipse-scout/migrate#objecttype-and-menutype-migration[@eclipse-scout/migrate]
 
 === Alternative Way to Migrate ObjectType
 
@@ -285,7 +257,48 @@ import {Button, GroupBox} from '@eclipse-scout/core';
 import Button from '@eclipse-scout/core/src/form/fields/button/Button.js';
 ----
 
-== options-parameter for filter-methods in menus.js (Scout JS)
+== MenuTypes as Constants (Scout JS)
+
+Since there are now constants for menu types, you can replace the string literals and use these constants.
+
+The migration can be done automatically using the migration tool.
+If you already used it to migrate the object type (<<ObjectType as Class Reference (Scout JS)>>), the menu types have probably already been migrated.
+Otherwise, follow the instructions described here: https://www.npmjs.com/package/@eclipse-scout/migrate#objecttype-and-menutype-migration[@eclipse-scout/migrate]
+
+== Scout JS API Changes
+
+Along with the TypeScript migration, we had to adjust the API a little and removed some obsolete code.
+Please check if your JavaScript uses the mentioned methods and adjust it accordingly.
+
+=== Rename WidgetTooltip.widget
+
+The `widget` property of `WidgetTooltip` has been renamed to `content`.
+Together with the property itself the corresponding setter has been renamed from `setWidget` to `setContent`.
+
+=== Rename WidgetPopup.widget (Scout JS & Scout Classic)
+
+The `widget` property on `WidgetPopup` classes (and all its subclasses) has been renamed to `content`:
+
+. Scout JS
+.. Update the `widget` property in all JS models creating WidgetPopups from `widget` to `content`.
+.. Rename the `_renderWidget` method on subclasses of `WidgetPopup` to `_renderContent`.
+.. `setWidget` on WidgetPopups has been renamed to `setContent`.
+. Scout Classic
+.. `IWidgetPopup#PROP_WIDGET` has been renamed to `IWidgetPopup#PROP_CONTENT`.
+.. `IWidgetPopup#getWidget` has been renamed to `IWidgetPopup#getContent`.
+.. `AbstractWidgetPopup#getConfiguredWidget` as been renamed to `AbstractWidgetPopup#getConfiguredContent`.
+.. `AbstractWidgetPopup#createWidget` as been renamed to `AbstractWidgetPopup#createContent`.
+.. `AbstractWidgetPopup#setWidget` as been renamed to `AbstractWidgetPopup#setContent`.
+
+=== Rename ProposalChooser.model
+
+The `model` property on `ProposalChooser` class (and all its subclasses) has been renamed to `content`:
+
+. Scout JS
+.. Rename the `_createModel` method on subclasses of `ProposalChooser` to `_createContent`.
+.. Rename the `_renderModel` method on subclasses of `ProposalChooser` to `_renderContent`.
+
+=== Options-parameter for filter-methods in menus.js
 
 The methods `filter` and `filterAccordingToSelection` in `menus.js` now have an options-parameter. This parameter combines the former parameters `onlyVisible`, `enableDisableKeyStrokes` and `notAllowedTypes`.
 The following are two migration examples:
@@ -323,35 +336,7 @@ menus.filter(this.menus, allowedTypes, {onlyVisible, enableDisableKeyStrokes});
 
 ----
 
-== Rename WidgetTooltip.widget (Scout JS)
-
-The `widget` property of `WidgetTooltip` has been renamed to `content`.
-Together with the property itself the corresponding setter has been renamed from `setWidget` to `setContent`.
-
-== Rename WidgetPopup.widget (Scout JS & Scout Classic)
-
-The `widget` property on `WidgetPopup` classes (and all its subclasses) has been renamed to `content`:
-
-. Scout JS
-.. Update the `widget` property in all JS models creating WidgetPopups from `widget` to `content`.
-.. Rename the `_renderWidget` method on subclasses of `WidgetPopup` to `_renderContent`.
-.. `setWidget` on WidgetPopups has been renamed to `setContent`.
-. Scout Classic
-.. `IWidgetPopup#PROP_WIDGET` has been renamed to `IWidgetPopup#PROP_CONTENT`.
-.. `IWidgetPopup#getWidget` has been renamed to `IWidgetPopup#getContent`.
-.. `AbstractWidgetPopup#getConfiguredWidget` as been renamed to `AbstractWidgetPopup#getConfiguredContent`.
-.. `AbstractWidgetPopup#createWidget` as been renamed to `AbstractWidgetPopup#createContent`.
-.. `AbstractWidgetPopup#setWidget` as been renamed to `AbstractWidgetPopup#setContent`.
-
-== Rename ProposalChooser.model (Scout JS)
-
-The `model` property on `ProposalChooser` classes (and all its subclasses) has been renamed to `content`:
-
-. Scout JS
-.. Rename the `_createModel` method on subclasses of `ProposalChooser` to `_createContent`.
-.. Rename the `_renderModel` method on subclasses of `ProposalChooser` to `_renderContent`.
-
-== JQuery (Scout JS)
+=== JQuery-Scout
 
 The following functions have been removed because they are not in use anymore.
 
@@ -367,14 +352,14 @@ The following functions have been renamed
 
 . widthToContent -> cssWidthToContentAnimated
 
-== Table (Scout JS)
+=== Table
 
 TableFilter.js has been removed because it has no benefits.
 
 With TypeScript, the interface `Filter<TableRow>` should be used instead.
 With JavaScript, `extends from TableFilter` can be removed.
 
-== Testing / karma-jasmine-scout (Scout JS)
+=== Testing / karma-jasmine-scout
 
 The following functions have been removed because they are not in use anymore.
 
@@ -392,7 +377,7 @@ The following functions have been renamed.
 The jquery-plugin jqueryExtensions has been refactored to a ES6 module to avoid pollution (of code completion) of the JQuery object outside test environment.
 In the rare case you used these functions for testing, you need to import them now, the JQuery-object does not contain them anymore.
 
-== Various Widget Adjustments (Scout JS)
+=== Various Clean Up
 
 The following model properties have been removed because they are not in use.
 

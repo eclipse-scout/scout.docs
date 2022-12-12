@@ -53,7 +53,7 @@ If you just want to play around with them without looking at the source code, yo
 
 // ----------------------------------------------------------------------------
 
-=== Improved Developer Experience for Scout JS
+== Improved Developer Experience for Scout JS
 
 Scout 23.1 contains many improvements for Scout JS developers.
 The goal was to make the development easier, more efficient and more fun.
@@ -254,7 +254,7 @@ We added linting support for TypeScript files.
 
 If you are already using Scout's eslint module (https://www.npmjs.com/package/@eclipse-scout/eslint[@eclipse-scout/eslint]), you'll get the linting automatically.
 
-== Typed NodeId for node identifier
+== Typed NodeId for Node Identifier
 
 In previous versions several ways were used to create/use a node identfier (e.g. to identify a specific client/backend server):
 
@@ -264,7 +264,7 @@ In previous versions several ways were used to create/use a node identfier (e.g.
 
 As of version 23.1 the typed `org.eclipse.scout.rt.dataobject.id.NodeId` is used wherever possible, the application scoped bean `org.eclipse.scout.rt.platform.context.NodeIdentifier` is still used for the computation of this typed `NodeId`. The `get()` method returning a `String` has been deprecated, the interface `org.eclipse.scout.rt.shared.INode` has been removed.
 
-== IId interface, new IRootId and ICompositeId
+== IId Interface, new IRootId and ICompositeId
 
 In previous versions the `IId` interface was typed with a generic `WRAPPED_TYPE extends Comparable<WRAPPED_TYPE>`.
 To be able to use the `IId` interface as general root for any kind of identifiers without having to deal with a concrete generic type, the generic type definition was removed and moved to the default implementation `AbstractRootId` and the typed sub-interfaces `IUuid`, `IStringId` and `ILongId`.
@@ -314,14 +314,14 @@ image::{rnimgsdir}/calendar_tooltip.png[]
 
 Further the calendar provides now a time range selection in the day, work week and week mode. By default, this feature is disabled, it can be configured with the `rangeSelectionAllowed` property. The start point and end point of the current selected time range can be accessed with the `selectedRange` property.
 
-== Categories for health checkers
+== Categories for Health Checkers
 
 For the health check servlet `org.eclipse.scout.rt.server.commons.healthcheck.AbstractHealthCheckServlet` a new query parameter _category_ has been introduced to create the possibility to check only some specific health checkers for a specific category. If a category is supplied using the parameter, the actual `IHealthChecker` checkers are filtered using the method `org.eclipse.scout.rt.server.commons.healthcheck.IHealthChecker.acceptCategory(HealthCheckCategoryId)`.
 
 If no category is provided there is no change in behavior and all checkers are executed.
 If an invalid category is provided an error is logged and the same behavior is executed as no category was provided.
 
-=== API changes:
+=== API Changes
 
 * New method `org.eclipse.scout.rt.server.commons.healthcheck.IHealthChecker.acceptCategory(HealthCheckCategoryId)` was added, default implementation always returns `true`
 * Parameter `HealthCheckCategoryId` was added for `org.eclipse.scout.rt.server.commons.healthcheck.IHealthChecker.checkHealth(RunContext, HealthCheckCategoryId)`; if health check itself does not rely on a specific category ignore this parameter
