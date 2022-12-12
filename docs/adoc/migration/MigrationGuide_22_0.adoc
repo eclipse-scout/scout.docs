@@ -130,6 +130,19 @@ For this you have to do the following steps:
 To create a new key pair you can execute the class `org.eclipse.scout.rt.platform.security.SecurityUtility` on the command line. This will print a new, unique, Java 17 compatible key pair.
 
 +
+As an alternative you can also execute the following shell script to create a new key pair using https://www.openssl.org/[OpenSSL]:
++
+[source,shell]
+----
+  PRIVATE_KEY=$(openssl ecparam -name prime256v1 -genkey -text)
+  printf "################ Public Private Keypair ################"
+  printf "\nBase64 encoded privateKey: "
+  echo "$PRIVATE_KEY" | openssl ec -outform pem -no_public 2>/dev/null | openssl pkcs8 -topk8 -nocrypt -inform pem -outform der | base64 -w0
+  printf "\nBase64 encoded publicKey: "
+  echo "$PRIVATE_KEY" | openssl ec -outform der -pubout 2>/dev/null | base64 -w0
+  printf "\n"
+----
++
 Afterwards update the properties with the new values. It is recommended to have different values for each environment!
 
 +
