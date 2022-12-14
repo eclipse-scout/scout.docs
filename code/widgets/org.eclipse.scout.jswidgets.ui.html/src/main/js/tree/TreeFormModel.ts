@@ -41,18 +41,12 @@ export default (): FormModel => ({
                   id: 'AddNodeMenu',
                   objectType: Menu,
                   text: '${textKey:AddNode}',
-                  menuTypes: [
-                    Tree.MenuTypes.EmptySpace
-                  ],
                   keyStroke: 'insert'
                 },
                 {
                   id: 'AddChildNodeMenu',
                   objectType: Menu,
                   text: '${textKey:AddChildNode}',
-                  menuTypes: [
-                    Tree.MenuTypes.EmptySpace
-                  ],
                   keyStroke: 'insert'
                 },
                 {
@@ -69,25 +63,16 @@ export default (): FormModel => ({
                   id: 'DeleteAllMenu',
                   objectType: Menu,
                   text: '${textKey:DeleteAll}',
-                  menuTypes: [
-                    Tree.MenuTypes.EmptySpace
-                  ],
                   childActions: [
                     {
                       id: 'DeleteAllNodesMenu',
                       objectType: Menu,
-                      text: '${textKey:DeleteAllNodes}',
-                      menuTypes: [
-                        Tree.MenuTypes.EmptySpace
-                      ]
+                      text: '${textKey:DeleteAllNodes}'
                     },
                     {
                       id: 'DeleteAllChildNodesMenu',
                       objectType: Menu,
-                      text: '${textKey:DeleteAllChildNodes}',
-                      menuTypes: [
-                        Tree.MenuTypes.EmptySpace
-                      ]
+                      text: '${textKey:DeleteAllChildNodes}'
                     }
                   ]
                 }

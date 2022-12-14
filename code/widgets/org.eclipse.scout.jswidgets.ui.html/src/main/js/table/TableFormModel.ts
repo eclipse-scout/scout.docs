@@ -93,9 +93,6 @@ export default (): FormModel => ({
                   id: 'AddRowMenu',
                   objectType: Menu,
                   text: '${textKey:AddRow}',
-                  menuTypes: [
-                    Table.MenuTypes.EmptySpace
-                  ],
                   keyStroke: 'insert'
                 },
                 {
