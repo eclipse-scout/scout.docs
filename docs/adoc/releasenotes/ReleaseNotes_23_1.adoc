@@ -252,6 +252,12 @@ Menu type support has been added to the `ValueField` and the `ImageField`.
 This means that e.g. the `ValueField` will display different menus whether a value is set or not.
 For more information about the menuType support of `ValueField` and `ImageField` see link:{techdocjs}#menu-types[Technical Guide for Scout JS].
 
+==== Default menuTypes
+
+Default menuTypes have been added to several widgets.
+This means that e.g. the `Table` treats a menu without a menuType as if it had set `Table.MenuTypes.EmptySpace`.
+For more information about the default menuTypes see link:{techdocjs}#menu-types[Technical Guide for Scout JS].
+
 == JavaScript Code Migration Tool
 
 It is normal that code changes from time to time even on a larger scale.
