@@ -67,18 +67,12 @@ export default (): PageModel => ({
         id: 'AddRowMenu',
         objectType: Menu,
         text: '${textKey:AddRow}',
-        menuTypes: [
-          Table.MenuTypes.EmptySpace
-        ],
         keyStroke: 'insert'
       },
       {
         id: 'AddManyMenu',
         objectType: Menu,
-        text: 'Add many',
-        menuTypes: [
-          Table.MenuTypes.EmptySpace
-        ]
+        text: 'Add many'
       },
       {
         id: 'DeleteRowMenu',
@@ -95,10 +89,7 @@ export default (): PageModel => ({
         objectType: Menu,
         iconId: icons.SQUARE_BOLD,
         stackable: false,
-        horizontalAlignment: 1,
-        menuTypes: [
-          Table.MenuTypes.EmptySpace
-        ]
+        horizontalAlignment: 1
       }
     ],
     tableControls: [
