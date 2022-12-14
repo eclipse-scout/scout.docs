@@ -1540,6 +1540,25 @@ Menu types are context specific and interpreted by the menu container (e.g. by a
 
 Please refer to the respective container for the available menu types and their functions.
 
+Most widgets specify some default menuTypes. Menus without any menuTypes are treated as if these default menuTypes are set. The defaults are:
+
+* `Calendar`
+** `Calendar.MenuTypes.EmptySpace`
+* `ImageField`
+** `ImageField.MenuTypes.ImageUrl`
+** `ImageField.MenuTypes.Null`
+* `Planner`
+** `Planner.MenuTypes.EmptySpace`
+* `Table`
+** `Table.MenuTypes.EmptySpace`
+* `TileGrid`
+** `TileGrid.MenuTypes.EmptySpace`
+* `Tree`
+** `Tree.MenuTypes.EmptySpace`
+* `ValueField`
+** `ValueField.MenuTypes.NotNull`
+** `ValueField.MenuTypes.Null`
+
 ==== ValueField
 
 The `ValueField` support the menu types `ValueField.MenuTypes.Null` and `ValueField.MenuTypes.NotNull`.

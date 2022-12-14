@@ -52,3 +52,17 @@ If you just want to play around with them without looking at the source code, yo
 * https://scout.bsi-software.com/jswidgets/
 
 // ----------------------------------------------------------------------------
+
+== Improved Developer Experience for Scout JS
+
+Scout 23.2 contains many improvements for Scout JS developers.
+The goal was to make the development easier, more efficient and more fun.
+Please read the following chapters to learn how we did it.
+
+=== MenuTypes
+
+==== Default menuTypes
+
+Default menuTypes have been added to several widgets.
+This means that e.g. the `Table` treats a menu without a menuType as if it had set `Table.MenuTypes.EmptySpace`.
+For more information about the default menuTypes see link:{techdocjs}#menu-types[Technical Guide for Scout JS].
