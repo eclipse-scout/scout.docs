@@ -9,6 +9,7 @@
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 import {ObjectFactory} from '@eclipse-scout/core';
+import * as self from './index';
 
 export * from './ExampleBeanField';
 
@@ -16,10 +17,9 @@ export * from './ExampleBeanColumn';
 export * from './WidgetsOutline';
 export * from './WidgetsOutlineAdapter';
 export * from './WidgetsTileOutlineOverview';
+export * from './forms/hybrid/HybridJsForm';
 export * from './tile/CustomTile';
 export * from './tile/CustomTileAdapter';
-
-import * as self from './index.js';
 
 export default self;
 ObjectFactory.get().registerNamespace('widgets', self);

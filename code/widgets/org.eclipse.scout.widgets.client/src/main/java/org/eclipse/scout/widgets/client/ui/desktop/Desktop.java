@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2015 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
@@ -37,6 +37,7 @@ import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.shared.AbstractIcons;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.AdvancedWidgetsOutline;
+import org.eclipse.scout.widgets.client.ui.desktop.outlines.HybridOutline;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.LayoutWidgetsOutline;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.PagesOutline;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.SimpleWidgetsOutline;
@@ -75,6 +76,7 @@ public class Desktop extends AbstractDesktop {
     outlines.add(AdvancedWidgetsOutline.class);
     outlines.add(LayoutWidgetsOutline.class);
     outlines.add(PagesOutline.class);
+    outlines.add(HybridOutline.class);
     return outlines;
   }
 
@@ -245,6 +247,14 @@ public class Desktop extends AbstractDesktop {
   public class PagesOutlineViewButton extends AbstractOutlineViewButton {
     public PagesOutlineViewButton() {
       super(Desktop.this, PagesOutline.class);
+    }
+  }
+
+  @Order(50)
+  @ClassId("5241a333-c606-4db4-9dc5-27125870390f")
+  public class HybridOutlineViewButton extends AbstractOutlineViewButton {
+    public HybridOutlineViewButton() {
+      super(Desktop.this, HybridOutline.class);
     }
   }
 
