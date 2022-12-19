@@ -315,6 +315,20 @@ Use the Scout content assist to add the fields and select [element]_String Field
 * Class `EmailField`, using label "E-Mail"
 
 We have now completed the implementation of the form layout and added all form fields of the person form.
+
+You might not have enough permissions yet to access the person form. For simplicity we will give all permissions to anyone. Follow the steps described below.
+
+. Expand the Maven module `contacts.server` in the Eclipse package explorer
+. Navigate to the package `org.eclipse.scout.contacts.server.security` in folder `src/main/java`
+. Adjust the file `ServerAccessControlService.java` according to <<lst-contacts_access_control>>.
+
+[[lst-contacts_access_control]]
+[source,java]
+.The content of the class `ServiceAccessControlService`.
+----
+include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/security/ServerAccessControlService.java[tags=access_control]
+----
+
 The application is now in a state where we can verify the layout of the person form and check the handling of the different input fields.
 (Re)start the application and enter some values into the various fields of the person form.
 

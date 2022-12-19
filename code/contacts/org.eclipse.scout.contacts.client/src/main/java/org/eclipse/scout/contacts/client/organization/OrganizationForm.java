@@ -154,24 +154,27 @@ public class OrganizationForm extends AbstractForm {
   public PhoneField getPhoneField() {
     return getFieldByClass(PhoneField.class);
   }
-  // tag::layout[]
-
 
   @Override
   protected void execInitForm() {
     BEANS.get(ContactsHelper.class).handleReadOnly(getOkButton());
   }
 
+  // tag::layout[]
   // tag::refactor[]
   @Order(10)
   @ClassId("e7efc084-fe7a-462f-ba23-914e58f7b82d")
   public class MainBox extends AbstractGroupBox {
+    // end::refactor[]
+    // end::layout[]
 
     @Override
     protected void injectMenusInternal(OrderedCollection<IMenu> menus) {
       BEANS.get(ContactsHelper.class).injectReadOnlyMenu(menus);
     }
 
+    // tag::layout[]
+    // tag::refactor[]
     @Order(10)
     @ClassId("b20aad47-e070-4f3c-bafc-ddbaa3ae2a4c")
     public class GeneralBox extends AbstractGroupBox {
