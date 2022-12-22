@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {HtmlTile, models, Page, PageModel, PageWithTable, scout, strings, TableRow, TableRowModel, Tile} from '@eclipse-scout/core';
+import {HtmlTile, models, ObjectOrModel, Page, PageModel, PageWithTable, scout, strings, TableRow, TableRowModel, Tile} from '@eclipse-scout/core';
 import SamplePageWithTableModel from './SamplePageWithTableModel';
 import $ from 'jquery';
 import {MiniForm, SamplePageWithNodes, SamplePageWithTableTable} from '../index';
@@ -96,7 +96,7 @@ export class SamplePageWithTable extends PageWithTable {
     };
   }
 
-  protected override _loadTableData(searchFilter: any): JQuery.Deferred<any> {
+  protected override _loadTableData(searchFilter: any): JQuery.Promise<any> {
     let searchFormStringFieldValue = searchFilter.stringField;
     let filter = element => {
       if (!strings.hasText(searchFormStringFieldValue)) {
@@ -135,10 +135,10 @@ export class SamplePageWithTable extends PageWithTable {
       number: 959161,
       bool: true
     }];
-    return $.resolvedDeferred(data.filter(filter));
+    return $.resolvedPromise(data.filter(filter));
   }
 
-  protected override _transformTableDataToTableRows(tableData: any): TableRow[] {
+  protected override _transformTableDataToTableRows(tableData: any): ObjectOrModel<TableRow>[] {
     return tableData
       .map(row => {
         return {
