@@ -69,16 +69,16 @@ One major addition in this release is TypeScript support.
 This gives you many benefits:
 
 * *More efficient development* +
-Typing allows your IDE to better assist with code completion during development and only suggests methods and properties for an object that actually exist. +
+Typing allows your IDE to better assist with code completion during development and to only suggest methods and properties for an object that actually exist. +
 +
 .Better Code Completion
 image::{rnimgsdir}/code_completion.png[]
 * *Easier entry* +
 With better code completion and clear method signatures, a not-so-experienced JavaScript developer can more easily get up to speed and understand the relationships in the code.
-* *More security for upgrades* +
+* *More confidence when updating* +
 If a used API has changed, the code turns red and the build fails.
-* *More security during development* +
-Incorrect use of an API or code in general is detected at an early stage. The developer gets more security that his code will work. +
+* *More confidence during development* +
+Incorrect use of an API or code in general is detected at an early stage. The developer gets more confidence that his code will work. +
 +
 .Compile Errors
 image::{rnimgsdir}/compile_errors.png[]
