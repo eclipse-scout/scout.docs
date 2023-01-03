@@ -1288,10 +1288,66 @@ Output:
 
   <scout-version data-value="16.1.0.002"></scout-version>
 
+== TypeScript Support
+
+Eclipse Scout is written in TypeScript and therefore comes with a fully typed TypeScript API.
+
+This gives you many benefits:
+
+* *More efficient development* +
+Typing allows your IDE to better assist with code completion during development and to only suggest methods and properties for an object that actually exists. +
++
+.Better Code Completion
+image::{imgsdir}/scoutjs_code_completion.png[]
+* *Easier entry* +
+With better code completion and clear method signatures, a not-so-experienced JavaScript developer can more easily get up to speed and understand the relationships in the code.
+* *More confidence when updating* +
+If a used API has changed, the code turns red and the build fails.
+* *More confidence during development* +
+Incorrect use of an API or code in general is detected at an early stage. The developer gets more security that his code will work. +
+
+In addition to the TypeScript API, Scout also tries to make it as easy as possible for you so you can write TypeScript yourself in your project.
+This includes:
+
+* An enhanced build stack that can transpile TypeScript code to JavaScript.
+* An improved Scout SDK so IntelliJ can handle Scout code written in TypeScript.
+* Predefined TypeScript configuration and ESLint rules for TypeScript.
+
+=== Project Setup for TypeScript
+
+To use TypeScript in your Project, you need to create a `tsconfig.json` that extends from the Scout `tsconfig.json`.
+Follow the instructions at https://www.npmjs.com/package/@eclipse-scout/tsconfig[@eclipse-scout/tsconfig] to create one.
+
+Now, just create a TypeScript file (a new file ending with `.ts`) and start writing TypeScript!
+
+The build automatically processes these files, so you don't have to adjust the build unless you are writing a JavaScript library.
+If that is the case, see <<Authoring Libraries>>.
+
+To enable code linting for TypeScript files just ensure your ESLint configuration is correctly setup as described in <<ESLint>>.
+The Scout default configuration can handle JavaScript as well as TypeScript code, so there is no separate configuration needed.
+
+*Note*: if you are using third party libraries, we suggest you check if they include types.
+Some libraries contain the types directly in the package, for others the types are often available as a separate npm module from https://github.com/DefinitelyTyped/DefinitelyTyped[DefinitelyTyped] which you need to add as `devDependency` to your `package.json`.
+If there are no types available at all, you will have to provide at least some types for the library by yourself in order to work efficiently with it.
+
+To get started with TypeScript or to learn more about it, we recommend visiting https://www.typescriptlang.org/.
+
+=== TypeScript Migration
+
+If you would like to migrate your existing code base to TypeScript, you can use the https://www.npmjs.com/package/@eclipse-scout/migrate[Scout Migration Tool] for an initial automatic migration.
+But be aware, that the majority of the work, which is adding types, will need to be done manually.
+
+Migrating to TypeScript is not required, you can still use JavaScript or write only new code with TypeScript.
+However, if you are a library developer, we recommend migrating to TypeScript to make the usage of the library easier.
+
+Detailed instruction for the migration can be found here: https://www.npmjs.com/package/@eclipse-scout/migrate[@eclipse-scout/migrate]
+
 == Build Stack
+
 JavaScript and CSS assets of a typical Scout application are built by  https://webpack.js.org/[Webpack] using https://www.npmjs.com/[npm] and https://nodejs.org/[Node.js]. In order to make the building as easy as possible for you, there is a https://www.npmjs.com/package/@eclipse-scout/cli[CLI] module available. That module contains a default webpack and karma configuration and several build scripts you can use. The goal is to reduce the time you need to setup your build to a minimum. If you have created your Scout project using a Scout archetype, it should all be already setup for you. Nevertheless, you will get to a point where it is important to know how the building works in detail and how the several build tools are wired together. If you are there, this chapter should help you out.
 
 === Dependency Management
+
 In every modern application you will have dependencies to other modules, either modules you created to separate your code, or third party modules like Scout. Such dependencies to other JavaScript modules are managed by the Node Package Manager (https://www.npmjs.com/[npm]). So every module containing JavaScript or Less code needs to be a Node module with a `package.json` file that defines its dependencies.
 
 This setup gives you the possibility to easier integrate and update 3rd party JavaScript frameworks available in the huge https://www.npmjs.com/[npm registry].
@@ -1536,7 +1592,10 @@ Or you can also set `scout.loadWebResourcesFromFilesystem` to true to disable cl
 
 === ESLint
 
-For the Scout code base we use https://eslint.org/[ESLint] to analyze the JavaScript code. The ruleset we use is stored in the module https://www.npmjs.com/package/@eclipse-scout/eslint-config[@eclipse-scout/eslint-config]. If you like, you can use the same ruleset for your application, but you don't have to. You can use your custom config or even a different linter.
+For the Scout code base we use https://eslint.org/[ESLint] to analyze the JavaScript and TypeScript code.
+The configuration we use is stored in the module https://www.npmjs.com/package/@eclipse-scout/eslint-config[@eclipse-scout/eslint-config].
+If you like, you can use the same configuration for your application, but you don't have to.
+You can use your custom config or even a different linter.
 
 NOTE: When using the Scout archetype to generate your app, the ESLint configuration is already setup for you and you don't need to do the following steps.
 
@@ -1561,7 +1620,8 @@ module.exports = {
 };
 ----
 
-This tells ESLint to inherit the configuration from the Scout module. In order to run the analysis, you can either use an IDE that supports it (e.g. IntelliJ), or the command line.
+This tells ESLint to inherit the configuration from the Scout module.
+In order to run the analysis, you can either use an IDE that supports it (e.g. IntelliJ), or the command line.
 
 `npx eslint .`
 
@@ -1590,10 +1650,139 @@ The only thing you need to do is to create that file and add a line with the wor
 For more details please see the official ESLint documentation at
 https://eslint.org/docs/user-guide/configuring#eslintignore.
 
-=== TypeScript Support
-
-// FIXME CGU describe
-
 === Authoring Libraries
 
-// FIXME CGU describe
+If you are writing a Scout JS library module, you probably want to prebuild your JavaScript code so the consumer of your library don't have to do it.
+This is especially important if you write your module in TypeScript because the Scout build does not transpile TypeScript code of libraries by default.
+
+Basically, the following things are necessary to create a library:
+
+. Edit your `webpack.config.js` or create a new one if you don't have one already.
+. Create a new entry point and define a name for your library.
+. Use the `libraryConfig` function provided by Scout to create a library configuration. +
+The library config takes care of defining the externals (the code that won't be bundled into your library) based on the dependencies of your `package.json`.
+This means, if an `import` points to code from a dependency (or dev-, optional-, bundled- or peer-dependency), the code won't be bundled and the import is preserved.
+The library itself will be an ESM module and provide an `export` so it can be imported by consumers.
+. Link the entry point (`main`) of your `package.json` to the entry point of your library.
+. Define where your entry point and your type declarations are in a bundled module using `publishConfig`.
+The library will be created in the `dist` folder, as well as the type declarations (see the `outDir` property of your `tsconfig.json`).
+The attributes in the `publishConfig` will replace the regular attributes when the library is published.
+During development, the `publishConfig` has no effect.
+. Ensure the `dist` folder will be part of the bundled module by adding it to the list of files in `package.json`.
+. Consult the https://webpack.js.org/guides/author-libraries/[Webpack Guide] if you want to learn more about authoring libraries in general.
+
+[source,JavaScript]
+.Library Webpack Config
+----
+const baseConfig = require('@eclipse-scout/cli/scripts/webpack-defaults');
+module.exports = (env, args) => {
+  args.resDirArray = [];
+  const config = baseConfig(env, args);
+  return {
+    entry: {
+      'your-library': './src/main/js/index.ts' // <2>
+    },
+    ...baseConfig.libraryConfig(config) // <3>
+  };
+};
+----
+
+[source,json]
+.package.json for a library
+----
+{
+  "main": "./src/main/js/index.ts",
+  "publishConfig": {
+    "main": "./target/dist/dev/your-library.js",
+    "types": "./target/dist/d.ts/index.d.ts"
+  },
+  "files": [
+    "src/main/js",
+    "target/dist"
+  ]
+}
+----
+
+==== Multiple Libraries in a Single Module
+
+If you need to build multiple libraries in a single npm module, you can use the `run` argument of Scout`s webpack build to control which library should be built.
+Scout itself for example uses it to build a testing library (`@eclipse-scout/core/testing`) with some utilities for writing tests.
+
+For each library specified by the `run` argument a new webpack build is started, so the libraries are built consecutively which is ideal for the memory consumption.
+
+To use this feature, just check for the `run` args in your webpack config and load another config instead.
+
+[source,JavaScript]
+----
+module.exports = (env, args) => {
+  args.resDirArray = [];
+  if (args.run === 'other') {
+    return require('./webpack.config.other.js')(env, args);
+  }
+  // ... default config
+};
+
+----
+
+In the `webpack.config.other.js` define your other library.
+If it should only contain a part of the source code, make sure to specify the externals correctly.
+The function `rewriteIndexImports` of the base config may help you to externalize all imports to the `index` file.
+
+[source,JavaScript]
+----
+const baseConfig = require('@eclipse-scout/cli/scripts/webpack-defaults');
+module.exports = (env, args) => {
+const config = baseConfig(env, args);
+  let otherConfig = {
+    entry: {
+      'other-library': './src/main/js/folder-with-other-library/index.ts'
+    },
+    ...baseConfig.libraryConfig(config)
+  };
+  otherConfig.externals = [
+    baseConfig.rewriteIndexImports('@your/core', 'folder-with-other-library'),
+    otherConfig.externals
+  ];
+  return otherConfig;
+};
+----
+
+Then, make sure every library will be built by specifying the run argument in the `package.json`:
+[source,json]
+
+----
+{
+  "scripts": {
+    "build:dev": "scout-scripts build:dev --run default other",
+    "build:prod": "scout-scripts build:prod --run default other"
+  }
+}
+----
+
+Finally, you need to define the entry points in your `package.json`.
+You can do so using the `exports` attribute.
+
+[source,json]
+.package.json for a library
+----
+{
+  "exports": {
+    ".": "./src/main/js/index.ts",
+    "./other": "./src/main/js/folder-with-other-library/index.ts",
+    "./src/main/js/*": "./src/main/js/*"
+  },
+  "main": "./src/main/js/index.ts",
+  "publishConfig": {
+    "exports": {
+      ".": "./target/dist/dev/your-library.js",
+      "./testing": "./target/dist/dev/other-library.js",
+      "./src/main/js/*": "./src/main/js/*"
+    },
+    "main": "./target/dist/dev/your-library.js"
+  }
+}
+----
+
+*Important*: As soon as the `exports` attribute is used, consumers of the module can only import code that is explicitly exported.
+In order to still allow imports to individual source files directly (e.g. for CSS Files), you can export them using wildcard syntax (`./src/main/js/*`).
+If you don't need or want that, just omit this configuration.
