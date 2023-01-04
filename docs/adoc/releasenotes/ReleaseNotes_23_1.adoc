@@ -143,7 +143,7 @@ Or you can use widget maps.
 A widget map is an interface that maps the ids of the widgets to their type.
 This allows TypeScript to determine the return type automatically.
 
-.Event Name Completion
+.Typed `widget` function
 image::{rnimgsdir}/typed_widget.png[]
 
 Scout SDK takes care of creating the widget maps, so you don't have to write them manually.
