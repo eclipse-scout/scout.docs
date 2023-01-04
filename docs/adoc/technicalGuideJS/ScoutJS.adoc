@@ -10,13 +10,16 @@ ifndef::mdledir[:mdledir: .]
 :experimental:
 
 == Overview
-A classic Scout application has a client model written in Java, and a UI which is rendered using JavaScript. With this approach you can write your client code using a mature and type safe language. Unfortunately you cannot develop applications which have to run offline because the UI and the Java model need to be synchronized.
+Scout JS is used to build the user interface of an Eclipse Scout application.
+It consists of a large widget library including simple widgets like buttons or menu items and more complex widgets like tables, tile grids or trees.
+Beside the widget library itself, Scout JS also helps to interact with the widgets, from accessing a widget, to configuring data binding or adding input validation.
 
-With Scout JS this will change. You will be able to create applications running without a UI server because there won't be a Java model anymore. The client code will be written using JavaScript and executed directly in the browser.
+But with the widgets alone you cannot create an application.
+You need a frame to put the widgets into, a setup to easily write tests and prevent errors, a centralized error handling to analyze errors, possibilities to customize the look of your app and tooling to build it, so it can be published and used.
+For all these topics Scout JS provides solutions with the goal to make developing a user interface as easy as possible.
 
-You still don't have to care about how the model will be rendered. There isn't a strict separation of the UI and the model anymore, but that doesn't mean you have to write HTML and CSS. You can of course, if you want to. But typically you will be using the Scout widgets you already know.
-
-Scout JS is used in classic Scout applications as well. This means if you understand the concepts of Scout JS, writing custom widgets will be a lot easier.
+By the way: Scout JS is used in classic Scout applications as well.
+This means, if you understand the concepts of Scout JS, writing custom widgets for Scout Classic will be a lot easier.
 
 == Widget
 A widget is a component which may be rendered. It may be simple like a label, or more complex like a tree or table. A form is a widget and a form field, too.
@@ -38,7 +41,9 @@ If you want to destroy a widget yourself, it is recommended to do that by deleti
 If you have attached listeners to other widgets at initialization time, now is the time to detach them. After a widget is destroyed it cannot be used anymore. Every attempt will result in a `Widget is destroyed` error.
 
 === Creating a Widget
-A widget may be created using the constructor function or `scout.create`. Best practice is to always use `scout.create` which gives you two benefits:
+
+A widget may be created using the constructor function or `scout.create`.
+Best practice is to always use `scout.create` which gives you two benefits:
 
 1. You don't have to call `init` by yourself.
 2. The widget may be extended (see <<Object Factory>> for details).
@@ -48,14 +53,35 @@ The following example creates a `StringField`.
 [source,javascript]
 .Creating a string field
 ----
-var field = scout.create('StringField', {
+import {scout, StringField} from '@eclipse-scout/core';
+
+let field = scout.create(StringField, {
   parent: groupBox,
   label: 'hello',
   value: 'world'
 });
 ----
 
-The first parameter is the object type, which typically is the name of the constructor function preceded by the name space. `StringField` belongs to the `scout` name space which is the default and may be omitted. If the string field belonged to another name space called `mynamespace`, you would have to write the following:
+The first parameter is the object type.
+Typically, it is a class reference pointing to the widget you want to create.
+When using a class reference, the return value will be typed, so the IDE can assist you with code completion.
+For this reason, this syntax is recommended.
+
+The object type can also be a string, like the name of the class.
+
+[source,javascript]
+.Creating a string field by string based object type
+----
+let field = scout.create('StringField', {
+  parent: groupBox,
+  label: 'hello',
+  value: 'world'
+});
+----
+
+In that case, the `ObjectFactory` will look for the class in the namespace object, which is put on the `window`.
+`StringField` belongs to the `scout` namespace which is the default and can therefore be omitted.
+If the string field belonged to another name space called `mynamespace`, you would have to write the following:
 
 [source,javascript]
 .Creating a field considering the name space
@@ -63,27 +89,50 @@ The first parameter is the object type, which typically is the name of the const
 scout.create('mynamespace.StringField', {})
 ----
 
-The second parameter of scout.create is the model. The model is the specification for your widget. In case of the `StringField` you can specify the label, the max length, whether it is enabled and visible and more. If you don't specify them, the defaults are used. The only needed property is the `parent`. To see what the defaults are, have a look at the source code of the widget constructor.
+The second parameter of `scout.create` is the model.
+The model is the specification for your widget.
+In case of the `StringField` you can specify properties like the label, the max length, whether it is enabled and visible and more.
+If you don't specify them, the defaults are used. The only needed property is the `parent`.
 
-Every widget needs a parent. The parent is responsible to render (and remove) its children. In the example above, the parent is a group box. This group box has a property called `fields`. If the group box is rendered, it will render its fields too.
+To get a list of all available `StringField` properties, have a look at the interface {github-code}/eclipse-scout-core/src/form/fields/stringfield/StringFieldModel.ts[StringFieldModel].
+Such a model definition is available for every widget.
+Just add the suffix `Model` to the widget name and you'll find it.
 
-You don't need a group box to render the string field, you could render it directly onto the desktop. But if you want to use a form, you need a group box and create the form, group box and the field. Doing this programmatically, meaning creating each widget separately using scout.create, is time consuming, that is why we suggest to use the declarative approach.
+.Widget Model Definition
+image::{imgsdir}/widget_model.png[]
+
+Every widget needs a parent.
+The parent is responsible to render (and remove) its children.
+In the example above, the parent is a group box.
+This group box has a property called `fields`.
+If the group box is rendered, it will render its fields too.
+
+You don't need a group box to render the string field, you could render it directly onto the desktop.
+But if you want to use a form, you need a group box and create the form, group box and the field.
+Doing this programmatically, meaning creating each widget separately using `scout.create`, is time consuming, that is why we suggest to use the declarative approach.
 
 === Creating a Widget Declaratively
-Have a look at the above example again. The second parameter, the model, defines some properties of the string field. This actually already is the declarative approach, because you could also set each property manually after creating the string field using the according methods. In order to create a form, we need to specify multiple widgets, respectively a widget hierarchy, at once. The following example defines a form with a group box and a string field.
+
+Have a look at the above example again.
+The second parameter, the model, defines some properties of the string field.
+This actually already is the declarative approach, because you could also set each property manually after creating the string field using the according methods.
+In order to create a form, we need to specify multiple widgets, respectively a widget hierarchy, at once.
+The following example defines a form with a group box and a string field.
 
 [source,javascript]
 .A form model defined declaratively
 ----
+import {GroupBox, StringField} from '@eclipse-scout/core';
+
 export default {
   title: 'My first form!',
   rootGroupBox: {
     id: 'MainBox',
-    objectType: 'GroupBox',
+    objectType: GroupBox,
     fields: [
       {
         id: 'MyStringField',
-        objectType: 'StringField',
+        objectType: StringField,
         label: 'hello',
         value: 'world'
       }
@@ -92,12 +141,17 @@ export default {
 }
 ----
 
-To keep things nice and clean we separate the model from the code by putting this description of the form in a separate file called `MyFormModel.js`. Typically you would create a file called `MyForm.js` as well, which contains the logic to interact with the fields. But since we just want to open the form it is not necessary. Instead you can use the following code to create the form:
+To keep things nice and clean we separate the model from the code by putting this description of the form in a separate file called `MyFormModel.js`.
+Typically, you would create a file called `MyForm.js` as well, which contains the logic to interact with the fields.
+But since we just want to open the form it is not necessary.
+Instead, you can use the following code to create the form:
 
 [source,javascript]
 ----
+import {Form, scout} from '@eclipse-scout/core';
 import model from './MyFormModel';
-var form = scout.create('Form', $.extend({parent: desktop}, model));
+
+let form = scout.create(Form, $.extend({parent: desktop}, model));
 ----
 
 Now you can open the form using `form.open()` and it will look like this:
@@ -106,7 +160,8 @@ Now you can open the form using `form.open()` and it will look like this:
 .First form
 image::{imgsdir}/scoutjs_myform.png[]
 
-As soon as you would like to add some code that interacts with the fields or maybe just want to not always load the model manually when creating the form, you should create a file called `MyForm.js`. The content of that file would be a class `MyForm` that extends the `Form` from Scout and a method called `_jsonModel` that returns our model.
+As soon as you would like to add some code that interacts with the fields or maybe just want to not always load the model manually when creating the form, you should create a file called `MyForm.js`.
+The content of that file would be a class `MyForm` that extends the `Form` from Scout and a method called `_jsonModel` that returns our model.
 
 [source,javascript]
 ----
@@ -120,14 +175,18 @@ export default class MyForm extends Form {
 }
 ----
 
-Creating the form is now possible using the following code (assuming your namespace is called 'example' and you've added the file `MyForm.js` to your `index.js`).
+Creating the form is now possible using the following code.
+
 [source,javascript]
 ----
-var form = scout.create('example.MyForm', {parent: desktop});
+let form = scout.create(MyForm, {parent: desktop});
 ----
 
 ==== Using constants in a JSON model
-In previous Scout versions, the model was defined in a JSON file. Even though it is still possible, it is not recommended anymore, because writing the model using JavaScript is much more convenient. One advantage is, that you can use constants the same way as in your regular JavaScript code.
+
+In previous Scout versions, the model was defined in a JSON file.
+Even though it is still possible, it is not recommended anymore, because writing the model using JavaScript is much more convenient.
+One advantage is, that you can use constants the same way as in your regular JavaScript code.
 
 [source,javascript]
 ----
@@ -138,37 +197,46 @@ export default {
 }
 ----
 
-If you use a JSON based model, you cannot reference Scout's JavaScript enums/constants and you'd have to write the following to assign the constant value:
+If you use a JSON based model, you cannot reference Scout's JavaScript enums/constants, and you'd have to write the following to assign the constant value:
 
 [source,json]
 ----
 { "labelPosition": 2 }
 ----
 
-Obviously this makes the JSON code harder to read and understand and the developer has to lookup the enum/constant definition first. This is where the _${const:NAME}_ tag comes to help. A widget can define a list of properties that can be used with the const-tag. The widget defines in which enum/constant the name provided by the tag is resolved. Using the const-tag, the JSON example now looks like this:
+Obviously this makes the JSON code harder to read and understand and the developer has to lookup the enum/constant definition first.
+This is where the _${const:NAME}_ tag comes to help.
+A widget can define a list of properties that can be used with the const-tag.
+The widget defines in which enum/constant the name provided by the tag is resolved.
+Using the const-tag, the JSON example now looks like this:
 
 [source,json]
 ----
 { "labelPosition": "${const:ON_FIELD}" }
 ----
 
-When you want to provide const-tag support for a custom widget, you need to call  `scout.Widget#resolveConsts` in the `_init` function of your widget and for each supported property specifiy the property name and the object that contains the enum/constant definition.
+When you want to provide const-tag support for a custom widget, you need to call  `scout.Widget#resolveConsts` in the `_init` function of your widget and for each supported property specify the property name and the object that contains the enum/constant definition.
 
 === Finding a Widget
-In the example from the previous chapter we have seen how to create a widget, in that specific case we created a form. Typically it is not sufficient to just create a form, you most likely want to interact with the fields, like reading the values the user entered. In order to do that you need access to the fields. The easiest way is to use the IDs specified in the JSON.
+
+In the example from the previous chapter we have seen how to create a widget, in that specific case we created a form.
+Typically, it is not sufficient to just create a form, you most likely want to interact with the fields, like reading the values the user entered.
+In order to do that you need access to the fields.
+The easiest way is to use the IDs specified in the JSON.
 
 Let's have a look at our example form again:
+
 [source,javascript]
 ----
 export default {
   title: 'My first form!',
   rootGroupBox: {
     id: 'MainBox',
-    objectType: 'GroupBox',
+    objectType: GroupBox,
     fields: [
       {
         id: 'MyStringField',
-        objectType: 'StringField',
+        objectType: StringField,
         label: 'hello',
         value: 'world'
       }
@@ -177,19 +245,100 @@ export default {
 }
 ----
 
-In this example we have 3 widgets: the form, the root group box and a string field. These widgets are linked to each other which enables us to find the string field starting from the form. This can be done by using the following command:
+In this example we have 3 widgets: the form, the root group box and a string field.
+These widgets are linked to each other which enables us to find the string field starting from the form.
+This can be done by using the following command:
 
-`var stringField = form.widget('MyStringField');`
+`let stringField = form.widget('MyStringField');`
 
 Now you can read its value, change properties, add event handlers and so on.
 
+==== Widget Maps
+
+The result of the `widget` function to find a widget is a generic `Widget`, so it is not possible to call a method of a specific widget without casting (at least with TypeScript).
+To do the type casting, you can either specify the return type directly at the time of usage.
+
+.Using the second parameter
+[source,js]
+----
+import {Menu} from '@eclipse-scout/core';
+
+let menu = this.widget('YourId', Menu);
+----
+
+.Cast manually (TypeScript)
+[source,ts]
+----
+import {Menu} from '@eclipse-scout/core';
+
+let menu = this.widget('YourId') as Menu;
+----
+
+Or you can use widget maps.
+
+A widget map is a type that maps the ids of the widgets to their object type.
+This allows TypeScript to determine the return type automatically.
+
+.Typed `widget` function
+image::{imgsdir}/typed_widget.png[]
+
+Scout SDK takes care of creating the widget maps, so you don't have to write them manually.
+But there is one precondition: your model has to be in a TypeScript file.
+
+Nevertheless, here is how you would do it manually for our example form from above.
+
+. Create a type called 'MyFormWidgetMap' in the file 'MyFormModel.ts'
+. Link it to the form by re declaring the type of `widgetMap`.
+
+[source,javascript]
+.Create Widget Map
+----
+export type MyFormWidgetMap = {
+  'MainBox': GroupBox;
+  'MyStringField': StringField;
+}
+----
+
+[source,javascript]
+.Link Widget Map
+----
+import {Form} from '@eclipse-scout/core';
+import {MyFormWidgetMap} from './MyFormModel';
+
+export class MyForm extends Form {
+  declare widgetMap: MyFormWidgetMap;
+}
+----
+
+If you're using JavaScript for your form, you can use JSDoc to link the `widgetMap`:
+
+[source,javascript]
+.Link Widget Map in JavaScript
+----
+import {Form} from '@eclipse-scout/core';
+import {MyFormWidgetMap} from './MyFormModel';
+
+export default class MyForm extends Form {
+
+  constructor() {
+    super();
+
+    /** @type MyFormWidgetMap */
+    this.widgetMap = null;
+  }
+}
+----
+
 === Properties
+
 As seen before, every widget has a model representing its state. This model is written onto the widget at the time it is being instantiated. The properties of that model are now available as properties of the widget. So in order to access such a property, just call `widget.yourProperty`. If you want to modify the property, just call `widget.setYourProperty(value)`.
 
 [source,javascript]
 .Accessing and modifying a property
 ----
-var field = scout.create('StringField', {
+import {scout, StringField} from '@eclipse-scout/core';
+
+var field = scout.create(StringField, {
   parent: parent,
   labelVisible: false
 });
@@ -215,12 +364,13 @@ Defining a property as widget property has the benefit that the widget is create
 [source,javascript]
 .Creating the string field automatically using a widget property
 ----
-import {StringField} from '@eclipse-scout/core';
-var groupBox = scout.create('GroupBox', {
+import {scout, StringField, GroupBox} from '@eclipse-scout/core';
+
+var groupBox = scout.create(GroupBox, {
   parent: parent,
   label: 'My Group Box',
   fields: [{
-    objectType: 'StringField',
+    objectType: StringField,
     label: 'My String Field'
   }]
 });
@@ -243,7 +393,9 @@ So if a property is defined as widget property, calling a setter will do the fol
 . The render method is called (same as for regular properties).
 
 === Events
-Every widget supports event handling by using the class `EventSupport`. This allows the widgets to attach listeners to other widgets and getting informed when an event happens.
+
+Every widget supports event handling by using the class `EventSupport`.
+This allows the widgets to attach listeners to other widgets and getting informed when an event happens.
 
 The 3 most important methods are the following:
 
@@ -251,35 +403,42 @@ The 3 most important methods are the following:
 . `off`: removes a listener
 . `trigger`: triggers an event
 
-So if a widget is interested in an event of another widget, it calls the function `on` with a callback function as parameter. If it is not interested anymore, it uses the function `off` with the same callback function as parameter.
+So if a widget is interested in an event of another widget, it calls the function `on` with a callback function as parameter.
+If it is not interested anymore, it uses the function `off` with the same callback function as parameter.
 
 The following example shows how to handle a button click event.
 
 [source,javascript]
 .Handling an event
 ----
-var button = scout.create('Button', {
+import {scout, Button} from '@eclipse-scout/core';
+
+let button = scout.create(Button, {
   parent: parent,
   label: 'click me!'
 });
 button.render();
-button.on('click', function(event) {
+button.on('click', event => {
   // print 'Button "click me!" has been clicked'
   console.log('Button "' + event.source.label + '" has been clicked');
 });
 ----
 
-Every click on the button will execute the callback function. To stop listening, you could call `button.off('click')`, but this would remove every listener listening to the 'click' event. Better is to pass the same reference to the callback used with `on` as parameter for `off`.
+Every click on the button will execute the callback function.
+To stop listening, you could call `button.off('click')`, but this would remove every listener listening to the 'click' event.
+Better is to pass the same reference to the callback used with `on` as parameter for `off`.
 
 [source,javascript]
 .Stop listening for an event
 ----
-var button = scout.create('Button', {
+import {scout, Button} from '@eclipse-scout/core';
+
+let button = scout.create(Button, {
   parent: parent,
   label: 'click me!'
 });
 button.render();
-var callback = function(event) {
+let callback = event => {
   // print 'Button "click me!" has been clicked'
   console.log('Button "' + event.source.label + '" has been clicked');
 
@@ -289,9 +448,14 @@ var callback = function(event) {
 button.on('click', callback);
 ----
 
-NOTE: If the callback function is bound using `bind()`, the bound function has to be used when removing the listener using `off`. This is because `bind()` returns a new function wrapping the original callback.
+NOTE: If the callback function is bound using `bind()`, the bound function has to be used when removing the listener using `off`.
+This is because `bind()` returns a new function wrapping the original callback.
 
-In order to trigger an event rather than listening to one, you would use the function `trigger`. This is what the button in the above example does. When it is being clicked, it calls `this.trigger('click')` (`this` points to the instance of the button). With the second parameter you may specify additional data which will be copied onto the event. By default the event contains the type (e.g. 'click') and the source which triggered it (e.g. the button).
+In order to trigger an event rather than listening to one, you would use the function `trigger`.
+This is what the button in the above example does.
+When it is being clicked, it calls `this.trigger('click')` (`this` points to the instance of the button).
+With the second parameter you may specify additional data which will be copied onto the event.
+By default, the event contains the type (e.g. 'click') and the source which triggered it (e.g. the button).
 
 [source,javascript]
 .Triggering an event with custom event data
@@ -322,14 +486,15 @@ Listening to such an event works in the same way as for other events, just use t
 [source,javascript]
 .Example of a property change event
 ----
-import {Button} from '@eclipse-scout/core';
-var button = scout.create('Button', {
+import {scout, Button} from '@eclipse-scout/core';
+
+let button = scout.create(Button, {
   parent: parent,
   label: 'click me!',
   displayStyle: Button.DisplayStyle.TOGGLE
 });
 button.render();
-button.on('propertyChange', function(event) {
+button.on('propertyChange', event => {
   if (event.propertyName === 'selected') {
     // prints 'Property selected changed from false to true'
     console.log('Property ' + event.propertyName + ' changed from ' + event.oldValue + ' to ' + event.newValue);
@@ -346,14 +511,31 @@ You can listen for a specific property change with the following notation: `prop
 [source,javascript]
 .Listen for specific property changes
 ----
-button.on('propertyChange:selected', function(event) {
+button.on('propertyChange:selected', event => {
   // This listener is only executed when the 'selected' property changes
   console.log('Property ' + event.propertyName + ' changed from ' + event.oldValue + ' to ' + event.newValue);
 });
 button.setSelected(true);
 ----
 
+==== Event Maps
+
+If you want to know what events are available for a specific widget, you can have a look at its event map.
+The event map is a TypeScript interface and named after the widget with the suffix `EventMap`.
+For example, you will find the event map of a `Menu` under the name {github-code}/eclipse-scout-core/src/menu/MenuEventMap.ts[MenuEventMap].
+
+Beside having a complete list of the available events, these event maps are also used by TypeScript to provide code completion for the event name when adding an event handler:
+
+.Event Name Completion
+image::{imgsdir}/event_completion.png[]
+
+You also get the correct type of the event itself including its members in the handler:
+
+.Typed Event
+image::{imgsdir}/typed_events.png[]
+
 === Icons
+
 See chapter <<Icons>> for a general introduction to icons in Scout.
 
 Widgets that have a property `iconId` (for instance `Menu`) can display an icon. This iconId references
@@ -371,8 +553,8 @@ Example: `font:\uE043`, references a character in _scoutIcons.ttf_
 +
 Example: `font:fooIcons \uE109`, references a character in custom font _fooIcons.ttf_
 * **Icon Constants**: iconId has the format: `${iconId:[constant]}`, where constant is a constant in the module `icons.js`.
-  This format is especially useful when you configure a Scout widget with a JSON model. The value of the constant
-  is again either an image or a font-icon as described above.
+This format is especially useful when you configure a Scout widget with a JSON model. The value of the constant
+is again either an image or a font-icon as described above.
 +
 Example: `${iconId:ANGLE_UP}` uses `icons.ANGLE_UP`, icons predefined by Scout
 +
@@ -400,11 +582,21 @@ So far we have learned what the parent is. But what is the owner? The owner is t
 This comes in handy if you want to temporarily give the control over rendering/removal to another widget (like a popup) but don't let the other widget destroy your widget (e.g. when the popup is closed) because you want to use your widget again (e.g. display it on another popup).
 
 == Object Factory
-As seen in the <<Creating a Widget>> a widget may be created using `scout.create`. When using this function, the call is delegated to the `ObjectFactory`.
 
-The `ObjectFactory` is responsible to create and initialize a Scout object. A typical Scout object has an `objectType` and an `init` function. But actually any kind of object with a constructor function in the scout or a custom namespace may be created.
+As seen in the <<Creating a Widget>> a widget may be created using `scout.create`.
+When using this function, the call is delegated to the `ObjectFactory`.
 
-By default, objects are created using naming convention. This means when calling `scout.create('scout.Table', model)`, the `scout` namespace is searched for a class called `Table`. Since `scout` is the default namespace, it may be omitted. So calling `scout.create('Table', model)` has the same effect. If there is such a class found, it will be instantiated and the `init` function called, if there is one. The `model` is passed to that `init` function. So instead of using `scout.create` you could also use the following code:
+The `ObjectFactory` is responsible to create and initialize a Scout object.
+A typical Scout object has an `objectType` and an `init` function.
+But actually any kind of object with a constructor function may be created.
+
+If you use a string based object type, objects are created using naming convention by default.
+This means when calling `scout.create('scout.Table', model)`, the `scout` namespace is searched for a class called `Table`.
+Since `scout` is the default namespace, it may be omitted.
+So calling `scout.create('Table', model)` has the same effect.
+If there is such a class found, it will be instantiated and the `init` function called, if there is one.
+The `model` is passed to that `init` function.
+So instead of using `scout.create` you could also use the following code:
 
 [source,javascript]
 .Creating an object without the ObjectFactory
@@ -414,9 +606,15 @@ var table = new Table();
 table.init(model);
 ----
 
-This will work fine, but you will loose the big benefit of the `ObjectFactory`: the ability to replace existing classes. So if you want to customize the default `Table`, you would likely extend that table and override some functions. In that case you need to make sure every time a table is created, your class is used instead of the default. To do that you have to register your class in the `ObjectFactory` with the `objectType` `Table`. If `scout.create('Table')` is called the object factory will check if there is a class registered for the type `Table` and, if yes, that class is used. Only if there is no registration found, the default approach using the naming convention is performed.
+This will work fine, but you will lose the big benefit of the `ObjectFactory`: the ability to replace existing classes.
+So if you want to customize the default `Table`, you would likely extend that table and override some functions.
+In that case you need to make sure every time a table is created, your class is used instead of the default.
+To do that you have to register your class in the `ObjectFactory` with the `objectType` `Table`.
+If `scout.create('Table')` is called the object factory will check if there is a class registered for the type `Table` and, if yes, that class is used.
+Only if there is no registration found, the default approach using the naming convention is performed.
 
-In order to register you class, you need a file called `objectFactories` and add that to your JavaScript module (e.g. index.js). The content of that file may look as following:
+In order to register you class, you need a file called `objectFactories` and add that to your JavaScript module (e.g. index.js).
+The content of that file may look as following:
 
 [source,javascript]
 .Adding a new object factory registration
@@ -429,9 +627,14 @@ scout.addObjectFactories({
 });
 ----
 
-This will simply add a new factory for the type `Table` the the list of existing factories. From now on `yourproject.CustomTable` will be instantiated every time a `Table` should be created.
+This will simply add a new factory for the type `Table` the the list of existing factories.
+From now on `yourproject.CustomTable` will be instantiated every time a `Table` should be created.
+
+NOTE: This replacement also works if `scout.create` is used with class references (which is the recommended approach).
+So, `scout.create('Table')` as well as `scout.create(Table)` will return a new `CustomTable`.
 
 == Form
+
 A form is typically used for two purposes:
 
 1. Allowing the user to enter data in a structured way
@@ -479,7 +682,10 @@ image::{imgsdir}/formfield.png[]
 
 Typical form fields are `StringField`, `DateField` or `TableField`. All these fields have the API of `FormField` in common (like `setLabel()`, `setErrorStatus()`, etc.) but also provide additional API.
 
-Some form fields are actually just a wrapper for another widget. This is for example the case for the `TableField`. The `Table` itself may be used stand-alone, just call `scout.create('Table', {})`. But if you want to use it in a `GroupBox`, which is a form field, you have to use a `TableField` wrapping the `Table`.
+Some form fields are actually just a wrapper for another widget.
+This is for example the case for the `TableField`.
+The `Table` itself may be used stand-alone, just call `scout.create(Table, {})`.
+But if you want to use it in a `GroupBox`, which is a form field, you have to use a `TableField` wrapping the `Table`.
 
 == Value Field
 A value field extends the form field by the ability to store a value. Typical form fields are `StringField`, `NumberField`, `DateField` or `SmartField`. All these fields provide a value which is accessible using `field.value` and may be set using `field.setValue(value)`.
@@ -583,7 +789,7 @@ The most important parts of a Lookup Row are the key and the value. The key can 
 
 Like in a classic Scout application each Smart Field in Scout JS references a LookupCall class. The lookup call is in charge of querying a data source and returning results for that query. Example: when you type "f" into a Smart Field, a lookup call could return a result which contains lookup rows starting with "F", like "Faz" and "Foo".
 
-The lookup call may return static (hard-coded) data which is already available in the browser, or may fetch an external data-source via HTTP, typically some kind of REST API. Depening on how your Smart Field is configured and used, the Smart Field will call different methods on the LookupCall instance and pass data to that method, like the search text the user has typed into the field. These methods are: `getAll`, `getByText`, `getByKey` and `getByRec`.
+The lookup call may return static (hard-coded) data which is already available in the browser, or may fetch an external data-source via HTTP, typically some kind of REST API. Depending on how your Smart Field is configured and used, the Smart Field will call different methods on the LookupCall instance and pass data to that method, like the search text the user has typed into the field. These methods are: `getAll`, `getByText`, `getByKey` and `getByRec`.
 
 * *getByKey():* Retrieves a single lookup row for a specific key value. Used by Smart Fields and Smart Columns to get the display text for a given key value.
 * *getByText():* Retrieve multiple lookup rows which match a certain String. Used by Smart Fields when the user starts to enter some text in the field.
@@ -712,8 +918,6 @@ As you see, the first thing we do on line 1 is to import the default theme 'inde
 @palette-gray-5: #2d3748;
 ...
 ----
-
-Note that all variables except `@palette-gray-2-1` override variables from `colors.less`. `@palette-gray-2-1` is a variable which is only defined and used in the _dark_ theme.
 
 ==== Build and Runtime
 
@@ -1005,7 +1209,7 @@ This `CustomTileFilter` is now passed to a TileGrid via
 
 [source,js]
 ----
-tileGrid.createTextFilter = () => scout.create('CustomTileFilter');
+tileGrid.createTextFilter = () => scout.create(CustomTileFilter);
 tileGrid.updateTextFilterText = (filter, text) => filter.setAcceptedText(text);
 ----
 

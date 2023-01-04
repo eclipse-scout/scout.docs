@@ -22,6 +22,7 @@ ifndef::mdledir[:mdledir: .]
 // Links
 :docroot: https://eclipsescout.github.io/{doc-short-version}/
 :github-changelog-link: https://github.com/eclipse-scout/scout.rt/compare/releases/{scout-previous-version}%2E%2E%2Ereleases/{scout-version}[detailed change log]
+:github-code: https://github.com/eclipse-scout/scout.rt/blob/releases/{scout-version}
 :maven-central-link: http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.eclipse.scout.rt%22%20AND%20v%3A%22{maven-version}%22[{maven-version}]
 :migration-guide: https://eclipsescout.github.io/{doc-short-version}/migration-guide.html
 :migration-guide-link: {migration-guide}[Migration Guide]

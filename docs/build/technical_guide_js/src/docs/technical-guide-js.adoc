@@ -10,6 +10,7 @@ This technical guide documents the Scout JS architecture and describes important
 
 NOTE: This is the guide to Scout JS, the JavaScript part of Eclipse Scout. +
 If you are looking for the Java part please see the https://eclipsescout.github.io/{scout-version}/technical-guide.html[technical guide for Scout Classic]. +
+If you don't know the difference between Scout JS and Scout Classic, please read the https://eclipsescout.github.io/{scout-version}/getstarted.html[Get Started Guide] first.
 
 :sectnums:
 include::{mdledir}/technicalGuideJS/ScoutJS.adoc[]
