@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2015 BSI Business Systems Integration AG.
+ * Copyright (c) 2023 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
@@ -21,7 +21,7 @@ import org.eclipse.scout.rt.platform.config.CONFIG;
 import org.eclipse.scout.rt.shared.SharedConfigProperties.CreateTunnelToServerBeansProperty;
 import org.eclipse.scout.rt.shared.services.common.ping.IPingService;
 import org.eclipse.scout.widgets.client.WidgetsClientConfigProperties.SeleniumProperty;
-import org.eclipse.scout.widgets.client.ui.desktop.Desktop;
+import org.eclipse.scout.widgets.client.ui.desktop.BuggyDesktop;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,7 +45,7 @@ public class ClientSession extends AbstractClientSession {
     }
 
     execInitLocale();
-    setDesktop(new Desktop());
+    setDesktop(new BuggyDesktop());
 
     if (createTunnelToServerBeans) {
       BEANS.get(IBookmarkService.class).loadBookmarks();

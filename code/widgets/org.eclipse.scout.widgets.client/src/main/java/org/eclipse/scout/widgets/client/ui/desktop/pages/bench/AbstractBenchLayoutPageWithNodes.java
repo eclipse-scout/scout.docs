@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) 2023 BSI Business Systems Integration AG.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Distribution License v1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/org/documents/edl-v10.html
+ *
+ * Contributors:
+ *     BSI Business Systems Integration AG - initial API and implementation
+ */
 package org.eclipse.scout.widgets.client.ui.desktop.pages.bench;
 
 import java.util.ArrayList;
@@ -44,9 +54,16 @@ public class AbstractBenchLayoutPageWithNodes extends AbstractPageWithNodes {
   protected void execPageActivated() {
     super.execPageActivated();
     IDesktop.CURRENT.get().setBenchLayoutData(getBenchLayoutData());
-    List<IForm> formList = new ArrayList<>();
-    execCreatePageForms(formList);
-    m_pageForms = CollectionUtility.arrayList(formList);
+    if (m_pageForms != null) {
+      for (IForm f : m_pageForms) {
+        IDesktop.CURRENT.get().showForm(f);
+      }
+    }
+    else {
+      List<IForm> formList = new ArrayList<>();
+      execCreatePageForms(formList);
+      m_pageForms = CollectionUtility.arrayList(formList);
+    }
   }
 
   @Override
@@ -54,7 +71,7 @@ public class AbstractBenchLayoutPageWithNodes extends AbstractPageWithNodes {
     // remove all page forms
     if (m_pageForms != null) {
       for (IForm f : m_pageForms) {
-        f.doClose();
+        IDesktop.CURRENT.get().hideForm(f);
       }
     }
     super.execPageDeactivated();
