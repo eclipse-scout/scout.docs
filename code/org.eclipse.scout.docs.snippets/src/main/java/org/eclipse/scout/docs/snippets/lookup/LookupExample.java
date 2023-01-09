@@ -9,6 +9,7 @@ import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 import org.eclipse.scout.rt.shared.services.lookup.LookupCall;
 
+@SuppressWarnings("all")
 public class LookupExample {
 
   @ClassId("96e2adab-36f0-4cc1-8335-67719008cfa6")

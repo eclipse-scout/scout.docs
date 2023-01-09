@@ -9,6 +9,7 @@ import org.eclipse.scout.rt.server.services.lookup.AbstractLookupService;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 
+@SuppressWarnings("all")
 public class LanguageLookupService extends AbstractLookupService<String> implements ILanguageLookupService {
 
   @Override

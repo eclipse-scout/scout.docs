@@ -19,7 +19,7 @@ import org.eclipse.scout.rt.dataobject.id.IdTypeName;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.util.Assertions.AssertionException;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "squid:S1481"})
 public class DataObjectExamples {
 
   void serialize() {

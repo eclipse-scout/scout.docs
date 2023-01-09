@@ -19,6 +19,7 @@ import org.eclipse.scout.rt.platform.text.TEXTS;
 
 @ClassId("7d73104f-4982-4b7d-856f-ce133b70bb26")
 @FormData(value = PersonFormData.class, sdkCommand = SdkCommand.CREATE)
+@SuppressWarnings("all")
 public class PersonForm extends AbstractForm {
 
   @Override
