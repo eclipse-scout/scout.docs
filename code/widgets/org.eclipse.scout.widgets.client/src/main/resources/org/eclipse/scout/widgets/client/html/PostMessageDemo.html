@@ -212,8 +212,8 @@
           document.body.appendChild(addIframeButton);
 
           addIframeButton.addEventListener('click', function(event) {
-            var iframe = document.createElement("iframe");
-            iframe.scrolling = "yes";
+            var iframe = document.createElement('iframe');
+            iframe.scrolling = 'yes';
             iframeContainer.appendChild(iframe);
             iframe.src = document.location + '?nested=true';
             addIframeButton.remove(); // remove button after nested iframe was inserted

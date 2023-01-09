@@ -1,3 +1,6 @@
+/* eslint-disable */
+// noinspection JSFunctionExpressionToArrowFunction, JSDeprecatedSymbols
+
 // ### IMPLEMENTATION NOTE ###
 // Because this file is not processed by a transpiler, the following code is deliberately written in ES5 style.
 // Otherwise, it couldn't be run in very old browsers (e.g. Internet Explorer).
@@ -51,7 +54,6 @@ function sendMessage(data) {
 
 // Enable all elements, since we now know that JS is enabled
 var disabledElements = document.querySelectorAll('[disabled]');
-// noinspection JSFunctionExpressionToArrowFunction
 Array.prototype.forEach.call(disabledElements, function(el) {
   el.removeAttribute('disabled');
 });
@@ -70,22 +72,18 @@ var counter = 0;
 // -- Buttons -----
 
 var names = ['World', 'Scout', 'Alice', 'Bob', 'Again'];
-// noinspection JSFunctionExpressionToArrowFunction
 button1.addEventListener('click', function(event) {
   sendMessage('Hello ' + names[Math.floor(Math.random() * names.length)] + '!');
 });
 
-// noinspection JSFunctionExpressionToArrowFunction
 button2.addEventListener('click', function(event) {
   sendMessage(counter);
 });
 
-// noinspection JSFunctionExpressionToArrowFunction
 button3.addEventListener('click', function(event) {
   sendMessage('{"counter": ' + counter + ', "message": "Hello Scout!"}');
 });
 
-// noinspection JSFunctionExpressionToArrowFunction
 button4.addEventListener('click', function(event) {
   sendMessage({
     counter: counter,
@@ -93,7 +91,6 @@ button4.addEventListener('click', function(event) {
   });
 });
 
-// noinspection JSFunctionExpressionToArrowFunction
 button5.addEventListener('click', function(event) {
   sendMessage(['One', 'Two', 'Three', counter, {msg: 'Hello Scout!'}]);
 });
@@ -113,8 +110,8 @@ if ('URLSearchParams' in window) {
     document.body.appendChild(addIframeButton);
 
     addIframeButton.addEventListener('click', function(event) {
-      var iframe = document.createElement("iframe");
-      iframe.scrolling = "yes";
+      var iframe = document.createElement('iframe');
+      iframe.scrolling = 'yes';
       iframeContainer.appendChild(iframe);
       iframe.src = document.location + '?nested=true';
       addIframeButton.remove(); // remove button after nested iframe was inserted
@@ -124,7 +121,6 @@ if ('URLSearchParams' in window) {
 
 // -- Message listener -----
 
-// noinspection JSFunctionExpressionToArrowFunction
 window.addEventListener('message', function(event) {
   log('Received: ' + formatObject(event.data) + ' (origin: ' + event.origin + ')', 'in');
 });
