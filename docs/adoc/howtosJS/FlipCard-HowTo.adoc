@@ -76,6 +76,7 @@ export default class FlipCardField extends FormField {
 ----
 
 ===== Add the FlipCard to the HelloForm
+Don't forget to add the `import` for your `FlipCardField`.
 
 HelloFormModel.js
 [source,js]
@@ -98,7 +99,7 @@ HelloFormModel.js
           <!--1-->
           {
             id: 'FlipCardField',
-            objectType: 'hellojs.FlipCardField',
+            objectType: FlipCardField,
             label: 'Flip the card',
             gridDataHints: {
               h: 5,
@@ -209,7 +210,10 @@ export default class FlipCardField extends FormField {
 
 HelloForm.json
 [source,js]
+
 ----
+import {FlipCardField} from '../index';
+
 export default {
   id: 'hellojs.HelloForm',
   ...
@@ -228,7 +232,7 @@ export default {
           <!--1-->
           {
             id: 'FlipCardField',
-            objectType: 'hellojs.FlipCardField',
+            objectType: FlipCardField,
             label: 'Flip the card',
             frontImage: 'img/card-back.jpg',
             backImage: 'img/card-front.jpg',
