@@ -11,7 +11,7 @@
   <parent>
     <groupId>org.eclipsescout.docs</groupId>
     <artifactId>aggregator</artifactId>
-    <version>23.1-SNAPSHOT</version>
+    <version>23.1.0-beta.4</version>
   </parent>
 
   <artifactId>technical_guide</artifactId>
