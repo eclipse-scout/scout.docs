@@ -15,7 +15,7 @@ We assume the ice cream shop already has a running Scout application and a place
 
 ==== Prerequisites
 
-Everything related to charts has its own Maven and npm modules and is not part of Scout core. Therefore, the following Maven dependencies need to be added to the `client`-, `shared`- or `ui.html`-module of the ice cream shop app.
+Everything related to charts has its own Maven and npm modules and is not part of Scout core. Therefore, the following Maven dependencies need to be added to the `client`-, `shared`- and `ui.html`-module of the ice cream shop app.
 
 [source,xml]
 ----
@@ -124,7 +124,7 @@ The ice cream shop has sold the following amount of scoops:
 |0
 |===
 
-We create a data object and pass it to the chart.
+We create a data object and pass it to the chart (e.g. in the `execLoad` method of our `FormHandler`).
 
 [source,java]
 ----
@@ -154,7 +154,7 @@ IntStream.of(0, 0, 0, 59, 182, 391, 415, 261, 75, 31, 0, 0)
     .forEach(value -> strawberry.getValues().add(new BigDecimal(value)));
 data.getChartValueGroups().add(strawberry);
 
-chart.setData(data);
+getFieldByClass(ChartField.class).getChart().setData(data);
 ----
 
 The chart will now look like this:
@@ -173,7 +173,7 @@ IChartConfig config = BEANS.get(IChartConfig.class)
     .withType(IChartType.BAR)
     .withColorScheme(ColorScheme.RAINBOW);
 
-chart.setConfig(config);
+getFieldByClass(ChartField.class).getChart().setConfig(config);
 ----
 
 image::{imgsdir}/barChartRainbow.png[]
@@ -192,8 +192,8 @@ config.withAutoColor(false)
     .withYAxisLabelDisplay(true)
     .withYAxisLabel("Scoops");
 
-chart.setData(data);
-chart.setConfig(config);
+getFieldByClass(ChartField.class).getChart().setData(data);
+getFieldByClass(ChartField.class).getChart().setConfig(config);
 ----
 
 image::{imgsdir}/barChartCustom.png[]
@@ -202,7 +202,7 @@ Finally, we want to make the chart interactive.
 
 [source,java]
 ----
-chart.extendConfig(BEANS.get(IChartConfig.class)
+getFieldByClass(ChartField.class).getChart().extendConfig(BEANS.get(IChartConfig.class)
     .withClickable(true)
     .withCheckable(true)
     .withLegendClickable(true), true);
