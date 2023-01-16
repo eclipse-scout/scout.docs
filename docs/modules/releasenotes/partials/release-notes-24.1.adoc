@@ -110,3 +110,7 @@ When enabling `AutoCheckChildNodes` for a Tree or TreeBox widget, the behavior o
 The new behavior improves the consistence and represents better the real world requirements. For more details, consider
 reading the corresponding chapter in the
 xref:migration:partial$migration-guide-24.1.adoc#tree-improved-auto-check-behavior-when-checking-nodes[migration guide].
+
+== IOUtility: Remove duplicate method getFileExtension
+
+Method getFileExtension from FileUtility should be used instead.

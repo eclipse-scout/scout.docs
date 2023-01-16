@@ -46,6 +46,7 @@ import org.eclipse.scout.rt.platform.html.HTML;
 import org.eclipse.scout.rt.platform.resource.BinaryResource;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
+import org.eclipse.scout.rt.platform.util.FileUtility;
 import org.eclipse.scout.rt.platform.util.IOUtility;
 import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
@@ -80,14 +81,14 @@ public abstract class AbstractFileTableField extends AbstractTableField<Table> {
   /**
    * Allows user of this template field to react to row selection events
    *
-   * @param Resource
+   * @param resource
    *          the resource that is represented by the clicked row
    */
   protected void execResourceRowClick(BinaryResource resource) {
   }
 
   private Object[] fileToArray(BinaryResource file) {
-    String type = IOUtility.getFileExtension(file.getFilename());
+    String type = FileUtility.getFileExtension(file.getFilename());
     int size = file.getContentLength();
 
     if (BEANS.get(FileCodeType.class).getCode(type) == null) {
