@@ -10,7 +10,6 @@
 package org.eclipse.scout.widgets.shared;
 
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -20,6 +19,7 @@ import java.util.Set;
 
 import org.eclipse.scout.rt.platform.Replace;
 import org.eclipse.scout.rt.platform.util.NumberFormatProvider;
+import org.eclipse.scout.rt.platform.util.ObjectUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -67,37 +67,25 @@ public class CustomNumberFormatProvider extends NumberFormatProvider {
   @Override
   public DecimalFormat getCurrencyInstance(Locale locale) {
     Locale defaultLocaleForCountry = getDefaultLocaleForCountry(locale);
-    if (defaultLocaleForCountry == null) {
-      return super.getCurrencyInstance(locale);
-    }
-    return (DecimalFormat) NumberFormat.getCurrencyInstance(defaultLocaleForCountry);
+    return super.getCurrencyInstance(ObjectUtility.nvl(defaultLocaleForCountry, locale));
   }
 
   @Override
-  public NumberFormat getIntegerInstance(Locale locale) {
+  public DecimalFormat getIntegerInstance(Locale locale) {
     Locale defaultLocaleForCountry = getDefaultLocaleForCountry(locale);
-    if (defaultLocaleForCountry == null) {
-      return super.getIntegerInstance(locale);
-    }
-    return NumberFormat.getIntegerInstance(defaultLocaleForCountry);
+    return super.getIntegerInstance(ObjectUtility.nvl(defaultLocaleForCountry, locale));
   }
 
   @Override
   public DecimalFormat getNumberInstance(Locale locale) {
     Locale defaultLocaleForCountry = getDefaultLocaleForCountry(locale);
-    if (defaultLocaleForCountry == null) {
-      return super.getNumberInstance(locale);
-    }
-    return (DecimalFormat) NumberFormat.getNumberInstance(defaultLocaleForCountry);
+    return super.getNumberInstance(ObjectUtility.nvl(defaultLocaleForCountry, locale));
   }
 
   @Override
   public DecimalFormat getPercentInstance(Locale locale) {
     Locale defaultLocaleForCountry = getDefaultLocaleForCountry(locale);
-    if (defaultLocaleForCountry == null) {
-      return super.getPercentInstance(locale);
-    }
-    return (DecimalFormat) NumberFormat.getPercentInstance(defaultLocaleForCountry);
+    return super.getPercentInstance(ObjectUtility.nvl(defaultLocaleForCountry, locale));
   }
 
   private void init(Locale locale, String primaryCountryLanguage) {

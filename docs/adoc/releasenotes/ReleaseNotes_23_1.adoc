@@ -389,3 +389,7 @@ If an invalid category is provided an error is logged and the same behavior is e
 
 The JsForm is a Java-form that wraps a form implemented in JS. This allows a Scout Classic application to open a Scout JS form.
 For more information about the JsForm see link:{techdoc}#how-to-js-form[Technical Guide].
+
+== NumberFormatProvider
+
+The return type of `NumberFormatProvider#getIntegerInstance` was changed from `java.text.NumberFormat` to `java.text.DecimalFormat` to align the return type of all get__Xyz__Instance() methods.
