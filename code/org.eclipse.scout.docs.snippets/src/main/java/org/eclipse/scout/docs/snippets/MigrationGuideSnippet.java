@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ *
+ * This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License 2.0
+ * which is available at https://www.eclipse.org/legal/epl-2.0/
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ */
 package org.eclipse.scout.docs.snippets;
 
 import java.io.Serializable;
@@ -23,7 +32,7 @@ public class MigrationGuideSnippet {
       /*
       // tag::jobManager.rawEclipseJob.old[]
       new Job("job-name") {
-      
+
         @Override
         protected IStatus run(IProgressMonitor monitor) {
           // do something
@@ -46,7 +55,7 @@ public class MigrationGuideSnippet {
       /*
       // tag::jobManager.clientSyncJob.old[]
       new ClientSyncJob("job-name", ClientSessionProvider.currentSession()) {
-      
+
         @Override
         protected void runVoid(IProgressMonitor monitor) throws Throwable {
           // do something
@@ -70,7 +79,7 @@ public class MigrationGuideSnippet {
       /*
       // tag::jobManager.clientAsyncJob.old[]
       new ClientAsyncJob("job-name", ClientSessionProvider.currentSession()) {
-      
+
         @Override
         protected void runVoid(IProgressMonitor monitor) throws Throwable {
           // do something
@@ -94,7 +103,7 @@ public class MigrationGuideSnippet {
       /*
       // tag::jobManager.serverJob.old[]
       new ServerJob("job-name", ServerJob.getCurrentSession()) {
-      
+
       @Override
       protected IStatus runTransaction(IProgressMonitor monitor) throws Exception {
         // do something
@@ -119,7 +128,7 @@ public class MigrationGuideSnippet {
       /*
       // tag::jobManager.serverJob.runNow.old[]
       new ServerJob("job-name", ServerJob.getCurrentSession()) {
-      
+
       @Override
       protected IStatus runTransaction(IProgressMonitor monitor) throws Exception {
         // do something
@@ -142,7 +151,7 @@ public class MigrationGuideSnippet {
       /*
       // tag::jobManager.delayedExecution.old[]
       new Job("job-name") {
-      
+
       @Override
       protected IStatus run(IProgressMonitor monitor) {
         // do something
@@ -167,7 +176,7 @@ public class MigrationGuideSnippet {
       /*
       // tag::jobManager.fixedDelayExecution.old[]
       new Job("job-name") {
-      
+
       @Override
       protected IStatus run(IProgressMonitor monitor) {
         // do something
@@ -194,7 +203,7 @@ public class MigrationGuideSnippet {
       /*
       // tag::jobManager.serverJob.otherSubject.old[]
       new ServerJob("job-name", ServerJob.getCurrentSession(), subject) {
-      
+
       @Override
       protected IStatus runTransaction(IProgressMonitor monitor) throws Exception {
         // do something
@@ -221,7 +230,7 @@ public class MigrationGuideSnippet {
       /*
       // tag::jobManager.job.checkForCancellation.old[]
       new Job("job-name") {
-      
+
       @Override
       protected IStatus run(IProgressMonitor monitor) {
         // do first chunk of work
@@ -261,7 +270,7 @@ public class MigrationGuideSnippet {
       /*
       // tag::jobManager.job.join.old[]
       Job job = new Job("job-name") {
-      
+
         @Override
         protected IStatus run(IProgressMonitor monitor) {
           // do something
@@ -289,7 +298,7 @@ public class MigrationGuideSnippet {
       /*
       // tag::jobManager.job.join_with_timeout.old[]
       Job job = new Job("job-name") {
-      
+
         @Override
         protected IStatus run(IProgressMonitor monitor) {
           // do something
@@ -317,9 +326,9 @@ public class MigrationGuideSnippet {
       /*
       // tag::jobManager.job.get_result.old[]
       final AtomicReference<String> result = new AtomicReference<>();
-      
+
       Job job = new Job("job-name") {
-      
+
         @Override
         protected IStatus run(IProgressMonitor monitor) {
           // do something

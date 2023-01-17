@@ -53,6 +53,12 @@ If you just want to play around with them without looking at the source code, yo
 
 // ----------------------------------------------------------------------------
 
+== Re-license from EPL-1.0 to EPL-2.0
+
+Scout has changed its license from the deprecated EPL-1.0 license to EPL-2.0.
+Usually this has no impact for your project.
+For details please consult the https://www.eclipse.org/legal/epl-2.0/faq.php[EPL FAQ] in particular the section with the https://www.eclipse.org/legal/epl-2.0/faq.php#h.a0eux401qus[major changes].
+
 == Improved Developer Experience for Scout JS
 
 Scout 23.1 contains many improvements for Scout JS developers.
