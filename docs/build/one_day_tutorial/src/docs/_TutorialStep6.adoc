@@ -25,7 +25,7 @@ We can now implement the company form according to the following steps.
 
 . Expand folder `src/main/java` in the client module in the package explorer
 . Select package `org.eclipse.scout.contacts.client.organization` and create a new form called "OrganizationForm" as we've done before
-. Hit btn:[Enter] for IntelliJ or Click btn:[Finish] for Eclipse
+. Hit kbd:[Enter] for IntelliJ or click btn:[Finish] for Eclipse
 
 After creating the initial form class using Scout's new form wizard the form layout can be implemented according to <<lst-contacts_organization>>.
 

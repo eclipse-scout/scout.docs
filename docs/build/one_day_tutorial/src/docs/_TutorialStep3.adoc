@@ -66,7 +66,7 @@ The next step is to create the `org.eclipse.scout.contacts.server.sql` package.
 * Select the existing package `org.eclipse.scout.contacts.server`
 * For IntelliJ:
 ** Right click on it and select `New -> Package`
-** Enter `org.eclipse.scout.contacts.server.sql` into the [field]_Name_ field and hit btn:[Enter]
+** Enter `org.eclipse.scout.contacts.server.sql` into the [field]_Name_ field and hit kbd:[Enter]
 * For Eclipse:
 ** Hit kbd:[Ctrl+N] on it
 ** This opens the dialog to select a wizard. Enter "package" into the search field

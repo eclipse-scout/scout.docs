@@ -75,7 +75,7 @@ Start the form creation with the Scout new form wizard following the steps liste
 . Select package `org.eclipse.scout.contacts.client.person` in folder `src/main/java`
 . For IntelliJ:
 ** Create a new Scout form by right-clicking on the package and selecting `New -> Scout Element -> Form` as shown in <<img-contacts_create_new_form_Intellij>>
-** Enter "Person" into the [field]_Name_ as shown in <<img-contacts_create_new_person_form_Intellij>> and then hit btn:[Enter]
+** Enter "Person" into the [field]_Name_ as shown in <<img-contacts_create_new_person_form_Intellij>> and then hit kbd:[Enter]
 . For Eclipse:
 ** Press kbd:[Ctrl+N] and enter "form" into the search field of the wizard selection dialog
 ** Select the [element]_Scout Form_ proposal and click the btn:[Next] button
@@ -189,7 +189,8 @@ Follow the steps described below to create the gender code type.
 . Select package `org.eclipse.scout.contacts.shared.person` in folder `src/main/java`
 . For IntelliJ:
 ** Create a new Scout code type by right-clicking on the package and selecting `New -> Scout Element -> Code Type` as shown in <<img-contacts_tutorial_create_new_gender_codetype_Intellij>>
-** Enter "Gender" into the [field]_Name_ as shown in <<img-contacts_tutorial_new_gender_codetype_Intellij>> and then hit btn:[Enter]
+** Enter "Gender" into the [field]_Name_ as shown in <<img-contacts_tutorial_new_gender_codetype_Intellij>> and then hit kbd:[Enter]
+** In the generated code type, change the generics from `<Long, Long>` to `<String, String>`.
 . For Eclipse:
 ** Press kbd:[Ctrl+N] and enter "code" into the search field of the wizard selection dialog
 ** Select the [element]_Scout CodeType_ proposal and click the btn:[Next] button

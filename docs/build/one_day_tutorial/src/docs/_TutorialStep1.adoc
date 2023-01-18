@@ -108,7 +108,7 @@ image::{imgsdir}/sdk_rename_package.png[]
 
 In next step we rename class `WorkOutline` to `ContactOutline`.
 In the Java editor we can rename the class by clicking into the class identifier `WorkOutline` and hitting kbd:[Shift+F6] (Eclipse: kbd:[Alt+Shift+R]).
-Inside the edit box we can then change the class name to `ContactOutline` and hit the btn:[Enter] key to execute the change.
+Inside the edit box we can then change the class name to `ContactOutline` and hit the kbd:[Enter] key to execute the change.
 If your IDE shows a Rename Type dialog just hit button btn:[Continue] to complete the rename operation.
 To get rid of the compile error in method `execCreateChildPages` we simply delete the content in the method body.
 
