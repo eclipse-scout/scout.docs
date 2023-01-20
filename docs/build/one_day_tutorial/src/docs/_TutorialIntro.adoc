@@ -88,6 +88,3 @@ As we can reuse many of the components developed so far this is the shortest tut
 Step 7: Linking Organizations and Persons (<<sec-contacts_link_organization_person>>)::
 In this step we modify the user interface to implement a 1:n relationship between organizations and persons.
 This includes the creation of a hierarchical page structure for organization, adding an organization column to the person page and adding an organization field to the person form to manage the association of a person to an organization.
-
-Step 8: Additional Concepts and Features (<<sec-contacts_outlook>>)::
-The last tutorial part discusses the gap between the tutorial application and the complete "Contacts" demo application.
