@@ -23,7 +23,7 @@ import org.eclipse.scout.rt.platform.status.Status;
 
 @HybridActionType(SendDesktopNotificationHybridAction.TYPE)
 public class SendDesktopNotificationHybridAction extends AbstractHybridAction<IDoEntity> {
-  protected final static String TYPE = "SendDesktopNotification";
+  protected static final String TYPE = "SendDesktopNotification";
 
   @Override
   public void execute(IDoEntity data) {

@@ -15,8 +15,8 @@ import org.eclipse.scout.rt.client.ui.desktop.hybrid.HybridActionType;
 @HybridActionType(OpenPersonFormHybridAction.TYPE)
 public class OpenPersonFormHybridAction extends AbstractFormHybridAction<PersonForm, PersonDo> {
 
-  protected final static String PERSON = "Person";
-  protected final static String TYPE = OPEN_FORM_PREFIX + PERSON;
+  protected static final String PERSON = "Person";
+  protected static final String TYPE = OPEN_FORM_PREFIX + PERSON;
 
   @Override
   protected PersonForm createForm(PersonDo data) {
