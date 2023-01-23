@@ -13,7 +13,7 @@ The persistence of entered data is achieved via simple JDBC access to a Derby da
 
 It is recommended that you first import the full "`Contacts`" demo application into a separate workspace.
 This gives you the possibility to check your source code against the full implementation during the various steps of the tutorial.
-To do so, just clone the Scout demo repository and import it into a new Eclipse workspace.
+To do so, just clone the Scout demo repository and import it into your IDE.
 
  git clone https://github.com/bsi-software/org.eclipse.scout.docs.git
 
@@ -44,7 +44,7 @@ For entering and editing of data in Scout applications views are used in most ca
 Views are displayed in the bench area of a Scout application.
 Several views can also be opened simultaneously.
 To show a specific view the user has to click on the view button associated with the desired view.
-An example of an opened view is shown for person "Alice" in <<img-app_contacts_personform>>.
+An example of an opened view is shown for person "Verónica" in <<img-app_contacts_personform>>.
 
 [[img-app_contacts_personform]]
 .The "`Contacts`" application with a person opened in a form.
@@ -88,6 +88,3 @@ As we can reuse many of the components developed so far this is the shortest tut
 Step 7: Linking Organizations and Persons (<<sec-contacts_link_organization_person>>)::
 In this step we modify the user interface to implement a 1:n relationship between organizations and persons.
 This includes the creation of a hierarchical page structure for organization, adding an organization column to the person page and adding an organization field to the person form to manage the association of a person to an organization.
-
-Step 8: Additional Concepts and Features (<<sec-contacts_outlook>>)::
-The last tutorial part discusses the gap between the tutorial application and the complete "Contacts" demo application.

@@ -37,22 +37,34 @@ We will therefore need to access the database to provide the data to the lookup 
 As this is a common requirement the Scout framework comes with the base class `AbstractSqlLookupService` and a default mechanism to route lookup calls from the frontend sever to database calls on the backend server.
 The necessary infrastructure can be created using the Scout lookup wizard according to the steps described below.
 
-. Expand folder `src/main/java` in the client module in the package explorer
-. Select package `org.eclipse.scout.contacts.shared.organization` and hit kbd:[Ctrl+N]
-. Enter "lookup" into the search field of the wizard selection and double click on proposal [element]_Scout LookupCall_
-. Use "OrganizationLookupCall" as class name
-. Enter "String" as the key class and use service super class "AbstractSqlLookupService" in the wizard
-. Verify that the fields in the wizard match the values provided in <<img-sdk_new_lookupcall_organization>>
-. Click btn:[Finish] to start the Scout lookup call wizard.
+. Expand folder `src/main/java` in the shared module in the package explorer
+. Select package `org.eclipse.scout.contacts.shared.organization`
+. For IntelliJ
+** Create a new Scout lookup call by right-clicking on the package and selecting `New -> Scout Element -> Lookup Call` as shown in <<img-sdk_create_new_lookupcall_organization_Intellij>>
+** Enter "Organization" into the name field as shown in <<img-sdk_new_lookupcall_organization_Intellij>> and press kbd:[Enter].
+** In the generated lookup call, change the generic from `<Long>` to `<String>`.
+. For Eclipse
+** Hit kbd:[Ctrl+N]
+** Enter "lookup" into the search field of the wizard selection and double click on proposal [element]_Scout LookupCall_
+** Use "OrganizationLookupCall" as class name
+** Enter "String" as the key class and use service super class "AbstractSqlLookupService" in the wizard
+** Verify that the fields in the wizard match the values provided in <<img-sdk_new_lookupcall_organization>>
+** Click btn:[Finish]
 
+[[img-sdk_create_new_lookupcall_organization_Intellij]]
+.Creating the OrganizationLookupCall in IntelliJ.
+image::{imgsdir}/sdk_create_new_lookupcall_organization_Intellij.png[]
+[[img-sdk_new_lookupcall_organization_Intellij]]
+.Using the Scout lookup call wizard for creating class OrganizationLookupCall in IntelliJ.
+image::{imgsdir}/sdk_new_lookupcall_organization_Intellij.png[]
 [[img-sdk_new_lookupcall_organization]]
-.Using the Scout lookup call wizard for creating class OrganizationLookupCall.
+.Using the Scout lookup call wizard for creating class OrganizationLookupCall in Eclipse.
 image::{imgsdir}/sdk_new_lookupcall_organization.png[]
 
-The Scout wizard will then create the lookup class `OrganizationLookupCall` and the corresponding lookup service with the interface `IOrganizationLookupService` and its initial implementation `OrganizationLookupService`.
+The Scout wizard creates the lookup class `OrganizationLookupCall` and the corresponding lookup service with the interface `IOrganizationLookupService` and its initial implementation `OrganizationLookupService`.
+Beside making sure the generic uses the correct data type (`String`), the service interface and the lookup call class can be used as provided by the Scout wizard.
 We will only need to provide some implementation for the lookup service.
-The service interface and the lookup call class can be used as provided by the Scout wizard.
-<<lst-contacts_lookup_call_organization>> shows the code generated for the lookup call
+<<lst-contacts_lookup_call_organization>> shows the generated code for the lookup call.
 
 [[lst-contacts_lookup_call_organization]]
 [source,java]
@@ -191,7 +203,7 @@ public class PersonService implements IPersonService {
 
 Having modified the person service we add a organization id property to the person page.
 We can then populate this property when the person page is attached to the organization node page.
-Finally we can use in method `execLoadData` according to <<lst-contacts_person_page_modification>>.
+Finally, we can use in method `execLoadData` according to <<lst-contacts_person_page_modification>>.
 
 [[lst-contacts_person_page_modification]]
 [source,java]
@@ -215,18 +227,23 @@ As mentioned before we will only have the person page as a child page in the "Co
 To create the organization node page follow the steps listed below.
 
 . Expand folder `src/main/java` in the client module in the package explorer
-. Select package `org.eclipse.scout.contacts.client.organization` and hit kbd:[Ctrl+N]
-. Enter "scout page" into the search field of the wizard selection and double click on proposal [element]_Scout Page_
-. Add "Organization" to the class name field
-. Switch the super class field to "AbstractPageWithNodes"
-. Verify that the fields in the wizard match the values provided in <<img-sdk_new_organization_nodepage>>
-. Click btn:[Finish] to start the Scout page wizard
+. Select package `org.eclipse.scout.contacts.client.organization`
+. For IntelliJ
+** Create a new Scout page by right-clicking on the package and selecting `New -> Scout Element -> Page` as we've done before
+** Enter "OrganizationNode" into the name field and press kbd:[Enter]
+** Finally, rename "OrganizationNodeTablePage" to "OrganizationNodePage"
+. For Eclipse
+** Hit kbd:[Ctrl+N] and enter "scout page" into the search field of the wizard selection and double click on proposal [element]_Scout Page_
+** Add "Organization" to the class name field
+** Switch the super class field to "AbstractPageWithNodes"
+** Verify that the fields in the wizard match the values provided in <<img-sdk_new_organization_nodepage>>
+** Click btn:[Finish]
 
 [[img-sdk_new_organization_nodepage]]
 .Creating the organization node page.
 image::{imgsdir}/sdk_new_organization_nodepage.png[]
 
-After the wizard has created the initial implementation of the node page open class `OrganizationNodePage` in the Java editor and adapt its implementation according to <<lst-contacts_organization_node_page>>.
+After the wizard has created the initial implementation of the node page, open class `OrganizationNodePage` in the Java editor and adapt its implementation according to <<lst-contacts_organization_node_page>>.
 
 [[lst-contacts_organization_node_page]]
 [source,java]
