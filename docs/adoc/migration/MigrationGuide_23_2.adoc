@@ -90,3 +90,8 @@ To install the Scout SDK into your existing Eclipse IDE, use this P2 update site
 {scout-sdk-update-site}
 
 // ----------------------------------------------------------------------------
+
+== Utility changes
+
+=== DateUtility: New default date time format
+The method `DateUtility#formatDateTime` has been renamed to `DateUtility#formatDateTimeShort` and a since Scout 23.2 the `DateUtility#formatDateTime` returns a 4-digit year (e.g. 2023 for the year 2023). Up to Scout 23.1 the default format for the year in a date time was 2-digit long (e.g. 22 for the year 2022).
