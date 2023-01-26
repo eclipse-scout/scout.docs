@@ -679,7 +679,7 @@ For this example we use the slightly adjusted red palette, but you can use your 
 ----
 
 .Accent color change
-image::{imgsdir}/accent-color-change.png[]
+image::common:accent-color-change.png[]
 
 === Advanced Customization
 

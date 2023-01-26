@@ -9,5 +9,4 @@
 *** xref:oneday:step-5.adoc[]
 *** xref:oneday:step-6.adoc[]
 *** xref:oneday:step-7.adoc[]
-*** xref:oneday:step-8.adoc[]
 *** xref:oneday:git.adoc[]
