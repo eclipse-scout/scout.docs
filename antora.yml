@@ -21,4 +21,4 @@ nav:
 - modules/sdk/nav.adoc
 - modules/releasenotes/nav.adoc
 - modules/migration/nav.adoc
-- modules/eclipse_help/nav.adoc
+# - modules/eclipse_help/nav.adoc

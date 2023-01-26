@@ -1,0 +1,26 @@
+= Scout SDK for IntelliJ
+
+NOTE: Looking for something else? Visit https://eclipsescout.github.io for all Scout related documentation.
+
+Install the plugin:
+https://plugins.jetbrains.com/plugin/13393-eclipse-scout[Eclipse Scout Plugin for IntelliJ]
+
+ Eclipse Scout integration for IntelliJ IDEA
+
+Supports Scout runtime versions 10, 11, 22 and 23.
+
+Features:
+
+* Derived resource update for FormData and PageData
+* DataObject convenience methods update
+* Java code completion for Scout elements like FormFields, Menus, KeyStrokes, Codes and more.
+* JavaScript code completion for Scout JS models.
+* Scout national language support
+** Editor for Scout nls files
+** Inspections for missing and unused translations
+** Code completion for Scout translation keys in Java, JavaScript and HTML
+** Tooltip documentation for Scout translation keys
+** Code folding support for Scout translations with configurable display language
+* @ClassId validation inspections (missing, duplicates)
+* Project creation support
+* Element creation support (e.g. Entity, Form, Page, Lookup Call, Code Type)

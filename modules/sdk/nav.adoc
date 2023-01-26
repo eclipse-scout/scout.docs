@@ -1,1 +1,3 @@
-* xref:SdkEclipse.adoc[Eclipse Scout SDK]
+* xref:index.adoc[]
+** xref:SdkIntelliJ.adoc[]
+** xref:SdkEclipse.adoc[]

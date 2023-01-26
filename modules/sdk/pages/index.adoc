@@ -1,0 +1,10 @@
+= Eclipse Scout SDK
+
+We support IntelliJ and Eclipse.
+
+The Scout SDK provides wizards to create new project and application components, adds code assistance to the Java Editor and comes with a NLS editor to manage all translated text entries of the application.
+
+[[sec-sdk_motivation]]
+== Motivation for the Tooling
+
+include::partial$SdkScoutTooling.adoc[]
