@@ -7,12 +7,20 @@ import org.eclipse.scout.rt.platform.classid.ClassId;
 
 @ClassId("f1be145a-6c22-4888-99cc-bb9fe7b8d2ef")
 public abstract class AbstractCustomTile extends AbstractTile implements ICustomTile {
+
   private String m_group;
+
+  public AbstractCustomTile() {
+    super();
+  }
+
+  public AbstractCustomTile(boolean callInitializer) {
+    super(callInitializer);
+  }
 
   @Override
   protected void initConfig() {
     super.initConfig();
-
     setLabel(getConfiguredLabel());
   }
 
