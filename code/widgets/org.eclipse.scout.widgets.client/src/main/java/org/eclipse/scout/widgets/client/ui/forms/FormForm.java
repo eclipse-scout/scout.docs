@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2015 BSI Business Systems Integration AG.
+ * Copyright (c) 2023 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
@@ -74,6 +74,7 @@ import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.IconIdField;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.MaximizedField;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.ModalityBox.ModalityField;
+import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.NotificationCountField;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.OpenFormBox.OpenFormButton;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.OpenFormBox.OpenInNewSessionButton;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.OpeningDelayBox.BlockModelThreadField;
@@ -148,6 +149,10 @@ public class FormForm extends AbstractForm implements IPageForm {
 
   public IconIdField getIconIdField() {
     return getFieldByClass(IconIdField.class);
+  }
+
+  public NotificationCountField getNotificationCountField() {
+    return getFieldByClass(NotificationCountField.class);
   }
 
   public DisplayParentField getDisplayParentField() {
@@ -431,6 +436,21 @@ public class FormForm extends AbstractForm implements IPageForm {
         }
       }
 
+      @Order(41)
+      @ClassId("e646264e-959a-454c-b801-4b3e540697ac")
+      public class NotificationCountField extends AbstractIntegerField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return "Notification count";
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(getForm().getNotificationCount());
+        }
+      }
+
       @Order(42)
       @ClassId("9469f9f9-1fc6-46b3-b819-a34adfea2cbd")
       public class IconIdField extends AbstractSmartField<String> {
@@ -574,6 +594,7 @@ public class FormForm extends AbstractForm implements IPageForm {
                   FormForm form = new FormForm();
                   form.setTitle(getFormTitleField().getValue());
                   form.setSubTitle(getFormSubTitleField().getValue());
+                  form.setNotificationCount(getNotificationCountField().getValue());
                   form.setDisplayHint(displayHint.getValue());
                   form.setCacheBounds(getCacheBoundsField().getValue());
                   form.setMaximized(getMaximizedField().getValue());

@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) 2023 BSI Business Systems Integration AG.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Distribution License v1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/org/documents/edl-v10.html
+ *
+ * Contributors:
+ *     BSI Business Systems Integration AG - initial API and implementation
+ */
 package org.eclipse.scout.widgets.client.ui.forms;
 
 import org.eclipse.scout.rt.client.ui.IDisplayParent;
@@ -6,6 +16,7 @@ import org.eclipse.scout.rt.client.ui.form.IForm;
 import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
+import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerField;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.Order;
@@ -18,6 +29,7 @@ import org.eclipse.scout.widgets.client.ui.forms.FormForm.IconIdLookupCall;
 import org.eclipse.scout.widgets.client.ui.forms.FormOptionsForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.FormOptionsForm.MainBox.CssClassField;
 import org.eclipse.scout.widgets.client.ui.forms.FormOptionsForm.MainBox.IconField;
+import org.eclipse.scout.widgets.client.ui.forms.FormOptionsForm.MainBox.NotificationCountField;
 import org.eclipse.scout.widgets.client.ui.forms.FormOptionsForm.MainBox.SaveNeededVisibleField;
 import org.eclipse.scout.widgets.client.ui.forms.FormOptionsForm.MainBox.ShowInfoStatusField;
 import org.eclipse.scout.widgets.client.ui.forms.FormOptionsForm.MainBox.SubtitleField;
@@ -70,6 +82,10 @@ public class FormOptionsForm extends AbstractForm {
 
   public SubtitleField getSubTitleField() {
     return getFieldByClass(SubtitleField.class);
+  }
+
+  public NotificationCountField getNotificationCountField() {
+    return getFieldByClass(NotificationCountField.class);
   }
 
   public CloseButton getCloseButton() {
@@ -194,6 +210,26 @@ public class FormOptionsForm extends AbstractForm {
       @Override
       protected void execChangedValue() {
         getConfigurableForm().setSubTitle(getValue());
+      }
+    }
+
+    @Order(2500)
+    @ClassId("eab83f3f-6d63-4416-b976-c58e52963ff9")
+    public class NotificationCountField extends AbstractIntegerField {
+
+      @Override
+      protected String getConfiguredLabel() {
+        return "Notification count";
+      }
+
+      @Override
+      protected void execInitField() {
+        setValue(getConfigurableForm().getNotificationCount());
+      }
+
+      @Override
+      protected void execChangedValue() {
+        getConfigurableForm().setNotificationCount(getValue());
       }
     }
 
