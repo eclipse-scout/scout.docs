@@ -1,0 +1,92 @@
+////
+Howto:
+- Write this document such that it helps people to migrate. Describe what they should do.
+- Chronological order is not necessary.
+- Choose the right top level chapter (java, js, other)
+- Use "WARNING: {NotReleasedWarning}" on its own line to mark parts about not yet released code (also add a "(since <version>)" suffix to the chapter title)
+- Use "title case" in chapter titles (https://english.stackexchange.com/questions/14/)
+////
+
+ifndef::finaldoc[]
+include::../_initDoc.adoc[]
+endif::finaldoc[]
+
+// double underscore
+:dus: __
+
+== About This Document
+
+This document describes all relevant changes *from Eclipse Scout {scout-previous-version} to Eclipse Scout {scout-version}*. If existing code has to be migrated, instructions are provided here.
+
+WARNING: {NotReleasedWarning}
+
+== Obtaining the Latest Version
+
+=== Scout Runtime for Java
+
+Scout Runtime artifacts for Java are distributed using Maven Central:
+
+* {maven-central-link} on _Maven Central_
+* {mvnrepository-link} on _mvnrepository.com_
+
+Usage example in the parent POM of your Scout application:
+
+[source,xml]
+[subs="verbatim,attributes"]
+----
+<dependency>
+    <groupId>org.eclipse.scout.rt</groupId>
+    <artifactId>org.eclipse.scout.rt</artifactId>
+    <version>{maven-version}</version>
+    <type>pom</type>
+    <scope>import</scope>
+</dependency>
+----
+
+=== Scout Runtime for JavaScript
+
+Scout Runtime artifacts for JavaScript are distributed using npm:
+
+* https://www.npmjs.com/package/@eclipse-scout/core[Scout Core Runtime]
+* https://www.npmjs.com/search?q=%40eclipse-scout[All official Scout JavaScript packages]
+
+Usage example in your package.json:
+
+[source,json]
+[subs="verbatim,attributes"]
+----
+{
+  "name": "my-module",
+  "version": "1.0.0",
+  "devDependencies": {
+    "@eclipse-scout/cli": "{node-version}",
+    "@eclipse-scout/releng": "^22.0.0"
+  },
+  "dependencies": {
+    "@eclipse-scout/core": "{node-version}",
+    "jquery": "3.6.0"
+  }
+}
+----
+
+The pre-built Scout JavaScript assets are also available using a CDN (e.g. to be directly included in a html document):
+https://www.jsdelivr.com/package/npm/@eclipse-scout/core?path=dist
+
+=== IDE Tooling (Scout SDK)
+
+Scout officially supports https://www.jetbrains.com/idea/[IntelliJ IDEA] and {scout-sdk-download-link}.
+
+==== IntelliJ IDEA
+
+You can download the Scout plugin for IntelliJ IDEA from the https://plugins.jetbrains.com/plugin/13393-eclipse-scout/[JetBrains Plugin Repository] or you can use the plugins client built into IntelliJ IDEA.
+Please refer to the https://www.jetbrains.com/help/idea/managing-plugins.html[IntelliJ Help] on how to install and manage plugins.
+
+==== Eclipse
+
+You can download the complete Eclipse IDE with Scout SDK included here: +
+{scout-sdk-download-link}
+
+To install the Scout SDK into your existing Eclipse IDE, use this P2 update site: +
+{scout-sdk-update-site}
+
+// ----------------------------------------------------------------------------
