@@ -118,6 +118,7 @@ export class FormForm extends Form {
     return {
       title: this.propertiesBox.titleField.value,
       subTitle: this.propertiesBox.subTitleField.value,
+      notificationCount: this.propertiesBox.notificationCountField.value,
       iconId: this.propertiesBox.iconIdField.value,
       displayHint: this.propertiesBox.displayHintField.value,
       displayViewId: this.propertiesBox.displayViewIdField.value,

@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {CheckBoxField, DisplayHint, DisplayViewId, GroupBox, GroupBoxModel, SmartField, StringField} from '@eclipse-scout/core';
+import {CheckBoxField, DisplayHint, DisplayViewId, GroupBox, GroupBoxModel, IntegerField, SmartField, StringField} from '@eclipse-scout/core';
 import {DisplayParentLookupCall, FormDisplayHintLookupCall, FormDisplayViewIdLookupCall, IconIdLookupCall} from '../index';
 
 export default (): GroupBoxModel => ({
@@ -26,6 +26,11 @@ export default (): GroupBoxModel => ({
       id: 'SubTitleField',
       objectType: StringField,
       label: 'Sub Title'
+    },
+    {
+      id: 'NotificationCountField',
+      objectType: IntegerField,
+      label: 'Notification count'
     },
     {
       id: 'IconIdField',
@@ -106,6 +111,7 @@ export default (): GroupBoxModel => ({
 export type FormPropertiesBoxWidgetMap = {
   'TitleField': StringField;
   'SubTitleField': StringField;
+  'NotificationCountField': IntegerField;
   'IconIdField': SmartField<string>;
   'DisplayHintField': SmartField<DisplayHint>;
   'DisplayViewIdField': SmartField<DisplayViewId>;
