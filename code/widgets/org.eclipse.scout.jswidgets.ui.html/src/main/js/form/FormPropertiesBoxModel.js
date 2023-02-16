@@ -26,9 +26,9 @@ export default () => ({
       label: 'Sub Title'
     },
     {
-      id: 'NotificationCountField',
-      objectType: 'IntegerField',
-      label: 'Notification count'
+      id: 'NotificationBadgeTextField',
+      objectType: 'StringField',
+      label: 'Notification badge text'
     },
     {
       id: 'IconIdField',
