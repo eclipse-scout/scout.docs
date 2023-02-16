@@ -20,7 +20,7 @@ export default class FormPropertiesBox extends GroupBox {
     this.form = null;
     this.titleField = null;
     this.subTitleField = null;
-    this.notificationCountField = null;
+    this.notificationBadgeTextField = null;
     this.iconIdField = null;
     this.askIfNeedSaveField = null;
     this.cacheBoundsField = null;
@@ -43,7 +43,7 @@ export default class FormPropertiesBox extends GroupBox {
     super._init(model);
     this.titleField = this.widget('TitleField');
     this.subTitleField = this.widget('SubTitleField');
-    this.notificationCountField = this.widget('NotificationCountField');
+    this.notificationBadgeTextField = this.widget('NotificationBadgeTextField');
     this.iconIdField = this.widget('IconIdField');
     this.displayHintField = this.widget('DisplayHintField');
     this.displayViewIdField = this.widget('DisplayViewIdField');
@@ -75,8 +75,8 @@ export default class FormPropertiesBox extends GroupBox {
     this.subTitleField.setValue(form.subTitle);
     this.subTitleField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    this.notificationCountField.setValue(form.notificationCount);
-    this.notificationCountField.on('propertyChange', this._onPropertyChange.bind(this));
+    this.notificationBadgeTextField.setValue(form.getNotificationBadgeText());
+    this.notificationBadgeTextField.on('propertyChange', this._onPropertyChange.bind(this));
 
     this.iconIdField.setValue(form.iconId);
     this.iconIdField.on('propertyChange', this._onPropertyChange.bind(this));
@@ -114,8 +114,8 @@ export default class FormPropertiesBox extends GroupBox {
       this.form.setTitle(event.newValue);
     } else if (event.propertyName === 'value' && event.source.id === 'SubTitleField') {
       this.form.setSubTitle(event.newValue);
-    } else if (event.propertyName === 'value' && event.source.id === 'NotificationCountField') {
-      this.form.setNotificationCount(event.newValue);
+    } else if (event.propertyName === 'value' && event.source.id === 'NotificationBadgeTextField') {
+      this.form.setNotificationBadgeText(event.newValue);
     } else if (event.propertyName === 'value' && event.source.id === 'IconIdField') {
       this.form.setIconId(event.newValue);
     } else if (event.propertyName === 'value' && event.source.id === 'AskIfNeedSaveField') {

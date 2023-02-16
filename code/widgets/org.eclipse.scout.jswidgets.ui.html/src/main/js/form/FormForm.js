@@ -20,6 +20,7 @@ export default class FormForm extends Form {
     this.currentFormPropertiesBox = null;
     this.LifecycleData = {};
     this.closeMenuVisible = false;
+    this._notificationBadgeText = null;
   }
 
   _jsonModel() {
@@ -28,6 +29,8 @@ export default class FormForm extends Form {
 
   _init(model) {
     super._init(model);
+
+    this.setNotificationBadgeText(this._notificationBadgeText);
 
     this.widget('OpenFormButton').on('click', this._onOpenFormButtonClick.bind(this));
     this.widget('OpenLifecycleFormButton').on('click', this._onOpenLifecycleFormButtonClick.bind(this));
@@ -112,7 +115,7 @@ export default class FormForm extends Form {
     return {
       title: this.propertiesBox.titleField.value,
       subTitle: this.propertiesBox.subTitleField.value,
-      notificationCount: this.propertiesBox.notificationCountField.value,
+      _notificationBadgeText: this.propertiesBox.notificationBadgeTextField.value,
       iconId: this.propertiesBox.iconIdField.value,
       displayHint: this.propertiesBox.displayHintField.value,
       displayViewId: this.propertiesBox.displayViewIdField.value,

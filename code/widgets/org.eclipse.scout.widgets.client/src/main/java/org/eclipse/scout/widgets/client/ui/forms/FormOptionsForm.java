@@ -16,7 +16,6 @@ import org.eclipse.scout.rt.client.ui.form.IForm;
 import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
-import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerField;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.Order;
@@ -29,7 +28,7 @@ import org.eclipse.scout.widgets.client.ui.forms.FormForm.IconIdLookupCall;
 import org.eclipse.scout.widgets.client.ui.forms.FormOptionsForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.FormOptionsForm.MainBox.CssClassField;
 import org.eclipse.scout.widgets.client.ui.forms.FormOptionsForm.MainBox.IconField;
-import org.eclipse.scout.widgets.client.ui.forms.FormOptionsForm.MainBox.NotificationCountField;
+import org.eclipse.scout.widgets.client.ui.forms.FormOptionsForm.MainBox.NotificationBadgeTextField;
 import org.eclipse.scout.widgets.client.ui.forms.FormOptionsForm.MainBox.SaveNeededVisibleField;
 import org.eclipse.scout.widgets.client.ui.forms.FormOptionsForm.MainBox.ShowInfoStatusField;
 import org.eclipse.scout.widgets.client.ui.forms.FormOptionsForm.MainBox.SubtitleField;
@@ -84,8 +83,8 @@ public class FormOptionsForm extends AbstractForm {
     return getFieldByClass(SubtitleField.class);
   }
 
-  public NotificationCountField getNotificationCountField() {
-    return getFieldByClass(NotificationCountField.class);
+  public NotificationBadgeTextField getNotificationBadgeTextField() {
+    return getFieldByClass(NotificationBadgeTextField.class);
   }
 
   public CloseButton getCloseButton() {
@@ -215,21 +214,21 @@ public class FormOptionsForm extends AbstractForm {
 
     @Order(2500)
     @ClassId("eab83f3f-6d63-4416-b976-c58e52963ff9")
-    public class NotificationCountField extends AbstractIntegerField {
+    public class NotificationBadgeTextField extends AbstractStringField {
 
       @Override
       protected String getConfiguredLabel() {
-        return "Notification count";
+        return "Notification badge text";
       }
 
       @Override
       protected void execInitField() {
-        setValue(getConfigurableForm().getNotificationCount());
+        setValue(getConfigurableForm().getNotificationBadgeText());
       }
 
       @Override
       protected void execChangedValue() {
-        getConfigurableForm().setNotificationCount(getValue());
+        getConfigurableForm().setNotificationBadgeText(getValue());
       }
     }
 
