@@ -27,6 +27,7 @@ import org.eclipse.scout.widgets.client.ui.forms.FormForm.IconIdLookupCall;
 import org.eclipse.scout.widgets.client.ui.forms.FormOptionsForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.FormOptionsForm.MainBox.CssClassField;
 import org.eclipse.scout.widgets.client.ui.forms.FormOptionsForm.MainBox.IconField;
+import org.eclipse.scout.widgets.client.ui.forms.FormOptionsForm.MainBox.NotificationBadgeTextField;
 import org.eclipse.scout.widgets.client.ui.forms.FormOptionsForm.MainBox.SaveNeededVisibleField;
 import org.eclipse.scout.widgets.client.ui.forms.FormOptionsForm.MainBox.ShowInfoStatusField;
 import org.eclipse.scout.widgets.client.ui.forms.FormOptionsForm.MainBox.SubtitleField;
@@ -79,6 +80,10 @@ public class FormOptionsForm extends AbstractForm {
 
   public SubtitleField getSubTitleField() {
     return getFieldByClass(SubtitleField.class);
+  }
+
+  public NotificationBadgeTextField getNotificationBadgeTextField() {
+    return getFieldByClass(NotificationBadgeTextField.class);
   }
 
   public CloseButton getCloseButton() {
@@ -203,6 +208,26 @@ public class FormOptionsForm extends AbstractForm {
       @Override
       protected void execChangedValue() {
         getConfigurableForm().setSubTitle(getValue());
+      }
+    }
+
+    @Order(2500)
+    @ClassId("eab83f3f-6d63-4416-b976-c58e52963ff9")
+    public class NotificationBadgeTextField extends AbstractStringField {
+
+      @Override
+      protected String getConfiguredLabel() {
+        return "Notification badge text";
+      }
+
+      @Override
+      protected void execInitField() {
+        setValue(getConfigurableForm().getNotificationBadgeText());
+      }
+
+      @Override
+      protected void execChangedValue() {
+        getConfigurableForm().setNotificationBadgeText(getValue());
       }
     }
 

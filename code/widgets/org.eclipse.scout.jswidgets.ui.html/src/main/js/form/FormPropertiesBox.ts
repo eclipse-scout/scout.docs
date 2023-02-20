@@ -17,6 +17,7 @@ export class FormPropertiesBox extends GroupBox {
   form: Form;
   titleField: StringField;
   subTitleField: StringField;
+  notificationBadgeTextField: StringField;
   iconIdField: SmartField<string>;
   askIfNeedSaveField: CheckBoxField;
   cacheBoundsField: CheckBoxField;
@@ -36,6 +37,7 @@ export class FormPropertiesBox extends GroupBox {
     this.form = null;
     this.titleField = null;
     this.subTitleField = null;
+    this.notificationBadgeTextField = null;
     this.iconIdField = null;
     this.askIfNeedSaveField = null;
     this.cacheBoundsField = null;
@@ -58,6 +60,7 @@ export class FormPropertiesBox extends GroupBox {
     super._init(model);
     this.titleField = this.widget('TitleField');
     this.subTitleField = this.widget('SubTitleField');
+    this.notificationBadgeTextField = this.widget('NotificationBadgeTextField');
     this.iconIdField = this.widget('IconIdField');
     this.displayHintField = this.widget('DisplayHintField');
     this.displayViewIdField = this.widget('DisplayViewIdField');
@@ -88,6 +91,9 @@ export class FormPropertiesBox extends GroupBox {
 
     this.subTitleField.setValue(form.subTitle);
     this.subTitleField.on('propertyChange:value', event => this.form.setSubTitle(event.newValue));
+
+    this.notificationBadgeTextField.setValue(form.getNotificationBadgeText());
+    this.notificationBadgeTextField.on('propertyChange:value', event => this.form.setNotificationBadgeText(event.newValue));
 
     this.iconIdField.setValue(form.iconId);
     this.iconIdField.on('propertyChange:value', event => this.form.setIconId(event.newValue));

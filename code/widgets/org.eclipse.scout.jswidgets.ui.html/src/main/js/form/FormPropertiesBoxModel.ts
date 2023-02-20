@@ -28,6 +28,11 @@ export default (): GroupBoxModel => ({
       label: 'Sub Title'
     },
     {
+      id: 'NotificationBadgeTextField',
+      objectType: StringField,
+      label: 'Notification badge text'
+    },
+    {
       id: 'IconIdField',
       objectType: SmartField,
       lookupCall: IconIdLookupCall,
@@ -106,6 +111,7 @@ export default (): GroupBoxModel => ({
 export type FormPropertiesBoxWidgetMap = {
   'TitleField': StringField;
   'SubTitleField': StringField;
+  'NotificationBadgeTextField': StringField;
   'IconIdField': SmartField<string>;
   'DisplayHintField': SmartField<DisplayHint>;
   'DisplayViewIdField': SmartField<DisplayViewId>;
