@@ -14,7 +14,7 @@
   <parent>
     <groupId>org.eclipse.scout.widgets</groupId>
     <artifactId>org.eclipse.scout.widgets</artifactId>
-    <version>23.1-SNAPSHOT</version>
+    <version>23.1.2</version>
     <relativePath>../org.eclipse.scout.widgets/</relativePath>
   </parent>
 
