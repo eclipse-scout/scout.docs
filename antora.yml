@@ -1,0 +1,24 @@
+name: scout-docs
+title: Eclipse Scout Documentation
+version: 22.0
+asciidoc:
+  attributes:
+    source-language: asciidoc@
+    experimental: true
+    sectanchors: true
+
+nav:
+- modules/getstarted/nav.adoc
+- modules/helloscout/nav.adoc
+- modules/deploy_to_tomcat/nav.adoc
+- modules/one_day_tutorial/nav.adoc
+- modules/helloscout_js/nav.adoc
+- modules/helloscout_js_fullstack/nav.adoc
+- modules/helloscout_cdn/nav.adoc
+- modules/technical_guide/nav.adoc
+- modules/technical_guide_js/nav.adoc
+- modules/sdk_eclipse/nav.adoc
+- modules/sdk_tests/nav.adoc
+- modules/releasenotes/nav.adoc
+- modules/migration/nav.adoc
+# - modules/eclipse_help/nav.adoc
