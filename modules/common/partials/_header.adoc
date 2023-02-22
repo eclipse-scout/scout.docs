@@ -1,6 +1,5 @@
 :doctype: book
 :revnumber: {project-version}
-:toc: left
 :finaldoc: true
 
 include::partial$_folders.adoc[]
