@@ -1,5 +1,5 @@
 ifndef::finaldoc[]
-include::../_initDoc.adoc[]
+include::common:partial$_initDoc.adoc[]
 endif::finaldoc[]
 
 :howtodir: ../howtos
@@ -8,6 +8,6 @@ endif::finaldoc[]
 
 This chapter provides various small technical guides to very specific Scout subjects.
 
-include::{howtodir}/SmartField-HowTo.adoc[]
+include::howtos:partial$SmartField-HowTo.adoc[]
 
-include::{howtodir}/Chart-HowTo.adoc[]
+include::howtos:partial$Chart-HowTo.adoc[]

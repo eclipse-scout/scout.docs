@@ -1,5 +1,5 @@
 ifndef::finaldoc[]
-include::../_initDoc.adoc[]
+include::common:partial$_initDoc.adoc[]
 endif::finaldoc[]
 
 //fallback for safe mode == secure:
@@ -16,7 +16,7 @@ ifndef::mdledir[:mdledir: .]
 
 [[img-new_text_entry_wizard]]
 .Adding a new text with the New Entry wizard.
-image::{imgsdir}/sdk_wizard_nls_entry.png[]
+image::common:sdk_wizard_nls_entry.png[]
 
 Key Name:: This field holds the text key that is used to access translated text.
 default:: This field holds the default translated text for the key. Make sure to at least provide a translated text in this tab.

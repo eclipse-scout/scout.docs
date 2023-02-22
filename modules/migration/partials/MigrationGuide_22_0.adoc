@@ -8,7 +8,7 @@ Howto:
 ////
 
 ifndef::finaldoc[]
-include::../_initDoc.adoc[]
+include::common:partial$_initDoc.adoc[]
 endif::finaldoc[]
 
 // double underscore
@@ -238,7 +238,7 @@ To do so, edit your launch configuration and change the regular expression of th
 Or remove the action completely if you prefer the launchers to be started in parallel.
 
 .Adjust Launch Group
-image::{mgimgsdir}/launch-group.png[]
+image::launch-group.png[]
 
 == Release engineering changes
 

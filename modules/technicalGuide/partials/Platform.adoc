@@ -1,6 +1,6 @@
 
 ifndef::finaldoc[]
-include::../_initDoc.adoc[]
+include::common:partial$_initDoc.adoc[]
 endif::finaldoc[]
 
 //fallback for safe mode == secure:
@@ -30,7 +30,7 @@ The lifecycle of a Scout application is controlled by implementations of `org.ec
 This interface contains methods to start and stop the application and to retrieve the <<sec-bean.manager,Bean Manager>> associated with this application.
 The class `org.eclipse.scout.rt.platform.Platform` provides access to the current platform instance. On first access the platform is automatically created and started.
 
-image::{imgsdir}/platformStates.png[]
+image::common:platformStates.png[]
 
 During its startup, the platform transitions through several states. Depending on the state of the platform some components may already be initialized and ready to use while others are not available yet.
 
@@ -46,7 +46,7 @@ As soon as the state of the platform changes the listener will be notified.
 [source,java,indent=0]
 .A listener that will do some work as soon as the platform has been started.
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/PlatformSnippet.java[tags=PlatformListener]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/PlatformSnippet.java[tags=PlatformListener]
 ----
 
 TIP: As platform listeners may run as part of the startup or shutdown not the full Scout platform may be available. Depending on the state some tasks cannot be performed or some platform models are not available yet!
@@ -66,7 +66,7 @@ This class inventory can be accessed as described in listing <<lst-ClassInventor
 [source,java,indent=0]
 .Access the Scout class inventory.
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/PlatformSnippet.java[tags=ClassInventory]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/PlatformSnippet.java[tags=ClassInventory]
 ----
 
 ==== scout.xml
@@ -101,7 +101,7 @@ Usually beans are registered during application startup. The application startup
 [source,java,indent=0]
 .A listener that registers a bean (direct class or with meta data).
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/PlatformSnippet.java[tags=RegisterBeansListener]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/PlatformSnippet.java[tags=RegisterBeansListener]
 ----
 
 There is also a predefined bean registration built into the Scout runtime. This automatically registers all classes having an `org.eclipse.scout.rt.platform.@Bean` annotation. Therefore it is usually sufficient to only annotate a class with `@Bean` to have it available in the bean manager as shown in listing <<lst-NormalBeanClass>>.
@@ -110,7 +110,7 @@ There is also a predefined bean registration built into the Scout runtime. This 
 [source,java,indent=0]
 .A normal bean
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/PlatformSnippet.java[tags=BeanClass]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/PlatformSnippet.java[tags=BeanClass]
 ----
 
 TIP: As the `@Bean` annotation is an `java.lang.annotation.@Inherited` annotation, this automatically registers all child classes too. This means that also interfaces may be `@Bean` annotated making all implementations automatically available in the bean manager! Furthermore other annotations may be `@Bean` annotated making all classes holding these annotations automatically to beans as well.
@@ -142,7 +142,7 @@ As like all bean meta data this characteristic can be provided in two different 
 [source,java,indent=0]
 .An application scoped bean using annotations
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/PlatformSnippet.java[tags=BeanSingletonClass]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/PlatformSnippet.java[tags=BeanSingletonClass]
 ----
 
 So the Java annotation `org.eclipse.scout.rt.platform.@ApplicationScoped` describes a bean having singleton characteristics.
@@ -173,7 +173,7 @@ To retrieve a bean the class `org.eclipse.scout.rt.platform.BEANS` should be use
 [source,java,indent=0]
 .How to get beans.
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/PlatformSnippet.java[tags=BeanRetrieval]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/PlatformSnippet.java[tags=BeanRetrieval]
 ----
 
 * The `get()` method throws an exception if there is not a single bean result. So if no bean can be found or if multiple equivalent bean candidates are available this method fails!
@@ -184,7 +184,7 @@ There are now two more annotations that have an effect on which beans are return
 
 [[img-beanHierarchy]]
 .A sample bean hierarchy.
-image::{imgsdir}/beanHierarchy.png[]
+image::common:beanHierarchy.png[]
 
 In this situation 4 bean candidates are available: MyServiceImpl, MyServiceMod, MySpecialVersion and AnotherVersion.
 But which one is returned by `BEANS.get(IMyService.class)`? Or by `BEANS.get(MySpecialVersion.class)`?
@@ -203,7 +203,7 @@ If a bean does not declare an order value, the default of `5000` is used. Scout 
 So for user applications the value `4000` and below can be used to declare more important beans.
 For testing bean mocks the value `-10'000` can be used which then usually comes before each normal Scout or application bean.
 
-image::{imgsdir}/defaultOrders.png[]
+image::common:defaultOrders.png[]
 
 ===== @Replace
 
@@ -250,7 +250,7 @@ The sample in listing <<lst-BeanDecorationFactory>> wraps each call to the serve
 [source,java,indent=0]
 .Bean decoration example.
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/PlatformSnippet.java[tags=BeanDecorationFactory]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/PlatformSnippet.java[tags=BeanDecorationFactory]
 ----
 
 ==== Destroy Beans
@@ -277,7 +277,7 @@ For each property a class cares about default values and value validation. These
 [source,java,indent=0]
 .A configuration property of type Long.
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/test/java/org/eclipse/scout/docs/snippets/platform/config/MyCustomTimeoutProperty.java[tags=ConfigProperties]
+include::common:example$org.eclipse.scout.docs.snippets/src/test/java/org/eclipse/scout/docs/snippets/platform/config/MyCustomTimeoutProperty.java[tags=ConfigProperties]
 ----
 <1> key
 <2> default value
@@ -288,7 +288,7 @@ To read the configured value you can use the `CONFIG` class as demonstrated in <
 [source,java,indent=0]
 .Read the configured value in your code.
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/test/java/org/eclipse/scout/docs/snippets/platform/config/ScoutConfigTest.java[tags=getPropertyValue]
+include::common:example$org.eclipse.scout.docs.snippets/src/test/java/org/eclipse/scout/docs/snippets/platform/config/ScoutConfigTest.java[tags=getPropertyValue]
 ----
 
 ==== Property resolution
@@ -354,7 +354,7 @@ In this case a fixed value is returned.
 [source,java,indent=0]
 .Property class providing a constant value.
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/test/java/org/eclipse/scout/docs/snippets/platform/config/ApplicationNameConstant.java[tags=code]
+include::common:example$org.eclipse.scout.docs.snippets/src/test/java/org/eclipse/scout/docs/snippets/platform/config/ApplicationNameConstant.java[tags=code]
 ----
 
 The next example presented in <<lst-PropertyRedirection>> uses the same idea.
@@ -364,14 +364,14 @@ In this case, the `getKey()` method is overridden to read the value from an othe
 [source,java,indent=0]
 .Property class reading the value from an other key.
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/test/java/org/eclipse/scout/docs/snippets/platform/config/ApplicationNamePropertyRedirection.java[tags=code]
+include::common:example$org.eclipse.scout.docs.snippets/src/test/java/org/eclipse/scout/docs/snippets/platform/config/ApplicationNamePropertyRedirection.java[tags=code]
 ----
 
 [[lst-PropertyRedirectionConfig]]
 [source,properties,indent=0]
 .Read the configured value in your code.
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/test/resources/config.properties[tags=redirection]
+include::common:example$org.eclipse.scout.docs.snippets/src/test/resources/config.properties[tags=redirection]
 ----
 
 ==== Configuration validation

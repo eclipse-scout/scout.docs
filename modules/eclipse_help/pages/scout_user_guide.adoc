@@ -1,7 +1,7 @@
 = Eclipse Scout User Guide
 :doctype: article
 :revnumber: {project-version}
-include::_initDoc.adoc[]
+include::partial$_initDoc.adoc[]
 
 //fallback for safe mode == secure:
 ifndef::imgsdir[:imgsdir: ../../../../imgs]
@@ -17,4 +17,4 @@ In the second part, the Scout tooling available in the Eclipse IDE is described.
 
 '''
 :_footer-link-path: build/eclipse_help/src/docs/{docname}.adoc
-include::../../../common/src/docs/_footer-text.adoc[]
+include::common:partial$_footer-text.adoc[]

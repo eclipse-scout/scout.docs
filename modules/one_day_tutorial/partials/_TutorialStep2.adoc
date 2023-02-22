@@ -1,4 +1,4 @@
-include::../../../common/src/docs/_initSubDoc.adoc[]
+include::common:partial$_initSubDoc.adoc[]
 
 //-----------------------------------------------------------------------------
 //WARNING: this file is a text module, it needs to be embedded in a master asciidoctor document.
@@ -39,13 +39,13 @@ This person package can be created with the following steps.
 
 [[img-contacts_person_package_Intellij]]
 .Create the person package in IntelliJ.
-image::{imgsdir}/sdk_new_package_Intellij.png[]
+image::common:sdk_new_package_Intellij.png[]
 [[img-contacts_person_package_wizard_Intellij]]
 .Add the person package to the "Contacts" application in IntelliJ.
-image::{imgsdir}/sdk_new_package_wizard_Intellij.png[]
+image::common:sdk_new_package_wizard_Intellij.png[]
 [[img-contacts_person_package]]
 .Add the person package to the "Contacts" application in Eclipse.
-image::{imgsdir}/sdk_new_package_wizard.png[]
+image::common:sdk_new_package_wizard.png[]
 
 We will also need a separate package for organizations and some common elements.
 
@@ -65,7 +65,7 @@ In package `org.eclipse.scout.contacts.client.common` create a new class `Countr
 [source,java]
 .The Scout lookup call for countries. This lookup call will be used for the address field.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/common/CountryLookupCall.java[tags=all]
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/common/CountryLookupCall.java[tags=all]
 ----
 
 <1> Makes the `CountryLookupCall` to work with key type `String`
@@ -91,13 +91,13 @@ We can now add the Scout person page as described below.
 
 [[img-contacts_create_new_person_page_Intellij]]
 .Create the person page in IntelliJ.
-image::{imgsdir}/sdk_create_new_personpage_wizard_Intellij.png[]
+image::common:sdk_create_new_personpage_wizard_Intellij.png[]
 [[img-contacts_new_person_page_Intellij]]
 .Add the person page to the "Contacts" application in IntelliJ.
-image::{imgsdir}/sdk_new_personpage_wizard_Intellij.png[]
+image::common:sdk_new_personpage_wizard_Intellij.png[]
 [[img-contacts_new_person_page]]
 .Add the person page to the "Contacts" application in Eclipse.
-image::{imgsdir}/sdk_new_personpage_wizard.png[]
+image::common:sdk_new_personpage_wizard.png[]
 
 The Scout [wizard]_New Page Wizard_ then creates an initial implementation for the `PersonTablePage` class very similar to the listing provided in <<lst-contacts_PersonTable>> below.
 
@@ -105,7 +105,7 @@ The Scout [wizard]_New Page Wizard_ then creates an initial implementation for t
 [source,java]
 .Initial implementation of class PersonTablePage.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonTablePage.java[tags=PageInit]
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonTablePage.java[tags=PageInit]
 ----
 
 Before we start to add the columns to the table of the page we need to do some minor adaptations to <<lst-contacts_PersonTable>>.
@@ -154,19 +154,19 @@ We then open the Scout content assist with kbd:[Ctrl+Space] and select the [elem
 
 [[img-sdk_new_page_column_contacts_IntelliJ]]
 .Adding a column to the person page table in IntelliJ.
-image::{imgsdir}/sdk_new_page_column_contacts_IntelliJ.png[]
+image::common:sdk_new_page_column_contacts_IntelliJ.png[]
 [[img-sdk_new_page_column_contacts]]
 .Adding a column to the person page table in Eclipse.
-image::{imgsdir}/sdk_new_page_column_contacts.png[]
+image::common:sdk_new_page_column_contacts.png[]
 
 In the first edit box we type "PersonId" as shown in <<img-sdk_new_page_column_personid_Intellij>> (IntelliJ) and <<img-sdk_new_page_column_personid>> (Eclipse) and press kbd:[Enter].
 
 [[img-sdk_new_page_column_personid_Intellij]]
 .Adding a column to the person page table in IntelliJ.
-image::{imgsdir}/sdk_new_page_column_personid_Intellij.png[]
+image::common:sdk_new_page_column_personid_Intellij.png[]
 [[img-sdk_new_page_column_personid]]
 .Adding a column to the person page table in Eclipse.
-image::{imgsdir}/sdk_new_page_column_personid.png[]
+image::common:sdk_new_page_column_personid.png[]
 
 To configure this column as an invisible primary key we modify the newly created column class according to <<lst-contacts_PersonIdColumn>>.
 
@@ -174,7 +174,7 @@ To configure this column as an invisible primary key we modify the newly created
 [source,java]
 .Implementation of the person primary key column PersonIdColumn.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonTablePage.java[tags=PersonIdColumn]
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonTablePage.java[tags=PersonIdColumn]
 ----
 <1> Returning `false` here makes this column invisible. As this column will be excluded from the table control the user is not aware of the existence of this column.
 <2> Returning `true` marks this attibute as a primary key (or part of a primary key)
@@ -190,7 +190,7 @@ For these three columns the default implementation is fine and does not need any
 [source,java]
 .Implementation of the first name column.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonTablePage.java[tags=FirstNameColumn]
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonTablePage.java[tags=FirstNameColumn]
 ----
 
 For column `CountryColumn` we will use a smart column.
@@ -203,7 +203,7 @@ In the created class `CountryColumn` we need to add the generic type parameter t
 [source,java]
 .Implementation of the country smart column.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonTablePage.java[tags=CountryColumn]
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonTablePage.java[tags=CountryColumn]
 ----
 
 <1> The configured lookup call is used to map country codes to the country names used in the user interface.
@@ -215,7 +215,7 @@ As an example for such a column <<lst-contacts_PhoneColumn>> is provided below.
 [source,java]
 .Implementation of the (initially invisible) phone column.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonTablePage.java[tags=PhoneColumn]
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonTablePage.java[tags=PhoneColumn]
 ----
 
 <1> Returning `false` hides the column initially. Using the table control the user can then make this column visible in the user interface.
@@ -240,7 +240,7 @@ For this we have to add a single line of code to method `execCreateChildPages` o
 [source,java]
 .Adding the PersonTable to the ContactOutline.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/contact/ContactOutline.java[tags=execCreateChildPagesPerson]
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/contact/ContactOutline.java[tags=execCreateChildPagesPerson]
 ----
 
 <1> A new instance of the `PersonTable` is added to this outline. This makes the person page visible in the navigation area below the contacts outline.
@@ -261,7 +261,7 @@ Where appropriate, pointers are provided to the detailed descriptions for the cr
 [source,java]
 .Initial implementation of class OrganizationTablePage.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/organization/OrganizationTablePage.java[tags=PageInit]
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/organization/OrganizationTablePage.java[tags=PageInit]
 ----
 
 <1> Make sure to add a translated text entry for "Organizations" using the Scout NLS tooling
@@ -283,7 +283,7 @@ As in the case of the person page we have to add the newly created class `Organi
 [source,java]
 .Adding the OrganizationTablePage to the ContactOutline.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/contact/ContactOutline.java[tags=execCreateChildPagesPerson;execCreateChildPagesOrganization]
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/contact/ContactOutline.java[tags=execCreateChildPagesPerson;execCreateChildPagesOrganization]
 ----
 
 <1> The pages will appear in the user interface according to the order in which they are added to the outline.
@@ -298,7 +298,7 @@ The user interface should look like the screenshot provided in <<img-contacts_tu
 
 [[img-contacts_tutorial_result_step_2]]
 .The "Contacts" application with the person and organization pages at the end of tutorial step 2.
-image::{imgsdir}/contacts_tutorial_result_step_2.png[]
+image::common:contacts_tutorial_result_step_2.png[]
 
 When comparing the state of the "Contacts" tutorial application with the Scout demo application in <<img-app_contacts_personpage>> the main difference is the missing person data.
 Adding access to a database is the focus of the next tutorial step.

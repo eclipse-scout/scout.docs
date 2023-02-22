@@ -1,5 +1,5 @@
 ifndef::finaldoc[]
-include::../_initDoc.adoc[]
+include::common:partial$_initDoc.adoc[]
 endif::finaldoc[]
 
 //fallback for safe mode == secure:
@@ -19,7 +19,7 @@ To start the wizard use menu:File[New,Other...] or press kbd:[Ctrl,N].
 
 [[img-sdk_wizard_page]]
 .The new Page Wizard
-image::{imgsdir}/sdk_new_page.png[]
+image::common:sdk_new_page.png[]
 
 // TODO [7.0] mzi: replace *Name* field
 In the case of <<img-sdk_wizard_page>> the package `org.eclipse.scout.apps.helloworld.client.helloworld` has been selected in the Package Explorer.

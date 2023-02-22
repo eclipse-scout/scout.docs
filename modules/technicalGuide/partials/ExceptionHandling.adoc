@@ -1,6 +1,6 @@
 
 ifndef::finaldoc[]
-include::../_initDoc.adoc[]
+include::common:partial$_initDoc.adoc[]
 endif::finaldoc[]
 
 //fallback for safe mode == secure:
@@ -38,7 +38,7 @@ Further, `PlatformException` allows to associate context information, which are 
 [source,java,indent=0]
 .PlatformException examples
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/ExceptionHandlingSnippet.java[tags=PlatformException.constr]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/ExceptionHandlingSnippet.java[tags=PlatformException.constr]
 ----
 
 ===== ProcessingException
@@ -103,7 +103,7 @@ Typically, this translator is used if you require to add some context informatio
 [source,java,indent=0]
 .PlatformException examples
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/ExceptionHandlingSnippet.java[tags=platformExceptionTranslator.example]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/ExceptionHandlingSnippet.java[tags=platformExceptionTranslator.example]
 ----
 
 ==== NullExceptionTranslator
@@ -123,5 +123,5 @@ SLF4J allows the use of formatting anchors in the form of {} pairs in the messag
 [source,java,indent=0]
 .Logging examples
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/ExceptionHandlingSnippet.java[tags=slf4Jlogging]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/ExceptionHandlingSnippet.java[tags=slf4Jlogging]
 ----

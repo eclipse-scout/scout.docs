@@ -1,5 +1,5 @@
 ifndef::finaldoc[]
-include::../_initDoc.adoc[]
+include::common:partial$_initDoc.adoc[]
 endif::finaldoc[]
 
 //fallback for safe mode == secure:
@@ -136,7 +136,7 @@ chart.setData(data);
 
 The chart will now look like this:
 
-image::{imgsdir}/pieChartDefault.png[]
+image::common:pieChartDefault.png[]
 
 It looks like this, because the default type is `pie`, the default value of `maxSegments` is `5` and the first three segments in each dataset are 0.
 
@@ -156,7 +156,7 @@ let config = {
 chart.setConfig(config);
 ----
 
-image::{imgsdir}/barChartRainbow.png[]
+image::common:barChartRainbow.png[]
 
 Now we add labels to the scales and set some custom colors.
 
@@ -186,7 +186,7 @@ chart.setData(data);
 chart.setConfig(config);
 ----
 
-image::{imgsdir}/barChartCustom.png[]
+image::common:barChartCustom.png[]
 
 Finally, we want to make the chart interactive.
 
@@ -208,7 +208,7 @@ chart.setConfig(config);
 The chart is now `clickable` and `checkable` and datasets can be hidden via the legend.
 
 .The dataset "Vanilla" is hidden and some segments are checked.
-image::{imgsdir}/barChartCustomInteractive.png[]
+image::common:barChartCustomInteractive.png[]
 
 ==== Events
 
@@ -296,4 +296,4 @@ let config = {
 ----
 
 .A checkable bubble chart using the custom grey color scheme.
-image::{imgsdir}/bubbleChartColorSchemeGrey.png[]
+image::common:bubbleChartColorSchemeGrey.png[]

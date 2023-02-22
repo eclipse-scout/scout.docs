@@ -1,8 +1,8 @@
 = Build Scout App and Deploy to Tomcat
 // comment prevents empty line after formatting, needed for toc
-include::../../../common/src/docs/_header.adoc[]
+include::common:partial$_header.adoc[]
 
-include::_BuildAndDeploy.adoc[]
+include::partial$_BuildAndDeploy.adoc[]
 
 :_footer-link-path: build/deploy_to_tomcat/src/docs/{docname}.adoc
-include::../../../common/src/docs/_footer.adoc[]
+include::common:partial$_footer.adoc[]

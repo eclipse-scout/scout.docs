@@ -1,6 +1,6 @@
 
 ifndef::finaldoc[]
-include::../_initDoc.adoc[]
+include::common:partial$_initDoc.adoc[]
 endif::finaldoc[]
 
 //fallback for safe mode == secure:
@@ -34,26 +34,26 @@ A job is defined as some work to be executed asynchronously and is associated wi
 [source,java,indent=0]
 .Work that does not return a result
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=IRunnable]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=IRunnable]
 ----
 [source,java,indent=0]
 .Work that returns a computation result
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=Callable]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=Callable]
 ----
 
 Upon scheduling a job, the job manager returns a `IFuture` to interact with the job, e.g. to cancel its execution, or to await its completion. The job itself can also access its `IFuture`, namely via `IFuture.CURRENT()` ThreadLocal.
 [source,java,indent=0]
 .Accessing the Future from within the job
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=future.threadLocal]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=future.threadLocal]
 ----
 
 === Scheduling a Job
 The job manager provides two scheduling methods, which only differ in the work they accept for execution (callable or runnable).
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=jobManager.api.schedule]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=jobManager.api.schedule]
 ----
 <1> Use to schedule a runnable which does not return a result to the submitter
 <2> Use to schedule a callable which does return a result to the submitter
@@ -65,7 +65,7 @@ The following snippet illustrates how a job is actually scheduled.
 [source,java,indent=0]
 .Schedule a job
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=jobManager.schedule1]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=jobManager.schedule1]
 ----
 <1> Obtain the job manager via bean manager (application scoped bean)
 <2> Provide the work to be executed (either runnable or callable)
@@ -76,7 +76,7 @@ This looks a little bit clumsy, which is why Scout provides you with the `Jobs` 
 [source,java,indent=0]
 .Schedule a job via Jobs helper class
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=jobManager.schedule2]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=jobManager.schedule2]
 ----
 
 === JobInput
@@ -85,7 +85,7 @@ The job input tells the job manager how to run the job. It further names the job
 [source,java,indent=0]
 .Schedule a job and control execution via JobInput
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=jobInput.example]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=jobInput.example]
 ----
 
 This snippet instructs the job manager to run the job as following:
@@ -102,7 +102,7 @@ The following paragraphs describe the functionality of `JobInput` in more detail
 To optionally specify the name of the job, which is used to name the worker thread (only in development environment) and for logging purpose. Optionally, _formatting anchors_ in the form of {} pairs can be used in the name, which will be replaced by the respective argument.
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=jobInput.name]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=jobInput.name]
 ----
 
 ==== JobInput.withRunContext
@@ -120,7 +120,7 @@ Use the static factory method `Jobs.newExecutionTrigger()` to get an instance:
 
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=executionTrigger.examples]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=executionTrigger.examples]
 ----
 Learn more about <<ExecutionTrigger,ExecutionTrigger>>.
 
@@ -135,7 +135,7 @@ A new semaphore instance can be obtained via `Jobs` class.
 
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=executionSemaphore.example]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=executionSemaphore.example]
 ----
 <1> Create a new `ExecutionSemaphore` via `Jobs` class. The semaphore is initialized with 5 permits, meaning that at any given time, there are no more than 5 jobs running concurrently.
 <2> Schedule 100 jobs in a row.
@@ -211,7 +211,7 @@ A future filter is a filter which can be passed to various methods of the job ma
 .Example of a future filter
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=futureFilter.example]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=futureFilter.example]
 ----
 
 Scout provides you with `FutureFilterBuilder` class to ease building filters which match multiple criteria joined by logical 'AND' operation.
@@ -219,7 +219,7 @@ Scout provides you with `FutureFilterBuilder` class to ease building filters whi
 [source,java,indent=0]
 .Usage of FutureFilterBuilder
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=futureFilterBuilder.example]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=futureFilterBuilder.example]
 ----
 <1> Returns an instance of the future filter builder
 <2> Specifies to match only futures associated with execution hint 'computation'
@@ -238,7 +238,7 @@ A job event filter is a filter which can be given to job manager to subscribe fo
 .Example of an event filter
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=eventFilter.example]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=eventFilter.example]
 ----
 
 Scout provides you with `JobEventFilterBuilder` class to ease building filters which match multiple criteria joined by logical 'AND' operation.
@@ -246,7 +246,7 @@ Scout provides you with `JobEventFilterBuilder` class to ease building filters w
 [source,java,indent=0]
 .Usage of JobEventFilterBuilder
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=jobEventFilterBuilder.example]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=jobEventFilterBuilder.example]
 ----
 <1> Returns an instance of the job event filter builder
 <2> Specifies to match all events representing a job state change
@@ -267,19 +267,19 @@ In the following some examples:
 .Cancel a job via its future
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=future.cancel]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=future.cancel]
 ----
 
 .Cancel multiple jobs via job manager
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=jobManager.cancel1]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=jobManager.cancel1]
 ----
 
 .Cancel multiple jobs which match a specific execution hint and the current session
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=jobManager.cancel2]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=jobManager.cancel2]
 ----
 
 A job can query its current cancellation status via `RunMonitor.CURRENT.get().isCancelled()`. If doing some long running operations, it is recommended for the job to regularly check for cancellation.
@@ -312,7 +312,7 @@ The listener is registered via job manager as following:
 .Subscribe for global job events
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=jobManager.registerListener]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=jobManager.registerListener]
 ----
 <1> Subscribe for all events related to jobs just about to commence execution, and which belong to the current session
 <2> Get the future this event was fired for
@@ -322,7 +322,7 @@ If interested in only events of a single future, the listener can be registered 
 .Subscribe for local job events
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=future.registerListener]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=future.registerListener]
 ----
 
 
@@ -340,7 +340,7 @@ Further, `awaitDoneAndGet` allows to specify an <<exception-translation,IExcepti
 .Examples of how to await done state on a future
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=future.awaitDone]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=future.awaitDone]
 ----
 <1> Waits if necessary for the job to complete, or until cancelled. This method does not throw an exception if cancelled or the computation failed, but throws <<ThreadInterruptedError,ThreadInterruptedError>> if the current thread was interrupted while waiting.
 <2> Waits if necessary for at most 10 seconds for the job to complete, or until cancelled, or the timeout elapses. This method does not throw an exception if cancelled, or the computation failed, but throws <<TimedOutError,TimedOutError>> if waiting timeout elapsed, or throws <<ThreadInterruptedError,ThreadInterruptedError>> if the current thread was interrupted while waiting.
@@ -354,7 +354,7 @@ It is further possible to await asynchronously on a future to enter done state b
 .Example of when-done callback
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=future.whenDone]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=future.whenDone]
 ----
 
 Because invoked in another thread, this method optionally accepts a <<RunContext,RunContext>> to be applied when being invoked.
@@ -366,7 +366,7 @@ Please note that this method does not return the job's result, because by Java F
 .Examples of how to await finished state on a future
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=future.awaitFinished]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=future.awaitFinished]
 ----
 
 ==== Awaiting multiple future's 'done' state
@@ -377,7 +377,7 @@ Filters can be plugged by using logical filters like `AndFilter` or `OrFilter`, 
 .Examples of how to await done state of multiple futures
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=jobManager.awaitDone]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=jobManager.awaitDone]
 ----
 <1> Waits if necessary for at most 1 minute for all three futures to complete, or until cancelled, or the timeout elapses.
 <2> Waits if necessary for at most 1 minute until all jobs marked as 'reporting' jobs of the current session complete, or until cancelled, or the timeout elapses.
@@ -388,7 +388,7 @@ Use the method `awaitFinished` to wait for multiple jobs to finish, meaning that
 .Examples of how to await finish state of multiple futures
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=jobManager.awaitFinished]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=jobManager.awaitFinished]
 ----
 <1> Waits if necessary for at most 1 minute for all three futures to finish, or until cancelled, or the timeout elapses.
 <2> Waits if necessary for at most 1 minute until all jobs marked as 'reporting' jobs of the current session finish, or until cancelled, or the timeout elapses.
@@ -409,13 +409,13 @@ A blocking condition is often used by model jobs to wait for something to happen
 You are running in a semaphore aware job and require to do some long running operation. During that time you do not require to be the permit owner. A simple but wrong approach would be the following:
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=blockingCondition.example1]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=blockingCondition.example1]
 ----
 The problem with this approach is, that you still are the permit owner while waiting, meaning that you possibly prevent other jobs from running.
 Instead, you could use a blocking condition for that to achieve:
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=blockingCondition.example2]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=blockingCondition.example2]
 ----
 
 === ExecutionSemaphore
@@ -454,7 +454,7 @@ The class `ModelJobs` is a helper class, and is for convenience purpose to facil
 .Running work in model thread
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=modelJobs.example]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=modelJobs.example]
 ----
 <1> Schedules the work to be executed in the model thread
 <2> Creates the `JobInput` to become a model job, meaning with the session's model job semaphore set
@@ -464,7 +464,7 @@ For model jobs, it is also allowed to run according to a Quartz schedule plan, o
 Furthermore, the class `ModelJobs` provides some useful static methods:
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=modelJobs.api]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=modelJobs.api]
 ----
 
 === Configuration
@@ -484,19 +484,19 @@ This sections contains some common scheduling examples.
 .Schedule a one-shot job
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=examples.scheduling.one-shot]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=examples.scheduling.one-shot]
 ----
 
 .Schedule a job with a delay
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=examples.scheduling.delayed]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=examples.scheduling.delayed]
 ----
 
 .Schedule a repetitive job at a fixed rate
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=examples.scheduling.at-fixed-rate-infinitely]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=examples.scheduling.at-fixed-rate-infinitely]
 ----
 <1> Configure to fire in 1 minute for the first time
 <2> Use Quartz simple schedule to achieve fixed-rate execution
@@ -506,7 +506,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 .Schedule a repetitive job which runs 60 times at every minute
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=examples.scheduling.at-fixed-rate-finitely]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=examples.scheduling.at-fixed-rate-finitely]
 ----
 <1> Configure to fire in 1 minute for the first time
 <2> Use Quartz simple schedule to achieve fixed-rate execution
@@ -516,7 +516,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 .Schedule a repetitive job at a fixed delay
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=examples.scheduling.at-fixed-delay-infinitely]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=examples.scheduling.at-fixed-delay-infinitely]
 ----
 <1> Configure to fire in 1 minute for the first time
 <2> Use fixed delay schedule
@@ -524,7 +524,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 .Schedule a repetitive job which runs 60 times, but waits 1 minute between the termination of the previous and the commencement of the next execution
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=examples.scheduling.at-fixed-delay-finitely]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=examples.scheduling.at-fixed-delay-finitely]
 ----
 <1> Configure to fire in 1 minute for the first time
 <2> Use fixed delay schedule
@@ -532,21 +532,21 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 .Running at 10:15am every Monday, Tuesday, Wednesday, Thursday and Friday
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=examples.scheduling.cron-1]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=examples.scheduling.cron-1]
 ----
 <1> Cron format: [second] [minute] [hour] [day_of_month] [month] [day_of_week] [year]?
 
 .Running every minute starting at 14:00 and ending at 14:05, every day
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=examples.scheduling.cron-2]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=examples.scheduling.cron-2]
 ----
 <1> Cron format: [second] [minute] [hour] [day_of_month] [month] [day_of_week] [year]?
 
 .Limit the maximal concurrency level among jobs
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=examples.scheduling.executionSemaphore]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=examples.scheduling.executionSemaphore]
 ----
 <1> Create the execution semaphore initialized with 5 permits
 <2> Set the execution semaphore to the job subject for limited concurrency
@@ -554,17 +554,17 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 .Cancel all jobs of the current session
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=examples.cancel.all-jobs-of-current-session]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=examples.cancel.all-jobs-of-current-session]
 ----
 
 .Query for cancellation
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=CancellableWork]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=CancellableWork]
 ----
 
 .Release current semaphore permit while executing
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=blockingCondition.example2]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=blockingCondition.example2]
 ----

@@ -1,5 +1,5 @@
 ifndef::finaldoc[]
-include::../_initDoc.adoc[]
+include::common:partial$_initDoc.adoc[]
 endif::finaldoc[]
 
 // Fallback for safe mode == secure:

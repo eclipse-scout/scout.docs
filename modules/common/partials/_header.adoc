@@ -3,9 +3,9 @@
 :toc: left
 :finaldoc: true
 
-include::_folders.adoc[]
-include::{mdledir}/_initDoc.adoc[]
-include::{mdledir}/_initCommon.adoc[]
+include::partial$_folders.adoc[]
+include::common:partial$_initDoc.adoc[]
+include::common:partial$_initCommon.adoc[]
 
 NOTE: Looking for something else? Visit https://eclipsescout.github.io for all Scout related documentation.
 

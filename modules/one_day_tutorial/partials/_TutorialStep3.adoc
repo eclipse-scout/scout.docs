@@ -1,4 +1,4 @@
-include::../../../common/src/docs/_initSubDoc.adoc[]
+include::common:partial$_initSubDoc.adoc[]
 
 //-----------------------------------------------------------------------------
 //WARNING: this file is a text module, it needs to be embedded in a master asciidoctor document.
@@ -39,7 +39,7 @@ This can be done using the following steps.
 [source,xml]
 .The additional dependencies needed in the server pom.xml to use the derby database
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.server/pom.xml[tags=Derby]
+include::common:example$contacts/org.eclipse.scout.contacts.server/pom.xml[tags=Derby]
 ----
 
 <1> Add the `derby` and the `org.eclipse.scout.rt.server.jdbc` dependencies to the pom.xml of your "Contacts" server module.
@@ -52,13 +52,13 @@ To do this:
 
 [[img-contacts_tutorial_maven_modules_Intellij]]
 .Locate the Maven server modules in IntelliJ.
-image::{imgsdir}/contacts_tutorial_maven_modules_Intellij.png[]
+image::common:contacts_tutorial_maven_modules_Intellij.png[]
 [[img-contacts_tutorial_update_server_modules_Intellij]]
 .Update the Maven server modules for the "Contacts" application in IntelliJ.
-image::{imgsdir}/contacts_tutorial_update_server_modules_Intellij.png[]
+image::common:contacts_tutorial_update_server_modules_Intellij.png[]
 [[img-contacts_tutorial_update_server_modules]]
 .Update the Maven server modules for the "Contacts" application in Eclipse.
-image::{imgsdir}/contacts_tutorial_update_server_modules.png[]
+image::common:contacts_tutorial_update_server_modules.png[]
 
 The next step is to create the `org.eclipse.scout.contacts.server.sql` package.
 
@@ -83,10 +83,10 @@ After copying these classes make sure that the structure of your server Maven mo
 
 [[img-contacts_tutorial_copied_db_classes_intellij]]
 .The copied database classes in the tutorial workspace in IntelliJ.
-image::{imgsdir}/contacts_tutorial_copied_db_classes_intellij.png[]
+image::common:contacts_tutorial_copied_db_classes_intellij.png[]
 [[img-contacts_tutorial_copied_db_classes]]
 .The copied database classes in the tutorial workspace in Eclipse.
-image::{imgsdir}/contacts_tutorial_copied_db_classes.png[]
+image::common:contacts_tutorial_copied_db_classes.png[]
 
 The imported classes are described in the following sections.
 Additional information is provided where these classes are relying on Scout concepts that have not previously been introduced.
@@ -112,7 +112,7 @@ In the case of the "Contacts" application the config property files are located 
 [source]
 .Properties relevant for creating and accessing the database.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.server.app.dev/src/main/resources/config.properties[tags=databaseProperties]
+include::common:example$contacts/org.eclipse.scout.contacts.server.app.dev/src/main/resources/config.properties[tags=databaseProperties]
 ----
 
 These added property values then match the config properties defined in the class `DatabaseProperties` provided in <<lst-contacts_props>>.
@@ -122,7 +122,7 @@ Remember that this is one of the database infrastructure classes we have copied 
 [source,java]
 .Typed properties for the "Contacts" application
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/sql/DatabaseProperties.java[tags=structure]
+include::common:example$contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/sql/DatabaseProperties.java[tags=structure]
 ----
 
 <1> Defines the default value of the property that is used if the property is not defined in file config.properties
@@ -147,7 +147,7 @@ The only project specific method is `getConfiguredJdbcMappingName` as implemente
 [source,java]
 .The Derby SQL service to connect to the database
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/sql/DerbySqlService.java[tags=service]
+include::common:example$contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/sql/DerbySqlService.java[tags=service]
 ----
 
 <1> Check the https://db.apache.org/derby/docs/10.11/ref/rrefattrib24612.html[Derby documentation] for additional attributes.
@@ -176,7 +176,7 @@ Examples are `:<identifier>` and `:{<identifier>.<attribute>}`.
 [source,java]
 .Interface SQLs with the SQL commands for the creation of the database tables.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/sql/SQLs.java[tags=createDB]
+include::common:example$contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/sql/SQLs.java[tags=createDB]
 ----
 
 <1> The syntax ':identifier' adds convenience and is supported by the Scout framework
@@ -205,7 +205,7 @@ The context is then used to execute the runnable that creates the organization a
 [source,java]
 .Class DatabaseSetupService to create the database tables for the "Contacts" application.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/sql/DatabaseSetupService.java[tags=service]
+include::common:example$contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/sql/DatabaseSetupService.java[tags=service]
 ----
 
 <1> The existing tables are stored in the `StringArrayHolder` object named "result".
@@ -273,7 +273,7 @@ On the client side the server roundtrip is implemented in method `execLoadData` 
 [source,java]
 .Accessing the "Contacts" backend server to fetch organization data.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/organization/OrganizationTablePage.java[tags=execLoadData]
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/organization/OrganizationTablePage.java[tags=execLoadData]
 ----
 
 This roundtrip between class `OrganizationTablePage` and `OrganizationService` works through the following steps.
@@ -289,7 +289,7 @@ On the server side fetching the data from the database will be implemented in cl
 [source,java]
 .Method getTableData to access the database and map the data into a pageData object.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/organization/OrganizationService.java[tags=getTableData]
+include::common:example$contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/organization/OrganizationService.java[tags=getTableData]
 ----
 
 In the next section we will implement the database access logic in the `getOrganizationTableData` methods of the server classes `OrganizationService` and `PersonService`.
@@ -304,7 +304,7 @@ For the implementation of method `getOrganizationTableData` in class `Organizati
 [source,java]
 .Interface SQLs with the SQL to fetch the list of organizations with their attributes.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/sql/SQLs.java[tags=organizationListing]
+include::common:example$contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/sql/SQLs.java[tags=organizationListing]
 ----
 
 <1> The syntax ':{identifier.attribute}' adds convenience to map SQL result sets to Scout page data objects.
@@ -317,7 +317,7 @@ After adding the two additional lines, we update the imports of the classes with
 [source,java]
 .Method getTableData to access the database and map the data into a pageData object.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/organization/OrganizationService.java[tags=getTableData;allOrgs]
+include::common:example$contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/organization/OrganizationService.java[tags=getTableData;allOrgs]
 ----
 
 <1> Added line 1: Assembling of the SQL statement
@@ -360,4 +360,4 @@ Person and company data is now visible in the user interface as shown in <<img-c
 
 [[img-contacts_tutorial_result_step_3]]
 .The "Contacts" application displaying person data at the end of tutorial step 3.
-image::{imgsdir}/contacts_tutorial_result_step_3.png[]
+image::common:contacts_tutorial_result_step_3.png[]

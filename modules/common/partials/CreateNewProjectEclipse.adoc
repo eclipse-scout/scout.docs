@@ -1,5 +1,5 @@
 ifndef::finaldoc[]
-include::_initDoc.adoc[]
+include::partial$_initDoc.adoc[]
 endif::finaldoc[]
 
 //fallback for safe mode == secure:
@@ -18,7 +18,7 @@ Once the Eclipse IDE is running, it will show the Java perspective.
 
 [[img-sdk_start_new_workspace]]
 .Select a new empty folder to hold your project workspace
-image::{imgsdir}/sdk_start_new_workspace.png[]
+image::common:sdk_start_new_workspace.png[]
 
 To create a new Scout project, select the menu menu:File[New,Project...] and type `Scout Project` in the wizard search field.
 Select the Scout Project wizard and press btn:[Next].
@@ -26,7 +26,7 @@ The [wizard]_New Scout Project_ wizard is then started as shown in <<img-sdk_new
 
 [[img-sdk_new_project_wizard]]
 .The new Scout project wizard.
-image::{imgsdir}/sdk_new_project.png[]
+image::common:sdk_new_project.png[]
 
 In the [wizard]_New Scout Project_ wizard you have to enter a `Group Id`, `Artifact Id` and a `Display Name` for your Scout project.
 As the created project will make use of https://maven.apache.org/[Apache Maven], please refer to the https://maven.apache.org/guides/mini/guide-naming-conventions.html[Maven naming conventions] to choose  `Group Id` and `Artifact Id` for your project.
@@ -43,14 +43,14 @@ Finally, the installation of the maven plugin connectors requires a restart of t
 
 [[img-sdk_new_project_connector]]
 .The Maven plugin connector installation dialog.
-image::{imgsdir}/sdk_new_project_connectors.png[]
+image::common:sdk_new_project_connectors.png[]
 
 After the [wizard]_New Scout Project_ wizard has created the Maven modules for the `Hello Scout` application, the code is compiled by the Eclipse IDE.
 You can see the created Maven modules in the `Package Explorer` as shown in <<img-sdk_new_project_initial_helloworld>>.
 
 [[img-sdk_new_project_initial_helloworld]]
 .The initial set of Maven modules created for the Hello Scout application.
-image::{imgsdir}/sdk_new_project_initial_helloworld.png[]
+image::common:sdk_new_project_initial_helloworld.png[]
 
 After the compilation, you can start the Scout application for the first time.
 Since the `Hello Scout` app consists of a backend and a frontend, two servers need to be started.
@@ -61,7 +61,7 @@ To start the launch group use the [menu]_Run As_ menu as shown in <<img-start_al
 
 [[img-start_all]]
 .Starting the Hello Scout application.
-image::{imgsdir}/sdk_start_all.png[]
+image::common:sdk_start_all.png[]
 
 IMPORTANT: The JavaScript build fails in case the installed Node.js was not found or is too old.
 In that case, follow the instructions in the section <<Prerequisites>>.
@@ -74,4 +74,4 @@ The `Hello Scout` application is then presented as shown in <<img-start_browser>
 
 [[img-start_browser]]
 .The Hello Scout application in the browser.
-image::{imgsdir}/run_helloworld_in_browser.png[]
+image::common:run_helloworld_in_browser.png[]

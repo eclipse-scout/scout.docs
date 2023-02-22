@@ -1,6 +1,6 @@
 = Get Started with Eclipse Scout
 // comment prevents empty line after formatting, needed for toc
-include::../../../common/src/docs/_header.adoc[]
+include::common:partial$_header.adoc[]
 
 Eclipse Scout is a framework that can be used in several ways.
 Before you can start, you should decide which way you want to take.
@@ -76,4 +76,4 @@ Even though this is a convenient way to get the Scout assets, we still recommend
 If you want to learn more about using a CDN, please see http://eclipsescout.github.io/{scout-version}/helloscout-cdn.html[Hello Scout for CDN].
 
 :_footer-link-path: build/getstarted/src/docs/{docname}.adoc
-include::../../../common/src/docs/_footer.adoc[]
+include::common:partial$_footer.adoc[]

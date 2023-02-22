@@ -1,4 +1,4 @@
-include::../../../common/src/docs/_initSubDoc.adoc[]
+include::common:partial$_initSubDoc.adoc[]
 //-----------------------------------------------------------------------------
 //WARNING: this file is a text module, it needs to be embedded in a master asciidoctor document.
 //-----------------------------------------------------------------------------
@@ -20,7 +20,7 @@ The sections below highlight the following areas.
 
 [[img-contacts_theming_styling]]
 .Scout application can change between different themes at runtime.
-image::{imgsdir}/contacts_theming_styling.png[]
+image::common:contacts_theming_styling.png[]
 
 [[sec-contacts_modular_apps]]
 === Modular Scout Applications

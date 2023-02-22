@@ -7,7 +7,7 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 :sdk_wizard_language: <<sdk_wizard_language.adoc#, Add a Language Wizard>>
 :sdk_editor_nls: <<sdk_editor_nls.adoc#, Scout NLS Editor>>
 
-include::{mdledir}/_initCommon.adoc[]
+include::common:partial$_initCommon.adoc[]
 
 :finaldoc: true
 

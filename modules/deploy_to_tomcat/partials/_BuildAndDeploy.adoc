@@ -1,4 +1,4 @@
-include::../../../common/src/docs/_folders.adoc[]
+include::common:partial$_folders.adoc[]
 
 //-----------------------------------------------------------------------------
 //Asciidoctor input file: "Export the hello scout application"
@@ -120,7 +120,7 @@ You should then see the page shown in <<img-deploy_tomcat_1>>.
 
 [[img-deploy_tomcat_1]]
 .The Tomcat shown after a successful installation. After clicking on the `Manager App` button (highlighted in red) the login box is shown in front. A successful login shows the "Tomcat Web Application Manager".
-image::{imgsdir}/tomcat_managerapp_login.png[]
+image::common:tomcat_managerapp_login.png[]
 
 Once the web browser displays the successful running of your Tomcat instance, switch to its `Manager App` by clicking on the button highlighted in <<img-deploy_tomcat_1>>.
 After entering user name and password the browser will display the `Tomcat Web Application Manager` as shown in <<img-deploy_tomcat_2>>.
@@ -128,7 +128,7 @@ If you don't know the credentials, you may look it up in the file `tomcat-users.
 
 [[img-deploy_tomcat_2]]
 .The "`Tomcat Web Application Manager`". The WAR files to be deployed can then be selected using button "`Choose File`" highlighted in red.
-image::{imgsdir}/tomcat_managerapp_selectwar.png[]
+image::common:tomcat_managerapp_selectwar.png[]
 
 After logging into Tomcat's manager application, you can select the WAR files to be deployed using the button `Choose File` as shown in <<img-deploy_tomcat_2>>.
 Then pick your just built `org.eclipse.scout.apps.helloscout.server.war`, close the file chooser and click on the button `Deploy` (the one located directly below button `Choose File`) to deploy the application to the Tomcat web server.
@@ -152,7 +152,7 @@ In this case you might need to accept your self-signed certificate as the browse
 
 [[img-helloworld_running_download]]
 .The "Hello Scout" login page.
-image::{imgsdir}/tomcat_helloworld_download.png[]
+image::common:tomcat_helloworld_download.png[]
 
 Then you will see the login page as shown in <<img-helloworld_running_download>>. Two users have been predefined: `admin` with password `admin` and `scott` with password `tiger`.
 You can find this configuration in the `config.properties` file of the application.
@@ -186,7 +186,7 @@ Tomcat 9 Downloads: http://tomcat.apache.org/download-90.cgi
 
 [[img-tomcat_install]]
 .A successful Tomcat installation.
-image::{imgsdir}/tomcat_install.png[]
+image::common:tomcat_install.png[]
 
 Once you have downloaded and installed Tomcat 9 (see the sections below for plattform specific guidelines) you can start the corresponding service or daemon.
 To verify that Tomcat is actually running open a web browser of your choice and type http://localhost:8080 into the address bar.
@@ -223,7 +223,7 @@ Here, we will only introduce the most important aspects of the Tomcat installati
 
 [[img-tomcat_install_dir]]
 .The organisation of a Tomcat installation including specific files of interest. As an example, a web app called "helloworld_server" is contained in subdirectory "webapps".
-image::{imgsdir}/tomcat_install_dir.png[]
+image::common:tomcat_install_dir.png[]
 
 Note that some folders and many files of a Tomcat installation are not represented in <<img-tomcat_install_dir>>.
 We just want to provide a basic understanding of the most important parts to operate the web server in the context of this tutorial.

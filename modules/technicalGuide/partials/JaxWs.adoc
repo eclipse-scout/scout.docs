@@ -1,6 +1,6 @@
 
 ifndef::finaldoc[]
-include::../_initDoc.adoc[]
+include::common:partial$_initDoc.adoc[]
 endif::finaldoc[]
 
 //fallback for safe mode == secure:
@@ -102,14 +102,14 @@ If running in an EE application server, refer to the containers documentation fo
 .Maven dependency for _JAX-WS METRO_
 [source,xml,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.pom.dependency.metro]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.pom.dependency.metro]
 ----
 
 [[lst-maven.dep.cxf]]
 .Maven dependency for _Apache CXF_
 [source,xml,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.pom.dependency.cxf]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.pom.dependency.cxf]
 ----
 
 ===== Configure JAX-WS servlet in web.xml
@@ -121,7 +121,7 @@ Similar to the pom.xml as described in <<jaxws.implementor.dependency>>, the _we
 .web.xml for _JAX-WS METRO_ Servlet
 [source,xml,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.webxml.metro]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.webxml.metro]
 ----
 <1> the base URL where to publish the webservice endpoints
 
@@ -129,7 +129,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 .web.xml for _Apache CXF_ Servlet
 [source,xml,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.webxml.cxf]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.webxml.cxf]
 ----
 <1> _Apache CXF_ specific configuration file for endpoints to be published. See <<jaxws.registration.endpoints.cxf>> for more information.
 <2> the base URL where to publish the webservice endpoints
@@ -151,7 +151,7 @@ This is mainly because of the following benefits:
 * easier to work with shared element types among webservices
 
 .typical modularization
-image::{imgsdir}/jaxws_modularization.png[]
+image::common:jaxws_modularization.png[]
 
 It is important to note, that the _server_ depends on the _jaxws_ module, and not vice versa. The _jaxws_ module is primarily of technical nature, meaning that it knows how to generate its WS artifacts, and also contains those. However, implementing port type beans and even implementing handler beans are typically put into the server module to the access service and database layer. On the other hand, WS clients may be put into _jaxws_ module, because they rarely contain any project specific business logic.
 
@@ -173,7 +173,7 @@ The profiles requires the Scout runtime version to be specified, and which is us
 .Scout version defined as Maven property
 [source,xml,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.pom.scoutversion]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.pom.scoutversion]
 ----
 
 If your project design envisions a separate JAR module per WSDL, you simply have to set the property 'jaxws.wsdl.file' with the name of your WSDL file in the module's pom.xml (example in <<lst-jaxws.pom.single-wsdl-file>>).
@@ -182,7 +182,7 @@ If your project design envisions a separate JAR module per WSDL, you simply have
 .wsimport configuration in pom.xml if working with a single WSDL file per JAR module
 [source,xml,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.pom.single-wsdl-file-per-module]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.pom.single-wsdl-file-per-module]
 ----
 <1> name of the wsdl file
 
@@ -201,7 +201,7 @@ WARNING: If you decide to configure multiple WSDL files in your POM as described
 .wsimport configuration in pom.xml if working with multiple WSDL files per JAR module
 [source,xml,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.pom.multiple-wsdl-files-per-module]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.pom.multiple-wsdl-files-per-module]
 ----
 <1> declare an execution section for each WSDL file
 <2> give the section a unique id (wsimport-1, wsimport-2, wsimport-3, ...)
@@ -222,7 +222,7 @@ By default, all XML files contained in folder 'WEB-INF/binding' are used as bind
 .explicit configuration of binding files
 [source,xml,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.pom.multiple-binding-files]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.pom.multiple-binding-files]
 ----
 <1> global binding file which applies to all XSD schema elements. See <<lst-jaxws.example.globalbindingfile>>  for an example.
 <2> custom binding file to customize the webservice's WSDL components in the namespace _http://java.sun.com/xml/ns/jaxws_. See <<lst-jaxws.bindingfile.ws>> for an example.
@@ -236,7 +236,7 @@ The global binding file typically contains some customization for common data ty
 .example of global binding file in the namespace http://java.sun.com/xml/ns/jaxb
 [source,xml,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.bindingfile.global-binding]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.bindingfile.global-binding]
 ----
 
 By default, generated artifacts are put into the package corresponding to the element's namespace. Sometimes, you like to control the package names, but you want to do that on a per-namespace basis, and not put all the artifacts of a webservice into the very same package. That is mainly to omit collisions, and to have artifacts shared among webservices not duplicated.
@@ -248,7 +248,7 @@ That is because WSDL component customization is to be done in 'jaxws' namespace 
 .example of jaxws component customization in the namespace http://java.sun.com/xml/ns/jaxws
 [source,xml,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.bindingfile.ws-binding]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.bindingfile.ws-binding]
 ----
 <1> customization via jaxws namespace: http://java.sun.com/xml/ns/jaxws
 <2> instructs to put all webservice components (port type, service) into package _org.eclipse.ws.yourfirstwebservice_
@@ -257,7 +257,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 .example of xsd schema element customization in the namespace http://java.sun.com/xml/ns/jaxb
 [source,xml,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.bindingfile.xs-binding]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.bindingfile.xs-binding]
 ----
 <1> customization via jaxb namespace: http://java.sun.com/xml/ns/jaxb
 <2> instructs to put all XSD schema elements in namespace _http://eclipse.org/public/services/ws/soap_ into package _org.eclipse.ws.yourfirstwebservice_
@@ -322,7 +322,7 @@ An entry point implements the endpoint interface (or port type interface), and i
 
 [[img-interaction_entrypoint_porttype]]
 .Interaction of entry point and port type
-image::{imgsdir}/jaxws_interaction_entrypoint_porttype.png[]
+image::common:jaxws_interaction_entrypoint_porttype.png[]
 
 As you can see, both, entry point and port type implement the endpoint interface. But it is the entry point which is actually installed as the webservice endpoint, and which receives web requests. However, the webservice itself is implemented in the implementing bean, which typically is located in _server_ module. See <<jaxws.modularization>> for more information. Upon a web request, the entry point simply intercepts the web request, and then invokes the web method on the implementing bean for further processing.
 
@@ -339,7 +339,7 @@ See the endpoint interface of ping webservice: <<PingWebServicePortType.java>>
 To generate an entry point for the webservice's endpoint interface, create an interface as following in your jaxws project.
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.entrypoint.definition]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.entrypoint.definition]
 ----
 <1> Create an interface or class to act as an anchor for the `WebServiceEntryPoint` annotation. This class or interface has no special meaning, except that it declares the annotation to be interpreted by annotation processor.
 <2> Reference the endpoint interface for which an entry point should be generated for. Typically, the endpoint interface is generated by 'wsimport' and is annotated with `WebService` annotation.
@@ -441,7 +441,7 @@ TIP: If using container based authentication (authentication enforced by the app
 .Example configuration for an entry point definition
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.pingws.entrypoint.definition]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.pingws.entrypoint.definition]
 ----
 <1> References the endpoint interface for which to generate an entry point for.
 <2> Declares the handlers to be installed on that entry point. The order is as declared.
@@ -457,7 +457,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 This configuration generates the following artifacts:
 
 .generated artifacts
-image::{imgsdir}/jaxws_example_pingws_artifacts_generated.png[]
+image::common:jaxws_example_pingws_artifacts_generated.png[]
 
 All artifacts are generated into the package 'org.eclipse.scout.docs.ws.ping', as specified by the definition. The entry point itself is generated into 'PingWebServiceEntryPoint.java'. Further, for each handler, a respective handler delegate is generated. That allows handlers to be looked up via bean manager, and to run the handlers on behalf of a `RunContext`. Also, an `AuthHandler` is generated to authenticate web requests as configured.
 
@@ -466,7 +466,7 @@ The handler-chain XML file generated looks as following. As specified, the authe
 .PingWebServiceEntryPoint_handler-chain.xml
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws_pingws_handler_file]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws_pingws_handler_file]
 ----
 
 The following listing shows the beginning of the entry point generated. As you can see, the handler-chain XML file is referenced via `HandlerChain` annotation, and the `MTOM` annotation was added as well.
@@ -474,7 +474,7 @@ The following listing shows the beginning of the entry point generated. As you c
 .PingWebServiceEntryPoint.java
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.pingws.porttype]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.pingws.porttype]
 ----
 
 [[jaxws.provider.handlerChain]]
@@ -492,7 +492,7 @@ If a handler requires to be run in a `RunContext`, annotate the handler with `Ru
 .Example of a JAX-WS Handler
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.handler.ipaddressfilter]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.handler.ipaddressfilter]
 ----
 <1> Annotate the Handler with `ApplicationScoped` annotation, so it can be looked up via bean manager
 <2> Optionally annotate the Handler with `RunWithRunContext` annotation, so the handler is invoked in a `RunContext`
@@ -508,7 +508,7 @@ The following listings gives an example of how to propagate state among handlers
 .This handler puts the correlation ID onto message context to be accessible by subsequent handlers and the port type.
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.statepropagation.handler1]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.statepropagation.handler1]
 ----
 <1> Put the 'correlation ID' onto message context.
 <2> Set scope to _APPLICATION_ to be accessible in port type. By default, the scope if _HANDLER_ only.
@@ -517,14 +517,14 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 .This handler accesses the 'correlation ID' as set by the previous handler.
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.statepropagation.handler2]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.statepropagation.handler2]
 ----
 <1> Get the 'correlation ID' from message context.
 
 .This port type accesses the 'correlation ID' as set by the previous handler.
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.statepropagation.porttype]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.statepropagation.porttype]
 ----
 <1> Get the current message context via thread local `IWebServiceContext`
 <2> Get the 'correlation ID' from message context.
@@ -539,7 +539,7 @@ NOTE: You have to implement your own handler if the consumer provides a correlat
 .Add Scout's WsProviderCorrelationIdHandler to the handler chain
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.pingwsWithCorrelationId.entrypoint.definition]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.pingwsWithCorrelationId.entrypoint.definition]
 ----
 <1> Add the correlation ID handler *at the beginning* of the handler chain to ensure that all handlers can use its value (especially the `LogHandler` has to be added after the correlation ID handler).
 
@@ -556,7 +556,7 @@ During startup, _JAX-WS METRO_ looks for the file '/WEB-INF/sun-jaxws.xml', whic
 .WEB-INF/sun-jaxws.xml
 [source,xml,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws_registration_metro_sunjaxws.xml]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws_registration_metro_sunjaxws.xml]
 ----
 
 [[jaxws.registration.endpoints.cxf]]
@@ -566,7 +566,7 @@ During startup, _Apache CXF_ looks for the config file as specified in 'web.xml'
 .WEB-INF/cxf-jaxws.xml
 [source,xml,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws_registration_cxf_jaxws.xml]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws_registration_cxf_jaxws.xml]
 ----
 
 TIP: As the webservice endpoint, specify the fully qualified name to the entry point, and not to the implementing port type.
@@ -583,7 +583,7 @@ To interact with a webservice endpoint, create a concrete 'WebServiceClient' cla
 .Example of a WS-Client
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.wsclient1]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.wsclient1]
 ----
 <1> Specify 'service' and 'port' via bounded type parameters
 
@@ -594,7 +594,7 @@ See also <<jaxws.consumer.configuration>>.
 .Example of a WS-Client configuration
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.wsclient2]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.wsclient2]
 ----
 <1> Specifies the endpoint URL
 <2> Specifies credentials
@@ -606,7 +606,7 @@ A webservice operation is invoked on behalf of an invocation context, which is a
 .Example of a webservice call
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.wsclient.call_1]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.wsclient.call_1]
 ----
 <1> Obtain a new invocation context and port via WS-Client
 <2> Invoke the webservice operation
@@ -618,7 +618,7 @@ The following listing illustrates how to set/overwrite properties.
 .Configure invocation context with data to be included in the web request
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.wsclient.call_2]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.wsclient.call_2]
 ----
 <1> Set the credentials
 <2> Change the connect timeout to 10s
@@ -639,7 +639,7 @@ The invocation context allows you to access HTTP status code and HTTP headers of
 
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.wsclient.call_3]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.wsclient.call_3]
 ----
 
 ==== Propagate state to Handlers
@@ -647,7 +647,7 @@ An invocation context can be associated with request context properties, which a
 
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.wsclient.call_4]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.wsclient.call_4]
 ----
 <1> Propagate the correlation ID
 <2> Invoke the web operation
@@ -665,7 +665,7 @@ If the endpoint requires to authenticate requests, an authentication handler is 
 
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.wsclient3]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.wsclient3]
 ----
 
 TIP: The credentials as provided via `InvocationContext` can be accessed via request context with the property `InvocationContext.PROP_USERNAME` and `InvocationContext.PROP_PASSWORD`.
@@ -675,7 +675,7 @@ The current context's correlation ID can be forwarded to the consumed web servic
 
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.wsclient4]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.wsclient4]
 ----
 <1> The handler can be at any position in the handler chain.
 
@@ -774,49 +774,49 @@ Whenever possible, use `UtcDateTimeAdapter` or `CalendarDateTimeAdapter` instead
 ==== PingWebService.wsdl
 [source,xml,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/resources/WEB-INF/wsdl/PingWebService.wsdl[]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/resources/WEB-INF/wsdl/PingWebService.wsdl[]
 ----
 
 [[PingWebServicePortType.java]]
 ==== PingWebServicePortType.java
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.endpointinterface]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.endpointinterface]
 ----
 
 [[PingWebServicePortTypeEntryPoint.java]]
 ==== PingWebServicePortTypeEntryPoint.java
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.entrypoint]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.entrypoint]
 ----
 
 [[PingWebServicePortTypeBean.java]]
 ==== PingWebServicePortTypeBean.java
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.porttype.bean]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.porttype.bean]
 ----
 
 [[settings_org.eclipse.jdt.core.prefs]]
 ==== .settings/org.eclipse.jdt.core.prefs file to enable APT in Eclipse IDE
 [source,xml,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.eclipseide.apt.settings/org.eclipse.jdt.core.prefs]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.eclipseide.apt.settings/org.eclipse.jdt.core.prefs]
 ----
 
 [[settings_org.eclipse.jdt.apt.core.prefs]]
 ==== .settings/org.eclipse.jdt.apt.core.prefs file to enable APT in Eclipse IDE
 [source,xml,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.eclipseide.apt.settings/org.eclipse.jdt.apt.core.prefs]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.eclipseide.apt.settings/org.eclipse.jdt.apt.core.prefs]
 ----
 
 [[factorypath]]
 ==== .factorypath file to enable APT in Eclipse IDE
 [source,xml,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.eclipseide.apt.factorypath]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.eclipseide.apt.factorypath]
 ----
 
 [[IAuthenticationMethod]]

@@ -1,5 +1,5 @@
 ifndef::finaldoc[]
-include::../_initDoc.adoc[]
+include::common:partial$_initDoc.adoc[]
 endif::finaldoc[]
 
 //fallback for safe mode == secure:
@@ -18,7 +18,7 @@ The screenshot below shows the opened NLS editor.
 In the first column the `key` values are shown that are used in accessing translations through `TEXTS.get("key")`.
 The second columns holds the default translations followed by columns holding the translations for other translated languages.
 
-image::{imgsdir}/sdk_editor_nls.png[]
+image::common:sdk_editor_nls.png[]
 
 ==== Action Buttons
 
@@ -27,27 +27,27 @@ Actions on the top right corner:
 [cols="10,45,45"]
 |===
 
-| image:{imgsdir}/icon_refresh.png[]
+| image:common:icon_refresh.png[]
 | Refresh NLS Project
 | Reload the content of the editor.
 
-| image:{imgsdir}/icon_find_obj.png[]
+| image:common:icon_find_obj.png[]
 | Show NLS entry usage
 | For each row, search in the Java code where the NLS Key is used. Results are displayed in the first column.
 
-| image:{imgsdir}/icon_text_add.png[]
+| image:common:icon_text_add.png[]
 | New entry...
 | Opens the {sdk_wizard_nls-entry}
 
-| image:{imgsdir}/icon_fileadd_pending.png[]
+| image:common:icon_fileadd_pending.png[]
 | New language...
 | Opens the {sdk_wizard_language}
 
-| image:{imgsdir}/icon_import.png[]
+| image:common:icon_import.png[]
 | Import...
 | Import the NLS entries of an external file
 
-| image:{imgsdir}/icon_export.png[]
+| image:common:icon_export.png[]
 | Export...
 | Export the NLS entries to an external file
 |===
@@ -66,15 +66,15 @@ On each row it is possible to call following context menu:
 [cols="10,45,45"]
 |===
 
-| image:{imgsdir}/icon_text.png[]
+| image:common:icon_text.png[]
 | Modify Entry
 | Opens the {sdk_wizard_nls-entry}
 
-| image:{imgsdir}/icon_find_obj.png[]
+| image:common:icon_find_obj.png[]
 | Find references to 'Xxx'
 | Search in the Java code where the NLS Key is used.
 
-| image:{imgsdir}/icon_text_remove.png[]
+| image:common:icon_text_remove.png[]
 | Remove Xxx
 | Delete the NLS Entry from the files
 |===

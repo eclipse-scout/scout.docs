@@ -1,6 +1,6 @@
 
 ifndef::finaldoc[]
-include::../_initDoc.adoc[]
+include::common:partial$_initDoc.adoc[]
 endif::finaldoc[]
 
 //fallback for safe mode == secure:
@@ -55,7 +55,7 @@ Extensions to specific types of elements are prepared as abstract classes:
 
 The following image visualizes the extension chain used to intercept the default behavior of a component:
 
-image::{imgsdir}/scout_extensibility_chain_concept.png[]
+image::common:scout_extensibility_chain_concept.png[]
 
 ==== Extending a StringField example
 
@@ -64,7 +64,7 @@ The following example changes the initial value of a https://wiki.eclipse.org/Sc
 [source,java,indent=0]
 .Extension for NameField
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/ExtensibilitySnippets.java[tags=NameFieldExtension]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/ExtensibilitySnippets.java[tags=NameFieldExtension]
 ----
 
 Note: The type parameter of the extension (e.g. `NameField`) denotes the element which is extended.
@@ -74,7 +74,7 @@ The extension needs to be registeres when starting the application:
 [source,java,indent=0]
 .Register extension for NameField
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/ExtensibilitySnippets.java[tags=RegisterNameFieldExtension]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/ExtensibilitySnippets.java[tags=RegisterNameFieldExtension]
 ----
 
 === Contributions
@@ -89,7 +89,7 @@ The following example adds two new fields for salary and birthday to a `PersonFo
 [source,java,indent=0]
 .Extension for PersonForm
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/person/PersonFormMainBoxExtension.java[tags=PersonFormMainBoxExtension]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/person/PersonFormMainBoxExtension.java[tags=PersonFormMainBoxExtension]
 ----
 
 Beware: Field names must be unique throughout form and extensions (e.g. there may not be a field on the form or another extension contributing to the same form with the same field name). However, it is possible to create templates (e.g. a group box as container with its own @FormData annotation) which is added multiple times through a form or extensions.
@@ -99,7 +99,7 @@ The extension data must be registered manually in the job like in the example be
 [source,java,indent=0]
 .Register extension for PersonForm
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/ExtensibilitySnippets.java[tags=RegisterPersonFormMainBoxExtension]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/ExtensibilitySnippets.java[tags=RegisterPersonFormMainBoxExtension]
 ----
 
 Then the https://wiki.eclipse.org/Scout/SDK[SDK] automatically creates the extension DTO which could look as follows. Please note: The DTO is generated automatically but you have to register the generated DTO manually!
@@ -107,7 +107,7 @@ Then the https://wiki.eclipse.org/Scout/SDK[SDK] automatically creates the exten
 [source,java,indent=0]
 .Extension Data for PersonForm
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/person/PersonFormMainBoxExtensionData.java[tags=PersonFormMainBoxExtensionData]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/person/PersonFormMainBoxExtensionData.java[tags=PersonFormMainBoxExtensionData]
 ----
 
 You can also access the values of the DTO extension as follows:
@@ -115,7 +115,7 @@ You can also access the values of the DTO extension as follows:
 [source,java,indent=0]
 .Access extended fields
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/ExtensibilitySnippets.java[tags=accessExtendedFields]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/ExtensibilitySnippets.java[tags=accessExtendedFields]
 ----
 
 ==== Extending a form and a handler
@@ -125,7 +125,7 @@ Extending a AbstractForm and one (or more) of its AbstractFormHandlers that can 
 [source,java,indent=0]
 .Extension for PersonForm
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/person/PersonFormExtension.java[tags=PersonFormExtension]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/person/PersonFormExtension.java[tags=PersonFormExtension]
 ----
 
 There are a few things to note about this example:
@@ -141,7 +141,7 @@ You can also move existing Scout elements to other positions. For this you have 
 [source,java,indent=0]
 .Move NameField to LastBox
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/ExtensibilitySnippets.java[tags=moveElement]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/ExtensibilitySnippets.java[tags=moveElement]
 ----
 
 === Migration

@@ -1,5 +1,5 @@
 ifndef::finaldoc[]
-include::../_initDoc.adoc[]
+include::common:partial$_initDoc.adoc[]
 endif::finaldoc[]
 
 //fallback for safe mode == secure:
@@ -36,14 +36,14 @@ For the provided screenshots we start from the popular package _Eclipse IDE for 
 
 [[img-eclipse_install_new_software]]
 .Eclipse menu to install additional software
-image::{imgsdir}/eclipse_install_new_software.png[]
+image::common:eclipse_install_new_software.png[]
 
 To add Scout to your existing Eclipse installation, you need to start Eclipse.
 Then select the menu:Help[Install New Software...] menu as shown in <<img-eclipse_install_new_software>> to open the install dialog.
 
 [[img-eclipse_select_scout_features]]
 .Select the Scout features to add to the Eclipse installation
-image::{imgsdir}/eclipse_select_scout_features.png[]
+image::common:eclipse_select_scout_features.png[]
 
 In the install dialog, select the update site matching your Eclipse installation.
 Type Scout into the filter field below and select Eclipse Scout SDK (Binary only).

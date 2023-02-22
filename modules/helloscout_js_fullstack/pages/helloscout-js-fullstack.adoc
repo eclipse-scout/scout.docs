@@ -1,6 +1,6 @@
 = Hello Scout JS Full Stack
 // comment prevents empty line after formatting, needed for toc
-include::../../../common/src/docs/_header.adoc[]
+include::common:partial$_header.adoc[]
 
 == Introduction
 
@@ -18,15 +18,15 @@ This section guides you through the installation of the tools required to start 
 
 === Node.js
 
-include::{mdledir}/InstallNode.adoc[]
+include::common:partial$InstallNode.adoc[]
 
 === IntelliJ
 
-include::{mdledir}/InstallIntelliJ.adoc[]
+include::common:partial$InstallIntelliJ.adoc[]
 
 == Create the Project
 
-include::{mdledir}/CreateNewJsProjectIntellij.adoc[]
+include::common:partial$CreateNewJsProjectIntellij.adoc[]
 
 == What's Next?
 
@@ -44,4 +44,4 @@ and its {jswidgets-code}[source code].
 In case you should get stuck somewhere and need help, contact us on the http://www.eclipse.org/forums/eclipse.scout[Scout Forum] or on https://stackoverflow.com/tags/eclipse-scout[Stack Overflow].
 
 :_footer-link-path: build/helloscout_js_fullstack/src/docs/{docname}.adoc
-include::../../../common/src/docs/_footer.adoc[]
+include::common:partial$_footer.adoc[]

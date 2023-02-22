@@ -1,4 +1,4 @@
-include::../../../common/src/docs/_initSubDoc.adoc[]
+include::common:partial$_initSubDoc.adoc[]
 
 //-----------------------------------------------------------------------------
 //WARNING: this file is a text module, it needs to be embedded in a master asciidoctor document.
@@ -30,7 +30,7 @@ The validation implemented in <<lst-contacts_validate_email>> checks the length 
 [source,java]
 .The validation of the email field
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonForm.java[tags=email]
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonForm.java[tags=email]
 ----
 
 <1> Email verification is performed against a simple regular expression.
@@ -62,7 +62,7 @@ A possible implementation to enforce the other rules is provided in <<lst-contac
 [source,java]
 .The validation of the fields in the address box
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonForm.java[tags=validateAddress]
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonForm.java[tags=validateAddress]
 ----
 
 <1> This method is called after the value of this field has been changed.
@@ -82,7 +82,7 @@ Now add this validation to the person form using the implementation provided in 
 [source,java]
 .The validation of the first and last names on the form level
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonForm.java[tags=validate]
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonForm.java[tags=validate]
 ----
 
 <1> This method is called during the form validation and before the form is stored/closed.
@@ -96,7 +96,7 @@ Re-start the "Contacts" application and try to trigger the different validation 
 
 [[img-contacts_tutorial_result_step_5a]]
 .The form field validation implemented for the person form.
-image::{imgsdir}/contacts_tutorial_result_step_5a.png[]
+image::common:contacts_tutorial_result_step_5a.png[]
 
 [[sec-contacts_form_templatefields]]
 === Creating Template Fields
@@ -141,7 +141,7 @@ We are now ready to implement the template field class according to the followin
 [source,java]
 .The refactored picture field.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/common/AbstractUrlImageField.java[tags=template]
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/common/AbstractUrlImageField.java[tags=template]
 ----
 
 <1> The link to the corresponding field data class.
@@ -154,7 +154,7 @@ Delete the field `PictureUrlField` and remove all the code from the field `Pictu
 [source,java]
 .The refactored picture field.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/organization/OrganizationForm.java[tags=refactor;picture]
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/organization/OrganizationForm.java[tags=refactor;picture]
 ----
 
 <1> The implementation of the picture field is now provided by the template field `AbstractUrlImageField`.
@@ -184,10 +184,10 @@ Using the refactored picture template field we want the user to be able to enter
 
 [[img-sdk_new_form_pictureurl_Intellij]]
 .Creating the picture URL form with the new form wizard in IntelliJ.
-image::{imgsdir}/sdk_new_form_pictureurl_Intellij.png[]
+image::common:sdk_new_form_pictureurl_Intellij.png[]
 [[img-sdk_new_form_pictureurl]]
 .Creating the picture URL form with the new form wizard in Eclipse.
-image::{imgsdir}/sdk_new_form_pictureurl.png[]
+image::common:sdk_new_form_pictureurl.png[]
 
 Now adapt the content of the URL form according to <<lst-contacts_form_pictureurl>>.
 As you can see, there is no roundtrip to a backend server and the form only contains a single editable field.
@@ -196,7 +196,7 @@ As you can see, there is no roundtrip to a backend server and the form only cont
 [source,java]
 .The form to edit the picture URL
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/common/PictureUrlForm.java[tags=all]
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/common/PictureUrlForm.java[tags=all]
 ----
 
 <1> No label is needed as the name of the field is already provided by the title of the form.
@@ -209,7 +209,7 @@ The implementation of the edit context menu is provided in <<lst-contacts_pictur
 [source,java]
 .The "Edit URL" menu for the refactored picture field
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/common/AbstractUrlImageField.java[tags=menu]
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/common/AbstractUrlImageField.java[tags=menu]
 ----
 
 <1> If we already have an URL for the picture prefill the url field in the form with its value.
@@ -261,7 +261,7 @@ Using the created picture template field we can now update the image in the pict
 
 [[img-contacts_tutorial_result_step_5b]]
 .The person form with the refactored picture template field including a menu (red square) and a URL edit form.
-image::{imgsdir}/contacts_tutorial_result_step_5b.png[]
+image::common:contacts_tutorial_result_step_5b.png[]
 
 In the next tutorial step we are going to implement the company form to enter and edit company information.
 For the creation of this form we can reuse the template fields that we have created.

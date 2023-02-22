@@ -1,7 +1,7 @@
 ==== Add a Language Wizard
 :doctype: article
 :revnumber: {project-version}
-include::_initDoc.adoc[]
+include::partial$_initDoc.adoc[]
 
 //fallback for safe mode == secure:
 ifndef::imgsdir[:imgsdir: ../../../../imgs]
@@ -14,7 +14,7 @@ It can be started from the <<sdk_editor_nls.adoc#nls-editor, The NLS Editor>>.
 
 It is possible to crate one translation file that corresponds to the user locale, which are specified by a language and optionally a country (`de`, `de_DE`, `de_CH` and so on).
 
-image::{imgsdir}/sdk_wizard_language.png[]
+image::common:sdk_wizard_language.png[]
 
 Language:: The language of the locale.
 Country:: (optional) The country of the locale.
@@ -24,4 +24,4 @@ Folder:: The location where the Texts properties file will be created.
 Go back to the <<sdk_wizard.adoc#, Scout Wizards>>.
 
 :_footer-link-path: build/eclipse_help/src/docs/{docname}.adoc
-include::../../../common/src/docs/_footer-text.adoc[]
+include::common:partial$_footer-text.adoc[]

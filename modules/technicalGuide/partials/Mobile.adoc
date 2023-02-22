@@ -1,6 +1,6 @@
 
 ifndef::finaldoc[]
-include::../_initDoc.adoc[]
+include::common:partial$_initDoc.adoc[]
 endif::finaldoc[]
 
 //fallback for safe mode == secure:
@@ -13,7 +13,7 @@ ifndef::mdledir[:mdledir: .]
 
 [[img-mobile-support]]
 .Scout apps run on desktops, tablets and mobile phones
-image::{imgsdir}/multi_device.png[]
+image::common:multi_device.png[]
 
 Scout applications are mobile capable, meaning that they can be used on portable touch devices like smart phones and tablets. This capability is based on 2 main parts:
 
@@ -28,7 +28,7 @@ One example is the menu bar that stacks all menus which don't fit into an ellips
 
 [[img-responsive-menubar]]
 .Responsive menu bar
-image::{imgsdir}/responsive_menubar.png[]
+image::common:responsive_menubar.png[]
 
 Beside being responsive, the widgets may deal with touch devices as well. This means they are big enough to be used with the finger.
 And they don't need a mouse, especially the right mouse button.
@@ -39,7 +39,7 @@ This approach not only provides an indicator where tooltips are available, it al
 
 [[img-field-tooltip]]
 .Touch friendly widgets
-image::{imgsdir}/tooltip.png[]
+image::common:tooltip.png[]
 
 [[ResponsiveGroupBox]]
 ==== GroupBox
@@ -47,14 +47,14 @@ image::{imgsdir}/tooltip.png[]
 Another widget that will react to changing sizes is the group box. Once a group box becomes smaller than its preferred width it will transform its internal fields. Example: For all internal fields the labelPosition will be set to 'top' to give the field more horizontal space.
 [[img-responsive-groupbox]]
 .Responsive group box
-image::{imgsdir}/responsive_groupbox.png[]
+image::common:responsive_groupbox.png[]
 
 Those transformations are handled by `scout.GroupBoxResponsiveHandler` and managed by `scout.ResponsiveManager`. The manager decides when to switch to a responsive mode and back. If desired, the responsive transformations can be completely disabled by calling `scout.responsiveManager.setActive(false)`.
 By default all the main boxes will be responsive. In order to exclude a group box from the responsive transformations you could do the following:
 
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/mobile/ResponsiveSnippet.java[tags=DisableResponsive]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/mobile/ResponsiveSnippet.java[tags=DisableResponsive]
 ----
 The handler is called when the manager detects a changed responsive state to perform its transformations.
 There are three responsive modes, of which only the first two are supported in scout classic.
@@ -65,7 +65,7 @@ There are three responsive modes, of which only the first two are supported in s
 
 [[img-responsive-form]]
 .Responsive Form
-image::{imgsdir}/responsive-form.png[]
+image::common:responsive-form.png[]
 
 ===== Add a Custom Handler
 
@@ -97,7 +97,7 @@ For details see chapter <<Compact Desktop>>
 
 [[img-mobile-desktop]]
 .Desktop with displayStyle set to 'compact'
-image::{imgsdir}/contacts_mobile.png[width=350]
+image::common:contacts_mobile.png[width=350]
 
 ==== Compact Desktop
 
@@ -117,7 +117,7 @@ This includes detail forms (incl. default detail forms), outline tiles, menus, t
 If no detail form is configured, the detail content will be automatically generated based on the selected table row (`TableRowDetail.js`).
 
 .Table Row Detail
-image::{imgsdir}/mobile_table_row_detail.png[width=350]
+image::common:mobile_table_row_detail.png[width=350]
 
 ===== Adjusting Summary Cells
 
@@ -135,7 +135,7 @@ Just override the method `createCompactHandler` and adjust the handler if you li
 Or override the method `createSummaryCompactHandler` if you only want to modify the summary cell style.
 
 .Mobile Summary Cells
-image::{imgsdir}/mobile_summary_cell.png[width=350]
+image::common:mobile_summary_cell.png[width=350]
 
 ==== Compact Table
 
@@ -143,7 +143,7 @@ Since Scout 11, the table got a new mode called `compact`.
 This will hide all columns and insert a new one containing the content of every other column.
 The content will be displayed vertically which means the cells of a row will be put below each other.
 
-image::{imgsdir}/table_compact.png[width=700]
+image::common:table_compact.png[width=700]
 
 This mode won't be set automatically by a device transformer because it does not work
 for editable tables and may not be desired for every table.
@@ -155,7 +155,7 @@ If you don't like how the content is arranged you can control the conversion by 
 
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/mobile/CompactTable.java[tags=CompactHandler]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/mobile/CompactTable.java[tags=CompactHandler]
 ----
 
 With this mechanism you can easily reorder and hide columns, limit the initially visible content columns or hide the "more link".
@@ -163,7 +163,7 @@ If this is not sufficient you can always set a custom `CompactBeanBuilder` or re
 
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/mobile/CompactTable.java[tags=CustomBeanBuilder]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/mobile/CompactTable.java[tags=CustomBeanBuilder]
 ----
 
 ==== Form Transformation
@@ -174,7 +174,7 @@ reducing the column count to one, disabling cancel confirmation and more.
 Have a look at `MobileDeviceTransformation` and at `MobileDeviceTransformer` to learn more about it.
 
 .Form on Mobile
-image::{imgsdir}/mobile_form.png[width=350]
+image::common:mobile_form.png[width=350]
 
 [[disable-transformations]]
 ==== Disable Transformations
@@ -184,7 +184,7 @@ To disable some transformations just get the configuration and disable the unwan
 
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/mobile/CustomMobileDeviceTransformer.java[tags=ExcludeTransformationGlobally]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/mobile/CustomMobileDeviceTransformer.java[tags=ExcludeTransformationGlobally]
 ----
 
 Have a look at the class `MobileDeviceTransformation` to get a list of all available transformations.
@@ -195,7 +195,7 @@ If you don't want any of these transformers to be active you could simply replac
 
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/mobile/CustomDeviceTransformationPlatformListener.java[tags=ExcludeAllTransformations]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/mobile/CustomDeviceTransformationPlatformListener.java[tags=ExcludeAllTransformations]
 ----
 
 === Adapt Specific Components
@@ -206,7 +206,7 @@ Let's say you want to hide a field if the application is running on a smart phon
 
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/mobile/AdjustComponents.java[tags=UserAgentUtility]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/mobile/AdjustComponents.java[tags=UserAgentUtility]
 ----
 
 Sometimes a transformation done by a device transformer is not desired but you don't want to turn it off globally.
@@ -214,14 +214,14 @@ If that is the case you can disable that transformation for a specific form or f
 
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/mobile/AdjustComponents.java[tags=ExcludeTransformation]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/mobile/AdjustComponents.java[tags=ExcludeTransformation]
 ----
 
 Or you can exclude a specific form or form field from all transformations.
 
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/mobile/AdjustComponents.java[tags=ExcludeField]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/mobile/AdjustComponents.java[tags=ExcludeField]
 ----
 
 ==== Optimize the Look
@@ -233,7 +233,7 @@ Also have a look at the Java file `CssClasses`. Scout provides a few predefined 
 
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/mobile/AdjustComponents.java[tags=CssClass]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/mobile/AdjustComponents.java[tags=CssClass]
 ----
 
 For details on how to write the Less code please see the chapter Styling in the https://eclipsescout.github.io/{doc-short-version}/technical-guide-js.html#styling[Technical Guide for Scout JS].
@@ -243,7 +243,7 @@ To do so just override the method `getConfiguredBodyLayoutConfig` of your group 
 
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/mobile/AdjustComponents.java[tags=Gaps]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/mobile/AdjustComponents.java[tags=Gaps]
 ----
 
 === User Agent

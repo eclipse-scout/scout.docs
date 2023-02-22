@@ -1,6 +1,6 @@
 = Hello Scout Classic
 // comment prevents empty line after formatting, needed for toc
-include::../../../common/src/docs/_header.adoc[]
+include::common:partial$_header.adoc[]
 
 == Introduction
 
@@ -13,11 +13,11 @@ The generated application will consist of a client and server part and simply di
 
 == Prerequisites
 
-include::{mdledir}/DownloadScout.adoc[]
+include::common:partial$DownloadScout.adoc[]
 
 == Create a Scout Project
 
-include::{mdledir}/CreateNewProject.adoc[]
+include::common:partial$CreateNewProject.adoc[]
 
 == What's Next?
 
@@ -32,4 +32,4 @@ In case you should get stuck somewhere and need help, contact us on the http://w
 We wish you all the best on your journey with Scout.
 
 :_footer-link-path: build/helloscout/src/docs/{docname}.adoc
-include::../../../common/src/docs/_footer.adoc[]
+include::common:partial$_footer.adoc[]

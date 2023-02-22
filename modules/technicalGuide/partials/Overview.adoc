@@ -1,6 +1,6 @@
 
 ifndef::finaldoc[]
-include::../_initDoc.adoc[]
+include::common:partial$_initDoc.adoc[]
 endif::finaldoc[]
 
 //fallback for safe mode == secure:
@@ -20,7 +20,7 @@ Scout is a framework for creating modern business applications.
 Such applications are typically separated into multiple tiers where each tier is responsible for a specific part of the application like presenting information to the user or processing business logic and persisting data.
 Scout solves these requirements by providing a separation of such tiers out of the box.
 
-image::{imgsdir}/big_picture.png[]
+image::common:big_picture.png[]
 
 A typical Scout application consists of the following parts:
 

@@ -1,5 +1,5 @@
 ifndef::finaldoc[]
-include::../_initDoc.adoc[]
+include::common:partial$_initDoc.adoc[]
 endif::finaldoc[]
 
 //fallback for safe mode == secure:
@@ -28,7 +28,7 @@ The return value of the accessor method defines the attribute type.
 [source,java]
 .Example: ExampleEntityDo
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/ExampleEntityDo.java[tags=class]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/ExampleEntityDo.java[tags=class]
 ----
 <1> Example attribute of type `String`
 <2> Example attribute of type `List<Integer>`
@@ -39,7 +39,7 @@ Using the convenience with methods, new data objects can be created with fluent-
 [source,java]
 .Example: Create ExampleEntityDo instance
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=create]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=create]
 ----
 
 === Marshalling ===
@@ -53,7 +53,7 @@ The Scout module `org.eclipse.scout.rt.jackson` provides a default implementatio
 [source,java]
 .Example: Serialize ExampleEntityDo
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=serialize]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=serialize]
 ----
 
 The data object `ExampleEntityDo` serialized to JSON:
@@ -61,13 +61,13 @@ The data object `ExampleEntityDo` serialized to JSON:
 [source,json]
 .Example: ExampleEntityDo as JSON
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/resources/org/eclipse/scout/docs/snippets/dataobject/ExampleEntityDo.json[]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/resources/org/eclipse/scout/docs/snippets/dataobject/ExampleEntityDo.json[]
 ----
 
 [source,java]
 .Example: Deserialize ExampleEntityDo
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=deserialize]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=deserialize]
 ----
 
 ==== Type Name ====
@@ -103,7 +103,7 @@ Scout has its own namespace (with ID `scout`), your project should use an own on
 [source,java]
 .Example: LoremNamespace
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/LoremNamespace.java[tags=class]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/LoremNamespace.java[tags=class]
 ----
 
 A class implementing `ITypeVersion` is used within the `@TypeVersion` annotation.
@@ -115,7 +115,7 @@ The default constructor extracts the namespace and version based on the class na
 [source,java]
 .Example: LoremTypeVersions
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/LoremTypeVersions.java[tags=class]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/LoremTypeVersions.java[tags=class]
 ----
 
 ===== Signature Test
@@ -128,7 +128,7 @@ Each module containing data objects with type version annotation should implemen
 [source,java]
 .Example: DocsSnippetsDataObjectSignatureTest
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/test/java/org/eclipse/scout/docs/snippets/DocsSnippetsDataObjectSignatureTest.java[tags=class]
+include::common:example$org.eclipse.scout.docs.snippets/src/test/java/org/eclipse/scout/docs/snippets/DocsSnippetsDataObjectSignatureTest.java[tags=class]
 ----
 
 ==== Data Object Naming Convention ====
@@ -147,14 +147,14 @@ To use a custom attribute name within the serialized string, the attribute acces
 [source,java]
 .Example: Custom Attribute Name
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/CustomAttributeEntityDo.java[tags=customAttributeName]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/CustomAttributeEntityDo.java[tags=customAttributeName]
 ----
 <1> Important: The annotation value must be equals to the string constant used for the `doValue()` or `doList()` attribute declaration.
 
 [source,JSON]
 .Example: Custom Attribute Name as JSON
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/resources/org/eclipse/scout/docs/snippets/dataobject/CustomAttributeNameEntityDo.json[]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/resources/org/eclipse/scout/docs/snippets/dataobject/CustomAttributeNameEntityDo.json[]
 ----
 
 ==== Attribute Format ====
@@ -164,7 +164,7 @@ Using the `ValueFormat` annotation a data type dependent format string may be pr
 [source,java]
 .Example: Custom Attribute Format
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/CustomAttributeEntityDo.java[tags=customValueFormat]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/CustomAttributeEntityDo.java[tags=customValueFormat]
 ----
 
 The `IValueFormatConstants` interface declares a set of default format pattern constants.
@@ -180,7 +180,7 @@ or by explicitly removing the attribute before a data object is serialized:
 [source,java]
 .Example: Remove an attribute from a data object
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=removeAttribute]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=removeAttribute]
 ----
 
 === Handling of DoEntity Attributes ===
@@ -205,7 +205,7 @@ Scout data objects solve this issue: Data objects internally use a `Map<String, 
 [source,java]
 .Example: ExampleEntityDo Access the Attribute Value
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=access]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=access]
 ----
 
 * Existence: Using the `DoNode.exists()` method, each attribute may be checked for existence
@@ -213,7 +213,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 [source,java]
 .Example: ExampleEntityDo Attribute Existence
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=exists]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=exists]
 ----
 
 === Abstract Data Objects & Polymorphism ===
@@ -227,31 +227,31 @@ Each non-abstract subclass must specify a unique `@TypeName` annotation value.
 [source,java]
 .Example: Abstract class AbstractExampleEntityDo with one attribute
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/AbstractExampleEntityDo.java[tags=class]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/AbstractExampleEntityDo.java[tags=class]
 ----
 
 [source,java]
 .Example: Subclass 1 with an additional attribute and a unique type name
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/ExampleEntity1Do.java[tags=class]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/ExampleEntity1Do.java[tags=class]
 ----
 
 [source,java]
 .Example: Subclass 2 with an additional attribute and a unique type name
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/ExampleEntity2Do.java[tags=class]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/ExampleEntity2Do.java[tags=class]
 ----
 
 [source,java]
 .Example: Class with attributes of type AbstractExampleEntityDo
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/ExampleDoEntityListDo.java[tags=class]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/ExampleDoEntityListDo.java[tags=class]
 ----
 
 [source,java]
 .Example: Using the ExampleDoEntityListDo class with different kinds of AbstractExampleEntityDo sub classes
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=abstractDataObject]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=abstractDataObject]
 ----
 
 If an instance of `ExampleDoEntityListDo` is serialized, each attribute is serialized using its runtime data type, adding an appropriate `_type` attribute to each serialized object.
@@ -262,7 +262,7 @@ To each object which is part of a list value property the `_type` property is ad
 [source,json]
 .Example: ExampleDoEntityListDo as JSON
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/resources/org/eclipse/scout/docs/snippets/dataobject/ExampleDoEntityListDo.json[]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/resources/org/eclipse/scout/docs/snippets/dataobject/ExampleDoEntityListDo.json[]
 ----
 
 === Rename an attribute of a data object in a subclass ===
@@ -273,7 +273,7 @@ Additionally the overridden method must call the `doValue()` method providing th
 [source,java]
 .Example: Rename attribute in a data object subclass
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/ExampleEntityExDo.java[tags=class]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/ExampleEntityExDo.java[tags=class]
 ----
 <1> Rename `name` attribute of superclass to `nameEx`
 
@@ -306,7 +306,7 @@ If the serialized JSON document contains a `_type` and/or `_typeVersion` attribu
 [source,java]
 .Example: ExampleEntityDo accessing attribute "by name"
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=accessRaw]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=accessRaw]
 ----
 <1> Accessing value attribute, default type is `Object`
 <2> Accessing value attribute, specify the type as class object if known
@@ -337,7 +337,7 @@ To build map-like a data object (corresponds to `Map<String, T>`), the `DoMapEnt
 [source,java]
 .Example: Map<String, ExampleEntityDo> as ExampleMapEntityDo data object
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/ExampleMapEntityDo.java[tags=class]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/ExampleMapEntityDo.java[tags=class]
 ----
 
 The example JSON document of  ExampleMapEntityDo instance with two elements:
@@ -345,13 +345,13 @@ The example JSON document of  ExampleMapEntityDo instance with two elements:
 [source,JSON]
 .Example: ExampleMapEntityDo with two elements:
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/resources/org/eclipse/scout/docs/snippets/dataobject/ExampleMapEntityDo.json[]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/resources/org/eclipse/scout/docs/snippets/dataobject/ExampleMapEntityDo.json[]
 ----
 
 [source,java]
 .Example: Accessing attributes
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=accessMapAttributes]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=accessMapAttributes]
 ----
 <1> Accessing attribute using `get` method returns the attribute of declared type `T`
 <2> Accessing all attributes using `all` method returns a map with all attributes of type `T`
@@ -365,7 +365,7 @@ According to the http://json.org/[JSON specification] a JSON document at top lev
 [source,java]
 .Example: Deserialize a JSON document with unknown structure
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=dataObjectInterface]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=dataObjectInterface]
 ----
 
 === Ad-Hoc Data Objects ===
@@ -375,7 +375,7 @@ The `DoEntityBuilder` may be used to build ad-hoc data objects without a concret
 [source,java]
 .Example: DoEntityBuilder
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=doEntityBuilder]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=doEntityBuilder]
 ----
 <1> Builder for a DoEntity object
 <2> Builder for the string representation of a DoEntity objects
@@ -397,7 +397,7 @@ For each data object all available attributes and their properties (name, type, 
 [source,java]
 .Example: Accessing data object inventory
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=accessInventory]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=accessInventory]
 ----
 
 Apart from attribute descriptions, the inventory provides access to type name and type version of each data object class.
@@ -422,7 +422,7 @@ An optional static `resolve()` method handles the resolve of a given string valu
 [source,java]
 .Example IEnum implementation
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=exampleEnum]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=exampleEnum]
 ----
 <1> Optional resolve method
 
@@ -438,7 +438,7 @@ An exampleId instance may then be used as type-safe parameter for further refere
 [source,java]
 .Example ID implementation wrapping a UUID
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=exampleId]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=exampleId]
 ----
 
 [[sec-unit-testing]]

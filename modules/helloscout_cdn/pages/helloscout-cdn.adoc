@@ -1,5 +1,5 @@
 = Hello Scout JS with a CDN
-include::../../../common/src/docs/_header.adoc[]
+include::common:partial$_header.adoc[]
 
 == Introduction
 
@@ -64,7 +64,7 @@ Now create a file called `hello.js` and paste the following code:
 [source,javascript,indent=0]
 [subs="+attributes"]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/js/helloscoutcdn/hello.js[tags=hello]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/js/helloscoutcdn/hello.js[tags=hello]
 ----
 
 As you can see, there are no imports at the top.
@@ -90,4 +90,4 @@ The result could look like this: https://codepen.io/cguglielmo/pen/qBqYMvp[Eclip
 Have fun!
 
 :_footer-link-path: build/helloscout_cdn/src/docs/{docname}.adoc
-include::../../../common/src/docs/_footer.adoc[]
+include::common:partial$_footer.adoc[]

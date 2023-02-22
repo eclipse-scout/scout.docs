@@ -1,7 +1,7 @@
 == Scout Tooling
 :doctype: article
 :revnumber: {project-version}
-include::_initDoc.adoc[]
+include::partial$_initDoc.adoc[]
 
 //fallback for safe mode == secure:
 ifndef::imgsdir[:imgsdir: ../../../../imgs]
@@ -15,7 +15,7 @@ The Scout Tooling provides wizards to create new project and application compone
 
 === Effects on Productivity and Code Quality
 
-include::{mdledir}/sdk/SdkScoutTooling.adoc[]
+include::sdk:partial$SdkScoutTooling.adoc[]
 
 === Learn More
 
@@ -27,4 +27,4 @@ To learn more about the wizards and the editor support follow the links provided
 
 '''
 :_footer-link-path: build/eclipse_help/src/docs/{docname}.adoc
-include::../../../common/src/docs/_footer-text.adoc[]
+include::common:partial$_footer-text.adoc[]

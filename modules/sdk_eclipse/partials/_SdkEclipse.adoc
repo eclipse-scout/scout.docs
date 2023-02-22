@@ -1,4 +1,4 @@
-include::../../../common/src/docs/_folders.adoc[]
+include::common:partial$_folders.adoc[]
 ifndef::sdkdir[:sdkdir: ../../../../adoc/sdk]
 
 //-----------------------------------------------------------------------------
@@ -21,7 +21,7 @@ A high level description of the Scout tooling is provided in <<sec-sdk_overview>
 [[sec-sdk_motivation]]
 == Motivation for the Tooling
 
-include::{sdkdir}/SdkScoutTooling.adoc[]
+include::sdk:partial$SdkScoutTooling.adoc[]
 
 [[sec-eclipse_ide_tooling]]
 == Eclipse IDE tooling
@@ -38,7 +38,7 @@ In the first wizard step type the name of the object you want to create into the
 
 [[img-eclipse_new_wizard]]
 ."New" Wizard
-image::{imgsdir}/eclipse_new_wizard.png[]
+image::common:eclipse_new_wizard.png[]
 
 === Create a new Java class
 
@@ -48,7 +48,7 @@ Click on btn:[Next] to open the *New class wizard*
 
 [[img-eclipse_new_class]]
 ."New Java Class" Wizard
-image::{imgsdir}/eclipse_new_class.png[]
+image::common:eclipse_new_class.png[]
 
 You can choose define the following properties:
 
@@ -71,7 +71,7 @@ Start the *New Wizard* and type *Package* in the Wizards field.
 Select *Package*
 Click on btn:[Next] to open the *New package wizard*
 
-image::{imgsdir}/create_new_package_wizard.png[]
+image::common:create_new_package_wizard.png[]
 
 In the *New package wizard* you can define the following properties:
 
@@ -161,7 +161,7 @@ In the first wizard step type "_Scout_" into the *Wizards* field as shown in <<i
 
 [[img-sdk_wizard_new]]
 .Selecting Scout Wizards in the Eclipse wizard dialog
-image::{imgsdir}/sdk_new_wizard.png[]
+image::common:sdk_new_wizard.png[]
 
 The wizards provided by the Scout SDK are introduced and described in the sections listed below.
 
@@ -174,26 +174,26 @@ The wizards provided by the Scout SDK are introduced and described in the sectio
 
 (((SDK Wizard!New Scout Project)))
 
-include::{sdkdir}/SdkWizardProject.adoc[]
+include::sdk:partial$SdkWizardProject.adoc[]
 
 [[sec-wizard_page]]
 ==== New Page Wizard
 
 (((SDK Wizard!New Page)))
 
-include::{sdkdir}/SdkWizardPage.adoc[]
+include::sdk:partial$SdkWizardPage.adoc[]
 
 [[sec-wizard_form]]
 ==== New Form Wizard
 
 (((SDK Wizard!New Form)))
 
-include::{sdkdir}/SdkWizardForm.adoc[]
+include::sdk:partial$SdkWizardForm.adoc[]
 
 [[sec-sdk_content_assist]]
 === Scout Content Assistance
 
-include::{sdkdir}/SdkContentAssist.adoc[]
+include::sdk:partial$SdkContentAssist.adoc[]
 
 [[sec-sdk_nls]]
 === Scout NLS Tooling
@@ -205,11 +205,11 @@ include::{sdkdir}/SdkContentAssist.adoc[]
 
 Translated text entries are most frequently added when working in the Java editor view.
 
-include::{sdkdir}/SdkEditorNlsContentAssist.adoc[]
+include::sdk:partial$SdkEditorNlsContentAssist.adoc[]
 
 Adding a translated text can then be done in the [wizard]_New Entry_ wizard provided by the Scout SDK as shown in <<img-new_text_entry_wizard>>.
 
-include::{sdkdir}/SdkEditorNlsNewEntry.adoc[]
+include::sdk:partial$SdkEditorNlsNewEntry.adoc[]
 
 [[sec-nls_editor]]
 ==== The NLS Editor
@@ -224,6 +224,6 @@ The NLS editor can be accessed for each text provider service of a Scout applica
 In the case of the "Hello World" application you will find the `Texts.nls` file in module `org.eclipse.scout.helloworld.shared`.
 To open the editor for the "Hello World" application select the `Texts.nls` file first and then use context menu menu:Open With[NLS Editor].
 
-include::{sdkdir}/SdkEditorNls.adoc[]
+include::sdk:partial$SdkEditorNls.adoc[]
 
-include::{sdkdir}/SdkEclipseInstallation.adoc[]
+include::sdk:partial$SdkEclipseInstallation.adoc[]

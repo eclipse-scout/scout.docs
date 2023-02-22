@@ -1,6 +1,6 @@
 
 ifndef::finaldoc[]
-include::../_initDoc.adoc[]
+include::common:partial$_initDoc.adoc[]
 endif::finaldoc[]
 
 //fallback for safe mode == secure:
@@ -20,7 +20,7 @@ The Lookup call mechanism is used to look up a set of key-text pairs. Whereas th
 
 This schema explains the role of a LookupCall in a SmartField:
 
-image::{imgsdir}/Schema_LookupCall.png[]
+image::common:Schema_LookupCall.png[]
 
 === Input
 
@@ -44,21 +44,21 @@ It is possible to add you own additional attributes, for example validityFrom, v
 
 [source,java]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/lookup/LanguageLookupCall.java[tags=LanguageLookupCall]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/lookup/LanguageLookupCall.java[tags=LanguageLookupCall]
 ----
 
 In this case, you might want to set your properties before the lookup call query is sent. This can be done with the PrepareLookup event of the SmartField or the ListBox:
 
 [source,java]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/lookup/LookupExample.java[tags=SmartFieldLookup]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/lookup/LookupExample.java[tags=SmartFieldLookup]
 ----
 
 If you follow this pattern, you will consume the values on the server by casting the call:
 
 [source,java]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/lookup/LanguageLookupService.java[tags=getDataByAll]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/lookup/LanguageLookupService.java[tags=getDataByAll]
 ----
 
 === Type of lookup calls
@@ -77,7 +77,7 @@ An example of this approach is when a SmartField or a SmartColumn is configured 
 
 ==== Overview
 
-image::{imgsdir}/LookupCall.png[]
+image::common:LookupCall.png[]
 
 ==== Properties
 
@@ -92,7 +92,7 @@ Defined with `getConfiguredXxxxxx()` methods.
 
 [source,java]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/lookup/LookupExample.java[tags=SmartFieldLookupCall]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/lookup/LookupExample.java[tags=SmartFieldLookupCall]
 ----
 
 *Accessing a LookupRow directly:*
@@ -103,5 +103,5 @@ Before accessing the text, we ensure that a LookupRow has been retrieved.
 
 [source,java]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/lookup/LookupExample.java[tags=executeLookupCall]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/lookup/LookupExample.java[tags=executeLookupCall]
 ----
