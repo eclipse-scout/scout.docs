@@ -62,7 +62,6 @@ These are the dependencies listed in the https://cdn.jsdelivr.net/npm/@eclipse-s
 Now create a file called `hello.js` and paste the following code:
 
 [source,javascript,indent=0]
-[subs="+attributes"]
 ----
 include::common:example$org.eclipse.scout.docs.snippets/src/main/js/helloscoutcdn/hello.js[tags=hello]
 ----
