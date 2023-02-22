@@ -8,7 +8,7 @@
  * SPDX-License-Identifier: EPL-2.0
  */
 import FileChooserFormModel from './FileChooserFormModel';
-import {Button, Event, FileChooser, FileInput, Form, FormModel, HtmlField, HtmlFieldAppLinkActionEvent, InitModelOf, models, scout, strings} from '@eclipse-scout/core';
+import {AppLinkActionEvent, Button, Event, FileChooser, FileInput, Form, FormModel, HtmlField, InitModelOf, models, scout, strings} from '@eclipse-scout/core';
 import {DisplayParentLookupCall, FileChooserFormWidgetMap} from '../index';
 
 export class FileChooserForm extends Form {
@@ -70,7 +70,7 @@ export class FileChooserForm extends Form {
     chosenFilesField.setValue(chosenFilesText + ' ' + fileDescriptions.join(', '));
   }
 
-  protected _onChosenFilesAppLinkAction(event: HtmlFieldAppLinkActionEvent) {
+  protected _onChosenFilesAppLinkAction(event: AppLinkActionEvent) {
     let chosenFilesField: HtmlFieldWithFiles = this.widget('ChosenFilesField');
     let file = chosenFilesField.files[event.ref];
     let url = URL.createObjectURL(file);
