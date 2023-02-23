@@ -671,3 +671,13 @@ For more details, see https://github.com/eclipse-scout/scout.rt/commit/91f846556
 If you are implementing one of the interfaces `ITokenVerifier` or `ITokenPrincipalProducer`, you must add either the `@ApplicationScope` or `@Bean` annotation to your implementation class.
 Previously, the interfaces itself were annotated with `@ApplicationScope`, which is too strict.
 This prevents having multiple instances of BearerAuthAccessController with different configurations/states of an `ITokenVerifier` or `ITokenPrincipalProducer`.
+
+== Improved error message when upload file size is exceeded (since 22.0.46)
+
+Widgets which allow to upload a file inside the browser show an error message if the uploaded file exceeds the configurated maximum upload file size. The error message always refers to MB even if the configured maximum upload file size is much smaller than that (or much larger). The error message looked like this: _The maximum file size exceeds the limit allowed (0.000976 MB)._
+
+The same message using KB is much more readable: _The maximum file size exceeds the limit allowed (1 KB)._
+
+Hence, depending on the file size, a suitable unit (B, KB, MB, GB) is used for all upload-widgets (file chooser, file chooser button, file chooser field).
+
+This change has also changed the translations of the text-key _ui.FileSizeLimit_. In case this text-key is directly used in your project (which you should not do anyway), the displayed error message is broken now. You have to adapt your code.
