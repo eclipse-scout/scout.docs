@@ -1,21 +1,21 @@
-import {Form, GroupBox} from '@eclipse-scout/core';
+import {Button, Form, GroupBox, StringField} from '@eclipse-scout/core';
 
 export default () => ({
-  objectType: 'Form',
+  objectType: Form,
   displayHint: Form.DisplayHint.VIEW,
   modal: false,
   rootGroupBox: {
-    objectType: 'GroupBox',
+    objectType: GroupBox,
     borderDecoration: GroupBox.BorderDecoration.EMPTY,
     fields: [
       {
         id: 'NameField',
-        objectType: 'StringField',
+        objectType: StringField,
         label: 'Name'
       },
       {
         id: 'GreetButton',
-        objectType: 'Button',
+        objectType: Button,
         label: 'Say Hello',
         keyStroke: 'enter',
         processButton: false
