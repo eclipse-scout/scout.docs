@@ -170,7 +170,7 @@ See the JsDoc of the `registerNamespace` method if you are curious what it does.
 
 == ObjectType as Class Reference (Scout JS)
 
-As described in the xref:releasenotes:release-notes.adoc[]:, it is now possible to use class references for the `objectType`.
+As described in the xref:releasenotes:release-notes.adoc[], it is now possible to use class references for the `objectType`.
 Even though the string based style still works and a migration is not necessary, the class reference style is the preferred way for the future.
 
 We highly recommend you migrate your code, so you can benefit of the improved type safety and code completion.
