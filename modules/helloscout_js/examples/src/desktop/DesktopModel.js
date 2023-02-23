@@ -1,11 +1,14 @@
+import {HelloForm} from "../greeting/HelloForm";
+import {Desktop} from "./Desktop";
+
 export default () => ({
-  objectType: 'Desktop',
+  objectType: Desktop,
   navigationHandleVisible: false,
   navigationVisible: false,
   headerVisible: false,
   views: [
     {
-      objectType: 'helloworld.HelloForm'
+      objectType: HelloForm
     }
   ]
 });

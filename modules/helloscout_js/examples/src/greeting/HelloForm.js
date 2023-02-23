@@ -1,14 +1,10 @@
-import { Form, models, MessageBoxes } from '@eclipse-scout/core';
+import {Form, MessageBoxes} from '@eclipse-scout/core';
 import HelloFormModel from './HelloFormModel';
 
 export class HelloForm extends Form {
 
-  constructor() {
-    super();
-  }
-
   _jsonModel() {
-    return models.get(HelloFormModel)
+    return HelloFormModel();
   }
 
   _init(model) {
