@@ -1,5 +1,5 @@
 ifndef::finaldoc[]
-include::_initDoc.adoc[]
+include::partial$_initDoc.adoc[]
 endif::finaldoc[]
 
 //fallback for safe mode == secure:
@@ -22,14 +22,14 @@ The `Display Name` is used as the application name presented to the user (e.g. i
 
 [[img-sdk_new_projectjs_wizard_ij]]
 .The new Scout project wizard.
-image::{imgsdir}/sdk_new_projectjs_ij.png[]
+image::common:sdk_new_projectjs_ij.png[]
 
 For the `Hello Scout JS Full Stack` application use `helloscoutjs` as the artifact id and ensure the user interface programming language is set to `JavaScript` as sown in <<img-sdk_new_projectjs_wizard_ij>>.
 You can keep the other default values. Then click the btn:[Next] button.
 
 [[img-sdk_new_projectjs_location_ij]]
 .Specify name and location of the new project.
-image::{imgsdir}/sdk_new_projectjs_location_ij.png[]
+image::common:sdk_new_projectjs_location_ij.png[]
 On the second page please specify project name and location and press btn:[Finish].
 The Scout plugin then creates the initial project content for you (you will see some Maven build output).
 Wait until all tasks have completed.
@@ -38,7 +38,7 @@ Afterwards, you will find the created Scout modules in the Project view as shown
 
 [[img-sdk_new_projectjs_initial_helloworld_ij]]
 .The initial set of Maven modules created for the Hello Scout application.
-image::{imgsdir}/sdk_new_projectjs_initial_helloworld_ij.png[]
+image::common:sdk_new_projectjs_initial_helloworld_ij.png[]
 
 TIP: If the modules are not automatically created as indicated in <<img-sdk_new_projectjs_initial_helloworld_ij>>, right click on the root `pom.xml` and click `Add as Maven Project`.
 
@@ -52,7 +52,7 @@ This will launch the db setup application which creates a new Derby database in 
 
 [[img-start_dbsetup_ij]]
 .Selecting the db setup run configuration
-image::{imgsdir}/sdk_dbsetup_ij.png[]
+image::common:sdk_dbsetup_ij.png[]
 
 Now you are ready to start the Scout JS application.
 This includes downloading the necessary JavaScript dependencies, executing the Java and JavaScript builds and launching the Scout development server.
@@ -79,4 +79,4 @@ The `Hello Scout JS Full Stack` application is then presented as shown in <<img-
 
 [[img-start_browser_hellojs_ij]]
 .The Hello Scout JS Full Stack application in the browser.
-image::{imgsdir}/run_helloscoutjs_full_stack_in_browser.png[]
+image::common:run_helloscoutjs_full_stack_in_browser.png[]

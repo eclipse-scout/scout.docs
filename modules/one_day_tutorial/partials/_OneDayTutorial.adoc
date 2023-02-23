@@ -1,4 +1,4 @@
-include::../../../common/src/docs/_initSubDoc.adoc[]
+include::common:partial$_initSubDoc.adoc[]
 
 //-----------------------------------------------------------------------------
 //Asciidoctor input file: "One Day Tutorial"
@@ -23,44 +23,44 @@ The remaining sections focus on the individual steps to implement the "`Contacts
 
 //--- tutorial intro --------------------------------------------------------//
 
-include::_TutorialIntro.adoc[]
+include::partial$_TutorialIntro.adoc[]
 
 //--- tutorial steps --------------------------------------------------------//
 
 [[sec-contacts_initial_project]]
 == Setting up the Initial Project
 
-include::_TutorialStep1.adoc[]
+include::partial$_TutorialStep1.adoc[]
 
 [[sec-contacts_pages]]
 == Adding the Person and Organization Page
 
-include::_TutorialStep2.adoc[]
+include::partial$_TutorialStep2.adoc[]
 
 [[sec-contacts_jdbc]]
 == Creating and Accessing the Database
 
-include::_TutorialStep3.adoc[]
+include::partial$_TutorialStep3.adoc[]
 
 [[sec-contacts_forms]]
 == Adding a Form to Create/Edit Persons
 
-include::_TutorialStep4.adoc[]
+include::partial$_TutorialStep4.adoc[]
 
 [[sec-contacts_fields]]
 == Form Field Validation and Template Fields
 
-include::_TutorialStep5.adoc[]
+include::partial$_TutorialStep5.adoc[]
 
 [[sec-contacts_form_add_company]]
 == Adding the Company Form
 
-include::_TutorialStep6.adoc[]
+include::partial$_TutorialStep6.adoc[]
 
 [[sec-contacts_link_organization_person]]
 == Linking Organizations and Persons
 
-include::_TutorialStep7.adoc[]
+include::partial$_TutorialStep7.adoc[]
 
 [[sec-source_control]]
 == Git configuration

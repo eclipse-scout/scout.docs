@@ -1,5 +1,5 @@
 ifndef::finaldoc[]
-include::_initDoc.adoc[]
+include::partial$_initDoc.adoc[]
 endif::finaldoc[]
 
 //fallback for safe mode == secure:
@@ -22,14 +22,14 @@ The `Display Name` is used as the application name presented to the user (e.g. i
 
 [[img-sdk_new_project_wizard_ij]]
 .The new Scout project wizard.
-image::{imgsdir}/sdk_new_project_ij.png[]
+image::common:sdk_new_project_ij.png[]
 
 For the `Hello Scout` application just use the already pre-filled values and ensure the user interface programming language is set to `Java` as sown in <<img-sdk_new_project_wizard_ij>>.
 Then click the btn:[Next] button.
 
 [[img-sdk_new_project_location_ij]]
 .Specify name and location of the new project.
-image::{imgsdir}/sdk_new_project_location_ij.png[]
+image::common:sdk_new_project_location_ij.png[]
 On the second page please specify project name and location and press btn:[Finish].
 The Scout plugin then creates the initial project content for you (you will see some Maven build output).
 Wait until all tasks have completed.
@@ -38,7 +38,7 @@ Afterwards, you will find the created Scout modules in the Project view as shown
 
 [[img-sdk_new_project_initial_helloworld_ij]]
 .The initial set of Maven modules created for the Hello Scout application.
-image::{imgsdir}/sdk_new_project_initial_helloworld_ij.png[]
+image::common:sdk_new_project_initial_helloworld_ij.png[]
 
 TIP: If the modules are not automatically created as indicated in <<img-sdk_new_project_initial_helloworld_ij>>, right click on the root `pom.xml` and click `Add as Maven Project`.
 
@@ -61,7 +61,7 @@ The watcher keeps on running and will continuously update the JavaScript assets 
 
 [[img-start_all_ij]]
 .Selecting the compound run configuration
-image::{imgsdir}/sdk_start_all_ij.png[]
+image::common:sdk_start_all_ij.png[]
 
 TIP: The JavaScript build fails in case the installed Node.js was not found or is too old.
 In that case, follow the instructions in the section <<Prerequisites>> and check the IntelliJ settings in `File | Settings | Languages & Frameworks | Node.js and NPM`.
@@ -72,4 +72,4 @@ The `Hello Scout` application is then presented as shown in <<img-start_browser_
 
 [[img-start_browser_ij]]
 .The Hello Scout application in the browser.
-image::{imgsdir}/run_helloworld_in_browser.png[]
+image::common:run_helloworld_in_browser.png[]

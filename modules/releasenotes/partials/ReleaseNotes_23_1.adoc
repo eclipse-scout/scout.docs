@@ -78,7 +78,7 @@ This gives you many benefits:
 Typing allows your IDE to better assist with code completion during development and to only suggest methods and properties for an object that actually exist. +
 +
 .Better Code Completion
-image::{rnimgsdir}/code_completion.png[]
+image::code_completion.png[]
 * *Easier entry* +
 With better code completion and clear method signatures, a not-so-experienced JavaScript developer can more easily get up to speed and understand the relationships in the code.
 * *More confidence when updating* +
@@ -87,7 +87,7 @@ If a used API has changed, the code turns red and the build fails.
 Incorrect use of an API or code in general is detected at an early stage. The developer gets more confidence that his code will work. +
 +
 .Compile Errors
-image::{rnimgsdir}/compile_errors.png[]
+image::compile_errors.png[]
 
 === Well-Defined and Typed Widget Models
 
@@ -98,12 +98,12 @@ The model is a TypeScript interface and named after the widget with the suffix `
 For example, you will find the model of a `Menu` under the name `MenuModel`.
 
 .Widget Model
-image::{rnimgsdir}/widget_model.png[]
+image::widget_model.png[]
 
 The models can not only be used for documentation purposes, TypeScript and Scout SDK use them as well for code completion and type checks.
 
 .Widget Model Code Completion
-image::{rnimgsdir}/model_completion.png[]
+image::model_completion.png[]
 
 === Well-Defined and Typed Widget Events
 
@@ -116,12 +116,12 @@ For example, you will find the event map of a `Menu` under the name `MenuEventMa
 These event maps are used by TypeScript to provide code completion for the event name when adding an event handler:
 
 .Event Name Completion
-image::{rnimgsdir}/event_completion.png[]
+image::event_completion.png[]
 
 You also get the correct type of the event itself including its members in the handler:
 
 .Typed Event
-image::{rnimgsdir}/typed_events.png[]
+image::typed_events.png[]
 
 === Typed Return Values When Finding Widgets
 
@@ -150,7 +150,7 @@ A widget map is an interface that maps the ids of the widgets to their type.
 This allows TypeScript to determine the return type automatically.
 
 .Typed `widget` function
-image::{rnimgsdir}/typed_widget.png[]
+image::typed_widget.png[]
 
 Scout SDK takes care of creating the widget maps, so you don't have to write them manually.
 
@@ -368,7 +368,7 @@ The calendar component item of the calendar widget has new attributes:
 * descriptionElements - list of `ICalendarItemDescriptionElement` which is displayed in the body of the tooltip of the calendar component
 
 .Calendar Component
-image::{rnimgsdir}/calendar_tooltip.png[]
+image::calendar_tooltip.png[]
 
 Further the calendar provides now a time range selection in the day, work week and week mode. By default, this feature is disabled, it can be configured with the `rangeSelectionAllowed` property. The start point and end point of the current selected time range can be accessed with the `selectedRange` property.
 

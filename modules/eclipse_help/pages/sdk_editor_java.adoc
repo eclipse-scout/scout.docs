@@ -1,7 +1,7 @@
 === Additions to the Java Editor
 :doctype: article
 :revnumber: {project-version}
-include::_initDoc.adoc[]
+include::partial$_initDoc.adoc[]
 
 //fallback for safe mode == secure:
 ifndef::imgsdir[:imgsdir: ../../../../imgs]
@@ -12,11 +12,11 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 Scout uses the standard Java Editor of the Eclipse IDE.
 To ease the development, the Scout SDK provides additional features for the Java Editor.
 
-include::{mdledir}/sdk/SdkContentAssist.adoc[]
+include::sdk:partial$SdkContentAssist.adoc[]
 
 ==== NLS-Entry support
 
-include::{mdledir}/sdk/SdkEditorNlsContentAssist.adoc[]
+include::sdk:partial$SdkEditorNlsContentAssist.adoc[]
 
 Selecting "New text..." then opens the <<sdk_wizard_nls-entry.adoc#nls-entry-wizard, NLS Entry Wizard>>.
 
@@ -24,4 +24,4 @@ Selecting "New text..." then opens the <<sdk_wizard_nls-entry.adoc#nls-entry-wiz
 Go back to the <<sdk.adoc#, Scout Tooling>>.
 
 :_footer-link-path: build/eclipse_help/src/docs/{docname}.adoc
-include::../../../common/src/docs/_footer-text.adoc[]
+include::common:partial$_footer-text.adoc[]

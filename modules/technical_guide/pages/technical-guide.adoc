@@ -1,6 +1,6 @@
 = Eclipse Scout Technical Guide
 // comment prevents empty line after formatting, needed for toc
-include::../../../common/src/docs/_header.adoc[]
+include::common:partial$_header.adoc[]
 
 :sectnums!:
 
@@ -9,27 +9,27 @@ include::../../../common/src/docs/_header.adoc[]
 This technical guide documents the Scout architecture and describes important concepts used in Scout.
 
 :sectnums:
-include::{mdledir}/technicalGuide/Overview.adoc[]
-include::{mdledir}/technicalGuide/Platform.adoc[]
-include::{mdledir}/technicalGuide/ClientModel.adoc[]
-include::{mdledir}/technicalGuide/Texts.adoc[]
-include::{mdledir}/technicalGuide/Icons.adoc[]
-include::{mdledir}/technicalGuide/LookupCall.adoc[]
-include::{mdledir}/technicalGuide/CodeType.adoc[]
-include::{mdledir}/technicalGuide/ExceptionHandling.adoc[]
-include::{mdledir}/technicalGuide/JobManager.adoc[]
-include::{mdledir}/technicalGuide/RunContext.adoc[]
-include::{mdledir}/technicalGuide/RunMonitor.adoc[]
-include::{mdledir}/technicalGuide/ClientNotification.adoc[]
-include::{mdledir}/technicalGuide/Extensibility.adoc[]
-include::{mdledir}/technicalGuide/Mobile.adoc[]
-include::{mdledir}/technicalGuide/Security.adoc[]
-include::{mdledir}/technicalGuide/DataObject.adoc[]
-include::{mdledir}/technicalGuide/REST.adoc[]
-include::{mdledir}/technicalGuide/JaxWs.adoc[]
-include::{mdledir}/technicalGuide/SmtpHelper.adoc[]
-include::{mdledir}/technicalGuide/ScoutJS.adoc[]
-include::{mdledir}/technicalGuide/HowTos.adoc[]
+include::technicalGuide:partial$Overview.adoc[]
+include::technicalGuide:partial$Platform.adoc[]
+include::technicalGuide:partial$ClientModel.adoc[]
+include::technicalGuide:partial$Texts.adoc[]
+include::technicalGuide:partial$Icons.adoc[]
+include::technicalGuide:partial$LookupCall.adoc[]
+include::technicalGuide:partial$CodeType.adoc[]
+include::technicalGuide:partial$ExceptionHandling.adoc[]
+include::technicalGuide:partial$JobManager.adoc[]
+include::technicalGuide:partial$RunContext.adoc[]
+include::technicalGuide:partial$RunMonitor.adoc[]
+include::technicalGuide:partial$ClientNotification.adoc[]
+include::technicalGuide:partial$Extensibility.adoc[]
+include::technicalGuide:partial$Mobile.adoc[]
+include::technicalGuide:partial$Security.adoc[]
+include::technicalGuide:partial$DataObject.adoc[]
+include::technicalGuide:partial$REST.adoc[]
+include::technicalGuide:partial$JaxWs.adoc[]
+include::technicalGuide:partial$SmtpHelper.adoc[]
+include::technicalGuide:partial$ScoutJS.adoc[]
+include::technicalGuide:partial$HowTos.adoc[]
 
 :_footer-link-path: build/technical_guide/src/docs/{docname}.adoc
-include::../../../common/src/docs/_footer.adoc[]
+include::common:partial$_footer.adoc[]

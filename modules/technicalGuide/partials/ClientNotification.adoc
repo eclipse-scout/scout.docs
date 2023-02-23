@@ -1,6 +1,6 @@
 
 ifndef::finaldoc[]
-include::../_initDoc.adoc[]
+include::common:partial$_initDoc.adoc[]
 endif::finaldoc[]
 
 //fallback for safe mode == secure:
@@ -22,7 +22,7 @@ With client notifications it is possible to do so.
 
 [[img-client_notifications]]
 .Client Notifications
-image::{imgsdir}/clientNotifications.png[]
+image::common:clientNotifications.png[]
 
 === Examples
 
@@ -49,7 +49,7 @@ In case of multiple server nodes, the client notifications are synchronized usin
 
 [[img-long_polling]]
 .Long Polling
-image::{imgsdir}/cn_long_polling.png[]
+image::common:cn_long_polling.png[]
 
 Client notifications are implemented using `long polling` as described below, because long polling works reliably in most corporate networks with proxy servers between server and client
  as well as with security policies that do not allow server push.
@@ -70,13 +70,13 @@ When a client notifications is published on the server, it is automatically sync
 
 [[img-client_notification_big_picture]]
 .Client Notification Big Picture
-image::{imgsdir}/cn_big_picture.png[]
+image::common:cn_big_picture.png[]
 
 ==== Multiple Server Nodes
 
 [[img-client_notification_multiple]]
 .Client Notification Multiple Server Nodes
-image::{imgsdir}/cn_multiple_servers.png[]
+image::common:cn_multiple_servers.png[]
 
 In order to deal with multiple ui-server nodes, the server holds a single notifications queue per ui-server node.
 
@@ -90,7 +90,7 @@ Sessions and corresponding users are registered on the server upon creation (and
 [source,java,indent=0]
 .Publishing Client Notifications
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/ClientNotificationSnippet.java[tags=PublishClientNotification]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/ClientNotificationSnippet.java[tags=PublishClientNotification]
 ----
 
 There are several options to choose from when publishing a new client notification:
@@ -125,7 +125,7 @@ In this case a coalescer can be created to reduce the notifications:
 [source,java,indent=0]
 .Client Notification Coalescer
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/ClientNotificationSnippet.java[tags=cn_bookmarkCoalescer]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/ClientNotificationSnippet.java[tags=cn_bookmarkCoalescer]
 ----
 
 === Handling
@@ -141,7 +141,7 @@ The new handler does not need to be registered anywhere. It is available via jan
 [source,java,indent=0]
 .Notification Handler for `MessageNotifications`
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/notification/MessageNotificationHandler.java[tags=notificationHandler]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/notification/MessageNotificationHandler.java[tags=notificationHandler]
 ----
 
 ==== Handling Notifications Temporarily
@@ -158,7 +158,7 @@ This behavior was implemented to simplify for example the usage of shared caches
 [source,java,indent=0]
 .Blocking until notification handling completed
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/ClientNotificationSnippet.java[tags=cn_reloadCodeType]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/ClientNotificationSnippet.java[tags=cn_reloadCodeType]
 ----
 
 In the example above, it is guaranteed, that the codetype is up-to-date as soon as reloadCodeType is finished.
@@ -170,7 +170,7 @@ If the scout model needs to be updated when handling notifications, a model job 
 [source,java,indent=0]
 .Notification Handler Creating Model Job
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/notification/MessageNotificationHandler.java[tags=handleNotification]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/notification/MessageNotificationHandler.java[tags=handleNotification]
 ----
 
 TIP: Make sure to always run updates to the scout models in a model job (forms, pages, ...): Use ModelJobs.schedule(...) where necessary in notification handlers.

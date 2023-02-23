@@ -1,7 +1,7 @@
 ==== New LookupCall Wizard
 :doctype: article
 :revnumber: {project-version}
-include::_initDoc.adoc[]
+include::partial$_initDoc.adoc[]
 
 //fallback for safe mode == secure:
 ifndef::imgsdir[:imgsdir: ../../../../imgs]
@@ -14,7 +14,7 @@ To start the wizard use menu:File[New,Other...] or press kbd:[Ctrl,N] as describ
 
 [[img-sdk_wizard_lookupcall]]
 .The new LookupCall wizard
-image::{imgsdir}/sdk_new_lookupcall.png[]
+image::common:sdk_new_lookupcall.png[]
 
 In the case of <<img-sdk_wizard_lookupcall>> the package `org.eclipse.scout.apps.helloworld.shared.helloworld` has been selected in the Package Explorer.
 The only wizard fields that then needs to be filled in manually are the *Name* and the *Key Class* fields.
@@ -49,4 +49,4 @@ In the <<img-sdk_wizard_lookupcall>> example shown above the Scout SDK will crea
 Go back to the <<sdk_wizard.adoc#scout-wizards, Scout Wizards>>.
 
 :_footer-link-path: build/eclipse_help/src/docs/{docname}.adoc
-include::../../../common/src/docs/_footer-text.adoc[]
+include::common:partial$_footer-text.adoc[]

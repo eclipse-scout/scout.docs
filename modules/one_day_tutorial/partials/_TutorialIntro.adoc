@@ -1,4 +1,4 @@
-include::../../../common/src/docs/_initSubDoc.adoc[]
+include::common:partial$_initSubDoc.adoc[]
 
 //-----------------------------------------------------------------------------
 //WARNING: this file is a text module, it needs to be embedded in a master asciidoctor document.
@@ -21,7 +21,7 @@ Alternatively, you can also view the source code of the "`Contacts`" demo applic
 
 [[img-app_contacts_personpage]]
 .The "`Contacts`" application with the person page.
-image::{imgsdir}/app_contacts_personpage.png[]
+image::common:app_contacts_personpage.png[]
 
 The "`Contacts`" application shows the basic user interface layout of a typical Scout application.
 The main areas of this layout are briefly introduced below.
@@ -48,7 +48,7 @@ An example of an opened view is shown for person "Verónica" in <<img-app_contac
 
 [[img-app_contacts_personform]]
 .The "`Contacts`" application with a person opened in a form.
-image::{imgsdir}/app_contacts_personform.png[]
+image::common:app_contacts_personform.png[]
 
 //--- tutorial_section ------------------------------------------------------//
 [[sec-contacts_overview]]

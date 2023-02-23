@@ -1,6 +1,6 @@
 
 ifndef::finaldoc[]
-include::../_initDoc.adoc[]
+include::common:partial$_initDoc.adoc[]
 endif::finaldoc[]
 
 //fallback for safe mode == secure:
@@ -19,7 +19,7 @@ A CodeType is a structure to represent a tree key-code association. They are use
 === Description
 CodeTypes are used in https://wiki.eclipse.org/Scout/Concepts/SmartField[SmartField] to let the user choose between a finite list of values. The value stored by the field corresponds to the key of the selected code.
 
-image::{imgsdir}/Scout_SmartField_Hierarchy_SWT.png[]
+image::common:Scout_SmartField_Hierarchy_SWT.png[]
 
 A CodeType can be seen as a tree of https://wiki.eclipse.org/Scout/Concepts/Code[Codes]. Each code associates to the key (the Id) other properties: among others a Text and an IconId.
 
@@ -49,7 +49,7 @@ CodeType in a SmartField (or SmartColumn).
 
 [source,java]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/codetype/YesOrNoSmartField.java[tags=YesOrNoSmartField]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/codetype/YesOrNoSmartField.java[tags=YesOrNoSmartField]
 ----
 
 If the SmartField (or SmartColumn) works with a CodeType, a specific LookupCall is instantiated to get the LookupRows based on the Codes contained in a CodeType.
@@ -62,14 +62,14 @@ This function returns the text corresponding to the key using a CodeType:
 
 [source,java]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/codetype/CodetypeExamples.java[tags=getCodeText]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/codetype/CodetypeExamples.java[tags=getCodeText]
 ----
 
 === Static CodeType
 
 ==== Java Code and structure
 
-image::{imgsdir}/Scout_CodeType_Structure.png[]
+image::common:Scout_CodeType_Structure.png[]
 
 The common way to define a CodeType is to extend AbstractCodeType. Each code is an inner-class extending AbstractCode. Like usual the properties of Codes and CodeTypes can be set using the https://wiki.eclipse.org/Scout/Concepts/GetConfigured_Methods[getConfiguredXxxxxx()] methods.
 

@@ -1,5 +1,5 @@
 ifndef::finaldoc[]
-include::../_initDoc.adoc[]
+include::common:partial$_initDoc.adoc[]
 endif::finaldoc[]
 
 //fallback for safe mode == secure:
@@ -42,7 +42,7 @@ The `org.eclipse.scout.rt.mail.smtp.SmtpServerConfig` class allows to specify de
 [source,java,indent=0]
 .Create and configure an instance of `org.eclipse.scout.rt.mail.smtp.SmtpServerConfig`
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/SmtpServerConfigSnippet.java[tags=SmtpServerConfig.example]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/SmtpServerConfigSnippet.java[tags=SmtpServerConfig.example]
 ----
 
 === Sending messages
@@ -62,7 +62,7 @@ Messages can be sent using the `sendMessage` Methods of the `SmtpHelper` class. 
 [source,java,indent=0]
 .Create `org.eclipse.scout.rt.mail.CharsetSafeMimeMessage` object
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/SmtpHelperSnippet.java[tags=SmtpHelper.prepareMimeMessage]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/SmtpHelperSnippet.java[tags=SmtpHelper.prepareMimeMessage]
 ----
 
 In order to send the message you can either use a `org.eclipse.scout.rt.mail.smtp.SmtpServerConfig` object or an existing `javax.mail.Session` object as demonstrated in <<lst-SmtpHelper.sendWithSmtpServerConfig>> and <<lst-SmtpHelper.sendWithSession>>.
@@ -71,7 +71,7 @@ In order to send the message you can either use a `org.eclipse.scout.rt.mail.smt
 [source,java,indent=0]
 .Send email using an `org.eclipse.scout.rt.mail.smtp.SmtpServerConfig` object.
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/SmtpHelperSnippet.java[tags=SmtpHelper.sendWithSmtpServerConfig]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/SmtpHelperSnippet.java[tags=SmtpHelper.sendWithSmtpServerConfig]
 ----
 
 
@@ -79,7 +79,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 [source,java,indent=0]
 .Send email using an existing `javax.mail.Session` object.
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/SmtpHelperSnippet.java[tags=SmtpHelper.sendWithSession]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/SmtpHelperSnippet.java[tags=SmtpHelper.sendWithSession]
 ----
 
 === SmtpHelper Configuration

@@ -1,4 +1,4 @@
-include::../../../common/src/docs/_initSubDoc.adoc[]
+include::common:partial$_initSubDoc.adoc[]
 
 //-----------------------------------------------------------------------------
 //WARNING: this file is a text module, it needs to be embedded in a master asciidoctor document.
@@ -53,13 +53,13 @@ The necessary infrastructure can be created using the Scout lookup wizard accord
 
 [[img-sdk_create_new_lookupcall_organization_Intellij]]
 .Creating the OrganizationLookupCall in IntelliJ.
-image::{imgsdir}/sdk_create_new_lookupcall_organization_Intellij.png[]
+image::common:sdk_create_new_lookupcall_organization_Intellij.png[]
 [[img-sdk_new_lookupcall_organization_Intellij]]
 .Using the Scout lookup call wizard for creating class OrganizationLookupCall in IntelliJ.
-image::{imgsdir}/sdk_new_lookupcall_organization_Intellij.png[]
+image::common:sdk_new_lookupcall_organization_Intellij.png[]
 [[img-sdk_new_lookupcall_organization]]
 .Using the Scout lookup call wizard for creating class OrganizationLookupCall in Eclipse.
-image::{imgsdir}/sdk_new_lookupcall_organization.png[]
+image::common:sdk_new_lookupcall_organization.png[]
 
 The Scout wizard creates the lookup class `OrganizationLookupCall` and the corresponding lookup service with the interface `IOrganizationLookupService` and its initial implementation `OrganizationLookupService`.
 Beside making sure the generic uses the correct data type (`String`), the service interface and the lookup call class can be used as provided by the Scout wizard.
@@ -70,7 +70,7 @@ We will only need to provide some implementation for the lookup service.
 [source,java]
 .The OrganizationLookupCall implemented by the Scout wizard.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.shared/src/main/java/org/eclipse/scout/contacts/shared/organization/OrganizationLookupCall.java[tags=all]
+include::common:example$contacts/org.eclipse.scout.contacts.shared/src/main/java/org/eclipse/scout/contacts/shared/organization/OrganizationLookupCall.java[tags=all]
 ----
 
 We are now ready to implement method `getConfiguredSqlSelect` of the organization lookup service.
@@ -80,7 +80,7 @@ Open class `OrganizationLookupService` in the Java editor and change the impleme
 [source,java]
 .The OrganizationService methods to load, create and update organization data.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/organization/OrganizationLookupService.java[tags=all]
+include::common:example$contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/organization/OrganizationLookupService.java[tags=all]
 ----
 
 <1> We only need to return a single SQL statement for lookup services that extend `AbstractSqlLookupService`
@@ -94,7 +94,7 @@ Next is the case where the lookup service returns a number of lookup rows that m
 [source,java]
 .The SQL statement to provide the data for the organization lookup service.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/sql/SQLs.java[tags=lookupService]
+include::common:example$contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/sql/SQLs.java[tags=lookupService]
 ----
 
 <1> The where clause to be used for a search for a specific key
@@ -112,7 +112,7 @@ Then, update the implementation of the OrganizationField according to <<lst-cont
 [source,java]
 .The organization smart field in the "Work" tab backed by the OrganizationLookupCall.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonForm.java[tags=organizationField]
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonForm.java[tags=organizationField]
 ----
 
 <1> The OrganizationField now extends a Scout smart field
@@ -129,7 +129,7 @@ Then, change the implementation of `OrganizationColumn` according to <<lst-conta
 [source,java]
 .The organization smart column in the person page.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonTablePage.java[tags=organizationColumn]
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonTablePage.java[tags=organizationColumn]
 ----
 
 Using the created organization lookup calls we have now completed the modifications on the person form and also used the lookup call to display the a person's organization in the person page.
@@ -147,7 +147,7 @@ Note that this is a screenshot of the "Contacts" demo application, not the tutor
 
 [[img-contacts_demo_organization_nodepage]]
 .A drill-down on an organization in the "Contacts" demo application provides access to related persons and events.
-image::{imgsdir}/contacts_demo_organization_nodepage.png[]
+image::common:contacts_demo_organization_nodepage.png[]
 
 In the "Contacts" demo application this hierarchical page structure is implemented as follows.
 
@@ -167,7 +167,7 @@ For this change we first update the person service interface as shown in <<lst-c
 [source,java]
 .The updated method `getPersonTableData` for the person service interface.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.shared/src/main/java/org/eclipse/scout/contacts/shared/person/IPersonService.java[tags=all]
+include::common:example$contacts/org.eclipse.scout.contacts.shared/src/main/java/org/eclipse/scout/contacts/shared/person/IPersonService.java[tags=all]
 ----
 
 <1> Add parameter `organizationId`
@@ -209,7 +209,7 @@ Finally, we can use in method `execLoadData` according to <<lst-contacts_person_
 [source,java]
 .Add the possibility to restrict the list of persons to those assigned to a specific organization.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonTablePage.java[tags=linkToOrganization]
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonTablePage.java[tags=linkToOrganization]
 ----
 
 <1> This property lets the person page remember an organization key
@@ -241,7 +241,7 @@ To create the organization node page follow the steps listed below.
 
 [[img-sdk_new_organization_nodepage]]
 .Creating the organization node page.
-image::{imgsdir}/sdk_new_organization_nodepage.png[]
+image::common:sdk_new_organization_nodepage.png[]
 
 After the wizard has created the initial implementation of the node page, open class `OrganizationNodePage` in the Java editor and adapt its implementation according to <<lst-contacts_organization_node_page>>.
 
@@ -249,7 +249,7 @@ After the wizard has created the initial implementation of the node page, open c
 [source,java]
 .The complete implementation of the class `OrganizationNodePage`.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/organization/OrganizationNodePage.java[tags=all]
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/organization/OrganizationNodePage.java[tags=all]
 ----
 
 <1> The organization id property that represents the selected organization in the parent page
@@ -264,7 +264,7 @@ Create this missing link by adding method `execCreateChildPage` to the organizat
 [source,java]
 .Add the organization node page as a child page to the organization page.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/organization/OrganizationTablePage.java[tags=childPage]
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/organization/OrganizationTablePage.java[tags=childPage]
 ----
 
 The difference between Scout table pages and node pages is also reflected in the different signatures of `AbstractPageWithTable.execCreateChildPage` and `AbstractPageWithNodes.execCreateChildPages`.
@@ -284,4 +284,4 @@ As shown in <<img-contacts_tutorial_result_step_7>> the organization specific pe
 
 [[img-contacts_tutorial_result_step_7]]
 .The linked person page only shows persons related to the parent organization page.
-image::{imgsdir}/contacts_tutorial_result_step_7.png[]
+image::common:contacts_tutorial_result_step_7.png[]

@@ -1,5 +1,5 @@
 ifndef::finaldoc[]
-include::../_initDoc.adoc[]
+include::common:partial$_initDoc.adoc[]
 endif::finaldoc[]
 
 :howtodir: ../howtosJS
@@ -8,6 +8,6 @@ endif::finaldoc[]
 
 This chapter provides various small technical guides to very specific Scout JS subjects.
 
-include::{howtodir}/FlipCard-HowTo.adoc[]
+include::howtosJS:partial$FlipCard-HowTo.adoc[]
 
-include::{howtodir}/Chart-HowTo.adoc[]
+include::howtosJS:partial$Chart-HowTo.adoc[]

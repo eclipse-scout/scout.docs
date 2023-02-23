@@ -36,4 +36,4 @@ ifndef::mdledir[:mdledir: .]
 :techdocjs: https://eclipsescout.github.io/{doc-short-version}/technical-guide-js.html
 
 
-include::_initCommon.adoc[]
+include::partial$_initCommon.adoc[]

@@ -1,7 +1,7 @@
 === Scout Wizards
 :doctype: article
 :revnumber: {project-version}
-include::_initDoc.adoc[]
+include::partial$_initDoc.adoc[]
 
 //fallback for safe mode == secure:
 ifndef::imgsdir[:imgsdir: ../../../../imgs]
@@ -16,7 +16,7 @@ In the first wizard step type "_Scout_" into the *Wizards* field as shown in <<i
 
 [[img-sdk_wizard_new]]
 .Selecting Scout Wizards in the Eclipse wizard dialog
-image::{imgsdir}/sdk_new_wizard.png[]
+image::common:sdk_new_wizard.png[]
 
 ==== New Project Wizard
 
@@ -43,4 +43,4 @@ Adding additional translated languages with the <<sdk_wizard_language.adoc#, Add
 Go back to the <<sdk.adoc#scout-tooling, Scout Tooling>>.
 
 :_footer-link-path: build/eclipse_help/src/docs/{docname}.adoc
-include::../../../common/src/docs/_footer-text.adoc[]
+include::common:partial$_footer-text.adoc[]

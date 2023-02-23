@@ -1,6 +1,6 @@
 = Eclipse Scout JS: Technical Guide
 // comment prevents empty line after formatting, needed for toc
-include::../../../common/src/docs/_header.adoc[]
+include::common:partial$_header.adoc[]
 
 :sectnums!:
 
@@ -13,9 +13,9 @@ If you are looking for the Java part please see the https://eclipsescout.github.
 If you don't know the difference between Scout JS and Scout Classic, please read the https://eclipsescout.github.io/{scout-version}/getstarted.html[Get Started Guide] first.
 
 :sectnums:
-include::{mdledir}/technicalGuideJS/ScoutJS.adoc[]
-include::{mdledir}/technicalGuideJS/BrowserSupport.adoc[]
-include::{mdledir}/technicalGuideJS/HowTos.adoc[]
+include::technicalGuideJS:partial$ScoutJS.adoc[]
+include::technicalGuideJS:partial$BrowserSupport.adoc[]
+include::technicalGuideJS:partial$HowTos.adoc[]
 
 :_footer-link-path: build/technical_guide_js/src/docs/{docname}.adoc
-include::../../../common/src/docs/_footer.adoc[]
+include::common:partial$_footer.adoc[]

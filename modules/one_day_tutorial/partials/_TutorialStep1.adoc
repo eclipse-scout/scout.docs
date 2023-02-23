@@ -1,4 +1,4 @@
-include::../../../common/src/docs/_initSubDoc.adoc[]
+include::common:partial$_initSubDoc.adoc[]
 
 //-----------------------------------------------------------------------------
 //WARNING: this file is a text module, it needs to be embedded in a master asciidoctor document.
@@ -27,20 +27,20 @@ For the wizard fields you may use the values below and as shown in <<img-sdk_new
 
 [[img-sdk_new_project_tutorial_Intellij]]
 .The creation of the initial "Contacts" application in IntelliJ.
-image::{imgsdir}/sdk_new_project_tutorial_Intellij.png[]
+image::common:sdk_new_project_tutorial_Intellij.png[]
 [[img-sdk_new_project_tutorial]]
 .The creation of the initial "Contacts" application in Eclipse.
-image::{imgsdir}/sdk_new_project_tutorial.png[]
+image::common:sdk_new_project_tutorial.png[]
 
 To create this initial application click on btn:[Next/Finish].
 The project wizard then creates a number of Maven modules as shown in <<img-contacts_package_explorer_Intellij>> (IntelliJ) and <<img-contacts_package_explorer>> (Eclipse).
 
 [[img-contacts_package_explorer_Intellij]]
 .The package explorer with the initial Maven modules created for the "Contacts" application in IntelliJ.
-image::{imgsdir}/app_contacts_package_explorer_initial_Intellij.png[]
+image::common:app_contacts_package_explorer_initial_Intellij.png[]
 [[img-contacts_package_explorer]]
 .The package explorer with the initial Maven modules created for the "Contacts" application in Eclipse.
-image::{imgsdir}/app_contacts_package_explorer_initial.png[]
+image::common:app_contacts_package_explorer_initial.png[]
 
 [[sec-contacts_remove_stuff]]
 === Removing unnecessary Components
@@ -88,10 +88,10 @@ In the result list, we select the desired class and click the btn:[OK] button to
 
 [[img-eclipse_open_type_Intellij]]
 .Use the Open Type dialog to quickly find java types in IntelliJ.
-image::{imgsdir}/eclipse_open_type_Intellij.png[]
+image::common:eclipse_open_type_Intellij.png[]
 [[img-eclipse_open_type]]
 .Use the Open Type dialog to quickly find java types in Eclipse.
-image::{imgsdir}/eclipse_open_type.png[]
+image::common:eclipse_open_type.png[]
 
 We start with the package rename.
 To rename the package `org.eclipse.scout.contacts.client.work` to `org.eclipse.scout.contacts.client.contact` click into the word "work" of the package name and hit kbd:[Shift+F6] (Eclipse: kbd:[Alt+Shift+R]).
@@ -101,10 +101,10 @@ This warning can be acknowledged by clicking btn:[Continue].
 
 [[img-sdk_rename_package_Intellij]]
 .Use the IntelliJ Rename Package dialog to rename a Java package in IntelliJ.
-image::{imgsdir}/sdk_rename_package_Intellij.png[]
+image::common:sdk_rename_package_Intellij.png[]
 [[img-sdk_rename_package]]
 .Use the Eclipse Rename Package dialog to rename a Java package in Eclipse.
-image::{imgsdir}/sdk_rename_package.png[]
+image::common:sdk_rename_package.png[]
 
 In next step we rename class `WorkOutline` to `ContactOutline`.
 In the Java editor we can rename the class by clicking into the class identifier `WorkOutline` and hitting kbd:[Shift+F6] (Eclipse: kbd:[Alt+Shift+R]).
@@ -122,13 +122,13 @@ Next, we change the outline title in method `getConfiguredTitle`.
 
 [[img-sdk_new_text_entry_contact_wizard_IntelliJ]]
 .Use the Scout new entry wizard to add translated texts to the application in IntelliJ.
-image::{imgsdir}/sdk_new_text_entry_contact_wizard_IntelliJ.png[]
+image::common:sdk_new_text_entry_contact_wizard_IntelliJ.png[]
 [[img-sdk_new_text_entry_contact]]
 .Use the Scout content assist to add new translations.
-image::{imgsdir}/sdk_new_text_entry_contact.png[]
+image::common:sdk_new_text_entry_contact.png[]
 [[img-sdk_new_text_entry_contact_wizard]]
 .Use the Scout new entry wizard to add translated texts to the application in Eclipse.
-image::{imgsdir}/sdk_new_text_entry_contact_wizard.png[]
+image::common:sdk_new_text_entry_contact_wizard.png[]
 
 As the last modification we change the return value of method `getConfiguredIconId` to value `Icons.Folder` and end with the code shown in <<lst-contacts_outline>>.
 
@@ -139,7 +139,7 @@ In Eclipse, you can use kbd:[Ctrl+Shift+O] to add the imports manually.
 [source,java]
 .Initial implementation of class ContactOutline.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/contact/ContactOutline.java[tags=OutlineInit]
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/contact/ContactOutline.java[tags=OutlineInit]
 ----
 
 [[sec-contacts_change_desktop]]
@@ -158,7 +158,7 @@ In the source code of method `getConfiguredOutlines` remove `SettingsOutline.cla
 [source,java]
 .Method getConfiguredOutlines defines the outlines associated with the desktop of the application.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/Desktop.java[tags=getConfiguredOutlines]
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/Desktop.java[tags=getConfiguredOutlines]
 ----
 
 Then, perform the following changes in class `Desktop`
@@ -183,7 +183,7 @@ At the end of these changes the inner class structure of class Desktop will look
 [source,java]
 .Structure of class Desktop with outline buttons and top level menus.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/Desktop.java[tags=DesktopInit]
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/Desktop.java[tags=DesktopInit]
 ----
 
 <1> In your implementation `OptionsMenu` should extend `AbstractMenu` and the method `getConfiguredForm` should be deleted.
@@ -202,7 +202,7 @@ The user interface of the application will now look as shown in <<img-contacts_t
 
 [[img-contacts_tutorial_result_step_1]]
 .The "Contacts" application at the end of tutorial step 1.
-image::{imgsdir}/contacts_tutorial_result_step_1.png[]
+image::common:contacts_tutorial_result_step_1.png[]
 
 From the coding perspective we now have all necessary maven Modules for the "Contacts" application including Java package and class names to match with the complete Scout "Contacts" demo application.
 This point is important as it simplifies the comparison of intermediate stages of the tutorial application with the Scout demo application.

@@ -1,7 +1,7 @@
 === NLS Editor
 :doctype: article
 :revnumber: {project-version}
-include::_initDoc.adoc[]
+include::partial$_initDoc.adoc[]
 
 //fallback for safe mode == secure:
 ifndef::imgsdir[:imgsdir: ../../../../imgs]
@@ -19,10 +19,10 @@ Select menu:Open With[NLS Editor] in the context menu
 
 ==== The NLS Editor
 
-include::{mdledir}/sdk/SdkEditorNls.adoc[]
+include::sdk:partial$SdkEditorNls.adoc[]
 
 '''
 Go back to the <<sdk.adoc#scout-tooling, Scout Tooling>>.
 
 :_footer-link-path: build/eclipse_help/src/docs/{docname}.adoc
-include::../../../common/src/docs/_footer-text.adoc[]
+include::common:partial$_footer-text.adoc[]

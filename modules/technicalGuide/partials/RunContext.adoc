@@ -1,6 +1,6 @@
 
 ifndef::finaldoc[]
-include::../_initDoc.adoc[]
+include::common:partial$_initDoc.adoc[]
 endif::finaldoc[]
 
 //fallback for safe mode == secure:
@@ -28,7 +28,7 @@ The following <<lst-RunContexts.empty>> illustrates the creation of an empty `Ru
 [source,java,indent=0]
 .Creation of an empty `RunContext`
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/RunContextSnippet.java[tags=RunContexts.empty]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/RunContextSnippet.java[tags=RunContexts.empty]
 ----
 <1> create the `Subject` to do some work on behalf
 <2> Create and initialize the `RunContext`
@@ -39,7 +39,7 @@ The following <<lst-RunContexts.copyCurrent>> illustrates the creation of a 'sna
 [source,java,indent=0]
 .Create a copy of the current calling `RunContext`
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/RunContextSnippet.java[tags=RunContexts.copyCurrent]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/RunContextSnippet.java[tags=RunContexts.copyCurrent]
 ----
 
 An important difference is related to the `RunMonitor`. By using the `copyCurrent()` factory method, the context's monitor is additionally registered as child monitor of the monitor of the current calling context. That way, a cancellation request to the calling context is propagated down to this context as well. Of course, that behavior can be overwritten by providing another monitor yourself.

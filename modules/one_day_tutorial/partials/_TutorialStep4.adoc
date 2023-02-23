@@ -1,4 +1,4 @@
-include::../../../common/src/docs/_initSubDoc.adoc[]
+include::common:partial$_initSubDoc.adoc[]
 
 //-----------------------------------------------------------------------------
 //WARNING: this file is a text module, it needs to be embedded in a master asciidoctor document.
@@ -24,7 +24,7 @@ We start with the sketch of the form layout as shown in <<img-contacts_tutorial_
 
 [[img-contacts_tutorial_person_form_1]]
 .A sketch of the target layout for the person form.
-image::{imgsdir}/contacts_person_form.png[]
+image::common:contacts_person_form.png[]
 
 The upper half of the form shows a picture of the person and contains some primary attributes such as first name and the gender of the person.
 
@@ -36,7 +36,7 @@ Scout containers have two columns (indicated in red) per default and as many row
 
 [[img-contacts_person_form_grid]]
 .Logical columns and rows of the Scout form layout. Scout containers have two columns per default.
-image::{imgsdir}/contacts_person_form_grid.png[]
+image::common:contacts_person_form_grid.png[]
 
 Individual form fields consist of a label part and a field part and occupy a single cell in the logical grid.
 Examples for fields using the default configuration are the first name field or the email field.
@@ -49,7 +49,7 @@ Containers provide a lot of flexibility as these widgets can be nested hierarchi
 
 [[img-contacts_person_form_groups]]
 .The hierarchical organization of the form including Scout group boxes, tab boxes and a sequence box.
-image::{imgsdir}/contacts_person_form_groups.png[]
+image::common:contacts_person_form_groups.png[]
 
 The sketch above details the organization of the container components to match the desired layout for the person form.
 The different container widgets can all be used with their default settings except for the address box.
@@ -84,13 +84,13 @@ Start the form creation with the Scout new form wizard following the steps liste
 
 [[img-contacts_create_new_form_Intellij]]
 .Create a New Scout Form in IntelliJ.
-image::{imgsdir}/contacts_create_new_form_Intellij.png[]
+image::common:contacts_create_new_form_Intellij.png[]
 [[img-contacts_create_new_person_form_Intellij]]
 .Use the [wizard]_New Scout Form_ to create the person form in IntelliJ.
-image::{imgsdir}/contacts_create_new_person_form_Intellij.png[]
+image::common:contacts_create_new_person_form_Intellij.png[]
 [[img-contacts_create_new_person_form]]
 .Use the [wizard]_New Scout Form_ to create the person form in Eclipse.
-image::{imgsdir}/contacts_create_new_person_form.png[]
+image::common:contacts_create_new_person_form.png[]
 
 Now open the newly created class `PersonForm` in the Java editor and perform the changes listed below as shown in <<lst-contacts_form_init>>.
 
@@ -103,7 +103,7 @@ Now open the newly created class `PersonForm` in the Java editor and perform the
 [source,java]
 .Add getConfiguredDisplayHint and the methods related to the person's primary key.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonForm.java[tags=init]
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonForm.java[tags=init]
 ----
 
 <1> Links the form with its form data class `PersonFormData`.
@@ -122,7 +122,7 @@ Inside of class `DetailsBox` create the individual tab containers "Contact Info"
 [source,java]
 .The layouting structure of the person form using Scout container widgets.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonForm.java[tags=structure;layout]
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonForm.java[tags=structure;layout]
 ----
 
 <1> Every Scout form has a class `MainBox`. It contains all visible UI components.
@@ -140,7 +140,7 @@ Open class `PersonTablePage` in the Java editor and create the context menus "Ne
 [source,java]
 .The page context menus to open the person form.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonTablePage.java[tags=structure;menu]
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonTablePage.java[tags=structure;menu]
 ----
 
 <1> This action gets executed when the user presses kbd:[Enter] on a table row or double clicks on a table row.
@@ -156,7 +156,7 @@ The final implementation for the "Create new person" menu is provided in <<lst-c
 [source,java]
 .The "Create new person" menu on the desktop.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/Desktop.java[tags=quickAccessMenu]
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/Desktop.java[tags=quickAccessMenu]
 ----
 
 We have now created the initial implementation of the person form including context menus to open the form from the person page and the "Quick Access" top level menu of the "Contacts" application.
@@ -166,7 +166,7 @@ A screenshot of the current state is shown in <<img-contacts_tutorial_result_ste
 
 [[img-contacts_tutorial_result_step_4_intermediate]]
 .The initial person form and the top level menu "Create new person".
-image::{imgsdir}/contacts_tutorial_result_step_4_intermediate.png[]
+image::common:contacts_tutorial_result_step_4_intermediate.png[]
 
 This initial implementation of the person form is also ready to add the individual form fields into the container boxes.
 For the fields of the person form we can directly extend the abstract form field classes offered by the Scout framework.
@@ -199,13 +199,13 @@ Follow the steps described below to create the gender code type.
 
 [[img-contacts_tutorial_create_new_gender_codetype_Intellij]]
 .Create the gender code in IntelliJ.
-image::{imgsdir}/contacts_tutorial_create_new_gender_codetype_Intellij.png[]
+image::common:contacts_tutorial_create_new_gender_codetype_Intellij.png[]
 [[img-contacts_tutorial_new_gender_codetype_Intellij]]
 .Create the gender code using the Scout new code wizard in IntelliJ.
-image::{imgsdir}/contacts_tutorial_new_gender_codetype_Intellij.png[]
+image::common:contacts_tutorial_new_gender_codetype_Intellij.png[]
 [[img-contacts_tutorial_new_gender_codetype]]
 .Create the gender code using the Scout new code wizard in Eclipse.
-image::{imgsdir}/contacts_tutorial_new_gender_codetype.png[]
+image::common:contacts_tutorial_new_gender_codetype.png[]
 
 Then, open the newly created class `GenderCodeType` in the Java editor and set the `ID` constant to "Gender".
 The created class will then look like <<lst-contacts_gender_code>> except for the missing inner code classes.
@@ -215,7 +215,7 @@ We will add these inner codes as the next step.
 [source,java]
 .The Scout code type to represent the gender of a person. This code type will be used for the gender field.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.shared/src/main/java/org/eclipse/scout/contacts/shared/person/GenderCodeType.java[tags=all]
+include::common:example$contacts/org.eclipse.scout.contacts.shared/src/main/java/org/eclipse/scout/contacts/shared/person/GenderCodeType.java[tags=all]
 ----
 
 To add an inner class `MaleCode` code to the gender code type perform the steps below.
@@ -246,7 +246,7 @@ As the first field we add the field that will show the picture of the person to 
 [source,java]
 .The picture field for the person form.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonForm.java[tags=pictureField]
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonForm.java[tags=pictureField]
 ----
 
 <1> Sets the field invisible. An invisible field does not occupy space in the user interface.
@@ -270,7 +270,7 @@ The remaining fields for the general box can then be added using the Scout conte
 [source,java]
 .The other fields in the general box.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonForm.java[tags=nameFields;dateOfBirthField;genderField]
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonForm.java[tags=nameFields;dateOfBirthField;genderField]
 ----
 
 <1> The codes defined in `GenderCodeType` will be used to determine the actual radio buttons to add to the gender field.
@@ -298,7 +298,7 @@ This field will not need a label, span 4 rows of the logical grid and hold a mul
 [source,java]
 .The notes tab box with its multi line text field.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonForm.java[tags=notes]
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonForm.java[tags=notes]
 ----
 
 Next is the implementation of the address box in the "Contact Info" tab.
@@ -316,7 +316,7 @@ To further optimize screen real estate we also switch to on-field labels for the
 [source,java]
 .The content of the address box.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonForm.java[tags=addressBox]
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonForm.java[tags=addressBox]
 ----
 
 <1> Makes the address box to occupy 1 column and 3 rows.
@@ -348,7 +348,7 @@ You might not have enough permissions yet to access the person form. For simplic
 [source,java]
 .The content of the class `ServiceAccessControlService`.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/security/ServerAccessControlService.java[tags=access_control]
+include::common:example$contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/security/ServerAccessControlService.java[tags=access_control]
 ----
 
 The application is now in a state where we can verify the layout of the person form and check the handling of the different input fields.
@@ -378,7 +378,7 @@ Adapt the default implementation of the form handlers according to <<lst-contact
 [source,java]
 .The new handler and modify handler for the person form.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonForm.java[tags=structure;handler]
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonForm.java[tags=structure;handler]
 ----
 
 <1> Obtains a reference to the person service located on the Scout backend application.
@@ -400,7 +400,7 @@ Modify the person service methods according to <<lst-contacts_form_service>>.
 [source,java]
 .The PersonService methods to load, create and update person data.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/person/PersonService.java[tags=all]
+include::common:example$contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/person/PersonService.java[tags=all]
 ----
 
 <1> The SQL insert statement adds a new person entry in the database. Only the primary key is used to create this entry.
@@ -424,4 +424,4 @@ You may want to define these texts using the Scout content assist for defining n
 
 [[img-contacts_tutorial_result_step_4]]
 .The "Contacts" application with the person form at the end of tutorial step 4.
-image::{imgsdir}/contacts_tutorial_result_step_4.png[]
+image::common:contacts_tutorial_result_step_4.png[]

@@ -1,5 +1,5 @@
 = Scout SDK Testing Procedure
-include::../../../common/src/docs/_header.adoc[]
+include::common:partial$_header.adoc[]
 
 After installing the Eclipse Scout package you are ready for testing the SDK version
 
@@ -63,4 +63,4 @@ image::scout_sdk_super_class_proposals.png[]
 
 
 :_footer-link-path: build/sdk_tests/src/docs/{docname}.adoc
-include::../../../common/src/docs/_footer.adoc[]
+include::common:partial$_footer.adoc[]

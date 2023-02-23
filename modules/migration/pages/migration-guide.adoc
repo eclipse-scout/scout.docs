@@ -1,9 +1,9 @@
 = Eclipse Scout Migration Guide
 // comment prevents empty line after formatting, needed for toc
-include::../../../common/src/docs/_header.adoc[]
+include::common:partial$_header.adoc[]
 ifndef::mgdir[:mgdir: {mdledir}/migration]
 
-include::{mdledir}/migration/MigrationGuide.adoc[]
+include::partial$MigrationGuide.adoc[]
 
 :_footer-link-path: build/migration/src/docs/{docname}.adoc
-include::../../../common/src/docs/_footer.adoc[]
+include::common:partial$_footer.adoc[]

@@ -1,6 +1,6 @@
 
 ifndef::finaldoc[]
-include::../_initDoc.adoc[]
+include::common:partial$_initDoc.adoc[]
 endif::finaldoc[]
 
 //fallback for safe mode == secure:
@@ -22,7 +22,7 @@ NOTE: Tabs are only visible if the form does have a title, subtitle or an image.
 
 [[img-benchLayout-overview]]
 .Desktop Bench overview
-image::{imgsdir}/BenchLayout_overview.png[]
+image::common:BenchLayout_overview.png[]
 
 The east, center and west columns are separated with splitters which can be moved according to the layout data properties. Each column is split into a north, center and south part.
 Within a column the north, center and south parts can not differ in their width.
@@ -32,7 +32,7 @@ The modifications (splitter movements) are cached  when a cache key (`BenchLayou
 An example of a bench layout data configuration with a fixed north (N) view stack and an south (S) view stack with an minimal size. See `org.eclipse.scout.rt.client.ui.desktop.bench.layout.FlexboxLayoutData` API for the documentation of the properties.
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/BenchLayoutSnippet.java[tags=BenchLayoutSample]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/BenchLayoutSnippet.java[tags=BenchLayoutSample]
 ----
 <1> set the `BenchLayoutData` to the desktop.
 <2> set a cache key to store the layout modifications (dragging splitters) to the session store. Aware the settings are stored to the browsers session store they are not transfered over different browsers nor systems.
@@ -54,7 +54,7 @@ NOTE: Some of these dimensions are already used internally. Refer to the impleme
 
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/ClientModelSnippet.java[tags=DimensionSamples]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/ClientModelSnippet.java[tags=DimensionSamples]
 ----
 <1> Disables the menu using the internal default dimension
 <2> Disables the menu using the internal granted dimension

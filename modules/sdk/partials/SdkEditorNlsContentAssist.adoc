@@ -1,5 +1,5 @@
 ifndef::finaldoc[]
-include::../_initDoc.adoc[]
+include::common:partial$_initDoc.adoc[]
 endif::finaldoc[]
 
 //fallback for safe mode == secure:
@@ -18,7 +18,7 @@ When the the current edit position is inside the String parameter of the `TEXTS.
 
 [[img-java_proposals_texts]]
 .Proposals corresponding to NLS Support.
-image::{imgsdir}/java_proposals_texts.png[]
+image::common:java_proposals_texts.png[]
 
 Selecting one of proposal entries (like "DateOfBirth" in the example) shows the available translations on the right side.
 To select a specific proposal entry you may double click on the entry or hit the kbd:[Enter] key.

@@ -1,7 +1,7 @@
 === Import the Scout Demo Applications
 :doctype: article
 :revnumber: {project-version}
-include::_initDoc.adoc[]
+include::partial$_initDoc.adoc[]
 
 //fallback for safe mode == secure:
 ifndef::imgsdir[:imgsdir: ../../../../imgs]
@@ -25,19 +25,19 @@ Next, under folder [folder]_Oomph_ select the node [folder]_Projects into Worksp
 
 [[img-oomph_existing_project]]
 .The Import Wizard in Eclipse.
-image::{imgsdir}/oomph_existing_project.png[]
+image::common:oomph_existing_project.png[]
 
 Now select Scout Demo App, check in the table below that 'Stream' shows the desired Scout version and click btn:[Next].
 
 [[img-oomph_existing_project1]]
 .Select Scout Demo App
-image::{imgsdir}/oomph_existing_projects1.png[]
+image::common:oomph_existing_projects1.png[]
 
 On the next wizard page, select the _Show all variables_ check box in the bottom left corner.
 
 [[img-oomph_existing_variables]]
 ."Variables" Step of the Importer.
-image::{imgsdir}/oomph_existing_variables.png[]
+image::common:oomph_existing_variables.png[]
 
 Before you proceed make sure that all shown variables are set appropriately for your use case.
 
@@ -57,11 +57,11 @@ If the dialog does not automatically appear, click on the small icon in the stat
 
 [[img-oomph_restart]]
 .Restart of the IDE after installation.
-image::{imgsdir}/oomph_restart.png[]
+image::common:oomph_restart.png[]
 
 [[img-oomph_status]]
 .Status icon
-image::{imgsdir}/oomph_status.png[]
+image::common:oomph_status.png[]
 
 To complete the installation click btn:[Finish].
 If your IDE needs to be restarted, select the same workspace in the [wizard]_Eclipse Launcher_ dialog.
@@ -80,13 +80,13 @@ Demo Docs:: The scout documentation and the project containing most of the code 
 
 [[img-oomph_workingsets]]
 .Projects in the workspace after the "Scout Demo App" setup.
-image::{imgsdir}/oomph_workingsets.png[]
+image::common:oomph_workingsets.png[]
 
 If you do not see the workingsets, you might need to select "menu:Top Level Elements[Working Sets]" from the Menu as displayed in <<img-workingsets_top_level>>
 
 [[img-workingsets_top_level]]
 .Select "Working Sets" as "Top Level Elements" in the "Package Explorer".
-image::{imgsdir}/workingsets_top_level.png[]
+image::common:workingsets_top_level.png[]
 
 ==== Run the Contacts Demo Application
 
@@ -101,13 +101,13 @@ Now select _[contacts] all_ (Windows or Unix variant) to run the Contacts applic
 
 [[img-oomph_run_contacts_all]]
 .Start the Contacts application.
-image::{imgsdir}/run_contacts_all_dev.png[]
+image::common:run_contacts_all_dev.png[]
 
 Once the startup sequence of the Contacts application has completed the console view in your Eclipse IDE should look like <<img-oomph_contacts_console>>.
 
 [[img-oomph_contacts_console]]
 .Console view after starting the Contacts demo.
-image::{imgsdir}/oomph_contacts_console.png[]
+image::common:oomph_contacts_console.png[]
 
 ===== Use the Contacts Demo in a Browser
 
@@ -116,7 +116,7 @@ To get the screen shown in <<img-contacts_persons_alice>> first click on the [fo
 
 [[img-contacts_persons_alice]]
 .The Contacts application.
-image::{imgsdir}/contacts_persons_alice.png[]
+image::common:contacts_persons_alice.png[]
 
 ==== What's Next?
 
@@ -131,7 +131,7 @@ The list on the left side of the application containing the nodes [folder]_Perso
 [source,java]
 .ContactOutline implementation.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/contact/ContactOutline.java[tags=Outline]
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/contact/ContactOutline.java[tags=Outline]
 ----
 
 If you have clicked on the [folder]_Persons_ node a page with all available persons is shown.
@@ -141,4 +141,4 @@ This is the end of the <<tutorial.adoc#getting-started, getting started>> guide.
 
 '''
 :_footer-link-path: build/eclipse_help/src/docs/{docname}.adoc
-include::../../../common/src/docs/_footer-text.adoc[]
+include::common:partial$_footer-text.adoc[]

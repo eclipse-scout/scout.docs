@@ -1,5 +1,5 @@
 ifndef::finaldoc[]
-include::../_initDoc.adoc[]
+include::common:partial$_initDoc.adoc[]
 endif::finaldoc[]
 
 //fallback for safe mode == secure:
@@ -140,9 +140,9 @@ and are therefore less likely to forget output encoding and introduce a security
 
 Example: In the following label field, the HTML <b> tag is encoded as `\&lt;b\&gt;bold text\&lt;/b\&gt;`:
 
-image::{imgsdir}/encodedField.png[]
+image::common:encodedField.png[]
 
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/LabelFieldEncodingForm.java[tags=SecureOutput.encodingByDefault]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/LabelFieldEncodingForm.java[tags=SecureOutput.encodingByDefault]
 
 ==== Html Enabled
 
@@ -158,7 +158,7 @@ Html input should only partially be encoded or not at all.
 
 To disable the encoding of the whole value, the property `HtmlEnabled` can be used:
 
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/LabelFieldEncodingForm.java[tags=SecureOutput.noEncodingField]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/LabelFieldEncodingForm.java[tags=SecureOutput.noEncodingField]
 
 There are several ways to implement the use cases above. Some typical implementations are described in the following sections.
 
@@ -209,14 +209,14 @@ Let us assume you require a permission to allow a user to access companies.
 
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/AccessSnippet.java[tags=ReadCompanyPermission]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/AccessSnippet.java[tags=ReadCompanyPermission]
 ----
 
 To check access one can use `ACCESS`.
 
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/AccessSnippet.java[tags=ACCESS_A]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/AccessSnippet.java[tags=ACCESS_A]
 ----
 <1> Checks permission against granted permissions of current user.
 <2> Checks permission and if this check fails, throw an `AccessForbiddenException` with a default message.
@@ -225,14 +225,14 @@ We can defined a default access check failed message for a permission.
 
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/AccessSnippet.java[tags=CreateCompanyPermission]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/AccessSnippet.java[tags=CreateCompanyPermission]
 ----
 
 `ACCESS` allows to check multiple permissions at once.
 
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/AccessSnippet.java[tags=ACCESS_B]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/AccessSnippet.java[tags=ACCESS_B]
 ----
 
 We have seen some simple permission checks.
@@ -242,19 +242,19 @@ This is the permission level which is granted for those users.
 
 [source,java]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/ScoutdocPermissionLevels.java[tags=ScoutdocPermissionLevels]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/ScoutdocPermissionLevels.java[tags=ScoutdocPermissionLevels]
 ----
 
 In order to check access for this new level we have to override `AbstractPermission#evalPermission`.
 
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/AccessSnippet.java[tags=UpdateCompanyPermission]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/AccessSnippet.java[tags=UpdateCompanyPermission]
 ----
 
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/AccessSnippet.java[tags=ACCESS_C]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/AccessSnippet.java[tags=ACCESS_C]
 ----
 
 If such a service call would be expensive, one may cache the result of such a permission check.

@@ -1,5 +1,5 @@
 ifndef::finaldoc[]
-include::../_initDoc.adoc[]
+include::common:partial$_initDoc.adoc[]
 endif::finaldoc[]
 
 //fallback for safe mode == secure:
@@ -22,7 +22,7 @@ This leads to the initial dialog of the _New Scout Project_ wizard as shown in <
 
 [[img-sdk_wizard_project]]
 .The new Project Wizard
-image::{imgsdir}/sdk_new_project.png[]
+image::common:sdk_new_project.png[]
 
 A detailed description of the indiviudal wizard fields of <<img-sdk_wizard_project>> is provided in the next section.
 

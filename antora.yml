@@ -6,7 +6,13 @@ asciidoc:
     source-language: asciidoc@
     experimental: true
     sectanchors: true
-
+# TODO: Get rid of these attributes:
+    git-repository: bsi-software/org.eclipse.scout.docs
+    git-branch: releases/22.0
+    project-version: 22.0
+    scout-short-version: 22.0
+    doc-short-version: 22.0
+    doc-short-version-underlined: 22_0
 nav:
 - modules/getstarted/nav.adoc
 - modules/helloscout/nav.adoc

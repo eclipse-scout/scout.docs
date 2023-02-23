@@ -1,4 +1,4 @@
-include::../../../common/src/docs/_initSubDoc.adoc[]
+include::common:partial$_initSubDoc.adoc[]
 
 //-----------------------------------------------------------------------------
 //WARNING: this file is a text module, it needs to be embedded in a master asciidoctor document.
@@ -10,7 +10,7 @@ As a result, the descriptions of this section can be kept on a much higher level
 
 [[img-contacts_organization_form]]
 .The sketch of the organization form layout.
-image::{imgsdir}/contacts_organization_form.png[]
+image::common:contacts_organization_form.png[]
 
 Considering the layout sketch for the organization form shown in <<img-contacts_organization_form>> we can already see how we can reuse the following fields / templates.
 
@@ -33,7 +33,7 @@ After creating the initial form class using Scout's new form wizard the form lay
 [source,java]
 .The layout implementation of the organization form
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/organization/OrganizationForm.java[tags=layout]
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/organization/OrganizationForm.java[tags=layout]
 ----
 
 <1> We reuse the picture template field to display the company logo.
@@ -54,7 +54,7 @@ The technical setup exactly follows the implementation of the person service.
 [source,java]
 .The OrganizationService methods to load, create and update organization data.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/organization/OrganizationService.java[tags=all]
+include::common:example$contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/organization/OrganizationService.java[tags=all]
 ----
 
 Method `prepareCreate` is not needed for the creation of a new organization and we can remove it from `OrganizationService` and `IOrganizationService`.
@@ -73,4 +73,4 @@ As shown in <<img-contacts_tutorial_result_step_6>> company data can now be view
 
 [[img-contacts_tutorial_result_step_6]]
 .The "Contacts" application with the newly created organization form.
-image::{imgsdir}/contacts_tutorial_result_step_6.png[]
+image::common:contacts_tutorial_result_step_6.png[]

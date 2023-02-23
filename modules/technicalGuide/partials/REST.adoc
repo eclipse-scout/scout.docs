@@ -1,5 +1,5 @@
 ifndef::finaldoc[]
-include::../_initDoc.adoc[]
+include::common:partial$_initDoc.adoc[]
 endif::finaldoc[]
 
 //fallback for safe mode == secure:
@@ -67,7 +67,7 @@ The interface is annotated by `@Bean` allowing the Scout platform to load and re
 [source,java]
 .Example: REST resource
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/rest/ExampleResource.java[tags=class]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/rest/ExampleResource.java[tags=class]
 ----
 
 ==== REST Resource Registration ====
@@ -209,7 +209,7 @@ At least the REST resource's base URI must be specified:
 [source,java]
 .Example: REST resource client helper
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/rest/ExampleRestClientHelper.java[tags=class]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/rest/ExampleRestClientHelper.java[tags=class]
 ----
 <1> Declare base uri.
 <2> Custom exception transformer that is used as default strategy for all invocations prepared by this helper. (This is just for demonstration. Better extend
@@ -220,7 +220,7 @@ Based on the helper class, an example REST resource client may be implemented:
 [source,java]
 .Example: REST resource client
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/rest/ExampleResourceClient.java[tags=class]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/rest/ExampleResourceClient.java[tags=class]
 ----
 <1> HTTP GET example: Directly read response into an object. Exceptions are transformed transparently and the underlying resources are released (e.g. HTTP client).
 <2> HTTP POST example: Again, directly read the response into an object.
@@ -237,7 +237,7 @@ Properties can be set on the REST client during initialization (valid for all re
 [source,java]
 .Setting properties for REST Client for all requests
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/rest/ExampleRestClientHelper.java[tags=client-properties]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/rest/ExampleRestClientHelper.java[tags=client-properties]
 ----
 
 Some properties (see JavaDoc for details) may also be set on a request level:
@@ -245,7 +245,7 @@ Some properties (see JavaDoc for details) may also be set on a request level:
 [source,java]
 .Setting properties for REST Client for a single requests, e.g. setting `FOLLOW_REDIRECTS` to `false`
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/rest/ExampleResourceClient.java[tags=property-request]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/rest/ExampleResourceClient.java[tags=property-request]
 ----
 
 ==== REST Client HTTP Proxy ====
@@ -284,7 +284,7 @@ Scout does not impose nor provide a cancellation resource. It must be implemente
 [source,java]
 .Example: REST cancellation Resource
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/rest/CancellationResource.java[tags=class]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/rest/CancellationResource.java[tags=class]
 ----
 <1> Resolve the `userId` of the current user. This is optional and may depend on the current project.
 <2> Invoke the cancellation registry for the given `requestId` and `userId`.
@@ -292,7 +292,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 [source,java]
 .Example: REST cancellation Resource Client
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/rest/CancellationResourceClient.java[tags=class]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/rest/CancellationResourceClient.java[tags=class]
 ----
 
 ==== Install Cancellation Request Filter ====
@@ -302,7 +302,7 @@ To assign an ID to each request, an appropriate client request filter must be re
 [source,java]
 .Example: Register Client Request Cancellation Filter in REST Client Helper
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/rest/CancellationRestClientHelper.java[tags=class]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/rest/CancellationRestClientHelper.java[tags=class]
 ----
 <1> Register the `RestRequestCancellationClientRequestFilter` that assigns a UUID to every request, which is sent as an HTTP header named `X-ScoutRequestId`.
 <2> Binds the actual cancel-operation to the `cancel` Method (in this case the cancellation rest resource client from above).
@@ -319,7 +319,7 @@ currently active `RunMonitor`. Therefore, a cancel request would not cancel the 
 [source,java]
 .Example: Register client request cancellation filter in Rest Client Helper
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/rest/RestRequestCancellationServletFilter.java[tags=class]
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/rest/RestRequestCancellationServletFilter.java[tags=class]
 ----
 <1> Implement the same `userId` Lookup as in the `CancellationResource`.
 

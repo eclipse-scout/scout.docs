@@ -1,5 +1,5 @@
 ifndef::finaldoc[]
-include::../_initDoc.adoc[]
+include::common:partial$_initDoc.adoc[]
 endif::finaldoc[]
 
 //fallback for safe mode == secure:
@@ -32,7 +32,7 @@ Typing kbd:[Ctrl,Space] then provides access to the most frequently used Scout w
 
 [[img-java_proposals_groupbox]]
 .Proposals to create new form fields in a GroupBox
-image::{imgsdir}/java_proposals_groupbox2.png[]
+image::common:java_proposals_groupbox2.png[]
 
 When a template is selected, it is possible to customize it by navigating between the different Edit-Groups with the kbd:[Tab] Key (this works exactly like other templates in the Eclipse Editor).
 With this mechanism you can quickly define the class name, the parent class and other properties.
@@ -48,7 +48,7 @@ The Scout table itself may be located inside of a TableField as shown in <<img-j
 
 [[img-java_proposals_table]]
 .Proposals to create new columns in a Table
-image::{imgsdir}/java_proposals_table2.png[]
+image::common:java_proposals_table2.png[]
 
 Next to adding columns the content assist shown in <<img-java_proposals_table>> can also be used to add key stroke actions and menus to tables.
 
@@ -58,4 +58,4 @@ Adding new Codes to an existing CodeType is supported by the content assist as s
 
 [[img-java_proposals_code]]
 .Proposals to create new codes in a CodeType
-image::{imgsdir}/java_proposals_code.png[]
+image::common:java_proposals_code.png[]

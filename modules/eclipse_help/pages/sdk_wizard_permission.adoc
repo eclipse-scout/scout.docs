@@ -1,7 +1,7 @@
 ==== New Permission Wizard
 :doctype: article
 :revnumber: {project-version}
-include::_initDoc.adoc[]
+include::partial$_initDoc.adoc[]
 
 //fallback for safe mode == secure:
 ifndef::imgsdir[:imgsdir: ../../../../imgs]
@@ -14,7 +14,7 @@ To start the wizard use menu:File[New,Other...] or press kbd:[Ctrl,N] as describ
 
 [[img-sdk_wizard_permission]]
 .The new Permission wizard
-image::{imgsdir}/sdk_new_permission.png[]
+image::common:sdk_new_permission.png[]
 
 // TODO [7.0] mzi: replace *Name* field
 In the case of <<img-sdk_wizard_permission>> the package `org.eclipse.scout.apps.helloworld.shared.helloworld` has been selected in the Package Explorer.
@@ -42,4 +42,4 @@ In the <<img-sdk_wizard_permission>> example shown above the Scout SDK will crea
 Go back to the <<sdk_wizard.adoc#scout-wizards, Scout Wizards>>.
 
 :_footer-link-path: build/eclipse_help/src/docs/{docname}.adoc
-include::../../../common/src/docs/_footer-text.adoc[]
+include::common:partial$_footer-text.adoc[]

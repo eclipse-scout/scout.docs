@@ -1,5 +1,5 @@
 ifndef::finaldoc[]
-include::../_initDoc.adoc[]
+include::common:partial$_initDoc.adoc[]
 endif::finaldoc[]
 
 //fallback for safe mode == secure:
@@ -122,7 +122,7 @@ Now reload your browser and you should get the following result:
 
 .Result Minimal Form Field
 ****
-image::{imgsdir}/flipCard01.jpg[]
+image::common:flipCard01.jpg[]
 ****
 
 ==== Full Featured Flip Card Field
@@ -297,5 +297,5 @@ Finally, create a folder `img` in the WebContent folder (org.eclipse.scout.hello
 
 .Result Flip Card
 ****
-image::{imgsdir}/flipCard02.jpg[]
+image::common:flipCard02.jpg[]
 ****

@@ -221,14 +221,14 @@ But there is a trick: resolve multiple inspections at once using code analysis.
 .. Start the action `Run inspection by name` and select the inspection `Unresolved JavaScript variable`.
 +
 .Start Action
-image::{mgimgsdir}/unresolved-variable-inspection.png[]
+image::unresolved-variable-inspection.png[]
 .Select inspection
-image::{mgimgsdir}/unresolved-variable-inspection-1.png[]
+image::unresolved-variable-inspection-1.png[]
 .. Select `Uncommitted files` and disable all inspection options, because the inspection is not limited to missing imports.
 Click OK to run the analysis.
 +
 .Run Action
-image::{mgimgsdir}/unresolved-variable-inspection-2.png[]
+image::unresolved-variable-inspection-2.png[]
 
 .. In the result view, select one or more problems and click the button `Missing import statement`.
 +
@@ -238,9 +238,9 @@ Note: Even though we disabled all inspection options, there may still be problem
 If that is the case, resolving multiple problems is not possible unless you unselect these problems including theirs parent node.
 +
 .Resolve problems
-image::{mgimgsdir}/unresolved-variable-inspection-3.png[]
+image::unresolved-variable-inspection-3.png[]
 .Button in drop down
-image::{mgimgsdir}/unresolved-variable-inspection-3a.png[]
+image::unresolved-variable-inspection-3a.png[]
 
 .. Finally, you need to verify, whether the imports are correct.
 Please make sure all imports are present for every object type and the classes are imported from a module and not a single file.
