@@ -1,0 +1,152 @@
+ifndef::finaldoc[]
+include::common:partial$_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+:imgsdir: ../../imgs
+:codedir: ../../../code
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
+=== How to Use a REST Service
+This how to shows how to provide JAX-RS RESTful services and consume them from a Scout JS Single Page Application.
+
+The goal is to provide a `ServerState` service in the `org.eclipse.scout.hellojs.ui.html` module.
+
+==== Maven Dependencies
+Add the following dependencies to the `org.eclipse.scout.hellojs.ui.html` module.
+
+org.eclipse.scout.hellojs.ui.html/pom.xml
+[source,xml]
+----
+<dependencies>
+  ...
+  <!-- Scout RS -->
+  <dependency>
+    <groupId>org.eclipse.scout.rt</groupId>
+    <artifactId>org.eclipse.scout.rt.rest</artifactId>
+  </dependency>
+  <!-- JAX-RS Jersey -->
+  <dependency>
+    <groupId>org.glassfish.jersey.containers</groupId>
+    <artifactId>jersey-container-servlet-core</artifactId>
+  </dependency>
+  <dependency>
+    <groupId>org.glassfish.jersey.inject</groupId>
+    <artifactId>jersey-hk2</artifactId>
+  </dependency>
+  <dependency>
+    <groupId>org.glassfish.jersey.media</groupId>
+    <artifactId>jersey-media-json-jackson</artifactId>
+  </dependency>
+</dependencies>
+----
+
+==== REST Servlet
+
+Register the REST servlet in the web.xml of `org.eclipse.scout.hellojs.ui.html.app.dev` and `org.eclipse.scout.hellojs.ui.html.app.war`.
+
+- org.eclipse.scout.hellojs.ui.html.app.dev/src/main/webapp/WEB-INF/web.xml
+- org.eclipse.scout.hellojs.ui.html.app.war/src/main/webapp/WEB-INF/web.xml
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+  ...
+  <!-- JAX-RS Jersey Servlet -->
+  <servlet>
+    <servlet-name>apiServlet</servlet-name>
+    <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+    <init-param>
+      <param-name>javax.ws.rs.Application</param-name>
+      <param-value>org.eclipse.scout.rt.rest.RestApplication</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+
+  ...
+
+  <servlet-mapping>
+    <servlet-name>apiServlet</servlet-name>
+    <url-pattern>/api/*</url-pattern>
+  </servlet-mapping>
+
+  ...
+
+</web-app>
+----
+
+==== Provide a RESTful service
+Create the server state service in the `org.eclipse.scout.hellojs.ui.html` module. The service returns a OK status whenever it is accessible.
+
+org.eclipse.scout.hellojs.ui.html/src/main/java/org/eclipse/scout/hellojs/ui/html/helloworld/ServerStateService.java
+[source,java]
+----
+package org.eclipse.scout.hellojs.ui.html.helloworld;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+import org.eclipse.scout.rt.platform.status.IStatus;
+import org.eclipse.scout.rt.platform.status.Status;
+import org.eclipse.scout.rt.rest.IRestResource;
+
+/**
+ * <h3>{@link HelloWorldService}</h3>
+ */
+@Path("serverstatus") //<1>
+public class ServerStateService implements IRestResource {
+
+  @GET
+  @Produces(MediaType.APPLICATION_JSON)
+  public Status getStatus() {
+    return new Status(IStatus.OK);
+  }
+}
+----
+<1> The path under which the service will be provided. Note: the full path is `/api/serverstatus` since the apiServlet is mapped to `/api/*` in the web.xml.
+
+===== Test if the service is up an running
+Start the dev ui application `org.eclipse.scout.hellojs.ui.html.app.dev/[org.eclipse.scout.hellojs] dev ui.launch`.
+Connect to the url `http:localhost:[ui server port]/api/serverstatus` and ensure the service is up an running.
+
+==== Use the service from Scout JS
+
+[source,js]
+----
+var ajaxOptions = {
+  type: 'GET',
+  dataType: 'json',
+  contentType: 'application/json; charset=UTF-8',
+  cache: false,
+  url: 'api/serverstatus',
+  timeout: 0
+};
+
+this.ajaxCall = scout.create('AjaxCall', {
+  ajaxOptions: ajaxOptions,
+  name: 'server status request'
+}, {
+  ensureUniqueId: false
+});
+
+this.ajaxCall.retryIntervals = []; // <1>
+
+this.ajaxCall.call() // <2>
+  .done(function(result) {  // <3>
+    // TODO handle the success state. result.severity if filled with the severity code.
+  }.bind(this))
+  .fail(  // <4>
+    function() {
+      // TODO handle the failure case.
+    }.bind(this)
+  );
+----
+<1> The ajax call retries by default 4 times for our example it is not needed to retry at all.
+<2> The ajax call
+<3> Success callback
+<4> Error callback
+
+

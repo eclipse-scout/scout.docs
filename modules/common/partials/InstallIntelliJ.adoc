@@ -1,0 +1,30 @@
+ifndef::finaldoc[]
+include::partial$_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../imgs]
+ifndef::codedir[:codedir: ../../code]
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
+//-----------------------------------------------------------------------------
+//WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
+//-----------------------------------------------------------------------------
+
+If you have no IntelliJ yet, you can download it from the https://www.jetbrains.com/idea/download[JetBrains download site].
+We recommend selecting the Ultimate edition to have the JavaScript support included in the IDE.
+There is a 30-day trial if you have no licence.
+For this tutorial you can also use the free Community Edition, but it requires some extra steps indicated.
+
+Install or extract the package and start IntelliJ (see https://www.jetbrains.com/help/idea/run-for-the-first-time.html[Run IntelliJ IDEA for the first time] for instructions).
+Follow the instructions until the `Welcome to IntelliJ IDEA` screen is shown.
+
+On the left side switch to `Plugins`, search for `Eclipse Scout` and press the green `Install` button.
+In case a `Third-Party Plugins Privacy Notice` is shown, press `Accept`. The Scout plugin does not collect or process any personal data.
+Afterwards, the plugin is being downloaded from the https://plugins.jetbrains.com/plugin/13393-eclipse-scout[JetBrains Marketplace] and installed locally.
+As soon as this is completed, press the `Restart IDE` button.
+
+The same can also be achieved by navigating to `File | Settings | Plugins` in case you already have an existing IntelliJ project running.
+
+Congratulations! You have successfully set up IntelliJ IDEA for Scout development.

@@ -1,0 +1,1 @@
+* xref:getstarted.adoc[Get Started Guide]

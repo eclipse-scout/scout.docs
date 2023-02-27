@@ -1,0 +1,267 @@
+include::common:partial$_initSubDoc.adoc[]
+
+//-----------------------------------------------------------------------------
+//WARNING: this file is a text module, it needs to be embedded in a master asciidoctor document.
+//-----------------------------------------------------------------------------
+
+This tutorial step introduces two additional concepts that are used in most Scout applications.
+Form field validation and template fields.
+Form field validation helps to keep data quality high and template fields are used to increase the code quality of a Scout application.
+
+In addition to just retrieving and storing new data, a business application should also help the user to maintain the quality of the entered data.
+To validate user input, the Scout framework offers form field validation.
+Simple input validation is possible on the level of individual fields as shown in <<sec-contacts_field_validation>>.
+Scout also offers mechanisms to validate field values on the level of container fields or on the level of a form as shown in <<sec-contacts_field_validation_complex>>.
+In the text below we add a number of form field validations that implement this approach for the person form.
+
+In <<sec-contacts_form_templatefields>> we refactor the picture field code into a template field that can later be re-used for the organization form.
+To edit the image URL we add a simple edit form to the refactored picture field in <<sec-contacts_form_urleditform>>.
+
+In <<sec-contacts_form_templatefields_more>> we outline the creation of additional template fields and provide a summary of this tutorial step in <<sec-contacts_form_templatefields_summary>>.
+
+[[sec-contacts_field_validation]]
+=== Simple Form Field Validation
+
+This section explains the form field validation on the level of a single field.
+As an example we will use the email address field defined in the "Contact Info" tab.
+The validation implemented in <<lst-contacts_validate_email>> checks the length and the format of the entered email address.
+
+[[lst-contacts_validate_email]]
+[source,java]
+.The validation of the email field
+----
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonForm.java[tags=email]
+----
+
+<1> Email verification is performed against a simple regular expression.
+<2> This prevents the field from accepting more than 64 characters. The return value should match the size of the corresponding table column.
+<3> Method `execValidateValue` is called during validation of the new field value.
+<4> If the value violates any business rules, a `VetoException` should be thrown.
+<5> If the new value passes all business rules the method returns the value.
+
+In the next section we use the address box to demonstrate the joint validation of several fields.
+
+[[sec-contacts_field_validation_complex]]
+=== Complex Form Field Validation
+
+Often the values of several fields have to be considered jointly to evaluate if the entered data is actually valid.
+As an example we will add a more complex form field validation on the level of the `AddressBox` group box widget that takes into account the data entered into the street, city, and country fields.
+
+The implemented validation for the address box example should enforce the following set of business rules.
+
+* Only valid countries should be allowed
+* If a city is provided a country must also be provided
+* If street information is provided, both a city and a country must be provided
+* The address may be empty
+
+The simplest rule is about entering only valid countries.
+This rule is already implemented as the country smart field only allows the user to select a single entry of the list of valid countries.
+A possible implementation to enforce the other rules is provided in <<lst-contacts_validate_address>>.
+
+[[lst-contacts_validate_address]]
+[source,java]
+.The validation of the fields in the address box
+----
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonForm.java[tags=validateAddress]
+----
+
+<1> This method is called after the value of this field has been changed.
+<2> After changing the street, the city or the country recompute which address fields are mandatory.
+<3> The city becomes mandatory if the street field is not empty. The country is mandatory if the street or the city is not empty.
+
+Whenever the content of the street field, the city field, or the country field is changed the mechanism implemented above triggers a re-evaluation of the mandatory status of the city field and the country field.
+As the Scout default form validation ensures that every mandatory field receives some content the application prevents the user from entering address data that does not satisfy the business rules mentioned above.
+
+The verification of user input can also be triggered before the form is closed.
+This behavior can be implemented by overriding method `execValidate` on the form level.
+As an example we use this mechanism to make sure that a user can only enter persons that have at least some name information.
+
+Now add this validation to the person form using the implementation provided in <<lst-contacts_validate_names>>.
+
+[[lst-contacts_validate_names]]
+[source,java]
+.The validation of the first and last names on the form level
+----
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonForm.java[tags=validate]
+----
+
+<1> This method is called during the form validation and before the form is stored/closed.
+<2> Place the focus on the first name field.
+<3> In case both the first name and the last name fields are empty throw a VetoException, this will fail the validation.
+<4> The return value indicates if the validation has passed successfully or not.
+
+As we have now implemented a number of form field validations we are now ready to test the result in the running application.
+Re-start the "Contacts" application and try to trigger the different validation rules.
+<<img-contacts_tutorial_result_step_5a>> shows the response of the user interface when trying to save invalid person data.
+
+[[img-contacts_tutorial_result_step_5a]]
+.The form field validation implemented for the person form.
+image::common:contacts_tutorial_result_step_5a.png[]
+
+[[sec-contacts_form_templatefields]]
+=== Creating Template Fields
+
+In this section we show how to refactor a group of fields into a Scout template field that is ready for reuse.
+As an example we refactor the picture field into a template field.
+Later in tutorial step <<sec-contacts_form_add_company>> we can then reuse this field in the company form to show the company's logo.
+
+The generic approach to refactor a form field into a template field is listed below.
+
+. Create an empty field data class in the shared module
+. Create the template field class in the client module
+. Copy the existing field code to the template field
+. Let the original field extend the new template field and fix imports
+
+For refactoring the picture field we can exactly follow these steps.
+To create the empty field data class perform the following steps.
+
+. Expand the shared module of the "Contacts" application
+. Navigate into folder `src/generated/java`
+. Add a new package `org.eclipse.scout.contacts.shared.common`
+. Create class `AbstractUrlImageFieldData` in this package as shown in <<lst-contacts_empty_form_data>>
+
+// for this one the source code is explicitly entered here, as this class is regenerated automatically
+[[lst-contacts_empty_form_data]]
+[source,java]
+.The empty form data class for the picture template field.
+----
+package org.eclipse.scout.contacts.shared.common;
+
+public abstract class AbstractUrlImageFieldData {
+}
+----
+
+We are now ready to implement the template field class according to the following steps.
+
+. Navigate to the client module of the "Contacts" application
+. Select package `org.eclipse.scout.contacts.client.common` in folder `src/main/java`
+. Create a new Java class called `AbstractUrlImageField` and update the implementation according to <<lst-contacts_refactor_picture>>
+
+[[lst-contacts_refactor_picture]]
+[source,java]
+.The refactored picture field.
+----
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/common/AbstractUrlImageField.java[tags=template]
+----
+
+<1> The link to the corresponding field data class.
+<2> Field `PictureUrlField` is refactored into the property `url` value. To transfer the content of this property to the field data object we need to add annotation `@FormData` to its getter and setter methods.
+
+The next step is to replace the original code of the picture field with the newly created template field.
+Delete the field `PictureUrlField` and remove all the code from the field `PictureField` and let `PictureField` extend the newly created template field as shown in <<lst-contacts_picture_exends_urlimagefield>>.
+
+[[lst-contacts_picture_exends_urlimagefield]]
+[source,java]
+.The refactored picture field.
+----
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/organization/OrganizationForm.java[tags=refactor;picture]
+----
+
+<1> The implementation of the picture field is now provided by the template field `AbstractUrlImageField`.
+
+As the last step we need to slightly modify the SQL statement that loads and stores the picture URL information.
+The reason for the change is the replacement of the picture url field by an url property defined as a member of the picture field.
+For this change perform the steps listed below.
+
+. Open class `SQLs` in the Java editor.
+. In string `PERSON_SELECT` change the token ':pictureUrl' with ':picture.url'
+. In string `PERSON_UPDATE` change the token ':pictureUrl' with ':picture.url'
+
+Based on the picture field example we have now walked through the complete process to turn normal fields into template fields.
+This process remains the same for refactoring container fields into template fields.
+
+[[sec-contacts_form_urleditform]]
+=== Adding a simple URL Input Form to the Picture Field
+
+Using the refactored picture template field we want the user to be able to enter and update the URL of the shown picture.
+
+* We create a new form called `PictureUrl` as we've done before as shown in <<img-sdk_new_form_pictureurl_Intellij>> (IntelliJ) or <<img-sdk_new_form_pictureurl>> (Eclipse).
+* For Eclipse:
+** Verify that you use the correct source folder and package name.
+** In the [element]_Name_ field enter "PictureUrl".
+** In section [element]_Additional Components_ deselect all checkboxes.
+** Click btn:[Finish] to let the wizard implement the form.
+
+[[img-sdk_new_form_pictureurl_Intellij]]
+.Creating the picture URL form with the new form wizard in IntelliJ.
+image::common:sdk_new_form_pictureurl_Intellij.png[]
+[[img-sdk_new_form_pictureurl]]
+.Creating the picture URL form with the new form wizard in Eclipse.
+image::common:sdk_new_form_pictureurl.png[]
+
+Now adapt the content of the URL form according to <<lst-contacts_form_pictureurl>>.
+As you can see, there is no roundtrip to a backend server and the form only contains a single editable field.
+
+[[lst-contacts_form_pictureurl]]
+[source,java]
+.The form to edit the picture URL
+----
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/common/PictureUrlForm.java[tags=all]
+----
+
+<1> No label is needed as the name of the field is already provided by the title of the form.
+<2> As no round trip to the backend is required the modify handler can remain empty.
+
+We can now add an "Edit URL" menu to the picture template field.
+The implementation of the edit context menu is provided in <<lst-contacts_picture_edit_menu>>.
+
+[[lst-contacts_picture_edit_menu]]
+[source,java]
+.The "Edit URL" menu for the refactored picture field
+----
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/common/AbstractUrlImageField.java[tags=menu]
+----
+
+<1> If we already have an URL for the picture prefill the url field in the form with its value.
+<2> Method `waitFor` makes the application wait until the user has closed the form.
+<3> Only store the new URL if the user has saved a new value. Storing the value will refresh the picture in the user interface.
+
+Based on the example with the picture field we have now walked through the complete process to turn normal fields into template fields.
+This process remains the same for refactoring container fields into template fields.
+
+[[sec-contacts_form_templatefields_more]]
+=== More Template Fields
+
+To reduce the amount of copy & paste for the implementation of the company form in the next tutorial step, we recommend that you refactor the following fields into templates.
+
+* Email field
+* Address group box field
+* Notes group box field
+
+You can follow the steps described in the previous section for the picture field.
+To be able to copy & paste the code in the following tutorial step you may use the following class names.
+
+* `AbstractEmailField` for the email template field
+* `AbstractAddressBox` for the address group template field
+* `AbstractNotesBox` for the notes tab template field
+
+Note that both the `AbstractAddressBox` and the `AbstractNotesBox` need their own form data object, whereas the `AbstractEmailField` does not.
+
+Replacing the concrete fields with the template fields in the person form will result in a number of compile errors in the field getter methods of the person form.
+In the case of the "Contacts" application these getter methods are not needed and can simply be deleted.
+
+Moving from concrete fields to template fields also implies some minor changes as we have seen with the picture template field.
+Therefore make sure to modify the SQL statements in class `SQLs` accordingly.
+
+* Replace token ':street' by ':addressBox.street'
+* Replace token ':city' by ':addressBox.city'
+* Replace token ':country' by ':addressBox.country'
+* Replace token ':notes' by ':notesBox.notes'
+
+[[sec-contacts_form_templatefields_summary]]
+=== What have we achieved?
+
+In this step of the "Contacts" tutorial we have covered two important concepts for implementing business applications.
+
+* Validation of user input on the level of fields, components and the complete form
+* Creation and usage of template fields to minimize copy & paste where possible
+
+The "Contacts" application is in a clean state again and you can (re)start the backend and the frontend of the application and verify the result in your browser.
+Using the created picture template field we can now update the image in the picture form as shown in <<img-contacts_tutorial_result_step_5b>>.
+
+[[img-contacts_tutorial_result_step_5b]]
+.The person form with the refactored picture template field including a menu (red square) and a URL edit form.
+image::common:contacts_tutorial_result_step_5b.png[]
+
+In the next tutorial step we are going to implement the company form to enter and edit company information.
+For the creation of this form we can reuse the template fields that we have created.

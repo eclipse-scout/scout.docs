@@ -1,0 +1,13 @@
+
+ifndef::imgsdir[:imgsdir: ../../../../imgs]
+ifndef::codedir[:codedir: ../../../../../code]
+ifndef::mdledir[:mdledir: ../../../../adoc]
+
+:sdk_wizard_nls-entry: <<sdk_wizard_nls-entry.adoc#, New Text Entry Wizard>>
+:sdk_wizard_language: <<sdk_wizard_language.adoc#, Add a Language Wizard>>
+:sdk_editor_nls: <<sdk_editor_nls.adoc#, Scout NLS Editor>>
+
+include::common:partial$_initCommon.adoc[]
+
+:finaldoc: true
+

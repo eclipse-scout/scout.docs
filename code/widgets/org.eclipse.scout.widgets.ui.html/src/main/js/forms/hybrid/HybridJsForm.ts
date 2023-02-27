@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {AppLinkActionEvent, DesktopNotification, Form, FormModel, HybridManager, InitModelOf, Label, objects, scout, Status, StringField, strings, WrappedFormField} from '@eclipse-scout/core';
+import {DesktopNotification, Form, FormModel, HybridManager, InitModelOf, Label, LabelAppLinkActionEvent, objects, scout, Status, StringField, strings, WrappedFormField} from '@eclipse-scout/core';
 import model, {HybridJsFormModel, HybridJsFormWidgetMap} from './HybridJsFormModel';
 import {PersonDo} from './PersonDo';
 
@@ -61,7 +61,7 @@ This view demonstrates several hybrid abilities like opening a Scout Classic for
     this.createPersonFormWrappedFormField = this.widget('CreatePersonFormWrappedFormField');
   }
 
-  async _onPingLabelAppLinkAction(event: AppLinkActionEvent) {
+  async _onPingLabelAppLinkAction(event: LabelAppLinkActionEvent) {
     if (event.ref === 'ping') {
       await HybridManager.get(this.session).triggerHybridActionAndWait('Ping');
       this.session.desktop.addNotification(scout.create(DesktopNotification, {
@@ -74,13 +74,13 @@ This view demonstrates several hybrid abilities like opening a Scout Classic for
     }
   }
 
-  _onSendDesktopNotificationLabelAppLinkAction(event: AppLinkActionEvent) {
+  _onSendDesktopNotificationLabelAppLinkAction(event: LabelAppLinkActionEvent) {
     if (event.ref === 'sendDesktopNotification') {
       HybridManager.get(this.session).triggerHybridAction('SendDesktopNotification');
     }
   }
 
-  async _onOpenPersonFormLabelAppLinkAction(event: AppLinkActionEvent) {
+  async _onOpenPersonFormLabelAppLinkAction(event: LabelAppLinkActionEvent) {
     if (event.ref === 'openPersonForm') {
       const personDo = PersonDo.of(this.openFormPersonDoField.value);
       const form = await HybridManager.get(this.session).openForm('Person', personDo ? personDo.toJson() : null);
@@ -88,7 +88,7 @@ This view demonstrates several hybrid abilities like opening a Scout Classic for
     }
   }
 
-  async _onCreatePersonFormLabelAppLinkAction(event: AppLinkActionEvent) {
+  async _onCreatePersonFormLabelAppLinkAction(event: LabelAppLinkActionEvent) {
     if (event.ref === 'createPersonForm') {
       if (this.createPersonFormWrappedFormField.innerForm) {
         this.session.desktop.addNotification(scout.create(DesktopNotification, {

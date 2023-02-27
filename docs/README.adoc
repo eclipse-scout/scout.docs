@@ -3,6 +3,8 @@
 
 = Scout Docs - Docs
 
+WARNING: This was moved to modules!
+
 == Description
 
 This folder contains the source for producing the different documentation items (Eclipse Help, Scout Books, HTML pages...) of the link:{scout_home}[Eclipse Scout framework]

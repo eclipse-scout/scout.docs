@@ -1,0 +1,61 @@
+ifndef::finaldoc[]
+include::common:partial$_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../imgs]
+ifndef::codedir[:codedir: ../../code]
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
+//-----------------------------------------------------------------------------
+//Asciidoctor input file: "SDK - Content Assist"
+//
+//WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
+//-----------------------------------------------------------------------------
+
+To create new Scout components that are represented by inner classes in the Scout framework, the Scout tooling extends the Java content assist of the Eclipse Java editor.
+The offered proposals are context specific.
+Depending on the current cursor position in the Java editor, possible Scout components are added to the proposal list.
+
+In a class representing a group box in a form, the Scout content assist adds proposals for various form fields. In a table class the content assist adds proposals to add table columns or context menus.
+Those proposals trigger the creation of inner classes for form fields, table columns or codes.
+The Eclipse content assist can be started by typing kbd:[Ctrl,Space].
+
+[[sec-sdk_new_form_field]]
+==== Create new Form Fields
+
+(((SDK Content Assist!New Form Field)))
+
+To add additional form fields to a form the current edit position needs to be inside of a Scout group box.
+Typing kbd:[Ctrl,Space] then provides access to the most frequently used Scout widgets as shown in <<img-java_proposals_groupbox>>.
+
+[[img-java_proposals_groupbox]]
+.Proposals to create new form fields in a GroupBox
+image::common:java_proposals_groupbox2.png[]
+
+When a template is selected, it is possible to customize it by navigating between the different Edit-Groups with the kbd:[Tab] Key (this works exactly like other templates in the Eclipse Editor).
+With this mechanism you can quickly define the class name, the parent class and other properties.
+To exit the Edit-Mode just press kbd:[Enter].
+
+[[sec-sdk_new_table_column]]
+==== Create new Table Columns
+
+(((SDK Content Assist!New Table Column)))
+
+For adding new columns in a table set the current edit position inside a Scout table.
+The Scout table itself may be located inside of a TableField as shown in <<img-java_proposals_table>> or can also be located inside of a Scout TablePage.
+
+[[img-java_proposals_table]]
+.Proposals to create new columns in a Table
+image::common:java_proposals_table2.png[]
+
+Next to adding columns the content assist shown in <<img-java_proposals_table>> can also be used to add key stroke actions and menus to tables.
+
+==== Create new Codes
+
+Adding new Codes to an existing CodeType is supported by the content assist as shown in <<img-java_proposals_code>>.
+
+[[img-java_proposals_code]]
+.Proposals to create new codes in a CodeType
+image::common:java_proposals_code.png[]

@@ -1,0 +1,122 @@
+ifndef::finaldoc[]
+include::common:partial$_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+:imgsdir: ../../imgs
+:codedir: ../../../code
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
+//-----------------------------------------------------------------------------
+// This file describes the SmtpHelper Bean and the connection pooling it provides.
+//-----------------------------------------------------------------------------
+
+== SmtpHelper
+The `org.eclipse.scout.rt.mail.smtp.SmtpHelper` is an `@ApplicationScoped` Bean that provides means of sending emails described by `javax.mail.internet.MimeMessage` objects via SMTP.
+The SMTP connection can either be provided as a `org.eclipse.scout.rt.mail.smtp.SmtpServerConfig` object containing all the required connection parameters or as an already created `javax.mail.Session` object.
+The `SmtpHelper` also supports pooling of SMTP connections as described in the section <<connection-pooling-chapter>>.
+
+=== SmtpServerConfig
+The `org.eclipse.scout.rt.mail.smtp.SmtpServerConfig` class allows to specify details of an SMTP connection to be made. It supports the following properties:
+
+|===
+|Property|Description|Example
+
+|host|The hostname or ip address of the SMTP server to use.|`localhost` or `192.168.10.199`.
+|port|The TCP port the SMTP server listens on.|E.g. 25 or 465.
+|username|The username to use for authentication.|-
+|password|The password to use for authentication.|-
+|useAuthentication|Whether to use authentication or not. This setting is only effective, if a username has been provided.|-
+|useSmtps|If true, the protocol will be 'smtps', else the protocol will be 'smtp'.|-
+|useStartTls|If true, STARTTLS will be used to create the connection to the SMTP server.|-
+|sslProtocols|Limits the SSL protocols to support when connecting to the SMTP server. The value is a space separated list of protocol names returned by the `javax.net.ssl.SSLSocket.getSupportedProtocols()` method.|E.g. "TLSv1.1 TLSv1.2"
+|additionalSessionProperties|Can be used to specify any other property for the `javax.mail.Session` that is created from `org.eclipse.scout.rt.mail.smtp.SmtpServerConfig`. These additional properties are applied after all the other properties, thus may override already specified properties.|"mail.smtp.socketFactory.class": "com.example.net.SocketFactory"
+|poolSize|Allows to specify the size of the connection pool for this `SmtpServerConfig`. The Default value is 0 which effectively deactives connection pooling.|4
+|maxMessagesPerConnection|Allows to specify the max number of messages to be sent per connection when using connection pooling (`poolSize` > 0). The default value is 0 which effectively disables limiting the maximum number of messages sent per connection. You should consult with the operator of the SMTP server you are using to define this value. Local mail servers probably allow less than 20 messages per connection, bigger white mailers may allow up to 100 or even more.|20
+|===
+
+<<lst-SmtpServerConfig.example>> demonstrates how to use the SmtpServerConfig class.
+
+[[lst-SmtpServerConfig.example]]
+[source,java,indent=0]
+.Create and configure an instance of `org.eclipse.scout.rt.mail.smtp.SmtpServerConfig`
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/SmtpServerConfigSnippet.java[tags=SmtpServerConfig.example]
+----
+
+=== Sending messages
+Messages can be sent using the `sendMessage` Methods of the `SmtpHelper` class. In Order to prepare the message to be sent, Scout provides a number of classes and helpers:
+
+|===
+|Class|Description
+
+|`org.eclipse.scout.rt.mail.MailMessage`|Encapsulates all the information about a single mail message (sender, recipient, carbon-copy recipients, subject, body, attachments, etc.).
+|`org.eclipse.scout.rt.mail.MailParticipant`|Defines email address and name of a mail participant. A participant can be a recipient, a carbon-copy recipient, a blind-carbon-copy recipient, the sender and a replyTo contact.
+|`org.eclipse.scout.rt.mail.MailAttachment`|Contains information about an email attachment.
+|`org.eclipse.scout.rt.mail.MailHelper`|Provides various helper methods around email bodies, attachments, etc.
+|===
+
+<<lst-SmtpHelper.prepareMimeMessage>> shows the usage of the mentioned classes Scout provides in order to create a MimeMessage object.
+[[lst-SmtpHelper.prepareMimeMessage]]
+[source,java,indent=0]
+.Create `org.eclipse.scout.rt.mail.CharsetSafeMimeMessage` object
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/SmtpHelperSnippet.java[tags=SmtpHelper.prepareMimeMessage]
+----
+
+In order to send the message you can either use a `org.eclipse.scout.rt.mail.smtp.SmtpServerConfig` object or an existing `javax.mail.Session` object as demonstrated in <<lst-SmtpHelper.sendWithSmtpServerConfig>> and <<lst-SmtpHelper.sendWithSession>>.
+
+[[lst-SmtpHelper.sendWithSmtpServerConfig]]
+[source,java,indent=0]
+.Send email using an `org.eclipse.scout.rt.mail.smtp.SmtpServerConfig` object.
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/SmtpHelperSnippet.java[tags=SmtpHelper.sendWithSmtpServerConfig]
+----
+
+
+[[lst-SmtpHelper.sendWithSession]]
+[source,java,indent=0]
+.Send email using an existing `javax.mail.Session` object.
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/SmtpHelperSnippet.java[tags=SmtpHelper.sendWithSession]
+----
+
+=== SmtpHelper Configuration
+The `SmtpHelper` provides some config properties that allow to modify certain behaviour.
+
+|===
+|Key|Description|Example
+
+|scout.smtp.debugReceiverEmail|If this property is set, the `SmtpHelper` sends all emails to the specified email address instead of the recipients specified in the `MimeMessage` object. This is useful for development and testing environments.|debug-receiver@example.com
+|scout.smtp.connectionTimeout|Specifies the connection timeout for SMTP connections in milliseconds. Default is 60 seconds.|30000
+|scout.smtp.readTimeout|Specifies the read timeout for SMTP connections in milliseconds. Default is 60 seconds.|30000
+|===
+
+[[connection-pooling-chapter]]
+=== Connection Pooling
+Normally, the `SmtpHelper` opens a new connection for every email which is then closed after the email has been sent.
+If you want to send a lot of emails, this behaviour is rather inefficient as opening a new SMTP connection takes a long time compared to sending the email especially when using encrypted connections.
+To mitigate this overhead, the `SmtpHelper` supports pooling of SMTP connections which is activated using the `poolSize` property of `SmtpServerConfig` objects.
+If you set the pool size property to a value > 0, the `SmtpHelper` will create parallel connections up to the specified number.
+This means, that connection pooling is not possible when you use the `sendMessage` method accepting an already prepared `javax.mail.Session` object.
+
+*Pooling* in this context means the following:
+
+* All SMTP server connections sharing the same `SmtpServerConfig` object (by same meaning being equal according to `SmtpServerConfig.equals()`) belong to the same pool
+* For each different `SmtpServerConfig` object (again using `SmtpServerConfig.equals()`) up to the specified pool size connections are created
+* Connections are not immediately closed after an email has been sent, instead they are returned to the pool as idle connections.
+* Before creating new connections, idle connections are reused.
+* When trying to send an email while all the SMTP connections are currently in use and the pool size has already been reached, the calling thread is blocked until a connection is returned as idle to the pool or as soon as the wait-for-connection-timeout has exceeded.
+* As long as connections are open, a background job monitors their state and closes idle and old connections.
+
+=== SmtpConnectionPool Configuration
+The following config properties allow to modify the behavior of the connection pool implementation at the global level:
+
+|===
+|key|Description|Example
+
+|scout.smtp.pool.maxIdleTime|Specifies how long in seconds a connection can be idle before it is closed by the background cleanup job. Default is 60 seconds.|30
+|scout.smtp.pool.maxConnectionLifetime|Specifies how long in seconds a connection can be open before it is closed. This is to prevent connections from being open forever when sending emails on a regular basis. Default is 1h.|7200
+|scout.smtp.pool.waitForConnectionTimeout|Max. wait time for SMTP connection in seconds. If the value is 0, callers will wait infinitely long for SMTP connections. Default is 300 seconds.|100
+|===

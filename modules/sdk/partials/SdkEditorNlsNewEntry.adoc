@@ -1,0 +1,24 @@
+ifndef::finaldoc[]
+include::common:partial$_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../imgs]
+ifndef::codedir[:codedir: ../../code]
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
+//-----------------------------------------------------------------------------
+//Asciidoctor input file: "SDK - Editor - NLS"
+//
+//WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
+//-----------------------------------------------------------------------------
+
+[[img-new_text_entry_wizard]]
+.Adding a new text with the New Entry wizard.
+image::common:sdk_wizard_nls_entry.png[]
+
+Key Name:: This field holds the text key that is used to access translated text.
+default:: This field holds the default translated text for the key. Make sure to at least provide a translated text in this tab.
+French (France):: Additional tabs to enter translations for other languages may be present. Adding additional languages is described in the text for the NLS editor.
+Copy key to the clipboard:: Select this checkbox to copy the key name to the clipboard and paste it later in your code.

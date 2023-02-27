@@ -1,0 +1,35 @@
+= Eclipse Scout Technical Guide
+// comment prevents empty line after formatting, needed for toc
+include::common:partial$_header.adoc[]
+
+:sectnums!:
+
+== Introduction
+
+This technical guide documents the Scout architecture and describes important concepts used in Scout.
+
+:sectnums:
+include::technicalGuide:partial$Overview.adoc[]
+include::technicalGuide:partial$Platform.adoc[]
+include::technicalGuide:partial$ClientModel.adoc[]
+include::technicalGuide:partial$Texts.adoc[]
+include::technicalGuide:partial$Icons.adoc[]
+include::technicalGuide:partial$LookupCall.adoc[]
+include::technicalGuide:partial$CodeType.adoc[]
+include::technicalGuide:partial$ExceptionHandling.adoc[]
+include::technicalGuide:partial$JobManager.adoc[]
+include::technicalGuide:partial$RunContext.adoc[]
+include::technicalGuide:partial$RunMonitor.adoc[]
+include::technicalGuide:partial$ClientNotification.adoc[]
+include::technicalGuide:partial$Extensibility.adoc[]
+include::technicalGuide:partial$Mobile.adoc[]
+include::technicalGuide:partial$Security.adoc[]
+include::technicalGuide:partial$DataObject.adoc[]
+include::technicalGuide:partial$REST.adoc[]
+include::technicalGuide:partial$JaxWs.adoc[]
+include::technicalGuide:partial$SmtpHelper.adoc[]
+include::technicalGuide:partial$ScoutJS.adoc[]
+include::technicalGuide:partial$HowTos.adoc[]
+
+:_footer-link-path: build/technical_guide/src/docs/{docname}.adoc
+include::common:partial$_footer.adoc[]

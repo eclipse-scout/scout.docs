@@ -1,0 +1,16 @@
+
+ifndef::finaldoc[]
+include::common:partial$_initDoc.adoc[]
+endif::finaldoc[]
+
+// Fallback for safe mode == secure:
+:codedir: ../../../code
+ifndef::mdledir[:mdledir: .]
+ifndef::rndir[:rndir: .]
+ifndef::rnimgsdir[:rnimgsdir: {rndir}/imgs]
+:experimental:
+
+//-----------------------------------------------------------------------------
+// This file contains the release notes
+//-----------------------------------------------------------------------------
+include::ReleaseNotes_23_1.adoc[]
