@@ -93,5 +93,6 @@ To install the Scout SDK into your existing Eclipse IDE, use this P2 update site
 
 == Utility changes
 
-=== DateUtility: New default date time format
-From Scout 23.2 `DateUtility#formatDateTime` returns the date formatted with the `DateFormat.DEFAULT` and no longer with the `DateFormat.SHORT`. Now both methods, `DateUtility#formatDate` and `DateUtility#formatDateTime` are formatting the date identically. To apply the old formatting, use `DateUtility#formatDateTimeShort`.
+=== DateUtility: New Default Date Time Format
+
+Since this version, the method `DateUtility#formatDateTime` returns the date formatted with the `DateFormat.DEFAULT` and no longer with the `DateFormat.SHORT`. Now both methods, `DateUtility#formatDate` and `DateUtility#formatDateTime`, are formatting the date identically. To apply the old formatting, use `DateUtility#formatDateTimeShort`.
