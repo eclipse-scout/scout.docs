@@ -16,7 +16,7 @@
   <parent>
     <groupId>org.eclipsescout.docs</groupId>
     <artifactId>aggregator</artifactId>
-    <version>23.1-SNAPSHOT</version>
+    <version>23.1.4</version>
   </parent>
 
   <artifactId>helloscout_js_fullstack</artifactId>

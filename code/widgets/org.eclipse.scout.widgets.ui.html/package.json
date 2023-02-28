@@ -1,6 +1,6 @@
 {
   "name": "@eclipse-scout/demo-widgets",
-  "version": "23.1.0-snapshot",
+  "version": "23.1.4",
   "description": "Eclipse Scout Demo Widgets",
   "author": "BSI Business Systems Integration AG",
   "homepage": "https://www.eclipse.org/scout",
@@ -38,12 +38,12 @@
     "version:release": "releng-scripts version:release"
   },
   "devDependencies": {
-    "@eclipse-scout/cli": ">=23.1.0-snapshot <23.1.0",
+    "@eclipse-scout/cli": "23.1.4",
     "@eclipse-scout/releng": "^22.0.0",
-    "@eclipse-scout/tsconfig": ">=23.1.0-snapshot <23.1.0"
+    "@eclipse-scout/tsconfig": "23.1.4"
   },
   "dependencies": {
-    "@eclipse-scout/core": ">=23.1.0-snapshot <23.1.0",
+    "@eclipse-scout/core": "23.1.4",
     "jquery": "3.6.0"
   }
 }
