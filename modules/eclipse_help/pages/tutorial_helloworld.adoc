@@ -11,6 +11,10 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 
 With this tutorial you will learn how to create your first Scout application.
 
+==== Prerequisites
+
+include::common:partial$InstallNode.adoc[]
+
 ==== Create a Scout Project
 
 include::common:partial$CreateNewProjectEclipse.adoc[]
