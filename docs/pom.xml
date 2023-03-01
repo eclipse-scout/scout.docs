@@ -19,10 +19,6 @@
   <packaging>pom</packaging>
   <name>root</name>
 
-  <modules>
-    <module>build</module>
-  </modules>
-
   <build>
     <plugins>
       <plugin>
