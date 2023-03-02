@@ -4,7 +4,7 @@ site:
 content:
   sources: 
   - url: ../org.eclipse.scout.docs
-    branches: releases/22.0
+    branches: releases/22.0, releases/23.1
 ui: 
   bundle:
     url: antora/eclipse-help-ui-bundle.zip
