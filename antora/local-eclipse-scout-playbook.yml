@@ -2,12 +2,12 @@ site:
   title: Eclipse Scout
   start_page: scout-docs::index.adoc
 content:
-  sources: 
-  - url: ../org.eclipse.scout.docs
+  sources:
+  - url: ../../org.eclipse.scout.docs
     branches: releases/22.0
-ui: 
+ui:
   bundle:
-    url: antora/eclipse-scout-ui-bundle.zip
+    url: ./eclipse-scout-ui-bundle.zip
     snapshot: true
 antora:
   extensions:

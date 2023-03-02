@@ -2,10 +2,10 @@ site:
   title: Eclipse Scout
   start_page: scout-docs:eclipse_help:scout_user_guide.adoc
 content:
-  sources: 
-  - url: ../org.eclipse.scout.docs
+  sources:
+  - url: ../../org.eclipse.scout.docs
     branches: releases/22.0
-ui: 
+ui:
   bundle:
-    url: antora/eclipse-help-ui-bundle.zip
+    url: ./eclipse-help-ui-bundle.zip
     snapshot: true
