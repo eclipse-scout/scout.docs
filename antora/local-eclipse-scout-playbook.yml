@@ -3,7 +3,7 @@ site:
   start_page: scout-docs::index.adoc
 content:
   sources:
-  - url: ../../org.eclipse.scout.docs
+  - url: ./../../org.eclipse.scout.docs
     branches: releases/22.0
 ui:
   bundle:
