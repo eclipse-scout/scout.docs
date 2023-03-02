@@ -11,6 +11,7 @@ The documentation is published on link:https://eclipsescout.github.io/[GitHub pa
 == Organisation of this Repository
 
 * `modules` folder: contains the documentation source, link:docs/[read more],
+* `antora` folder: contains the playbooks and user interface bundles for the Antora build, see below
 * `code` folder: contains demo applications (code snippets in the documentation items are extracted from this code base during the build)
 
 == Build Demo Applications
