@@ -9,7 +9,7 @@
  */
 import LabelFormModel from './LabelFormModel';
 import {LabelFormWidgetMap} from '../index';
-import {Form, FormModel, GridData, GroupBox, InitModelOf, LabelAppLinkActionEvent, MessageBoxes, models} from '@eclipse-scout/core';
+import {AppLinkActionEvent, Form, FormModel, GridData, GroupBox, InitModelOf, MessageBoxes, models} from '@eclipse-scout/core';
 
 export class LabelForm extends Form {
   declare widgetMap: LabelFormWidgetMap;
@@ -53,7 +53,7 @@ export class LabelForm extends Form {
     this.widget('EventsTab').setField(label);
   }
 
-  protected _onLabelAppLinkAction(event: LabelAppLinkActionEvent) {
+  protected _onLabelAppLinkAction(event: AppLinkActionEvent) {
     MessageBoxes.createOk(this)
       .withBody(this.session.text('ThanksForClickingMe'))
       .withYes(this.session.text('YoureWelcome'))
