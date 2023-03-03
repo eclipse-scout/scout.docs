@@ -91,6 +91,17 @@ This means that e.g. the `Table` treats a menu without a menuType as if it had s
 For more information about the default menuTypes see xref:technical-guide:user-interface/widget-reference.adoc#menu-types[MenuTypes].
 
 
+=== SmartFields: Error-Handling for Key-Lookups
+
+Before this change: If a key-lookup inside a SmartField didn't return a result, the SmartField was presented to the user like no value has been chosen.
+Internally, however, the (most likely invalid) value was still set on the SmartField.
+Hence, the user couldn't see that the current value is invalid and a new value should be set.
+
+This change puts a warning status on the SmartField if a key-lookup doesn't return a value.
+
+Because of the potential consequences, this change was implemented for ScoutJS only (not for Scout Classic).
+
+
 // ----------------------------------------------------------------------------
 
 == Changes in Scout Classic
