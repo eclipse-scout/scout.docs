@@ -14,6 +14,7 @@ asciidoc:
     doc-short-version: 22.0
     doc-short-version-underlined: 22_0
 nav:
+- modules/ROOT/nav.adoc
 - modules/getstarted/nav.adoc
 - modules/helloscout/nav.adoc
 - modules/deploy_to_tomcat/nav.adoc
