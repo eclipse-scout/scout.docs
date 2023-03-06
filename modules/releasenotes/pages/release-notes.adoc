@@ -1,0 +1,9 @@
+= Eclipse Scout Release Notes
+:toclevels: 4
+include::common:partial$_header.adoc[]
+ifndef::rndir[:rndir: {mdledir}/releasenotes]
+
+include::partial$ReleaseNotes.adoc[]
+
+:_footer-link-path: build/releasenotes/src/docs/{docname}.adoc
+include::common:partial$_footer.adoc[]

@@ -1,0 +1,11 @@
+site:
+  title: Eclipse Scout
+  start_page: scout-docs:eclipse_help:scout_user_guide.adoc
+content:
+  sources:
+  - url: ./..
+    branches: releases/22.0, releases/23.1
+ui:
+  bundle:
+    url: ./eclipse-help-ui-bundle.zip
+    snapshot: true

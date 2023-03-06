@@ -1,0 +1,66 @@
+= Scout SDK Testing Procedure
+include::common:partial$_header.adoc[]
+
+After installing the Eclipse Scout package you are ready for testing the SDK version
+
+== Precondition
+
+Before executing the SDK tests described below, make sure that you already have (at least) checked that the Scout Hello World is working properly.
+
+Eclipse must be launched with a JDK! Check this in the Eclipse About Dialog -> Installation Details -> Configuration.
+Otherwise many operations (especially the generation of webservices) will fail. This can be set in the `eclipse.ini` file.
+
+- Windows: The `-vm` parameter pointing to the JDK subdirectory `...\jre\bin\server\jvm.dll`
+
+== Verify Version
+
+. Open Eclipse About dialog
+. Click on Eclipse Scout project button
+. Check Scout SDK feature version
+. Click on button Plug-in Details
+. Check Scout SDK plug-in version (same as feature version)
+
+SDK Version Check:
+
+- [ ] Scout SDK version matches expected version for testing.
+
+== Test Code Completion
+
+- [ ] Open HelloWorld Form and create a new form field using Ctrl+Space. Ensure the Scout Templates (E.g. StringField, TableField) are available.
+- [ ] Select a Template. The corresponding code is inserted and edit locations can be switched using Tab key.
+- [ ] When moving to a super class by using the Tab key, ensure the possible super class proposals are displayed (see screenshot below).
+- [ ] Create a new Form using the New Form wizard. As soon as the Form is opened, directly invoke the code completion in a group box without closing the file and ensure the template can be inserted.
+
+.Select the desired super class proposal
+image::scout_sdk_super_class_proposals.png[]
+
+== Test DTO update
+
+- [ ] Ensure the newly created form field (test before) is reflected in the corresponding form data (DTO auto update).
+
+== Test NLS
+
+- [ ] When pressing Ctrl+Space in a TEXTS.get("") statement ensure the NLS proposals are displayed and that a new one can be created
+- [ ] Open the *.nls file and test that the NLS Editor opens and that new entries can be created.
+
+== Test ClassId creation
+
+- [ ] Press the menu Scout -> Create all missing @Classid Annotations and ensure they are correctly created (all types that implement ITypeWithClassId should have a class id after this step)
+
+== Test Wizards Small Set
+
+- [ ] Create a new Form (Ctrl+N) and verify that it is created correctly (no compilation errors)
+- [ ] Create a new Table Page (Ctrl+N) and verify that it is created correctly (no compilation errors)
+
+== Test Wizards Full Set
+
+- [ ] Create a new CodeType (Ctrl+N) and verify that it is created correctly (no compilation errors)
+- [ ] Create a new Form (Ctrl+N) and verify that it is created correctly (no compilation errors)
+- [ ] Create a new LookupCall (Ctrl+N) and verify that it is created correctly (no compilation errors)
+- [ ] Create a new Table Page (Ctrl+N) and verify that it is created correctly (no compilation errors)
+- [ ] Create a new Permission (Ctrl+N) and verify that it is created correctly (no compilation errors)
+- [ ] Create a new Web Service (Ctrl+N) Consumer for WSDL http://services.nexus6studio.com/StockQuoteService.asmx?wsdl and verify that it is created correctly (no compilation errors)
+
+
+:_footer-link-path: build/sdk_tests/src/docs/{docname}.adoc
+include::common:partial$_footer.adoc[]

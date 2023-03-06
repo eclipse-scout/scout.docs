@@ -1,0 +1,67 @@
+include::common:partial$_initDoc.adoc[]
+= Version {scout-version}
+
+These pages document https://www.eclipse.org/scout/[Eclipse Scout].
+
+Here you will find all Scout {scout-version} related documentation, from getting started to architecture details to release upgrades.
+
+== Get Started
+
+Read the xref:getstarted:getstarted.adoc[Get Started Guide] first to learn the difference between Scout Classic and Scout JS.
+This will help you to decide which tutorial is the right one to start with.
+
+Once you have completed the Hello Scout tutorial, you can continue with one of the following tutorials.
+
+Scout Classic Tutorials
+
+* xref:helloscout:helloscout.adoc[]
+* xref:deploy_to_tomcat:deploy-to-tomcat.adoc[Deploy to Tomcat]
+* xref:one_day_tutorial:one-day-tutorial.adoc[One Day Tutorial]
+
+Scout JS Tutorials
+
+* xref:helloscout_js:helloscout-js.adoc[Hello Scout JS]
+* xref:helloscout_js_fullstack:helloscout-js-fullstack.adoc[Hello Scout JS Full Stack]
+* xref:helloscout_cdn:helloscout-cdn.adoc[Hello Scout JS with CDN]
+
+== Deepen Your Knowledge
+
+If you want to get serious about Scout, you should definitely have a look at the following documents.
+
+You will learn about best practices and architecture details and even find How Tos for some specific topics.
+To learn more about the functionality of the Scout plugins for various IDEs, have a look at the Scout SDK documents.
+
+* xref:technical_guide:technical-guide.adoc[Scout Classic Technical Guide]
+* xref:technical_guide_js:technical-guide-js.adoc[Scout JS Technical Guide]
+* xref:sdk_eclipse:sdk-eclipse.adoc[Scout SDK for Eclipse]
+
+== Upgrade Your Version
+
+Please read the following documents when doing a Scout release upgrade.
+
+The Release Notes describe the new features of the release.
+The Migration Guide explains how to migrate your code for a proper upgrade.
+
+* xref:releasenotes:release-notes.adoc[Release Notes]
+* xref:migration:migration-guide.adoc[Migration Guide]
+
+== Choose Your Version
+
+Scout is a mature framework and since we release a major version once a year, there are quite a few versions out there.
+
+The link for the current stable version provides the most recent and accurate documentation.
+If you use an older Scout version, you should consult the documentation for that specific version.
+
+|===
+| stable | Version 22  | https://eclipsescout.github.io/22.0[Browse]
+|	 | Version 11  | https://eclipsescout.github.io/11.0[Browse]
+|	 | Version 10  | https://eclipsescout.github.io/10.0[Browse]
+|	 | Version 9   | https://eclipsescout.github.io/9.0[Browse]
+|	 | Version 8   | https://eclipsescout.github.io/8.0[Browse]
+|	 | Version 7   | https://eclipsescout.github.io/7.0[Browse]
+|	 | Version 6   | https://eclipsescout.github.io/6.0[Browse]
+|	 | Version 5.2 | https://eclipsescout.github.io/5.2[Browse]
+|	 | Version 5   | https://eclipsescout.github.io/5.0[Browse]
+|	 | Version 4   | https://eclipsescout.github.io/4.0[Browse]
+|	 | Version 3.9 | https://eclipsescout.github.io/3.9[Browse]
+|===

@@ -1,0 +1,144 @@
+=== Import the Scout Demo Applications
+:doctype: article
+:revnumber: {project-version}
+include::partial$_initDoc.adoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../../../../imgs]
+ifndef::codedir[:codedir: ../../../../../code]
+ifndef::mdledir[:mdledir: ../../../../adoc]
+:experimental:
+
+With this tutorial you will learn how to import the Scout Demo applications into your workspace.
+The tutorial consists of the following two parts:
+
+* Install the Scout Demo applications
+* Run the Scout demo from your IDE
+
+==== Install the Scout Demo Applications
+
+In the first part of the tutorial we import the demo applications using the https://wiki.eclipse.org/Eclipse_Installer[Oomph Eclipse installer,window=_blank] tool.
+
+In the Eclipse IDE open the [wizard]_Import_ wizard with menu menu:File[Import...].
+This opens the dialog shown in <<img-oomph_existing_project>>.
+Next, under folder [folder]_Oomph_ select the node [folder]_Projects into Workspace_ and click the btn:[Next] button.
+
+[[img-oomph_existing_project]]
+.The Import Wizard in Eclipse.
+image::common:oomph_existing_project.png[]
+
+Now select Scout Demo App, check in the table below that 'Stream' shows the desired Scout version and click btn:[Next].
+
+[[img-oomph_existing_project1]]
+.Select Scout Demo App
+image::common:oomph_existing_projects1.png[]
+
+On the next wizard page, select the _Show all variables_ check box in the bottom left corner.
+
+[[img-oomph_existing_variables]]
+."Variables" Step of the Importer.
+image::common:oomph_existing_variables.png[]
+
+Before you proceed make sure that all shown variables are set appropriately for your use case.
+
+* `Git clone location rule`: "`Located in a folder named '.git/{lt}repo{gt}' within the workspace folder`"
+* `Target Platform`: "`None`"
+* `JRE Location`: Path to your Java 11 or 17 JRE
+* `Scout Demo App Github repository`: "`HTTPS (read-only, anonymous)`"
+
+Once you finished setting the variables click btn:[Next].
+This leads to the [wizard]_Confirmation_ dialog.
+This last step can be completed by clicking on btn:[Finish].
+
+The Oomph installer first makes sure that all necessary Scout components and M2E connectors are available.
+In case one or more components are missing, Oomph will first download and install them.
+This triggers a restart request as shown in <<img-oomph_restart>>.
+If the dialog does not automatically appear, click on the small icon in the status bar on the bottom as shown in <<img-oomph_status>>.
+
+[[img-oomph_restart]]
+.Restart of the IDE after installation.
+image::common:oomph_restart.png[]
+
+[[img-oomph_status]]
+.Status icon
+image::common:oomph_status.png[]
+
+To complete the installation click btn:[Finish].
+If your IDE needs to be restarted, select the same workspace in the [wizard]_Eclipse Launcher_ dialog.
+
+After the restart Oomph will continue to download and install the Scout demo applications showing the progress in the Eclipse importer dialog.
+Once the download and installation has completed you can close the dialog with clicking the btn:[Finish] button.
+
+===== Setup result
+
+After the Setup of the "Scout Demo App", a lot of projects are materialized in the workspace (see the screenshot in <<img-oomph_workingsets>>).
+The projects are organized in three working sets:
+
+Demo App: Contacts:: The projects corresponding to the Scout Demo Application "Contacts".
+Demo App: Widgets:: The projects corresponding to the Scout Demo Applications "Widgets" and "JSWidgets".
+Demo Docs:: The scout documentation and the project containing most of the code snippets included in the documentation.
+
+[[img-oomph_workingsets]]
+.Projects in the workspace after the "Scout Demo App" setup.
+image::common:oomph_workingsets.png[]
+
+If you do not see the workingsets, you might need to select "menu:Top Level Elements[Working Sets]" from the Menu as displayed in <<img-workingsets_top_level>>
+
+[[img-workingsets_top_level]]
+.Select "Working Sets" as "Top Level Elements" in the "Package Explorer".
+image::common:workingsets_top_level.png[]
+
+==== Run the Contacts Demo Application
+
+With the Scout demo installed in our workspace we are now ready to start the applications from within our IDE.
+
+===== Start the application in the IDE
+
+Open the [menu]_Run As_ menu as shown in <<img-oomph_run_contacts_all>>.
+There are 3 launch groups available, one for each application.
+Each launch group will start all the necessary builds and servers.
+Now select _[contacts] all_ (Windows or Unix variant) to run the Contacts application.
+
+[[img-oomph_run_contacts_all]]
+.Start the Contacts application.
+image::common:run_contacts_all_dev.png[]
+
+Once the startup sequence of the Contacts application has completed the console view in your Eclipse IDE should look like <<img-oomph_contacts_console>>.
+
+[[img-oomph_contacts_console]]
+.Console view after starting the Contacts demo.
+image::common:oomph_contacts_console.png[]
+
+===== Use the Contacts Demo in a Browser
+
+With the Contacts demo running in the IDE open the application in your favorite browser via URL http://localhost:8082[http://localhost:8082,window=_blank].
+To get the screen shown in <<img-contacts_persons_alice>> first click on the [folder]_Persons_ node and then double click on the ''Alice'' row.
+
+[[img-contacts_persons_alice]]
+.The Contacts application.
+image::common:contacts_persons_alice.png[]
+
+==== What's Next?
+
+Play with the Contacts application.
+This provides a good overview of a typical Scout application.
+You can browse through the data, open different forms and add/change entities.
+
+Also have a quick look at the code.
+The list on the left side of the application containing the nodes [folder]_Persons_ and [folder]_Organizations_ is implemented in class [java]+ContactOutline+ as shown in <<lst-contacts_outline>>.
+
+[[lst-contacts_outline]]
+[source,java]
+.ContactOutline implementation.
+----
+include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/contact/ContactOutline.java[tags=Outline]
+----
+
+If you have clicked on the [folder]_Persons_ node a page with all available persons is shown.
+This page is implemented in class [java]+PersonTablePage+ and the dialog to show/edit persons is implemented in class [java]+PersonForm+.
+
+This is the end of the <<tutorial.adoc#getting-started, getting started>> guide.
+
+'''
+:_footer-link-path: build/eclipse_help/src/docs/{docname}.adoc
+include::common:partial$_footer-text.adoc[]
