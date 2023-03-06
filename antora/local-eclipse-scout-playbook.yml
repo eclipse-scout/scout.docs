@@ -1,9 +1,8 @@
 site:
   title: Eclipse Scout
-  start_page: scout-docs::index.adoc
 content:
   sources:
-  - url: ./../../org.eclipse.scout.docs
+  - url: ./..
     branches: releases/22.0
 ui:
   bundle:
