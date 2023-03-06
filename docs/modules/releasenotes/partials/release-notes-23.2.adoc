@@ -64,3 +64,18 @@ Default menuTypes have been added to several widgets.
 This means that e.g. the `Table` treats a menu without a menuType as if it had set `Table.MenuTypes.EmptySpace`.
 For more information about the default menuTypes see xref:technical-guide:user-interface/widget-reference.adoc#menu-types[MenuTypes].
 
+
+// ----------------------------------------------------------------------------
+
+== Changes in Scout Classic
+
+=== Health Check Servlet
+
+The logic of executing health checks was extracted from `org.eclipse.scout.rt.server.commons.healthcheck.AbstractHealthCheckServlet` and moved to an own `org.eclipse.scout.rt.server.commons.healthcheck.HealthCheckService`.
+
+The `AbstractHealthCheckServlet` is no longer abstract, was renamed to `HealthCheckServlet` and may be used without further individualization.
+
+To update to the new servlet, the following changes in your `web.xml` are necessary:
+
+* UI Server: Replace `org.eclipse.scout.rt.ui.html.admin.healthcheck.UiHealthCheckServlet` with `org.eclipse.scout.rt.server.commons.healthcheck.HealthCheckServlet` in your `web.xml`
+* Backend Server: Replace `org.eclipse.scout.rt.server.admin.healthcheck.ServerHealthCheckServlet` with `org.eclipse.scout.rt.server.commons.healthcheck.HealthCheckServlet` in your `web.xml`
