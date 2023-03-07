@@ -67,7 +67,7 @@ Default menuTypes have been added to several widgets.
 This means that e.g. the `Table` treats a menu without a menuType as if it had set `Table.MenuTypes.EmptySpace`.
 For more information about the default menuTypes see link:{techdocjs}#menu-types[Technical Guide for Scout JS].
 
-=== CollapsStyle for Group CustomHeader
+== CollapsStyle for Group CustomHeader
 
 The Group.CollapseStyle property is applied on a custom headers, that can be used in the group. Without the property set, the default CollapsStyle is left.
 
