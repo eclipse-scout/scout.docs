@@ -1,5 +1,6 @@
 site:
   title: Eclipse Scout
+  start_page: scout-docs:ROOT:index.adoc
 content:
   sources:
   - url: ./..
