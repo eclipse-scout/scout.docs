@@ -3,7 +3,7 @@ site:
 content:
   sources:
   - url: ./..
-    branches: releases/22.0, releases/23.1
+    branches: releases/22.0, releases/23.1, releases/23.2
 ui:
   bundle:
     url: ./eclipse-scout-ui-bundle.zip
