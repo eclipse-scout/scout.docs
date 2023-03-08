@@ -81,7 +81,7 @@ If given an `Exception`, or a `RuntimeException`, or if being a subclass thereof
 
 [[default-runtime-exception-translator]]
 === DefaultRuntimeExceptionTranslator
-Use this translator to work with runtime exceptions. When working with xref:technical-guide:scout-classic/RunContext.adoc[]] or xref:technical-guide:scout-classic/JobManager.adoc#ifuture[IFuture], some methods optionally accept a translator. If not specified, this translator is used by default.
+Use this translator to work with runtime exceptions. When working with xref:technical-guide:common-concepts/RunContext.adoc[]] or xref:technical-guide:common-concepts/JobManager.adoc#ifuture[IFuture], some methods optionally accept a translator. If not specified, this translator is used by default.
 
 If given a `RuntimeException`, it is returned as given. For a checked exception, a <<PlatformException,PlatformException>> is returned which wraps the given checked exception.
 

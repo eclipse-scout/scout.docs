@@ -6,7 +6,7 @@ A form is typically used for two purposes:
 1. Allowing the user to enter data in a structured way
 2. Displaying the data in a structured way
 
-This is achieved by using xref:technical-guide:scout-js/form-field.adoc[]]s. Every form has one root group box (also called main box) which has 1:n form fields. The form fields are layouted using the logical grid layout, unless no custom layout is used. This makes it easy to arrange the fields in a uniform way.
+This is achieved by using xref:technical-guide:user-interface/form-field.adoc[]]s. Every form has one root group box (also called main box) which has 1:n form fields. The form fields are layouted using the logical grid layout, unless no custom layout is used. This makes it easy to arrange the fields in a uniform way.
 
 A form may be displayed in various ways, mainly controlled by the property `displayHint`.
 The following display hints are available by default:

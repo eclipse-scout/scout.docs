@@ -148,7 +148,7 @@ Also, make sure that you don't use exactly the same name as for the target _JS_ 
 Other than that, you can name the target files whatever you want,
 just make sure you also adjust the **references in** `**index.html**` accordingly (see next section).
 
-For more details on the build, see xref:technical-guide:scout-js/build-stack.adoc[].
+For more details on the build, see xref:technical-guide:user-interface/build-stack.adoc[].
 
 === Static Resources
 
@@ -300,7 +300,7 @@ To see more example code of Scout JS, we recommend looking at the {jswidgets}[Sc
 and its {jswidgets-code}[source code].
 
 If you are interested in Scout's concepts, architecture and features you probably want to have
-a look at the xref:technical-guide:scout-js/overview.adoc[Scout JS Technical Guide].
+a look at the xref:technical-guide:technical-guide.adoc[Technical Guide].
 
 In case you should get stuck somewhere and need help,
 contact us on the http://www.eclipse.org/forums/eclipse.scout[Scout Forum]

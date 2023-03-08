@@ -234,7 +234,7 @@ image::tree_box_with_filter_field_icon.png[]
 image::tree_box_with_filter_field.png[]
 
 This feature is enabled by default and can be turned off using the property `textFilterEnabled`.
-For more information about the filter API and the filter field see xref:technical-guide:scout-js/widget-reference.adoc#filter-field[Filter Field].
+For more information about the filter API and the filter field see xref:technical-guide:user-interface/widget-reference.adoc#filter-field[Filter Field].
 
 == Menu on Form Field
 

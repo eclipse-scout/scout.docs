@@ -226,7 +226,7 @@ Also have a look at the Java file `CssClasses`. Scout provides a few predefined 
 include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/mobile/AdjustComponents.java[tags=CssClass]
 ----
 
-For details on how to write the Less code please see xref:technical-guide:scout-js/styling.adoc[].
+For details on how to write the Less code please see xref:technical-guide:user-interface/styling.adoc[].
 
 If you just want to reduce some padding maybe it is sufficient to adjust the gaps of a group box.
 To do so just override the method `getConfiguredBodyLayoutConfig` of your group box and do the adjustments.

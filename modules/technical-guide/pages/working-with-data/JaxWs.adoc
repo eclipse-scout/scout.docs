@@ -14,7 +14,7 @@ Scout facilitates working with webservices, supports you in the generation of ar
 * ready to go Maven profile for easy webservice stub and artifact generation
 * full JAX-WS 2.3 compliance
 * JAX-WS implementor independence
-* provides an up front port type _EntryPoint_ to enforce for authentication, and to run web requests in a xref:technical-guide:scout-classic/RunContext.adoc[]
+* provides an up front port type _EntryPoint_ to enforce for authentication, and to run web requests in a xref:technical-guide:common-concepts/RunContext.adoc[]
 * adds cancellation support for on-going webservice requests
 * provides a port cache for webservice consumers
 * allows to participate in 2PC protocol for webservice consumers
@@ -259,7 +259,7 @@ WARNING: _wsimport_ allows to directly configure the package name for files to b
 TIP: For shared webservice artifacts, you can also use XJC binding compiler to generate those artifacts in advance, and then provide the resulting episode binding file (META-INF/sun-jaxb.episode) to _wsimport_. See https://www.mojohaus.org/jaxb2-maven-plugin/Documentation/v2.4/example_xjc_basic.html for more information.
 
 === Annotation Processing Tool (APT)
-Annotation Processing (APT) is a tool which can be enabled to fire for annotated types during compilation. In JAX-WS Scout integration, it is used as a trigger to generate webservice port type implementations. Such an auto-generated port type implementation is called an entry point. It is to be published as the  webservice's endpoint, and acts as an interceptor for webservice requests. It optionally enforces for authentication, and makes the request to be executed in a xref:technical-guide:scout-classic/RunContext.adoc[]. Then, it handles the web request to the effectively implementing port type bean for actual processing.
+Annotation Processing (APT) is a tool which can be enabled to fire for annotated types during compilation. In JAX-WS Scout integration, it is used as a trigger to generate webservice port type implementations. Such an auto-generated port type implementation is called an entry point. It is to be published as the  webservice's endpoint, and acts as an interceptor for webservice requests. It optionally enforces for authentication, and makes the request to be executed in a xref:technical-guide:common-concepts/RunContext.adoc[]. Then, it handles the web request to the effectively implementing port type bean for actual processing.
 
 The entry point generated simplifies the actual port type implementation by removing lot of glue code to be written by hand otherwise. Of course, this entry point is just for convenience purpose, and it is up to you to make use of this artifact.
 
@@ -420,7 +420,7 @@ See <<ICredentialVerifier,ICredentialVerifier>> for more information.
 |Indicates the principal producer to use to create principals to represent authenticated users. By default, SimplePrincipalProducer is used.
 
 |runContextProducer
-|Indicates which xref:technical-guide:scout-classic/RunContext.adoc[] to use to run authenticated webservice requests. By default, `ServerRunContextProducer` is used, which is based on a session cache, and enforces to run in a new transaction.
+|Indicates which xref:technical-guide:common-concepts/RunContext.adoc[] to use to run authenticated webservice requests. By default, `ServerRunContextProducer` is used, which is based on a session cache, and enforces to run in a new transaction.
 |===
 
 TIP: If using container based authentication (authentication enforced by the application server), use <<ContainerBasedAuthenticationMethod,ContainerBasedAuthenticationMethod>> as authentication method, and do not configure a credential verifier.
@@ -521,7 +521,7 @@ include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclips
 <2> Get the 'correlation ID' from message context.
 
 === JAX-WS Correlation ID Propagation
-Scout's JAX-WS integration already provides complete support for reading a correlation ID from the HTTP header named `X-Scout-Correlation-Id` of the incoming web service request and propagates it to the xref:technical-guide:scout-classic/RunContext.adoc[] that executes the actual service operation. A new correlation ID is created if the HTTP header is empty or missing.
+Scout's JAX-WS integration already provides complete support for reading a correlation ID from the HTTP header named `X-Scout-Correlation-Id` of the incoming web service request and propagates it to the xref:technical-guide:common-concepts/RunContext.adoc[] that executes the actual service operation. A new correlation ID is created if the HTTP header is empty or missing.
 
 NOTE: The CorrelationIdHandler example above just illustrates the capabilities of a SOAPHandler.
 
