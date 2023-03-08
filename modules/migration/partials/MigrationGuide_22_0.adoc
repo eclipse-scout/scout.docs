@@ -294,7 +294,7 @@ A _ITypeVersion_ represents a namespace/version and its dependencies.
 *Migration:*
 
 For each different String value used in type version annotation, create an implementation of `ITypeVersion` as described
-in xref:technical-guide:scout-classic/DataObject.adoc#cha-namespace-and-itypeversion[Data Objects: Namespace and ITypeVersion] in the technical documentation.
+in xref:technical-guide:working-with-data/DataObject.adoc#cha-namespace-and-itypeversion[Data Objects: Namespace and ITypeVersion] in the technical documentation.
 
 `DataObjectInventory#getTypeVersion` now returns `NamespaceVersion` instead of `String`.
 Use `NamespaceVersion#unwrap` to access the text representation.
@@ -385,7 +385,7 @@ For details please see the individual commits.
 Some icons have been removed because they are not used by Scout itself anymore.
 If you need these icons, please add them to your own icon library.
 If you don't already have a custom icon library, please see our guide on how to create one:
-xref:technical-guide:scout-classic/Icons.adoc[]
+xref:technical-guide:user-interface/icons.adoc[]
 The icons from Scout can be found here: https://github.com/eclipse-scout/scout.rt/tree/releases/22.0/org.eclipse.scout.rt.ui.html/src/icons
 There you also find a `selection.json` that can be used to import the icons to https://icomoon.io/app[IcoMoon].
 
@@ -636,7 +636,7 @@ table.removeFilter(filters);
 These widgets support a text filter that is shown while typing if the widget is focused. This behaviour is enabled by default and can be turned off using the property `textFilterEnabled`.
 Fields that provide this functionality may now be obsolete and can be removed.
 
-For more information about the filter API and the filter field see xref:technical-guide:scout-js/widget-reference.adoc#filter-field[Filter Field].
+For more information about the filter API and the filter field see xref:technical-guide:user-interface/widget-reference.adoc#filter-field[Filter Field].
 
 == New Modules for DataModel related classes
 

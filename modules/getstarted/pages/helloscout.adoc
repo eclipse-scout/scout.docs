@@ -24,7 +24,7 @@ Congratulations! You have successfully created your first Scout Classic applicat
 
 To gain experience working with Scout, we recommend going through the xref:getstarted:one-day-tutorial/one-day-tutorial.adoc[One Day Tutorial].
 
-If you are interested in Scout's concepts, architecture and features you probably want to have a look at the xref:technical-guide:scout-classic/Overview.adoc[Technical Guide].
+If you are interested in Scout's concepts, architecture and features you probably want to have a look at the xref:technical-guide:technical-guide.adoc[Technical Guide].
 
 In case you should get stuck somewhere and need help, contact us on the http://www.eclipse.org/forums/eclipse.scout[Scout Forum] or on https://stackoverflow.com/tags/eclipse-scout[Stack Overflow].
 

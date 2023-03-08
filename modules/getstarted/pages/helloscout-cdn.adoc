@@ -4,7 +4,7 @@ include::common:partial$_header.adoc[]
 == Introduction
 
 A typical approach to work with Scout JS is to use a package manager (e.g. pnpm) to download the modules and a bundler (e.g. webpack) to build them.
-Thanks to the xref:technical-guide:scout-js/build-stack.adoc#command-line-interface-cli[Scout CLI] this task is straightforward.
+Thanks to the xref:technical-guide:user-interface/build-stack.adoc#command-line-interface-cli[Scout CLI] this task is straightforward.
 
 The main advantage is the simplified development process.
 You can use Less variables from Scout (e.g. the color palette).
