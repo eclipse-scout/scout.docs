@@ -1,0 +1,7 @@
+* xref:howtos.adoc[]
+** Scout Classic
+*** xref:scout-classic/Chart-HowTo.adoc[]
+*** xref:scout-classic/SmartField-HowTo.adoc[]
+** Scout JS
+*** xref:scout-js/Chart-HowTo.adoc[]
+*** xref:scout-js/FlipCard-HowTo.adoc[]
