@@ -1,0 +1,13 @@
+= Form Field
+
+A form field is a special kind of a widget. It is mainly used on forms but may actually be added to any other widget.
+
+Every form field contains of the following parts:
+
+[[img-formfield, Figure 000]]
+.Parts of a form field
+image::common:formfield.png[]
+
+Typical form fields are `StringField`, `DateField` or `TableField`. All these fields have the API of `FormField` in common (like `setLabel()`, `setErrorStatus()`, etc.) but also provide additional API.
+
+Some form fields are actually just a wrapper for another widget. This is for example the case for the `TableField`. The `Table` itself may be used stand-alone, just call `scout.create('Table', {})`. But if you want to use it in a `GroupBox`, which is a form field, you have to use a `TableField` wrapping the `Table`.

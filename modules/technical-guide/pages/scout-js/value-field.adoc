@@ -1,0 +1,94 @@
+= Value Field
+
+A value field extends the form field by the ability to store a value. Typical form fields are `StringField`, `NumberField`, `DateField` or `SmartField`. All these fields provide a value which is accessible using `field.value` and may be set using `field.setValue(value)`.
+
+== Parser, Validator, Formatter
+The value always has the target data type of the field. When using a `StringField` the type is `string`, when using a `NumberField` the type is `number`, when using a `DateField` the type is `date`. This means you don't have to care about how to parse the value from the user input, this will be done by the field for you. The field also validates the value, meaning if the user entered an invalid value, an error is shown. Furthermore, if you already have the value and want to show it in the field, you don't have to format the value by yourself.
+
+This process of parsing, validating and formatting is provided by every value field. The responsible functions are `parseValue`, `validateValue` and `formatValue`. If a user enters text, it will be parsed to get the value with the correct type. The value will then be validated to ensure it is allowed to enter that specific value. Afterwards it will be formatted again to make sure the input looks as expected (e.g. if the user enters 2 it may be formatted to 2.0). If you set the vaue programmatically using `setValue` it is expected that the value already has the correct type, this means parse won't be executed. But the value will be validated, formatted and eventually displayed in the field.
+
+Even though the fields already provide a default implementation of this functionality, you may want to extend or replace it. For that purpose you may set a custom parser and formatter or one or more validators.
+
+=== Custom Parser and Formatter
+Typically you don't have to add a custom parser or formatter for a `NumberField` or `DateField`. They work with a `DecimalFormat` or `DateFormat` which means you can specify a pattern how the number or date should be represented. By default, it uses the  pattern of the current locale, so you don't even have to specify anything.
+
+For a `StringField` on the other hand, adding a custom parser or formatter could make sense. Let's say you want to group the text into 4 digit blocks, so that if the user inputs 1111222233334444 it should be converted to 1111-2222-3333-4444. This could be done using the following formatter.
+
+[source,javascript]
+.Example of a formatter
+----
+function formatter(value, defaultFormatter) {
+  var displayText = defaultFormatter(value);
+  if (!displayText) {
+    return displayText;
+  }
+  return displayText.match(/.{4}/g).join('-');
+};
+----
+Keep in mind that you should call the default formatter first unless you want to replace it completely.
+
+To make your formatter active, just use the corresponding setter.
+
+[source,javascript]
+.Setting the formatter
+----
+field.setFormatter(formatter);
+----
+
+Formatting the value is most of the time only half the job. You probably want to set a parser as well, so that if the user enters the text with the dashes it will be converted to a string without dashes.
+
+[source,javascript]
+.Example of a parser
+----
+function parser(displayText, defaultParser) {
+  if (displayText) {
+    return displayText.replace(/-/g, '');
+  }
+  return defaultParser(displayText);
+};
+----
+
+Use the corresponding setter to activate the parser.
+
+[source,javascript]
+.Setting the parser
+----
+field.setParser(parser);
+----
+
+=== Custom Validator
+The purpose of a validator is to only allow valid values. This mostly depends on your business rules, this is why the default validators don't do a whole lot of things.
+
+See the following example of a validator used by a `DateField`.
+
+[source,javascript]
+.Example of a validator
+----
+import {dates} from '@eclipse-scout/core';
+function(value) {
+  if (dates.isSameDay(value, new Date())) {
+    throw 'You are not allowed to select the current date';
+  }
+  return value;
+};
+----
+
+This validator ensures that the user may not enter the current date. If he does, en error status will be shown on the right side of the date field saying 'You are not allowed to select the current date'.
+
+[[img-datefield-validation-error, Figure 000]]
+.Validation error of a date field
+image::common:datefield_validation_error.png[]
+
+As you can see in the example, in order to mark a value as invalid just throw the error message you want to show to the user. You could also throw an error or a `Status` object. In that case a generic error message will be displayed.
+
+In order to activate your validator, you can either call `setValidator` to replace the existing validator. In that case you should consider calling the default validator first, like you did it for the formatter or parser. Or you can use `addValidator` which adds the validator to the list of validators of the field.
+
+[source,javascript]
+.Adding a validator
+----
+field.addValidator(validator);
+----
+
+Compared to parse and format you may have multiple validators. When the value is validated, every validator is called and has to aggree. If one validation fails, the value is not accepted. This should make it easier to reuse existing validators or separate your validation into tiny validators according to your business rules.
+
+If you now ask yourself, why this is not possible for parsing and formatting, consider the following: `Validate` takes a value and returns a value, the data type is the same for input and output. `Parse` takes a text and creates a value, `format` takes a value and creates a text. The data type is likely not the same (besides for the `StringField`). If you had multiple parsers, the output of the previous parser would be the input of the next one, so depending on the index of your parser you would either get the text or the already parsed value as input. Confusing, isn't it? So in order to keep it simple, there is only one parser and only one formatter for each field.

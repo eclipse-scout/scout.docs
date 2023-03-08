@@ -99,7 +99,6 @@ And in the subfolder `src/` you find the source files that are transformed and b
 
 :the-package-json-guide: https://nodejs.dev/learn/the-package-json-guide
 :the-package-lock-json-file: https://nodejs.dev/learn/the-package-lock-json-file
-:technical-guide-js-build-stack: https://eclipsescout.github.io/{doc-short-version}/technical-guide-js.html#build-stack
 
 ==== npm
 
@@ -153,7 +152,7 @@ Also, make sure that you don't use exactly the same name as for the target _JS_ 
 Other than that, you can name the target files whatever you want,
 just make sure you also adjust the **references in** `**index.html**` accordingly (see next section).
 
-For more details on the build, see the {technical-guide-js-build-stack}[_Build Stack_ chapter in the technical guide].
+For more details on the build, see xref:technical-guide:scout-js/build-stack.adoc[].
 
 === Static Resources
 
@@ -296,7 +295,6 @@ See the https://git-scm.com/docs/gitignore[gitignore Documentation] for details.
 == What's Next?
 
 :jswidgets-code: https://github.com/bsi-software/org.eclipse.scout.docs/tree/releases/{doc-short-version}/code/widgets
-:technical-guide-js: https://eclipsescout.github.io/{doc-short-version}/technical-guide-js.html
 :scout-forum: http://www.eclipse.org/forums/eclipse.scout
 
 Now that you have successfully created your first Scout JS application,
@@ -309,7 +307,7 @@ To see more example code of Scout JS, we recommend looking at the {jswidgets}[Sc
 and its {jswidgets-code}[source code].
 
 If you are interested in Scout's concepts, architecture and features you probably want to have
-a look at the {technical-guide-js}[Scout JS Technical Guide].
+a look at the xref:technical-guide:scout-js/overview.adoc[Scout JS Technical Guide].
 
 In case you should get stuck somewhere and need help,
 contact us on the http://www.eclipse.org/forums/eclipse.scout[Scout Forum]

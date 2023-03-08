@@ -1,0 +1,106 @@
+= HTML Document Parser
+
+The HTML document parser is only available in the Scout UI server. If your Scout JS application uses a different backend, you cannot use the features described in this chapter.
+
+The class `HtmlDocumentParser` is used by the Scout UI server in order to create dynamic HTML output on the server-side. Like JSP the parser supports a set of tags that are processed by the sever. The main purpose of the parser is to provide functions used for `login.html` and `index.html`, like bootstrapping and  localization _before_ JavaScript can be executed in the browser.
+
+Note: some tags like `scout-version` and `scout-text` will be removed from the DOM once the Scout `App` is initialized.
+
+== scout:base
+
+Outputs the context-path (or the root-directory) of the deployed web application as `base` tag in the HTML document.
+
+Example:
+
+  <scout:base>
+
+Output:
+
+  <base href="helloworld_1_0/">
+
+== scout:include
+This tag is used for server-side inlcudes, which means you can embed the HTML content of another file into the current HTML document. This avoids unnecessary code duplication by referencing the same fragement in multiple HTML documents.
+
+Example:
+
+  <scout:include template="head.html" />
+
+== scout:message
+Depending on the current user language provided by the browser, this tag outputs a list of localized text strings. The texts are used to display error-messages during login in the correct language, because at this point we don't have a Scout session and thus no user language. The parser replaces the message tag through `scout-text` tags. These tags will be read by  `scout.texts#readFromDOM`.
+
+Example:
+
+  <scout:message style="tag" key="ui.Login" key="ui.LoginFailed" key="ui.User" key="ui.Password" />
+
+Output:
+
+  <scout-text data-key="ui.Login" data-value="Anmelden"></scout-text>
+
+== scout:script
+
+Converts the tag to a regular `script` tag in the HTML document so that the referenced JavaScript bundle can be loaded by the browser.
+Prior to that, the file name will be augmented depending on Scout's runtime properties: if caching is enabled an additional fingerprint is added to the filename.
+If minifying is enabled the suffix ".min" is appended to the filename.
+
+This tag may be used if custom chunks are defined in `webpack.config.js` and names of these chunks are known at development time.
+
+Example:
+
+  <scout:script src="yourapp.js" />
+
+Output:
+
+  <script src="yourapp-98aea5b3.min.js"></script>
+
+== scout:scripts
+
+Writes all `script` tags in the HTML document which contain the webpack entryPoint name given. This requires that no custom splitChunks are defined.
+It automatically includes all chunks that are required by the given entry point. The entry point name must match the name in the `entry` section of the `webpack.config.js` file.
+
+Example:
+
+  <scout:scripts entrypoint="yourapp"/>
+
+Output:
+
+  <script src="vendors~yourapp~login~logout-546ee42899f2ccc6205f.min.js"></script>
+  <script src="yourapp-3b5331af613bf5a7803d.min.js"></script>
+  <script src="vendors~yourapp-945482a5b2d8d312fd1b.min.js"></script>
+
+== scout:stylesheet
+
+Converts the tag to a regular `style` tag in the HTML document so that the referenced CSS bundle can be loaded by the browser. Prior to that, the file name will be augmented depending on Scout's runtime properties: if caching is enabled an additional fingerprint is added to the filename. If minifying is enabled the suffix "-min" is appended to the filename.
+
+Example:
+
+  <scout:stylesheet src="yourtheme.css" />
+
+Output:
+
+  <link rel="stylesheet" type="text/css" href="yourtheme-98aea5b3.min.css">
+
+== scout:stylesheets
+
+Writes all `link` tags in the HTML document which contain the webpack entryPoint name given. This requires that no custom splitChunks are defined.
+It automatically includes all chunks that are required by the given entry point. The entry point name must match the name in the `entry` section of the `webpack.config.js` file.
+
+Example:
+
+  <scout:stylesheets entrypoint="yourapp-theme"/>
+
+Output:
+
+  <link rel="stylesheet" type="text/css" href="yourapp-theme-9858a5b3.min.css">
+  <link rel="stylesheet" type="text/css" href="vendors~yourapp-theme-675d7813.min.css">
+
+== scout:version
+
+Outputs the current version of the Scout application as `scout-version` tag in the HTML document. This tag is read by `scout.App#_initVersion`.
+
+Example:
+
+  <scout:version>
+
+Output:
+
+  <scout-version data-value="16.1.0.002"></scout-version>

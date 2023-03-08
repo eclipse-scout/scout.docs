@@ -1,0 +1,32 @@
+= Object Factory
+
+As seen in the xref:technical-guide:scout-js/widget.adoc#creating-a-widget[Creating a Widget] a widget may be created using `scout.create`. When using this function, the call is delegated to the `ObjectFactory`.
+
+The `ObjectFactory` is responsible to create and initialize a Scout object. A typical Scout object has an `objectType` and an `init` function. But actually any kind of object with a constructor function in the scout or a custom namespace may be created.
+
+By default, objects are created using naming convention. This means when calling `scout.create('scout.Table', model)`, the `scout` namespace is searched for a class called `Table`. Since `scout` is the default namespace, it may be omitted. So calling `scout.create('Table', model)` has the same effect. If there is such a class found, it will be instantiated and the `init` function called, if there is one. The `model` is passed to that `init` function. So instead of using `scout.create` you could also use the following code:
+
+[source,javascript]
+.Creating an object without the ObjectFactory
+----
+import {Table} from '@eclipse-scout/core';
+var table = new Table();
+table.init(model);
+----
+
+This will work fine, but you will loose the big benefit of the `ObjectFactory`: the ability to replace existing classes. So if you want to customize the default `Table`, you would likely extend that table and override some functions. In that case you need to make sure every time a table is created, your class is used instead of the default. To do that you have to register your class in the `ObjectFactory` with the `objectType` `Table`. If `scout.create('Table')` is called the object factory will check if there is a class registered for the type `Table` and, if yes, that class is used. Only if there is no registration found, the default approach using the naming convention is performed.
+
+In order to register you class, you need a file called `objectFactories` and add that to your JavaScript module (e.g. index.js). The content of that file may look as following:
+
+[source,javascript]
+.Adding a new object factory registration
+----
+import {CustomTable} from './index';
+import {scout} from '@eclipse-scout/core';
+
+scout.addObjectFactories({
+  'Table': () => new CustomTable()
+});
+----
+
+This will simply add a new factory for the type `Table` the the list of existing factories. From now on `yourproject.CustomTable` will be instantiated every time a `Table` should be created.

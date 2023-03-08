@@ -31,7 +31,6 @@ ifndef::mdledir[:mdledir: .]
 :simrel-link: https://wiki.eclipse.org/Simultaneous_Release[Eclipse {simrel-name} Simultaneous Release]
 :simrel-faq-link: https://wiki.eclipse.org/SimRel/Simultaneous_Release_Cycle_FAQ#What_is_the_Simultaneous_Release_cycle_.3F[Simultaneous Release FAQ]
 :techdoc: https://eclipsescout.github.io/{doc-short-version}/technical-guide.html
-:techdocjs: https://eclipsescout.github.io/{doc-short-version}/technical-guide-js.html
 
 
 include::partial$_initCommon.adoc[]
