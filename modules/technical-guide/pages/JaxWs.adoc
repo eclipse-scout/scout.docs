@@ -1,0 +1,848 @@
+= Webservices with JAX-WS
+include::common:partial$_header.adoc[]
+
+//-----------------------------------------------------------------------------
+// This file describes the architecture of JAX-WS
+//-----------------------------------------------------------------------------
+
+The Java API for XML-Based Web Services (JAX-WS) is a Java programming language API for creating web services. JAX-WS is one of the Java XML programming APIs, and is part of the Java EE platform.
+
+Scout facilitates working with webservices, supports you in the generation of artifacts, and provides the following functionality:
+
+== Functionality
+
+* ready to go Maven profile for easy webservice stub and artifact generation
+* full JAX-WS 2.3 compliance
+* JAX-WS implementor independence
+* provides an up front port type _EntryPoint_ to enforce for authentication, and to run web requests in a xref:technical-guide:RunContext.adoc[]
+* adds cancellation support for on-going webservice requests
+* provides a port cache for webservice consumers
+* allows to participate in 2PC protocol for webservice consumers
+* allows to provide 'init parameters' to handlers
+
+== JAX-WS implementor and deployment
+
+=== JAX-WS version and implementor
+The JAX-WS Scout integration provides a thin layer on top of JAX-WS implementors to facilitate working with webservices.
+It depends on the JAX-WS 2.3.x API as specified in JSR 224. It is implementor neutral, and was tested with with the following implementations:
+
+* _JAX-WS RI_ (reference implementation)
+* _JAX-WS METRO_
+* _Apache CXF_
+
+The integration does not require you to bundle the JAX-WS implementor with your application, which is a prerequisite for running in an EE container.
+
+=== Running JAX-WS in a servlet container
+A servlet container like Apache Tomcat typically does not ship with a JAX-WS implementor. As the actual implementor, you can either use _JAX-WS RI_ as shipped with the JRE, or provide a separate implementor like _JAX-WS METRO_ or _Apache CXF_ in the form of a Maven dependency. However, _JAX-WS RI_ does not provide a servlet based entry point, because the Servlet API is not part of the Java SE specification.
+
+When publishing webservices, it therefore is easiest to ship with a separate implementor: Declare a respective Maven dependency in your webbapp project - that is the Maven module typically containing the application's _web.xml_.
+
+=== Running JAX-WS in a EE container
+When running in an EE container, the container typically ships with a JAX-WS implementor. It is highly recommended to use that implementor, primarily to avoid classloading issues, and to further profit from the container's monitoring and authentication facility. Refer to the containers documentation for more information.
+
+[[jaxws.implementor.configuration]]
+=== Configure JAX-WS implementor
+JAX-WS Scout integration is prepared to run with different implementors. Unfortunately, some implementors do not implement the JSR exactly, or some important functionality is missing in the JSR. To address this fact without loosing implementor independence, the delegate bean <<JaxWsImplementorSpecifics,JaxWsImplementorSpecifics>> exists.
+
+As of now, Scout ships with three such implementor specific classes, which are activated via _config.properties_ by setting the property _scout.jaxws.implementor_ with its fully qualified class name. By default, _JAX-WS METRO_ implementor is installed.
+
+For instance, support for _Apache CXF_ implementor is activated as following:
+[source,txt]
+----
+scout.jaxws.implementor=org.eclipse.scout.rt.server.jaxws.implementor.JaxWsCxfSpecifics
+----
+
+[cols="30,70", options="header"]
+|===
+|class |description
+
+|JaxWsRISpecifics
+|implementor specifics for _JAX-WS Reference Implementation (RI)_ as contained in JRE
+
+|JaxWsMetroSpecifics
+|implementor specifics for _JAX-WS METRO_ implementation
+
+|JaxWsCxfSpecifics
+|implementor specifics for _Apache JAX-WS CXF_ implementation
+|===
+
+Of course, other implementors can be used as well. For that to work, install your own _JaxWsImplementorSpecifics_ class, and reference its fully qualified name in _config.properties_.
+
+[[JaxWsImplementorSpecifics]]
+==== JaxWsImplementorSpecifics
+This class encapsulates functionality that is defined in JAX-WS JSR 224, but may diverge among JAX-WS implementors. As of now, the following points are addressed:
+
+* missing support in JSR to set socket connect and read timeout;
+* proprietary 'property' to set response code in _Apache CXF_;
+* when working with _Apache CXF_, response header must be set directly onto Servlet Response, and not via `MessageContext`;
+* when working with _JAX-WS METRO_ or _JAX-WS RI_, the handler's return value is ignored in one-way communication; instead, the chain must be exited by throwing a webservice exception;
+
+Learn more about how to configure a JAX-WS implementor: <<jaxws.implementor.configuration>>
+
+[[jaxws.implementor.dependency]]
+==== Configure JAX-WS Maven dependency in pom.xml
+The effective dependency to the JAX-WS implementor is to be specified in the pom.xml of the webapp module (not the server module). That allows for running with a different implementor depending on the environment, e.g. to provide the implementor yourself when starting the application from within your IDE in Jetty, or to use the container's implementor when deploying to an EE enabled application server. Even if providing the very same implementor for all environments yourself, it is good practice to do the configuration in the webapp module.
+
+A generally applicable configuration cannot be given, because the effective configuration depends on the implementor you choose, and whether it is already shipped with the application server you use. However, if _JAX-WS RI_ is sufficient, you do not have to specify an implementor at all because already contained in JRE.
+
+If running in an EE application server, refer to the containers documentation for more information.
+
+<<lst-maven.dep.metro>> provides sample configuration for shipping with _JAX_WS METRO_ and <<lst-maven.dep.cxf>> does the same for _Apache CXF_
+
+[[lst-maven.dep.metro]]
+.Maven dependency for _JAX-WS METRO_
+[source,xml,indent=0]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.pom.dependency.metro]
+----
+
+[[lst-maven.dep.cxf]]
+.Maven dependency for _Apache CXF_
+[source,xml,indent=0]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.pom.dependency.cxf]
+----
+
+==== Configure JAX-WS servlet in web.xml
+This section describes the configuration of the entry point Servlet to publish webservices. If working with webservice consumers only, no configuration is required.
+
+Similar to the pom.xml as described in <<jaxws.implementor.dependency>>, the _web.xml_ differs from implementor to implementor, and whether the implementor is already shipped with the application server. Nevertheless, the following <<lst-jaxws.webxml.metro>> show a sample configuration for _JAX-WS METRO_ and <<lst-jaxws.webxml.cxf>> for _Apache CXF_.
+
+[[lst-jaxws.webxml.metro]]
+.web.xml for _JAX-WS METRO_ Servlet
+[source,xml,indent=0]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.webxml.metro]
+----
+<1> the base URL where to publish the webservice endpoints
+
+[[lst-jaxws.webxml.cxf]]
+.web.xml for _Apache CXF_ Servlet
+[source,xml,indent=0]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.webxml.cxf]
+----
+<1> _Apache CXF_ specific configuration file for endpoints to be published. See <<jaxws.registration.endpoints.cxf>> for more information.
+<2> the base URL where to publish the webservice endpoints
+
+But, if running in an EE container, it is most likely that a Servlet configuration must not be configured, because the endpoints are discovered by the application server, or registered in a vendor specific way. Refer to the containers documentation for more information.
+
+TIP: Some application servers like Oracle WebLogic Server (WLS) allow the port types to be registered as a Servlet in web.xml. However, this is vendor specific, and works despite the fact that port type does not implement 'javax.servlet.Servlet'.
+
+WARNING: Do not forget to exclude the webservice's Servlet URL pattern from authentication filter.
+
+[[jaxws.modularization]]
+== Modularization
+Scout JAX-WS integration does not prescribe how to organize your webservices in terms of Maven modules. You could either put all your webservices directly into the server module, or create a separate _jaxws_ module containing all webservices, or even create a separate _jaxws_ module for each webservice. Most often, the second approach of a single, separate _jaxws_ module, which the server module depends on, is chosen.
+
+This is mainly because of the following benefits:
+
+* annotation processing must not be enabled for the entire server module
+* one module to build all webservice artifacts at once
+* easier to work with shared element types among webservices
+
+.typical modularization
+image::common:jaxws_modularization.png[]
+
+It is important to note, that the _server_ depends on the _jaxws_ module, and not vice versa. The _jaxws_ module is primarily of technical nature, meaning that it knows how to generate its WS artifacts, and also contains those. However, implementing port type beans and even implementing handler beans are typically put into the server module to the access service and database layer. On the other hand, WS clients may be put into _jaxws_ module, because they rarely contain any project specific business logic.
+
+You may ask yourself, how the _jaxws_ module can access the implementing port type and handlers located in the _server_ module. That works because of the indirection via bean manager, and because there is a flat classpath at runtime.
+
+See <<WebServiceEntryPoint,WebServiceEntryPoint>> for more information.
+
+== Build webservice stubs and artifacts
+
+[[jaxws.stub.generation]]
+=== Configure webservice stub generation via wsimport
+The Maven plugin 'com.sun.xml.ws:jaxws-maven-plugin' with the goal 'wsimport' is used to generate a webservice stub from a WSDL file and its referenced XSD schema files. If your Maven module inherits from the Scout module 'maven_rt_plugin_config-master', the 'jaxws' profile is available, which activates automatically upon the presence of a 'WEB-INF/wsdl' folder. Instead of inheriting from that module, you can alternatively copy the 'jaxws' profile into your projects parent POM module.
+
+This profile is for convenience purpose, and provides a ready-to-go configuration to generate webservice stubs and webservice provider artifacts. It configures the 'jaxws-maven-plugin' to look for WSDL and XSD files in the folder 'src/main/resources/WEB-INF/wsdl', and for binding files in the folder '/src/main/resources/WEB-INF/binding'. Upon generation, the stub will be put into the folder 'target/generated-sources/wsimport'.
+
+The profiles requires the Scout runtime version to be specified, and which is used to refer to `org.eclipse.scout.jaxws.apt` module to generate webservice provider artifacts. However, this version is typically defined in pom.xml of the parent module, because also used to refer to other Scout runtime artifacts.
+
+[[lst-jaxws.pom.scoutversion]]
+.Scout version defined as Maven property
+[source,xml,indent=0]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.pom.scoutversion]
+----
+
+If your project design envisions a separate JAR module per WSDL, you simply have to set the property 'jaxws.wsdl.file' with the name of your WSDL file in the module's pom.xml (example in <<lst-jaxws.pom.single-wsdl-file>>).
+
+[[lst-jaxws.pom.single-wsdl-file]]
+.wsimport configuration in pom.xml if working with a single WSDL file per JAR module
+[source,xml,indent=0]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.pom.single-wsdl-file-per-module]
+----
+<1> name of the wsdl file
+
+Otherwise, if having multiple WSDL files in your JAR module, some little more configuration is required, namely a respective execution section per WSDL file.
+Thereby, the 'id' of the execution section must be unique.
+Scout 'jaxws' profile already provides one such section, which is used to generate the stub for a single WSDL file (see such configuration in <<lst-jaxws.pom.single-wsdl-file>>), and names it 'wsimport-1'.
+It is simplest to name the subsequent execution sections 'wsimport-2', 'wsimport-3', and so on. +
+For each execution section, you must configure its unique _id_, the _goal_ 'wsimport', and in the configuration section the respective _wsdlLocation_ and _wsdlFile_.
+For 'wsimport' to work, _wsdlLocation_ is not required.
+However, that location will be referenced in generated artifacts to set the wsdl location via `@WebService` and `@WebServiceClient`.
+The complete configuration is presented in <<lst-jaxws.pom.multiple-wsdl>>.
+
+WARNING: If you decide to configure multiple WSDL files in your POM as described in <<lst-jaxws.pom.multiple-wsdl>>, the configuration defined in the parent POM (`maven_rt_plugin_config-master`) and expecting a configuration as presented in <<lst-jaxws.pom.single-wsdl-file>> needs to be overridden, therefore one of your execution id needs to be `wsimport-1`.
+
+[[lst-jaxws.pom.multiple-wsdl]]
+.wsimport configuration in pom.xml if working with multiple WSDL files per JAR module
+[source,xml,indent=0]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.pom.multiple-wsdl-files-per-module]
+----
+<1> declare an execution section for each WSDL file
+<2> give the section a unique id (wsimport-1, wsimport-2, wsimport-3, ...)
+<3> specify the goal 'wsimport' to build the webservice stub
+<4> specify the project relative path to the WSDL file
+<5> specify the relative path to the WSDL file (relative to 'WEB-INF/wsdl')
+<6> declare an execution section for the next WSDL file
+
+Further, you can overwrite any configuration as defined by 'jaxws-maven-plugin'. See http://www.mojohaus.org/jaxws-maven-plugin/ for supported configuration properties.
+
+Also, it is good practice to create a separate folder for each WSDL file, which also contains all its referenced XSD schemas. Then, do not forget to change the properties _wsdlLocation_ and _wsdlFile_ accordingly.
+
+=== Customize WSDL components and XSD schema elements via binding files
+
+By default, all XML files contained in folder 'WEB-INF/binding' are used as binding files. But, most often, you will have a global binding file, which applies to all your WSDL files, and some custom binding files different per WSDL file and XSD schema files. See how to explicitly configure binding files in <<lst-jaxws.pom.multiple-binding>>.
+
+[[lst-jaxws.pom.multiple-binding]]
+.explicit configuration of binding files
+[source,xml,indent=0]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.pom.multiple-binding-files]
+----
+<1> global binding file which applies to all XSD schema elements. See <<lst-jaxws.example.globalbindingfile>>  for an example.
+<2> custom binding file to customize the webservice's WSDL components in the namespace _http://java.sun.com/xml/ns/jaxws_. See <<lst-jaxws.bindingfile.ws>> for an example.
+<3> custom binding file to customize the webservice's XSD schema elements in the namespace _http://java.sun.com/xml/ns/jaxb_. See <<lst-jaxws.bindingfile.xs>> for an example.
+
+With binding files in place, you can customize almost every WSDL component and XSD element that can be mapped to Java, such as the service endpoint interface class, packages, method name, parameter name, exception class, etc.
+
+The global binding file typically contains some customization for common data types like _java.util.Date_ or _java.util.Calendar_, whereas the custom binding files are specific for a WSDL or XSD schema. See <<jaxws.xmladapters>>.
+
+[[lst-jaxws.example.globalbindingfile]]
+.example of global binding file in the namespace http://java.sun.com/xml/ns/jaxb
+[source,xml,indent=0]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.bindingfile.global-binding]
+----
+
+By default, generated artifacts are put into the package corresponding to the element's namespace. Sometimes, you like to control the package names, but you want to do that on a per-namespace basis, and not put all the artifacts of a webservice into the very same package. That is mainly to omit collisions, and to have artifacts shared among webservices not duplicated.
+
+Two separate binding files are required to customize WSDL components and XSD schema elements. +
+That is because WSDL component customization is to be done in 'jaxws' namespace http://java.sun.com/xml/ns/jaxws, whereas XSD schema element customization in 'jaxb' namespace http://java.sun.com/xml/ns/jaxb.
+
+[[lst-jaxws.bindingfile.ws]]
+.example of jaxws component customization in the namespace http://java.sun.com/xml/ns/jaxws
+[source,xml,indent=0]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.bindingfile.ws-binding]
+----
+<1> customization via jaxws namespace: http://java.sun.com/xml/ns/jaxws
+<2> instructs to put all webservice components (port type, service) into package _org.eclipse.ws.yourfirstwebservice_
+
+[[lst-jaxws.bindingfile.xs]]
+.example of xsd schema element customization in the namespace http://java.sun.com/xml/ns/jaxb
+[source,xml,indent=0]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.bindingfile.xs-binding]
+----
+<1> customization via jaxb namespace: http://java.sun.com/xml/ns/jaxb
+<2> instructs to put all XSD schema elements in namespace _http://eclipse.org/public/services/ws/soap_ into package _org.eclipse.ws.yourfirstwebservice_
+<3> instructs to put all XSD schema elements in namespace _http://eclipse.org/public/services/ws/common/soap_ into package _org.eclipse.ws.common_
+
+WARNING: _wsimport_ allows to directly configure the package name for files to be generated (packageName). However, this is discouraged, because all artifacts are put into the very same package. Use package customization on a per-namespace basis instead.
+
+TIP: For shared webservice artifacts, you can also use XJC binding compiler to generate those artifacts in advance, and then provide the resulting episode binding file (META-INF/sun-jaxb.episode) to _wsimport_. See https://www.mojohaus.org/jaxb2-maven-plugin/Documentation/v2.4/example_xjc_basic.html for more information.
+
+=== Annotation Processing Tool (APT)
+Annotation Processing (APT) is a tool which can be enabled to fire for annotated types during compilation. In JAX-WS Scout integration, it is used as a trigger to generate webservice port type implementations. Such an auto-generated port type implementation is called an entry point. It is to be published as the  webservice's endpoint, and acts as an interceptor for webservice requests. It optionally enforces for authentication, and makes the request to be executed in a xref:technical-guide:RunContext.adoc[]. Then, it handles the web request to the effectively implementing port type bean for actual processing.
+
+The entry point generated simplifies the actual port type implementation by removing lot of glue code to be written by hand otherwise. Of course, this entry point is just for convenience purpose, and it is up to you to make use of this artifact.
+
+When using 'jaxws' Scout Maven profile, annotation processing is enabled for that module by default. But, an entry point for a webservice port type will only be generated if enabled for that port type, meaning that a class annotated with <<WebServiceEntryPoint,WebServiceEntryPoint>> pointing to that very endpoint interface is found in this module. Anyway, for a sole webservice consumer, it makes no sense to generate an entry point at all.
+
+==== Enable Annotation Processing Tool (APT) in Eclipse IDE
+In Eclipse IDE, the workspace build ignores annotation processing as configured in pom.xml. Instead, it must be enabled separately with the following files. Nevertheless, to simply run Maven build with annotation support from within Eclipse IDE, those files are not required.
+
+[cols="40,60", options="header"]
+|===
+|file |description
+|<<settings_org.eclipse.jdt.core.prefs,.settings/org.eclipse.jdt.core.prefs>>
+|Enables APT for this module via the property _org.eclipse.jdt.core.compiler.processAnnotations=enabled_
+
+|<<settings_org.eclipse.jdt.apt.core.prefs,.settings/org.eclipse.jdt.apt.core.prefs>>
+|Enables APT for this module via the property _org.eclipse.jdt.apt.aptEnabled=true_
+
+|<<factorypath,.factorypath>>
+|Specifies the annotation processor to be used (<<JaxWsAnnotationProcessor,JaxWsAnnotationProcessor>>) and dependent artifacts
+|===
+
+[[generate_artifacts_from_console]]
+=== Build webservice stubs and APT artifacts from console
+Simply run _mvn clean compile_ on the project. If you are experiencing some problems, run with -X debug flag to get a more detailed error message.
+
+[[generate_artifacts_from_eclipse]]
+=== Build webservice stubs and APT artifacts from within Eclipse IDE
+In the Eclipse IDE, there are three ways to generate webservice stubs and APT artifacts.
+
+. the implicit way on behalf of the workspace build and m2e integration (automatically, but sometimes not reliable)
+. the explicit but potentially slow way by doing a 'Update Maven Project' with 'clean projects' checked (Alt+F5)
+. the explicit and faster way by running a Maven build for that project. Thereto, right-click on the project or pom.xml, then select the menu 'Run As | Maven build...', then choose 'clean compile' as its goal and check 'Resolve workspace artifacts', and finally click 'Run'. Afterwards, do not forget to refresh the project by pressing F5.
+
+If the webservice stub(s) or APT artifacts are not generated (anew or at all), delete the target folder manually, and continue according to procedure number three. A possible reason might be the presence of 'target\jaxws\wsartifact-hash'. Then, for each webservice, a 'hash file' is computed by 'wsimport', so that regeneration only occurs upon a change of WSDL or XSD files.
+
+=== Exclude derived resources from version control
+Stub and APT artifacts are derived resources, and should be excluded from version control.
+When working with Eclipse IDE, this is done automatically by eGit, because it adds derived resources to _.gitignore_ (if configured to do so).
+
+=== JaxWsAnnotationProcessor
+`JaxWsAnnotationProcessor` is an annotation processor provided by Scout JAX-WS integration to generate an entry point for an endpoint interface during compilation. The instructions how to generate the entry point is given via a Java class or Java interface annotated with <<WebServiceEntryPoint,WebServiceEntryPoint>> annotation.
+
+== Provide a webservice
+In this chapter, you will learn how to publish a webservice provider via an entry point.
+
+[[WebServiceEntryPoint]]
+=== The concept of an Entry Point
+An entry point implements the endpoint interface (or port type interface), and is published as the webservice endpoint for that endpoint interface. The entry point itself is auto generated by <<JaxWsAnnotationProcessor,JaxWsAnnotationProcessor>> during compile time, based on instructions as given by the respective class/interface annotated with `WebServiceEntryPoint` annotation. The entry point is responsible to enforce authentication and to run the web request in a `RunContext`. In turn, the request is propagated to the bean implementing the endpoint interface.
+
+<<img-interaction_entrypoint_porttype>> illustrates the endpoint's class hierarchy and the message flow for a web request.
+
+[[img-interaction_entrypoint_porttype]]
+.Interaction of entry point and port type
+image::common:jaxws_interaction_entrypoint_porttype.png[]
+
+As you can see, both, entry point and port type implement the endpoint interface. But it is the entry point which is actually installed as the webservice endpoint, and which receives web requests. However, the webservice itself is implemented in the implementing bean, which typically is located in _server_ module. See <<jaxws.modularization>> for more information. Upon a web request, the entry point simply intercepts the web request, and then invokes the web method on the implementing bean for further processing.
+
+See an <<PingWebServicePortTypeBean.java,example>> of an implementing port type bean, which is invoked by entry point.
+
+TIP: Do not forget to annotate the implementing bean with `ApplicationScoped` annotation in order to be found by bean manager.
+
+=== Generate an Entry Point as an endpoint interface
+This section describes the steps required to generate an entry point. For demonstration purposes, a simple ping webservice is used, which provides a single method 'ping' to accept and return a `String` object.
+
+See the WSDL file of ping webservice: <<PingWebService.wsdl>> +
+See the endpoint interface of ping webservice: <<PingWebServicePortType.java>>
+
+To generate an entry point for the webservice's endpoint interface, create an interface as following in your jaxws project.
+[source,java,indent=0]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.entrypoint.definition]
+----
+<1> Create an interface or class to act as an anchor for the `WebServiceEntryPoint` annotation. This class or interface has no special meaning, except that it declares the annotation to be interpreted by annotation processor.
+<2> Reference the endpoint interface for which an entry point should be generated for. Typically, the endpoint interface is generated by 'wsimport' and is annotated with `WebService` annotation.
+
+It is important to understand, that the interface `PingWebServiceEntryPointDefinition` solely acts as the anchor for the `WebServiceEntryPoint` annotation. This class or interface has no special meaning, except that it declares the annotation to be interpreted by annotation processor. Typically, this class is called _Entry Point Definition_.
+
+If running `mvn clean compile`, an entry point is generated for that endpoint interface.
+See the entry point as generated for ping webservice: <<PingWebServicePortTypeEntryPoint.java>>
+
+If you should experience some problems in the entry point generation, refer to <<generate_artifacts_from_eclipse,Build webservice stubs and APT artifacts from within Eclipse IDE>>, or <<generate_artifacts_from_console,Build webservice stubs and APT artifacts from console>>.
+
+=== Instrument the Entry Point generation
+This section gives an overview on how to configure the entry point to be generated.
+
+[cols="30,70", options="header"]
+|===
+|attribute |description
+
+|*endpointInterface* +
+(_mandatory_)
+|Specifies the endpoint interface for which to generate an entry point for. +
+ An endpoint interface defines the service's abstract webservice contract, and is also known as port type interface. Also, the endpoint interface is annotated with WebService annotation.
+
+|entryPointName
+|Specifies the class name of the entry point generated. If not set, the name is like the name of the endpoint interface suffixed with EntryPoint.
+
+|entryPointPackage
+|Specifies the package name of the entry point generated. If not set, the package name is the same as of the element declaring this WebServiceEntryPoint annotation.
+
+|serviceName
+|Specifies the service name as declared in the WSDL file, and must be set if publishing the webservice via auto discovery in an EE container. Both, 'serviceName' and 'portName' uniquely identify a webservice endpoint to be published. +
+See for valid service names in the WSDL: `<wsdl:service name="SERVICE_NAME">...</wsdl:service>`
+
+|portName
+|Specifies the name of the port as declared in the WSDL file, and must be set if publishing the webservice via auto discovery in an EE container. Both, 'serviceName' and 'portName' uniquely identify a webservice endpoint to be published. +
+See for valid port names in the WSDL: `<wsdl:service name="..."><wsdl:port name="PORT_NAME" binding="..."/></wsdl:service>`
+
+|wsdlLocation
+|Specifies the location of the WSDL document. If not set, the location is derived from WebServiceClient annotation which is typically initialized with the 'wsdlLocation' as provided to 'wsimport'.
+
+|authentication
+|Specifies the authentication mechanism to be installed, and in which `RunContext` to run authenticated requests. By default, authentication is _disabled_. If _enabled_, an `AuthenticationHandler` is generated and registered in the handler chain as very first handler. However, the position of that handler can be changed via _order_ field on `Authentication` annotation. +
+See <<jaxws.provider.authentication>> for more information.
+
+|handlerChain
+|Specifies the handlers to be installed. The order of the handlers is as declared. A handler is looked up as a bean, and must implement `javax.xml.ws.handler.Handler` interface. +
+See <<jaxws.provider.handlerChain>> for more information.
+|===
+
+Besides the instructions which can be set via `WebServiceEntryPoint` annotation, it is further possible to contribute other annotations to the entry point. Simply declare the annotation of your choice as a sibling annotation to `WebServiceEntryPoint` annotation. In turn, this annotation will be added to the entry point as well. This may be useful to enable some vendor specific features, or e.g. to enable _MTOM_ to efficiently send binary data to a client. +
+That also applies for `WebService` annotation to overwrite values as declared in the WSDL file.
+
+Further, you can also provide your own _handler chain binding file_. However, _handlers_ and _authentication_ as declared via `WebServiceEntryPoint` annotation are ignored then.
+
+WARNING: Handlers registered via _handlerChain_ must be beans, meaning either annotated with _@Bean_ or _@ApplicationScoped_.
+
+TIP: The binding to the concrete endpoint is done via 'endpointInterface' attribute. If a WSDL declares multiple services, create a separate entry point definition for each service to be published.
+
+TIP: Annotate the _Entry Point Definition_ class with `IgnoreWebServiceEntryPoint' to not generate an entry point for that definition. This is primarily used while developing an entry point, or for documenting purpose.
+
+TIP: Some fields require you to provide a Java class. Such fields are mostly of the annotation type `Clazz`, which accepts either the concrete `Class`, or its 'fully qualified name'. Use the latter if the class is not visible from within `jaxws` module. +
+However, if ever possible specify a `Class`. Because most classes are looked up via bean manager, this can be achieved with an interface located in 'jaxws' module, but with an implementation in 'server' module.
+
+
+[[jaxws.provider.authentication]]
+==== Configure Authentication
+The field 'authentication' on `WebServiceEntryPoint` configures what authentication mechanism to install on the webservice endpoint, and in which `RunContext` to run authenticated webservice requests. It consists of the <<IAuthenticationMethod,IAuthenticationMethod>> to challenge the client to provide credentials, and the <<ICredentialVerifier,ICredentialVerifier>> to verify request's credentials against a data source.
+
+By default, authentication is _disabled_. If _enabled_, an `AuthenticationHandler` is generated and registered in the handler chain as very first handler. The position can be changed via _order_ field on `Authentication` annotation.
+
+The following properties can be set.
+[cols="30,70"]
+|===
+|*method* +
+(_mandatory_)
+|Specifies the authentication method to be used to challenge the client to provide credentials. By default, `NullAuthenticationMethod` is used to disable authentication. +
+See <<IAuthenticationMethod,IAuthenticationMethod>> for more information.
+
+|verifier +
+|Specifies against which data source credentials are to be verified. By default, `ForbiddenCredentialVerifier` is used to reject any webservice request. +
+See <<ICredentialVerifier,ICredentialVerifier>> for more information.
+
+|order +
+|Specifies the position where to register the authentication handler in the handler chain. By default, it is registered as the very first handler.
+
+|principalProducer
+|Indicates the principal producer to use to create principals to represent authenticated users. By default, SimplePrincipalProducer is used.
+
+|runContextProducer
+|Indicates which xref:technical-guide:RunContext.adoc[] to use to run authenticated webservice requests. By default, `ServerRunContextProducer` is used, which is based on a session cache, and enforces to run in a new transaction.
+|===
+
+TIP: If using container based authentication (authentication enforced by the application server), use <<ContainerBasedAuthenticationMethod,ContainerBasedAuthenticationMethod>> as authentication method, and do not configure a credential verifier.
+
+[[example.entrypoint.definition]]
+=== Example of an Entry Point definition
+
+[[jaxws.listing.porttypedefinition]]
+.Example configuration for an entry point definition
+[source,java,indent=0]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.pingws.entrypoint.definition]
+----
+<1> References the endpoint interface for which to generate an entry point for.
+<2> Declares the handlers to be installed on that entry point. The order is as declared.
+<3> Registers the 'CorrelationIdHandler' as the first handler to set a correlation ID onto the current message context. See <<jaxws.provider.statepropagation>> for more information about state propagation.
+<4> Registers the 'IpAddressFilter' as the second handler to filter for IP addresses. Also, this handler is parameterized with 'init params' to configure the valid IP range.
+<5> Registers the `LogHandler` as the third handler to log SOAP messages.
+<6> Configures the webservice's authentication.
+<7> Configures the 'AuthHandler' to be put at position 2 (0-based), meaning in between of `IpAddressFilter` and `LogHandler`. By default, `AuthHandler` would be the very first handler in the handler chain.
+<8> Configures to use _BASIC AUTH_ as authentication method.
+<9> Configures to verify user's credentials against 'config.properties' file.
+<10> Specification of an `MTOM` annotation to be added to the entry point.
+
+This configuration generates the following artifacts:
+
+.generated artifacts
+image::common:jaxws_example_pingws_artifacts_generated.png[]
+
+All artifacts are generated into the package 'org.eclipse.scout.docs.ws.ping', as specified by the definition. The entry point itself is generated into 'PingWebServiceEntryPoint.java'. Further, for each handler, a respective handler delegate is generated. That allows handlers to be looked up via bean manager, and to run the handlers on behalf of a `RunContext`. Also, an `AuthHandler` is generated to authenticate web requests as configured.
+
+The handler-chain XML file generated looks as following. As specified, the authentication handler is installed as the third handler.
+
+.PingWebServiceEntryPoint_handler-chain.xml
+[source,java,indent=0]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws_pingws_handler_file]
+----
+
+The following listing shows the beginning of the entry point generated. As you can see, the handler-chain XML file is referenced via `HandlerChain` annotation, and the `MTOM` annotation was added as well.
+
+.PingWebServiceEntryPoint.java
+[source,java,indent=0]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.pingws.porttype]
+----
+
+[[jaxws.provider.handlerChain]]
+=== Configure JAX-WS Handlers
+See <<example.entrypoint.definition,listing>> for an example of how to configure JAX-WS handlers.
+
+JAX-WS handlers are configured directly on the entry point definition via the array field `handlerChain`. In turn, _JaxWsAnnotationProcessor_ generates a 'handler XML file' with the handler's order preserved, and which is registered in entry point via annotation `handlerChain`.
+
+A handler can be initialized with static 'init parameters', which will be injected into the handler instance. For the injection to work, declare a member of the type `Map` in the handler class, and annotate it with `javax.annotation.Resource` annotation.
+
+Because handlers are looked up via bean manager, a handler must be annotated with `ApplicationScoped` annotation.
+
+If a handler requires to be run in a `RunContext`, annotate the handler with `RunWithRunContext` annotation, and optionally specify a `RunContextProducer`. If the web request is authenticated upon entering the handler, the `RunContext` is run on behalf of the authenticated user. Otherwise, if not authenticated yet, it is invoked with the Subject as configured in `scout.jaxws.provider.user.handler` config property.
+
+.Example of a JAX-WS Handler
+[source,java,indent=0]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.handler.ipaddressfilter]
+----
+<1> Annotate the Handler with `ApplicationScoped` annotation, so it can be looked up via bean manager
+<2> Optionally annotate the Handler with `RunWithRunContext` annotation, so the handler is invoked in a `RunContext`
+<3> Declare a `Map` member annotated with `Resource` annotation to make injection of 'init parameters' work
+<4> Access injected 'init parameters'
+
+[[jaxws.provider.statepropagation]]
+=== Propagate state among Handlers and port type
+Sometimes it is useful to share state among handlers, and even with the port type. This can be done via `javax.xml.ws.handler.MessageContext`. By default, a property put onto message context is only available in the handler chain. To make it available to the port type as well, set its scope to 'APPLICATION' accordingly.
+
+The following listings gives an example of how to propagate state among handlers and port type.
+
+.This handler puts the correlation ID onto message context to be accessible by subsequent handlers and the port type.
+[source,java,indent=0]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.statepropagation.handler1]
+----
+<1> Put the 'correlation ID' onto message context.
+<2> Set scope to _APPLICATION_ to be accessible in port type. By default, the scope if _HANDLER_ only.
+
+[[jaxws.handler.statepropagation.readcid]]
+.This handler accesses the 'correlation ID' as set by the previous handler.
+[source,java,indent=0]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.statepropagation.handler2]
+----
+<1> Get the 'correlation ID' from message context.
+
+.This port type accesses the 'correlation ID' as set by the previous handler.
+[source,java,indent=0]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.statepropagation.porttype]
+----
+<1> Get the current message context via thread local `IWebServiceContext`
+<2> Get the 'correlation ID' from message context.
+
+=== JAX-WS Correlation ID Propagation
+Scout's JAX-WS integration already provides complete support for reading a correlation ID from the HTTP header named `X-Scout-Correlation-Id` of the incoming web service request and propagates it to the xref:technical-guide:RunContext.adoc[] that executes the actual service operation. A new correlation ID is created if the HTTP header is empty or missing.
+
+NOTE: The CorrelationIdHandler example above just illustrates the capabilities of a SOAPHandler.
+
+NOTE: You have to implement your own handler if the consumer provides a correlation ID in another header parameter or as part of the request's payload.
+
+.Add Scout's WsProviderCorrelationIdHandler to the handler chain
+[source,java,indent=0]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.pingwsWithCorrelationId.entrypoint.definition]
+----
+<1> Add the correlation ID handler *at the beginning* of the handler chain to ensure that all handlers can use its value (especially the `LogHandler` has to be added after the correlation ID handler).
+
+=== Registration of webservice endpoints
+The registration of webservice endpoints depends on the implementor you use, and whether you are running in an EE container with webservice auto discovery enabled.
+
+When running in an EE container, webservice providers are typically found by their presence. In order to be found, such webservice providers must be annotated with `WebService` annotation, and must have the coordinates 'serviceName' and 'portName' set. Still, most application servers allow for manual registration as well. E.g. if using Oracle WebLogic Server (WLS), endpoints to be published can be registered directly in 'web.xml' as a Servlet. However, this is vendor specific. Refer to the container's documentation for more information.
+
+If not running in an EE container, the registration is implementor specific. In the following, an example for _JAX-WS METRO_ and _Apache CXF_ is given.
+
+==== JAX-WS METRO
+During startup, _JAX-WS METRO_ looks for the file '/WEB-INF/sun-jaxws.xml', which contains the endpoint definitions.
+
+.WEB-INF/sun-jaxws.xml
+[source,xml,indent=0]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws_registration_metro_sunjaxws.xml]
+----
+
+[[jaxws.registration.endpoints.cxf]]
+==== Apache CXF
+During startup, _Apache CXF_ looks for the config file as specified in 'web.xml' via 'config-location'. See <<lst-jaxws.webxml.cxf>> for more information.
+
+.WEB-INF/cxf-jaxws.xml
+[source,xml,indent=0]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws_registration_cxf_jaxws.xml]
+----
+
+TIP: As the webservice endpoint, specify the fully qualified name to the entry point, and not to the implementing port type.
+
+TIP: Depending on the implementor, a HTML page may be provided to see all webservices published. +
+For _JAX-WS METRO_, enter the URL to a concrete webservice, e.g. http://localhost:8080/jaxws/PingWebService. +
+For _Apache CXF_, enter the base URL where the webservices are published, e.g. http://localhost:8080/jaxws.
+
+== Consume a webservice
+Communication with a webservice endpoint is done based on the webservice's port generated by 'wsimport'. Learn more how to <<jaxws.stub.generation,generate a webservice stub from a WSDL file>>.
+
+To interact with a webservice endpoint, create a concrete 'WebServiceClient' class which extends from `AbstractWebServiceClient`, and specify the endpoint's coordinates ('service' and 'port') via its bounded type parameters.
+
+.Example of a WS-Client
+[source,java,indent=0]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.wsclient1]
+----
+<1> Specify 'service' and 'port' via bounded type parameters
+
+A WS-Client can be configured with some default values like the endpoint URL, credentials, timeouts and more. However, the configuration can also  be set or overwritten later when creating the `InvocationContext`.
+
+See also <<jaxws.consumer.configuration>>.
+
+.Example of a WS-Client configuration
+[source,java,indent=0]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.wsclient2]
+----
+<1> Specifies the endpoint URL
+<2> Specifies credentials
+<3> Specifies timeouts
+
+=== Invoke a webservice
+A webservice operation is invoked on behalf of an invocation context, which is associated with a dedicated port, and which specifies the data to be included in the web request. Upon a webservice call, the invocation context should be discarded.
+
+.Example of a webservice call
+[source,java,indent=0]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.wsclient.call_1]
+----
+<1> Obtain a new invocation context and port via WS-Client
+<2> Invoke the webservice operation
+
+Invoking `newInvocationContext()` returns a new context and port instance. The context returned inherits all properties as configured for the WS-Client (endpoint URL, credentials, timeouts, ...), but which can be overwritten for the scope of this context.
+
+The following listing illustrates how to set/overwrite properties.
+
+.Configure invocation context with data to be included in the web request
+[source,java,indent=0]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.wsclient.call_2]
+----
+<1> Set the credentials
+<2> Change the connect timeout to 10s
+<3> Unset the read timeout
+<4> Add a HTTP request header
+<5> Invoke the webservice operation
+
+The WS-Client provides port instances via a preemptive port cache. This cache improves performance because port creation may be an expensive operation due to WSDL/schema validation. The cache is based on a 'corePoolSize', meaning that that number of ports is created on a preemptive basis. If more ports than that number are required, they are created on demand, and additionally added to the cache until expired, which is useful at a high load.
+
+WARNING: The JAX-WS specification does not specify thread safety of a port instance. Therefore, a port should not be used concurrently among threads. Further, JAX-WS API does not support to reset the Port's request and response context,  which is why a port should only be used for a single webservice call.
+
+
+=== Cancel a webservice request
+The WS-Client supports for cancellation of webservice requests. Internally, every web request is run in another thread, which the calling thread waits for to complete. Upon cancellation, that other thread is interrupted, and the calling thread released with a `WebServiceRequestCancelledException`. However, depending on the JAX-WS implementor, the web request may still be running, because JAX-WS API does not support the cancellation of a web request.
+
+=== Get information about the last web request
+The invocation context allows you to access HTTP status code and HTTP headers of the last web request.
+
+[source,java,indent=0]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.wsclient.call_3]
+----
+
+=== Propagate state to Handlers
+An invocation context can be associated with request context properties, which are propagated to handlers and JAX-WS implementor.
+
+[source,java,indent=0]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.wsclient.call_4]
+----
+<1> Propagate the correlation ID
+<2> Invoke the web operation
+
+Learn more how to access context properties from within a handler in <<jaxws.handler.statepropagation.readcid>>.
+
+=== Install handlers and provide credentials for authentication
+To install a handler, overwrite `execInstallHandlers` and add the handler to the given List. The handlers are invoked in the order as added to the handler-chain. By default, there is no handler installed.
+
+The method `execInstallHandlers` is invoked upon preemptive creation of the port. Consequently, you cannot do any assumption about the calling thread.
+
+If a handler requires to run in another `RunContext` than the calling context, annotate it with `RunWithRunContext` annotation, e.g. to start a new transaction to log into database.
+
+If the endpoint requires to authenticate requests, an authentication handler is typically added to the list, e.g. `BasicAuthenticationHandler` for 'Basic authentication', or `WsseUsernameTokenAuthenticationHandler` for 'Message Level WS-Security authentication', or some other handler to provide credentials.
+
+[source,java,indent=0]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.wsclient3]
+----
+
+TIP: The credentials as provided via `InvocationContext` can be accessed via request context with the property `InvocationContext.PROP_USERNAME` and `InvocationContext.PROP_PASSWORD`.
+
+=== JAX-WS Client Correlation ID Propagation
+The current context's correlation ID can be forwarded to the consumed web service. Scout provides a handler that sets the `X-Scout-Correlation-Id` HTTP header on the outgoing request.
+
+[source,java,indent=0]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.wsclient4]
+----
+<1> The handler can be at any position in the handler chain.
+
+[[jaxws.consumer.configuration]]
+=== Default configuration of WS-Clients
+The following properties can be set globally for all WS-Clients. However, a WS-Client can overwrite any of these values.
+
+[cols="30,50,20", options="header"]
+|===
+|property |description |default value
+
+|scout.jaxws.consumer.portCache.enabled
+|To indicate whether to use a preemptive port cache for WS-Clients. +
+Depending on the implementor used, cached ports may increase performance, because port creation is an expensive operation due to WSDL and schema validation. The cache is based on a 'corePoolSize', meaning that that number of ports is created on a preemptive basis. If more ports than that number is required, they are created on demand and also added to the cache until expired, which is useful at a high load.
+|true
+
+|scout.jaxws.consumer.portCache.corePoolSize
+|Number of ports to be preemptively cached to speed up webservice calls.
+|10
+
+|scout.jaxws.consumer.portCache.ttl
+|Maximum time in seconds to retain ports in the cache if the 'corePoolSize' is exceeded. That typically occurs at high load, or if 'corePoolSize' is undersized.
+|15 minutes
+
+|scout.jaxws.consumer.connectTimeout
+|Connect timeout in milliseconds to abort a webservice request, if establishment of the HTTP connection takes longer than this timeout. A timeout of null means an infinite timeout.
+|infinite
+
+|scout.jaxws.consumer.readTimeout
+|Read timeout in milliseconds to abort a webservice request, if it takes longer than this timeout for data to be available for read. A timeout of null means an infinite timeout.
+|infinite
+
+|===
+
+[[jaxws.xmladapters]]
+== XML adapters to work with java.util.Date and java.util.Calendar
+Scout ships with some XML adapters to not have to work with `XMLGregorianCalendar`, but with `java.util.Date` instead. +
+It is recommended to configure your global binding file accordingly. See <<lst-jaxws.example.globalbindingfile>> for an example.
+
+See the adapter's JavaDoc for more detailed information.
+
+.UTC Date adapters
+[cols="35,65", options="header"]
+|===
+|adapter |description
+
+|UtcDateAdapter
+|Use this adapter to work with UTC _xsd:dates_. A UTC date is also known as 'zulu' date, and has 'GMT+-00:00'. Unlike `UtcDateTimeAdapter`, this adapter truncates hours, minutes, seconds and milliseconds.
+
+|UtcTimeAdapter
+|Use this adapter to work with UTC _xsd:times_. A UTC time is also known as 'zulu' time, and has 'GMT+-00:00'. Unlike `UtcDateTimeAdapter`, this adapter sets year, month and day to the epoch, which is defined as 1970-01-01 in UTC.
+
+|UtcDateTimeAdapter
+|Use this adapter to work with UTC _xsd:dateTimes_. A UTC time is also known as 'zulu' time, and has 'GMT+-00:00'.
+
+This adapter converts xsd:dateTime into UTC milliseconds, by respecting the timezone as provided. If the timezone is missing, the date is interpreted as UTC-time, and not local to the default JVM timezone. To convert a `Date` into _xsd:dateTime_, the date's milliseconds are used as UTC milliseconds from the epoch, and are formatted as 'zulu' time.
+|===
+
+.Calendar adapters
+[cols="35,65", options="header"]
+|===
+|adapter |description
+
+|CalendarDateAdapter
+|Use this adapter to work with `Calendar` _xsd:dates_ without loosing timezone information. Unlike CalendarDateTimeAdapter, this adapter truncates hours, minutes, seconds and milliseconds.
+
+|CalendarTimeAdapter
+|Use this adapter to work with `Calendar` _xsd:times_ without loosing timezone information. Unlike CalendarDateTimeAdapter, this adapter sets year, month and day to the epoch, which is defined as 1970-01-01 in UTC.
+
+|CalendarDateTimeAdapter
+|Adapter to convert a _xsd:dateTime_ to a `Calendar` and vice versa. For both directions, the timezone information is not lost. Use this adapter if you expect to work with dates from various timezones without losing the local time. If the UTC (Zulu-time) is sufficient, use `UtcDateTimeAdapter` instead.
+|===
+
+.Default timezone Date adapters
+[cols="35,65", options="header"]
+|===
+|adapter |description
+
+|DefaultTimezoneDateAdapter
+|Use this adapter to work with _xsd:dates_ in the default timezone of the Java Virtual Machine. Depending on the JVM installation, the timezone may differ: 'GMT+-XX:XX'. Unlike `DefaultTimezoneDateTimeAdapter`, this adapter truncates hours, minutes, seconds and milliseconds. +
+Whenever possible, use `UtcDateAdapter` or `CalendarDateAdapter` instead.
+
+|DefaultTimezoneTimeAdapter
+|Use this adapter to work with _xsd:times_ in the default timezone of the Java Virtual Machine. Depending on the JVM installation, the timezone may differ: 'GMT+-XX:XX'. Unlike DefaultTimezoneDateTimeAdapter, this adapter sets year, month and day to the epoch, which is defined as 1970-01-01 in UTC. +
+Whenever possible, use `UtcTimeAdapter` or `CalendarTimeAdapter` instead.
+
+|DefaultTimezoneDateTimeAdapter
+|Use this adapter to work with _xsd:dateTimes_ in the default timezone of the Java Virtual Machine. Depending on the JVM installation, the timezone may differ: 'GMT+-XX:XX'. +
+Whenever possible, use `UtcDateTimeAdapter` or `CalendarDateTimeAdapter` instead.
+|===
+
+
+== JAX-WS Appendix
+
+[[PingWebService.wsdl]]
+=== PingWebService.wsdl
+[source,xml,indent=0]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/resources/WEB-INF/wsdl/PingWebService.wsdl[]
+----
+
+[[PingWebServicePortType.java]]
+=== PingWebServicePortType.java
+[source,java,indent=0]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.endpointinterface]
+----
+
+[[PingWebServicePortTypeEntryPoint.java]]
+=== PingWebServicePortTypeEntryPoint.java
+[source,java,indent=0]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.entrypoint]
+----
+
+[[PingWebServicePortTypeBean.java]]
+=== PingWebServicePortTypeBean.java
+[source,java,indent=0]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.porttype.bean]
+----
+
+[[settings_org.eclipse.jdt.core.prefs]]
+=== .settings/org.eclipse.jdt.core.prefs file to enable APT in Eclipse IDE
+[source,xml,indent=0]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.eclipseide.apt.settings/org.eclipse.jdt.core.prefs]
+----
+
+[[settings_org.eclipse.jdt.apt.core.prefs]]
+=== .settings/org.eclipse.jdt.apt.core.prefs file to enable APT in Eclipse IDE
+[source,xml,indent=0]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.eclipseide.apt.settings/org.eclipse.jdt.apt.core.prefs]
+----
+
+[[factorypath]]
+=== .factorypath file to enable APT in Eclipse IDE
+[source,xml,indent=0]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.eclipseide.apt.factorypath]
+----
+
+[[IAuthenticationMethod]]
+=== Authentication Method
+The authentication method specifies the protocol to challenge the webservice client to provide credentials. +
+Scout provides an implementation for _BASIC_ and _WSSE_UsernameToken_. You can implement your own authentication method by implementing `IAuthenticationMethod` interface.
+
+==== BasicAuthenticationMethod
+Authentication method to apply _Basic Access_ Authentication. This requires requests to provide a valid user name and password to access content. User's credentials are transported in HTTP headers. Basic authentication also works across firewalls and proxy servers.
+
+However, the disadvantage of Basic authentication is that it transmits unencrypted base64-encoded passwords across the network. Therefore, you only should use this authentication when you know that the connection between the client and the server is secure. The connection should be established either over a dedicated line or by using Secure Sockets Layer (SSL) encryption and Transport Layer Security (TLS).
+
+==== WsseUsernameTokenMethod
+Authentication method to apply _Message Level WS-Security with UsernameToken_ Authentication. This requires requests to provide a valid user name and password to access content. User's credentials are included in SOAP message headers.
+
+However, the disadvantage of WSSE UsernameToken Authentication is that it transmits unencrypted passwords across the network. Therefore, you only should use this authentication when you know that the connection between the client and the server is secure. The connection should be established either over a dedicated line or by using Secure Sockets Layer (SSL) encryption and Transport Layer Security (TLS).
+
+==== ContainerBasedAuthenticationMethod
+Use this authentication method when using container based authentication, meaning that webservice requests are authenticated by the application server, or a Servlet filter.
+
+[[ICredentialVerifier]]
+=== Credential Verifier
+Verifies user's credentials against a data source like _database_, _config.properties_, _Active Directory_, or others. +
+Scout provides an implementation for verification against users in _config.properties_. You can implement your own verifier by implementing `ICredentialVerifier` interface.
+
+TIP: If you require to run in a specific `RunContext` like a transaction for user's verification, annotate the verifier with `RunWithRunContext` annotation, and specify a `RunContextProducer` accordingly.
+
+==== ConfigFileCredentialVerifier
+Credential verifier against credentials configured in _config.properties_ file.
+
+By default, this verifier expects the passwords in 'config.properties' to be a hash produced with SHA-512 algorithm. To support you in password hash generation, `ConfigFileCredentialVerifier` provides a static Java main method.
+
+Credentials are loaded from property `scout.auth.credentials`. Multiple credentials are separated with the semicolon, username and password with the colon. If using hashed passwords (by default), the password's salt and hash are separated with the dot.
+
+To work with plaintext passwords, set the property `scout.auth.credentialsPlaintext`  to _true_.
+
+Example of hashed passwords: `scott:SALT.PASSWORD-HASH;jack:SALT.PASSWORD-HASH;john:SALT.PASSWORD-HASH`
+Example of plaintext passwords: `scott:****;jack:****;john:****`

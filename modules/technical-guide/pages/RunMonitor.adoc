@@ -1,0 +1,20 @@
+= RunMonitor
+include::common:partial$_header.adoc[]
+
+//-----------------------------------------------------------------------------
+// This file describes the architecture of RunContext
+//-----------------------------------------------------------------------------
+
+A RunMonitor allows the registration of `ICancellable` objects, which are cancelled upon cancellation of this monitor. A RunMonitor is associated with every RunContext and IFuture, meaning that executing code can always query its current cancellation status via `RunMonitor.CURRENT.get().isCancelled()`.
+
+A `RunMonitor` itself is also of the type `ICancellable`, meaning that it can be registered within another monitor as well. That way, a monitor hierarchy can be created with support of nested cancellation. That is exactly what is done when creating a copy of the current calling context, namely that the new monitor is registered as `ICancellable` within the monitor of the current calling context. Cancellation only works top-down, and not bottom up, meaning that a parent monitor is not cancelled once a child monitor is cancelled.
+
+When registering a `ICancellable` and this monitor is already cancelled, the `ICancellable` is cancelled immediately.
+
+Furthermore, a job's Future is linked with the job's `RunMonitor`, meaning that cancellation requests targeted to the `Future` are also propagated to the `RunMonitor`, and vice versa.
+
+The following <<img-runmonitor_associations>> illustrates the `RunMonitor` and its associations.
+
+.RunMonitor and its associations
+[[img-runmonitor_associations]]
+image::common:runmonitor_associations.png[]

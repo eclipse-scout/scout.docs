@@ -1,0 +1,7 @@
+= Eclipse Scout Technical Guide
+// comment prevents empty line after formatting, needed for tocinclude::common:partial$_header.adoc[]
+
+This technical guide documents the Scout architecture and describes important concepts used in Scout.
+
+:_footer-link-path: build/technical_guide/src/docs/{docname}.adoc
+include::common:partial$_footer.adoc[]

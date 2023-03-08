@@ -2,13 +2,8 @@
 :revnumber: {project-version}
 :finaldoc: true
 
-include::partial$_folders.adoc[]
 include::common:partial$_initDoc.adoc[]
 include::common:partial$_initCommon.adoc[]
 
-NOTE: Looking for something else? Visit https://eclipsescout.github.io for all Scout related documentation.
+WARNING: This document is referring to a past Scout release. Please click https://eclipsescout.github.io/stable/{docname}.html[here] for the recent version.
 
-// Replace above note with the following warning when this scout release gets outdated
-// Important: Keep a line break after the WARNING
-// WARNING: This document is referring to a past Scout release. Please click https://eclipsescout.github.io/stable/{docname}.html[here] for the recent version. +
-// Looking for something else? Visit https://eclipsescout.github.io for all Scout related documentation.

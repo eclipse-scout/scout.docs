@@ -1,1 +1,9 @@
-* xref:getstarted.adoc[Get Started Guide]
+* xref:getstarted.adoc[Get Started]
+** Scout Classic
+*** xref:helloscout.adoc[]
+*** xref:deploy-to-tomcat.adoc[]
+*** xref:one-day-tutorial/one-day-tutorial.adoc[One Day Tutorial]
+** Scout JS
+*** xref:helloscout-js.adoc[]
+*** xref:helloscout-js-fullstack.adoc[]
+*** xref:helloscout-cdn.adoc[]
