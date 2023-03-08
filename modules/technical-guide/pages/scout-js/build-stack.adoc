@@ -1,4 +1,5 @@
 = Build Stack
+include::common:partial$_header.adoc[]
 
 JavaScript and CSS assets of a typical Scout application are built by  https://webpack.js.org/[Webpack] using https://www.npmjs.com/[npm] and https://nodejs.org/[Node.js]. In order to make the building as easy as possible for you, there is a https://www.npmjs.com/package/@eclipse-scout/cli[CLI] module available. That module contains a default webpack and karma configuration and several build scripts you can use. The goal is to reduce the time you need to setup your build to a minimum. If you have created your Scout project using a Scout archetype, it should all be already setup for you. Nevertheless, you will get to a point where it is important to know how the building works in detail and how the several build tools are wired together. If you are there, this chapter should help you out.
 

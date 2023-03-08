@@ -1,4 +1,5 @@
 = Extensibility
+include::common:partial$_header.adoc[]
 
 The extensibility concepts of Scout allow you to extend or even replace methods of Scout widgets or objects.
 You can also use it to extend your own objects or objects from a Scout based third party library.

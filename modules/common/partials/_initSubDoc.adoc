@@ -1,4 +1,0 @@
-ifndef::finaldoc[]
-include::partial$_folders.adoc[]
-include::common:partial$_initDoc.adoc[]
-endif::finaldoc[]

@@ -1,4 +1,5 @@
 = Overview
+include::common:partial$_header.adoc[]
 
 A classic Scout application has a client model written in Java, and a UI which is rendered using JavaScript. With this approach you can write your client code using a mature and type safe language. Unfortunately you cannot develop applications which have to run offline because the UI and the Java model need to be synchronized.
 

@@ -1,7 +1,7 @@
 = How to Use a REST Service
 include::common:partial$_header.adoc[]
 
-This how to shows how to provide JAX-RS RESTful services and consume them from a Scout JS Single Page Application.
+This how-to shows how to provide JAX-RS RESTful services and consume them from a Scout JS Single Page Application.
 
 The goal is to provide a `ServerState` service in the `org.eclipse.scout.hellojs.ui.html` module.
 

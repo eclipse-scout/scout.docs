@@ -88,5 +88,3 @@ The result could look like this: https://codepen.io/cguglielmo/pen/qBqYMvp[Eclip
 
 Have fun!
 
-:_footer-link-path: build/helloscout_cdn/src/docs/{docname}.adoc
-include::common:partial$_footer.adoc[]

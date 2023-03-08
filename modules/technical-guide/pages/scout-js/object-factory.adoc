@@ -1,4 +1,5 @@
 = Object Factory
+include::common:partial$_header.adoc[]
 
 As seen in the xref:technical-guide:scout-js/widget.adoc#creating-a-widget[Creating a Widget] a widget may be created using `scout.create`. When using this function, the call is delegated to the `ObjectFactory`.
 

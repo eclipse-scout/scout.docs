@@ -1,4 +1,5 @@
 = Lookup Call
+include::common:partial$_header.adoc[]
 
 A `Lookup Call` is used to lookup a single or multiple `Lookup Rows`. Several widgets like `Smart Field`, `List Box` or `Tree Box` take advantage of that concept in order to provide their proposals.
 

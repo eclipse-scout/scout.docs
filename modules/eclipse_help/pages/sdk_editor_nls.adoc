@@ -3,12 +3,6 @@
 :revnumber: {project-version}
 include::partial$_initDoc.adoc[]
 
-//fallback for safe mode == secure:
-ifndef::imgsdir[:imgsdir: ../../../../imgs]
-ifndef::codedir[:codedir: ../../../../../code]
-ifndef::mdledir[:mdledir: ../../../../adoc]
-:experimental:
-
 The NLS Editor allows to edit the different properties files containing the translated text entries.
 It is a efficient way to edit all the property files for multilingual texts in one go.
 
@@ -25,4 +19,4 @@ include::sdk:partial$SdkEditorNls.adoc[]
 Go back to the <<sdk.adoc#scout-tooling, Scout Tooling>>.
 
 :_footer-link-path: build/eclipse_help/src/docs/{docname}.adoc
-include::common:partial$_footer-text.adoc[]
+include::partial$_footer-text.adoc[]

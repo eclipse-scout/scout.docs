@@ -3,12 +3,6 @@
 :revnumber: {project-version}
 include::partial$_initDoc.adoc[]
 
-//fallback for safe mode == secure:
-ifndef::imgsdir[:imgsdir: ../../../../imgs]
-ifndef::codedir[:codedir: ../../../../../code]
-ifndef::mdledir[:mdledir: ../../../../adoc]
-:experimental:
-
 The Scout SDK provides a set of wizards to create new Scout projects and various components for your Scout applications.
 
 To start any of these wizards press kbd:[Ctrl,N] or use menu menu:File[New,Other...].
@@ -43,4 +37,4 @@ Adding additional translated languages with the <<sdk_wizard_language.adoc#, Add
 Go back to the <<sdk.adoc#scout-tooling, Scout Tooling>>.
 
 :_footer-link-path: build/eclipse_help/src/docs/{docname}.adoc
-include::common:partial$_footer-text.adoc[]
+include::partial$_footer-text.adoc[]

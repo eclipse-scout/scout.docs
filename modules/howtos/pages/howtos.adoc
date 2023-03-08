@@ -1,3 +1,4 @@
 = How-Tos
+include::common:partial$_header.adoc[]
 
 This chapter provides various small technical guides to very specific Scout subjects.

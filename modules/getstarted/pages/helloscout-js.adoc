@@ -1,5 +1,4 @@
 = Hello Scout JS
-// comment prevents empty line after formatting, needed for toc
 include::common:partial$_header.adoc[]
 
 ifndef::source-highlighter[:source-highlighter: coderay]
@@ -14,7 +13,7 @@ ifndef::source-highlighter[:source-highlighter: coderay]
 In this tutorial we will create your first Scout JS application.
 
 NOTE: If you don't know what Scout JS is yet, please read the
-https://eclipsescout.github.io/{doc-short-version}/getstarted.html[Get Started Guide] first.
+xref:getstarted:getstarted.adoc[Get Started Guide] first.
 
 The application will simply show a text field and a button.
 Once the user enters some text and presses the button, the application displays a message box including that text.
@@ -301,7 +300,7 @@ Now that you have successfully created your first Scout JS application,
 you might want to learn more about Scout JS.
 
 If you are interested in adding a REST backend you should have a look at
-https://eclipsescout.github.io/{doc-short-version}/helloscout-js-fullstack.html[Hello Scout JS Full Stack Tutorial].
+xref:getstarted:helloscout-js-fullstack.adoc[Hello Scout JS Full Stack Tutorial].
 
 To see more example code of Scout JS, we recommend looking at the {jswidgets}[Scout JS Widgets] application
 and its {jswidgets-code}[source code].
@@ -315,5 +314,3 @@ or on https://stackoverflow.com/tags/eclipse-scout[Stack Overflow].
 
 We wish you all the best on your journey with Scout.
 
-:_footer-link-path: build/helloscout_js/src/docs/{docname}.adoc
-include::common:partial$_footer.adoc[]

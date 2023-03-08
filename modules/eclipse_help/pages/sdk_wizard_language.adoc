@@ -3,12 +3,6 @@
 :revnumber: {project-version}
 include::partial$_initDoc.adoc[]
 
-//fallback for safe mode == secure:
-ifndef::imgsdir[:imgsdir: ../../../../imgs]
-ifndef::codedir[:codedir: ../../../../../code]
-ifndef::mdledir[:mdledir: ../../../../adoc]
-:experimental:
-
 The _Add a Language_ wizard can be used to create additional translation files in order to localize the user interface.
 It can be started from the <<sdk_editor_nls.adoc#nls-editor, The NLS Editor>>.
 
@@ -24,4 +18,4 @@ Folder:: The location where the Texts properties file will be created.
 Go back to the <<sdk_wizard.adoc#, Scout Wizards>>.
 
 :_footer-link-path: build/eclipse_help/src/docs/{docname}.adoc
-include::common:partial$_footer-text.adoc[]
+include::partial$_footer-text.adoc[]

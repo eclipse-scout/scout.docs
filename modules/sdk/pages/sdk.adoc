@@ -1,4 +1,5 @@
 = Scout SDK
+include::common:partial$_header.adoc[]
 
 Scout provides plugins for IntelliJ and Eclipse that support developing Eclipse Scout applications.
 The Scout SDK plugins helps to create a new project and application components, improve code completion and come with a NLS editor to manage all translated text entries of the application.
