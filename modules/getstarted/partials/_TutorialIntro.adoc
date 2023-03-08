@@ -1,4 +1,3 @@
-include::common:partial$_initSubDoc.adoc[]
 
 //-----------------------------------------------------------------------------
 //WARNING: this file is a text module, it needs to be embedded in a master asciidoctor document.
@@ -17,7 +16,7 @@ To do so, just clone the Scout demo repository and import it into your IDE.
 
  git clone https://github.com/bsi-software/org.eclipse.scout.docs.git
 
-Alternatively, you can also view the source code of the "`Contacts`" demo application on https://github.com/bsi-software/org.eclipse.scout.docs/tree/{git-branch}/code/contacts[Github].
+Alternatively, you can also view the source code of the "`Contacts`" demo application on https://github.com/bsi-software/org.eclipse.scout.docs/tree/releases/{scout-version}/code/contacts[Github].
 
 [[img-app_contacts_personpage]]
 .The "`Contacts`" application with the person page.

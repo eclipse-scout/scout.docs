@@ -1,5 +1,4 @@
 = Build Scout App and Deploy to Tomcat
-// comment prevents empty line after formatting, needed for toc
 include::common:partial$_header.adoc[]
 
 //-----------------------------------------------------------------------------
@@ -285,5 +284,3 @@ Just append a comma to the existing roles followed by the string `manager-gui`.
 NOTE: You will need to restart your Tomcat application after adapting the content of file `tomcat-users.xml`.
 
 
-:_footer-link-path: build/deploy_to_tomcat/src/docs/{docname}.adoc
-include::common:partial$_footer.adoc[]

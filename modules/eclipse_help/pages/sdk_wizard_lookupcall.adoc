@@ -1,13 +1,5 @@
 ==== New LookupCall Wizard
-:doctype: article
-:revnumber: {project-version}
 include::partial$_initDoc.adoc[]
-
-//fallback for safe mode == secure:
-ifndef::imgsdir[:imgsdir: ../../../../imgs]
-ifndef::codedir[:codedir: ../../../../../code]
-ifndef::mdledir[:mdledir: ../../../../adoc]
-:experimental:
 
 The _New Scout Lookup Call_ wizard can be used to create a lookup call and a corresponding lookup service.
 To start the wizard use menu:File[New,Other...] or press kbd:[Ctrl,N] as described in section <<sdk_wizard.adoc#scout-wizards, Scout Wizards>>.
@@ -49,4 +41,4 @@ In the <<img-sdk_wizard_lookupcall>> example shown above the Scout SDK will crea
 Go back to the <<sdk_wizard.adoc#scout-wizards, Scout Wizards>>.
 
 :_footer-link-path: build/eclipse_help/src/docs/{docname}.adoc
-include::common:partial$_footer-text.adoc[]
+include::partial$_footer-text.adoc[]

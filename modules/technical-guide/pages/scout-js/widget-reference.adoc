@@ -1,4 +1,5 @@
 = Widget Reference
+include::common:partial$_header.adoc[]
 
 This chapter describes some of the widgets available in Scout. At the moment most of the widgets are not described yet, but they are already available at the https://scout.bsi-software.com/jswidgets[Scout JS Widgets Application]. With this application you can try the widgets out and get a feel of what they are capable of and how they are used.
 

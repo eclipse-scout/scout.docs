@@ -7,17 +7,13 @@ Howto:
 - Use "title case" in chapter titles (https://english.stackexchange.com/questions/14/)
 ////
 
-ifndef::finaldoc[]
-include::common:partial$_initDoc.adoc[]
-endif::finaldoc[]
-
 == About This Release
 
 The latest version of this release is: {maven-version}.
 
 You can see the {github-changelog-link} on GitHub.
 
-Coming from an older Scout version? Check out the {migration-guide-link} for instructions on how to obtain the new version and upgrade existing applications.
+Coming from an older Scout version? Check out the xref:migration:migration-guide.adoc[] for instructions on how to obtain the new version and upgrade existing applications.
 
 //The following enhancements were made after the initial {scout-version} release.
 //

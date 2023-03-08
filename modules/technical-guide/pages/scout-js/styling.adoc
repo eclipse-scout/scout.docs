@@ -1,4 +1,5 @@
 = Styling
+include::common:partial$_header.adoc[]
 
 Beside JavaScript for business logic and for the models, every Scout JS app probably needs some CSS code at some point in time.
 If you are writing custom widgets, you need it for sure.

@@ -1,4 +1,5 @@
 = Form
+include::common:partial$_header.adoc[]
 
 A form is typically used for two purposes:
 

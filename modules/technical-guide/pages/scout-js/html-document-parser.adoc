@@ -1,4 +1,5 @@
 = HTML Document Parser
+include::common:partial$_header.adoc[]
 
 The HTML document parser is only available in the Scout UI server. If your Scout JS application uses a different backend, you cannot use the features described in this chapter.
 

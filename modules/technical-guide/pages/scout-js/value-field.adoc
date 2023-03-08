@@ -1,4 +1,5 @@
 = Value Field
+include::common:partial$_header.adoc[]
 
 A value field extends the form field by the ability to store a value. Typical form fields are `StringField`, `NumberField`, `DateField` or `SmartField`. All these fields provide a value which is accessible using `field.value` and may be set using `field.setValue(value)`.
 

@@ -1,9 +1,11 @@
-include::common:partial$_initDoc.adoc[]
 = Overview
+include::common:partial$_header.adoc[]
 
 These pages document https://www.eclipse.org/scout/[Eclipse Scout].
 
 Here you will find all Scout {scout-version} related documentation, from getting started to architecture details to release upgrades.
+
+If you are interested in the documentation of another Scout version, use the version selector on the bottom left of this page. For older versions, please see <<archived-versions>>.
 
 == Get Started
 
@@ -45,12 +47,14 @@ The Migration Guide explains how to migrate your code for a proper upgrade.
 * xref:releasenotes:release-notes.adoc[Release Notes]
 * xref:migration:migration-guide.adoc[Migration Guide]
 
-== Previous Versions
+[#archived-versions]
+== Archived Versions
 
-Scout is a mature framework and since we release a major version once a year, there are quite a few versions out there.
+Scout is a mature framework and since we release at least one major version once a year, there are quite a few versions out there.
 
 This documentation describes Version 22 and newer.
-If you use an older Scout version, you should consult the documentation for that specific version.
+Older Scout Versions are not part of this documentation platform and have been archived.
+You'll find them under the following links:
 
 |===
 | Version 11  | https://eclipsescout.github.io/11.0[Browse]

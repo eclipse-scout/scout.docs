@@ -1,13 +1,5 @@
 === Import the Scout Demo Applications
-:doctype: article
-:revnumber: {project-version}
 include::partial$_initDoc.adoc[]
-
-//fallback for safe mode == secure:
-ifndef::imgsdir[:imgsdir: ../../../../imgs]
-ifndef::codedir[:codedir: ../../../../../code]
-ifndef::mdledir[:mdledir: ../../../../adoc]
-:experimental:
 
 With this tutorial you will learn how to import the Scout Demo applications into your workspace.
 The tutorial consists of the following two parts:
@@ -141,4 +133,4 @@ This is the end of the <<tutorial.adoc#getting-started, getting started>> guide.
 
 '''
 :_footer-link-path: build/eclipse_help/src/docs/{docname}.adoc
-include::common:partial$_footer-text.adoc[]
+include::partial$_footer-text.adoc[]

@@ -1,14 +1,6 @@
 [#nls-entry-wizard]
 ==== NLS Entry Wizard
-:doctype: article
-:revnumber: {project-version}
 include::partial$_initDoc.adoc[]
-
-//fallback for safe mode == secure:
-ifndef::imgsdir[:imgsdir: ../../../../imgs]
-ifndef::codedir[:codedir: ../../../../../code]
-ifndef::mdledir[:mdledir: ../../../../adoc]
-:experimental:
 
 
 The NLS Entry wizard can be used to create or to modify a text entry that will be displayed to the user and the needs to be localized.
@@ -23,4 +15,4 @@ include::sdk:partial$SdkEditorNlsNewEntry.adoc[]
 Go back to the <<sdk_wizard.adoc#scout-wizards, Scout Wizards>>.
 
 :_footer-link-path: build/eclipse_help/src/docs/{docname}.adoc
-include::common:partial$_footer-text.adoc[]
+include::partial$_footer-text.adoc[]

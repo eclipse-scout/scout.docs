@@ -1,13 +1,5 @@
 = Eclipse Scout User Guide
-:doctype: article
-:revnumber: {project-version}
 include::partial$_initDoc.adoc[]
-
-//fallback for safe mode == secure:
-ifndef::imgsdir[:imgsdir: ../../../../imgs]
-ifndef::codedir[:codedir: ../../../../../code]
-ifndef::mdledir[:mdledir: ../../../../adoc]
-:experimental:
 
 This guide gets you through the "`Hello World`" Eclipse Scout application and shows you how to import the Scout demo application into your Eclipse IDE.
 In the second part, the Scout tooling available in the Eclipse IDE is described.
@@ -17,4 +9,4 @@ In the second part, the Scout tooling available in the Eclipse IDE is described.
 
 '''
 :_footer-link-path: build/eclipse_help/src/docs/{docname}.adoc
-include::common:partial$_footer-text.adoc[]
+include::partial$_footer-text.adoc[]

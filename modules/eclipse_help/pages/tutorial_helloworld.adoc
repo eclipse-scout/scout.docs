@@ -1,13 +1,5 @@
 === Hello World Tutorial
-:doctype: article
-:revnumber: {project-version}
 include::partial$_initDoc.adoc[]
-
-//fallback for safe mode == secure:
-ifndef::imgsdir[:imgsdir: ../../../../imgs]
-ifndef::codedir[:codedir: ../../../../../code]
-ifndef::mdledir[:mdledir: ../../../../adoc]
-:experimental:
 
 With this tutorial you will learn how to create your first Scout application.
 
@@ -25,4 +17,4 @@ In the <<tutorial_existingdemo.adoc#import-the-scout-demo-applications, next tut
 
 '''
 :_footer-link-path: build/eclipse_help/src/docs/{docname}.adoc
-include::common:partial$_footer-text.adoc[]
+include::partial$_footer-text.adoc[]

@@ -1,14 +1,6 @@
 [#getting-started]
 == Getting Started
-:doctype: article
-:revnumber: {project-version}
 include::partial$_initDoc.adoc[]
-
-//fallback for safe mode == secure:
-ifndef::imgsdir[:imgsdir: ../../../../imgs]
-ifndef::codedir[:codedir: ../../../../../code]
-ifndef::mdledir[:mdledir: ../../../../adoc]
-:experimental:
 
 To get started with Eclipse Scout, we propose that you first go through the "`Hello World`" tutorial and then follow the tutorial to import the existing Scout demo applications.
 
@@ -17,4 +9,4 @@ To get started with Eclipse Scout, we propose that you first go through the "`He
 
 '''
 :_footer-link-path: build/eclipse_help/src/docs/{docname}.adoc
-include::common:partial$_footer-text.adoc[]
+include::partial$_footer-text.adoc[]

@@ -218,5 +218,3 @@ include::sdk:partial$SdkEditorNls.adoc[]
 include::sdk:partial$SdkEclipseInstallation.adoc[]
 
 
-:_footer-link-path: build/sdk_eclipse/src/docs/{docname}.adoc
-include::common:partial$_footer.adoc[]

@@ -1,12 +1,11 @@
 = Hello Scout JS Full Stack
-// comment prevents empty line after formatting, needed for toc
 include::common:partial$_header.adoc[]
 
 == Introduction
 
 In this tutorial we will create a Scout JS application consisting of a JavaScript frontend connected using REST to a Java backend that stores the data in a database.
 
-NOTE: If you don't know what Scout JS is yet, please read the https://eclipsescout.github.io/{doc-short-version}/getstarted.html[Get Started Guide] first.
+NOTE: If you don't know what Scout JS is yet, please read the xref:getstarted:getstarted.adoc[Get Started Guide] first.
 
 We will create the application using IntelliJ.
 The generated application can display persons loaded from a database.
@@ -30,17 +29,10 @@ include::common:partial$InstallIntelliJ.adoc[]
 include::common:partial$CreateNewJsProjectIntellij.adoc[]
 
 == What's Next?
-
-:jswidgets: https://scout.bsi-software.com/jswidgets_{doc-short-version-underlined}/
-:jswidgets-code: https://github.com/bsi-software/org.eclipse.scout.docs/tree/releases/{doc-short-version}/code/widgets
-:scout-forum: http://www.eclipse.org/forums/eclipse.scout
-
-To learn more about Scout JS, we recommend having a look at the other Scout JS Hello World tutorials and the xref:technical-guide:scout-js/overview.adoc[Scout JS Technical Guide].
+To learn more about Scout JS, we recommend having a look at the other Scout JS Hello World tutorials and the xref:technical-guide:technical-guide.adoc[Technical Guide].
 
 To see more example code of Scout JS, you should have a look at the {jswidgets}[Scout JS Widgets] application
 and its {jswidgets-code}[source code].
 
 In case you should get stuck somewhere and need help, contact us on the http://www.eclipse.org/forums/eclipse.scout[Scout Forum] or on https://stackoverflow.com/tags/eclipse-scout[Stack Overflow].
 
-:_footer-link-path: build/helloscout_js_fullstack/src/docs/{docname}.adoc
-include::common:partial$_footer.adoc[]

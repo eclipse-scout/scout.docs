@@ -1,8 +1,5 @@
 = Technical Guide
-
 include::common:partial$_header.adoc[]
 
 The following pages document the Scout architecture and describe important concepts.
 
-:_footer-link-path: build/technical_guide_js/src/docs/{docname}.adoc
-include::common:partial$_footer.adoc[]
