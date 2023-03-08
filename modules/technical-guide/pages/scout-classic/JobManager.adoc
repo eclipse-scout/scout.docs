@@ -349,7 +349,7 @@ It is further possible to await asynchronously on a future to enter done state b
 include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=future.whenDone]
 ----
 
-Because invoked in another thread, this method optionally accepts a xref:technical-guide:RunContext.adoc[]] to be applied when being invoked.
+Because invoked in another thread, this method optionally accepts a xref:technical-guide:scout-classic/RunContext.adoc[]] to be applied when being invoked.
 
 === Awaiting a single future's 'finished' state
 Use the method `awaitFinished` to wait for the job to finish, meaning that the job either completed normally or by an exception, or that it will never commence execution due to a premature cancellation. To learn more about the difference between 'done' and 'finished' state, click <<Difference between 'done' and 'finished' state, here>>.
@@ -461,7 +461,7 @@ include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclips
 
 == Configuration
 
-Job manager can be configured with properties starting with `scout.jobmanager`. See xref:technical-guide:Platform.adoc#sec-app.configProperties[Scout Config Properties].
+Job manager can be configured with properties starting with `scout.jobmanager`. See xref:technical-guide:scout-classic/Platform.adoc#sec-app.configProperties[Scout Config Properties].
 
 == Extending job manager
 Job manager is implemented as an application scoped bean, and which can be replaced. To do so, create a class which extends `JobManager`, and annotate it with `@Replace` annotation. Most likely, you like to use the EE container's `ThreadPoolExecutor`, or to contribute some behavior to the callable chain which finally executes the job.

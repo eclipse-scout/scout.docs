@@ -31,8 +31,8 @@ If you want to get serious about Scout, you should definitely have a look at the
 You will learn about best practices and architecture details and even find How Tos for some specific topics.
 To learn more about the functionality of the Scout plugins for various IDEs, have a look at the Scout SDK documents.
 
-* xref:technical-guide:technical-guide.adoc[Scout Classic Technical Guide]
-* xref:technical-guide-js:technical-guide-js.adoc[Scout JS Technical Guide]
+* xref:technical-guide:scout-classic/Overview.adoc[Scout Classic Technical Guide]
+* xref:technical-guide:scout-js/overview.adoc[Scout JS Technical Guide]
 * xref:sdk:sdk.adoc[Scout SDK]
 
 == Upgrade Your Version

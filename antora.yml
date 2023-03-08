@@ -17,7 +17,6 @@ nav:
 - modules/ROOT/nav.adoc
 - modules/getstarted/nav.adoc
 - modules/technical-guide/nav.adoc
-- modules/technical-guide-js/nav.adoc
 - modules/sdk/nav.adoc
 - modules/howtos/nav.adoc
 - modules/releasenotes/nav.adoc

@@ -33,11 +33,9 @@ include::common:partial$CreateNewJsProjectIntellij.adoc[]
 
 :jswidgets: https://scout.bsi-software.com/jswidgets_{doc-short-version-underlined}/
 :jswidgets-code: https://github.com/bsi-software/org.eclipse.scout.docs/tree/releases/{doc-short-version}/code/widgets
-:docs: https://eclipsescout.github.io/{doc-short-version}
-:technical-guide-js: {docs}/technical-guide-js.html
 :scout-forum: http://www.eclipse.org/forums/eclipse.scout
 
-To learn more about Scout JS, we recommend having a look at the other {docs}[Scout JS Tutorials] and the {technical-guide-js}[Scout JS Technical Guide].
+To learn more about Scout JS, we recommend having a look at the other Scout JS Hello World tutorials and the xref:technical-guide:scout-js/overview.adoc[Scout JS Technical Guide].
 
 To see more example code of Scout JS, you should have a look at the {jswidgets}[Scout JS Widgets] application
 and its {jswidgets-code}[source code].
