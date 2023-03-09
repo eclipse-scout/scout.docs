@@ -1,5 +1,5 @@
 = Eclipse Scout Migration Guide
 include::common:partial$_header.adoc[]
 
-include::partial$MigrationGuide_22_0.adoc[]
+include::partial$migration-guide-22.0.adoc[]
 
