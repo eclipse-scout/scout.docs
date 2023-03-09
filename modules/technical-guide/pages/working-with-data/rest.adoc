@@ -110,7 +110,7 @@ public static class ExampleClassContributor implements IRestApplicationClassesCo
 === Data Objects
 
 Scout data objects may be used as request and response objects for REST APIs.
-See xref:technical-guide:working-with-data/DataObject.adoc[]] for details and examples.
+See xref:technical-guide:working-with-data/data-object.adoc[]] for details and examples.
 
 === Marshaller
 

@@ -22,7 +22,7 @@ Another type of Smart Field is the so called `Proposal Field`. A Proposal Field 
 .Proposal Field
 image::common:proposal_field.png[]
 
-In order to provide the proposals you can either use a xref:technical-guide:working-with-data/LookupCall.adoc[] or a `Code Type`.
+In order to provide the proposals you can either use a xref:technical-guide:working-with-data/lookup-call.adoc[] or a `Code Type`.
 
 In a Scout JS application you can use SmartFields like in a classic Scout application. Any REST service can be used to provide results for a SmartField lookup call. However, the SmartField expects the result to have a defined structure. If the REST service API is in your hands, you can simply return a JSON response with the right structure. This means less work to do for you in the JavaScript layer, because you don't have to transform the response to a structure the SmartField can process. If you must use a service which API you cannot change, you have no other choice than doing some kind of transformation in JavaScript.
 
@@ -127,7 +127,7 @@ Venn:
 
 The colors used for grid lines, axes, etc. and the auto colors for datasets can be overridden using CSS.
 
-For a more detailed example see xref:howtos:scout-js/Chart-HowTo.adoc[How to Create a Chart for Scout JS] resp. xref:howtos:scout-classic/Chart-HowTo.adoc[How to Create a Chart for Scout Classic]
+For a more detailed example see xref:howtos:scout-js/chart-how-to.adoc[How to Create a Chart for Scout JS] resp. xref:howtos:scout-classic/chart-how-to.adoc[How to Create a Chart for Scout Classic]
 
 [#filter-field]
 == Filter Field
