@@ -42,12 +42,12 @@ Object.assign({}, chart); // workaround so that the imports are not unused
 
 `icecream-theme.less` and `icecream-theme-dark.less`.
 
-[source,css]
+[source,less]
 ----
 @import "~@eclipse-scout/chart/src/index";
 ----
 
-[source,css]
+[source,less]
 ----
 @import "~@eclipse-scout/chart/src/index-dark";
 ----
@@ -224,7 +224,7 @@ protected void execValueClick(BigDecimal xIndex, BigDecimal yIndex, Integer data
 Even if some charts are rendered on a `<canvas>`-element the colors can be changed via CSS. We add a custom grey color scheme for the bubble chart, which is rendered on a `<canvas>`.
 To achieve this, we need to add a LESS file with the following content:
 
-[source,css]
+[source,less]
 ----
 @chart-grey-1: #191919;
 @chart-grey-2: #4C4C4C;

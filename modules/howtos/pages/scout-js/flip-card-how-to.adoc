@@ -19,7 +19,7 @@ Create the following files in the folder `org.eclipse.scout.hellojs.ui.html`
 
 === Add the JS file to the JS index
 
-index.js
+.index.js
 [source,js]
 ----
 ...
@@ -29,8 +29,8 @@ export {default as FlipCardField} from './flipcard/FlipCardField';
 
 === Add the LESS file to the LESS index
 
-index.less
-[source,css]
+.index.less
+[source,less]
 ----
 ...
 @import "flipcard/FlipCardField";
@@ -42,7 +42,7 @@ index.less
 === Create a Minimal FormField
 The FlipCard will inherit from FormField. Every form field consists of a container, a label, the actual field, a mandatory-indicator and a status.
 
-FlipCardField.js
+.FlipCardField.js
 [source,js]
 ----
 import {FormField} from '@eclipse-scout/core';
@@ -69,7 +69,7 @@ export default class FlipCardField extends FormField {
 
 === Add the FlipCard to the HelloForm
 
-HelloFormModel.js
+.HelloFormModel.js
 [source,js]
 ----
 {
@@ -118,7 +118,7 @@ image::common:flipCard01.jpg[]
 
 == Full Featured Flip Card Field
 
-FlipCard.js
+.FlipCard.js
 [source,js]
 ----
 import {FormField} from '@eclipse-scout/core';
@@ -199,7 +199,7 @@ export default class FlipCardField extends FormField {
 <3> Initial rendering of the properties. Applies the state to the DOM.
 <4> Keep the references clean. Reset DOM references when the field has been removed.
 
-HelloForm.json
+.HelloForm.json
 [source,js]
 ----
 export default {
@@ -241,8 +241,8 @@ export default {
 ----
 <1> FlipCard field is inserted after the name field.
 
-FlipCardField.less
-[source,css]
+.FlipCardField.less
+[source,less]
 ----
 .flip-card-field {
 

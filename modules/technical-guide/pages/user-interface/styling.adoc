@@ -26,7 +26,7 @@ This file should be put into your `src/main/js` folder and named `index.less`.
 Just include your new files using the LESS `@import` keyword.
 
 .Include a LESS file
-[source,css]
+[source,less]
 ----
 @import "style/colors";
 ----
@@ -43,7 +43,7 @@ If you have a look at the file `colors.less` you find all the colors you can use
 Let's say you want to change the background color of the header, you can redefine the variable `@desktop-header-background-color`.
 
 .Changing the background color of the header
-[source,css]
+[source,less]
 ----
 @desktop-header-background-color: @palette-red-4;
 ----
@@ -75,7 +75,7 @@ The default accent color of Scout is blue.
 So, instead of changing specific colors, you can try to change the accent color palette.
 For this example we use the slightly adjusted red palette, but you can use your own colors of course:
 
-[source,css]
+[source,less]
 ----
 @accent-color-0: @palette-red-0;
 @accent-color-1: @palette-red-1;
@@ -121,7 +121,7 @@ If your Scout application should have only a single theme, option 1 is the way t
 In order to understand Scout themes, take a look at the `myapp-theme.less` file which has been generated for your project by the Scout archetype. In the following examples we assume that the name of your project is _myapp_.
 
 .myapp-theme.less
-[source,css]
+[source,less]
 ----
 @import "~@eclipse-scout/core/src/index";
 @import "./src/main/js/index";
@@ -132,22 +132,20 @@ As you can see the theme bundles various LESS modules. Line 1 imports the LESS m
 We recommend making an index file for each Scout module. These index files import each single LESS file which belongs to that module. This excerpt from Scouts `index.less` shows how we import all distinct LESS files required to style the desktop or the LESS variable definitions for all colors used in the stylesheet:
 
 .Excerpt from Scout core index.less
-[source,css]
+[source,less]
 ----
-...
 @import "desktop/Desktop";
 @import "desktop/DesktopLogo";
 @import "desktop/DesktopDense";
 @import "desktop/bench/DesktopBench";
 @import "desktop/bench/BenchColumn";
 @import "style/colors";
-...
 ----
 
 How does the dark theme for your Scout application look like? Like for the _default_ theme, we create a LESS file `myapp-theme-dark.less`, but this time we import the `index-dark` modules.
 
 .myapp-theme-dark.less
-[source,css]
+[source,less]
 ----
 @import "~@eclipse-scout/core/src/index-dark";
 @import "./src/main/js/index-dark";
@@ -156,7 +154,7 @@ How does the dark theme for your Scout application look like? Like for the _defa
 Let's take a look at the details in the `index-dark.less` file from the Scout core:
 
 .index-dark.less
-[source,css]
+[source,less]
 ----
 @import "index";
 @import "style/colors-dark";
@@ -168,16 +166,14 @@ The dark theme only extends new additional style and LESS variables or overrides
 This is what happens on line 2: `colors-dark.less` overrides some variables defined in the `colors.less` file from the default theme, like the gray colors:
 
 .Excerpt from Scout core index-dark.less
-[source,css]
+[source,less]
 ----
-...
 @palette-gray-0: @palette-white;
 @palette-gray-1: #F5F5F5;
 @palette-gray-2: #E9EBEB;
 @palette-gray-3: #BFC2C3;
 @palette-gray-4: #A7ACAD;
 @palette-gray-5: #7E8588;
-...
 ----
 
 Note that all variables except `@palette-gray-2-1` override variables from `colors.less`. `@palette-gray-2-1` is a variable which is only defined and used in the _dark_ theme.
