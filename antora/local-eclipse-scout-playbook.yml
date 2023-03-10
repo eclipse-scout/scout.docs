@@ -1,6 +1,9 @@
 site:
   title: Eclipse Scout
   start_page: scout-docs:ROOT:index.adoc
+urls:
+  latest_version_segment: stable
+  latest_prerelease_version_segment: next
 content:
   sources:
   - url: ./..
