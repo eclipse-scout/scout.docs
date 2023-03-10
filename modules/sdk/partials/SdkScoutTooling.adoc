@@ -1,13 +1,3 @@
-ifndef::finaldoc[]
-include::common:partial$_initDoc.adoc[]
-endif::finaldoc[]
-
-//fallback for safe mode == secure:
-ifndef::imgsdir[:imgsdir: ../imgs]
-ifndef::codedir[:codedir: ../../code]
-ifndef::mdledir[:mdledir: .]
-:experimental:
-
 //-----------------------------------------------------------------------------
 //Asciidoctor input file: "SDK - Scout Tooling"
 //
@@ -15,7 +5,7 @@ ifndef::mdledir[:mdledir: .]
 //-----------------------------------------------------------------------------
 
 Thanks to this tooling, developing Scout applications is made simpler, more productive and also more robust.
-Initially, a solid understanding of the Java language is sufficient to start developing Scout applications and only a rough understanding of the underlying Maven/JEE technologies is required.
+Initially, a solid understanding of Java (and JavaScript for Scout JS) is sufficient to start developing Scout applications and only a rough understanding of the underlying Maven/Web technologies is required.
 
 The Scout SDK also helps developers to become more productive.
 Many repetitive and error prone tasks run automatically in the background or are taken care of by the component wizards of the Scout SDK.

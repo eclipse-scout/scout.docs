@@ -1,0 +1,20 @@
+=== Hello World Tutorial
+include::partial$_initDoc.adoc[]
+
+With this tutorial you will learn how to create your first Scout application.
+
+==== Prerequisites
+
+include::common:partial$InstallNode.adoc[]
+
+==== Create a Scout Project
+
+include::common:partial$CreateNewProjectEclipse.adoc[]
+
+==== What's Next?
+
+In the <<tutorial_existingdemo.adoc#import-the-scout-demo-applications, next tutorial>>, you will learn how to import the Scout demo applications into your workspace.
+
+'''
+:_footer-link-path: build/eclipse_help/src/docs/{docname}.adoc
+include::partial$_footer-text.adoc[]

@@ -1,0 +1,11 @@
+[#new-scout-project-wizard]
+==== New Scout Project Wizard
+include::partial$_initDoc.adoc[]
+
+include::sdk:partial$SdkWizardProject.adoc[]
+
+'''
+Go back to the <<sdk_wizard.adoc#scout-wizards, Scout Wizards>>.
+
+:_footer-link-path: build/eclipse_help/src/docs/{docname}.adoc
+include::partial$_footer-text.adoc[]

@@ -1,5 +1,4 @@
 = Get Started with Eclipse Scout
-// comment prevents empty line after formatting, needed for toc
 include::common:partial$_header.adoc[]
 
 Eclipse Scout is a framework that can be used in several ways.
@@ -36,9 +35,9 @@ we recommend that you start with one of the following tutorials.
 Both tutorials guide you through the installation process,
 and you will learn how to setup your first Scout Classic or Scout JS project.
 
-http://eclipsescout.github.io/{scout-version}/helloscout.html[Hello Scout Classic] +
+xref:getstarted:helloscout.adoc[Hello Scout Classic] +
 
-http://eclipsescout.github.io/{scout-version}/helloscout-js.html[Hello Scout JS]
+xref:getstarted:helloscout-js.adoc[Hello Scout JS]
 
 == IDE
 
@@ -73,7 +72,5 @@ https://www.jsdelivr.com/package/npm/@eclipse-scout/core?path=dist
 
 Even though this is a convenient way to get the Scout assets, we still recommend getting the artifacts via npm, because it gives you more control and flexibility to work with.
 
-If you want to learn more about using a CDN, please see http://eclipsescout.github.io/{scout-version}/helloscout-cdn.html[Hello Scout for CDN].
+If you want to learn more about using a CDN, please see xref:getstarted:helloscout-cdn.adoc[Hello Scout for CDN].
 
-:_footer-link-path: build/getstarted/src/docs/{docname}.adoc
-include::common:partial$_footer.adoc[]

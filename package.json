@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "build": "npx antora --fetch antora\\local-eclipse-scout-playbook.yml && start antora\\build\\site\\index.html",
+    "build-help": "npx antora --fetch antora\\local-eclipse-help-playbook.yml && start antora\\build\\site\\index.html"
+  },
   "dependencies": {
     "@antora/cli": "3.1.2",
     "@antora/lunr-extension": "1.0.0-alpha.8",

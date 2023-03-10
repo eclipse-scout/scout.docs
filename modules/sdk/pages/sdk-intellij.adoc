@@ -1,0 +1,7 @@
+= Scout SDK for IntelliJ
+include::common:partial$_header.adoc[]
+
+The Scout SDK plugin for IntelliJ is available at the JetBrains Marketplace.
+Please see the xref:getstarted:helloscout-js-fullstack.adoc#intellij[Installation Guide] on how to install it.
+
+Make sure to check out https://plugins.jetbrains.com/plugin/13393-eclipse-scout to learn what the plugin contains.

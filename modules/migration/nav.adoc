@@ -1,1 +1,1 @@
-* xref:migration-guide.adoc[]
+* xref:migration-guide.adoc[Migration Guide]

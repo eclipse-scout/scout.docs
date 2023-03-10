@@ -1,1 +1,1 @@
-* xref:release-notes.adoc[]
+* xref:release-notes.adoc[Release Notes]
