@@ -3,8 +3,9 @@ site:
   start_page: scout-docs:ROOT:index.adoc
 content:
   sources:
-  - url: ./..
+  - url: ./../..
     branches: releases/22.0
+    start_path: docs
 ui:
   bundle:
     url: ./eclipse-scout-ui-bundle.zip
