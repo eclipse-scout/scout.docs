@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "build": "npx antora --fetch antora\\local-eclipse-scout-playbook.yml && start antora\\build\\site\\index.html",
-    "build-help": "npx antora --fetch antora\\local-eclipse-help-playbook.yml && start antora\\build\\site\\index.html"
+    "build": "npx antora --fetch docs\\playbooks\\local-eclipse-scout-playbook.yml && start docs\\playbooks\\build\\site\\index.html",
+    "build-help": "npx antora --fetch docs\\playbooks\\local-eclipse-help-playbook.yml && start docs\\playbooks\\build\\site\\index.html"
   },
   "dependencies": {
     "@antora/cli": "3.1.2",

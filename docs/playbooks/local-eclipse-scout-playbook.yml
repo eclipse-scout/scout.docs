@@ -1,0 +1,19 @@
+site:
+  title: Eclipse Scout
+  start_page: scout-docs:ROOT:index.adoc
+urls:
+  latest_version_segment: stable
+  latest_prerelease_version_segment: next
+content:
+  sources:
+  - url: ./../..
+    branches: releases/22.0, releases/23.1, releases/23.2
+    start_path: docs
+ui:
+  bundle:
+    url: ./eclipse-scout-ui-bundle.zip
+    snapshot: true
+antora:
+  extensions:
+  - require: '@antora/lunr-extension'
+    languages: [en]

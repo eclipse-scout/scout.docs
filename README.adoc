@@ -1,22 +1,18 @@
-:license_cc: https://creativecommons.org/licenses/by/3.0/
-:license_edl: https://www.eclipse.org/org/documents/edl-v10.php
-
 = Eclipse Scout - Docs
 
 This repository is part of the link:https://github.com/eclipse-scout/scout.rt[Eclipse Scout] project.
 It contains the source of the documentation items and some demo applications created with the framework.
-The documentation is published on link:https://eclipsescout.github.io/[GitHub pages] and you can also find the _Eclipse Scout User Guide_ in the link:https://help.eclipse.org[Eclipse Help Center].
-
+The documentation is published on link:https://eclipsescout.github.io/[GitHub pages], and you can also find the _Eclipse Scout User Guide_ in the link:https://help.eclipse.org[Eclipse Help Center].
 
 == Organisation of this Repository
 
-* `modules` folder: contains the documentation source, link:docs/[read more],
-* `antora` folder: contains the playbooks and user interface bundles for the Antora build, see below
+* `docs/modules` folder: contains the documentation source.
+* `docs/playbooks` folder: contains the playbooks and user interface bundles for the Antora build, see below
 * `code` folder: contains demo applications (code snippets in the documentation items are extracted from this code base during the build)
 
 == Build Demo Applications
 
-The demo applications are built with maven: check the link:code/README.adoc[README of the code folder].
+The demo applications are built with maven.
 
 == Build Documentation
 
@@ -30,14 +26,14 @@ There are two build targets:
 === Windows and Symbolic Links
 
 By default, Windows does not enable the creation symbolic links.
-Because of that, git creates a little text file for the symbolic link `modules/common/examples/` → `code/`.
+Because of that, git creates a little text file for the symbolic link `docs/modules/common/examples/` → `code/`.
 Before building the documentation, replace that file with a real symbolic link, overriding the Windows default.
 
 Create the symbolic link manually using a `cmd` shell run _as administrator_, from the root of the working directory:
 
 [listing]
-del modules\common\examples
-mklink /d modules\common\examples ..\..\code
+del docs\modules\common\examples
+mklink /d docs\modules\common\examples ..\..\..\code
 
 https://security.stackexchange.com/questions/10194/why-do-you-have-to-be-an-admin-to-create-a-symlink-in-windows[On Stackoverflow] you'll find a link to https://blogs.windows.com/windowsdeveloper/2016/12/02/symlinks-windows-10/[a blog post from 2016] explaining that an administrator can enable https://learn.microsoft.com/en-us/windows/apps/get-started/enable-your-device-for-development[Developer Mode] for the local machine, allowing the creation of symbolic links.
 At the same time, the blog post warns of potential security issues.
@@ -47,38 +43,27 @@ WARNING: This is not recommended!
 
 === Eclipse Scout
 
-The Eclipse Scout playbook uses the https://gitlab.com/antora/antora-lunr-extension[Antora Lunr Extension] to provide a client-side search, which you need to install.
+The Eclipse Scout playbook builds the site for link:https://eclipsescout.github.io/[GitHub pages].
+It uses the https://gitlab.com/antora/antora-lunr-extension[Antora Lunr Extension] to provide a client-side search.
 
 `eclipse-scout-ui-bundle.zip` :: the special user interface bundle for the site
 `local-eclipse-scout-playbook.yml` :: the playbook that uses the files in the working directory
 
-To test your changes:
+To test your changes, run:
 
 [listing]
-npx antora --fetch local-eclipse-scout-playbook.yml
+npm run build
 
 === Eclipse Help
 
 The Eclipse Help playbook uses a different user interface bundle without header, footer, navbar, sidebar, table of contents, and so on.
 
-[listing]
-npx antora --fetch antora-playbook.yml
-start antora/build/site/index.html
-
 `eclipse-help-ui-bundle.zip` :: the special user interface bundle for sparse pages
 `local-eclipse-help-playbook.yml` :: the playbook that uses the files in the working directory
 
-To test your changes:
+To test your changes, run:
 
 [listing]
-npx antora --fetch local-eclipse-help-playbook.yml
-start antora/build/site/index.html
+npm run build-help
 
 Please note that getting the files into an actual Eclipse release requires more manual steps.
-
-== License
-
-* The example source code is licensed under link:{license_edl}[Eclipse Distribution License (EDL)]
-* The documentation text is licensed under link:{license_cc}[Creative Commons Attribution 3.0 (Unported) License]
-
-
