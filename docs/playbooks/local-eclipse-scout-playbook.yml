@@ -6,8 +6,9 @@ urls:
   latest_prerelease_version_segment: next
 content:
   sources:
-  - url: ./..
+  - url: ./../..
     branches: releases/22.0, releases/23.1
+    start_path: docs
 ui:
   bundle:
     url: ./eclipse-scout-ui-bundle.zip

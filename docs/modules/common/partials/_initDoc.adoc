@@ -31,7 +31,7 @@
 :maven-central-link: http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.eclipse.scout.rt%22%20AND%20v%3A%22{maven-version}%22[{maven-version}]
 :mvnrepository-link: https://mvnrepository.com/artifact/org.eclipse.scout.rt/org.eclipse.scout.rt/{maven-version}[{maven-version}]
 :scout-sdk-download-link: https://www.eclipse.org/downloads/packages/release/{simrel-name}/r/eclipse-ide-scout-developers[Eclipse for Scout Developers]
-:scout-sdk-update-site: https://download.eclipse.org/scout/releases/12.0/
+:scout-sdk-update-site: https://download.eclipse.org/scout/releases
 :scout-docs-link: https://github.com/bsi-software/org.eclipse.scout.docs/tree/features/version/{maven-version}[features/version/{maven-version}]
 :simrel-link: https://wiki.eclipse.org/Simultaneous_Release[Eclipse {simrel-name} Simultaneous Release]
 :simrel-faq-link: https://wiki.eclipse.org/SimRel/Simultaneous_Release_Cycle_FAQ#What_is_the_Simultaneous_Release_cycle_.3F[Simultaneous Release FAQ]
