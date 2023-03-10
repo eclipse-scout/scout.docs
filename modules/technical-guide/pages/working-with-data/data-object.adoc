@@ -1,0 +1,440 @@
+= Data Objects
+include::common:partial$_header.adoc[]
+
+[[cha-data-objects]]
+
+Data objects are Scout beans, which are used as data transfer objects for synchronous REST and asynchronous MOM interfaces.
+Furthermore, they can be used as domain objects within business logic.
+
+== Data Object Definition
+
+A data object extends the `DoEntity` base class and declares each attribute as a single accessor method.
+Attributes of two kinds are available:
+
+* Value attribute of type `T`
+* List attribute of type `List<T>`
+
+The name of the accessor method defines the attribute name.
+The return value of the accessor method defines the attribute type.
+
+[source,java]
+.Example: ExampleEntityDo
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/ExampleEntityDo.java[tags=class]
+----
+<1> Example attribute of type `String`
+<2> Example attribute of type `List<Integer>`
+
+For convenience reasons when working with the data objects it is recommended to add a getter and a with (e.g. setter) method.
+Using the convenience with methods, new data objects can be created with fluent-style API:
+
+[source,java]
+.Example: Create ExampleEntityDo instance
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=create]
+----
+
+== Marshalling
+
+Using the `IDataObjectMapper` interface a data object can be converted from and to its string representation.
+The marshalling strategy is generic and replaceable.
+The Scout platform defines the `IDataObjectMapper` interface, at runtime a Scout bean implementing the interface must be available.
+
+The Scout module `org.eclipse.scout.rt.jackson` provides a default implementation serializing data objects from and to JSON using the https://github.com/FasterXML/jackson[Jackson library].
+
+[source,java]
+.Example: Serialize ExampleEntityDo
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=serialize]
+----
+
+The data object `ExampleEntityDo` serialized to JSON:
+
+[source,json]
+.Example: ExampleEntityDo as JSON
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/resources/org/eclipse/scout/docs/snippets/dataobject/ExampleEntityDo.json[]
+----
+
+[source,java]
+.Example: Deserialize ExampleEntityDo
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=deserialize]
+----
+
+=== Type Name
+
+A data object is annotated with a logical type name using the `@TypeName` annotation.
+
+IMPORTANT: Declaring a logical type name using the `@TypeName` annotation for each data object is mandatory.
+
+The annotation value is added to the serialized JSON object as top-level `_type` property.
+Using the type property the data object marshaller is able to find and instantiate the matching data object class, without having to rely on a fully classified class name.
+It avoids a 1:1 dependency between the serialized JSON String and the fully classified class name.
+A stable type name is required in order to be able to change the data object structure without breaking the API.
+
+=== Type Version 
+
+A data object may be annotated with a type version using the `@TypeVersion` annotation.
+The type version represents the version of the structure of the data object and not the version of the data within the data object.
+The type version value should be incremented, each time, the data object class is modified (add/remove/rename attributes).
+If a version is required for versioning the values of a data object, consider add a `version` attribute, incrementing its value, every time a value of the data object is modified.
+
+The annotation value is added to the serialized JSON object as top-level `_typeVersion` property.
+The serialized `_typeVersion` value is not deserialized into an attribute, since the deserializer creates a concrete data object class at runtime, having the `@TypeVersion` annotation providing the type version value.
+
+NOTE: Declaring a logical type version using the `@TypeVersion`annotation is highly recommended if a data object is persisted as JSON document to a file or database.
+
+[[cha-namespace-and-itypeversion]]
+==== Namespace and ITypeVersion
+
+A namespace (implementation of `INamespace`) represents a container for data objects.
+Each data object must have a unique type name within a namespace.
+Scout has its own namespace (with ID `scout`), your project should use an own one.
+
+[source,java]
+.Example: LoremNamespace
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/LoremNamespace.java[tags=class]
+----
+
+A class implementing `ITypeVersion` is used within the `@TypeVersion` annotation.
+Several type versions for one namespace may be bundled in a container class.
+
+There are a few different constructors provided by `AbstractTypeVersion` that simplify the definition of such a type version.
+The default constructor extracts the namespace and version based on the class name.
+
+[source,java]
+.Example: LoremTypeVersions
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/LoremTypeVersions.java[tags=class]
+----
+
+==== Signature Test
+
+`AbstractDataObjectSignatureTest` provides an abstract implementation of a test that creates a signature of all data object annotated with a type version
+including additional signatures (e.g. referenced `IEnum` with their values).
+A signature test enables to detect changes in data object that might need a migration.
+Each module containing data objects with type version annotation should implement a data object signature test.
+
+[source,java]
+.Example: DocsSnippetsDataObjectSignatureTest
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/test/java/org/eclipse/scout/docs/snippets/DocsSnippetsDataObjectSignatureTest.java[tags=class]
+----
+
+=== Data Object Naming Convention
+
+Scout objects use the following naming conventions:
+
+* A data object class should use the `Do' suffix.
+* The value of the `@TypeName` annotation corresponds to the simple class name without `Do` suffix
+** A namespace prefix (separated by a dot) is recommended in order to avoid duplicated type names across different modules (e.g. `scout.Bookmark`, `helloworld.MyDataObject`)
+
+=== Attribute Name
+
+The default attribute name within the serialized string corresponds to the name of the attribute accessor method defined in the data object.
+To use a custom attribute name within the serialized string, the attribute accessor method can be annotated by `@AttributeName` providing the custom attribute name.
+
+[source,java]
+.Example: Custom Attribute Name
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/CustomAttributeEntityDo.java[tags=customAttributeName]
+----
+<1> Important: The annotation value must be equals to the string constant used for the `doValue()` or `doList()` attribute declaration.
+
+[source,JSON]
+.Example: Custom Attribute Name as JSON
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/resources/org/eclipse/scout/docs/snippets/dataobject/CustomAttributeNameEntityDo.json[]
+----
+
+=== Attribute Format
+
+Using the `ValueFormat` annotation a data type dependent format string may be provided, which is used for the marshalling.
+
+[source,java]
+.Example: Custom Attribute Format
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/CustomAttributeEntityDo.java[tags=customValueFormat]
+----
+
+The `IValueFormatConstants` interface declares a set of default format pattern constants.
+
+Attributes with type `java.util.Date` accept the format pattern specified by `SimpleDateFormat` class (see https://docs.oracle.com/javase/8/docs/api/java/text/SimpleDateFormat.html)
+
+== Ignoring an Attribute
+
+The `@JsonIgnore` annotation included in the Jackson library is currently not supported for data objects.
+To ignore an attribute when serializing a data object, the attribute must be removed from the data object by either not setting a value for the desired attribute
+or by explicitly removing the attribute before a data object is serialized:
+
+[source,java]
+.Example: Remove an attribute from a data object
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=removeAttribute]
+----
+
+== Handling of DoEntity Attributes
+
+Instead of data objects, a REST or MOM interface could be built using simple plain old Java objects (POJOs).
+Compared to POJOs a Scout data object offers additional support and convenience when working with attributes.
+
+A JSON attribute may have three different states:
+
+* Attribute available with a value
+* Attribute available with value `null`
+* Attribute not available
+
+These three states cannot be represented with a POJO object which is based on a single variable with a pair of getter/setter.
+In order to differ between _value not available_ and _value is null_, a wrapper type is required, which beside the value stores the information, if the attribute is available.
+Scout data objects solve this issue: Data objects internally use a `Map<String, DoNode<?>>` where the abstract `DoNode` at runtime is represented by a `DoValue<T>` or a `DoList<T>` object instance wrapping the value.
+
+=== Access Data Object Attributes
+
+* Value: `DoNode.get()` returns the (wrapped) value of the attribute
+
+[source,java]
+.Example: ExampleEntityDo Access the Attribute Value
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=access]
+----
+
+* Existence: Using the `DoNode.exists()` method, each attribute may be checked for existence
+
+[source,java]
+.Example: ExampleEntityDo Attribute Existence
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=exists]
+----
+
+== Abstract Data Objects & Polymorphism
+
+A simple data objects is implemented by subclassing the `DoEntity` class.
+
+For a complex hierarchy of data objects the base class may be abstract and extend the `DoEntity` class, further subclasses extend the abstract base class.
+The abstract base data object class does not need to specify a `@TypeName` annotation since there are no instances of the abstract class which are serialized or deserialized directly.
+Each non-abstract subclass must specify a unique `@TypeName` annotation value.
+
+[source,java]
+.Example: Abstract class AbstractExampleEntityDo with one attribute
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/AbstractExampleEntityDo.java[tags=class]
+----
+
+[source,java]
+.Example: Subclass 1 with an additional attribute and a unique type name
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/ExampleEntity1Do.java[tags=class]
+----
+
+[source,java]
+.Example: Subclass 2 with an additional attribute and a unique type name
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/ExampleEntity2Do.java[tags=class]
+----
+
+[source,java]
+.Example: Class with attributes of type AbstractExampleEntityDo
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/ExampleDoEntityListDo.java[tags=class]
+----
+
+[source,java]
+.Example: Using the ExampleDoEntityListDo class with different kinds of AbstractExampleEntityDo sub classes
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=abstractDataObject]
+----
+
+If an instance of `ExampleDoEntityListDo` is serialized, each attribute is serialized using its runtime data type, adding an appropriate `_type` attribute to each serialized object.
+Therefore, the deserializer knows which concrete class to instantiate while deserializing the JSON document.
+This mechanism is used for simple value properties and list value properties.
+To each object which is part of a list value property the `_type` property is added to support polymorphism within single elements of a list.
+
+[source,json]
+.Example: ExampleDoEntityListDo as JSON
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/resources/org/eclipse/scout/docs/snippets/dataobject/ExampleDoEntityListDo.json[]
+----
+
+== Rename an attribute of a data object in a subclass
+
+To rename a data object attribute in a subclass, override the attribute accessor method and annotate it with `@AttributeName` using the new attribute name as value.
+Additionally the overridden method must call the `doValue()` method providing the new attribute name as argument.
+
+[source,java]
+.Example: Rename attribute in a data object subclass
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/ExampleEntityExDo.java[tags=class]
+----
+<1> Rename `name` attribute of superclass to `nameEx`
+
+== Interfaces to Data Objects
+
+Use the basic data object interface `IDoEntity` to model a data object hierarchy with own base interfaces and a set of implementing classes.
+
+Interfaces extending `IDataObject` do not need a `@TypeName` annotation, since they are never directly serialized or deserialized.
+
+The interfaces may be used as types for attributes within a data object. At runtime the concrete classes implementing the interfaces are serialized and their `@TypeName` annotation value is used.
+
+== Equals and Hashcode
+
+The Data Object base class `DoEntity` defines a generic `equals()` and `hashCode()` implementation considering all attributes of a data object for equality.
+A data object is equals to another data object, if the Java class of both data objects is identical and the attribute maps (including their nested values) of both data objects are equals.
+
+For futher details see:
+
+* `org.eclipse.scout.rt.dataobject.DoEntity.equals(Object)`
+* `org.eclipse.scout.rt.dataobject.DoNode.equals(Object)`
+
+== Generic DoEntity
+
+An instance of the `DoEntity` class can represent any kind of JSON document.
+If the JSON document contains no type attributes or no matching data object class exists at runtime, the JSON document is deserialized into a raw `DoEntity` instance holding all attributes.
+To access the attributes of the data object a set of generic getter methods may be used by specifying the attribute name.
+A generic JSON document is deserialized into a generic tree-like structure of nested `DoEntity` instances.
+If the serialized JSON document contains a `_type` and/or `_typeVersion` attribute, the attribute and its value is added as attribute to the generic raw `DoEntity` instance.
+
+[source,java]
+.Example: ExampleEntityDo accessing attribute "by name"
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=accessRaw]
+----
+<1> Accessing value attribute, default type is `Object`
+<2> Accessing value attribute, specify the type as class object if known
+<3> Accessing value attribute, convenience method for a set of common types
+<4> Accessing list attribute, default type is `Object`
+<5> Accessing list attribute, specify the type as class object if known
+<6> Accessing list attribute, convenience method for a set of common types
+<7> Accessing optional list attribute, default type is `Object`
+<8> Accessing optional list attribute, specify the type as class object if known
+
+NOTE: If a list attribute is not available, using one of the `getList(...)` getters adds an empty list as attribute value into the entity and returns the list.
+Use `optList(...)` in order to get an optionally available list without adding a new empty list as attribute.
+
+Apart of the convenience methods available directly within the `DoEntity` class, the `DataObjectHelper` class contains a set of further convenience methods to access raw values of a data object.
+
+=== Accessing number values
+
+If a generic JSON document is deserialized to a `DoEntity` class without using a subclass specifying the attribute types, all attributes of type JSON number are deserialized into the smallest possible Java type.
+For instance the number value 42 is deserialized into an Integer value, a large number may be deserialized into a `BigInteger` or `BigDecimal` if it is a floating point value.
+Using the convenience method `DoEntity.getDecimal(...)` each number attribute is converted automatically into a `BigDecimal` instance on access.
+
+IMPORTANT: If a generic JSON document is deserialized, only a set of basic Java types like String, Number, Double are supported. Every JSON object is deserialized into a (nested) `DoEntity` structure, which internally is represented by a nested structure of `Map<String, Object>`.
+
+== Map of objects
+
+To build map-like a data object (corresponds to `Map<String, T>`), the `DoMapEntity<T>` base class may be used.
+
+[source,java]
+.Example: Map<String, ExampleEntityDo> as ExampleMapEntityDo data object
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/ExampleMapEntityDo.java[tags=class]
+----
+
+The example JSON document of  ExampleMapEntityDo instance with two elements:
+
+[source,JSON]
+.Example: ExampleMapEntityDo with two elements:
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/resources/org/eclipse/scout/docs/snippets/dataobject/ExampleMapEntityDo.json[]
+----
+
+[source,java]
+.Example: Accessing attributes
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=accessMapAttributes]
+----
+<1> Accessing attribute using `get` method returns the attribute of declared type `T`
+<2> Accessing all attributes using `all` method returns a map with all attributes of type `T`
+
+IMPORTANT: A `DoMapEntity<T>` subclass may declare custom attributes of another type than `T` (e.g. an integer size attribute). If attributes of other types are used, using the `all` method results in a `ClassCastException` since not all attributes are of the same type any longer.
+
+== IDataObject Interface - Data Objects with unknown structure
+
+According to the http://json.org/[JSON specification] a JSON document at top level may contain a object or an array. If a JSON string of unknown structure is deserialized, the common super interface `IDataObject` may be used as target type for the call to the deserializer:
+
+[source,java]
+.Example: Deserialize a JSON document with unknown structure
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=dataObjectInterface]
+----
+
+== Ad-Hoc Data Objects
+
+The `DoEntityBuilder` may be used to build ad-hoc data objects without a concrete Java class defining its attributes.
+
+[source,java]
+.Example: DoEntityBuilder
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=doEntityBuilder]
+----
+<1> Builder for a DoEntity object
+<2> Builder for the string representation of a DoEntity objects
+
+== Maven Dependencies
+
+The Scout data object implementation does not reference any specific Java serialization library or framework.
+The basic building blocs of data objects are part of the Scout platform and to not reference any thirdparty libraries.
+At runtime an implementation of the `IDataObjectMapper` interface must be provided.
+The Scout default implementation based on the JSON library Jackson is provided by adding a maven dependency to the module `org.eclipse.scout.rt.jackson`.
+The dependency to this module must be added in the top-level .dev/.app module.
+A dependency within the program code is not necessaray as long as no specific Jackson features should be used within the application code.
+
+== Data Object Inventory
+
+The class `org.eclipse.scout.rt.dataobject.DataObjectInventory` provides access to all available data objects at runtime.
+For each data object all available attributes and their properties (name, type, accessor method and format pattern) are available:
+
+[source,java]
+.Example: Accessing data object inventory
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=accessInventory]
+----
+
+Apart from attribute descriptions, the inventory provides access to type name and type version of each data object class.
+
+== Extending with custom serializer and deserializer
+
+The application scoped beans `DataObjectSerializers` resp. `DataObjectDeserializers` define the available serializer and deserializer classes used to marshal the data objects.
+Own custom serializer and deserializer implementations can be added by replacing  the corresponding base class and register its own custom serializer or deserializer.
+
+== Enumerations within Data Objects
+
+Implementations of `org.eclipse.scout.rt.dataobject.enumeration.IEnum` add a `stringValue()` method to each enumeration value, guaranteeing a constant, fixed string value for each enumeration value.
+An arbitrary Java enum may be used within a data object, but does not guarantee a stable serialized value, if an enumeration value is changed in future.
+
+Additionally implementations of `IEnum` can be annotated with `@EnumName` to support being referenced in a data object signature test.
+
+All instances of `IEnum` may be used within data objects and are automatically serialized to their JSON string value representation and deserialized back to the correct Java class instance.
+
+The default resolver mechanism for `IEnum` (see `org.eclipse.scout.rt.dataobject.enumeration.EnumResolver`) matches the given string with the available string values in the current enumeration implementation to look up the matching enumeration value.
+An optional static `resolve()` method handles the resolve of a given string value into the correct enumeration value allowing to support even string values, whose enumeration values where changed or deleted.
+
+[source,java]
+.Example IEnum implementation
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=exampleEnum]
+----
+<1> Optional resolve method
+
+== Typed IDs within Data Objects
+
+Implementations of `org.eclipse.scout.rt.dataobject.id.IId<WRAPPED_TYPE>` interface wrap an arbitrary value adding a concrete Java type to a scalar value.
+E.g. the key of an example entity which technically is a UUID becomes an instance of the `ExampleId` class.
+
+All instances of `IId` may be used within data objects and are automatically serialized to their JSON string representation of the wrapped value and deserialized back to the correct Java class instance.
+
+An exampleId instance may then be used as type-safe parameter for further referencing a given example entity record, for instance as attribute value within a data object.
+
+[source,java]
+.Example ID implementation wrapping a UUID
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=exampleId]
+----
+
+[[sec-unit-testing]]
+== Unit Testing
+
+A set of utility methods for unit tests with data objects are provided within the `DataObjectTestHelper` class.
+Commonly used are a set of assert methods (e.g. `assertEquals(Object expected, Object actual)`) for testing data objects for (deep) equality.

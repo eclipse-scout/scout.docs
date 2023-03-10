@@ -1,7 +1,0 @@
-= Eclipse Scout One Day Tutorial
-include::common:partial$_header.adoc[]
-
-include::partial$_OneDayTutorial.adoc[]
-
-:_footer-link-path: build/one_day_tutorial/src/docs/{docname}.adoc
-include::common:partial$_footer.adoc[]

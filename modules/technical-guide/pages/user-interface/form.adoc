@@ -1,0 +1,38 @@
+= Form
+include::common:partial$_header.adoc[]
+
+A form is typically used for two purposes:
+
+1. Allowing the user to enter data in a structured way
+2. Displaying the data in a structured way
+
+This is achieved by using xref:technical-guide:user-interface/form-field.adoc[]]s. Every form has one root group box (also called main box) which has 1:n form fields. The form fields are layouted using the logical grid layout, unless no custom layout is used. This makes it easy to arrange the fields in a uniform way.
+
+A form may be displayed in various ways, mainly controlled by the property `displayHint`.
+The following display hints are available by default:
+
+* **view**: the form will be opened in a tab and will take full width and height of the bench
+* **dialog**: the form will be opened as overlaying dialog and will be as width and height as necessary
+* **popup-window**: the form will be opened in a separate browser window (please note that this feature does not work properly with Internet Explorer)
+
+To display the form, just set one of the above display hints and call `form.open()`.
+
+Beside opening the form as separate dialog or view, you can also embed it into any other widget because it is actually a widget by itself. Just call `form.render()` for that purpose.
+
+== Form Lifecycle
+When working with forms, you likely want to load, validate and save data as well. The form uses a so called `FormLifecycle` to manage the state of that data. The lifecycle is installed by default, so you don't have to care about it. So whenever the user enters some data and presses the save button, the data is validated and if invalid, a message is shown. If it is valid the data will be saved. The following functions of a form may be used to control that behavior.
+
+* **open**: calls `load` and displays the form once the loading is complete.
+* **load**: calls `_load` and `importData` which you can implement to load the data and then marks the fields as saved to set their initial values. Finally, a `postLoad` event is fired.
+* **save**: validates the data by checking the mandatory and validation state of the fields. If every mandatory field is filled and every field contains a valid value, the `exportData` and `_save` functions are called which you can implement to save the data. After that every field is marked as saved and the initial value set to the current value.
+* **reset**: resets the value of every field to its initial value marking the fields as untouched.
+* **ok**: saves and closes the form.
+* **cancel**: closes the form if there are no changes made. Otherwise, it shows a message box asking to save the changes.
+* **close**: closes the form and discards any unsaved changes.
+* **abort**: called when the user presses the "x" icon. It will call `close` if there is a close menu or button, otherwise `cancel`.
+
+If you need to perform form validation which is not related to a particular form-field, you can implement the `_validate` function. This function is always called, even when there is no __touched__ field.
+
+If you embed the form into another widget, you probably don't need the functions `open`, `ok`, `close`, `cancel` and `abort`. But `load`, `reset` and `save` may come in handy as well.
+
+Because it is quite common to have a button activating one of these functions (like an 'ok' or 'cancel' button), the following buttons (resp. menus because they are used in the menu bar) are available by default: `OkMenu`, `CancelMenu`, `SaveMenu`, `ResetMenu`, `CloseMenu`.

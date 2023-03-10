@@ -1,0 +1,5 @@
+= Eclipse Scout One Day Tutorial
+include::common:partial$_header.adoc[]
+
+include::partial$_OneDayTutorial.adoc[]
+

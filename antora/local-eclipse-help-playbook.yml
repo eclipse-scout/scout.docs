@@ -1,6 +1,6 @@
 site:
   title: Eclipse Scout
-  start_page: scout-docs:eclipse_help:scout_user_guide.adoc
+  start_page: scout-docs:eclipse-help:scout_user_guide.adoc
 content:
   sources:
   - url: ./..
