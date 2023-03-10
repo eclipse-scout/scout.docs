@@ -2,7 +2,7 @@
 
 This repository is part of the link:https://github.com/eclipse-scout/scout.rt[Eclipse Scout] project.
 It contains the source of the documentation items and some demo applications created with the framework.
-The documentation is published on link:https://eclipsescout.github.io/[GitHub pages] and you can also find the _Eclipse Scout User Guide_ in the link:https://help.eclipse.org[Eclipse Help Center].
+The documentation is published on link:https://eclipsescout.github.io/[GitHub pages], and you can also find the _Eclipse Scout User Guide_ in the link:https://help.eclipse.org[Eclipse Help Center].
 
 == Organisation of this Repository
 
@@ -64,6 +64,6 @@ The Eclipse Help playbook uses a different user interface bundle without header,
 To test your changes, run:
 
 [listing]
-npm run build
+npm run build-help
 
 Please note that getting the files into an actual Eclipse release requires more manual steps.
