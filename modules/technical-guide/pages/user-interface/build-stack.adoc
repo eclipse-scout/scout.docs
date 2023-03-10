@@ -220,15 +220,20 @@ This will start a real browser and enable the watch mode. This means every time 
 TIP: If you don't like the automatic browser reloading, you can press debug on the top right corner of the browser or manually navigate to http://localhost:9876/debug.html.
 
 ==== Arguments
-The test commands accept some arguments you can use to adjust the karma runner without modifying your karma config file. All passed arguments are merged with the karma config object, so all karma configuration options are available (see http://karma-runner.github.io/4.0/config/configuration-file.html).
+The test commands accept some arguments you can use to adjust the karma runner without modifying your karma config file.
+All passed arguments are merged with the karma config object, so all karma configuration options are available (see http://karma-runner.github.io/4.0/config/configuration-file.html).
 
 Example usage:
 
 `npm run test:ci \-- --junitReporter.outputDir=custom-out-dir`
 
-NOTE: Please note that no type conversion happens which is especially relevant for boolean arguments. If you for example want to disable the watcher, you cannot use `--auto-watch false`. Instead, you would have to use `--no-auto-watch`.
+NOTE: Please note that no type conversion happens which is especially relevant for boolean arguments.
+If you for example want to disable the watcher, you cannot use `--auto-watch false`.
+Instead, you would have to use `--no-auto-watch`.
 
-In addition to the karma configuration options you can also pass the webpack arguments (checkout <<webpack-arguments>> for a list of available arguments). To do that, you need to use the argument called `webpackArgs`. Example:
+In addition to the karma configuration options you can also pass the webpack arguments (checkout <<webpack-arguments>> for a list of available arguments).
+To do that, you need to use the argument called `webpackArgs`.
+Example:
 
 `npm run testserver:start \-- --webpackArgs.progress=false`
 
@@ -240,14 +245,17 @@ In case you need to test the files built by `build:prod` locally, follow this pr
 
 * Stop the UI server.
 * Run `npm run build:prod`, this script will copy minified script files to the _/dist_ folder.
-* Start the UI server. Stopping and starting the UI server makes sure the server-side script cache is cleared.
+* Start the UI server.
+Stopping and starting the UI server makes sure the server-side script cache is cleared.
 * Start the application with the URL parameter `/?debug=false`.
-* Check your index.html in the browser. Each referenced script or CSS file should have a fingerprint, example: `yourapp-2c6053b2fdf5b816fae5.min.js`.
+* Check your index.html in the browser.
+Each referenced script or CSS file should have a fingerprint, example: `yourapp-2c6053b2fdf5b816fae5.min.js`.
 
 NOTE: If you set the config property `scout.devMode` to false instead of using the URL parameter, the resources will be loaded from the Java classpath.
 In that case you need to additionally copy the content of the dist folder to target/classes before starting the UI server.
 Or you can also set `scout.loadWebResourcesFromFilesystem` to true to disable classpath loading (see also `LoadWebResourcesFromFilesystemConfigProperty`).
 
+[#eslint]
 == ESLint
 
 For the Scout code base we use https://eslint.org/[ESLint] to analyze the JavaScript and TypeScript code.
@@ -285,7 +293,11 @@ In order to run the analysis, you can either use an IDE that supports it (e.g. I
 
 NOTE: If the command takes very long and prints a lot of errors, you may have to ignore the `target/dist` folder, see <<ESLint Ignore>>.
 
-The command above will analyze your current directory including all sub directories. Depending on your environment, it is likely that you'll see some errors regarding linebreaks. This is because the Scout config enforces the UNIX format (LF). You can now either convert the linebreaks of your files to that format and adjust your editor to always use the UNIX format, or you can disable the rule. To do that, just add the following to your `.eslintrc.js`:
+The command above will analyze your current directory including all sub-directories.
+Depending on your environment, it is likely that you'll see some errors regarding linebreaks.
+This is because the Scout config enforces the UNIX format (LF).
+You can now either convert the linebreaks of your files to that format and adjust your editor to always use the UNIX format, or you can disable the rule.
+To do that, just add the following to your `.eslintrc.js`:
 
 [source,JavaScript]
 .Disabling the linebreak rule
@@ -297,7 +309,9 @@ The command above will analyze your current directory including all sub director
 
 Now run the command again to make the linebreak errors disappear.
 
-NOTE: If you plan to configure your IDE to use the UNIX linebreak format, we recommend having a look at https://editorconfig.org/[Editor Config]. The file can be interpreted by various IDEs. Just add `end_of_line=lf` to that file and you are done.
+NOTE: If you plan to configure your IDE to use the UNIX linebreak format, we recommend having a look at https://editorconfig.org/[Editor Config].
+The file can be interpreted by various IDEs.
+Just add `end_of_line=lf` to that file and you are done.
 
 === ESLint Ignore
 
