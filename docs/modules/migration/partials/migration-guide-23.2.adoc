@@ -90,3 +90,8 @@ To install the Scout SDK into your existing Eclipse IDE, use this P2 update site
 Since this version, the method `DateUtility#formatDateTime` returns the date formatted with the `DateFormat.DEFAULT` and no longer with the `DateFormat.SHORT`.
 Now, both methods, `DateUtility#formatDate` and `DateUtility#formatDateTime`, are formatting the date identically.
 To apply the old formatting, use `DateUtility#formatDateTimeShort`.
+
+== Adapted REST ErrorDoRestClientExceptionTransformer
+
+The transformation logic for exceptions which occur while invoking a REST client was slightly adapted.
+For HTTP error codes 502 (bad gateway), 503 (service unavailable) and 504 (gateway timeout) the adapted `ErrorDoRestClientExceptionTransformer` returns a `org.eclipse.scout.rt.platform.exception.RemoteSystemUnavailableException` instead of the former generic `org.eclipse.scout.rt.platform.exception.ProcessingException`.
