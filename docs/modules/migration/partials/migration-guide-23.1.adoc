@@ -458,3 +458,9 @@ Removals (see deprecation warning in 22.0 for further information):
 * DoStructureMigrator#migrateDataObject(DataObjectMigrationContext, IDataObject, IDataObjectMigrationLocalContextData...)
 * DoStructureMigrator#migrateDataObject(DataObjectMigrationContext, IDataObject, NamespaceVersion, IDataObjectMigrationLocalContextData...)
 * TestDoStructureMigrationInventory#TestDoStructureMigrationInventory(List<INamespace>, Collection<ITypeVersion>, Collection<Class<? extends IDoStructureMigrationTargetContextData>>, IDoStructureMigrationHandler...)
+
+== Scout REST Client: Removed property `scout.rest.useScoutApacheConnector`
+
+The property `scout.rest.useScoutApacheConnector` was removed in  release 23.1.
+The `ScoutApacheConnector` implementation is the new default handler to connect the Apache HTTP client for Jersey REST calls.
+Remove config property `scout.rest.useScoutApacheConnector=...` from all your config files.
