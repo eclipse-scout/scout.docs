@@ -10,10 +10,11 @@
 import {ObjectFactory} from '@eclipse-scout/core';
 import 'leaflet';
 import 'leaflet.heat';
-
 import * as self from './index';
 
 export * from './heatmap/HeatmapField';
+export * from './heatmap/HeatmapFieldModel';
+export * from './heatmap/HeatmapFieldEventMap';
 export * from './heatmap/HeatmapFieldAdapter';
 export * from './heatmap/HeatmapFieldLayout';
 

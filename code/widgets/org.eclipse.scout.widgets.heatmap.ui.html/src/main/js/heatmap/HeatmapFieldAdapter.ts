@@ -7,38 +7,36 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {FormFieldAdapter} from '@eclipse-scout/core';
+import {Event, FormFieldAdapter} from '@eclipse-scout/core';
+import {HeatmapField, HeatmapFieldClickEvent, HeatmapFieldViewParameterChangeEvent} from '../index';
 
 export class HeatmapFieldAdapter extends FormFieldAdapter {
+  declare widget: HeatmapField;
 
-  constructor() {
-    super();
-  }
-
-  _onWidgetEvent(event) {
+  protected override _onWidgetEvent(event: Event<HeatmapField>) {
     if (event.type === 'viewParameterChange') {
-      this._onWidgetViewParameterChange(event);
+      this._onWidgetViewParameterChange(event as HeatmapFieldViewParameterChangeEvent);
     } else if (event.type === 'click') {
-      this._onWidgetClick(event);
+      this._onWidgetClick(event as HeatmapFieldClickEvent);
     } else {
       super._onWidgetEvent(event);
     }
   }
 
-  _onWidgetViewParameterChange(event) {
+  protected _onWidgetViewParameterChange(event: HeatmapFieldViewParameterChangeEvent) {
     this._send('viewParameterChange', {
       center: event.center,
       zoomFactor: event.zoomFactor
     });
   }
 
-  _onWidgetClick(event) {
+  protected _onWidgetClick(event: HeatmapFieldClickEvent) {
     this._send('click', {
       point: event.point
     });
   }
 
-  onModelAction(event) {
+  override onModelAction(event: any) {
     if (event.type === 'heatPointsAdded') {
       this._onHeatPointsAdded(event);
     } else {
@@ -46,9 +44,9 @@ export class HeatmapFieldAdapter extends FormFieldAdapter {
     }
   }
 
-  _onHeatPointsAdded(event) {
-    event.points.forEach(function(point) {
+  protected _onHeatPointsAdded(event: any) {
+    event.points.forEach(point => {
       this.widget.addHeatPoint(point);
-    }, this);
+    });
   }
 }

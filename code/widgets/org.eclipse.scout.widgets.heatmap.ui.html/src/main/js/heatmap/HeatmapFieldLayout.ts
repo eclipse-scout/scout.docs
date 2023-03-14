@@ -8,18 +8,17 @@
  * SPDX-License-Identifier: EPL-2.0
  */
 import {AbstractLayout, graphics, HtmlComponent} from '@eclipse-scout/core';
+import {HeatmapField} from '../index';
 
 export class HeatmapFieldLayout extends AbstractLayout {
+  field: HeatmapField;
 
-  constructor(field) {
+  constructor(field: HeatmapField) {
     super();
     this.field = field;
   }
 
-  /**
-   * @override AbstractLayout.js
-   */
-  layout($container) {
+  override layout($container: JQuery) {
     let htmlContainer = HtmlComponent.get($container);
 
     // Because of a bug (?) in Leaflet.js, the canvas size must not get smaller than
