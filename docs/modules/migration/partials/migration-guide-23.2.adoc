@@ -6,6 +6,7 @@ Howto:
 - Use "WARNING: {NotReleasedWarning}" on its own line to mark parts about not yet released code (also add a "(since <version>)" suffix to the chapter title)
 - Use "title case" in chapter titles (https://english.stackexchange.com/questions/14/)
 ////
+
 == About This Document
 
 This document describes all relevant changes *from Eclipse Scout {scout-previous-version} to Eclipse Scout {scout-version}*. If existing code has to be migrated, instructions are provided here.

@@ -250,10 +250,6 @@ There are multiple possibilities to configure a REST client to use a HTTP proxy:
 scout.http.proxyPatterns[0]=.*\.example.com(:\d+)?=127.0.0.1:8888
 ----
 
-NOTE: In order to use the configurable proxy selector property, make sure to enable the new Scout Apache HTTP client connector,
-either using the REST client property `org.eclipse.scout.rt.rest.client.RestClientProperties.USE_SCOUT_APACHE_CONNECTOR`
-or by setting the config property `scout.rest.useScoutApacheConnector=true`.
-
 == REST Cancellation Support
 
 REST and the underlying HTTP protocol do not provide an explicit way to cancel running requests. Typically, a client terminates its connection to the HTTP server if it is no
