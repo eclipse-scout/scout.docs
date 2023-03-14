@@ -13,7 +13,7 @@ module.exports = (env, args) => {
   const config = baseConfig(env, args);
   return {
     entry: {
-      'eclipse-scout-demo-widgets-heatmap': './src/main/js/index.js'
+       'eclipse-scout-demo-widgets-heatmap': './src/main/js/index.ts'
     },
     ...baseConfig.libraryConfig(config)
   };

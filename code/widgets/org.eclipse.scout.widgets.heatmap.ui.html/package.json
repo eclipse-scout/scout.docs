@@ -14,7 +14,7 @@
     "npm": ">=9.1.1",
     "pnpm": ">=7.16.0"
   },
-  "main": "./src/main/js/index.js",
+  "main": "./src/main/js/index.ts",
   "publishConfig": {
     "main": "./target/dist/dev/eclipse-scout-demo-widgets-heatmap"
   },
@@ -39,7 +39,9 @@
   },
   "devDependencies": {
     "@eclipse-scout/cli": ">=23.1.0-snapshot <23.1.0",
-    "@eclipse-scout/releng": "^22.0.0"
+    "@eclipse-scout/releng": "^22.0.0",
+    "@eclipse-scout/tsconfig": ">=23.1.0-snapshot <23.1.0",
+    "@types/jquery": "3.5.14"
   },
   "dependencies": {
     "@eclipse-scout/core": ">=23.1.0-snapshot <23.1.0",
