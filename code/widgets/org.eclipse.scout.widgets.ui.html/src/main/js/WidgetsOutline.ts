@@ -7,19 +7,21 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {Outline, scout} from '@eclipse-scout/core';
+import {Outline, OutlineModel, scout} from '@eclipse-scout/core';
 import {WidgetsTileOutlineOverview} from './WidgetsTileOutlineOverview';
 
-export class WidgetsOutline extends Outline {
+export class WidgetsOutline extends Outline implements WidgetsOutlineModel {
+  declare model: WidgetsOutlineModel;
+  description: string;
 
-  constructor() {
-    super();
-  }
-
-  _createOutlineOverview() {
+  protected override _createOutlineOverview() {
     return scout.create(WidgetsTileOutlineOverview, {
       parent: this,
       outline: this
     });
   }
+}
+
+export interface WidgetsOutlineModel extends OutlineModel {
+  description?: string;
 }

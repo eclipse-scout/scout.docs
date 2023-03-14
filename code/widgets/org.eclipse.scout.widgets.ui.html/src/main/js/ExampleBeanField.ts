@@ -8,28 +8,22 @@
  * SPDX-License-Identifier: EPL-2.0
  */
 import {BeanField} from '@eclipse-scout/core';
+import {ExampleBean} from './index';
 
-export class ExampleBeanField extends BeanField {
+export class ExampleBeanField extends BeanField<ExampleBean> {
 
-  constructor() {
-    super();
-  }
-
-  _render() {
+  protected override _render() {
     super._render();
     this.$container.addClass('example-bean-field');
   }
 
-  /**
-   * @override
-   */
-  _renderValue() {
+  protected override _renderValue() {
     this.$field.empty();
     if (!this.value) {
       return;
     }
 
-    let $header = this.$field.appendDiv('example-bean-field-header')
+    this.$field.appendDiv('example-bean-field-header')
       .text(this.value.header);
     let $content = this.$field.appendDiv('example-bean-field-content');
     $content.appendElement('<p>')

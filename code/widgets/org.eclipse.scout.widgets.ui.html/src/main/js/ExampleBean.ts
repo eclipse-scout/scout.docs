@@ -7,7 +7,11 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {TileAdapter} from '@eclipse-scout/core';
+import {AppLink} from '@eclipse-scout/core';
 
-export class CustomTileAdapter extends TileAdapter {
+export interface ExampleBean {
+  header?: string;
+  description?: string;
+  appLink?: AppLink;
+  image?: string;
 }
