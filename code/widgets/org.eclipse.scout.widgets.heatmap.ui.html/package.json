@@ -15,6 +15,9 @@
     "pnpm": ">=7.16.0"
   },
   "main": "./src/main/js/index.js",
+  "publishConfig": {
+    "main": "./target/dist/dev/eclipse-scout-demo-widgets-heatmap"
+  },
   "files": [
     "src/main/resources/WebContent",
     "src/main/js",
@@ -41,6 +44,7 @@
   "dependencies": {
     "@eclipse-scout/core": ">=23.1.0-snapshot <23.1.0",
     "jquery": "3.6.0",
-    "leaflet": "1.9.2"
+    "leaflet": "1.9.2",
+    "leaflet.heat": "0.2.0"
   }
 }

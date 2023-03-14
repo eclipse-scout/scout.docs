@@ -31,7 +31,7 @@ export class HeatmapField extends FormField {
 
     // Before (!) installing the layout, set the initial size to 1x1. The size of $field must not
     // get smaller than that, because Leaflet.js throws an error when the drawing canvas has size 0.
-    // After the initial rendering, this condition is ensured by HeapmapFieldLayout.js.
+    // After the initial rendering, this condition is ensured by HeatmapFieldLayout.js.
     graphics.setSize($field, new Dimension(1, 1));
     let fieldHtmlComp = HtmlComponent.install($field, this.session);
     fieldHtmlComp.setLayout(new HeatmapFieldLayout(this));
