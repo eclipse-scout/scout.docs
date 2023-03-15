@@ -349,7 +349,7 @@ It is further possible to await asynchronously on a future to enter done state b
 include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=future.whenDone]
 ----
 
-Because invoked in another thread, this method optionally accepts a xref:technical-guide:common-concepts/run-context.adoc[]] to be applied when being invoked.
+Because invoked in another thread, this method optionally accepts a xref:technical-guide:common-concepts/run-context.adoc[] to be applied when being invoked.
 
 === Awaiting a single future's 'finished' state
 Use the method `awaitFinished` to wait for the job to finish, meaning that the job either completed normally or by an exception, or that it will never commence execution due to a premature cancellation. To learn more about the difference between 'done' and 'finished' state, click <<Difference between 'done' and 'finished' state, here>>.

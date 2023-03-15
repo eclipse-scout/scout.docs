@@ -104,7 +104,7 @@ When the build runs all the folders specified by the `resDir` array are visited 
 In order to use the latest EcmaScript features like the <<ES6 Modules>> but still support older browsers, Scout uses https://babeljs.io/[Babel] to transpile ES6+ code into ES5. The transpiler is enabled by default if you use the Webpack configuration provided by Scout, so you don't have to configure it by yourself.
 
 === CSS Preprocessor
-The CSS preprocessor used by Scout is http://lesscss.org/[Less], so the default webpack configuration already supports it by using the `less-loader` plugin. In order to profit from Scout`s less variables (see xref:technical-guide:user-interface/styling.adoc[]]) we recommend to use Less as well. Since it is already configured, you won't have to do anything but to write your CSS rules.
+The CSS preprocessor used by Scout is http://lesscss.org/[Less], so the default webpack configuration already supports it by using the `less-loader` plugin. In order to profit from Scout`s less variables (see xref:technical-guide:user-interface/styling.adoc[]) we recommend to use Less as well. Since it is already configured, you won't have to do anything but to write your CSS rules.
 
 
 == Karma Configuration
