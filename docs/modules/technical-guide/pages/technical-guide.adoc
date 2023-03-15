@@ -27,7 +27,7 @@ But with the widgets alone you cannot create an application.
 You need a frame to put the widgets into, a setup to easily write tests and prevent errors, a centralized error handling to analyze errors, possibilities to customize the look of your app and tooling to build it, so it can be published and used.
 For all these topics Scout JS provides solutions with the goal to make developing a user interface as easy as possible.
 
-This means, with Scout JS you'll create your user interface of an Eclipse Scout application using JavaScript.
+This means, with Scout JS you'll create your user interface of an Eclipse Scout application using JavaScript or TypeScript.
 Compared to using Scout Classic, you don't need a UI server which helps to create stateless applications.
 
 Scout JS is used in classic Scout applications as well to render the client model written in Java.

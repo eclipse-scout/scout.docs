@@ -741,7 +741,7 @@ This adapter converts xsd:dateTime into UTC milliseconds, by respecting the time
 |===
 
 .Default timezone Date adapters
-[cols="35,65", options="header"]
+[cols="35,65",options="header"]
 |===
 |adapter |description
 
@@ -758,11 +758,12 @@ Whenever possible, use `UtcTimeAdapter` or `CalendarTimeAdapter` instead.
 Whenever possible, use `UtcDateTimeAdapter` or `CalendarDateTimeAdapter` instead.
 |===
 
-
+[#jax-ws-appendix]
 == JAX-WS Appendix
 
 [[PingWebService.wsdl]]
 === PingWebService.wsdl
+
 [source,xml,indent=0]
 ----
 include::common:example$org.eclipse.scout.docs.snippets/src/main/resources/WEB-INF/wsdl/PingWebService.wsdl[]

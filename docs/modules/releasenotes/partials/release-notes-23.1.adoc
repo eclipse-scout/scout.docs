@@ -381,7 +381,7 @@ If an invalid category is provided an error is logged and the same behavior is e
 == JsForm
 
 The JsForm is a Java-form that wraps a form implemented in JS. This allows a Scout Classic application to open a Scout JS form.
-For more information about the JsForm see xref:howtos:scout-classic/smart-field-how-to.adoc[].
+For more information about the JsForm see xref:howtos:scout-classic/js-form-how-to.adoc[].
 
 == NumberFormatProvider
 
