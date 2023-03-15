@@ -26,7 +26,7 @@ There are two ways to install it.
 
 === Install Eclipse IDE for Scout Developers
 
-The installation process for the Eclipse package containing Scout is described in the http://eclipsescout.github.io/{scout-short-version}/helloscout.html#Eclipse[Hello Scout Tutorial].
+The installation process for the Eclipse package containing Scout is described in the http://eclipsescout.github.io/{scout-version}/helloscout.html#Eclipse[Hello Scout Tutorial].
 
 === Add Scout to your Existing Eclipse IDE
 
@@ -55,4 +55,4 @@ After the restart of the Eclipse IDE the Scout SDK is ready to use!
 === Verifying the Installation
 
 The simplest way to verify your Scout installation is to create a "`Hello World`" Scout project
-and run the corresponding Scout application as described in http://eclipsescout.github.io/{scout-short-version}/helloscout.html[Hello Scout].
+and run the corresponding Scout application as described in http://eclipsescout.github.io/{scout-version}/helloscout.html[Hello Scout].
