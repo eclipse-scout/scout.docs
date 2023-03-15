@@ -14,8 +14,6 @@ You can see the {github-changelog-link} on GitHub.
 
 Coming from an older Scout version? Check out the xref:migration:migration-guide.adoc[] for instructions on how to obtain the new version and upgrade existing applications.
 
-WARNING: {NotReleasedWarning}
-
 //The following enhancements were made after the initial {scout-version} release.
 //
 //==== 23.1.1
