@@ -37,5 +37,17 @@
       <artifactId>org.eclipse.scout.rt.jackson</artifactId>
     </dependency>
 
+    <!-- Necessary for JS code completion when Scout is in the same IntelliJ Project, see WEB-56592-->
+    <dependency>
+      <groupId>org.eclipse.scout.rt</groupId>
+      <artifactId>eclipse-scout-core</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.scout.rt</groupId>
+      <artifactId>eclipse-scout-chart</artifactId>
+      <optional>true</optional>
+    </dependency>
+
   </dependencies>
 </project>
