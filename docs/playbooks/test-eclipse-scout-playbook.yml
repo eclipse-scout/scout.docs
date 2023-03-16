@@ -1,0 +1,19 @@
+# This file is useful for testing local changes in your working
+# directory before merging them into a release Branch.
+
+site:
+  title: Eclipse Scout
+  start_page: scout-docs:ROOT:index.adoc
+content:
+  sources:
+  - url: ./../..
+    branches: HEAD
+    start_path: docs
+ui:
+  bundle:
+    url: ./eclipse-scout-ui-bundle.zip
+    snapshot: true
+antora:
+  extensions:
+  - require: '@antora/lunr-extension'
+    languages: [en]
