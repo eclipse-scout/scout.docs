@@ -8,17 +8,21 @@
  * SPDX-License-Identifier: EPL-2.0
  */
 import {Dimension, FormField, graphics, HtmlComponent, ObjectFactory} from '@eclipse-scout/core';
-import {HeatmapFieldLayout} from '../index';
-
+import {HeatmapFieldEventMap, HeatmapFieldLayout, HeatmapFieldModel} from '../index';
 import * as L from 'leaflet';
+import {LeafletMouseEvent} from 'leaflet';
 
-export class HeatmapField extends FormField {
+export class HeatmapField extends FormField implements HeatmapFieldModel {
+  declare model: HeatmapFieldModel;
+  declare eventMap: HeatmapFieldEventMap;
+  declare self: HeatmapField;
 
-  constructor() {
-    super();
-  }
+  heatPointList: HeatPoint[];
+  viewParameter: HeatmapViewParameter;
+  heatmap: L.Map;
+  _heatLayer: any;
 
-  _render() {
+  protected override _render() {
     this.addContainer(this.$parent, 'heatmap-field');
     this.addLabel();
     this.addStatus();
@@ -31,7 +35,7 @@ export class HeatmapField extends FormField {
 
     // Before (!) installing the layout, set the initial size to 1x1. The size of $field must not
     // get smaller than that, because Leaflet.js throws an error when the drawing canvas has size 0.
-    // After the initial rendering, this condition is ensured by HeapmapFieldLayout.js.
+    // After the initial rendering, this condition is ensured by HeatmapFieldLayout.js.
     graphics.setSize($field, new Dimension(1, 1));
     let fieldHtmlComp = HtmlComponent.install($field, this.session);
     fieldHtmlComp.setLayout(new HeatmapFieldLayout(this));
@@ -49,13 +53,13 @@ export class HeatmapField extends FormField {
     this.heatmap.on('contextmenu', this._onClick.bind(this));
   }
 
-  _renderProperties() {
+  protected override _renderProperties() {
     super._renderProperties();
     this._renderViewParameter();
     this._renderHeatPointList();
   }
 
-  _remove() {
+  protected override _remove() {
     super._remove();
 
     this.heatmap.remove();
@@ -63,7 +67,7 @@ export class HeatmapField extends FormField {
     this._heatLayer = null;
   }
 
-  _onViewParameterChange() {
+  protected _onViewParameterChange() {
     this.trigger('viewParameterChange', {
       center: {
         x: this.heatmap.getCenter().lng,
@@ -73,7 +77,7 @@ export class HeatmapField extends FormField {
     });
   }
 
-  _onClick(event) {
+  protected _onClick(event: LeafletMouseEvent) {
     this.trigger('click', {
       point: {
         x: event.latlng.lng,
@@ -82,14 +86,14 @@ export class HeatmapField extends FormField {
     });
   }
 
-  _renderViewParameter() {
+  protected _renderViewParameter() {
     this.heatmap.setView([
       this.viewParameter.center.y,
       this.viewParameter.center.x
     ], this.viewParameter.zoomFactor);
   }
 
-  _renderHeatPointList() {
+  protected _renderHeatPointList() {
     if (this._heatLayer) {
       this.heatmap.removeLayer(this._heatLayer);
     }
@@ -103,10 +107,10 @@ export class HeatmapField extends FormField {
         ]);
       });
     }
+    // @ts-expect-error no types available for leaflet.heat plugin
     this._heatLayer = L.heatLayer(heatPoints, {
-      // TODO [7.0] bsh: make this parameter list configurable from the model!
       // parameters to control the appearance of heat points
-      // see leaflet.heat docu for full spec
+      // see leaflet.heat docs for full spec
       radius: 20,
       blur: 30,
       max: 1.0
@@ -114,7 +118,7 @@ export class HeatmapField extends FormField {
     this._heatLayer.addTo(this.heatmap);
   }
 
-  addHeatPoint(point) {
+  addHeatPoint(point: HeatPoint) {
     if (this._heatLayer) {
       this._heatLayer.addLatLng([
         point.y,
@@ -123,4 +127,18 @@ export class HeatmapField extends FormField {
       ]);
     }
   }
+}
+
+export interface MapPoint {
+  x: number;
+  y: number;
+}
+
+export interface HeatPoint extends MapPoint {
+  intensity: number;
+}
+
+export interface HeatmapViewParameter {
+  center: MapPoint;
+  zoomFactor: number;
 }

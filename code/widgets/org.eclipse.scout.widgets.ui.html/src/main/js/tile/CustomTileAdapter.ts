@@ -7,13 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {OutlineAdapter} from '@eclipse-scout/core';
+import {TileAdapter} from '@eclipse-scout/core';
 
-export class WidgetsOutlineAdapter extends OutlineAdapter {
-
-  constructor() {
-    super();
-  }
-
+export class CustomTileAdapter extends TileAdapter {
 }
-

@@ -10,9 +10,7 @@ If you are interested in the documentation of another Scout version, use the ver
 == Get Started
 
 Read the xref:getstarted:getstarted.adoc[Get Started Guide] first to learn the difference between Scout Classic and Scout JS.
-This will help you to decide which tutorial is the right one to start with.
-
-Once you have completed the Hello Scout tutorial, you can continue with one of the following tutorials.
+This will help you to decide whether you should do the Scout Classic or Scout JS tutorials.
 
 Scout Classic Tutorials
 
@@ -30,11 +28,12 @@ Scout JS Tutorials
 
 If you want to get serious about Scout, you should definitely have a look at the following documents.
 
-You will learn about best practices and architecture details and even find How Tos for some specific topics.
-To learn more about the functionality of the Scout plugins for various IDEs, have a look at the Scout SDK documents.
-
-* xref:technical-guide:technical-guide.adoc[Technical Guide]
-* xref:sdk:sdk.adoc[Scout SDK]
+* xref:technical-guide:technical-guide.adoc[Technical Guide] +
+Documents best practices and architecture details.
+* xref:sdk:sdk.adoc[Scout SDK] +
+Describes the functionality of the Scout plugins for various IDEs.
+* xref:howtos:how-tos.adoc[] +
+Contains various small technical guides to very specific Scout subjects.
 
 == Upgrade Your Version
 

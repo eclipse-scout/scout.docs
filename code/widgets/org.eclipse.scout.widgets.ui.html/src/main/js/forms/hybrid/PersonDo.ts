@@ -7,11 +7,10 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-
 import {dates, objects, strings} from '@eclipse-scout/core';
 
 export class PersonDo {
-  _type: 'widgets.Person';
+  protected _type: 'widgets.Person';
   name: string;
   firstName: string;
   dateOfBirth: Date;

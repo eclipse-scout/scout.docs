@@ -41,6 +41,7 @@
     "@eclipse-scout/cli": ">=23.2.0-snapshot <23.2.0",
     "@eclipse-scout/releng": "^22.0.0",
     "@eclipse-scout/tsconfig": ">=23.2.0-snapshot <23.2.0"
+    "@types/jquery": "3.5.14"
   },
   "dependencies": {
     "@eclipse-scout/core": ">=23.2.0-snapshot <23.2.0",

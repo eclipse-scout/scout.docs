@@ -25,7 +25,7 @@ export class DesktopNotificationForm extends Form {
   protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
-    let notification = scout.create(DesktopNotification, {parent: this});
+    let notification = scout.create(DesktopNotification, {parent: this.session.desktop});
     this.widget('ClosableField').setValue(notification.closable);
     this.widget('MessageField').setValue('Hi there!');
     this.widget('DurationField').setValue(notification.duration);
@@ -44,7 +44,7 @@ export class DesktopNotificationForm extends Form {
 
   protected _onButtonClick(event: Event<Button>) {
     let notification = scout.create(DesktopNotification, {
-      parent: this,
+      parent: this.session.desktop,
       closable: this.widget('ClosableField').value,
       duration: this.widget('DurationField').value,
       iconId: this.widget('IconField').value,

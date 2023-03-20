@@ -7,26 +7,32 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {HtmlComponent, Tile} from '@eclipse-scout/core';
+import {HtmlComponent, Tile, TileModel} from '@eclipse-scout/core';
 
-export class CustomTile extends Tile {
+export class CustomTile extends Tile implements CustomTileModel {
+  declare model: CustomTileModel;
+  label: string;
 
   constructor() {
     super();
     this.label = null;
   }
 
-  _render() {
+  protected override _render() {
     this.$container = this.$parent.appendDiv('custom-tile');
     this.htmlComp = HtmlComponent.install(this.$container, this.session);
   }
 
-  _renderProperties() {
+  protected override _renderProperties() {
     super._renderProperties();
     this._renderLabel();
   }
 
-  _renderLabel() {
+  protected _renderLabel() {
     this.$container.text(this.label);
   }
+}
+
+export interface CustomTileModel extends TileModel {
+  label?: string;
 }

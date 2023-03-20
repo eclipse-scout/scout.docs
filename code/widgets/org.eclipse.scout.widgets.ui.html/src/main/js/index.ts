@@ -13,6 +13,7 @@ import * as self from './index';
 export * from './ExampleBeanField';
 
 export * from './ExampleBeanColumn';
+export * from './ExampleBean';
 export * from './WidgetsOutline';
 export * from './WidgetsOutlineAdapter';
 export * from './WidgetsTileOutlineOverview';

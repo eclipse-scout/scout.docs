@@ -7,21 +7,18 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {BeanColumn} from '@eclipse-scout/core';
+import {BeanColumn, TableRow} from '@eclipse-scout/core';
+import {ExampleBean} from './index';
 
-export class ExampleBeanColumn extends BeanColumn {
+export class ExampleBeanColumn extends BeanColumn<ExampleBean> {
 
-  constructor() {
-    super();
-  }
-
-  _renderValue($cell, value) {
+  protected override _renderValue($cell: JQuery, value: ExampleBean) {
     $cell.appendElement('<img>')
       .attr('src', value.image)
       .addClass('example-bean-column-image');
   }
 
-  compare(row1, row2) {
+  override compare(row1: TableRow, row2: TableRow) {
     let cellValue1 = this.table.cell(this, row1).value || {};
     let cellValue2 = this.table.cell(this, row2).value || {};
     return this.comparator.compareIgnoreCase(cellValue1.header, cellValue2.header);

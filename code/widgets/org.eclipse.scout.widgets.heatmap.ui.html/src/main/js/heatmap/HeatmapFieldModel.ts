@@ -7,12 +7,10 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {TileAdapter} from '@eclipse-scout/core';
+import {FormFieldModel} from '@eclipse-scout/core';
+import {HeatmapViewParameter, HeatPoint} from '../index';
 
-export class CustomTileAdapter extends TileAdapter {
-
-  constructor() {
-    super();
-  }
-
+export interface HeatmapFieldModel extends FormFieldModel {
+  heatPointList?: HeatPoint[];
+  viewParameter?: HeatmapViewParameter;
 }
