@@ -96,3 +96,16 @@ To apply the old formatting, use `DateUtility#formatDateTimeShort`.
 
 The transformation logic for exceptions which occur while invoking a REST client was slightly adapted.
 For HTTP error codes 502 (bad gateway), 503 (service unavailable) and 504 (gateway timeout) the adapted `ErrorDoRestClientExceptionTransformer` returns a `org.eclipse.scout.rt.platform.exception.RemoteSystemUnavailableException` instead of the former generic `org.eclipse.scout.rt.platform.exception.ProcessingException`.
+
+== Removed Deprecated Code
+
+The following functions were deprecated in a previous release and are now removed completely.
+
+* TabBox.ts: `selectTabById`, replaced by `setSelectedTab`
+* JQueryMouseWheelEvent: instead of using `DOMMouseScroll mousewheel` events use `wheel` and JQueryWheelEvent type
+* Menu.ts: `addChildActions`, replaced by `insertChildActions`
+* Widget.ts: `_isRemovalPending`, replaced by `isRemovalPending`
+* CompositeFieldUtility.java: `moveFieldTo`, third parameter removed
+* AbstractExtensionChain.java: `callChain`, vararg removed
+* AbstractDataModelOperatorField.java: setAttribute, second parameter is not optional anymore
+* FocusManager.ts: `requestFocus` does not accept a boolean anymore as third parameter
