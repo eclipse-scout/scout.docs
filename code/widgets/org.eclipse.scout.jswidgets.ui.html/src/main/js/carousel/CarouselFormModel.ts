@@ -42,7 +42,6 @@ export default (): FormModel => ({
                   id: 'CarouselItem2',
                   objectType: Form,
                   displayHint: 'view',
-                  modal: false,
                   rootGroupBox: {
                     id: 'InnerMainBox1',
                     objectType: GroupBox,
@@ -68,7 +67,6 @@ export default (): FormModel => ({
                   id: 'CarouselItem4',
                   objectType: Form,
                   displayHint: 'view',
-                  modal: false,
                   rootGroupBox: {
                     id: 'InnerMainBox2',
                     objectType: GroupBox,

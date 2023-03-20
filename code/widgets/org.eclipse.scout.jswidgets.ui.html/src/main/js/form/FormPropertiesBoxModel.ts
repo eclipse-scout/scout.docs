@@ -90,7 +90,8 @@ export default (): GroupBoxModel => ({
       id: 'ModalField',
       objectType: CheckBoxField,
       label: 'Modal',
-      labelVisible: false
+      labelVisible: false,
+      triStateEnabled: true
     },
     {
       id: 'HeaderVisibleField',

@@ -3,7 +3,6 @@ import {Button, Form, GroupBox, StringField} from '@eclipse-scout/core';
 export default () => ({
   objectType: Form,
   displayHint: Form.DisplayHint.VIEW,
-  modal: false,
   rootGroupBox: {
     objectType: GroupBox,
     borderDecoration: GroupBox.BorderDecoration.EMPTY,
@@ -22,4 +21,4 @@ export default () => ({
       }
     ]
   }
-})
+});
