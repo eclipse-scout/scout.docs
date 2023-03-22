@@ -14,3 +14,4 @@ antora:
   extensions:
   - require: '@antora/lunr-extension'
     languages: [en]
+  - require: ./drop-eclipse-help.js
