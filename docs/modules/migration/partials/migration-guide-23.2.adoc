@@ -126,3 +126,11 @@ A few classes used to read public holidays from an XML file and providing them t
 ** `org.eclipse.scout.rt.server.services.common.calendar.HolidayCalendarService`
 ** `org.eclipse.scout.rt.shared.services.common.calendar.HolidayItem`
 ** `org.eclipse.scout.rt.shared.services.common.calendar.HolidayCalendarItemParser`
+
+== Scout JS
+
+=== Form
+
+==== Modal Optional for Views
+
+The default value for the `modal` property has been changed for forms with `displayStyle` = `Form.DisplaStyle.VIEW`, see xref:releasenotes:release-notes.adoc#modal-optional-for-views[Release Notes].

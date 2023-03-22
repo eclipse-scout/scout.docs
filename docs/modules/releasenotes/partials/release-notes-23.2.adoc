@@ -56,6 +56,19 @@ Just use CSS to make it visible if you need it.
 
 == Scout JS
 
+=== Form
+
+[#modal-optional-for-views]
+==== Modal Optional for Views
+
+Until now, the default value for `modal` was true.
+This has been changed so that the default now depends on the `displayStyle`:
+It is still true for `Form.DisplayStyle.Dialog`, but false for `Form.DisplayStyle.View`.
+
+This means if you require your view to be `modal`, set it to true. Otherwise, you can remove the setting.
+
+The reason why this was changed is, because it is less common to have modal views, which also aligns it with the behavior of Scout Classic.
+
 === MenuTypes
 
 ==== Default menuTypes
