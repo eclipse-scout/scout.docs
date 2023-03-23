@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {Event, FormFieldAdapter} from '@eclipse-scout/core';
+import {Event, FormFieldAdapter, RemoteEvent} from '@eclipse-scout/core';
 import {HeatmapField, HeatmapFieldClickEvent, HeatmapFieldViewParameterChangeEvent} from '../index';
 
 export class HeatmapFieldAdapter extends FormFieldAdapter {
@@ -36,7 +36,7 @@ export class HeatmapFieldAdapter extends FormFieldAdapter {
     });
   }
 
-  override onModelAction(event: any) {
+  override onModelAction(event: RemoteEvent) {
     if (event.type === 'heatPointsAdded') {
       this._onHeatPointsAdded(event);
     } else {
@@ -44,7 +44,7 @@ export class HeatmapFieldAdapter extends FormFieldAdapter {
     }
   }
 
-  protected _onHeatPointsAdded(event: any) {
+  protected _onHeatPointsAdded(event: RemoteEvent) {
     event.points.forEach(point => {
       this.widget.addHeatPoint(point);
     });
