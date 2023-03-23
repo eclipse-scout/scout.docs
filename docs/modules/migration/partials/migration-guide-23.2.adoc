@@ -129,6 +129,13 @@ A few classes used to read public holidays from an XML file and providing them t
 
 == Scout JS
 
+=== Tree: Insert Order Changed
+
+`Tree.insertNodes` now adds new nodes (without an explicit childNodeIndex) at the bottom of the existing nodes instead of the top.
+This is already the case for the Scout Classic tree, and also for other widgets like table and tile grid.
+
+To insert the nodes at the beginning or any other position, you can use the new parameter `index`.
+
 === Form
 
 ==== Modal Optional for Views
