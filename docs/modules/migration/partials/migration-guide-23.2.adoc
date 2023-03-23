@@ -92,6 +92,13 @@ Since this version, the method `DateUtility#formatDateTime` returns the date for
 Now, both methods, `DateUtility#formatDate` and `DateUtility#formatDateTime`, are formatting the date identically.
 To apply the old formatting, use `DateUtility#formatDateTimeShort`.
 
+=== New ExceptionUtility
+
+A set of utility methods dealing with `Exception` and `Throwable` were moved and added to the new `ExceptionUtility`.
+
+Change invocations of `org.eclipse.scout.rt.platform.exception.ExceptionHandler.getRootCause()`
+to the new utility method  `org.eclipse.scout.rt.platform.util.ExceptionUtility.getRootCause()`.
+
 == Adapted REST ErrorDoRestClientExceptionTransformer
 
 The transformation logic for exceptions which occur while invoking a REST client was slightly adapted.
