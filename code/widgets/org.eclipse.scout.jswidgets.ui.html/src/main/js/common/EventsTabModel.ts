@@ -32,6 +32,7 @@ export default (): GroupBoxModel => ({
       labelPosition: FormField.LabelPosition.TOP,
       enabled: false,
       multilineText: true,
+      checkSaveNeeded: false,
       gridDataHints: {
         h: 3
       }

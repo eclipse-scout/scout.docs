@@ -40,14 +40,13 @@ export class FormFieldActionsBox extends GroupBox {
     if (!this.field) {
       return;
     }
-    let insertMenuButton = this.widget('InsertMenuButton');
-    insertMenuButton.on('click', this._onInsertMenuClick.bind(this));
-
-    let deleteMenuButton = this.widget('DeleteMenuButton');
-    deleteMenuButton.on('click', this._onDeleteMenuClick.bind(this));
-
-    let menuToDeleteField = this.widget('MenuToDeleteField');
-    menuToDeleteField.setLookupCall(new FormFieldMenuLookupCall(this.field));
+    this.widget('InsertMenuButton').on('click', this._onInsertMenuClick.bind(this));
+    this.widget('DeleteMenuButton').on('click', this._onDeleteMenuClick.bind(this));
+    this.widget('MenuToDeleteField').setLookupCall(new FormFieldMenuLookupCall(this.field));
+    this.widget('MarkAsSavedButton').on('click', () => this.field.markAsSaved());
+    this.widget('TouchButton').on('click', () => this.field.touch());
+    this.field.on('propertyChange:saveNeeded', event => this.widget('SaveNeededField').setValue(event.newValue));
+    this.field.on('propertyChange:touched', event => this.widget('TouchedField').setValue(event.newValue));
   }
 
   protected _onInsertMenuClick(event: Event<Button>) {

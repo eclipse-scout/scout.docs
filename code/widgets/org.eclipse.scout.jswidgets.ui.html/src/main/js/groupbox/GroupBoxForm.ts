@@ -63,6 +63,10 @@ export class GroupBoxForm extends Form {
     };
     bodyLayoutConfigBox.setField(groupBox);
     this.widget('GridDataBox').setField(groupBox);
+    let formFieldActionBox = this.widget('FormFieldActionsBox');
+    formFieldActionBox.setField(groupBox);
+    formFieldActionBox.widget('InsertMenuButton').setVisible(false);
+    formFieldActionBox.widget('DeleteMenuBox').setVisible(false);
     this.widget('WidgetActionsBox').setField(groupBox);
     this.widget('EventsTab').setField(groupBox);
 

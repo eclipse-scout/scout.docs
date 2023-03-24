@@ -33,6 +33,7 @@ export * from './chartfield/ChartTypeLookupCall';
 export * from './chartfield/LegendPositionLookupCall';
 export * from './chartfield/SpeedoGreenAreaPositionLookupCall';
 export * from './chartfield/ValuesProviderLookupCall';
+export * from './common/ActionWithResultBox';
 export * from './common/ConfigurationBox';
 export * from './common/EventsTab';
 export * from './common/EventsTabModel';

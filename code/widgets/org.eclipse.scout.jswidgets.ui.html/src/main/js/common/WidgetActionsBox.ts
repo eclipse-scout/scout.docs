@@ -39,10 +39,10 @@ export class WidgetActionsBox extends GroupBox {
     if (!this.field) {
       return;
     }
-    let focusButton = this.widget('FocusButton');
+    let focusButton = this.widget('FocusSequenceBox').actionButton;
     focusButton.on('click', this._onFocusButtonClick.bind(this));
 
-    let isFocusableButton = this.widget('IsFocusableButton');
+    let isFocusableButton = this.widget('IsFocusableSequenceBox').actionButton;
     isFocusableButton.on('click', this._onIsFocusableButtonClick.bind(this));
 
     let revealButton = this.widget('RevealButton');
@@ -61,24 +61,12 @@ export class WidgetActionsBox extends GroupBox {
 
   protected _onFocusButtonClick(event: Event<Button>) {
     let returned = this.field.focus();
-    let returnField = this.widget('FocusReturnField');
-    this._updateBooleanReturnValue(returnField, returned);
+    this.widget('FocusSequenceBox').updateBooleanReturnValue(returned);
   }
 
   protected _onIsFocusableButtonClick(event: Event<Button>) {
     let returned = this.field.isFocusable();
-    let returnField = this.widget('IsFocusableReturnField');
-    this._updateBooleanReturnValue(returnField, returned);
-  }
-
-  protected _updateBooleanReturnValue(returnField: LabelField, returned: boolean) {
-    if (returned) {
-      returnField.setValue('-> returned true');
-    } else {
-      returnField.setValue('-> returned false');
-    }
-    returnField.toggleCssClass('action-return-success', returned);
-    returnField.toggleCssClass('action-return-fail', !returned);
+    this.widget('IsFocusableSequenceBox').updateBooleanReturnValue(returned)
   }
 
   protected _onRevealButtonClick(event: Event<Button>) {

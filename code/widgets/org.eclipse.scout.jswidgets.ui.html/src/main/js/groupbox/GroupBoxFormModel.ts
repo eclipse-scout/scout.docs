@@ -9,8 +9,9 @@
  */
 import {FormField, FormModel, GroupBox, Menu, SmartField, StringField, TabBox, TabItem} from '@eclipse-scout/core';
 import {
-  EventsTab, EventsTabWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, GroupBoxAddFieldBox, GroupBoxAddFieldBoxWidgetMap, GroupBoxAddMenuBox, GroupBoxAddMenuBoxWidgetMap,
-  GroupBoxDeleteFieldBox, GroupBoxDeleteFieldBoxWidgetMap, GroupBoxDeleteMenuBox, GroupBoxDeleteMenuBoxWidgetMap, GroupBoxPropertiesBox, GroupBoxPropertiesBoxWidgetMap, LogicalGridLayoutConfigBox, WidgetActionsBox, WidgetActionsBoxWidgetMap
+  EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, GroupBoxAddFieldBox, GroupBoxAddFieldBoxWidgetMap, GroupBoxAddMenuBox,
+  GroupBoxAddMenuBoxWidgetMap, GroupBoxDeleteFieldBox, GroupBoxDeleteFieldBoxWidgetMap, GroupBoxDeleteMenuBox, GroupBoxDeleteMenuBoxWidgetMap, GroupBoxPropertiesBox, GroupBoxPropertiesBoxWidgetMap, LogicalGridLayoutConfigBox,
+  WidgetActionsBox, WidgetActionsBoxWidgetMap
 } from '../index';
 
 export default (): FormModel => ({
@@ -131,6 +132,10 @@ export default (): FormModel => ({
                 objectType: GroupBoxDeleteFieldBox
               },
               {
+                id: 'FormFieldActionsBox',
+                objectType: FormFieldActionsBox
+              },
+              {
                 id: 'WidgetActionsBox',
                 objectType: WidgetActionsBox
               }
@@ -170,6 +175,7 @@ export type GroupBoxFormWidgetMap =
     'Actions.DeleteMenuBox': GroupBoxDeleteMenuBox;
     'Actions.AddFieldBox': GroupBoxAddFieldBox;
     'Actions.DeleteFieldBox': GroupBoxDeleteFieldBox;
+    'FormFieldActionsBox': FormFieldActionsBox;
     'WidgetActionsBox': WidgetActionsBox;
     'EventsTab': EventsTab;
   }

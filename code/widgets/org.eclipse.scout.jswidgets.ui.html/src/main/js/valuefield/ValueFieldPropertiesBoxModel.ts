@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {GroupBox, GroupBoxModel, SmartField, StringField, ValueFieldClearable} from '@eclipse-scout/core';
+import {CheckBoxField, GroupBox, GroupBoxModel, SmartField, StringField, ValueFieldClearable} from '@eclipse-scout/core';
 import {ClearableStyleLookupCall} from '../index';
 
 export default (): GroupBoxModel => ({
@@ -43,4 +43,5 @@ export type ValueFieldPropertiesBoxWidgetMap = {
   'ValueField': StringField;
   'DisplayTextField': StringField;
   'ClearableField': SmartField<ValueFieldClearable>;
+  'SaveNeededField': CheckBoxField;
 };

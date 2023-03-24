@@ -46,15 +46,15 @@ export class FormForm extends Form {
     // form properties of the form will be opened with OpenFormButton
     this.propertiesBox = this.widget('PropertiesBox');
     this.propertiesBox.setForm(scout.create(Form, {parent: this}));
-    this.propertiesBox.titleField.setValue('Title');
+    this.propertiesBox.widget('TitleField').setValue('Title');
 
     // form properties of current form
     this.currentFormPropertiesBox = this.widget('CurrentFormPropertiesBox');
     this.currentFormPropertiesBox.setForm(this);
-    this.currentFormPropertiesBox.cacheBoundsField.setEnabled(false);
-    this.currentFormPropertiesBox.displayHintField.setEnabled(false);
-    this.currentFormPropertiesBox.displayViewIdField.setEnabled(false);
-    this.currentFormPropertiesBox.displayParentField.setEnabled(false);
+    this.currentFormPropertiesBox.widget('CacheBoundsField').setEnabled(false);
+    this.currentFormPropertiesBox.widget('DisplayHintField').setEnabled(false);
+    this.currentFormPropertiesBox.widget('DisplayViewIdField').setEnabled(false);
+    this.currentFormPropertiesBox.widget('DisplayParentField').setEnabled(false);
     this.widget('CurrentFormPropertiesTab').setVisible(!this.detailForm);
 
     if (this.closeMenuVisible) {
@@ -121,21 +121,22 @@ export class FormForm extends Form {
 
   protected _settings(): FormModel {
     return {
-      title: this.propertiesBox.titleField.value,
-      subTitle: this.propertiesBox.subTitleField.value,
-      _notificationBadgeText: this.propertiesBox.notificationBadgeTextField.value,
-      iconId: this.propertiesBox.iconIdField.value,
-      displayHint: this.propertiesBox.displayHintField.value,
-      displayViewId: this.propertiesBox.displayViewIdField.value,
-      displayParent: DisplayParentLookupCall.displayParentForType(this, this.propertiesBox.displayParentField.value),
-      modal: this.propertiesBox.modalField.value,
-      headerVisible: this.propertiesBox.headerVisibleField.value,
-      askIfNeedSave: this.propertiesBox.askIfNeedSaveField.value,
-      cacheBounds: this.propertiesBox.cacheBoundsField.value,
-      closable: this.propertiesBox.closableField.value,
-      movable: this.propertiesBox.movableField.value,
-      resizable: this.propertiesBox.resizableField.value,
-      maximized: this.propertiesBox.maximizedField.value
+      title: this.propertiesBox.widget('TitleField').value,
+      subTitle: this.propertiesBox.widget('SubTitleField').value,
+      _notificationBadgeText: this.propertiesBox.widget('NotificationBadgeTextField').value,
+      iconId: this.propertiesBox.widget('IconIdField').value,
+      displayHint: this.propertiesBox.widget('DisplayHintField').value,
+      displayViewId: this.propertiesBox.widget('DisplayViewIdField').value,
+      displayParent: DisplayParentLookupCall.displayParentForType(this, this.propertiesBox.widget('DisplayParentField').value),
+      modal: this.propertiesBox.widget('ModalField').value,
+      headerVisible: this.propertiesBox.widget('HeaderVisibleField').value,
+      askIfNeedSave: this.propertiesBox.widget('AskIfNeedSaveField').value,
+      cacheBounds: this.propertiesBox.widget('CacheBoundsField').value,
+      closable: this.propertiesBox.widget('ClosableField').value,
+      movable: this.propertiesBox.widget('MovableField').value,
+      resizable: this.propertiesBox.widget('ResizableField').value,
+      maximized: this.propertiesBox.widget('MaximizedField').value,
+      saveNeededVisible: this.propertiesBox.widget('SaveNeededVisibleField').value
     };
   }
 }

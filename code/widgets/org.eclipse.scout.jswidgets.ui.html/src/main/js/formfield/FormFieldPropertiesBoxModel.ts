@@ -167,6 +167,7 @@ export type FormFieldPropertiesBoxWidgetMap = {
   'LabelField': StringField;
   'LabelPositionField': SmartField<FormFieldLabelPosition>;
   'LabelWidthInPixelField': ProposalField;
+  'SaveNeededField': CheckBoxField;
   'TooltipTextField': StringField;
   'TooltipAnchorField': SmartField<FormFieldTooltipAnchor>;
   'ErrorStatusField': SmartField<StatusSeverity>;

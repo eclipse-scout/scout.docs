@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {Button, GroupBox, GroupBoxModel, Menu, SequenceBox, SmartField} from '@eclipse-scout/core';
+import {Button, CheckBoxField, GroupBox, GroupBoxModel, Menu, SequenceBox, SmartField} from '@eclipse-scout/core';
 
 export default (): GroupBoxModel => ({
   id: 'jswidgets.FormFieldActionsBox',
@@ -44,6 +44,36 @@ export default (): GroupBoxModel => ({
           displayStyle: Button.DisplayStyle.LINK
         }
       ]
+    },
+    {
+      id: 'MarkAsSavedButton',
+      objectType: Button,
+      label: '${textKey:MarkAsSaved}',
+      labelVisible: false,
+      processButton: false,
+      displayStyle: Button.DisplayStyle.LINK
+    },
+    {
+      id: 'TouchButton',
+      objectType: Button,
+      label: '${textKey:Touch}',
+      labelVisible: false,
+      processButton: false,
+      displayStyle: Button.DisplayStyle.LINK
+    },
+    {
+      id: 'SaveNeededField',
+      objectType: CheckBoxField,
+      labelVisible: false,
+      label: 'Save Needed',
+      enabled: false
+    },
+    {
+      id: 'TouchedField',
+      objectType: CheckBoxField,
+      labelVisible: false,
+      label: 'Touched',
+      enabled: false
     }
   ]
 });
@@ -52,5 +82,9 @@ export type FormFieldActionsBoxWidgetMap = {
   'InsertMenuButton': Button;
   'DeleteMenuBox': SequenceBox;
   'MenuToDeleteField': SmartField<Menu>;
+  'MarkAsSavedButton': Button;
   'DeleteMenuButton': Button;
+  'SaveNeededField': CheckBoxField;
+  'TouchedField': CheckBoxField;
+  'TouchButton': Button;
 };

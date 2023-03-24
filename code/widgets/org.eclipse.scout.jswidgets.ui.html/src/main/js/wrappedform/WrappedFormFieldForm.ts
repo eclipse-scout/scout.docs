@@ -7,24 +7,12 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {Button, Form, FormModel, InitModelOf, models, scout, SmartField, WrappedFormField} from '@eclipse-scout/core';
+import {Form, FormModel, InitModelOf, models, scout} from '@eclipse-scout/core';
 import WrappedFormFieldFormModel from './WrappedFormFieldFormModel';
-import {EventsTab, FormFieldPropertiesBox, GridDataBox, WidgetActionsBox, WrappedFormFieldFormWidgetMap} from '../index';
+import {WrappedFormFieldFormWidgetMap} from '../index';
 
 export class WrappedFormFieldForm extends Form {
   declare widgetMap: WrappedFormFieldFormWidgetMap;
-
-  innerFormField: SmartField<Form>;
-  closeInnerFormButton: Button;
-  wrappedFormField: WrappedFormField;
-  formFieldPropertiesBox: FormFieldPropertiesBox;
-  gridDataBox: GridDataBox;
-  widgetActionsBox: WidgetActionsBox;
-  eventsTab: EventsTab;
-
-  constructor() {
-    super();
-  }
 
   protected override _jsonModel(): FormModel {
     return models.get(WrappedFormFieldFormModel);
@@ -33,29 +21,27 @@ export class WrappedFormFieldForm extends Form {
   protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
-    this.innerFormField = this.widget('InnerFormField');
-    this.closeInnerFormButton = this.widget('CloseInnerFormButton');
-    this.wrappedFormField = this.widget('WrappedFormField');
+    let wrappedFormField = this.widget('WrappedFormField');
 
-    this.innerFormField.on('propertyChange:value', event => {
+    let innerFormField = this.widget('InnerFormField');
+    innerFormField.on('propertyChange:value', event => {
       let innerForm = null;
       if (event.newValue) {
-        innerForm = scout.create(event.newValue, {parent: this.wrappedFormField});
-        innerForm.one('close', event => this.innerFormField.setValue(null));
+        innerForm = scout.create(event.newValue, {parent: wrappedFormField});
+        innerForm.one('close', event => innerFormField.setValue(null));
       }
-      this.wrappedFormField.setInnerForm(innerForm);
+      wrappedFormField.setInnerForm(innerForm);
     });
-    this.wrappedFormField.on('propertyChange:innerForm', event => this.closeInnerFormButton.setEnabled(!!event.newValue));
-    this.closeInnerFormButton.on('click', event => this.wrappedFormField.innerForm.close());
 
-    this.formFieldPropertiesBox = this.widget('FormFieldPropertiesBox');
-    this.formFieldPropertiesBox.setField(this.wrappedFormField);
-    this.gridDataBox = this.widget('GridDataBox');
-    this.gridDataBox.setField(this.wrappedFormField);
+    let closeInnerFormButton = this.widget('CloseInnerFormButton');
+    wrappedFormField.on('propertyChange:innerForm', event => closeInnerFormButton.setEnabled(!!event.newValue));
+    closeInnerFormButton.on('click', event => wrappedFormField.innerForm.close());
 
-    this.widgetActionsBox = this.widget('WidgetActionsBox');
-    this.widgetActionsBox.setField(this.wrappedFormField);
-    this.eventsTab = this.widget('EventsTab');
-    this.eventsTab.setField(this.wrappedFormField);
+    this.widget('FormFieldPropertiesBox').setField(wrappedFormField);
+    this.widget('GridDataBox').setField(wrappedFormField);
+
+    this.widget('FormFieldActionsBox').setField(wrappedFormField);
+    this.widget('WidgetActionsBox').setField(wrappedFormField);
+    this.widget('EventsTab').setField(wrappedFormField);
   }
 }

@@ -141,3 +141,27 @@ To insert the nodes at the beginning or any other position, you can use the new 
 ==== Modal Optional for Views
 
 The default value for the `modal` property has been changed for forms with `displayStyle` = `Form.DisplaStyle.VIEW`, see xref:releasenotes:release-notes.adoc#modal-optional-for-views[Release Notes].
+
+==== FormField
+
+[#rename-requiressave-to-saveneeded]
+===== Rename requiresSave to saveNeeded
+
+The property `requiresSave` and the function `updateRequiresSave` on the `FormField` have been renamed to `saveNeeded` resp. `updateSaveNeeded`.
+This makes it consistent with the property `saveNeededVisible` on the Form and also with Scout Classic.
+
+To migrate it is best to search for `requiresSave` resp. `RequiresSave` in your JS/TS code base and replace the occurrences accordingly.
+
+[#formfield-visitfields-now-visits-deeper]
+===== VisitFields Now Visits Deeper
+
+The visiting is not limited to composite fields anymore which means more fields may be visited, see xref:releasenotes:release-notes.adoc#visitfields-across-field-trees[Release Notes]. If you need the old behavior, you can use the option `limitToSameFieldTree` in the options parameter of the `visitFields` method.
+
+===== Touched not Affected by Value Change Anymore
+
+A form field has a property `touched` which can be set by using `touch()`. A touched form field needs to be saved.
+Until now, a value change (by the user or by using `setValue`) set this property to true.
+This has been changed so that a value change does not change the property anymore, it can only be modified using `touch()` resp. `markAsSaved()`. This has the benefit that `touched` can be completely controlled by the developer.
+
+In order to check if a value has been changed or a field touched you can use the property `saveNeeded`.
+

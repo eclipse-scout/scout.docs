@@ -8,7 +8,7 @@
  * SPDX-License-Identifier: EPL-2.0
  */
 import {Button, Form, FormModel, GroupBox, SmartField, TabBox, TabItem, WrappedFormField} from '@eclipse-scout/core';
-import {EventsTab, EventsTabWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap, WrappedFormLookupCall} from '../index';
+import {EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap, WrappedFormLookupCall} from '../index';
 
 export default (): FormModel => ({
   id: 'jswidgets.WrappedFormFieldForm',
@@ -77,11 +77,12 @@ export default (): FormModel => ({
           label: 'Actions',
           fields: [
             {
+              id: 'FormFieldActionsBox',
+              objectType: FormFieldActionsBox
+            },
+            {
               id: 'WidgetActionsBox',
-              objectType: WidgetActionsBox,
-              expandable: false,
-              labelVisible: false,
-              borderVisible: false
+              objectType: WidgetActionsBox
             }
           ]
         }, {
@@ -104,6 +105,7 @@ export type WrappedFormFieldFormWidgetMap = {
   'FormFieldPropertiesBox': FormFieldPropertiesBox;
   'GridDataBox': GridDataBox;
   'ActionsTab': TabItem;
+  'FormFieldActionsBox': FormFieldActionsBox;
   'WidgetActionsBox': WidgetActionsBox;
   'EventsTab': EventsTab;
 } & FormFieldPropertiesBoxWidgetMap & GridDataBoxWidgetMap & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;

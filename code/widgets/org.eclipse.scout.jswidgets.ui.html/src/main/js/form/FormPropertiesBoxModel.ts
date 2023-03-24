@@ -105,6 +105,12 @@ export default (): GroupBoxModel => ({
       objectType: CheckBoxField,
       label: 'Maximized',
       labelVisible: false
+    },
+    {
+      id: 'SaveNeededVisibleField',
+      objectType: CheckBoxField,
+      label: 'Save Needed Visible',
+      labelVisible: false
     }
   ]
 });
@@ -125,4 +131,5 @@ export type FormPropertiesBoxWidgetMap = {
   'ModalField': CheckBoxField;
   'HeaderVisibleField': CheckBoxField;
   'MaximizedField': CheckBoxField;
+  'SaveNeededVisibleField': CheckBoxField;
 };

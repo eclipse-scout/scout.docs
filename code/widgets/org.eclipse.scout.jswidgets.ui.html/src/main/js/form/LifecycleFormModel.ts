@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {CancelMenu, CheckBoxField, CloseMenu, DateField, FormModel, GroupBox, OkMenu, ResetMenu, SaveMenu, StringField} from '@eclipse-scout/core';
+import {CancelMenu, CheckBoxField, CloseMenu, DateField, FormField, FormFieldMenu, FormModel, GroupBox, OkMenu, ResetMenu, SaveMenu, StringField} from '@eclipse-scout/core';
 
 export default (): FormModel => ({
   id: 'jswidgets.LifecycleForm',
@@ -40,6 +40,14 @@ export default (): FormModel => ({
         id: 'CloseMenu',
         objectType: CloseMenu,
         tooltipText: '${textKey:CloseMenuTooltip}'
+      },
+      {
+        objectType: FormFieldMenu,
+        field: {
+          objectType: DateField,
+          label: '${textKey:CreationDate}',
+          labelPosition: FormField.LabelPosition.ON_FIELD
+        }
       }
     ],
     fields: [

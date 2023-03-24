@@ -63,6 +63,25 @@ This means if you require your view to be `modal`, set it to true. Otherwise, yo
 
 The reason why this was changed is, because it is less common to have modal views, which also aligns it with the behavior of Scout Classic.
 
+==== SaveNeeded State Updated Automatically
+
+The property `saveNeededVisible` now correctly visualizes if the form needs to be saved.
+The default for this property is true for Scout JS forms.
+For Scout Classic forms the default has not been changed and is still false.
+
+For this, the form now has a property called `saveNeeded` that will be updated automatically if the `saveNeeded` state on any child field changes (please note that the property on the form field was renamed from `requiresSave` to `saveNeeded`, see xref:migration:migration-guide.adoc#rename-requiressave-to-saveneeded[Migration Guide]).
+
+==== New Property 'checkSaveNeeded' on Form Fields
+
+Sometimes the `saveNeeded` state is not of interest and should not affect the `saveNeeded` state of the form.
+This may be the case for fields that contain data that doesn't need to be saved. For this kind of fields, the `saveNeeded` computation can now be disabled by setting `checkSaveNeeded` to false.
+
+[#visitfields-across-field-trees]
+==== VisitFields Across Field Trees
+
+The method `FormField.visitFields` now also visits form fields that are not directly connected to a parent form field.
+Example: a form field inside a menu. This was necessary to properly detect `saveNeeded` changes of such fields and validate them when a form is stored. If you need the old behavior, consult the xref:migration:migration-guide.adoc#formfield-visitfields-now-visits-deeper[Migration Guide]).
+
 === MenuTypes
 
 ==== Default menuTypes
