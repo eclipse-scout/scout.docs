@@ -116,3 +116,13 @@ The following functions were deprecated in a previous release and are now remove
 * AbstractExtensionChain.java: `callChain`, vararg removed
 * AbstractDataModelOperatorField.java: setAttribute, second parameter is not optional anymore
 * FocusManager.ts: `requestFocus` does not accept a boolean anymore as third parameter
+
+== Removal of Public Holiday Calendar Support
+
+A few classes used to read public holidays from an XML file and providing them to the calendar were removed without replacement:
+
+** `org.eclipse.scout.rt.client.ui.basic.calendar.provider.AbstractHolidayItemProvider`
+** `org.eclipse.scout.rt.shared.services.common.calendar.IHolidayCalendarService`
+** `org.eclipse.scout.rt.server.services.common.calendar.HolidayCalendarService`
+** `org.eclipse.scout.rt.shared.services.common.calendar.HolidayItem`
+** `org.eclipse.scout.rt.shared.services.common.calendar.HolidayCalendarItemParser`
