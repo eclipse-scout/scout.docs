@@ -8,8 +8,8 @@
  * SPDX-License-Identifier: EPL-2.0
  */
 import {
-  CheckBoxField, DisabledStyle, dragAndDrop, DropType, FormFieldLabelPosition, FormFieldStatusPosition, FormFieldStyle, FormFieldTooltipAnchor, GroupBox, GroupBoxModel, NumberField, ProposalField, SmartField, StaticLookupCall,
-  StatusSeverity, StringField
+  CheckBoxField, DisabledStyle, DropType, FormFieldLabelPosition, FormFieldStatusPosition, FormFieldStyle, FormFieldTooltipAnchor, GroupBox, GroupBoxModel, NumberField, ProposalField, SmartField, StaticLookupCall, StatusSeverity,
+  StringField
 } from '@eclipse-scout/core';
 import {DisabledStyleLookupCall, FieldStyleLookupCall, LabelPositionLookupCall, LabelWidthInPixelLookupCall, StatusPositionLookupCall, StatusSeverityLookupCall, TooltipAnchorLookupCall} from '../index';
 
@@ -93,7 +93,7 @@ export default (): GroupBoxModel => ({
         objectType: StaticLookupCall,
         data: [
           [0, 'none'],
-          [dragAndDrop.SCOUT_TYPES.FILE_TRANSFER, 'file transfer']
+          [DropType.FILE_TRANSFER, 'file transfer']
         ]
       },
       label: 'Drop Type',
