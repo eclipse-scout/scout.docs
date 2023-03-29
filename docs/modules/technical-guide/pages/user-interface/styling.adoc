@@ -1,4 +1,5 @@
 = Styling
+
 include::common:partial$_header.adoc[]
 
 Beside JavaScript for business logic and for the models, every Scout JS app probably needs some CSS code at some point in time.
@@ -96,6 +97,7 @@ Keep in mind that these rules need to be more specific than the default CSS rule
 That only applies to custom rules which are supposed to change existing look or behavior.
 If you are writing a custom widget without overriding default Scout rules there shouldn't be any problems regarding migration.
 
+[[cha-themes]]
 == Themes
 
 Scout applications support styling via CSS/LESS themes. Scout comes with two themes by default: the _default_ theme with blue colors and the _dark_ theme with gray/black colors. Technically a theme has a name and a set of LESS files.
