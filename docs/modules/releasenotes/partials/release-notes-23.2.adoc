@@ -48,12 +48,6 @@ If you just want to play around with them without looking at the source code, yo
 
 // ----------------------------------------------------------------------------
 
-== Group: CollapseStyle for CustomHeader
-
-The `Group.CollapseStyle` property is now applied even if a custom header is used.
-This means the collapse icon is rendered and can be used, but it is invisible by default, so it does not show up by accident on existing custom headers.
-Just use CSS to make it visible if you need it.
-
 == Scout JS
 
 === Form
