@@ -24,8 +24,8 @@ export class SamplePageWithNodes extends PageWithNodes {
 
   protected override _createChildPages(): JQuery.Promise<Page[]> {
     return $.resolvedPromise([
-      scout.create(SamplePageWithTable, this._pageParam(null)),
-      scout.create(SamplePageWithNodes, this._pageParam(null))
+      scout.create(SamplePageWithTable, this._pageParam()),
+      scout.create(SamplePageWithNodes, this._pageParam())
     ]);
   }
 

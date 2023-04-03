@@ -28,6 +28,9 @@ export default (): FormModel => ({
             id: 'CarouselField',
             objectType: CarouselField,
             labelVisible: false,
+            gridDataHints: {
+              h: 5
+            },
             carousel: {
               id: 'Carousel',
               objectType: Carousel,
