@@ -61,9 +61,9 @@ export class EventsTab extends TabItem {
       return;
     }
     let logField = this.widget('EventLogField');
-    let log = logField.value || '';
+    let log = logField.value || 'Log initialized';
     if (log) {
-      log += '\n';
+      log = '\n' + log;
     }
     let entry = '';
     let keys = Object.keys(event);
@@ -83,7 +83,7 @@ export class EventsTab extends TabItem {
       }
       entry += key + ': ' + value;
     });
-    log += entry;
+    log = entry + log;
     logField.setValue(log);
   }
 
@@ -106,6 +106,6 @@ export class EventsTab extends TabItem {
   }
 
   protected _onClearEventLogClick(event: Event<Button>) {
-    this.widget('EventLogField').setValue('');
+    this.widget('EventLogField').setValue('Log cleared');
   }
 }
