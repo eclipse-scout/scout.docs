@@ -105,3 +105,34 @@ To update to the new servlet, the following changes in your `web.xml` are necess
 
 * UI Server: Replace `org.eclipse.scout.rt.ui.html.admin.healthcheck.UiHealthCheckServlet` with `org.eclipse.scout.rt.server.commons.healthcheck.HealthCheckServlet` in your `web.xml`
 * Backend Server: Replace `org.eclipse.scout.rt.server.admin.healthcheck.ServerHealthCheckServlet` with `org.eclipse.scout.rt.server.commons.healthcheck.HealthCheckServlet` in your `web.xml`
+
+=== Removed unused NLS texts
+
+The following NLS texts were unused within the Scout framework and removed:
+
+* ButtonDeselectAll
+* ButtonSelectAll
+* ErrorTextLogin
+* ErrorTextSecurity
+* ErrorTitleLogin
+* FileNotFoundMessage
+* FormIncompleteIntro
+* IOErrorInfo
+* IOErrorText
+* IOErrorTitle
+* LogicTimeIsInGEHours
+* LogicTimeIsInGEMinutes
+* LogicTimeIsInHours
+* LogicTimeIsInLEHours
+* LogicTimeIsInLEMinutes
+* LogicTimeIsInMinutes
+* LogicTimeIsNotNow
+* LogicTimeIsNow
+* NetErrorInfo
+* NetErrorText
+* NoSorting
+* OriginalErrorMessageIs
+* VetoErrorText
+* WeekShort
+* Without
+* searchingProposals
