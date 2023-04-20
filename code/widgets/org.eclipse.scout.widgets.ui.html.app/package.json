@@ -34,13 +34,13 @@
     "version:release": "releng-scripts version:release"
   },
   "devDependencies": {
-    "@eclipse-scout/cli": ">=23.1.0-snapshot <23.1.0",
+    "@eclipse-scout/cli": "23.1.12",
     "@eclipse-scout/releng": "^22.0.0"
   },
   "dependencies": {
-    "@eclipse-scout/core": ">=23.1.0-snapshot <23.1.0",
-    "@eclipse-scout/svg": ">=23.1.0-snapshot <23.1.0",
-    "@eclipse-scout/chart": ">=23.1.0-snapshot <23.1.0",
+    "@eclipse-scout/core": "23.1.12",
+    "@eclipse-scout/svg": "23.1.12",
+    "@eclipse-scout/chart": "23.1.12",
     "@eclipse-scout/demo-widgets": "23.1.12",
     "@eclipse-scout/demo-widgets-heatmap": "23.1.12",
     "leaflet": "1.9.2"
