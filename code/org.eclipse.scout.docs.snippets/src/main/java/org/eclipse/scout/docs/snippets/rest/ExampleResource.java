@@ -17,7 +17,7 @@ public class ExampleResource implements IRestResource {
   @GET
   @Path("{id}")
   @Produces(MediaType.APPLICATION_JSON)
-  public ExampleEntityDo getExamlpeEntity(@PathParam("id") String id) {
+  public ExampleEntityDo getExampleEntity(@PathParam("id") String id) {
     return BEANS.get(ExampleEntityDo.class)
         .withName("example-" + id)
         .withValues(1);

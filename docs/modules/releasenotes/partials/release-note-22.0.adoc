@@ -222,6 +222,14 @@ This allows inheritance for API documentation (e.g. on an abstract REST resource
 
 // ----------------------------------------------------------------------------
 
+== REST Multipart Support
+
+Multipart support on client and server side was added.
+See the xref:technical-guide:working-with-data/data-object.adoc#cha-rest-multipart[technical documentation] for more information.
+
+// ----------------------------------------------------------------------------
+
+
 == New Filter Field
 
 The widgets `Table.js`, `Tree.js`, `TileGrid.js` and `TileAccordion.js` now support a text filter.

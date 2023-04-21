@@ -329,3 +329,20 @@ Finally, declare the servlet filter in your `web.xml`:
 ----
 
 IMPORTANT: Make sure the cancellation filter is registered after the HttpServerRunContextFilter.
+
+[[cha-rest-multipart]]
+== REST Multipart Support
+
+Due to missing support for multipart handling in official JAX-RS API, Scout provides an own implementation allowing to use multipart requests without requiring other third party libraries.
+
+[source,java]
+.Example: Client
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/rest/UploadResourceClient.java[tags=method]
+----
+
+[source,java]
+.Example: Server
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/rest/UploadResource.java[tags=method]
+----
