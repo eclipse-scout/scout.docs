@@ -233,6 +233,7 @@ This can be done by using the following command:
 
 Now you can read its value, change properties, add event handlers and so on.
 
+[#widget-maps]
 === Widget Maps
 
 The result of the `widget` function to find a widget is a generic `Widget`, so it is not possible to call a method of a specific widget without casting (at least with TypeScript).
