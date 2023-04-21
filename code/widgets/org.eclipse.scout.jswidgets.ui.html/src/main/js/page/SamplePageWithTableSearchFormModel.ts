@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {Action, FormModel, GroupBox, Menu, ResetMenu, StringField} from '@eclipse-scout/core';
+import {FormModel, GroupBox, Menu, ResetMenu, SearchMenu, StringField} from '@eclipse-scout/core';
 
 export default (): FormModel => ({
   id: 'jswidgets.SamplePageWithTableSearchForm',
@@ -32,10 +32,7 @@ export default (): FormModel => ({
     menus: [
       {
         id: 'SearchButton',
-        objectType: Menu,
-        actionStyle: Action.ActionStyle.BUTTON,
-        text: '${textKey:Search}',
-        keyStroke: 'ENTER'
+        objectType: SearchMenu
       },
       {
         id: 'ResetMenu',
