@@ -113,42 +113,42 @@ To get the code completion for UI models, just start writing or press kbd:[Ctrl,
 
 Easily create a new `FormField`, `Menu`, `Column` and more Scout objects.
 
-.Create new field
+.Create a new field
 image::create-new-fields.png[]
 
 ==== Select ObjectType
 
 Change the object type of an existing object.
 
-.ObjectType Completion
+.ObjectType completion
 image::objecttype-completion.png[]
 
 ==== Property Completion
 
 Get a complete list of available properties in the current context.
 
-.Select Property
+.Select a property
 image::property-completion.png[]
 
 ==== Value Completion
 
 If a property expects a value from a predefined list, you'll get the available values.
 
-.Select a Value
+.Select a value
 image::value-completion.png[]
 
 === WidgetMap Generation
 
 xref:technical-guide:user-interface/widget.adoc#widget-maps[Widget Maps] have been introduced with Scout 23.1. Now, you can use the SDK to create the maps. Just use the menu entry or press the keystroke kbd:[Ctrl,Alt,Shift,W] to create the maps for the current model file. You can also create all maps in a certain scope or for the whole project.
 
-.WidgetMap Creation
+.WidgetMap creation
 image::widget-map-menu.png[]
 
 === DO Templates
 
 The SDK now contains templates to easily modify xref:technical-guide:working-with-data/data-object.adoc[Data Objects]. Just start writing `do` or use kbd:[Ctrl,J] for a complete list of all templates.
 
-.DO Templates
+.DO templates
 image::do-template.png[]
 
 // ----------------------------------------------------------------------------
