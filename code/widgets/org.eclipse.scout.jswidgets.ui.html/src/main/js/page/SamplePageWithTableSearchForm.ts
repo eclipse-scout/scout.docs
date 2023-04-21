@@ -29,7 +29,7 @@ export class SamplePageWithTableSearchForm extends Form {
 
   protected _initListeners() {
     let parentTable = (this.parent as FormTableControl).table;
-    this.widget('SearchButton').on('action', parentTable.reload.bind(parentTable, Table.ReloadReason.SEARCH));
+    this.on('search reset', parentTable.reload.bind(parentTable, Table.ReloadReason.SEARCH));
   }
 
   override exportData(): any {
