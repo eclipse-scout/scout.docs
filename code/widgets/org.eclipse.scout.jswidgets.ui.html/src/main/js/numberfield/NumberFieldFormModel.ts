@@ -67,6 +67,11 @@ export default (): FormModel => ({
                     label: 'Max Value'
                   },
                   {
+                    id: 'FractionDigitsField',
+                    objectType: NumberField,
+                    label: 'Fraction Digits'
+                  },
+                  {
                     id: 'FormatField',
                     objectType: StringField,
                     label: 'Format'
@@ -118,6 +123,10 @@ export default (): FormModel => ({
   }
 });
 
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
 export type NumberFieldFormWidgetMap = {
   'MainBox': GroupBox;
   'DetailBox': GroupBox;
@@ -128,6 +137,7 @@ export type NumberFieldFormWidgetMap = {
   'PropertiesBox': GroupBox;
   'MinValueField': NumberField;
   'MaxValueField': NumberField;
+  'FractionDigitsField': NumberField;
   'FormatField': StringField;
   'MultiplierField': NumberField;
   'ValueFieldPropertiesBox': ValueFieldPropertiesBox;

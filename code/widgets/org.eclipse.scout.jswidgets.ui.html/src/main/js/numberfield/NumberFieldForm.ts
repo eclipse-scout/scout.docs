@@ -43,6 +43,10 @@ export class NumberFieldForm extends Form {
     maxValueField.on('propertyChange:value', event => this.widget('NumberField').setMaxValue(event.newValue));
     maxValueField.setValue(numberField.maxValue);
 
+    let fractionDigitsField = this.widget('FractionDigitsField');
+    fractionDigitsField.on('propertyChange:value', event => this.widget('NumberField').setFractionDigits(event.newValue));
+    fractionDigitsField.setValue(numberField.fractionDigits);
+
     this.widget('ValueField').setEnabled(true);
     this.widget('ValueFieldPropertiesBox').setField(numberField);
     this.widget('FormFieldPropertiesBox').setField(numberField);

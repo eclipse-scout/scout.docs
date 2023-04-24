@@ -28,14 +28,19 @@ export default (): GroupBoxModel => ({
       label: 'Max Value'
     },
     {
-      id: 'MultiplierField',
+      id: 'FractionDigitsField',
       objectType: NumberField,
-      label: 'Multiplier'
+      label: 'Fraction Digits'
     },
     {
       id: 'FormatField',
       objectType: StringField,
       label: 'Format'
+    },
+    {
+      id: 'MultiplierField',
+      objectType: NumberField,
+      label: 'Multiplier'
     },
     {
       id: 'BackgroundEffectField',
@@ -47,10 +52,15 @@ export default (): GroupBoxModel => ({
   ]
 });
 
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
 export type NumberColumnPropertiesBoxWidgetMap = {
   'MinValueField': NumberField;
   'MaxValueField': NumberField;
-  'MultiplierField': NumberField;
+  'FractionDigitsField': NumberField;
   'FormatField': StringField;
+  'MultiplierField': NumberField;
   'BackgroundEffectField': SmartField<NumberColumnBackgroundEffect>;
 };
