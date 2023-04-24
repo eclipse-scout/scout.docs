@@ -53,6 +53,10 @@ export class NumberColumnPropertiesBox extends GroupBox {
       this.column.maxValue = event.newValue;
     });
 
+    let fractionDigitsField = this.widget('FractionDigitsField');
+    fractionDigitsField.setValue(this.column.fractionDigits);
+    fractionDigitsField.on('propertyChange:value', event => this.column.setFractionDigits(event.newValue));
+
     let multiplierField = this.widget('MultiplierField');
     multiplierField.setValue(this.column.decimalFormat.multiplier);
     multiplierField.on('propertyChange:value', event => this.column.setDecimalFormat({
