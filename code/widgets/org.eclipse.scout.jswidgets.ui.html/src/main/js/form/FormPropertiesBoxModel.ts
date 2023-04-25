@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {CheckBoxField, DisplayHint, DisplayViewId, GroupBox, GroupBoxModel, SmartField, StringField} from '@eclipse-scout/core';
+import {CheckBoxField, GroupBox, GroupBoxModel, SmartField, StringField} from '@eclipse-scout/core';
 import {DisplayParentLookupCall, FormDisplayHintLookupCall, FormDisplayViewIdLookupCall, IconIdLookupCall} from '../index';
 
 export default (): GroupBoxModel => ({
@@ -55,6 +55,11 @@ export default (): GroupBoxModel => ({
       objectType: SmartField,
       lookupCall: DisplayParentLookupCall,
       label: 'Display Parent'
+    },
+    {
+      id: 'ExclusiveKeyField',
+      objectType: StringField,
+      label: 'Exclusive Key'
     },
     {
       id: 'AskIfNeedSaveField',
@@ -115,14 +120,19 @@ export default (): GroupBoxModel => ({
   ]
 });
 
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
 export type FormPropertiesBoxWidgetMap = {
   'TitleField': StringField;
   'SubTitleField': StringField;
   'NotificationBadgeTextField': StringField;
-  'IconIdField': SmartField<string>;
-  'DisplayHintField': SmartField<DisplayHint>;
-  'DisplayViewIdField': SmartField<DisplayViewId>;
-  'DisplayParentField': SmartField<string>;
+  'IconIdField': SmartField<any>;
+  'DisplayHintField': SmartField<any>;
+  'DisplayViewIdField': SmartField<any>;
+  'DisplayParentField': SmartField<any>;
+  'ExclusiveKeyField': StringField;
   'AskIfNeedSaveField': CheckBoxField;
   'CacheBoundsField': CheckBoxField;
   'ClosableField': CheckBoxField;

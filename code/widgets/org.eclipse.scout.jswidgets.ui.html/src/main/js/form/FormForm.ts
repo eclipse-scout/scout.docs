@@ -68,11 +68,12 @@ export class FormForm extends Form {
   }
 
   protected _onOpenFormButtonClick(model: Event<Button>) {
-    let form = scout.create(FormForm, $.extend({
+    let exclusiveKey = this.propertiesBox.widget('ExclusiveKeyField').value;
+    let form = this.session.desktop.createFormExclusive(FormForm, $.extend({
       parent: this,
       openedByButton: true,
       closeMenuVisible: true
-    }, this._settings()));
+    }, this._settings()), exclusiveKey);
     this.widget('EventsTab').setField(form);
     this.widget('WidgetActionsBox').setField(form);
     form.open();
