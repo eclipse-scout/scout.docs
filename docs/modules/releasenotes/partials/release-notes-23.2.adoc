@@ -82,6 +82,13 @@ This may be the case for fields that contain data that doesn't need to be saved.
 The method `FormField.visitFields` now also visits form fields that are not directly connected to a parent form field.
 Example: a form field inside a menu. This was necessary to properly detect `saveNeeded` changes of such fields and validate them when a form is stored. If you need the old behavior, consult the xref:migration:migration-guide.adoc#formfield-visitfields-now-visits-deeper[Migration Guide]).
 
+==== Open Exclusive Support
+
+A form can now be opened exclusively.
+This means, you can define an exclusive key for a form, and if another form should be opened with the same key, the first form will be activated instead of opening the second one.
+
+To open a form exclusively, use `createFormExclusive` on the `Desktop` and open the form as usual using `form.open()`.
+
 === MenuTypes
 
 ==== Default menuTypes
@@ -89,7 +96,6 @@ Example: a form field inside a menu. This was necessary to properly detect `save
 Default menuTypes have been added to several widgets.
 This means that e.g. the `Table` treats a menu without a menuType as if it had set `Table.MenuTypes.EmptySpace`.
 For more information about the default menuTypes see xref:technical-guide:user-interface/widget-reference.adoc#menu-types[MenuTypes].
-
 
 === SmartFields: Error-Handling for Key-Lookups
 

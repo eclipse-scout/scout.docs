@@ -58,6 +58,10 @@ export class FormPropertiesBox extends GroupBox {
     iconIdField.setValue(form.iconId);
     iconIdField.on('propertyChange:value', event => this.form.setIconId(event.newValue));
 
+    let exclusiveKeyField = this.widget('ExclusiveKeyField');
+    exclusiveKeyField.setValue(form.exclusiveKey());
+    exclusiveKeyField.on('propertyChange:value', event => this.form.setExclusiveKey(event.newValue));
+
     let askIfNeedSaveField = this.widget('AskIfNeedSaveField');
     askIfNeedSaveField.setValue(form.askIfNeedSave);
     askIfNeedSaveField.on('propertyChange:value', event => this.form.setAskIfNeedSave(event.newValue));
