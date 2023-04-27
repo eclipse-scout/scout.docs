@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 BSI Business Systems Integration AG.
+ * Copyright (c) 2023 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
@@ -466,6 +466,11 @@ export default class ChartFieldForm extends Form {
         return;
       }
       this._setCustomChartConfig(JSON.parse(event.newValue));
+    });
+
+    let insertExampleChartPropertiesMenu = this.widget('InsertExampleChartPropertiesMenu');
+    insertExampleChartPropertiesMenu.on('action', event => {
+      customChartPropertiesField.setValue(JSON.stringify({options: {}}));
     });
 
     this.formFieldPropertiesBox = this.widget('FormFieldPropertiesBox');
@@ -1479,7 +1484,6 @@ export default class ChartFieldForm extends Form {
       editable: true,
       width: 120,
       fixedPosition: true,
-      fixedWidth: true,
       text: label,
       maxValue: this._getMaxValue(),
       minValue: this._getMinValue()
