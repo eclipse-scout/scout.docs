@@ -317,7 +317,12 @@ export default (): FormModel => ({
                   multilineText: true,
                   wrapText: true,
                   maxLength: 1048576,
-                  cssClass: 'json-field'
+                  cssClass: 'json-field',
+                  menus: [{
+                    id: 'InsertExampleChartPropertiesMenu',
+                    objectType: 'Menu',
+                    text: 'Insert example properties'
+                  }]
                 }
               ]
             },

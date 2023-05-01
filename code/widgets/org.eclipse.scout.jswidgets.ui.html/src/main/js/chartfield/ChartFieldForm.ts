@@ -495,6 +495,11 @@ export class ChartFieldForm extends Form {
       this._setCustomChartConfig(JSON.parse(event.newValue));
     });
 
+    let insertExampleChartPropertiesMenu = this.widget('InsertExampleChartPropertiesMenu');
+    insertExampleChartPropertiesMenu.on('action', event => {
+      customChartPropertiesField.setValue(JSON.stringify({options: {}}));
+    });
+
     this.formFieldPropertiesBox = this.widget('FormFieldPropertiesBox');
     this.formFieldPropertiesBox.setField(this.chartField);
     this.gridDataBox = this.widget('GridDataBox');
@@ -1514,7 +1519,6 @@ export class ChartFieldForm extends Form {
       editable: true,
       width: 120,
       fixedPosition: true,
-      fixedWidth: true,
       text: label,
       maxValue: this._getMaxValue(),
       minValue: this._getMinValue()
