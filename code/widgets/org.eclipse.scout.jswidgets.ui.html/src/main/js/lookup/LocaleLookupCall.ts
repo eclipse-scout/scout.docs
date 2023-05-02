@@ -11,10 +11,6 @@ import {StaticLookupCall} from '@eclipse-scout/core';
 
 export class LocaleLookupCall extends StaticLookupCall<string> {
 
-  constructor() {
-    super();
-  }
-
   protected override _data(): any[] {
     return LocaleLookupCall.DATA;
   }

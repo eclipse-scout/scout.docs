@@ -14,10 +14,6 @@ import RadioButtonGroupFormModel from './RadioButtonGroupFormModel';
 export class RadioButtonGroupForm extends Form {
   declare widgetMap: RadioButtonGroupFormWidgetMap;
 
-  constructor() {
-    super();
-  }
-
   protected override _jsonModel(): FormModel {
     return models.get(RadioButtonGroupFormModel);
   }
@@ -28,6 +24,22 @@ export class RadioButtonGroupForm extends Form {
     let group = this.widget('RadioButtonGroup');
     group.on('propertyChange:selectedButton', event => this.widget('SelectedButtonField').setValue(event.newValue));
     group.on('propertyChange:gridColumnCount', event => this.widget('GridColumnCountField').setValue(event.newValue));
+
+    let fields = group.fields;
+    for (let field of fields) {
+      // Link owner to form so fields don't get destroyed when a lookup call is set
+      field.setOwner(this);
+    }
+    let lookupCallField = this.widget('LookupCallField');
+    lookupCallField.setValue(group.lookupCall);
+    lookupCallField.on('propertyChange:value', event => {
+      if (event.newValue) {
+        group.setFields([]);
+      } else {
+        group.setFields(fields);
+      }
+      group.setLookupCall(event.newValue);
+    });
 
     let selectedButtonField = this.widget('SelectedButtonField');
     selectedButtonField.setLookupCall(new FormFieldLookupCall(group));
@@ -51,7 +63,6 @@ export class RadioButtonGroupForm extends Form {
       return newValue;
     };
     this.widget('ValueFieldPropertiesBox').setField(group);
-
     this.widget('FormFieldPropertiesBox').setField(group);
     this.widget('GridDataBox').setField(group);
     this.widget('LayoutConfigBox').setField(group);
@@ -76,32 +87,35 @@ export class RadioButtonGroupForm extends Form {
       this.widget('Button.GridDataBox').setField(button);
       this.widget('Button.GridDataBox').setEnabled(!!button);
     });
+    // If radio buttons are replaced, update value in targetField
+    group.on('propertyChange:fields', event => targetField.setValue(event.newValue[0]));
 
     let keyStrokeField = this.widget('Button.KeyStrokeField');
     keyStrokeField.setValue((targetField.value as RadioButton<number>).keyStroke);
     keyStrokeField.on('propertyChange:value', event => {
       let button = this.widget('Button.TargetField').value as RadioButton<number>;
-      if (button) {
-        button.setKeyStroke(event.newValue);
-      }
+      button?.setKeyStroke(event.newValue);
     });
 
     let selectedField = this.widget('Button.SelectedField');
     selectedField.setValue((targetField.value as RadioButton<number>).selected);
     selectedField.on('propertyChange:value', event => {
       let button = this.widget('Button.TargetField').value as RadioButton<number>;
-      if (button) {
-        button.setSelected(event.newValue);
-      }
+      button?.setSelected(event.newValue);
     });
 
     let wrapTextField = this.widget('Button.WrapTextField');
     wrapTextField.setValue((targetField.value as RadioButton<number>).wrapText);
     wrapTextField.on('propertyChange:value', event => {
       let button = this.widget('Button.TargetField').value as RadioButton<number>;
-      if (button) {
-        button.setWrapText(event.newValue);
-      }
+      button?.setWrapText(event.newValue);
+    });
+
+    let iconIdField = this.widget('Button.IconIdField');
+    iconIdField.setValue((targetField.value as RadioButton<number>).iconId);
+    iconIdField.on('propertyChange:value', event => {
+      let button = this.widget('Button.TargetField').value as RadioButton<number>;
+      button?.setIconId(event.newValue);
     });
 
     this.widget('Button.PropertiesBox').setEnabled(!!targetField.value);

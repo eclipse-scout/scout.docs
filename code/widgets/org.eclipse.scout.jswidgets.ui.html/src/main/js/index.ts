@@ -122,6 +122,8 @@ export * from './logicalgrid/LogicalGridFormModel';
 export * from './logicalgrid/LogicalGridLayoutConfigBox';
 export * from './logicalgrid/LogicalGridLayoutConfigBoxModel';
 export * from './logicalgrid/LogicalGridLookupCall';
+export * from './lookup/EmptyLookupCall';
+export * from './lookup/ErroneousLookupCall';
 export * from './lookup/LocaleLookupCall';
 export * from './lookup/SalutationLookupCall';
 export * from './lookup/RainbowLookupCall';

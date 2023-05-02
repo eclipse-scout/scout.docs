@@ -7,10 +7,10 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {CheckBoxField, FormField, FormModel, GroupBox, NumberField, RadioButton, RadioButtonGroup, SmartField, StringField, TabBox, TabItem} from '@eclipse-scout/core';
+import {CheckBoxField, FormModel, GroupBox, NumberField, RadioButton, RadioButtonGroup, SmartField, StaticLookupCall, StringField, TabBox, TabItem} from '@eclipse-scout/core';
 import {
-  EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, LogicalGridLayoutConfigBox, LogicalGridLayoutConfigBoxWidgetMap,
-  ValueFieldPropertiesBox, ValueFieldPropertiesBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap
+  EmptyLookupCall, ErroneousLookupCall, EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, IconIdLookupCall,
+  LogicalGridLayoutConfigBox, LogicalGridLayoutConfigBoxWidgetMap, SalutationLookupCall, ValueFieldPropertiesBox, ValueFieldPropertiesBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap, WorldLookupCall
 } from '../index';
 
 export default (): FormModel => ({
@@ -75,6 +75,21 @@ export default (): FormModel => ({
                 borderVisible: false,
                 fields: [
                   {
+                    id: 'LookupCallField',
+                    objectType: SmartField,
+                    label: 'Lookup Call',
+                    tooltipText: '${textKey:RadioButtonGroupLookupCallTooltip}',
+                    lookupCall: {
+                      objectType: StaticLookupCall,
+                      data: [
+                        [SalutationLookupCall, 'SalutationLookupCall'],
+                        [WorldLookupCall, 'WorldLookupCall'],
+                        [EmptyLookupCall, 'EmptyLookupCall'],
+                        [ErroneousLookupCall, 'ErroneousLookupCall']
+                      ]
+                    }
+                  },
+                  {
                     id: 'SelectedButtonField',
                     objectType: SmartField,
                     label: 'Selected Button'
@@ -134,6 +149,12 @@ export default (): FormModel => ({
                     labelVisible: false
                   },
                   {
+                    id: 'Button.IconIdField',
+                    objectType: SmartField,
+                    lookupCall: IconIdLookupCall,
+                    label: 'Icon Id'
+                  },
+                  {
                     id: 'Button.KeyStrokeField',
                     objectType: StringField,
                     label: 'Key Stroke'
@@ -176,35 +197,38 @@ export default (): FormModel => ({
   }
 });
 
-export type RadioButtonGroupFormWidgetMap =
-  {
-    'MainBox': GroupBox;
-    'DetailBox': GroupBox;
-    'RadioButtonGroup': RadioButtonGroup<number>;
-    'RadioButton1': RadioButton<number>;
-    'RadioButton2': RadioButton<number>;
-    'RadioButton3': RadioButton<number>;
-    'ConfigurationBox': TabBox;
-    'PropertiesTab': TabItem;
-    'PropertiesBox': GroupBox;
-    'SelectedButtonField': SmartField<FormField>;
-    'GridColumnCountField': NumberField;
-    'ValueFieldPropertiesBox': ValueFieldPropertiesBox;
-    'FormFieldPropertiesBox': FormFieldPropertiesBox;
-    'GridDataBox': GridDataBox;
-    'LayoutConfigBox': LogicalGridLayoutConfigBox;
-    'RadioButtonPropertiesTab': TabItem;
-    'Button.TargetField': SmartField<FormField>;
-    'Button.PropertiesBox': GroupBox;
-    'Button.SelectedField': CheckBoxField;
-    'Button.WrapTextField': CheckBoxField;
-    'Button.KeyStrokeField': StringField;
-    'Button.FormFieldPropertiesBox': FormFieldPropertiesBox;
-    'Button.GridDataBox': GridDataBox;
-    'ActionsTab': TabItem;
-    'FormFieldActionsBox': FormFieldActionsBox;
-    'WidgetActionsBox': WidgetActionsBox;
-    'EventsTab': EventsTab;
-  }
-  & ValueFieldPropertiesBoxWidgetMap & FormFieldPropertiesBoxWidgetMap & GridDataBoxWidgetMap & LogicalGridLayoutConfigBoxWidgetMap
-  & FormFieldActionsBoxWidgetMap & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
+export type RadioButtonGroupFormWidgetMap = {
+  'MainBox': GroupBox;
+  'DetailBox': GroupBox;
+  'RadioButtonGroup': RadioButtonGroup<any>;
+  'RadioButton1': RadioButton<any>;
+  'RadioButton2': RadioButton<any>;
+  'RadioButton3': RadioButton<any>;
+  'ConfigurationBox': TabBox;
+  'PropertiesTab': TabItem;
+  'PropertiesBox': GroupBox;
+  'LookupCallField': SmartField<any>;
+  'SelectedButtonField': SmartField<any>;
+  'GridColumnCountField': NumberField;
+  'ValueFieldPropertiesBox': ValueFieldPropertiesBox;
+  'FormFieldPropertiesBox': FormFieldPropertiesBox;
+  'GridDataBox': GridDataBox;
+  'LayoutConfigBox': LogicalGridLayoutConfigBox;
+  'RadioButtonPropertiesTab': TabItem;
+  'Button.TargetField': SmartField<any>;
+  'Button.PropertiesBox': GroupBox;
+  'Button.SelectedField': CheckBoxField;
+  'Button.WrapTextField': CheckBoxField;
+  'Button.IconIdField': SmartField<any>;
+  'Button.KeyStrokeField': StringField;
+  'Button.FormFieldPropertiesBox': FormFieldPropertiesBox;
+  'Button.GridDataBox': GridDataBox;
+  'ActionsTab': TabItem;
+  'FormFieldActionsBox': FormFieldActionsBox;
+  'WidgetActionsBox': WidgetActionsBox;
+  'EventsTab': EventsTab;
+} & ValueFieldPropertiesBoxWidgetMap & FormFieldPropertiesBoxWidgetMap & GridDataBoxWidgetMap & LogicalGridLayoutConfigBoxWidgetMap & FormFieldActionsBoxWidgetMap & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;

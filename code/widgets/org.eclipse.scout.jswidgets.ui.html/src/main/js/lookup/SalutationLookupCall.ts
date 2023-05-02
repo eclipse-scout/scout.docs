@@ -11,10 +11,6 @@ import {LookupRow, StaticLookupCall} from '@eclipse-scout/core';
 
 export class SalutationLookupCall extends StaticLookupCall<string> {
 
-  constructor() {
-    super();
-  }
-
   protected override _data(): any[] {
     return SalutationLookupCall.DATA;
   }

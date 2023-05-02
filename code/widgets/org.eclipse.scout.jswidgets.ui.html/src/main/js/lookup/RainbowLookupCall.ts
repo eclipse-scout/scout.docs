@@ -11,10 +11,6 @@ import {icons, InitModelOf, LookupRow, scout, StaticLookupCall} from '@eclipse-s
 
 export class RainbowLookupCall extends StaticLookupCall<string> {
 
-  constructor() {
-    super();
-  }
-
   protected override _data(): any[] {
     return RainbowLookupCall.DATA;
   }
