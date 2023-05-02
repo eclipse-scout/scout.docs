@@ -320,7 +320,7 @@ export default (): FormModel => ({
                   cssClass: 'json-field',
                   menus: [{
                     id: 'InsertExampleChartPropertiesMenu',
-                    objectType: 'Menu',
+                    objectType: Menu,
                     text: 'Insert example properties'
                   }]
                 }
@@ -505,6 +505,10 @@ export default (): FormModel => ({
   }
 });
 
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
 export type ChartFieldFormWidgetMap = {
   'MainBox': GroupBox;
   'DetailBox': GroupBox;
@@ -544,16 +548,13 @@ export type ChartFieldFormWidgetMap = {
   'CustomChartPropertiesBox': GroupBox;
   'InfoField': LabelField;
   'CustomChartPropertiesField': StringField;
+  'InsertExampleChartPropertiesMenu': Menu;
   'FormFieldPropertiesBox': FormFieldPropertiesBox;
   'GridDataBox': GridDataBox;
   'ChartDataBox': TabItem;
   'ChartDataBox.LeftBox': GroupBox;
   'ChartDataTableField': TableField;
   'ChartDataTableField.Table': ChartDataTableFieldTable;
-  'AddDatasetMenu': Menu;
-  'RemoveDatasetMenu': Menu;
-  'AddDataMenu': Menu;
-  'RemoveDataMenu': Menu;
   'ChartDataBox.RightBox': GroupBox;
   'RandomCheckBox': CheckBoxField;
   'FillTableCheckBox': CheckBoxField;
@@ -565,12 +566,20 @@ export type ChartFieldFormWidgetMap = {
   'ActionsTab': TabItem;
   'WidgetActionsBox': WidgetActionsBox;
   'EventsTab': EventsTab;
-} & FormFieldPropertiesBoxWidgetMap & GridDataBoxWidgetMap & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;
-
-export type ChartDataTableFieldTableColumnMap = {
-  'DatasetLabelColumn': Column<string>;
-};
+} & FormFieldPropertiesBoxWidgetMap & GridDataBoxWidgetMap & ChartDataTableFieldTableWidgetMap & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;
 
 export class ChartDataTableFieldTable extends Table {
+  declare widgetMap: ChartDataTableFieldTableWidgetMap;
   declare columnMap: ChartDataTableFieldTableColumnMap;
 }
+
+export type ChartDataTableFieldTableWidgetMap = {
+  'AddDatasetMenu': Menu;
+  'RemoveDatasetMenu': Menu;
+  'AddDataMenu': Menu;
+  'RemoveDataMenu': Menu;
+};
+
+export type ChartDataTableFieldTableColumnMap = {
+  'DatasetLabelColumn': Column;
+};
