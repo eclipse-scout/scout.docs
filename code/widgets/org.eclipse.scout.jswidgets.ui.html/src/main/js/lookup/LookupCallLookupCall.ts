@@ -8,7 +8,7 @@
  * SPDX-License-Identifier: EPL-2.0
  */
 import {arrays, LookupCall, LookupRow, StaticLookupCall} from '@eclipse-scout/core';
-import {LocaleLookupCall, RainbowLookupCall, SalutationLookupCall, WorldLookupCall} from '../index';
+import {EmptyLookupCall, ErroneousLookupCall, LocaleLookupCall, RainbowLookupCall, SalutationLookupCall, WorldLookupCall} from '../index';
 
 export class LookupCallLookupCall extends StaticLookupCall<LookupCall<any>> {
 
@@ -25,7 +25,9 @@ export class LookupCallLookupCall extends StaticLookupCall<LookupCall<any>> {
       [LocaleLookupCall, 'LocaleLookupCall'],
       [RainbowLookupCall, 'RainbowLookupCall'],
       [SalutationLookupCall, 'SalutationLookupCall'],
-      [WorldLookupCall, 'WorldLookupCall']
+      [WorldLookupCall, 'WorldLookupCall'],
+      [EmptyLookupCall, 'EmptyLookupCall'],
+      [ErroneousLookupCall, 'ErroneousLookupCall']
     ];
   }
 }

@@ -17,10 +17,6 @@ export class ListBoxForm extends Form {
   listBox: ListBox<any>;
   lookupCallField: SmartField<LookupCall<any>>;
 
-  constructor() {
-    super();
-  }
-
   protected override _jsonModel(): FormModel {
     return models.get(ListBoxFormModel);
   }
