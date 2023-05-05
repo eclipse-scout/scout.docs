@@ -171,6 +171,30 @@ The following NLS texts were unused within the Scout framework and removed:
 
 == Scout JS
 
+=== Multi Dimension Support
+
+Since some properties on `Widget` and `Column` are now computed based on their dimensions, they must always be set using the corresponding setter.
+Even though it was already bad practise to set a value without using the setter, it may have worked for your case if you didn't need a property change event or the property to be rendered.
+If you do so now, you will replace the computed value instead of setting the default dimension, which may result in unexpected behavior.
+
+Please check in your code, if you set the following properties directly and replace them with the corresponding setter.
+[source,javascript]
+----
+Widget.visible = value -> Widget.setVisible(value)
+Widget.enabled = value -> Widget.setEnabled(value)
+Column.visible = value -> Column.setVisible(value)
+Column.displayable = value -> Column.setDisplayable(value)
+----
+
+Furthermore, `Widget.isVisible()` and `Column.isVisible()` have been deprecated because the `visible` properties are now computed and there is no need for having `isVisible()` anymore.
+Therefore, please use the property `visible` directly instead of calling `isVisible()`.
+
+[source,javascript]
+----
+Widget.isVisible -> Widget.visible
+Column.isVisible -> Column.visible
+----
+
 === Tree: Insert Order Changed
 
 `Tree.insertNodes` now adds new nodes (without an explicit childNodeIndex) at the bottom of the existing nodes instead of the top.

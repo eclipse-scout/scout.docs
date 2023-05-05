@@ -7,10 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {
-  CheckBoxField, DisabledStyle, DropType, FormFieldLabelPosition, FormFieldStatusPosition, FormFieldStyle, FormFieldTooltipAnchor, GroupBox, GroupBoxModel, NumberField, ProposalField, SmartField, StaticLookupCall, StatusSeverity,
-  StringField
-} from '@eclipse-scout/core';
+import {CheckBoxField, DropType, GroupBox, GroupBoxModel, NumberField, ProposalField, SmartField, StaticLookupCall, StringField} from '@eclipse-scout/core';
 import {DisabledStyleLookupCall, FieldStyleLookupCall, LabelPositionLookupCall, LabelWidthInPixelLookupCall, StatusPositionLookupCall, StatusSeverityLookupCall, TooltipAnchorLookupCall} from '../index';
 
 export default (): GroupBoxModel => ({
@@ -27,9 +24,21 @@ export default (): GroupBoxModel => ({
       labelVisible: false
     },
     {
+      id: 'EnabledGrantedField',
+      objectType: CheckBoxField,
+      label: 'Enabled Granted',
+      labelVisible: false
+    },
+    {
       id: 'VisibleField',
       objectType: CheckBoxField,
       label: 'Visible',
+      labelVisible: false
+    },
+    {
+      id: 'VisibleGrantedField',
+      objectType: CheckBoxField,
+      label: 'Visible Granted',
       labelVisible: false
     },
     {
@@ -151,25 +160,30 @@ export default (): GroupBoxModel => ({
   ]
 });
 
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
 export type FormFieldPropertiesBoxWidgetMap = {
   'EnabledField': CheckBoxField;
+  'EnabledGrantedField': CheckBoxField;
   'VisibleField': CheckBoxField;
+  'VisibleGrantedField': CheckBoxField;
   'LabelVisibleField': CheckBoxField;
   'StatusVisibleField': CheckBoxField;
   'MandatoryField': CheckBoxField;
   'LoadingField': CheckBoxField;
   'LabelHtmlEnabledField': CheckBoxField;
   'InheritAccessibilityField': CheckBoxField;
-  'FieldStyleField': SmartField<FormFieldStyle>;
-  'DisabledStyleField': SmartField<DisabledStyle>;
-  'DropTypeField': SmartField<DropType>;
+  'FieldStyleField': SmartField<any>;
+  'DisabledStyleField': SmartField<any>;
+  'DropTypeField': SmartField<any>;
   'DropMaximumSizeField': NumberField;
   'LabelField': StringField;
-  'LabelPositionField': SmartField<FormFieldLabelPosition>;
+  'LabelPositionField': SmartField<any>;
   'LabelWidthInPixelField': ProposalField;
-  'SaveNeededField': CheckBoxField;
   'TooltipTextField': StringField;
-  'TooltipAnchorField': SmartField<FormFieldTooltipAnchor>;
-  'ErrorStatusField': SmartField<StatusSeverity>;
-  'StatusPositionField': SmartField<FormFieldStatusPosition>;
+  'TooltipAnchorField': SmartField<any>;
+  'ErrorStatusField': SmartField<any>;
+  'StatusPositionField': SmartField<any>;
 };

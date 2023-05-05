@@ -42,6 +42,7 @@ export class TableForm extends Form {
     this.widget('MoveDownMenu').on('action', this._onMoveDownMenuAction.bind(this));
     this.widget('MoveToBottomMenu').on('action', this._onMoveToBottomMenuAction.bind(this));
     this.widget('DeleteRowMenu').on('action', this._onDeleteRowMenuAction.bind(this));
+    this.widget('ToggleRowEnabledMenu').on('action', this._onToggleRowEnabledMenuAction.bind(this));
     this.table.on('appLinkAction', this._onAppLinkAction.bind(this));
 
     this.widget('PropertiesBox').setTable(this.table);
@@ -188,6 +189,11 @@ export class TableForm extends Form {
 
   protected _onDeleteRowMenuAction() {
     this.table.deleteRows(this.table.selectedRows);
+  }
+
+  protected _onToggleRowEnabledMenuAction() {
+    this.table.selectedRows.forEach(row => row.setEnabled(!row.enabled));
+    this.table.updateRows(this.table.selectedRows);
   }
 
   protected _onAppLinkAction(event: TableAppLinkActionEvent) {

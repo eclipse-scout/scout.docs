@@ -36,6 +36,12 @@ export default (): GroupBoxModel => ({
       labelVisible: false
     },
     {
+      id: 'VisibleGrantedField',
+      objectType: CheckBoxField,
+      label: 'Visible Granted',
+      labelVisible: false
+    },
+    {
       id: 'MandatoryField',
       objectType: CheckBoxField,
       label: 'Mandatory',
@@ -188,10 +194,15 @@ export default (): GroupBoxModel => ({
   ]
 });
 
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
 export type ColumnPropertiesBoxWidgetMap = {
   'EditableField': CheckBoxField;
   'DisplayableField': CheckBoxField;
   'VisibleField': CheckBoxField;
+  'VisibleGrantedField': CheckBoxField;
   'MandatoryField': CheckBoxField;
   'AutoOptimizeWidthField': CheckBoxField;
   'FixedWidthField': CheckBoxField;
@@ -211,7 +222,7 @@ export type ColumnPropertiesBoxWidgetMap = {
   'HorizontalAlignmentField': NumberField;
   'TextField': StringField;
   'HeaderTooltipTextField': StringField;
-  'HeaderIconIdField': SmartField<string>;
+  'HeaderIconIdField': SmartField<any>;
   'HeaderCssClassField': StringField;
   'SortIndexField': NumberField;
   'WidthField': NumberField;

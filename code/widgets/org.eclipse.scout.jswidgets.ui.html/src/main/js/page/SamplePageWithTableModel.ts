@@ -9,6 +9,7 @@
  */
 import {AggregateTableControl, BooleanColumn, Column, FormMenu, FormTableControl, icons, Menu, NumberColumn, PageModel, PageWithTable, SmartColumn, Table} from '@eclipse-scout/core';
 import {LocaleLookupCall, MiniForm, SamplePageWithTableSearchForm, SamplePageWithTableSearchFormWidgetMap} from '../index';
+import {ChartTableControl} from '@eclipse-scout/chart';
 
 export default (): PageModel => ({
   id: 'jswidgets.SamplePageWithTable',
@@ -101,6 +102,10 @@ export default (): PageModel => ({
           id: 'SearchForm',
           objectType: SamplePageWithTableSearchForm
         }
+      },
+      {
+        id: 'ChartTableControl',
+        objectType: ChartTableControl
       },
       {
         id: 'AggregateTableControl',

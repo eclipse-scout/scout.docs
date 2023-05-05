@@ -50,9 +50,17 @@ export class FormFieldPropertiesBox extends GroupBox {
     enabledField.setValue(this.field.enabled);
     enabledField.on('propertyChange:value', event => this.field.setEnabled(event.newValue));
 
+    let enabledGrantedField = this.widget('EnabledGrantedField');
+    enabledGrantedField.setValue(this.field.enabledGranted);
+    enabledGrantedField.on('propertyChange:value', event => this.field.setEnabledGranted(event.newValue));
+
     let visibleField = this.widget('VisibleField');
     visibleField.setValue(this.field.visible);
     visibleField.on('propertyChange:value', event => this.field.setVisible(event.newValue));
+
+    let visibleGrantedField = this.widget('VisibleGrantedField');
+    visibleGrantedField.setValue(this.field.visibleGranted);
+    visibleGrantedField.on('propertyChange:value', event => this.field.setVisibleGranted(event.newValue));
 
     let labelVisibleField = this.widget('LabelVisibleField');
     labelVisibleField.setValue(this.field.labelVisible);

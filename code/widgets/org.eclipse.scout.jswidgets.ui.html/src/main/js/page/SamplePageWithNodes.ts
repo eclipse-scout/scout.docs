@@ -38,7 +38,7 @@ export class SamplePageWithNodes extends PageWithNodes {
     // Search the first visible cell considering the originally defined column order (ignoring the column order changes the user did)
     let firstDefinedVisibleCell = arrays.find(row.cells, (cell, index) => {
       let column = columnsByIndex[index];
-      return column.visible && column.displayable;
+      return column.visible;
     });
     if (firstDefinedVisibleCell) {
       return firstDefinedVisibleCell.text;
