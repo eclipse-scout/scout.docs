@@ -145,6 +145,16 @@ export default (): FormModel => ({
                     Table.MenuTypes.MultiSelection
                   ],
                   keyStroke: 'delete'
+                },
+                {
+                  id: 'ToggleRowEnabledMenu',
+                  objectType: Menu,
+                  text: '${textKey:ToggleRowEnabled}',
+                  inheritAccessibility: false,
+                  menuTypes: [
+                    Table.MenuTypes.SingleSelection,
+                    Table.MenuTypes.MultiSelection
+                  ]
                 }
               ]
             }
@@ -223,46 +233,52 @@ export default (): FormModel => ({
   }
 });
 
-export type TableFormWidgetMap =
-  {
-    'MainBox': GroupBox;
-    'DetailBox': GroupBox;
-    'TableField': TableField;
-    'Table': TableFieldTable;
-    'AggregateTableControl': AggregateTableControl;
-    'AddRowMenu': Menu;
-    'MoveMenu': Menu;
-    'MoveToTopMenu': Menu;
-    'MoveUpMenu': Menu;
-    'MoveDownMenu': Menu;
-    'MoveToBottomMenu': Menu;
-    'DeleteRowMenu': Menu;
-    'ConfigurationBox': ConfigurationBox;
-    'PropertiesTab': TabItem;
-    'PropertiesBox': TablePropertiesBox;
-    'FormFieldPropertiesBox': FormFieldPropertiesBox;
-    'GridDataBox': GridDataBox;
-    'ColumnProperties': TabItem;
-    'Column.TargetField': SmartField<Column>;
-    'Column.PropertiesBox': ColumnPropertiesBox;
-    'ActionsTab': TabItem;
-    'FormFieldActionsBox': FormFieldActionsBox;
-    'WidgetActionsBox': WidgetActionsBox;
-    'EventsTab': EventsTab;
-  }
-  & TablePropertiesBoxWidgetMap & FormFieldPropertiesBoxWidgetMap & GridDataBoxWidgetMap & ColumnPropertiesBoxWidgetMap & FormFieldActionsBoxWidgetMap
-  & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
+export type TableFormWidgetMap = {
+  'MainBox': GroupBox;
+  'DetailBox': GroupBox;
+  'TableField': TableField;
+  'Table': TableFieldTable;
+  'ConfigurationBox': ConfigurationBox;
+  'PropertiesTab': TabItem;
+  'PropertiesBox': TablePropertiesBox;
+  'FormFieldPropertiesBox': FormFieldPropertiesBox;
+  'GridDataBox': GridDataBox;
+  'ColumnProperties': TabItem;
+  'Column.TargetField': SmartField<any>;
+  'Column.PropertiesBox': ColumnPropertiesBox;
+  'ActionsTab': TabItem;
+  'FormFieldActionsBox': FormFieldActionsBox;
+  'WidgetActionsBox': WidgetActionsBox;
+  'EventsTab': EventsTab;
+} & TableFieldTableWidgetMap & TablePropertiesBoxWidgetMap & FormFieldPropertiesBoxWidgetMap & GridDataBoxWidgetMap & ColumnPropertiesBoxWidgetMap & FormFieldActionsBoxWidgetMap & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;
+
+export class TableFieldTable extends Table {
+  declare widgetMap: TableFieldTableWidgetMap;
+  declare columnMap: TableFieldTableColumnMap;
+}
+
+export type TableFieldTableWidgetMap = {
+  'AggregateTableControl': AggregateTableControl;
+  'AddRowMenu': Menu;
+  'MoveMenu': Menu;
+  'MoveToTopMenu': Menu;
+  'MoveUpMenu': Menu;
+  'MoveDownMenu': Menu;
+  'MoveToBottomMenu': Menu;
+  'DeleteRowMenu': Menu;
+  'ToggleRowEnabledMenu': Menu;
+};
 
 export type TableFieldTableColumnMap = {
   'StringColumn': Column;
   'DateColumn': DateColumn;
   'NumberColumn': NumberColumn;
-  'SmartColumn': SmartColumn<string>;
+  'SmartColumn': SmartColumn<any>;
   'BooleanColumn': BooleanColumn;
   'IconColumn': IconColumn;
   'HtmlColumn': Column;
 };
-
-export class TableFieldTable extends Table {
-  declare columnMap: TableFieldTableColumnMap;
-}

@@ -1,14 +1,78 @@
-= Multiple Dimensions Support (Scout Classic)
+= Multiple Dimensions Support
 include::common:partial$_header.adoc[]
 
-Several components support multiple dimensions for visibility or enabled flags. This means the component is only visible or enabled if all dimensions are set to true.
-This gives developers the flexibility to e.g. use a dimension for granting and one for the business logic.
+Several components support multidimensional properties.
+A multidimensional property is a property that will be computed based on its dimensions.
+For example the `enabled` property of a `Widget` is multidimensional.
+This means, the widget will only be enabled if all dimensions are set to true.
+This gives developers the flexibility to e.g. use a dimension for authorization (`granted`) and one for the business logic and to be sure that if the widget was disabled using `widget.setEnabledGranted(false)` that it won't accidentally get enabled when using `widget.setEnabled(true)`.
 
-A total of 8 dimensions are available for a certain component type and attribute.
-This means you e.g. have a total of 8 dimensions for Form Field visibility in your application. And 8 dimensions for enabled-states of Actions.
-So the dimensions are not consumed by component instance but by component type. This means you have to be careful in defining new dimensions as all components of the same type share these dimensions.
+== Scout JS
+As long as only one dimension is used, multidimensional properties behave like normal properties.
+Let's have a look at the `visible` property of the `Widget`.
 
-NOTE: Some of these dimensions are already used internally. Refer to the implementation and JavaDoc of the component for details about how many dimensions are available for custom use.
+The property can be set using `widget.setVisible(false)`.
+This will set the `default` dimension and computes the new value for `widget.visible`.
+Because we didn't set any other dimension, `widget.visible` will return false.
+It will also trigger a `propertyChange` event for the `visible` property with the computed value.
+Compared to regular properties, it also triggers a propertyChange event for the dimension `visible-default`.
+
+We can now set another dimension, for example the pre-defined `visible-granted` dimension by using `widget.setVisibleGranted(true)`.
+We could also set any custom dimension as follows:
+
+[source,typescript]
+----
+widget.setPropertyDimension('visible', 'example', true);
+----
+
+Calling this method will recompute the `widget.visible` state.
+But since the default dimension is still set to false, the `widget.visible` state won't change.
+Because every dimension needs to be true, we have to call `widget.setVisible(true)` (or `widget.setPropertyDimension('visible', 'default', true)`) to make the property `widget.visible` true again.
+
+=== Default Value
+Every multidimensional property has a default value.
+This value is used if a dimension is not set.
+And it is used for the computation to compute the value.
+This means, if the default value is true, every dimension needs to be true to make the computation return true.
+If the default value is false, every dimension needs to be false to make the computation return false.
+The defaultValue `false` may be used to add dimensions to the property `FormField.mandatory`, which is false by default compared to `Widget.enabled`, which is true by default.
+
+To mark a property as multidimensional with the defaultValue `true`, use the following code in your widget:
+[source,javascript]
+----
+this._addMultiDimensionalProperty('visible', true);
+----
+
+=== Alias
+A property dimension can have an alias that is used to simulate a regular property.
+For example if an alias is registered for `enabled` with the name `accepted`, it is possible to call `setProperty('accepted', true)` resp. `getProperty('accepted')`. It looks like a regular property and also triggers a propertyChange event for the name `accepted`, but actually it is a dimension, so it will influence the computation of the `enabled` property.
+
+To add an alias for a dimension, use the following code in your widget:
+
+[source,javascript]
+----
+this._addPropertyDimensionAlias('enabled', 'accepted');
+----
+
+Sometimes an alias does not reflect the state of the multidimensional property.
+For example if the alias is called `locked`, the widget should be enabled if `locked` is true instead of false.
+In that case, you can set the alias to `inverted` as follows:
+
+[source,typescript]
+----
+this._addPropertyDimensionAlias('enabled', 'locked', true);
+----
+
+== Scout Classic
+
+A total of 8 dimensions are available for a certain widget type and property.
+This means you e.g. have a total of 8 dimensions for Form Field visibility in your application.
+And 8 dimensions for enabled-states of Actions.
+So the dimensions are not consumed by widget instance but by widget type.
+This means you have to be careful in defining new dimensions as all widgets of the same type share these dimensions.
+
+NOTE: Some of these dimensions are already used internally.
+Refer to the implementation and JavaDoc of the component for details about how many dimensions are available for custom use.
 
 [source,java,indent=0]
 ----
@@ -24,4 +88,5 @@ include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclips
 <8> Checks if all dimensions of formField2 are true
 <9> Checks if all dimensions of formField2 and all dimensions of all parent Form Fields are enabled.
 
-NOTE: In the example above the instance 'formField3' uses 4 dimensions for the enabled attribute: ENABLED_CUSTOM because it is explicitly used and the 3 dimensions that are used internally (ENABLED, ENABLED_GRANTED, ENABLED_SLAVE). Even though the instance 'formField2' makes no use of the custom dimension it is consumed for this instance as well because the dimensions do not exist by instance but by attribute (as explained above).
+NOTE: In the example above the instance 'formField3' uses 4 dimensions for the enabled attribute: ENABLED_CUSTOM because it is explicitly used and the 3 dimensions that are used internally (ENABLED, ENABLED_GRANTED, ENABLED_SLAVE).
+Even though the instance 'formField2' makes no use of the custom dimension it is consumed for this instance as well because the dimensions do not exist by instance but by attribute (as explained above).

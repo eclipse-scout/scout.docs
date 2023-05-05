@@ -50,6 +50,19 @@ If you just want to play around with them without looking at the source code, yo
 
 == Scout JS
 
+=== Multi Dimension Support
+
+Similar to Scout Classic, Scout JS now also supports multidimensional properties.
+
+A multidimensional property is a property that will be computed based on its dimensions.
+
+For example: `Widget.visible` is now multidimensional and computed based on the `default` and the `granted` dimension.
+Both dimensions need to be true to make the widget visible. This means, if a widget is made invisible using `widget.setVisibleGranted(false)`, calling `widget.setVisible(true)` (which will modify the default dimension) won't have any effect.
+
+This feature makes it easy to really hide a widget that the user is not allowed to see without fearing that it could be made visible accidentally.
+
+To learn more about this, see xref:technical-guide:user-interface/multi-dimensions.adoc[].
+
 === Form
 
 [#modal-optional-for-views]

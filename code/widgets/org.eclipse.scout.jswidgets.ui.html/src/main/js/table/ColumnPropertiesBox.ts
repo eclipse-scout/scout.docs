@@ -112,6 +112,10 @@ export class ColumnPropertiesBox extends GroupBox {
     visibleField.setValue(this.column.visible);
     visibleField.on('propertyChange:value', event => this.column.setVisible(event.newValue));
 
+    let visibleGrantedField = this.widget('VisibleGrantedField');
+    visibleGrantedField.setValue(this.column.visibleGranted);
+    visibleGrantedField.on('propertyChange:value', event => this.column.setVisibleGranted(event.newValue));
+
     let cssClassField = this.widget('CssClassField');
     cssClassField.setValue(this.column.cssClass);
     cssClassField.on('propertyChange:value', event => this.column.setCssClass(event.newValue));
