@@ -368,7 +368,7 @@ In addition to creating widgets, calling such a setter will also make sure that 
 So if a property is defined as widget property, calling a setter will do the following:
 
 . It checks if the property has changed at all (same as for regular properties).
-. If the values are not equal, `_prepareWidgetProperty` is called which checks if the new value already is a widget and if not creates it. It also destroys the old widget unless the property should not be preserved (see `_preserveOnPropertyChangeProperties`). If the value is an array, it does so for each element in the array (only widgets which are not part of the new array will be destroyed).
+. If the values are not equal, `_prepareWidgetProperty` is called which checks if the new value already is a widget and if not creates it. It also destroys the old widget unless the property should not be preserved (see `preserveOnPropertyChangeProperties`). If the value is an array, it does so for each element in the array (only widgets which are not part of the new array will be destroyed).
 . If the widget is rendered, the old widget is removed unless the property should not be preserved. If there is a custom remove function (e.g. _removeXY where XY is the property name), it will be called instead of removing the widgets directly. Note that the widget may have already been removed by the destroy function at the prepare phase.
 . The model is updated (same as for regular properties).
 . The render method is called (same as for regular properties).
