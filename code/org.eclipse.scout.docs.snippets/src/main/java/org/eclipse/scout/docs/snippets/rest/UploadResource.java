@@ -1,8 +1,10 @@
 package org.eclipse.scout.docs.snippets.rest;
 
 import java.io.File;
+import java.io.InputStream;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
@@ -24,9 +26,11 @@ public class UploadResource implements IRestResource {
   @POST
   @Path("content")
   @Consumes(MediaType.MULTIPART_FORM_DATA)
-  public Response pushContent(IMultipartMessage multipartMessage) {
+  public Response pushContent(@HeaderParam("Content-Type") MediaType mediaType, InputStream inputStream) {
     File file = null;
     String displayText = null;
+
+    IMultipartMessage multipartMessage = IMultipartMessage.of(mediaType, inputStream);
     while (multipartMessage.hasNext()) {
       try (IMultipartPart part = multipartMessage.next()) {
         switch (part.getPartName()) {
