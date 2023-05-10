@@ -7,7 +7,8 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {CancelMenu, CheckBoxField, CloseMenu, DateField, FormField, FormFieldMenu, FormModel, GroupBox, OkMenu, ResetMenu, SaveMenu, StringField} from '@eclipse-scout/core';
+import {CancelMenu, CheckBoxField, CloseMenu, DateField, FormField, FormFieldMenu, FormModel, GroupBox, LabelField, OkMenu, ResetMenu, SaveMenu, SequenceBox, SmartField, StringField} from '@eclipse-scout/core';
+import {StatusSeverityLookupCall} from '../index';
 
 export default (): FormModel => ({
   id: 'jswidgets.LifecycleForm',
@@ -91,12 +92,68 @@ export default (): FormModel => ({
             id: 'AskIfNeedSaveField',
             objectType: CheckBoxField,
             label: '${textKey:AskToSaveChangesOnCancel}'
+          },
+          {
+            id: 'AddErrorStatusSequenceBox',
+            objectType: SequenceBox,
+            label: 'Add error status',
+            labelVisible: false,
+            fields: [
+              {
+                id: 'AddErrorStatusWithSeverityField',
+                objectType: LabelField,
+                labelVisible: false,
+                statusVisible: false,
+                htmlEnabled: true,
+                value: '<span class="app-link" data-ref="add">Add</span> error status with severity',
+                gridDataHints: {
+                  useUiWidth: true,
+                  weightX: 0
+                }
+              },
+              {
+                id: 'StatusSeverityField',
+                objectType: SmartField,
+                label: 'Status Severity',
+                labelVisible: false,
+                statusVisible: false,
+                lookupCall: StatusSeverityLookupCall,
+                gridDataHints: {
+                  weightX: 1
+                }
+              },
+              {
+                id: 'ToFieldField',
+                objectType: LabelField,
+                labelVisible: false,
+                statusVisible: false,
+                value: 'to field',
+                gridDataHints: {
+                  useUiWidth: true,
+                  weightX: 0
+                }
+              },
+              {
+                id: 'TargetField',
+                objectType: SmartField,
+                label: 'Target',
+                labelVisible: false,
+                statusVisible: false,
+                gridDataHints: {
+                  weightX: 1
+                }
+              }
+            ]
           }
         ]
       }
     ]
   }
 });
+
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
 
 export type LifecycleFormWidgetMap = {
   'MainBox': GroupBox;
@@ -112,4 +169,9 @@ export type LifecycleFormWidgetMap = {
   'ExceptionField': CheckBoxField;
   'HasCloseButtonField': CheckBoxField;
   'AskIfNeedSaveField': CheckBoxField;
+  'AddErrorStatusSequenceBox': SequenceBox;
+  'AddErrorStatusWithSeverityField': LabelField;
+  'StatusSeverityField': SmartField<any>;
+  'ToFieldField': LabelField;
+  'TargetField': SmartField<any>;
 };

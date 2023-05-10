@@ -7,13 +7,18 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {Form, FormModel, InitModelOf, models} from '@eclipse-scout/core';
+import {AppLinkActionEvent, DefaultStatus, Form, FormField, FormModel, GroupBox, InitModelOf, LabelField, models, objects, SmartField, Status, StatusSeverity} from '@eclipse-scout/core';
 import $ from 'jquery';
 import LifecycleFormModel from './LifecycleFormModel';
-import {LifecycleFormWidgetMap} from '../index';
+import {FormFieldLookupCall, LifecycleFormWidgetMap} from '../index';
 
 export class LifecycleForm extends Form {
   declare widgetMap: LifecycleFormWidgetMap;
+
+  detailBox: GroupBox;
+  addErrorStatusWithSeverityField: LabelField;
+  statusSeverityField: SmartField<StatusSeverity>;
+  targetField: SmartField<FormField>;
 
   constructor() {
     super();
@@ -31,6 +36,37 @@ export class LifecycleForm extends Form {
     let askIfNeedSaveField = this.widget('AskIfNeedSaveField');
     askIfNeedSaveField.setValue(this.askIfNeedSave);
     askIfNeedSaveField.on('propertyChange:value', event => this.setAskIfNeedSave(event.newValue));
+
+    this.detailBox = this.widget('DetailBox');
+
+    this.addErrorStatusWithSeverityField = this.widget('AddErrorStatusWithSeverityField');
+    this.addErrorStatusWithSeverityField.on('appLinkAction', this._onAddErrorStatusWithSeverityFieldAppLinkAction.bind(this));
+
+    this.statusSeverityField = this.widget('StatusSeverityField');
+
+    this.targetField = this.widget('TargetField');
+    this.targetField.setLookupCall(new FormFieldLookupCall(this.detailBox));
+  }
+
+  protected _onAddErrorStatusWithSeverityFieldAppLinkAction(event: AppLinkActionEvent) {
+    if (event.ref !== 'add') {
+      return;
+    }
+
+    const target = this.targetField.value;
+    if (!target) {
+      return;
+    }
+    target.removeErrorStatus(DefaultStatus);
+
+    const severity = this.statusSeverityField.value;
+    if (!severity) {
+      return;
+    }
+
+    target.setErrorStatus(new DefaultStatus({
+      severity, message: this.session.text('FormFieldStatusMessage', objects.keyByValue(Status.Severity, severity))
+    }));
   }
 
   override importData() {
