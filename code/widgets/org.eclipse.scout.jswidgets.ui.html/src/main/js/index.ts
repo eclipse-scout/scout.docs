@@ -174,6 +174,7 @@ export * from './proposalfield/ProposalFieldPropertiesBoxModel';
 export * from './radiobuttongroup/RadioButtonGroupForm';
 export * from './radiobuttongroup/RadioButtonGroupFormModel';
 export * from './rest/RestForm';
+export * from './rest/RestExceptionLookupCall';
 export * from './rest/RestFormModel';
 export * from './sequencebox/SequenceBoxForm';
 export * from './sequencebox/SequenceBoxFormModel';

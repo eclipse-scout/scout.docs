@@ -184,6 +184,52 @@ To insert the nodes at the beginning or any other position, you can use the new 
 
 The default value for the `modal` property has been changed for forms with `displayStyle` = `Form.DisplaStyle.VIEW`, see xref:releasenotes:release-notes.adoc#modal-optional-for-views[Release Notes].
 
+==== Form Validation
+
+The text to display when the Form validation failed has been moved from Lifecycle to Form:
+
+* `Lifecycle.validationFailedTextKey` to `Form.validationFailedText` and use the `${textKey:TextKey}` notation to specify a text key
+* `Lifecycle.validationFailedText` to `Form.validationFailedText`
+
+The code to display a message box when the Form validation failed has been moved from Lifecycle to Form:
+
+* `Lifecycle._showStatusMessageBox` to `Form._showFormInvalidMessageBox`
+* `Lifecycle._createStatusMessageBox` to `Form._createStatusMessageBox`
+
+==== Form Error Handling
+
+The load, postLoad and save operations of a Scout JS Form include automatic error handling now.
+Custom logic to handle errors (e.g. from REST calls) are in most cases no longer necessary and can therefore be removed.
+
+If the default error handling does not suit your needs override one of the following methods:
+
+* `_handleError`: to handle all phases (load, postLost, save)
+* `_handleLoadError`: load errors only
+* `_handlePostLoadError`: postLoad errors only
+* `_handleSaveError`: save errors only
+
+To customize the error handling from outside the form suppress the default handling using an event listener and apply your own logic in the catch:
+
+[source,javascript]
+[subs="verbatim,attributes"]
+----
+form.on('error', event => {
+    if (event.phase === 'load') {
+      event.preventDefault(); // disable default error handling for 'load' only
+    }
+});
+form.open().catch(error => {
+  // add your custom error handling logic here
+});
+----
+
+As part of the new error handling the following methods changed its signature:
+
+* `Form.validate` and `Lifecycle.validate`: Now return Promise<Status> instead of Promise<boolean>. The former boolean value can be obtained by calling isValid() on the new Status object.
+* `Lifecycle.handle` now only takes a function returning Promise<void>. There is no need to return a Status anymore.
+* `Form._onLifecycleLoad`, `Form._onLifecycleSave`, `Form._save`, `Form.save` and `Lifecycle._save`: now return Promise<void>. There is no need to return a Status anymore. A load/save failure should return a rejected Promise and a successful load/save should return a resolved promise. In case of an error the Promise might be rejected with any error or a Status describing the error.
+* `Form._handleLoadError`: Returns Promise<void> which indicates that the error was handled. A rejected promise means the error could not be handled. In such a case no fallback is applied! It is therefore the developers responsibility to ensure the error was handled as desired.
+
 ==== FormField
 
 [#rename-requiressave-to-saveneeded]

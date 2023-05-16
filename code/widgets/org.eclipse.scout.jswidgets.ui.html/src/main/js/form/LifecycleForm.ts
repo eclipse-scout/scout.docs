@@ -81,7 +81,7 @@ export class LifecycleForm extends Form {
     };
   }
 
-  protected override _save(data: LifecycleFormData) {
+  protected override _save(data: LifecycleFormData): JQuery.Promise<void> {
     if (!this.widget('ExceptionField').value) {
       return super._save(data);
     }
