@@ -67,12 +67,12 @@ image::common:cn_big_picture.png[]
 .Client Notification Multiple Server Nodes
 image::common:cn_multiple_servers.png[]
 
-In order to deal with multiple ui-server nodes, the server holds a single notifications queue per ui-server node.
+In order to deal with multiple ui-server nodes, the server holds a single notifications queue per ui-server node were all client notifications are added (filtering is not possible on the server anymore as the backend may not know about all users or sessions of a specific ui-server). The ui-server decides how to deal further with these notifications (maybe even ignores them if they are not addressed to one of its users or sessions).
 
-In these queues only the relevant notifications need to be kept:
-If a client notification is addressed to a session or user, that does not exist on a ui-server node, it is not added to the queue.
+If an ui-server changes its backend server node and connects to another one, a new notification queue is created on this backend server (unless the ui-server is already known there) and the old notification queue on the old backend server is removed after it has expired after a specific timeout (see `org.eclipse.scout.rt.server.clientnotification.ClientNotificationProperties.NotificationQueueExpireTime`).
 
-Sessions and corresponding users are registered on the server upon creation (and de-registered after destruction).
+* Notifications which have been added to the old queue after the ui-server consumed them lastly but before the ui-server connects to the new server will not be transferred to the ui-server.
+* If an ui-server would randomly connect to different backend servers multiple notification queues for the specific ui-server may exist (unless a timeout is reached) and one notification may be delivered multiple times to the same ui-server, this should be avoided.
 
 == Publishing
 
