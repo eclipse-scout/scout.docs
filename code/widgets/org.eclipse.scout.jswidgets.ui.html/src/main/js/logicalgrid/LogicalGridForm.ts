@@ -39,7 +39,7 @@ export class LogicalGridForm extends Form {
     targetField.on('propertyChange:value', this._onTargetFieldValueChange.bind(this));
 
     let logicalGridField = this.widget('LogicalGridField');
-    logicalGridField.setValue(groupBox.logicalGrid ? groupBox.logicalGrid.objectType : null);
+    logicalGridField.setValue(groupBox.logicalGrid);
     logicalGridField.on('propertyChange:value', event => this.widget('DetailBox').setLogicalGrid(event.newValue));
 
     this.widget('GridDataBox').setEnabled(!!targetField.value);

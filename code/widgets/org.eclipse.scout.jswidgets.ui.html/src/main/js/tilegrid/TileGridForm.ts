@@ -45,7 +45,7 @@ export class TileGridForm extends Form {
     gridColumnCountField.on('propertyChange:value', event => this.tileGrid.setGridColumnCount(event.newValue));
 
     let logicalGridField = this.widget('LogicalGridField');
-    logicalGridField.setValue(this.tileGrid.logicalGrid ? this.tileGrid.logicalGrid.objectType : null);
+    logicalGridField.setValue(this.tileGrid.logicalGrid);
     logicalGridField.on('propertyChange:value', event => this.tileGrid.setLogicalGrid(event.newValue));
 
     let withPlaceholdersField = this.widget('WithPlaceholdersField');

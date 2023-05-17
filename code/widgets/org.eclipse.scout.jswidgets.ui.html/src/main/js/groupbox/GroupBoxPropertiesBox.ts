@@ -73,7 +73,7 @@ export class GroupBoxPropertiesBox extends GroupBox {
     gridColumnCountField.on('propertyChange:value', event => this.field.setGridColumnCount(event.newValue));
 
     let logicalGridField = this.widget('LogicalGridField');
-    logicalGridField.setValue(this.field.logicalGrid ? this.field.logicalGrid.objectType : null);
+    logicalGridField.setValue(this.field.logicalGrid);
     logicalGridField.on('propertyChange:value', event => this.field.setLogicalGrid(event.newValue));
 
     let notificationField = this.widget('NotificationField');

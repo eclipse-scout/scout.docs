@@ -7,20 +7,17 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {StaticLookupCall} from '@eclipse-scout/core';
+import {HorizontalGrid, VerticalSmartGrid} from '@eclipse-scout/core';
+import {ObjectTypeLookupCall} from '../index';
 
-export class LogicalGridLookupCall extends StaticLookupCall<string> {
-
-  constructor() {
-    super();
-  }
+export class LogicalGridLookupCall extends ObjectTypeLookupCall {
 
   protected override _data(): any[] {
     return LogicalGridLookupCall.DATA;
   }
 
   static DATA = [
-    ['scout.HorizontalGrid', 'Horizontal'],
-    ['scout.VerticalSmartGrid', 'Vertical (Smart)']
+    [HorizontalGrid, 'Horizontal'],
+    [VerticalSmartGrid, 'Vertical (Smart)']
   ];
 }

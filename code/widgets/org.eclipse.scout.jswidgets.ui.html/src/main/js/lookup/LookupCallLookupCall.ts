@@ -7,18 +7,9 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {arrays, LookupCall, LookupRow, StaticLookupCall} from '@eclipse-scout/core';
-import {EmptyLookupCall, ErroneousLookupCall, LocaleLookupCall, RainbowLookupCall, SalutationLookupCall, WorldLookupCall} from '../index';
+import {EmptyLookupCall, ErroneousLookupCall, LocaleLookupCall, ObjectTypeLookupCall, RainbowLookupCall, SalutationLookupCall, WorldLookupCall} from '../index';
 
-export class LookupCallLookupCall extends StaticLookupCall<LookupCall<any>> {
-
-  protected override _lookupRowByKey(key: LookupCall<any>): LookupRow<LookupCall<any>> {
-    let data = arrays.find(this.data, data => key instanceof data[0]);
-    if (!data) {
-      return null;
-    }
-    return this._dataToLookupRow(data);
-  }
+export class LookupCallLookupCall extends ObjectTypeLookupCall {
 
   protected override _data(): any[] {
     return [

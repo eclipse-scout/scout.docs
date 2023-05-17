@@ -37,6 +37,7 @@ export * from './common/ActionWithResultBox';
 export * from './common/ConfigurationBox';
 export * from './common/EventsTab';
 export * from './common/EventsTabModel';
+export * from './common/ObjectTypeLookupCall';
 export * from './common/FormFieldLookupCall';
 export * from './common/IconIdLookupCall';
 export * from './common/WidgetActionsBox';

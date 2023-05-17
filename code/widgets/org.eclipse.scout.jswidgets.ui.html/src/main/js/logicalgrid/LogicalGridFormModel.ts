@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {FormField, FormModel, GroupBox, SmartField, StringField, TabBox, TabItem} from '@eclipse-scout/core';
+import {FormModel, GroupBox, SmartField, StringField, TabBox, TabItem} from '@eclipse-scout/core';
 import {GridDataBox, GridDataBoxWidgetMap, GroupBoxAddFieldBox, GroupBoxAddFieldBoxWidgetMap, GroupBoxDeleteFieldBox, GroupBoxDeleteFieldBoxWidgetMap, LogicalGridLookupCall} from '../index';
 
 export default (): FormModel => ({
@@ -111,6 +111,10 @@ export default (): FormModel => ({
   }
 });
 
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
 export type LogicalGridFormWidgetMap = {
   'MainBox': GroupBox;
   'DetailBox': GroupBox;
@@ -121,8 +125,8 @@ export type LogicalGridFormWidgetMap = {
   'ConfigurationBox': TabBox;
   'PropertiesTab': TabItem;
   'PropertiesBox': GroupBox;
-  'TargetField': SmartField<FormField>;
-  'LogicalGridField': SmartField<string>;
+  'TargetField': SmartField<any>;
+  'LogicalGridField': SmartField<any>;
   'GridDataBox': GridDataBox;
   'CalculatedGridDataBox': GridDataBox;
   'ActionsTab': TabItem;

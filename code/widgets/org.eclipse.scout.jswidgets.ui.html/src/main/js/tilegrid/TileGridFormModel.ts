@@ -9,24 +9,9 @@
  */
 import {CheckBoxField, FormModel, GroupBox, LabelField, Menu, NumberField, SmartField, TabItem, TileField, TileGrid} from '@eclipse-scout/core';
 import {
-  ColorSchemeLookupCall,
-  ConfigurationBox,
-  CustomTile,
-  EventsTab,
-  EventsTabWidgetMap,
-  FormFieldActionsBox,
-  FormFieldActionsBoxWidgetMap,
-  FormFieldPropertiesBox,
-  FormFieldPropertiesBoxWidgetMap,
-  GridDataBox,
-  GridDataBoxWidgetMap,
-  LogicalGridLookupCall,
-  TileGridLayoutConfigBox,
-  TileTypeLookupCall,
-  WidgetActionsBox,
-  WidgetActionsBoxWidgetMap
+  ColorSchemeLookupCall, ConfigurationBox, CustomTile, EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap,
+  LogicalGridLookupCall, TileGridLayoutConfigBox, TileGridLayoutConfigBoxWidgetMap, TileTypeLookupCall, WidgetActionsBox, WidgetActionsBoxWidgetMap
 } from '../index';
-import {TileGridLayoutConfigBoxWidgetMap} from './TileGridLayoutConfigBoxModel';
 
 export default (): FormModel => ({
   id: 'jswidgets.TileGridForm',
@@ -273,42 +258,43 @@ export default (): FormModel => ({
   }
 });
 
-export type TileGridFormWidgetMap =
-  {
-    'MainBox': GroupBox;
-    'DetailBox': GroupBox;
-    'InsertMenu': Menu;
-    'InsertManyMenu': Menu;
-    'DeleteMenu': Menu;
-    'SelectNextMenu': Menu;
-    'SelectAllMenu': Menu;
-    'SortMenu': Menu;
-    'SortAscMenu': Menu;
-    'SortDescMenu': Menu;
-    'TileField': TileField;
-    'TileGrid': TileGrid;
-    'StatusField': LabelField;
-    'ConfigurationBox': ConfigurationBox;
-    'PropertiesTab': TabItem;
-    'PropertiesBox': GroupBox;
-    'SelectableField': CheckBoxField;
-    'MultiSelectField': CheckBoxField;
-    'ScrollableField': CheckBoxField;
-    'InvertColorsField': CheckBoxField;
-    'WithPlaceholdersField': CheckBoxField;
-    'VirtualField': CheckBoxField;
-    'TextFilterEnabledField': CheckBoxField;
-    'GridColumnCountField': NumberField;
-    'LogicalGridField': SmartField<string>;
-    'ColorSchemeField': SmartField<string>;
-    'TileTypeField': SmartField<'default' | 'simple'>;
-    'FormFieldPropertiesBox': FormFieldPropertiesBox;
-    'GridDataBox': GridDataBox;
-    'LayoutConfigBox': TileGridLayoutConfigBox;
-    'ActionsTab': TabItem;
-    'FormFieldActionsBox': FormFieldActionsBox;
-    'WidgetActionsBox': WidgetActionsBox;
-    'EventsTab': EventsTab;
-  }
-  & FormFieldPropertiesBoxWidgetMap & GridDataBoxWidgetMap & TileGridLayoutConfigBoxWidgetMap
-  & FormFieldActionsBoxWidgetMap & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
+export type TileGridFormWidgetMap = {
+  'MainBox': GroupBox;
+  'DetailBox': GroupBox;
+  'InsertMenu': Menu;
+  'InsertManyMenu': Menu;
+  'DeleteMenu': Menu;
+  'SelectNextMenu': Menu;
+  'SelectAllMenu': Menu;
+  'SortMenu': Menu;
+  'SortAscMenu': Menu;
+  'SortDescMenu': Menu;
+  'TileField': TileField;
+  'TileGrid': TileGrid;
+  'StatusField': LabelField;
+  'ConfigurationBox': ConfigurationBox;
+  'PropertiesTab': TabItem;
+  'PropertiesBox': GroupBox;
+  'SelectableField': CheckBoxField;
+  'MultiSelectField': CheckBoxField;
+  'ScrollableField': CheckBoxField;
+  'InvertColorsField': CheckBoxField;
+  'WithPlaceholdersField': CheckBoxField;
+  'VirtualField': CheckBoxField;
+  'TextFilterEnabledField': CheckBoxField;
+  'GridColumnCountField': NumberField;
+  'LogicalGridField': SmartField<any>;
+  'ColorSchemeField': SmartField<any>;
+  'TileTypeField': SmartField<any>;
+  'FormFieldPropertiesBox': FormFieldPropertiesBox;
+  'GridDataBox': GridDataBox;
+  'LayoutConfigBox': TileGridLayoutConfigBox;
+  'ActionsTab': TabItem;
+  'FormFieldActionsBox': FormFieldActionsBox;
+  'WidgetActionsBox': WidgetActionsBox;
+  'EventsTab': EventsTab;
+} & FormFieldPropertiesBoxWidgetMap & GridDataBoxWidgetMap & TileGridLayoutConfigBoxWidgetMap & FormFieldActionsBoxWidgetMap & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;

@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {CheckBoxField, GroupBox, GroupBoxBorderDecoration, GroupBoxMenuBarPosition, GroupBoxModel, MenuBarEllipsisPosition, NumberField, SmartField, StatusSeverity, StringField} from '@eclipse-scout/core';
+import {CheckBoxField, GroupBox, GroupBoxModel, NumberField, SmartField, StringField} from '@eclipse-scout/core';
 import {BorderDecorationLookupCall, IconIdLookupCall, LogicalGridLookupCall, MenuBarEllipsisPositionLookupCall, MenuBarPositionLookupCall, StatusSeverityLookupCall} from '../index';
 
 export default (): GroupBoxModel => ({
@@ -108,19 +108,23 @@ export default (): GroupBoxModel => ({
   ]
 });
 
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
 export type GroupBoxPropertiesBoxWidgetMap = {
   'ScrollableField': CheckBoxField;
   'BorderVisibleField': CheckBoxField;
-  'BorderDecorationField': SmartField<GroupBoxBorderDecoration>;
+  'BorderDecorationField': SmartField<any>;
   'ExpandableField': CheckBoxField;
   'ExpandedField': CheckBoxField;
   'ResponsiveField': CheckBoxField;
   'SubLabelField': StringField;
   'GridColumnCountField': NumberField;
-  'LogicalGridField': SmartField<string>;
-  'NotificationField': SmartField<StatusSeverity>;
-  'NotificationIconField': SmartField<string>;
+  'LogicalGridField': SmartField<any>;
+  'NotificationField': SmartField<any>;
+  'NotificationIconField': SmartField<any>;
   'MenuBarVisibleField': CheckBoxField;
-  'MenuBarPositionField': SmartField<GroupBoxMenuBarPosition>;
-  'MenuBarEllipsisPositionField': SmartField<MenuBarEllipsisPosition>;
+  'MenuBarPositionField': SmartField<any>;
+  'MenuBarEllipsisPositionField': SmartField<any>;
 };
