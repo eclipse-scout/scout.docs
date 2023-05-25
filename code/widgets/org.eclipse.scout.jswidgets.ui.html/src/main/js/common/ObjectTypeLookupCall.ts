@@ -12,7 +12,8 @@ import {arrays, LookupRow, StaticLookupCall} from '@eclipse-scout/core';
 export class ObjectTypeLookupCall<TKey extends object = object> extends StaticLookupCall<object> {
 
   protected override _lookupRowByKey(key: object): LookupRow<object> {
-    let data = arrays.find(this.data, data => key instanceof data[0]);
+    // Key maybe a class or an instance of a class
+    let data = arrays.find(this.data, data => key === data[0] || key?.constructor === data[0]);
     if (!data) {
       return null;
     }
