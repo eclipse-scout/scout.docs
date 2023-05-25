@@ -23,6 +23,10 @@
   </listener>
 
   <listener>
+    <listener-class>org.eclipse.scout.rt.rest.websocket.WebsocketInitializer</listener-class>
+  </listener>
+
+  <listener>
     <listener-class>org.eclipse.scout.rt.server.commons.HttpSessionMutex</listener-class>
   </listener>
 

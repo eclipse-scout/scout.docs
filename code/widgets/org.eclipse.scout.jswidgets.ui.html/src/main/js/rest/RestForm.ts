@@ -35,6 +35,8 @@ export class RestForm extends Form {
     deleteButton.on('click', this._onDeleteButtonClick.bind(this));
     let failButton = this.widget('FailButton');
     failButton.on('click', this._onFailButtonClick.bind(this));
+    let websocketButton = this.widget('WebsocketButton');
+    websocketButton.on('click', this._onWebsocketButtonClick.bind(this));
   }
 
   protected _addLogEntry(message: string) {
@@ -78,6 +80,18 @@ export class RestForm extends Form {
     ajax.get('api/example/error/' + exceptionId)
       .then(this._onSuccess.bind(this))
       .catch(this._onFail.bind(this));
+  }
+
+  protected _onWebsocketButtonClick(event: Event<Button>) {
+    const socket = new WebSocket('ws://localhost:8084/ws/cgu');
+
+    socket.addEventListener('open', event => {
+      socket.send('Hello Server!');
+    });
+
+    socket.addEventListener('message', event => {
+      this._addLogEntry(event.data);
+    });
   }
 
   protected _onSuccess(result: Response, textStatus: string, jqXHR: JQuery.jqXHR) {

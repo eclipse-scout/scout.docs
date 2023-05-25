@@ -91,6 +91,12 @@ export default (): FormModel => ({
             ]
           },
           {
+            id: 'WebsocketButton',
+            objectType: Button,
+            label: 'Init Websocket',
+            processButton: false
+          },
+          {
             id: 'LogField',
             objectType: StringField,
             label: 'Log',
@@ -123,5 +129,6 @@ export type RestFormWidgetMap = {
   'ErrorBox': GroupBox;
   'ExceptionTypeField': SmartField<any>;
   'FailButton': Button;
+  'WebsocketButton': Button;
   'LogField': StringField;
 };
