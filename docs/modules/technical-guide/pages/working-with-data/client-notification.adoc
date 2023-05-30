@@ -69,11 +69,6 @@ image::common:cn_multiple_servers.png[]
 
 In order to deal with multiple ui-server nodes, the server holds a single notifications queue per ui-server node.
 
-In these queues only the relevant notifications need to be kept:
-If a client notification is addressed to a session or user, that does not exist on a ui-server node, it is not added to the queue.
-
-Sessions and corresponding users are registered on the server upon creation (and de-registered after destruction).
-
 == Publishing
 
 [source,java,indent=0]
