@@ -91,10 +91,10 @@ To open a form exclusively, use `createFormExclusive` on the `Desktop` and open 
 
 ==== Error handling for save and load
 
-The load, postLoad and save operations of a Scout JS form include automatic error handling now.
+The `load`, `postLoad` and `save` operations of a Scout JS form include automatic error handling now.
 Custom logic to handle errors (e.g. from REST calls) are in most cases no longer necessary and can therefore be removed.
 
-Refer to the migration guide on how to customize the new default error handling in case you need some special behavior.
+Refer to the xref:migration:migration-guide.adoc#form-error-handling[Migration Guide] on how to customize the new default error handling in case you need some special behavior.
 
 === MenuTypes
 
@@ -113,6 +113,22 @@ Hence, the user couldn't see that the current value is invalid and a new value s
 This change puts a warning status on the SmartField if a key-lookup doesn't return a value.
 
 Because of the potential consequences, this change was implemented for ScoutJS only (not for Scout Classic).
+
+[#busy-handling]
+=== Busy handling
+
+The busy handling has been simplified for Scout JS.
+A new class `BusySupport` has been introduced which should be used instead of directly creating a `BusyIndicator`.
+Features:
+
+* multiple nested busy calls possible
+* cancellation callbacks
+* delayed rendering support
+
+It can be accessed using `Desktop.setBusy` (the Desktop is available on the Session) or `Form.setBusy`.
+Typically, it should not be necessary to create own `BusySupport` instances.
+
+In case you created custom busy handling, refer to the xref:migration:migration-guide.adoc#busy-handling[Migration Guide] on how to migrate.
 
 == SDK
 

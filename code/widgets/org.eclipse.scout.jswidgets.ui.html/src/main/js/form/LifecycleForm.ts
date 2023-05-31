@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {AppLinkActionEvent, DefaultStatus, Form, FormField, FormModel, GroupBox, InitModelOf, LabelField, models, objects, SmartField, Status, StatusSeverity} from '@eclipse-scout/core';
+import {ajax, AppLinkActionEvent, DefaultStatus, Form, FormField, FormModel, GroupBox, InitModelOf, LabelField, models, objects, SmartField, Status, StatusSeverity} from '@eclipse-scout/core';
 import $ from 'jquery';
 import LifecycleFormModel from './LifecycleFormModel';
 import {FormFieldLookupCall, LifecycleFormWidgetMap} from '../index';
@@ -19,9 +19,11 @@ export class LifecycleForm extends Form {
   addErrorStatusWithSeverityField: LabelField;
   statusSeverityField: SmartField<StatusSeverity>;
   targetField: SmartField<FormField>;
+  withSlowBackendCall: boolean;
 
   constructor() {
     super();
+    this.withSlowBackendCall = false;
   }
 
   protected override _jsonModel(): FormModel {
@@ -81,8 +83,18 @@ export class LifecycleForm extends Form {
     };
   }
 
+  protected override _load(): JQuery.Promise<object> {
+    if (this.withSlowBackendCall) {
+      return ajax.get('api/example/slowGet');
+    }
+    return super._load();
+  }
+
   protected override _save(data: LifecycleFormData): JQuery.Promise<void> {
     if (!this.widget('ExceptionField').value) {
+      if (this.withSlowBackendCall) {
+        return ajax.get('api/example/slowGet');
+      }
       return super._save(data);
     }
     // Simulate a failing asynchronous save operation (e.g. an ajax call)

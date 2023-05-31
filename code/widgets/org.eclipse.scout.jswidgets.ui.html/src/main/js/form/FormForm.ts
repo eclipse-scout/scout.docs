@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {Button, Event, Form, FormModel, InitModelOf, models, scout} from '@eclipse-scout/core';
+import {ajax, Button, Event, Form, FormModel, InitModelOf, models, scout} from '@eclipse-scout/core';
 import {DisplayParentLookupCall, FormFormWidgetMap, FormPropertiesBox, LifecycleForm, LifecycleFormData} from '../index';
 import FormFormModel from './FormFormModel';
 
@@ -18,6 +18,7 @@ export class FormForm extends Form {
   currentFormPropertiesBox: FormPropertiesBox;
   lifecycleData: LifecycleFormData;
   closeMenuVisible: boolean;
+  withSlowBackendCall: boolean;
   propertiesBox: FormPropertiesBox;
 
   protected _notificationBadgeText: string;
@@ -28,6 +29,7 @@ export class FormForm extends Form {
     this.currentFormPropertiesBox = null;
     this.lifecycleData = {};
     this.closeMenuVisible = false;
+    this.withSlowBackendCall = false;
     this._notificationBadgeText = null;
   }
 
@@ -116,6 +118,13 @@ export class FormForm extends Form {
     form.open();
   }
 
+  protected override _load(): JQuery.Promise<object> {
+    if (this.withSlowBackendCall) {
+      return ajax.get('api/example/slowGet');
+    }
+    return super._load();
+  }
+
   lifecycleDataToString(data: LifecycleFormData) {
     return 'Name: ' + data.name + ', Birthday: ' + data.birthday;
   }
@@ -137,7 +146,8 @@ export class FormForm extends Form {
       movable: this.propertiesBox.widget('MovableField').value,
       resizable: this.propertiesBox.widget('ResizableField').value,
       maximized: this.propertiesBox.widget('MaximizedField').value,
-      saveNeededVisible: this.propertiesBox.widget('SaveNeededVisibleField').value
+      saveNeededVisible: this.propertiesBox.widget('SaveNeededVisibleField').value,
+      withSlowBackendCall: this.propertiesBox.widget('WithSlowBackendCall').value
     };
   }
 }

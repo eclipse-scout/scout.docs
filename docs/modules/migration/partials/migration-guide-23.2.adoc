@@ -196,6 +196,7 @@ The code to display a message box when the Form validation failed has been moved
 * `Lifecycle._showStatusMessageBox` to `Form._showFormInvalidMessageBox`
 * `Lifecycle._createStatusMessageBox` to `Form._createStatusMessageBox`
 
+[#form-error-handling]
 ==== Form Error Handling
 
 The load, postLoad and save operations of a Scout JS Form include automatic error handling now.
@@ -252,3 +253,13 @@ Until now, a value change (by the user or by using `setValue`) set this property
 This has been changed so that a value change does not change the property anymore, it can only be modified using `touch()` resp. `markAsSaved()`. This has the benefit that `touched` can be completely controlled by the developer.
 
 In order to check if a value has been changed or a field touched you can use the property `saveNeeded`.
+
+[#busy-handling]
+==== Busy handling
+
+The busy handling has been simplified for Scout JS (see xref:releasenotes:release-notes.adoc#busy-handling[Release Notes]).
+
+The `Form.load` and `Form.save` methods now automatically include a busy indicator.
+Custom busy indicators for these two operations (e.g. when performing a Rest call) can therefore be removed.
+
+The method `Session.setBusy` was moved to `Desktop.setBusy`. So instead of calling `session.setBusy(...)` use `session.desktop.setBusy(...)`.

@@ -62,6 +62,12 @@ export default (): GroupBoxModel => ({
       label: 'Exclusive Key'
     },
     {
+      id: 'WithSlowBackendCall',
+      objectType: CheckBoxField,
+      label: 'With slow backend call',
+      labelVisible: false
+    },
+    {
       id: 'AskIfNeedSaveField',
       objectType: CheckBoxField,
       label: 'Ask If Need Save',
@@ -133,6 +139,7 @@ export type FormPropertiesBoxWidgetMap = {
   'DisplayViewIdField': SmartField<any>;
   'DisplayParentField': SmartField<any>;
   'ExclusiveKeyField': StringField;
+  'WithSlowBackendCall': CheckBoxField;
   'AskIfNeedSaveField': CheckBoxField;
   'CacheBoundsField': CheckBoxField;
   'ClosableField': CheckBoxField;

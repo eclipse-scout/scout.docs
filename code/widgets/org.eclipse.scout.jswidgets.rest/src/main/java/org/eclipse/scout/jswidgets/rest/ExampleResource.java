@@ -9,6 +9,8 @@
  */
 package org.eclipse.scout.jswidgets.rest;
 
+import java.util.concurrent.TimeUnit;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -28,6 +30,7 @@ import org.eclipse.scout.rt.platform.exception.RemoteSystemUnavailableException;
 import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.status.IStatus;
 import org.eclipse.scout.rt.platform.text.TEXTS;
+import org.eclipse.scout.rt.platform.util.SleepUtil;
 import org.eclipse.scout.rt.platform.util.concurrent.ThreadInterruptedError;
 import org.eclipse.scout.rt.rest.IRestResource;
 import org.eclipse.scout.rt.rest.RestApplication;
@@ -68,6 +71,15 @@ public class ExampleResource implements IRestResource {
   @Produces(MediaType.APPLICATION_JSON)
   public Response delete() {
     return new Response("Hi client, thank you for your DELETE request.");
+  }
+
+  @GET
+  @Produces(MediaType.APPLICATION_JSON)
+  @Path("slowGet")
+  public Response slowGet() {
+    long secondsToWait = 7;
+    SleepUtil.sleepElseLog(secondsToWait, TimeUnit.SECONDS);
+    return new Response("Waited for " + secondsToWait + " seconds.");
   }
 
   @GET
