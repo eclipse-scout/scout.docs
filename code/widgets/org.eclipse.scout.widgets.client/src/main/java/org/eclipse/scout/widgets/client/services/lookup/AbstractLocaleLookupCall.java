@@ -53,7 +53,7 @@ public abstract class AbstractLocaleLookupCall extends LocalLookupCall<Locale> {
       String displayName = locale.getDisplayName(NlsLocale.get());
       if (StringUtility.hasText(displayName)) {
         LookupRow<Locale> row = new LookupRow<>(locale, displayName);
-        LocaleTableRowData bean = new LocaleTableRowData();
+        LocaleTableRowData bean = createTableRowData(locale);
         bean.setCountry(locale.getCountry());
         bean.setLanguage(locale.getLanguage());
         row.withAdditionalTableRowData(bean);
@@ -64,6 +64,10 @@ public abstract class AbstractLocaleLookupCall extends LocalLookupCall<Locale> {
       }
     }
     return rows;
+  }
+
+  protected LocaleTableRowData createTableRowData(Locale locale) {
+    return new LocaleTableRowData();
   }
 
   protected abstract Locale[] availableLocales();
