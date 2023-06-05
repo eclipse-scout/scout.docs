@@ -22,6 +22,8 @@ import javax.ws.rs.core.MediaType;
 
 import org.eclipse.scout.rt.dataobject.exception.AccessForbiddenException;
 import org.eclipse.scout.rt.dataobject.exception.ResourceNotFoundException;
+import org.eclipse.scout.rt.platform.BEANS;
+import org.eclipse.scout.rt.platform.context.RunContext;
 import org.eclipse.scout.rt.platform.exception.ProcessingException;
 import org.eclipse.scout.rt.platform.exception.ProcessingStatus;
 import org.eclipse.scout.rt.platform.exception.RemoteSystemUnavailableException;
@@ -31,6 +33,9 @@ import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.concurrent.ThreadInterruptedError;
 import org.eclipse.scout.rt.rest.IRestResource;
 import org.eclipse.scout.rt.rest.RestApplication;
+import org.eclipse.scout.rt.security.IAccessControlService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
 
@@ -43,11 +48,14 @@ import com.fasterxml.jackson.databind.JsonMappingException;
  */
 @Path("example")
 public class ExampleResource implements IRestResource {
+  private static final Logger LOG = LoggerFactory.getLogger(ExampleResource.class);
 
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   public Response getStatus() {
-    return new Response("Hi client, thank you for your GET request.");
+    String userId = BEANS.get(IAccessControlService.class).getUserIdOfCurrentSubject();
+    LOG.info("New get request for /example. RunContext: {}.", RunContext.CURRENT.get());
+    return new Response("Hi " + userId + ", thank you for your GET request.");
   }
 
   @POST

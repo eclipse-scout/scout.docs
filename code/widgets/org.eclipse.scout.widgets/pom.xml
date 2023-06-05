@@ -32,13 +32,13 @@
 
   <modules>
     <!-- Widgets application (core) -->
-    <module>../org.eclipse.scout.widgets.client</module>
-    <module>../org.eclipse.scout.widgets.shared</module>
-    <module>../org.eclipse.scout.widgets.ui.html</module>
-    <module>../org.eclipse.scout.widgets.ui.html.app</module>
-    <module>../org.eclipse.scout.widgets.ui.html.app.dev</module>
-    <module>../org.eclipse.scout.widgets.ui.html.app.war</module>
-    <module>../org.eclipse.scout.widgets.ui.html.app.selenium</module>
+    <!--    <module>../org.eclipse.scout.widgets.client</module>-->
+    <!--    <module>../org.eclipse.scout.widgets.shared</module>-->
+    <!--    <module>../org.eclipse.scout.widgets.ui.html</module>-->
+    <!--    <module>../org.eclipse.scout.widgets.ui.html.app</module>-->
+    <!--    <module>../org.eclipse.scout.widgets.ui.html.app.dev</module>-->
+    <!--    <module>../org.eclipse.scout.widgets.ui.html.app.war</module>-->
+    <!--    <module>../org.eclipse.scout.widgets.ui.html.app.selenium</module>-->
 
     <!-- Scout JS widgets -->
     <module>../org.eclipse.scout.jswidgets.rest</module>
@@ -48,8 +48,8 @@
     <module>../org.eclipse.scout.jswidgets.ui.html.app.war</module>
 
     <!-- Components for custom widgets -->
-    <module>../org.eclipse.scout.widgets.heatmap.client</module>
-    <module>../org.eclipse.scout.widgets.heatmap.ui.html</module>
+    <!--    <module>../org.eclipse.scout.widgets.heatmap.client</module>-->
+    <!--    <module>../org.eclipse.scout.widgets.heatmap.ui.html</module>-->
   </modules>
 
   <dependencyManagement>

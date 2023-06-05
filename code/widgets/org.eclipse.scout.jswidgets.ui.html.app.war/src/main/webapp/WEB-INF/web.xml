@@ -23,6 +23,10 @@
   </listener>
 
   <listener>
+    <listener-class>org.eclipse.scout.rt.rest.websocket.WebsocketInitializer</listener-class>
+  </listener>
+
+  <listener>
     <listener-class>org.eclipse.scout.rt.server.commons.HttpSessionMutex</listener-class>
   </listener>
 
@@ -51,6 +55,33 @@
     <servlet-name>apiServlet</servlet-name>
     <url-pattern>/api/*</url-pattern>
   </servlet-mapping>
+
+  <filter>
+    <filter-name>AuthFilter</filter-name>
+    <filter-class>org.eclipse.scout.jswidgets.ui.html.app.AuthFilter</filter-class>
+    <init-param>
+      <param-name>filter-exclude</param-name>
+      <param-value>
+        /favicon/*
+        /fonts/*
+        /logo.svg
+        /background.jpg
+        /*login*.js
+        /*logout*.js
+        /*spnego*.js
+        /*jswidgets-theme*.css
+        /*login*.js.map
+        /*logout*.js.map
+        /*jswidgets-theme*.css.map
+        /csp-report
+      </param-value>
+    </init-param>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>AuthFilter</filter-name>
+    <servlet-name>apiServlet</servlet-name>
+  </filter-mapping>
 
   <filter>
     <filter-name>GzipServletFilter</filter-name>
