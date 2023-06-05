@@ -54,6 +54,7 @@ import org.eclipse.scout.rt.platform.util.SleepUtil;
 import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
+import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 import org.eclipse.scout.widgets.client.services.lookup.AbstractLocaleLookupCall;
 import org.eclipse.scout.widgets.client.services.lookup.AbstractLocaleLookupCall.LocaleTableRowData;
@@ -63,6 +64,7 @@ import org.eclipse.scout.widgets.client.services.lookup.RemoteLocaleLookupCall;
 import org.eclipse.scout.widgets.client.services.lookup.UserContentListLookupCall;
 import org.eclipse.scout.widgets.client.services.lookup.UserContentTreeLookupCall;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
+import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.CustomLocaleLookupCall.CustomLocaleTableRowData;
 import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ConfigurationBox;
 import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ConfigurationBox.BrowseAutoExpandAllField;
@@ -97,6 +99,7 @@ import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.Selenium
 import org.eclipse.scout.widgets.client.ui.forms.menu.AbstractSeleniumTestMenu;
 import org.eclipse.scout.widgets.client.ui.forms.menu.AbstractToggleMenu;
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractUserTreeField;
+import org.eclipse.scout.widgets.shared.Icons;
 import org.eclipse.scout.widgets.shared.services.code.ColorsCodeType;
 import org.eclipse.scout.widgets.shared.services.code.EventTypeCodeType;
 import org.eclipse.scout.widgets.shared.services.code.IndustryICBCodeType;
@@ -107,6 +110,40 @@ import org.eclipse.scout.widgets.shared.services.code.IndustryICBCodeType.ICB900
 public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm {
 
   private static final Locale ALBANIAN = new Locale("sq");
+
+  @ClassId("06e88da7-1810-4c58-862e-ddcf6e7a1877")
+  public static class CustomLocaleLookupCall extends LocaleLookupCall {
+    private static final long serialVersionUID = -4113831958135288489L;
+
+    @Override
+    protected LocaleTableRowData createTableRowData(Locale locale) {
+      return new CustomLocaleTableRowData();
+    }
+
+    protected static class CustomLocaleTableRowData extends LocaleTableRowData {
+      private static final long serialVersionUID = -3041359870377383920L;
+      private String iconId;
+      private boolean hasIso3Country;
+
+      public String getIconId() {
+        return iconId;
+      }
+
+      public CustomLocaleTableRowData withIconId(String iconId) {
+        this.iconId = iconId;
+        return this;
+      }
+
+      public boolean getHasIso3Country() {
+        return hasIso3Country;
+      }
+
+      public CustomLocaleTableRowData withHasIso3Country(boolean hasIso3Country) {
+        this.hasIso3Country = hasIso3Country;
+        return this;
+      }
+    }
+  }
 
   private boolean m_requestInput = false;
 
@@ -290,7 +327,8 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
 
           @Override
           protected Class<? extends ILookupCall<Locale>> getConfiguredLookupCall() {
-            return (Class<? extends ILookupCall<Locale>>) /*Remote*/ LocaleLookupCall.class;
+            /*Remote*/
+            return LocaleLookupCall.class;
           }
 
           @Override
@@ -437,6 +475,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         @Order(55)
         @ClassId("75eed6c0-aee7-4632-80ec-e4768c9c4bdb")
         public class SmartFieldWithCustomTableField extends AbstractSmartField<Locale> {
+
           @Override
           protected String getConfiguredLabel() {
             return TEXTS.get("CustomTable");
@@ -444,7 +483,26 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
 
           @Override
           protected Class<? extends ILookupCall<Locale>> getConfiguredLookupCall() {
-            return (Class<? extends ILookupCall<Locale>>) /*Remote*/LocaleLookupCall.class;
+            return CustomLocaleLookupCall.class;
+          }
+
+          @Override
+          protected void execFilterLookupResult(ILookupCall<Locale> call, List<ILookupRow<Locale>> result) {
+            super.execFilterLookupResult(call, result);
+            String[] icons = {
+                Icons.AngleLeft,
+                Icons.AngleDown,
+                Icons.AngleRight,
+                Icons.AngleUp,
+                null,
+                ""
+            };
+            int count = 0;
+            for (ILookupRow<Locale> lookupRow : result) {
+              ((CustomLocaleTableRowData) lookupRow.getAdditionalTableRowData())
+                  .withIconId(icons[count++ % icons.length])
+                  .withHasIso3Country(StringUtility.hasText(((CustomLocaleTableRowData) lookupRow.getAdditionalTableRowData()).getCountry()));
+            }
           }
 
           @Override
@@ -452,7 +510,9 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
             return new ColumnDescriptor[]{
                 new ColumnDescriptor(null, "Text", 200),
                 new ColumnDescriptor(LocaleTableRowData.country, TEXTS.get("Country"), 90),
-                new ColumnDescriptor(LocaleTableRowData.language, TEXTS.get("Language"), 90)
+                new ColumnDescriptor(LocaleTableRowData.language, TEXTS.get("Language"), 90),
+                new ColumnDescriptor("iconId").withHeaderIconId(Icons.List).withObjectType("IconColumn"),
+                new ColumnDescriptor("hasIso3Country").withHeaderIconId(Icons.World).withObjectType("BooleanColumn")
             };
           }
         }
@@ -705,7 +765,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
 
         @Override
         protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
-          return (Class<? extends ILookupCall<String>>) UserContentListLookupCall.class;
+          return UserContentListLookupCall.class;
         }
 
         @Override
@@ -892,7 +952,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
 
         @Override
         protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
-          return (Class<? extends ILookupCall<String>>) UserContentTreeLookupCall.class;
+          return UserContentTreeLookupCall.class;
         }
       }
 
