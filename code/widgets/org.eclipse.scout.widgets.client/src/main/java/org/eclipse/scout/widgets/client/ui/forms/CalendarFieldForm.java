@@ -365,7 +365,7 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
 
           @Override
           protected void execAction() {
-            List<ICalendarDescriptor> calendars = getCalendars();
+            List<ICalendarDescriptor> calendars = new ArrayList<>(getCalendars());
             calendars.add(new CalendarDescriptor("Dynamic Calendar #" + new Random().nextInt(1000)));
             setCalendars(calendars);
           }
