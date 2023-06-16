@@ -13,6 +13,7 @@ import java.util.List;
 
 import org.eclipse.scout.rt.client.ui.IDisplayParent;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
+import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.datefield.AbstractDateTimeField;
@@ -86,6 +87,10 @@ public class CalendarComponentForm extends AbstractForm {
     return getFieldByClass(DescriptionField.class);
   }
 
+  public MainBox.FullDayField getFullDayField() {
+    return getFieldByClass(MainBox.FullDayField.class);
+  }
+
   @Order(1000)
   @ClassId("7a8b3206-3192-466b-9418-6c795625ceb4")
   public class MainBox extends AbstractGroupBox {
@@ -142,6 +147,21 @@ public class CalendarComponentForm extends AbstractForm {
       }
     }
 
+    @Order(2500)
+    @ClassId("c6b54e22-65c7-4451-8f10-db674115392a")
+    public class FullDayField extends AbstractBooleanField {
+      @Override
+      protected String getConfiguredLabel() {
+        return "Full Day";
+      }
+
+      @Override
+      protected void execChangedValue() {
+        getStartDateField().setHasTime(!getValue());
+        getEndDateField().setHasTime(!getValue());
+      }
+    }
+
     @Order(3000)
     @ClassId("05e4cb65-46ca-4582-8d31-2fe447f1bc0f")
     public class LocationField extends AbstractStringField {
@@ -186,7 +206,12 @@ public class CalendarComponentForm extends AbstractForm {
 
       @Override
       protected int getConfiguredGridH() {
-        return 3;
+        return 5;
+      }
+
+      @Override
+      protected byte getConfiguredLabelPosition() {
+        return LABEL_POSITION_ON_FIELD;
       }
     }
 
