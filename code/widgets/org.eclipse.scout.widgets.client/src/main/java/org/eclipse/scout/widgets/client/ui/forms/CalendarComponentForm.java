@@ -9,15 +9,22 @@
  */
 package org.eclipse.scout.widgets.client.ui.forms;
 
+import java.util.List;
+
 import org.eclipse.scout.rt.client.ui.IDisplayParent;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.datefield.AbstractDateTimeField;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
+import org.eclipse.scout.rt.platform.text.TEXTS;
+import org.eclipse.scout.rt.shared.services.common.calendar.ICalendarDescriptor;
+import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
+import org.eclipse.scout.widgets.client.services.lookup.CalendarsLookupCall;
 import org.eclipse.scout.widgets.client.ui.forms.CalendarComponentForm.MainBox.DescriptionField;
 import org.eclipse.scout.widgets.client.ui.forms.CalendarComponentForm.MainBox.EndDateField;
 import org.eclipse.scout.widgets.client.ui.forms.CalendarComponentForm.MainBox.LocationField;
@@ -27,7 +34,17 @@ import org.eclipse.scout.widgets.client.ui.forms.CalendarComponentForm.MainBox.S
 @ClassId("09172d29-c400-4483-a94f-8e6c1a45f07e")
 public class CalendarComponentForm extends AbstractForm {
 
+  private List<ICalendarDescriptor> m_calendars;
+
   public CalendarComponentForm() {
+  }
+
+  public List<ICalendarDescriptor> getCalendars() {
+    return m_calendars;
+  }
+
+  public void setCalendars(List<ICalendarDescriptor> calendars) {
+    m_calendars = calendars;
   }
 
   @Override
@@ -43,6 +60,10 @@ public class CalendarComponentForm extends AbstractForm {
   @Override
   protected int getConfiguredModalityHint() {
     return MODALITY_HINT_MODELESS;
+  }
+
+  public MainBox.CalendarField getCalendarField() {
+    return getFieldByClass(MainBox.CalendarField.class);
   }
 
   public SubjectField getSubjectField() {
@@ -127,6 +148,26 @@ public class CalendarComponentForm extends AbstractForm {
       @Override
       protected String getConfiguredLabel() {
         return "Location";
+      }
+    }
+
+    @Order(3500)
+    @ClassId("db5e6404-df17-4c97-92ec-5cd944d6cb4b")
+    public class CalendarField extends AbstractSmartField<ICalendarDescriptor> {
+      @Override
+      protected String getConfiguredLabel() {
+        return TEXTS.get("Calendar");
+      }
+
+      @Override
+      protected void execPrepareLookup(ILookupCall<ICalendarDescriptor> call) {
+        CalendarsLookupCall lookupCall = ((CalendarsLookupCall) call);
+        lookupCall.addCalendars(getCalendars());
+      }
+
+      @Override
+      protected Class<? extends ILookupCall<ICalendarDescriptor>> getConfiguredLookupCall() {
+        return CalendarsLookupCall.class;
       }
     }
 
