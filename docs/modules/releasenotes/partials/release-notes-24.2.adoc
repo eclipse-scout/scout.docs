@@ -53,3 +53,43 @@ If you just want to play around with them without looking at the source code, yo
 
 This release introduces a mechanism to add signatures to `IId` that are e.g. sent to the browser or provided by a REST endpoint.
 For more information see xref:technical-guide:common-concepts/security.adoc#iid-signature[IId signature].
+
+[[multiple-calendars]]
+== Calendar Widget: Support for Multiple Calendars
+
+The calendar widget is now capable of handling multiple calendar resources. In the left sidebar of the calendar appears a widget, which allows choosing the current visible resources.
+
+By using a `CalendarResourceDo` object, new resources can be defined and added to the widget. These are the most important properties of the DataObject:
+
+[%header,cols="1,1,3"]
+|===
+|Property name
+|Type
+|Description
+
+|resourceId
+|UUID (String)
+|The unique identifier of a resource
+
+|name
+|String
+|The display name of the resource
+
+|parentId
+|UUID (String)
+|A resource can be a member of a resource group. If so, this property references the UUID of the resource group. A resource group is a normal `CalendarResourceDo` object.
+
+|visible
+|Boolean
+|Indicates, if the resource is currently visible. This property changes when the user shows/hides the resource in the sidebar.
+
+|selectable
+|Boolean
+|Indicates, if a range selection on this resource can be performed in the day view.
+|===
+
+A `CalendarResourceDo` can be added to the calendar by using `ICalendar#setResources` or `AbstractCalendar#getConfiguredResources`.
+
+A calendar item can be assigned to a resource by referencing the resource by its ID using `ICalendarItem#setResourceId`.
+
+When a CalendarItemProvider only produces items for one specific calendar, the method `AbstractCalendarItemProvider#getConfiguredAssociatedResource` can be overridden. All items produced by it are automatically assigned to the specified resource.
