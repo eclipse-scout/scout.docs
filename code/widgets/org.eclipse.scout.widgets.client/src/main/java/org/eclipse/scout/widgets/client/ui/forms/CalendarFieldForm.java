@@ -332,7 +332,8 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
               String cssClass = "calendar-appointment";
               Date start = form.getStartDateField().getValue();
               Date end = form.getEndDateField().getValue();
-              ICalendarAppointment calendarAppointment = new CalendarAppointment(0L, 0L, start, end, false, null, form.getSubjectField().getValue(), null, cssClass);
+              boolean fullDay = form.getFullDayField().getValue();
+              ICalendarAppointment calendarAppointment = new CalendarAppointment(0L, 0L, start, end, fullDay, null, form.getSubjectField().getValue(), null, cssClass);
               calendarAppointment.setSubjectLabel("Appointment");
               if (form.getLocationField().getValue() != null) {
                 calendarAppointment.getDescriptionElements().add(BEANS.get(CalendarItemDescriptionElement.class).withText(form.getLocationField().getValue()).withIconId(Icons.World));
