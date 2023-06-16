@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -9,25 +9,44 @@
  */
 package org.eclipse.scout.widgets.client.ui.forms;
 
+import java.util.List;
+
 import org.eclipse.scout.rt.client.ui.IDisplayParent;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
+import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.datefield.AbstractDateTimeField;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
+import org.eclipse.scout.rt.platform.text.TEXTS;
+import org.eclipse.scout.rt.shared.services.common.calendar.CalendarResourceDo;
+import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
+import org.eclipse.scout.widgets.client.services.lookup.CalendarResourceLookupCall;
 import org.eclipse.scout.widgets.client.ui.forms.CalendarComponentForm.MainBox.DescriptionField;
 import org.eclipse.scout.widgets.client.ui.forms.CalendarComponentForm.MainBox.EndDateField;
 import org.eclipse.scout.widgets.client.ui.forms.CalendarComponentForm.MainBox.LocationField;
+import org.eclipse.scout.widgets.client.ui.forms.CalendarComponentForm.MainBox.ResourceField;
 import org.eclipse.scout.widgets.client.ui.forms.CalendarComponentForm.MainBox.StartDateField;
 import org.eclipse.scout.widgets.client.ui.forms.CalendarComponentForm.MainBox.SubjectField;
 
 @ClassId("09172d29-c400-4483-a94f-8e6c1a45f07e")
 public class CalendarComponentForm extends AbstractForm {
 
+  private List<CalendarResourceDo> m_calendars;
+
   public CalendarComponentForm() {
+  }
+
+  public List<CalendarResourceDo> getCalendars() {
+    return m_calendars;
+  }
+
+  public void setCalendars(List<CalendarResourceDo> calendars) {
+    m_calendars = calendars;
   }
 
   @Override
@@ -43,6 +62,10 @@ public class CalendarComponentForm extends AbstractForm {
   @Override
   protected int getConfiguredModalityHint() {
     return MODALITY_HINT_MODELESS;
+  }
+
+  public ResourceField getResourceField() {
+    return getFieldByClass(ResourceField.class);
   }
 
   public SubjectField getSubjectField() {
@@ -63,6 +86,10 @@ public class CalendarComponentForm extends AbstractForm {
 
   public DescriptionField getDescriptionField() {
     return getFieldByClass(DescriptionField.class);
+  }
+
+  public MainBox.FullDayField getFullDayField() {
+    return getFieldByClass(MainBox.FullDayField.class);
   }
 
   @Order(1000)
@@ -121,12 +148,47 @@ public class CalendarComponentForm extends AbstractForm {
       }
     }
 
+    @Order(2500)
+    @ClassId("c6b54e22-65c7-4451-8f10-db674115392a")
+    public class FullDayField extends AbstractBooleanField {
+      @Override
+      protected String getConfiguredLabel() {
+        return "Full Day";
+      }
+
+      @Override
+      protected void execChangedValue() {
+        getStartDateField().setHasTime(!getValue());
+        getEndDateField().setHasTime(!getValue());
+      }
+    }
+
     @Order(3000)
     @ClassId("05e4cb65-46ca-4582-8d31-2fe447f1bc0f")
     public class LocationField extends AbstractStringField {
       @Override
       protected String getConfiguredLabel() {
         return "Location";
+      }
+    }
+
+    @Order(3500)
+    @ClassId("db5e6404-df17-4c97-92ec-5cd944d6cb4b")
+    public class ResourceField extends AbstractSmartField<CalendarResourceDo> {
+      @Override
+      protected String getConfiguredLabel() {
+        return TEXTS.get("Calendar");
+      }
+
+      @Override
+      protected void execPrepareLookup(ILookupCall<CalendarResourceDo> call) {
+        CalendarResourceLookupCall lookupCall = ((CalendarResourceLookupCall) call);
+        lookupCall.addCalendars(getCalendars());
+      }
+
+      @Override
+      protected Class<? extends ILookupCall<CalendarResourceDo>> getConfiguredLookupCall() {
+        return CalendarResourceLookupCall.class;
       }
     }
 
@@ -145,7 +207,12 @@ public class CalendarComponentForm extends AbstractForm {
 
       @Override
       protected int getConfiguredGridH() {
-        return 3;
+        return 5;
+      }
+
+      @Override
+      protected byte getConfiguredLabelPosition() {
+        return LABEL_POSITION_ON_FIELD;
       }
     }
 

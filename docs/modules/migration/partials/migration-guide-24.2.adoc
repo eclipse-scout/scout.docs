@@ -146,3 +146,9 @@ return id instanceof UnknownId ? null : id;
 The two constructors of `BasicCache` not supporting the label supplier were removed.
 As replacement, use the constructor including label supplier as second argument.
 The label supplier can be retrieved via `CacheBuilder#getLabelSupplier()`.
+
+== Calendar Widget: Support for Multiple Calendars
+
+The calendar widget is now capable of handling multiple calendars. See xref:releasenotes:release-notes.adoc#multiple-calendars[multiple calendar support] in the release notes for details.
+
+In most cases no changes have to be done. Some minor API changes have been made in the TypeScript part of the widget (Calendar.ts).
