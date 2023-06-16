@@ -12,6 +12,7 @@ package org.eclipse.scout.widgets.client.ui.forms;
 import static java.util.Calendar.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -54,6 +55,12 @@ import org.eclipse.scout.widgets.shared.Icons;
 @Order(8200)
 @ClassId("0d17b2a7-99c6-4de4-b1fa-8e29a9482480")
 public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleForm {
+
+  private static final List<String> CALENDAR_COLORS = new ArrayList<>(List.of(
+      "calendar-appointment-orange",
+      "calendar-appointment-green",
+      "calendar-appointment-blue",
+      "calendar-appointment-red"));
 
   @Override
   protected boolean getConfiguredAskIfNeedSave() {
@@ -147,7 +154,7 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
           protected void execLoadItemsInBackground(IClientSession session, Date minDate, Date maxDate, Set<ICalendarItem> result) {
             SleepUtil.sleepSafe(5, TimeUnit.SECONDS); // simulate delay (DB-read or call external interface)
 
-            String cssClass = "calendar-appointment";
+            String cssClass = "calendar-appointment-orange";
             java.util.Calendar cal = getInstance();
             cal.add(DAY_OF_YEAR, -2);
             DateUtility.truncCalendarToHour(cal);
@@ -329,7 +336,7 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
             }
             form.waitFor();
             if (form.isFormStored()) {
-              String cssClass = "calendar-appointment";
+              String cssClass = form.getCalendarField().getValue() != null ? form.getCalendarField().getValue().getCssClass() : "calendar-appointment";
               Date start = form.getStartDateField().getValue();
               Date end = form.getEndDateField().getValue();
               boolean fullDay = form.getFullDayField().getValue();
@@ -367,7 +374,9 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
           @Override
           protected void execAction() {
             List<ICalendarDescriptor> calendars = new ArrayList<>(getCalendars());
-            calendars.add(new CalendarDescriptor("Dynamic Calendar #" + new Random().nextInt(1000)));
+            int calendarId = new Random().nextInt(1000);
+            Collections.shuffle(CALENDAR_COLORS);
+            calendars.add(new CalendarDescriptor(calendarId, "Dynamic Calendar #" + calendarId, true, CALENDAR_COLORS.get(0)));
             setCalendars(calendars);
           }
         }
