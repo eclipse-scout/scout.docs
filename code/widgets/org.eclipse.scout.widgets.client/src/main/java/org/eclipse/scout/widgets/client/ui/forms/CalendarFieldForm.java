@@ -57,10 +57,10 @@ import org.eclipse.scout.widgets.shared.Icons;
 public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleForm {
 
   private static final List<String> CALENDAR_COLORS = new ArrayList<>(List.of(
-      "calendar-appointment-orange",
-      "calendar-appointment-green",
-      "calendar-appointment-blue",
-      "calendar-appointment-red"));
+      "calendar-color-orange",
+      "calendar-color-green",
+      "calendar-color-blue",
+      "calendar-color-red"));
 
   @Override
   protected boolean getConfiguredAskIfNeedSave() {
@@ -336,11 +336,10 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
             }
             form.waitFor();
             if (form.isFormStored()) {
-              String cssClass = form.getCalendarField().getValue() != null ? form.getCalendarField().getValue().getCssClass() : "calendar-appointment";
               Date start = form.getStartDateField().getValue();
               Date end = form.getEndDateField().getValue();
               boolean fullDay = form.getFullDayField().getValue();
-              ICalendarAppointment calendarAppointment = new CalendarAppointment(0L, 0L, start, end, fullDay, null, form.getSubjectField().getValue(), null, cssClass);
+              ICalendarAppointment calendarAppointment = new CalendarAppointment(0L, 0L, start, end, fullDay, null, form.getSubjectField().getValue(), null, null);
               calendarAppointment.setSubjectLabel("Appointment");
               if (form.getLocationField().getValue() != null) {
                 calendarAppointment.getDescriptionElements().add(BEANS.get(CalendarItemDescriptionElement.class).withText(form.getLocationField().getValue()).withIconId(Icons.World));
