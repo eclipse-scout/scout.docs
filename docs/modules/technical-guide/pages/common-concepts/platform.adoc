@@ -78,7 +78,7 @@ https://github.com/wildfly/jandex
 
 The Scout bean manager is a dynamic registry for beans. Beans are normal Java classes usually having some meta data describing the characteristics of the class.
 
-The bean manager can be changed at any time. This means beans can be registered or unregistered while the application is running. For this the bean manager contains methods to register and unregister beans. Furthermore methods to retrieve beans are provided.
+The bean manager can be changed at any time. This means beans can be registered or unregistered while the application is running. For this the bean manager contains methods to register and unregister beans. Furthermore, methods to retrieve beans are provided.
 
 The next sections describe how beans are registered, the different meta data of beans, how instances are created, how they can be retrieved and finally how the bean decoration works.
 
@@ -93,7 +93,7 @@ Usually beans are registered during application startup. The application startup
 include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/PlatformSnippet.java[tags=RegisterBeansListener]
 ----
 
-There is also a predefined bean registration built into the Scout runtime. This automatically registers all classes having an `org.eclipse.scout.rt.platform.@Bean` annotation. Therefore it is usually sufficient to only annotate a class with `@Bean` to have it available in the bean manager as shown in listing <<lst-NormalBeanClass>>.
+There is also a predefined bean registration built into the Scout runtime. This automatically registers all classes having an `org.eclipse.scout.rt.platform.@Bean` annotation. Therefore, it is usually sufficient to only annotate a class with `@Bean` to have it available in the bean manager as shown in listing <<lst-NormalBeanClass>>.
 
 [[lst-NormalBeanClass]]
 [source,java,indent=0]
@@ -102,16 +102,16 @@ There is also a predefined bean registration built into the Scout runtime. This 
 include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/PlatformSnippet.java[tags=BeanClass]
 ----
 
-TIP: As the `@Bean` annotation is an `java.lang.annotation.@Inherited` annotation, this automatically registers all child classes too. This means that also interfaces may be `@Bean` annotated making all implementations automatically available in the bean manager! Furthermore other annotations may be `@Bean` annotated making all classes holding these annotations automatically to beans as well.
+TIP: As the `@Bean` annotation is an `java.lang.annotation.@Inherited` annotation, this automatically registers all child classes too. This means that also interfaces may be `@Bean` annotated making all implementations automatically available in the bean manager! Furthermore, other annotations may be `@Bean` annotated making all classes holding these annotations automatically to beans as well.
 
 TIP: If you inherit a `@Bean` annotation from one of you super types but don't want to be automatically registered into the bean manger you can use the `org.eclipse.scout.rt.platform.@IgnoreBean` annotation. Those classes will then be skipped.
 
 ==== @TunnelToServer
 
-There is a built in annotation `org.eclipse.scout.rt.shared.@TunnelToServer`. Interfaces marked with this annotation are called on the server. The server itself ignores this annotation.
+There is a built-in annotation `org.eclipse.scout.rt.shared.@TunnelToServer`. Interfaces marked with this annotation are called on the server. The server itself ignores this annotation.
 
 To achieve this a bean is registered on client side for each of those interfaces. Because the platform cannot directly create an instance for these beans a specific producer is registered which creates a proxy that delegates the call to the server.
-Please note that this annotation is not inherited. Therefore if an interface extends a tunnel-to-server interface and the new methods of this interface should be called on the server as well the new child interface has to repeat the annotation!
+Please note that this annotation is not inherited. Therefore, if an interface extends a tunnel-to-server interface and the new methods of this interface should be called on the server as well the new child interface has to repeat the annotation!
 
 The proxy is created only once for a specific interface bean.
 
@@ -136,7 +136,7 @@ include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclips
 
 So the Java annotation `org.eclipse.scout.rt.platform.@ApplicationScoped` describes a bean having singleton characteristics.
 
-TIP: Also `@ApplicationScoped` is an `@Inherited` annotation. Therefore all child classes automatically inherit this characteristic like with the `@Bean` annotation.
+TIP: Also `@ApplicationScoped` is an `@Inherited` annotation. Therefore, all child classes automatically inherit this characteristic like with the `@Bean` annotation.
 
 === Bean Creation
 
@@ -211,9 +211,9 @@ In this situation the bean manager actually contains 3 beans:
 
 The bean `MySpecialVersion` is not part of the bean manager because it has been replaced by `AnotherVersion`.
 
-* `BEANS.get(IMyService.class)`: Returns `AnotherVersion` instance. The result cannot be an exact match because the requested type is an interface. Therefore of all candidates there is one single candidate with lowest order (comes first).
+* `BEANS.get(IMyService.class)`: Returns `AnotherVersion` instance. The result cannot be an exact match because the requested type is an interface. Therefore, of all candidates there is one single candidate with the lowest order (comes first).
 * `BEANS.get(MyServiceImpl.class)`: Returns `MyServiceImpl` because there is an exact match available.
-* `BEANS.get(MySpecialVersion.class)`: Returns `AnotherVersion`. The result cannot be an exact match because there is no exact bean with this class in the bean manager (`MySpecialVersion` has been replaced). Therefore only `AnotherVersion` remains as candidate in the hierarchy below `MySpecialVersion`.
+* `BEANS.get(MySpecialVersion.class)`: Returns `AnotherVersion`. The result cannot be an exact match because there is no exact bean with this class in the bean manager (`MySpecialVersion` has been replaced). Therefore, only `AnotherVersion` remains as candidate in the hierarchy below `MySpecialVersion`.
 * `BEANS.get(MyServiceMod.class)`: Returns `MyServiceMod` because there is no other candidate.
 * `BEANS.all(IMyService.class)`: Returns a list with all beans sorted by `@Order`. This results in: `AnotherVersion`, `MyServiceMod`, `MyServiceImpl`.
 
@@ -231,7 +231,7 @@ In case no decoration is required the factory may return `null`. Then the origin
 
 TIP: Decorations are only supported if the class obtained by the bean manager (e.g. by using `BEANS.get()`) is an interface!
 
-TIP: It is best practice to mark all annotations that are interpreted in the bean decoration factory with the annotation `org.eclipse.scout.rt.platform.@BeanInvocationHint`. However this annotation has no effect at runtime and is only for documentation reasons.
+TIP: It is best practice to mark all annotations that are interpreted in the bean decoration factory with the annotation `org.eclipse.scout.rt.platform.@BeanInvocationHint`. However, this annotation has no effect at runtime and is only for documentation reasons.
 
 The sample in listing <<lst-BeanDecorationFactory>> wraps each call to the server with a profiler decorator that measures how long a server call takes.
 
@@ -335,7 +335,7 @@ Scout already has some config properties. For a list and the corresponding docum
 
 Because the property classes are managed by the bean manager, you can use all the mechanisms to change the behavior (`@Replace` in particular).
 
-<<lst-PropertyConstant>> demonstrates how you can use the replace annotation to change the existing `ApplicationNameProperty` class.
+<<lst-PropertyConstant>> demonstrates how you can use the @Replace annotation to change the existing `ApplicationNameProperty` class.
 The value is no longer fetched via the config mechanism, because the `getValue(String)` method is overridden.
 In this case a fixed value is returned.
 
@@ -347,11 +347,11 @@ include::common:example$org.eclipse.scout.docs.snippets/src/test/java/org/eclips
 ----
 
 The next example presented in <<lst-PropertyRedirection>> uses the same idea.
-In this case, the `getKey()` method is overridden to read the value from an other key as demonstrated is the <<lst-PropertyRedirectionConfig>>.
+In this case, the `getKey()` method is overridden to read the value from another key as demonstrated is the <<lst-PropertyRedirectionConfig>>.
 
 [[lst-PropertyRedirection]]
 [source,java,indent=0]
-.Property class reading the value from an other key.
+.Property class reading the value from another key.
 ----
 include::common:example$org.eclipse.scout.docs.snippets/src/test/java/org/eclipse/scout/docs/snippets/platform/config/ApplicationNamePropertyRedirection.java[tags=code]
 ----
@@ -364,8 +364,9 @@ include::common:example$org.eclipse.scout.docs.snippets/src/test/resources/confi
 ----
 
 === Configuration validation
+
 During the Platform startup all classes implementing the interface `org.eclipse.scout.rt.platform.config.IConfigurationValidator` are asked to validate configuration provided in the `config.properties` files.
-If there is at least one `IConfigurationValidator` that accepts a given key-value-pair the configuration is considered to be valid. Otherwise the platform will not start.
+If there is at least one `IConfigurationValidator` that accepts a given key-value-pair the configuration is considered to be valid. Otherwise, the platform will not start.
 
 The concrete implementation `org.eclipse.scout.rt.platform.config.ConfigPropertyValidator` will also check if a configured value matches the default value. In case it does an info message (warn in development mode) will be logged but the platform will still start.
 To minimize configuration files such entries should be removed from `config.properties` files.
@@ -557,7 +558,7 @@ The value must be provided as a Map.
 Example:
 +
 [listing]
-scout.cspDirective[img-src]=`self` data: https: http://localhost:8086
+scout.cspDirective[img-src]=`self` data: 'self' data: https://media.example.com
 +
 Data type: Map
 
@@ -596,12 +597,12 @@ By default no URLs are set.
 Data type: List
 
 `scout.http.connectionTtl` ::
-Specifies the maximum life time in milliseconds for kept alive connections of the Apache HTTP client. The default value is 1 hour.
+Specifies the maximum lifetime in milliseconds for kept alive connections of the Apache HTTP client. The default value is 1 hour.
 +
 Data type: Integer
 
 `scout.http.ignoreProxyPatterns` ::
-Configure the proxy ignore list for the ConfigurableProxySelector. If an URI matches the pattern no proxy connection is used.
+Configure the proxy ignore list for the ConfigurableProxySelector. If a URI matches the pattern no proxy connection is used.
 +
 By default no proxy is configured.
 +
@@ -631,7 +632,7 @@ Specifies the total maximum connections of the Apache HTTP client. The default v
 Data type: Integer
 
 `scout.http.proxyPatterns` ::
-Configure proxies for the `ConfigurableProxySelector`. If an URI matches a pattern the corresponding proxy will be used.
+Configure proxies for the `ConfigurableProxySelector`. If a URI matches a pattern the corresponding proxy will be used.
 +
 By default no proxy is used.
 +
@@ -695,7 +696,7 @@ Indicates whether to use a preemptive port cache for webservice clients.
 +
 Depending on the implementor used, cached ports may increase performance, because port creation is an expensive operation due to WSDL and schema validation.
 +
-The cache is based on a `corePoolSize`, meaning that that number of ports is created on a preemptive basis. If more ports than that number is required, they are are created on demand and also added to the cache until expired, which is useful at a high load.
+The cache is based on a `corePoolSize`, meaning that that number of ports is created on a preemptive basis. If more ports than that number is required, they are created on demand and also added to the cache until expired, which is useful at a high load.
 +
 The default value is true.
 +
@@ -789,17 +790,17 @@ Specifies if the application should look for web resources (like .js, .html or .
 Data type: Boolean
 
 `scout.mail.bouncedetector.heuristic.contents` ::
-Non standard email bounce detection: content is checked against the provided list of heuristic contents (partial match, case-insensitive)
+Non-standard email bounce detection: content is checked against the provided list of heuristic contents (partial match, case-insensitive)
 +
 Data type: List
 
 `scout.mail.bouncedetector.heuristic.senderPrefixes` ::
-Non standard email bounce detection: sender is checked against the provided list of heuristic sender prefixes (prefix match, case-insensitive)
+Non-standard email bounce detection: sender is checked against the provided list of heuristic sender prefixes (prefix match, case-insensitive)
 +
 Data type: List
 
 `scout.mail.bouncedetector.heuristic.subjects` ::
-Non standard email bounce detection: subject is checked against the provided list of heuristic subjects (partial match, case-insensitive)
+Non-standard email bounce detection: subject is checked against the provided list of heuristic subjects (partial match, case-insensitive)
 +
 Data type: List
 
@@ -943,7 +944,7 @@ Socket read timeout value in milliseconds.
 Data type: Integer >= 0
 
 `scout.sql.directJdbcConnection` ::
-If true a direct JDBC connection is created. Otherwise a JNDI connection is used. The default value is true.
+If true a direct JDBC connection is created. Otherwise, a JNDI connection is used. The default value is true.
 +
 Data type: Boolean
 
@@ -1008,7 +1009,7 @@ The password to connect to the database (JDBC or JNDI)
 Data type: String
 
 `scout.sql.transactionMemberId` ::
-Id of the transaction member on which the connection is available.
+ID of the transaction member on which the connection is available.
 +
 Data type: String
 
