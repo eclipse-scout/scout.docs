@@ -8,11 +8,12 @@
  * SPDX-License-Identifier: EPL-2.0
  */
 import {
-  Button, CheckBoxField, Column, FormField, FormModel, GroupBox, icons, IntegerField, LabelField, Menu, NumberField, SmartField, StringField, TabBox, TabItem, Table, TableField, TileField, TileGrid, ValueField
+  Button, CheckBoxField, Column, FormField, FormModel, GroupBox, icons, IntegerField, LabelField, Menu, Mode, ModeSelector, ModeSelectorField, NumberField, SequenceBox, SmartField, StringField, TabBox, TabItem, Table, TableField, TileField,
+  TileGrid, ValueField
 } from '@eclipse-scout/core';
 import {Chart, ChartField, ChartFieldTile, ChartPosition, ChartType, GreenAreaPosition} from '@eclipse-scout/chart';
 import {
-  ChartTypeLookupCall, ColorSchemeLookupCall, EventsTab, EventsTabWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, LegendPositionLookupCall, SpeedoGreenAreaPositionLookupCall,
+  ChartTypeLookupCall, ColorMode, ColorSchemeLookupCall, EventsTab, EventsTabWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, LegendPositionLookupCall, SpeedoGreenAreaPositionLookupCall,
   ValuesProviderLookupCall, WidgetActionsBox, WidgetActionsBoxWidgetMap
 } from '../index';
 
@@ -116,10 +117,49 @@ export default (): FormModel => ({
               borderVisible: false,
               fields: [
                 {
-                  id: 'AutoColorCheckBox',
-                  objectType: CheckBoxField,
+                  id: 'AutoColorSequenceBox',
+                  objectType: SequenceBox,
                   label: 'Auto Color',
-                  labelVisible: false
+                  labelVisible: false,
+                  fields: [
+                    {
+                      id: 'AutoColorCheckBox',
+                      objectType: CheckBoxField,
+                      label: 'Auto Color',
+                      labelVisible: false
+                    },
+                    {
+                      id: 'ColorModeSelectorField',
+                      objectType: ModeSelectorField,
+                      label: 'Color Mode',
+                      labelVisible: false,
+                      enabled: false,
+                      modeSelector: {
+                        id: 'ModeSelector',
+                        objectType: ModeSelector,
+                        modes: [
+                          {
+                            id: 'Dataset',
+                            objectType: Mode,
+                            text: 'Dataset',
+                            ref: ColorMode.DATASET
+                          },
+                          {
+                            id: 'Data',
+                            objectType: Mode,
+                            text: 'Data',
+                            ref: ColorMode.DATA
+                          },
+                          {
+                            id: 'Element',
+                            objectType: Mode,
+                            text: 'Element',
+                            ref: ColorMode.ELEMENT
+                          }
+                        ]
+                      }
+                    }
+                  ]
                 },
                 {
                   id: 'ClickableCheckBox',
@@ -522,7 +562,13 @@ export type ChartFieldFormWidgetMap = {
   'ConfigurationBox': TabBox;
   'ChartPropertiesBox': TabItem;
   'ChartPropertiesBox.LeftBox': GroupBox;
+  'AutoColorSequenceBox': SequenceBox;
   'AutoColorCheckBox': CheckBoxField;
+  'ColorModeSelectorField': ModeSelectorField<ColorMode>;
+  'ModeSelector': ModeSelector<ColorMode>;
+  'Dataset': Mode<ColorMode>;
+  'Data': Mode<ColorMode>;
+  'Element': Mode<ColorMode>;
   'ClickableCheckBox': CheckBoxField;
   'CheckableCheckBox': CheckBoxField;
   'AnimatedCheckBox': CheckBoxField;
