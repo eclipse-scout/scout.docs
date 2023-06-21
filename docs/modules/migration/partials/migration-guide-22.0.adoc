@@ -677,3 +677,12 @@ The same message using KB is much more readable: _The maximum file size exceeds 
 Hence, depending on the file size, a suitable unit (B, KB, MB, GB) is used for all upload-widgets (file chooser, file chooser button, file chooser field).
 
 This change has also changed the translations of the text-key _ui.FileSizeLimit_. In case this text-key is directly used in your project (which you should not do anyway), the displayed error message is broken now. You have to adapt your code.
+
+== Multi hex color support for IChartValueGroupBean (sine 22.0.51)
+
+The `colorHexValue` property of a `IChartValueGroupBean` can now hold more than one hex value.
+These values are used to color the corresponding dataset in a ChartJS chart (bar, line, pie, bubble, etc.), if `autoColor` is turned off.
+The given colors are repeated for the whole dataset, e.g. if there are two colors given (blue and yellow) and the dataset contains 7 values, the elements are colored alternately in blue and yellow (starting and ending with blue).
+These colors are also used by the tooltip and the legend. If there are multiple colors for one legend label the first one will be used.
+
+If one processes this values further the code needs to be changed to work with `List<String>` instead of `String`.

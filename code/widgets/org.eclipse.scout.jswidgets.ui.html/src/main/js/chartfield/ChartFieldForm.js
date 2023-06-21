@@ -11,7 +11,7 @@
 import {App, arrays, colorSchemes, DefaultStatus, Form, GridData, models, objects, Status, strings} from '@eclipse-scout/core';
 import {Chart} from '@eclipse-scout/chart';
 import ChartFieldFormModel from './ChartFieldFormModel';
-import {ValuesProviderLookupCall} from '../index';
+import {ColorMode, ValuesProviderLookupCall} from '../index';
 
 export default class ChartFieldForm extends Form {
 
@@ -26,6 +26,8 @@ export default class ChartFieldForm extends Form {
 
     this.chartField = null;
     this.tileChartField = null;
+
+    this.colorModeSelectorField = null;
 
     this.formFieldPropertiesBox = null;
     this.gridDataBox = null;
@@ -81,6 +83,11 @@ export default class ChartFieldForm extends Form {
       chartTile.setColorScheme(colorScheme);
     });
 
+    this.colorModeSelectorField = this.widget('ColorModeSelectorField');
+    this.colorModeSelectorField.modeSelector.selectModeByRef(ColorMode.DATASET);
+    this.colorModeSelectorField.setValue(ColorMode.DATASET);
+    this.colorModeSelectorField.on('propertyChange:value', event => this._renewData());
+
     let autoColorCheckBox = this.widget('AutoColorCheckBox');
     autoColorCheckBox.setValue((this._getChartConfig().options || {}).autoColor);
     autoColorCheckBox.on('propertyChange:value', event => {
@@ -91,6 +98,7 @@ export default class ChartFieldForm extends Form {
         }
       });
       this._setChartConfig(config);
+      this.colorModeSelectorField.setEnabled(!event.newValue);
     });
 
     let clickableCheckBox = this.widget('ClickableCheckBox');
@@ -782,6 +790,35 @@ export default class ChartFieldForm extends Form {
     }
   }
 
+  _updateColorHexValue(valueGroups) {
+    valueGroups = arrays.ensure(valueGroups).filter(valueGroup => !!valueGroup);
+    if (!valueGroups || !valueGroups.length) {
+      return;
+    }
+
+    switch (this.colorModeSelectorField.value) {
+      case ColorMode.DATASET:
+        valueGroups.forEach(valueGroup => {
+          valueGroup.colorHexValue = this._randomHexColor();
+        });
+        break;
+      case ColorMode.DATA: {
+        const maxValueGroupSize = Math.max(...valueGroups.map(valueGroup => arrays.length(valueGroup.values)));
+        const colorHexValues = arrays.init(maxValueGroupSize).map(v => this._randomHexColor());
+        valueGroups.forEach(valueGroup => {
+          valueGroup.colorHexValue = colorHexValues;
+        });
+        break;
+      }
+      case ColorMode.ELEMENT:
+      default:
+        valueGroups.forEach(valueGroup => {
+          valueGroup.colorHexValue = arrays.init(arrays.length(valueGroup.values)).map(v => this._randomHexColor());
+        });
+        break;
+    }
+  }
+
   _getFulfillmentChartData() {
     if (this.random) {
       return this._getFulfillmentChartDataRandom();
@@ -927,9 +964,9 @@ export default class ChartFieldForm extends Form {
         chartValueGroup.type = type;
       }
       chartValueGroup.groupName = groupName;
-      chartValueGroup.colorHexValue = this._randomHexColor();
       chartValueGroups.push(chartValueGroup);
     }
+    this._updateColorHexValue(chartValueGroups);
 
     return {
       data: {
@@ -1008,9 +1045,9 @@ export default class ChartFieldForm extends Form {
       }
 
       chartValueGroup.groupName = chartData[i][0];
-      chartValueGroup.colorHexValue = this._randomHexColor();
       chartValueGroups.push(chartValueGroup);
     }
+    this._updateColorHexValue(chartValueGroups);
 
     return {
       data: {
@@ -1090,9 +1127,9 @@ export default class ChartFieldForm extends Form {
       }
 
       chartValueGroup.groupName = chartData[i][0];
-      chartValueGroup.colorHexValue = this._randomHexColor();
       chartValueGroups.push(chartValueGroup);
     }
+    this._updateColorHexValue(chartValueGroups);
 
     return {
       data: {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 BSI Business Systems Integration AG.
+ * Copyright (c) 2023 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
@@ -13,9 +13,12 @@ package org.eclipse.scout.widgets.client.ui.forms;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -31,6 +34,7 @@ import org.eclipse.scout.rt.chart.shared.data.basic.chart.IChartConfig;
 import org.eclipse.scout.rt.chart.shared.data.basic.chart.IChartType;
 import org.eclipse.scout.rt.chart.shared.data.basic.chart.IChartValueGroupBean;
 import org.eclipse.scout.rt.chart.shared.data.basic.chart.IMonupleChartValueGroupBean;
+import org.eclipse.scout.rt.chart.shared.data.basic.chart.INTupleChartValueGroupBean;
 import org.eclipse.scout.rt.chart.shared.data.basic.chart.MonupleChartValueGroupBean;
 import org.eclipse.scout.rt.chart.shared.data.basic.chart.NTupleChartValueGroupBean;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
@@ -56,6 +60,9 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerField;
 import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
+import org.eclipse.scout.rt.client.ui.form.fields.mode.AbstractMode;
+import org.eclipse.scout.rt.client.ui.form.fields.modeselector.AbstractModeSelectorField;
+import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.form.fields.tabbox.AbstractTabBox;
@@ -97,6 +104,7 @@ import org.eclipse.scout.widgets.client.ui.forms.ChartFieldForm.MainBox.BottomBo
 import org.eclipse.scout.widgets.client.ui.forms.ChartFieldForm.MainBox.BottomBox.ChartPropertiesBox;
 import org.eclipse.scout.widgets.client.ui.forms.ChartFieldForm.MainBox.BottomBox.ChartPropertiesBox.CustomChartPropertiesBox;
 import org.eclipse.scout.widgets.client.ui.forms.ChartFieldForm.MainBox.BottomBox.ChartPropertiesBox.FormFieldPropertiesBox;
+import org.eclipse.scout.widgets.client.ui.forms.ChartFieldForm.MainBox.BottomBox.ChartPropertiesBox.LeftBox.AutoColorSequenceBox.ColorModeSelectorField;
 import org.eclipse.scout.widgets.client.ui.forms.ChartFieldForm.MainBox.BottomBox.ChartPropertiesBox.LeftBox.FulfillmentStartValuePropertyCheckbox;
 import org.eclipse.scout.widgets.client.ui.forms.ChartFieldForm.MainBox.BottomBox.ChartPropertiesBox.LeftBox.TileCheckBox;
 import org.eclipse.scout.widgets.client.ui.forms.ChartFieldForm.MainBox.BottomBox.ChartPropertiesBox.LeftBox.TransparentCheckBox;
@@ -154,7 +162,6 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
     return (MainBox) getRootGroupBox();
   }
 
-
   public ChartField getChartField() {
     return getFieldByClass(ChartField.class);
   }
@@ -181,6 +188,10 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
 
   public ChartPropertiesBox getChartPropertiesBox() {
     return getFieldByClass(ChartPropertiesBox.class);
+  }
+
+  public ColorModeSelectorField getColorModeSelectorField() {
+    return getFieldByClass(ColorModeSelectorField.class);
   }
 
   public XAxisStackedCheckBox getXAxisStackedCheckBox() {
@@ -349,9 +360,9 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
         chartValue.setType(type);
       }
       chartValue.setGroupName(groupName);
-      chartValue.setColorHexValue(randomHexColor());
       bean.getData().getChartValueGroups().add(chartValue);
     }
+    updateColorHexValue(bean.getData().getChartValueGroups(), valueGroup -> ((IMonupleChartValueGroupBean) valueGroup).getValues().size());
 
     return bean;
   }
@@ -429,9 +440,9 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
         chartValue.add((BigDecimal) chartData[i][j], (BigDecimal) chartData[i][j + 1], (BigDecimal) chartData[i][j + 2]);
       }
       chartValue.setGroupName((String) chartData[i][0]);
-      chartValue.setColorHexValue(randomHexColor());
       bean.getData().getChartValueGroups().add(chartValue);
     }
+    updateColorHexValue(bean.getData().getChartValueGroups(), valueGroup -> ((INTupleChartValueGroupBean) valueGroup).getValues().size());
 
     return bean;
   }
@@ -496,9 +507,9 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
         chartValue.add((BigDecimal) chartData[i][j], (BigDecimal) chartData[i][j + 1]);
       }
       chartValue.setGroupName((String) chartData[i][0]);
-      chartValue.setColorHexValue(randomHexColor());
       bean.getData().getChartValueGroups().add(chartValue);
     }
+    updateColorHexValue(bean.getData().getChartValueGroups(), valueGroup -> ((INTupleChartValueGroupBean) valueGroup).getValues().size());
 
     return bean;
   }
@@ -900,6 +911,40 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
     }
   }
 
+  protected void updateColorHexValue(IMonupleChartValueGroupBean valueGroup) {
+    updateColorHexValue(Collections.singleton(valueGroup), vg -> vg.getValues().size());
+  }
+
+  protected <T extends IChartValueGroupBean> void updateColorHexValue(Collection<T> valueGroups, ToIntFunction<T> getValueGroupSize) {
+    if (valueGroups == null || valueGroups.isEmpty() || getValueGroupSize == null) {
+      return;
+    }
+
+    valueGroups = CollectionUtility.arrayListWithoutNullElements(valueGroups);
+
+    switch (getColorModeSelectorField().getValue()) {
+      case DATASET:
+        valueGroups.forEach(valueGroup -> valueGroup.setColorHexValue(randomHexColor()));
+        break;
+      case DATA:
+        int maxValueGroupSize = valueGroups.stream()
+            .mapToInt(getValueGroupSize)
+            .max()
+            .orElse(0);
+        List<String> colorHexValues = IntStream.range(0, maxValueGroupSize)
+            .mapToObj(i -> randomHexColor())
+            .collect(Collectors.toList());
+        valueGroups.forEach(valueGroup -> valueGroup.setColorHexValue(colorHexValues));
+        break;
+      case ELEMENT:
+      default:
+        valueGroups.forEach(valueGroup -> valueGroup.setColorHexValue(IntStream.range(0, getValueGroupSize.applyAsInt(valueGroup))
+            .mapToObj(i -> randomHexColor())
+            .collect(Collectors.toList())));
+        break;
+    }
+  }
+
   private BigDecimal getMaxValue() {
     switch (getChart().getConfig().getType()) {
       case IChartType.FULFILLMENT:
@@ -1137,8 +1182,8 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
           }
 
           @Order(10)
-          @ClassId("f4dd98dd-2071-418b-bebc-1a3807c44c20")
-          public class AutoColorCheckBox extends AbstractBooleanField {
+          @ClassId("2adb3400-9302-4efd-9074-ac31a7278767")
+          public class AutoColorSequenceBox extends AbstractSequenceBox {
 
             @Override
             protected String getConfiguredLabel() {
@@ -1151,15 +1196,116 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
             }
 
             @Override
-            protected void execInitField() {
-              setValue(getChart().getConfig().isAutoColor());
+            protected boolean getConfiguredAutoCheckFromTo() {
+              return false;
             }
 
-            @Override
-            protected void execChangedValue() {
-              IChartConfig config = getChart().getConfig();
-              config.withAutoColor(getValue());
-              getChart().setConfig(config);
+            @Order(10)
+            @ClassId("f4dd98dd-2071-418b-bebc-1a3807c44c20")
+            public class AutoColorCheckBox extends AbstractBooleanField {
+
+              @Override
+              protected String getConfiguredLabel() {
+                return "Auto color";
+              }
+
+              @Override
+              protected boolean getConfiguredLabelVisible() {
+                return false;
+              }
+
+              @Override
+              protected void execInitField() {
+                setValue(getChart().getConfig().isAutoColor());
+              }
+
+              @Override
+              protected void execChangedValue() {
+                IChartConfig config = getChart().getConfig();
+                config.withAutoColor(getValue());
+                getChart().setConfig(config);
+              }
+            }
+
+            @Order(20)
+            @ClassId("bc19b509-1a51-4f8c-94ea-42d741504bf3")
+            public class ColorModeSelectorField extends AbstractModeSelectorField<ColorMode> {
+              @Override
+              protected String getConfiguredLabel() {
+                return "Color mode";
+              }
+
+              @Override
+              protected boolean getConfiguredLabelVisible() {
+                return false;
+              }
+
+              @Override
+              protected boolean getConfiguredEnabled() {
+                return false;
+              }
+
+              @Override
+              protected void execInitField() {
+                setValue(ColorMode.DATASET);
+              }
+
+              @Override
+              protected void execChangedValue() {
+                renewData();
+              }
+
+              @Override
+              protected Class<? extends IValueField> getConfiguredMasterField() {
+                return AutoColorCheckBox.class;
+              }
+
+              @Override
+              protected void execChangedMasterValue(Object newMasterValue) {
+                setEnabled(!((Boolean) newMasterValue));
+              }
+
+              @Order(10)
+              @ClassId("2624e524-13da-4cca-bd19-225602b1ec03")
+              public class Dataset extends AbstractMode<ColorMode> {
+                @Override
+                protected String getConfiguredText() {
+                  return "Dataset";
+                }
+
+                @Override
+                protected ColorMode getConfiguredRef() {
+                  return ColorMode.DATASET;
+                }
+              }
+
+              @Order(20)
+              @ClassId("e12d1798-a588-43df-9cef-312c8a16eeb9")
+              public class Data extends AbstractMode<ColorMode> {
+                @Override
+                protected String getConfiguredText() {
+                  return "Data";
+                }
+
+                @Override
+                protected ColorMode getConfiguredRef() {
+                  return ColorMode.DATA;
+                }
+              }
+
+              @Order(30)
+              @ClassId("15d4befc-bb47-457b-92a3-98303924b78c")
+              public class Element extends AbstractMode<ColorMode> {
+                @Override
+                protected String getConfiguredText() {
+                  return "Element";
+                }
+
+                @Override
+                protected ColorMode getConfiguredRef() {
+                  return ColorMode.ELEMENT;
+                }
+              }
             }
           }
 
@@ -3249,5 +3395,11 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
       rows.add(new LookupRow<>(IChartConfig.RIGHT, "Right"));
       return rows;
     }
+  }
+
+  protected enum ColorMode {
+    DATASET,
+    DATA,
+    ELEMENT
   }
 }

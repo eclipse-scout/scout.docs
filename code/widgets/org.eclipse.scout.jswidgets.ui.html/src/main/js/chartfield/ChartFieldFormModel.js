@@ -9,6 +9,7 @@
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 import {FormField, icons} from '@eclipse-scout/core';
+import {ColorMode} from '../index';
 
 export default () => ({
   id: 'jswidgets.ChartFieldForm',
@@ -110,10 +111,49 @@ export default () => ({
               borderVisible: false,
               fields: [
                 {
-                  id: 'AutoColorCheckBox',
-                  objectType: 'CheckBoxField',
+                  id: 'AutoColorSequenceBox',
+                  objectType: 'SequenceBox',
                   label: 'Auto Color',
-                  labelVisible: false
+                  labelVisible: false,
+                  fields: [
+                    {
+                      id: 'AutoColorCheckBox',
+                      objectType: 'CheckBoxField',
+                      label: 'Auto Color',
+                      labelVisible: false
+                    },
+                    {
+                      id: 'ColorModeSelectorField',
+                      objectType: 'ModeSelectorField',
+                      label: 'Color Mode',
+                      labelVisible: false,
+                      enabled: false,
+                      modeSelector: {
+                        id: 'ModeSelector',
+                        objectType: 'ModeSelector',
+                        modes: [
+                          {
+                            id: 'Dataset',
+                            objectType: 'Mode',
+                            text: 'Dataset',
+                            ref: ColorMode.DATASET
+                          },
+                          {
+                            id: 'Data',
+                            objectType: 'Mode',
+                            text: 'Data',
+                            ref: ColorMode.DATA
+                          },
+                          {
+                            id: 'Element',
+                            objectType: 'Mode',
+                            text: 'Element',
+                            ref: ColorMode.ELEMENT
+                          }
+                        ]
+                      }
+                    }
+                  ]
                 },
                 {
                   id: 'ClickableCheckBox',
