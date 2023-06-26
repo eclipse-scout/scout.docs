@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-package org.eclipse.scout.widgets.shared.services;
+package org.eclipse.scout.jswidgets.ui.html.security;
 
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.security.AbstractAccessControlService;

@@ -143,6 +143,11 @@ Typically, it should not be necessary to create own `BusySupport` instances.
 
 In case you created custom busy handling, refer to the xref:migration:migration-guide.adoc#busy-handling[Migration Guide] on how to migrate.
 
+=== Access Control
+
+Scout JS now supports permissions. It provides the possibility and convenience of checking permissions using the `access` utility.
+For more information about the `access` utility see xref:technical-guide:common-concepts/security.adoc#scoutjs[Authorization (Scout JS)].
+
 == SDK
 
 The Scout IntelliJ plugins have been improved to better support Scout JS development and working with xref:technical-guide:working-with-data/data-object.adoc[Data Objects].
