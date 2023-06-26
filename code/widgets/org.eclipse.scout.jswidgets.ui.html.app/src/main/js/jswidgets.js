@@ -11,7 +11,8 @@ import {App} from '@eclipse-scout/demo-jswidgets';
 
 new App().init({
   bootstrap: {
-    textsUrl: 'res/texts.json'
+    textsUrl: 'res/texts.json',
+    permissionsUrl: 'api/permissions'
   }
 });
 

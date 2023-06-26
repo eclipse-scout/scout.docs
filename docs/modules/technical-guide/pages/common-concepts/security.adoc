@@ -173,10 +173,12 @@ It is also possible to encode any String manually using `StringUtility.htmlEncod
 However, using `HTML` is recommended, where possible, because it is more concise and leads to less errors.
 
 ==== Using a White-List Filter
+
 If HTML or XML from external sources or more complex HTML are used in the Scout model, using a white-list filter might be the best way to avoid security bugs.
 Libraries, such as http://jsoup.org/[JSoup] provide such a white-list filter. Scout currently does not include any services or utilities for using white-list filters,
 because the configuration and usage is very use-case-specific and would therefore not add much benefit.
 
+[#authorization-granting]
 == Authorization (Granting)
 
 Scout uses the `java.security` API principles to grant access to a specific resource.
@@ -252,3 +254,120 @@ include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclips
 If such a service call would be expensive, one may cache the result of such a permission check.
 You have to implement this by yourself.
 A recommended solution is to create a wrapper around `IPermissionCollection` and this wrapper caches calls to `IPermissionCollection#implies` if required.
+
+[#scoutjs]
+=== Scout JS
+
+The `access` utility provides the possibility and convenience of checking permissions in Scout JS code.
+
+All necessary information the Scout JS code needs is made available by the `PermissionResource` in the `org.eclipse.scout.rt.api`-module.
+To enable the feature this REST resource needs to be added to the server and the `access` utility needs to be bootstrapped in the entry file.
+
+.Add maven dependency to server providing REST resources (see xref:technical-guide:working-with-data/rest.adoc[])
+[source,xml]
+----
+<dependency>
+  <groupId>org.eclipse.scout.rt</groupId>
+  <artifactId>org.eclipse.scout.rt.api</artifactId>
+</dependency>
+----
+
+.bootstrap the `access` utility in the entry file `myapp.js`
+[source,javascript]
+----
+new App().init({
+  bootstrap: {
+    permissionsUrl: 'api/permissions'
+  }
+});
+----
+
+If the visibility of a field depends on a permission the `access` utility can be used to evaluate this permission.
+The method `quickCheck` returns a `boolean` while `check` returns a `JQuery.Promise<boolean>`
+
+[source,ts]
+----
+field.setVisible(access.quickCheck('SomePermission'));
+
+access.check('SomePermission').then(granted => field.setVisible(granted);
+----
+
+If one has created ``IOwnPermission``s with a special `implies`-logic and wants to make them available in Scout JS a couple of things need to be added:
+
+* `OwnPermissionDo`, data object used to transfer additional properties from the server to the Scout JS code
+* `ToOwnPermissionDoFunction`, `IToDoFunction` transforming `IOwnPermission` into the data object
+* `OwnPermission`, Scout JS pendant for `IOwnPermission` used by the `access` utility
+
+.`OwnPermissionDo` containing the `ToOwnPermissionDoFunction`
+[source,java]
+----
+@TypeName("myapp.OwnPermission")
+public class OwnPermissionDo extends PermissionDo {
+
+  protected static final String OWN_PERMISSION_OBJECT_TYPE = "myapp.OwnPermission";
+
+  public DoValue<String> foo() {
+    return doValue("foo");
+  }
+
+  public DoValue<String> bar() {
+    return doValue("bar");
+  }
+
+  /* **************************************************************************
+   * CUSTOM CONVENIENCE TO DO FUNCTION
+   * *************************************************************************/
+
+  @Order(4000)
+  public static class ToOwnPermissionDoFunction extends AbstractToPermissionDoFunction<IOwnPermission, OwnPermissionDo> {
+
+    @Override
+    public void apply(IOwnPermission ownPermission, OwnPermissionDo ownPermissionDo) {
+      BEANS.get(ToPermissionDoFunction.class).apply(ownPermission, ownPermissionDo);
+      ownPermissionDo
+          .withObjectType(OWN_PERMISSION_OBJECT_TYPE) // important to create the correct Scout JS pendant
+          .withFoo(ownPermission.getFoo())
+          .withBar(ownPermission.getBar());
+    }
+  }
+
+  /* **************************************************************************
+   * GENERATED CONVENIENCE METHODS
+   * *************************************************************************/
+
+  // ...
+}
+----
+
+.important overridden methods in the Scout JS `OwnPermission`
+[source,ts]
+----
+override matches(permission: Permission): boolean {
+  if (!super.matches(permission)) {
+    return false;
+  }
+  // check if permission is OwnPermission and foo matches
+  if (!(permission instanceof OwnPermission)) {
+    return false;
+  }
+  return this.foo === permission.foo;
+}
+
+protected override _evalPermissionQuick(permission: Permission): boolean {
+  // check if bar matches
+  return super._evalPermissionQuick(permission) && this.bar === permission.bar;
+}
+
+protected override _evalPermission(permission: Permission): JQuery.Promise<boolean> {
+  // call server to evaluate foo and bar
+  return ajax.getJson(`api/permissions/checkFooBar/${permission.foo}/${permission.bar}`)
+    .catch((error: AjaxError) => {
+      // handle error and return false
+      return false;
+    });
+}
+----
+
+The `PermissionResource` will automatically collect the granted ``IOwnPermission``s of a user (see xref:authorization-granting[Authorization (Granting)]).
+These ``IOwnPermission``s will be transformed by the `ToOwnPermissionDoFunction` and send to the browser where `OwnPermission` instances are created.
+Each access check will now automatically consider the `matches`-, `implies`- and `evaluate`-logic of `OwnPermission`.
