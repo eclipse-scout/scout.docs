@@ -27,7 +27,12 @@ public class FileCodeType extends AbstractCodeType<String, String> {
 
   @Override
   protected String getConfiguredText() {
-    return TEXTS.get("File");
+    return TEXTS.get("FileType");
+  }
+
+  @Override
+  protected String getConfiguredTextPlural() {
+    return TEXTS.get("FileTypes");
   }
 
   @Override

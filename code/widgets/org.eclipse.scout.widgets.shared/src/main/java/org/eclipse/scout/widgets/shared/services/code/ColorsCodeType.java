@@ -9,7 +9,7 @@
  */
 package org.eclipse.scout.widgets.shared.services.code;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +32,11 @@ public class ColorsCodeType extends AbstractCodeType<Long, Color> {
 
   @Override
   protected String getConfiguredText() {
+    return TEXTS.get("Color");
+  }
+
+  @Override
+  protected String getConfiguredTextPlural() {
     return TEXTS.get("Colors");
   }
 

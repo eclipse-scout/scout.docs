@@ -24,7 +24,12 @@ public class YesOrNoCodeType extends AbstractCodeType<Long, Boolean> {
 
   @Override
   protected String getConfiguredText() {
-    return TEXTS.get("text");
+    return TEXTS.get("YesOrNo");
+  }
+
+  @Override
+  protected String getConfiguredTextPlural() {
+    return TEXTS.get("YesOrNo");
   }
 
   @Override
@@ -67,5 +72,4 @@ public class YesOrNoCodeType extends AbstractCodeType<Long, Boolean> {
       return ID;
     }
   }
-
 }

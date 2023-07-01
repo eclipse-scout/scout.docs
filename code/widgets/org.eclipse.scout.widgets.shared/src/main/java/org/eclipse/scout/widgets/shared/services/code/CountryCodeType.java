@@ -27,6 +27,11 @@ public class CountryCodeType extends AbstractCodeType<Long, Long> {
   }
 
   @Override
+  protected String getConfiguredTextPlural() {
+    return TEXTS.get("Countries");
+  }
+
+  @Override
   public Long getId() {
     return ID;
   }
