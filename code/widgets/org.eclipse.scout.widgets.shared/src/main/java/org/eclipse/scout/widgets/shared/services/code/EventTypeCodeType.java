@@ -27,6 +27,11 @@ public class EventTypeCodeType extends AbstractCodeType<Long, Long> {
   }
 
   @Override
+  protected String getConfiguredTextPlural() {
+    return TEXTS.get("EventTypes");
+  }
+
+  @Override
   public Long getId() {
     return ID;
   }

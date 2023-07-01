@@ -32,6 +32,11 @@ public class IndustryICBCodeType extends AbstractCodeType<Long, Long> {
   }
 
   @Override
+  protected String getConfiguredTextPlural() {
+    return TEXTS.get("IndustryICB");
+  }
+
+  @Override
   public Long getId() {
     return ID;
   }

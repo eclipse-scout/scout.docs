@@ -80,6 +80,11 @@ public class ClientNotificationSnippet {
     }
 
     @Override
+    protected String getConfiguredTextPlural() {
+      return TEXTS.get("UiThemes");
+    }
+
+    @Override
     public Long getId() {
       return ID;
     }
