@@ -24,7 +24,12 @@ public class SeverityCodeType extends AbstractCodeType<Long, Integer> {
 
   @Override
   protected String getConfiguredText() {
-    return TEXTS.get("SeverityType");
+    return TEXTS.get("Severity");
+  }
+
+  @Override
+  protected String getConfiguredTextPlural() {
+    return TEXTS.get("Severity");
   }
 
   @Override

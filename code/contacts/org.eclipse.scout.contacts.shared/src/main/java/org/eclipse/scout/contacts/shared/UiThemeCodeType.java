@@ -27,6 +27,11 @@ public class UiThemeCodeType extends AbstractCodeType<Long, String> {
   }
 
   @Override
+  protected String getConfiguredTextPlural() {
+    return TEXTS.get("UiThemes");
+  }
+
+  @Override
   public Long getId() {
     return ID;
   }
