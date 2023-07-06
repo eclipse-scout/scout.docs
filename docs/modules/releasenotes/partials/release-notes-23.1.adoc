@@ -240,7 +240,7 @@ import {Menu, Table} from '@eclipse-scout/core';
   text: 'Example',
   objectType: Menu,
   menuTypes: [
-    Table.MenuTypes.SingleSelection
+    Table.MenuType.SingleSelection
   ]
 }
 ----

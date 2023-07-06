@@ -41,7 +41,7 @@ export default (): FormModel => ({
                   objectType: Menu,
                   text: '${textKey:AddNode}',
                   menuTypes: [
-                    Tree.MenuTypes.EmptySpace
+                    Tree.MenuType.EmptySpace
                   ],
                   keyStroke: 'insert'
                 },
@@ -50,7 +50,7 @@ export default (): FormModel => ({
                   objectType: Menu,
                   text: '${textKey:AddChildNode}',
                   menuTypes: [
-                    Tree.MenuTypes.EmptySpace
+                    Tree.MenuType.EmptySpace
                   ],
                   keyStroke: 'insert'
                 },
@@ -59,8 +59,8 @@ export default (): FormModel => ({
                   objectType: Menu,
                   text: '${textKey:DeleteNode}',
                   menuTypes: [
-                    Tree.MenuTypes.SingleSelection,
-                    Tree.MenuTypes.MultiSelection
+                    Tree.MenuType.SingleSelection,
+                    Tree.MenuType.MultiSelection
                   ],
                   keyStroke: 'delete'
                 },
@@ -69,7 +69,7 @@ export default (): FormModel => ({
                   objectType: Menu,
                   text: '${textKey:DeleteAll}',
                   menuTypes: [
-                    Tree.MenuTypes.EmptySpace
+                    Tree.MenuType.EmptySpace
                   ],
                   childActions: [
                     {
@@ -77,7 +77,7 @@ export default (): FormModel => ({
                       objectType: Menu,
                       text: '${textKey:DeleteAllNodes}',
                       menuTypes: [
-                        Tree.MenuTypes.EmptySpace
+                        Tree.MenuType.EmptySpace
                       ]
                     },
                     {
@@ -85,7 +85,7 @@ export default (): FormModel => ({
                       objectType: Menu,
                       text: '${textKey:DeleteAllChildNodes}',
                       menuTypes: [
-                        Tree.MenuTypes.EmptySpace
+                        Tree.MenuType.EmptySpace
                       ]
                     }
                   ]

@@ -57,7 +57,7 @@ export default (): PageModel => ({
         objectType: FormMenu,
         text: 'Form menu',
         menuTypes: [
-          Table.MenuTypes.EmptySpace, Table.MenuTypes.SingleSelection
+          Table.MenuType.EmptySpace, Table.MenuType.SingleSelection
         ],
         form: {
           objectType: MiniForm
@@ -68,7 +68,7 @@ export default (): PageModel => ({
         objectType: Menu,
         text: '${textKey:AddRow}',
         menuTypes: [
-          Table.MenuTypes.EmptySpace
+          Table.MenuType.EmptySpace
         ],
         keyStroke: 'insert'
       },
@@ -77,7 +77,7 @@ export default (): PageModel => ({
         objectType: Menu,
         text: 'Add many',
         menuTypes: [
-          Table.MenuTypes.EmptySpace
+          Table.MenuType.EmptySpace
         ]
       },
       {
@@ -85,8 +85,8 @@ export default (): PageModel => ({
         objectType: Menu,
         text: '${textKey:DeleteRow}',
         menuTypes: [
-          Table.MenuTypes.SingleSelection,
-          Table.MenuTypes.MultiSelection
+          Table.MenuType.SingleSelection,
+          Table.MenuType.MultiSelection
         ],
         keyStroke: 'delete'
       },
@@ -97,7 +97,7 @@ export default (): PageModel => ({
         stackable: false,
         horizontalAlignment: 1,
         menuTypes: [
-          Table.MenuTypes.EmptySpace
+          Table.MenuType.EmptySpace
         ]
       }
     ],
