@@ -326,26 +326,26 @@ Please refer to the respective container for the available menu types and their 
 Most widgets specify some default menuTypes. Menus without any menuTypes are treated as if these default menuTypes are set. The defaults are:
 
 * `Calendar`
-** `Calendar.MenuTypes.EmptySpace`
+** `Calendar.MenuType.EmptySpace`
 * `ImageField`
-** `ImageField.MenuTypes.ImageUrl`
-** `ImageField.MenuTypes.Null`
+** `ImageField.MenuType.ImageUrl`
+** `ImageField.MenuType.Null`
 * `Planner`
-** `Planner.MenuTypes.EmptySpace`
+** `Planner.MenuType.EmptySpace`
 * `Table`
-** `Table.MenuTypes.EmptySpace`
+** `Table.MenuType.EmptySpace`
 * `TileGrid`
-** `TileGrid.MenuTypes.EmptySpace`
+** `TileGrid.MenuType.EmptySpace`
 * `Tree`
-** `Tree.MenuTypes.EmptySpace`
+** `Tree.MenuType.EmptySpace`
 * `ValueField`
-** `ValueField.MenuTypes.NotNull`
-** `ValueField.MenuTypes.Null`
+** `ValueField.MenuType.NotNull`
+** `ValueField.MenuType.Null`
 
 === ValueField
 
-The `ValueField` support the menu types `ValueField.MenuTypes.Null` and `ValueField.MenuTypes.NotNull`.
-This means that the `ValueField` will only display menus with `ValueField.MenuTypes.Null` if the value is `null` or those with `ValueField.MenuTypes.NotNull` if the value is set.
+The `ValueField` support the menu types `ValueField.MenuType.Null` and `ValueField.MenuType.NotNull`.
+This means that the `ValueField` will only display menus with `ValueField.MenuType.Null` if the value is `null` or those with `ValueField.MenuType.NotNull` if the value is set.
 
 Menus added to a `ValueField` that need to be visible all the time do not need to specify all possible menu types.
 The `ValueField` will treat a menu without menu types as if it had set all menu types and therefore will always display it.
@@ -365,7 +365,7 @@ import {Menu, ValueField} from '@eclipse-scout/core';
     text: 'Visible if value is null',
     objectType: Menu,
     menuTypes: [
-      ValueField.MenuTypes.Null
+      ValueField.MenuType.Null
     ]
   }
 ]
@@ -373,4 +373,4 @@ import {Menu, ValueField} from '@eclipse-scout/core';
 
 === ImageField
 
-The `ImageField` supports the menu types `ImageField.MenuTypes.ImageUrl` and `ImageField.MenuTypes.Null`.
+The `ImageField` supports the menu types `ImageField.MenuType.ImageUrl` and `ImageField.MenuType.Null`.

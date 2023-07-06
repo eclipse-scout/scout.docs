@@ -99,7 +99,7 @@ export default (): FormModel => ({
                   objectType: Menu,
                   text: '${textKey:Move}',
                   menuTypes: [
-                    Table.MenuTypes.SingleSelection
+                    Table.MenuType.SingleSelection
                   ],
                   childActions: [
                     {
@@ -107,7 +107,7 @@ export default (): FormModel => ({
                       objectType: Menu,
                       text: '${textKey:MoveToTop}',
                       menuTypes: [
-                        Table.MenuTypes.SingleSelection
+                        Table.MenuType.SingleSelection
                       ]
                     },
                     {
@@ -115,7 +115,7 @@ export default (): FormModel => ({
                       objectType: Menu,
                       text: '${textKey:MoveUp}',
                       menuTypes: [
-                        Table.MenuTypes.SingleSelection
+                        Table.MenuType.SingleSelection
                       ]
                     },
                     {
@@ -123,7 +123,7 @@ export default (): FormModel => ({
                       objectType: Menu,
                       text: '${textKey:MoveDown}',
                       menuTypes: [
-                        Table.MenuTypes.SingleSelection
+                        Table.MenuType.SingleSelection
                       ]
                     },
                     {
@@ -131,7 +131,7 @@ export default (): FormModel => ({
                       objectType: Menu,
                       text: '${textKey:MoveToBottom}',
                       menuTypes: [
-                        Table.MenuTypes.SingleSelection
+                        Table.MenuType.SingleSelection
                       ]
                     }
                   ]
@@ -141,8 +141,8 @@ export default (): FormModel => ({
                   objectType: Menu,
                   text: '${textKey:DeleteRow}',
                   menuTypes: [
-                    Table.MenuTypes.SingleSelection,
-                    Table.MenuTypes.MultiSelection
+                    Table.MenuType.SingleSelection,
+                    Table.MenuType.MultiSelection
                   ],
                   keyStroke: 'delete'
                 },
@@ -152,8 +152,8 @@ export default (): FormModel => ({
                   text: '${textKey:ToggleRowEnabled}',
                   inheritAccessibility: false,
                   menuTypes: [
-                    Table.MenuTypes.SingleSelection,
-                    Table.MenuTypes.MultiSelection
+                    Table.MenuType.SingleSelection,
+                    Table.MenuType.MultiSelection
                   ]
                 }
               ]

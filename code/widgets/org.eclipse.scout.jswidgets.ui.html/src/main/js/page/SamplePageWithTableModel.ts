@@ -58,7 +58,7 @@ export default (): PageModel => ({
         objectType: FormMenu,
         text: 'Form menu',
         menuTypes: [
-          Table.MenuTypes.EmptySpace, Table.MenuTypes.SingleSelection
+          Table.MenuType.EmptySpace, Table.MenuType.SingleSelection
         ],
         form: {
           objectType: MiniForm
@@ -80,8 +80,8 @@ export default (): PageModel => ({
         objectType: Menu,
         text: '${textKey:DeleteRow}',
         menuTypes: [
-          Table.MenuTypes.SingleSelection,
-          Table.MenuTypes.MultiSelection
+          Table.MenuType.SingleSelection,
+          Table.MenuType.MultiSelection
         ],
         keyStroke: 'delete'
       },

@@ -287,3 +287,29 @@ The `Form.load` and `Form.save` methods now automatically include a busy indicat
 Custom busy indicators for these two operations (e.g. when performing a Rest call) can therefore be removed.
 
 The method `Session.setBusy` was moved to `Desktop.setBusy`. So instead of calling `session.setBusy(...)` use `session.desktop.setBusy(...)`.
+
+=== MenuTypes
+
+The MenuType constants and types were renamed from `MenuTypes` to `MenuType`:
+
+Constants:
+
+* `Calendar.MenuTypes` -> `Calendar.MenuType`
+* `ImageField.MenuTypes` -> `ImageField.MenuType`
+* `Planner.MenuTypes` -> `Planner.MenuType`
+* `TabBox.MenuTypes` -> `TabBox.MenuType`
+* `Table.MenuTypes` -> `Table.MenuType`
+* `TileGrid.MenuTypes` -> `TileGrid.MenuType`
+* `Tree.MenuTypes` -> `Tree.MenuType`
+* `ValueField.MenuTypes` -> `ValueField.MenuType`
+
+Types:
+
+* `CalendarMenuTypes` -> `CalendarMenuType`
+* `ImageFieldMenuTypes` -> `ImageFieldMenuType`
+* `PlannerMenuTypes` -> `PlannerMenuType`
+* `TabBoxMenuTypes` -> `TabBoxMenuType`
+* `TableMenuTypes` -> `TableMenuType`
+* `TileGridMenuTypes` -> `TileGridMenuType`
+* `TreeMenuTypes` -> `TreeMenuType`
+* `ValueFieldMenuTypes` -> `ValueFieldMenuType`

@@ -100,7 +100,7 @@ export default (): FormModel => ({
                   id: 'DeleteRowMenu',
                   objectType: Menu,
                   text: '${textKey:DeleteRow}',
-                  menuTypes: [Table.MenuTypes.SingleSelection, Table.MenuTypes.MultiSelection],
+                  menuTypes: [Table.MenuType.SingleSelection, Table.MenuType.MultiSelection],
                   keyStroke: 'delete'
                 }
               ]

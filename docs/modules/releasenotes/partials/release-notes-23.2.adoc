@@ -114,7 +114,7 @@ Refer to the xref:migration:migration-guide.adoc#form-error-handling[Migration G
 ==== Default menuTypes
 
 Default menuTypes have been added to several widgets.
-This means that e.g. the `Table` treats a menu without a menuType as if it had set `Table.MenuTypes.EmptySpace`.
+This means that e.g. the `Table` treats a menu without a menuType as if it had set `Table.MenuType.EmptySpace`.
 For more information about the default menuTypes see xref:technical-guide:user-interface/widget-reference.adoc#menu-types[MenuTypes].
 
 === SmartFields: Error-Handling for Key-Lookups
