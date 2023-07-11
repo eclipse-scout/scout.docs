@@ -169,6 +169,16 @@ The following NLS texts were unused within the Scout framework and removed:
 * Without
 * searchingProposals
 
+== Adapt Planner properties
+
+`Planner.selectionMode` is removed. The properties `Planner.rangeSelectable` and `Planner.multiSelect` should be used instead. To get the same behavior as before, the modes should be translated as follows:
+
+* SELECTION_MODE_NONE -> `Planner.rangeSelectable = false` and `Planner.multiSelect = false`
+* SELECTION_MODE_SINGLE_RANGE -> `Planner.rangeSelectable = true` and `Planner.multiSelect = false`
+* SELECTION_MODE_MULTI_RANGE -> `Planner.rangeSelectable = true` and `Planner.multiSelect = true`
+
+With `Planner.rangeSelectable = false` and `Planner.multiSelect = true` its now possible to select multiple rows even if no range is selectable. In addition, if multiple rows are selectable, the selected rows no longer have to be next to each other.
+
 == Scout JS
 
 === Multi Dimension Support
