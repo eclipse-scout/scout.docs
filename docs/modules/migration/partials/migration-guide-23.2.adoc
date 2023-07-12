@@ -179,6 +179,64 @@ The following NLS texts were unused within the Scout framework and removed:
 
 With `Planner.rangeSelectable = false` and `Planner.multiSelect = true` its now possible to select multiple rows even if no range is selectable. In addition, if multiple rows are selectable, the selected rows no longer have to be next to each other.
 
+== .properties Files using UTF-8 instead of ISO-8859-1 (Latin-1)
+
+`.properties` files, including, but not limited to
+
+* Text properties (NLS)
+* Config properties
+* User preferences via `FileSystemUserPreferencesStorageService`
+
+are now using UTF-8 instead of ISO-8859-1 encoding.
+
+Existing files need to be converted, e.g. by the help of `native2ascii`, which is available up to (but not including) JDK 17.
+Execute the following command in your workspace directory:
+
+....
+find . -name "*.properties" -exec native2ascii -reverse -encoding utf8 {} {} \;
+....
+
+It's recommended to check calls to
+
+* Properties#load
+* Properties#store
+
+and make sure that the `Reader`/`Writer` overload is used instead of the one with `InputStream`/`OutputStream` and that UTF-8 encoding is used for the reader/writer.
+Example:
+
+[source,java]
+----
+try (InputStream stream = getClass().getResourceAsStream(filename); Reader reader = new InputStreamReader(stream, StandardCharsets.UTF_8)) {
+  Properties properties = new Properties();
+  properties.load(reader);
+  // ...
+}
+----
+
+Additionally, configure your IDE to use UTF-8 for `.properties` files too.
+
+Eclipse: Window/Preferences/General/Content Types
+
+* Text/Java Properties File
+* Default encoding: `UTF-8` & press `Update`
+** For sub entries too (e.g. Build Properties File, ...)
+
+IntelliJ: File/Settings/Editor/File Encodings:
+
+* Project Encoding: `UTF-8`
+* Properties Files (*.properties)
+** Default encoding for properties files: `UTF-8`
+** [ ] Transparent native-to-ascii conversion: unchecked
+
+In `.editorconfig`, remove the section for `*.properties`, e.g. remove
+
+----
+[*.properties]
+charset = latin1 # latin1 = ISO-8859-1
+----
+
+Charset for `[*]` should already be set to `charset = utf-8`.
+
 == Scout JS
 
 === Multi Dimension Support

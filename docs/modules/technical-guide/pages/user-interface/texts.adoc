@@ -78,15 +78,11 @@ If configured like this, it means that the .properties files will be located in 
 * `/resources/texts/Texts_de.properties` (german)
 * `...` (additional languages)
 
-If you decide to store your translated texts in .properties files, you migth want to use the https://wiki.eclipse.org/Scout/SDK/NLS_Editor[NLS Editor] to edit them.
+If you decide to store your translated texts in .properties files, you might want to use the https://wiki.eclipse.org/Scout/SDK/NLS_Editor[NLS Editor] to edit them.
 
-You need to respect the format defined by the Java Properties class. In particular the encoding of a .properties file is ISO-8859-1 (also known as Latin-1). All non-Latin-1 characters must be encoded. Examples:
-
- 'à' => "\u00E0"
- 'ç' => "\u00E7"
- 'ß' => "\u00DF"
-
-The encoding is the "Unicode escape characters": \uHHHH where HHHH is a hexadecimal id of the character in the http://en.wikipedia.org/wiki/List_of_Unicode_characters[Unicode character table]. Read more on the .properties File on http://en.wikipedia.org/wiki/.properties[wikipedia].
+You need to respect the format defined by the Java Properties class.
+In particular the encoding of a .properties file is UTF-8 since Java 9.
+Read more on the .properties File on http://en.wikipedia.org/wiki/.properties[wikipedia].
 
 === File Watcher
 
