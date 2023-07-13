@@ -84,6 +84,17 @@ To install the Scout SDK into your existing Eclipse IDE, use this P2 update site
 
 // ----------------------------------------------------------------------------
 
+== New 3rd Party requirements
+
+To update your application the following steps might be required:
+
+* Update the version of the `maven_rt_plugin_config-master` in your `pom.xml` files to the newest `23.2.x` release.
+See https://search.maven.org/artifact/org.eclipse.scout/maven_rt_plugin_config-master[Maven central] for a list of versions available.
+* Update the Scout versions (`package.json` and `pom.xml`) as shown in <<Obtaining the Latest Version>>.
+* If you are using Eclipse and web-service providers, update the `.factorypath` files as shown in xref:technical-guide:working-with-data/jax-ws.adoc#jax-ws-appendix[JAX-WS Appendix].
+
+// ----------------------------------------------------------------------------
+
 == Utilities
 
 === DateUtility: New Default Date Time Format
