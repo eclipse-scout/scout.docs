@@ -237,6 +237,12 @@ charset = latin1 # latin1 = ISO-8859-1
 
 Charset for `[*]` should already be set to `charset = utf-8`.
 
+== CssClasses interface
+
+The interface `org.eclipse.scout.rt.client.ui.CssClasses` was moved to `org.eclipse.scout.rt.shared.CssClasses`.
+The old interface was left and marked `@Deprecated` for release 23/2 and will be removed in a future release.
+Change your imports to the moved interface in order to avoid deprecation warnings.
+
 == Scout JS
 
 === Multi Dimension Support
