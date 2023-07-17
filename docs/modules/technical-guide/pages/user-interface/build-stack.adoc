@@ -367,7 +367,7 @@ module.exports = (env, args) => {
   "main": "./src/main/js/index.ts",
   "publishConfig": {
     "main": "./target/dist/dev/your-library.js",
-    "types": "./target/dist/d.ts/index.d.ts"
+    "types": "./target/dist/d.ts/src/main/js/index.d.ts"
   },
   "files": [
     "src/main/js",
