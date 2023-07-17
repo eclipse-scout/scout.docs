@@ -1,0 +1,9 @@
+{
+  "extends": "@eclipse-scout/tsconfig/tsconfig.json",
+  "files": [],
+  "references": [
+    { "path": "code/widgets/org.eclipse.scout.jswidgets.ui.html"},
+    { "path": "code/widgets/org.eclipse.scout.widgets.ui.html"},
+    { "path": "code/widgets/org.eclipse.scout.widgets.heatmap.ui.html"}
+  ]
+}
