@@ -61,6 +61,7 @@ import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 import org.eclipse.scout.widgets.client.deeplink.FormDeepLinkHandler;
 import org.eclipse.scout.widgets.client.services.lookup.DisplayViewIdLookupCall;
 import org.eclipse.scout.widgets.client.services.lookup.DisplayViewIdLookupCall.DisplayViewId;
+import org.eclipse.scout.widgets.client.services.lookup.IconIdLookupCall;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.DisplayHintLookupCall.DisplayHint;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.DisplayParentLookupCall.DisplayParent;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.CloseButton;
@@ -97,7 +98,6 @@ import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.LongRunningOpe
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.LongRunningOperationBox.LongRunningDurationField;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.LongRunningOperationBox.StartLongRunningOperationButton;
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractStatusButton;
-import org.eclipse.scout.widgets.shared.Icons;
 
 @ClassId("b612310f-59b6-427d-93c9-57b384564a94")
 public class FormForm extends AbstractForm implements IPageForm {
@@ -1052,55 +1052,10 @@ public class FormForm extends AbstractForm implements IPageForm {
     }
   }
 
-  @ApplicationScoped
-  @ClassId("effa0008-9b49-4c98-9a4a-a2d6eef411a4")
-  public static class IconIdLookupCall extends LocalLookupCall<String> {
-
-    private static final long serialVersionUID = 1L;
-
-    @Override
-    protected List<? extends ILookupRow<String>> execCreateLookupRows() {
-      List<ILookupRow<String>> rows = new ArrayList<>();
-      for (IconId iconId : IconId.values()) {
-        rows.add(
-            new LookupRow<>(iconId.getValue(), iconId.getDisplayText()).withIconId(iconId.getValue()));
-      }
-      return rows;
-    }
-
-    public enum IconId {
-      Calendar(Icons.Calendar),
-      Person(Icons.PersonSolid),
-      Square(Icons.SquareSolid),
-      Star(Icons.Star),
-      Sum(Icons.Sum),
-      World(Icons.World);
-
-      private final String m_value;
-      private final String m_displayText;
-
-      IconId(String value) {
-        this(value, null);
-      }
-
-      IconId(String value, String displayText) {
-        m_value = value;
-        m_displayText = (displayText == null ? name() : displayText);
-      }
-
-      public String getValue() {
-        return m_value;
-      }
-
-      public String getDisplayText() {
-        return m_displayText;
-      }
-    }
-  }
-
   @Order(15)
   @ClassId("a50aa909-95e2-4503-bd09-a789b21801d0")
   public abstract static class AbstractFieldButtonsBox extends AbstractSequenceBox {
+
     @Override
     protected boolean getConfiguredAutoCheckFromTo() {
       return false;

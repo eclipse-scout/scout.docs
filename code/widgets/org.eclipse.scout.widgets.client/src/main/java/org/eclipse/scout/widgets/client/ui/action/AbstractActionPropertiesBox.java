@@ -21,7 +21,7 @@ import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
-import org.eclipse.scout.widgets.client.ui.forms.FormForm.IconIdLookupCall;
+import org.eclipse.scout.widgets.client.services.lookup.IconIdLookupCall;
 
 @ClassId("206530e2-cebb-4ae8-9624-20474982cfda")
 public abstract class AbstractActionPropertiesBox<ACTION extends IAction> extends AbstractGroupBox {

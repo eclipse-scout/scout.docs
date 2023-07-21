@@ -235,11 +235,6 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
             }
 
             @Override
-            protected String getConfiguredFont() {
-              return "ITALIC";
-            }
-
-            @Override
             protected void execChangedValue() {
               getChooseAnImageField().setEnabled(getValue());
             }
@@ -270,11 +265,6 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
             }
 
             @Override
-            protected String getConfiguredFont() {
-              return "ITALIC";
-            }
-
-            @Override
             protected void execChangedValue() {
               getChooseAnImageField().setMandatory(getValue());
             }
@@ -300,11 +290,6 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
             }
 
             @Override
-            protected String getConfiguredFont() {
-              return "ITALIC";
-            }
-
-            @Override
             protected boolean getConfiguredProcessButton() {
               return false;
             }
@@ -322,11 +307,6 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
             @Override
             protected String getConfiguredTooltipText() {
               return "Maximum file size in bytes that is accepted by the file chooser field.";
-            }
-
-            @Override
-            protected String getConfiguredLabelFont() {
-              return "ITALIC";
             }
 
             @Override
@@ -358,6 +338,7 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
       @Order(20)
       @ClassId("573e431b-de60-4476-b638-6868f76da1e7")
       public class FileChooserButtonBox extends AbstractGroupBox {
+
         @Override
         protected String getConfiguredLabel() {
           return "File Chooser Button";
@@ -366,6 +347,7 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
         @Order(10)
         @ClassId("bb27c852-ac1c-48ef-8ee0-e9aefec3d6d9")
         public class FileChooserButton extends AbstractFileChooserButton {
+
           @Override
           protected String getConfiguredLabel() {
             return "Upload";

@@ -24,7 +24,7 @@ import org.eclipse.scout.rt.platform.status.IStatus;
 import org.eclipse.scout.rt.platform.status.Status;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
-import org.eclipse.scout.widgets.client.ui.forms.FormForm.IconIdLookupCall;
+import org.eclipse.scout.widgets.client.services.lookup.IconIdLookupCall;
 import org.eclipse.scout.widgets.client.ui.forms.FormOptionsForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.FormOptionsForm.MainBox.CssClassField;
 import org.eclipse.scout.widgets.client.ui.forms.FormOptionsForm.MainBox.IconField;

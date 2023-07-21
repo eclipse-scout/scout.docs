@@ -33,6 +33,15 @@ public abstract class AbstractViewButtonPropertiesBox extends AbstractActionProp
   @Override
   protected void updateFields() {
     super.updateFields();
+    IViewButton action = getAction();
+    if (action != null) {
+      getDisplayStyleField().setEnabled(true);
+      getDisplayStyleField().setValue(action.getDisplayStyle());
+    }
+    else {
+      getDisplayStyleField().setEnabled(false);
+      getDisplayStyleField().setValue(null);
+    }
   }
 
   public DisplayStyleField getDisplayStyleField() {
@@ -42,6 +51,7 @@ public abstract class AbstractViewButtonPropertiesBox extends AbstractActionProp
   @Order(10000)
   @ClassId("bb8e93de-d360-4226-9c6e-39eaddf4e1a8")
   public class DisplayStyleField extends AbstractSmartField<IViewButton.DisplayStyle> {
+
     @Override
     protected String getConfiguredLabel() {
       return TEXTS.get("DisplayStyle");
@@ -57,5 +67,4 @@ public abstract class AbstractViewButtonPropertiesBox extends AbstractActionProp
       Optional.ofNullable(getAction()).ifPresent(a -> a.setDisplayStyle(getValue()));
     }
   }
-
 }
