@@ -18,9 +18,12 @@ export * from './WidgetsOutline';
 export * from './WidgetsOutlineAdapter';
 export * from './WidgetsTileOutlineOverview';
 export * from './forms/hybrid/HybridJsForm';
+export * from './forms/hybrid/PersonDo';
+export * from './forms/hybrid/PersonJsForm';
 export * from './forms/switch/SwitchDisplayStyleLookupCall';
 export * from './forms/switch/SwitchJsForm';
 export * from './forms/switch/SwitchJsFormModel';
+export * from './pages/hybrid/HybridJsPage';
 export * from './tile/CustomTile';
 export * from './tile/CustomTileAdapter';
 

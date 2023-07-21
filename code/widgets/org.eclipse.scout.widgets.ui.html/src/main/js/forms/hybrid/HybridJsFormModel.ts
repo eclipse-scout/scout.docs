@@ -10,7 +10,7 @@
 import {FormModel, GroupBox, Label, StringField, WidgetField, WrappedFormField} from '@eclipse-scout/core';
 
 export default (): FormModel => ({
-  id: 'widgets.HybridJsForm',
+  id: 'HybridJsForm',
   rootGroupBox: {
     id: 'MainBox',
     objectType: GroupBox,
@@ -30,7 +30,8 @@ export default (): FormModel => ({
             },
             fieldWidget: {
               id: 'HybridDescriptionLabel',
-              objectType: Label
+              objectType: Label,
+              htmlEnabled: true
             }
           },
           {
@@ -227,7 +228,3 @@ export type HybridJsFormWidgetMap = {
   'CreateFormBox.PersonDoField': StringField;
   'CreatePersonFormWrappedFormField': WrappedFormField;
 };
-
-export interface HybridJsFormModel extends FormModel {
-  pageTitle?: string;
-}
