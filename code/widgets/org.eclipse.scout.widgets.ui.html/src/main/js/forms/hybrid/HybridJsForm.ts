@@ -8,14 +8,12 @@
  * SPDX-License-Identifier: EPL-2.0
  */
 import {AppLinkActionEvent, DesktopNotification, Form, FormModel, HybridManager, InitModelOf, Label, objects, scout, Status, StringField, strings, WrappedFormField} from '@eclipse-scout/core';
-import model, {HybridJsFormModel, HybridJsFormWidgetMap} from './HybridJsFormModel';
-import {PersonDo} from './PersonDo';
+import model, {HybridJsFormWidgetMap} from './HybridJsFormModel';
+import {PersonDo} from '../../index';
 
-export class HybridJsForm extends Form implements HybridJsFormModel {
-  declare model: HybridJsFormModel;
+export class HybridJsForm extends Form {
   declare widgetMap: HybridJsFormWidgetMap;
 
-  pageTitle: string;
   hybridDescriptionLabel: Label;
   pingLabel: Label;
   sendDesktopNotificationLabel: Label;
@@ -37,8 +35,8 @@ export class HybridJsForm extends Form implements HybridJsFormModel {
     super._init(model);
 
     this.hybridDescriptionLabel = this.widget('HybridDescriptionLabel');
-    this.hybridDescriptionLabel.setValue(`The page (${this.pageTitle}) you see here is implemented in Scout Classic but its detailForm is implemented in Scout JS.
-This view demonstrates several hybrid abilities like opening a Scout Classic form from Scout JS or executing actions on the UI server from Scout JS.`);
+    this.hybridDescriptionLabel.setValue('The page you see here is implemented in Scout Classic but its detailForm is implemented in <b>Scout JS</b>.<br>' +
+      'This view demonstrates several hybrid abilities like opening a Scout Classic form from Scout JS or executing actions on the UI server from Scout JS.');
 
     this.pingLabel = this.widget('PingLabel');
     this.pingLabel.on('appLinkAction', this._onPingLabelAppLinkAction.bind(this));

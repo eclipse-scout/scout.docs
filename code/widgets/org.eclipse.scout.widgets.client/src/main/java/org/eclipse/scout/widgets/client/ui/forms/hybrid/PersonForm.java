@@ -37,6 +37,11 @@ public class PersonForm extends AbstractForm {
     return "Person";
   }
 
+  @Override
+  protected String getConfiguredSubTitle() {
+    return "Java";
+  }
+
   public void exportData(PersonDo personDo) {
     BEANS.get(PersonFormMapper.class).toDo(this, personDo);
   }
