@@ -148,7 +148,7 @@ The content of that file would be a class `MyForm` that extends the `Form` from 
 import {Form} from '@eclipse-scout/core';
 import model from './MyFormModel';
 
-export default class MyForm extends Form {
+export class MyForm extends Form {
   _jsonModel() {
     return model;
   }
@@ -270,7 +270,7 @@ Nevertheless, here is how you would do it manually for our example form from abo
 . Create a type called 'MyFormWidgetMap' in the file 'MyFormModel.ts'
 . Link it to the form by re declaring the type of `widgetMap`.
 
-[source,javascript]
+[source,typescript]
 .Create Widget Map
 ----
 export type MyFormWidgetMap = {
@@ -279,7 +279,7 @@ export type MyFormWidgetMap = {
 }
 ----
 
-[source,javascript]
+[source,typescript]
 .Link Widget Map
 ----
 import {Form} from '@eclipse-scout/core';
@@ -298,7 +298,7 @@ If you're using JavaScript for your form, you can use JSDoc to link the `widgetM
 import {Form} from '@eclipse-scout/core';
 import {MyFormWidgetMap} from './MyFormModel';
 
-export default class MyForm extends Form {
+export class MyForm extends Form {
 
   constructor() {
     super();

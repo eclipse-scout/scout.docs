@@ -20,7 +20,7 @@ In addition to Node module dependencies, a Scout application uses ES6 imports to
 import PersonFormModel from './PersonFormModel';
 import {Form, models} from '@eclipse-scout/core';
 
-export default class PersonForm extends Form {
+export class PersonForm extends Form {
 
   _jsonModel() {
     return models.get(PersonFormModel);
