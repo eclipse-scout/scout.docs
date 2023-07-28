@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {Button, GroupBox, GroupBoxModel, LabelField, NumberField, SequenceBox} from '@eclipse-scout/core';
+import {Button, GroupBox, GroupBoxModel, NumberField} from '@eclipse-scout/core';
 import {ActionWithResultBox} from '../index';
 
 export default (): GroupBoxModel => ({
@@ -35,6 +35,9 @@ export default (): GroupBoxModel => ({
       label: 'Reveal',
       displayStyle: Button.DisplayStyle.LINK,
       processButton: false,
+      gridDataHints: {
+        fillVertical: false
+      },
       tooltipText: '${textKey:RevealTooltip}'
     },
     {

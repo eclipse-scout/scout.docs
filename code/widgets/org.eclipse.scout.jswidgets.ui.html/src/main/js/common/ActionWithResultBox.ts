@@ -38,9 +38,9 @@ export class ActionWithResultBox extends SequenceBox implements ActionWithResult
 
   updateBooleanReturnValue(returned: boolean) {
     if (returned) {
-      this.resultField.setValue('-> returned true');
+      this.resultField.setValue('→ returned true');
     } else {
-      this.resultField.setValue('-> returned false');
+      this.resultField.setValue('→ returned false');
     }
     this.resultField.toggleCssClass('action-return-success', returned);
     this.resultField.toggleCssClass('action-return-fail', !returned);
