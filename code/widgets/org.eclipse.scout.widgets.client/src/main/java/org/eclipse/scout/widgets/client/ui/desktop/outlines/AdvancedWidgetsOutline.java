@@ -20,6 +20,7 @@ import org.eclipse.scout.rt.platform.inventory.IClassInfo;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.widgets.client.ui.desktop.pages.FormPage;
 import org.eclipse.scout.widgets.client.ui.desktop.pages.IAdvancedFormPage;
+import org.eclipse.scout.widgets.client.ui.desktop.pages.SwitchJsNodePage;
 import org.eclipse.scout.widgets.client.ui.forms.IPageForm;
 
 @Order(1100)
@@ -54,6 +55,8 @@ public class AdvancedWidgetsOutline extends AbstractWidgetsOutline {
         .map(ci -> (Class<IPageForm>) ci.resolveClass())
         .map(FormPage::new)
         .forEach(pageList::add);
+
+    pageList.add(new SwitchJsNodePage());
 
     FormPage.sort(pageList);
   }

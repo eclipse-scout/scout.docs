@@ -11,7 +11,7 @@ import {OutlineModel, PageWithNodes} from '@eclipse-scout/core';
 import {
   AccordionForm, BreadcrumbBarFieldForm, BrowserFieldForm, ButtonForm, CarouselForm, ChartFieldForm, CheckBoxFieldForm, DateFieldForm, DesktopForm, DesktopNotificationForm, EditableTableForm, FileChooserButtonForm, FileChooserFieldForm,
   FileChooserForm, FormForm, GroupBoxForm, HierarchicalTableForm, ImageFieldForm, ImageForm, IntegerFieldForm, LabelFieldForm, LabelForm, ListBoxForm, LogicalGridForm, MenuBarForm, MessageBoxForm, ModeSelectorForm, MultilineSmartFieldForm,
-  MultilineStringFieldForm, NumberFieldForm, PopupForm, ProposalFieldForm, RadioButtonGroupForm, RestForm, SamplePageWithNodes, SamplePageWithTable, SequenceBoxForm, SmartFieldForm, StringFieldForm, TabBoxForm, TableForm,
+  MultilineStringFieldForm, NumberFieldForm, PopupForm, ProposalFieldForm, RadioButtonGroupForm, RestForm, SamplePageWithNodes, SamplePageWithTable, SequenceBoxForm, SmartFieldForm, StringFieldForm, SwitchForm, TabBoxForm, TableForm,
   TableSmartFieldForm, TagFieldForm, TileAccordionForm, TileGridForm, TooltipForm, TreeBoxForm, TreeForm, TreeSmartFieldForm, VirtualTileGridForm, WatchFieldForm, WidgetsOutlineOverview, WrappedFormFieldForm
 } from '../index';
 
@@ -388,6 +388,15 @@ export default (): OutlineModel => ({
           detailTableVisible: false
         }
       ]
+    },
+    {
+      objectType: PageWithNodes,
+      text: 'Switch',
+      leaf: true,
+      detailForm: {
+        objectType: SwitchForm
+      },
+      detailTableVisible: false
     },
     {
       objectType: PageWithNodes,
