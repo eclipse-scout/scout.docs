@@ -19,71 +19,83 @@ And it can even be used to replace a specific widget completely, so your widget 
 
 To extend from a widget, just create a new class, extend from the desired widget class and override the methods you want to adjust.
 
-[source,javascript]
-.SpecialStringField.js
+[source,typescript]
+.SpecialStringField.ts
 ----
 import {StringField} from '@eclipse-scout/core';
 
-export default class SpecialStringField extends StringField {
+export class SpecialStringField extends StringField {
   // Override desired methods
 }
 ----
 
-Then, register it in your `index` file as usual and use it in your code by creating a new instance with `scout.create('yournamespace.SpecialStringField')` or as part of a model:
+Then, register it in your `index` file as usual and use it in your code by creating a new instance with `scout.create(SpecialStringField)` or as part of a model:
 
-[source,js]
-.index.js
+[source,typescript]
+.index.ts
 ----
 // ...
-export {default as SpecialStringField} from './SpecialStringField';
+export * from './SpecialStringField';
 // ...
-window.yournamespace = Object.assign(window.yournamespace || {}, self);
+ObjectFactory.get().registerNamespace('yournamespace', self);
 ----
 
-[source,javascript]
-.ExampleFormModel.js
+[source,typescript]
+.ExampleFormModel.ts
 ----
-export default () => ({
+import {FormModel, GroupBox} from '@eclipse-scout/core';
+import {SpecialStringField} from './index';
+
+export default (): FormModel => ({
   rootGroupBox: {
-    objectType: 'GroupBox',
+    objectType: GroupBox,
     fields: [
       {
         id: 'SpecialField',
-        objectType: 'yournamespace.SpecialStringField',
+        objectType: SpecialStringField,
         label: 'Your special field'
       }
     ]
   }
 });
+
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
+export type ExampleFormWidgetMap = {
+  'SpecialField': SpecialStringField;
+};
 ----
 
 If you want to replace every `StringField` in your application with `SpecialStringField`, you need to register a new object factory for the `objectType` `StringField` as follows:
 
-[source,javascript]
+[source,typescript]
 .Adding a new object factory registration
 ----
-import {SpecialStringField} from './index';
 import {scout} from '@eclipse-scout/core';
+import {SpecialStringField} from './index';
 
 scout.addObjectFactories({
   'StringField': () => new SpecialStringField()
 });
 ----
 
-More details can be found in the chapter <<Object Factory>>.
+More details can be found in the chapter xref:user-interface/object-factory.adoc[].
 
 ==== Extending a Model
 
-If you need to extend a widget that uses a model (see <<Creating a Widget Declaratively>>), you may have to extend that model as well.
+If you need to extend a widget that uses a model (see xref:user-interface/widget.adoc#creating-a-widget-declaratively[Creating a Widget Declaratively]), you may have to extend that model as well.
 To do so, extend the widget as described above and either adjust the widgets in the `init` function directly.
 
-[source,javascript]
-.ExtendedForm.js
+[source,typescript]
+.ExtendedForm.ts
 ----
-import ExampleForm from './ExampleForm';
+import {InitModelOf} from '@eclipse-scout/core';
+import {ExampleForm} from './ExampleForm';
 
-export default class ExtendedForm extends ExampleForm {
-  _init(model) {
+export class ExtendedForm extends ExampleForm {
+  protected override _init(model: InitModelOf<this>) {
     super._init(model);
     this.widget('SpecialField').setLabel('New label for the special field');
   }
@@ -93,17 +105,16 @@ export default class ExtendedForm extends ExampleForm {
 Or, for more complex cases, you can put your model adjustments in a separate file and use the declarative approach.
 To do so, override the `_jsonModel` method and use `models.extend` to adapt the original model.
 
-[source,javascript]
-.ExtendedForm.js with separate model
+[source,typescript]
+.ExtendedForm.ts with separate model
 ----
-import {models} from '@eclipse-scout/core';
-import ExampleForm from './ExampleForm';
+import {FormModel, models} from '@eclipse-scout/core';
+import {ExampleForm} from './index';
 import ExtendedFormModel from './ExtendedFormModel';
 
-export default class ExtendedForm extends ExampleForm {
-  _jsonModel() {
-    let baseModel = super._jsonModel();
-    return models.extend(ExtendedFormModel, baseModel);
+export class ExtendedForm extends ExampleForm {
+  protected override _jsonModel(): FormModel {
+    return models.extend(ExtendedFormModel, super._jsonModel());
   }
 }
 ----
@@ -115,10 +126,12 @@ Then, create a new file that will contain your model extensions.
 
 The following example contains an extension for the field with the id `SpecialField` that sets a new value for the label.
 
-[source,javascript]
-.ExtendedFormModel.js
+[source,typescript]
+.ExtendedFormModel.ts
 ----
-export default () => ({
+import {ExtensionModel} from '@eclipse-scout/core';
+
+export default (): ExtensionModel => ({
   type: 'extension',
   extensions: [
     {
@@ -150,11 +163,11 @@ The base class for all extensions is `Extension`. This class is used to extend a
 Scout object. In order to use the extension feature you must subclass +Extension+ and
 implement an `init` function, where you register the functions you want to extend. Example:
 
-[source,javascript]
+[source,typescript]
 ----
 import {Extension, StringField} from '@eclipse-scout/core';
 
-export default class MyExtension extends Extension {
+export class MyExtension extends Extension {
   init() {
     this.extend(StringField.prototype, '_init');
   }
@@ -163,14 +176,22 @@ export default class MyExtension extends Extension {
 
 Then you implement functions with the same name and signature on the extension class. Example:
 
-[source,javascript]
+[source,typescript]
 ----
-_init(model) {
-  // Call the original _init() method of the StringField class
-  this.next(model);
-  // Extend the instance with a new property called bar with the value foo
-  // -> EVERY string field now has this new property
-  this.extended.setProperty('bar', 'foo');
+import {Extension, InitModelOf, StringField} from '@eclipse-scout/core';
+
+export class MyExtension extends Extension<StringField> {
+  init() {
+    this.extend(StringField.prototype, '_init');
+  }
+
+  _init(model: InitModelOf<StringField>) {
+    // Call the original _init() method of the StringField class
+    this.next(model);
+    // Extend the instance with a new property called bar with the value foo
+    // -> EVERY string field now has this new property
+    this.extended.setProperty('bar', 'foo');
+  }
 }
 ----
 
@@ -182,29 +203,30 @@ next:: is a reference to the next extended function or the original function of 
 in case the current extension is the last extension in the extension chain.
 extended:: is the extended or original object.
 
-All extensions must be registered in the `_installExtensions` function of your `App` (make sure to use the namespace which is defined in your `index.js` instead of `yournamespace`).
+All extensions must be registered in the `_installExtensions` function of your `App`.
 
 You can find your app in your entrypoint file that is linked in your `webpack.config.js`.
 If you already have a custom `App`, just override `_installExtensions` and register the extension.
 Otherwise, you need to create a custom `App` first by extending from the Scout `App` (or `RemoteApp` for Scout Classic) and make sure
 this new app is initialized rather than the default one.
 
-.CustomApp.js
-[source,javascript]
+.CustomApp.ts
+[source,typescript]
 ----
 import {App, Extension} from '@eclipse-scout/core';
+import {MyExtension} from './index';
 
-export default class CustomApp extends App {
-  _installExtensions() {
+export class CustomApp extends App {
+  override _installExtensions() {
     Extension.install([
-      'yournamespace.MyExtension'
+      MyExtension
     ]);
   }
 }
 ----
 
 .Entry point file
-[source,javascript]
+[source,typescript]
 ----
 import CustomApp from './CustomApp';
 

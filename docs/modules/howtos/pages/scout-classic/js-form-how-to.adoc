@@ -39,7 +39,7 @@ if (exampleJsForm.isFormStored()) {
 The complete form and its business logic is implemented in JS in the same way a form is implemented in a Scout JS application.
 The only property that needs to be set in Java is the `displayHint` of the form.
 
-[source,ts]
+[source,typescript]
 .Implementation of the form in Scout JS
 ----
 import {Form, models, StringField} from '@eclipse-scout/core';
