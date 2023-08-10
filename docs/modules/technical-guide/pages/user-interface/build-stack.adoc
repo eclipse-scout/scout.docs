@@ -337,8 +337,10 @@ The library config takes care of defining the externals (the code that won't be 
 This means, if an `import` points to code from a dependency (or dev-, optional-, bundled- or peer-dependency), the code won't be bundled and the import is preserved.
 The library itself will be an ESM module and provide an `export` so it can be imported by consumers.
 . Link the entry point (`main`) of your `package.json` to the entry point of your library.
+. Configure your `tsconfig.json` and set the `rootDir` and `outDir` property analogous to the example of the
+https://www.npmjs.com/package/@eclipse-scout/tsconfig[@eclipse-scout/tsconfig] library.
 . Define where your entry point and your type declarations are in a bundled module using `publishConfig`.
-The library will be created in the `dist` folder, as well as the type declarations (see the `outDir` property of your `tsconfig.json`).
+The library will be created in the `dist` folder, as well as the type declarations.
 The attributes in the `publishConfig` will replace the regular attributes when the library is published.
 During development, the `publishConfig` has no effect.
 . Ensure the `dist` folder will be part of the bundled module by adding it to the list of files in `package.json`.
@@ -367,7 +369,7 @@ module.exports = (env, args) => {
   "main": "./src/main/js/index.ts",
   "publishConfig": {
     "main": "./target/dist/dev/your-library.js",
-    "types": "./target/dist/d.ts/index.d.ts"
+    "types": "./target/dist/d.ts/main/js/index.d.ts"
   },
   "files": [
     "src/main/js",
