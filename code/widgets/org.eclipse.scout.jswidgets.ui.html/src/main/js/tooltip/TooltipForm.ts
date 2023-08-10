@@ -54,7 +54,6 @@ export class TooltipForm extends Form {
     if (this.tooltip) {
       this.tooltip.$anchor = this.widget('OpenTooltipButton').$field;
       this.tooltip.render();
-      this.session.layoutValidator.schedulePostValidateFunction(() => this.tooltip.position());
     }
   }
 
