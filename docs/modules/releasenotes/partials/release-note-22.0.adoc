@@ -260,3 +260,8 @@ The detail elements of a page are now loaded lazily which improves initial loadi
 == Focus of Invalid Field (Scout JS)
 
 The first invalid field now gets the focus when a form should be saved to better guide the user.
+
+== OpenTelemetry Support
+
+Basic OpenTelemetry support for signal metric was added.
+See the xref:technical-guide:common-concepts/observability.adoc[technical documentation] for more information.

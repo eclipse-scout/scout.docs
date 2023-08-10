@@ -1,0 +1,116 @@
+= Observability
+
+include::common:partial$_header.adoc[]
+
+//-----------------------------------------------------------------------------
+// This file describes observability in Scout
+//-----------------------------------------------------------------------------
+
+Scout supports observability.
+The goal is to establish link:https://opentelemetry.io/docs/what-is-opentelemetry/[OpenTelemetry] as the Observability framework.
+
+== Current State
+
+[cols="20,50,30",options="header"]
+|===
+|Signal |Support |Tested OpenTelemetry Support
+
+|Traces
+|Not supported, planned
+|❌
+
+|Metrics
+|supported, based on OpenTelemetry +
+disabled by default (see configuration property `scout.otel.initializerEnabled`)
+|✅
+
+|Logs
+|supported, based on SLF4J
+|❌ +
+no integration in OpenTelemetry yet
+|===
+
+== How Does It Work?
+
+Scout uses the features of link:https://github.com/open-telemetry/opentelemetry-java/tree/main/sdk-extensions/autoconfigure[OpenTelemetry SDK Autoconfigure],
+which allows environment-based configuration of the OpenTelemetry SDK.
+
+The main focus is on manual instrumentation provided by the Scout framework.
+The OpenTelemetry SDK is initialized by the class `org.eclipse.scout.rt.opentelemetry.sdk.OpenTelemetryInitializer`.
+This initializer will set up the `io.opentelemetry.api.GlobalOpenTelemetry` instance and some defaults:
+
+* Exporters: `otlp` for metrics (`none` for traces and logs due to missing (tested) support) +
+Protocol: `http/protobuf`
+* Logical service name: Scout's `ApplicationName`
+* link:https://opentelemetry.io/docs/specs/otel/resource/semantic_conventions/#service[Service resource attributes]: e.g. `service.instance.id` (=Scout's `NodeIdentifier`)
+
+TIP: All these defaults can be changed by the corresponding system property or environment variable, see the README of OpenTelemetry SDK Autoconfigure.
+
+== How To Enable A Scout Application
+
+Add the SDK related maven dependencies to the maven module(s), e.g. the `.server` and `.ui.html`, according to <<lst-contacts_db_pom>>.
+
+[[lst-contacts_db_pom]]
+[source,xml]
+.The dependencies required in the `.server` and/or `.ui.html` pom.xml to use the Scout's OpenTelemetry integration
+----
+include::common:example$contacts/org.eclipse.scout.contacts.server/pom.xml[tags=OpenTelemetry]
+----
+
+The OpenTelemetry's link:https://opentelemetry.io/docs/instrumentation/java/automatic/[Automatic Instrumentation] can be used by disabling the Scout's `OpenTelemetryInitializer`.
+Therefore, the configuration property `scout.otel.initializerEnabled` must be set to `false`.
+Then you can follow the official setup guide.
+
+== Running It All Together
+
+Under this {docker-observability-setup}[link] you can find a complete `docker compose` setup of a demo observability infrastructure.
+Follow these steps to run the infrastructure and prepare the application for observability.
+
+image::common:observability_sample_setup.drawio.svg[]
+
+. Start up the observability infrastructure (for demonstration purposes). +
+`docker compose up` +
+To access `Prometheus` go to http://localhost:9090/ +
+To access `Grafana` go to http://localhost:3000/
+. Activate OpenTelemetry SDK & OTLP exporter in the application. +
+* Configuration property `scout.otel.initializerEnabled=true`
+* Maven dependencies, see <<lst-contacts_db_pom>>
+. Use OTLP exporter in `dev` mode. +
+Set configuration property: `scout.otel.defaultExporter=otlp` or use the system property/environment variables of the autoconfigure feature.
+
+TIP: Use the exporter `logging-otlp` to just print out the observability data.
+But do not forget to add the required maven dependency `io.opentelemetry:opentelemetry-exporter-logging-otlp`.
+
+== Providing Custom Metrics
+
+Custom application metrics can be provided by either put the metric handling directly in the production code:
+
+[source,java]
+----
+OpenTelemetry openTelemetry = GlobalOpenTelemetry.get();
+// continue with https://opentelemetry.io/docs/instrumentation/java/manual/#metrics.
+----
+
+or by providing an implementation of the interface `org.eclipse.scout.rt.platform.opentelemetry.IMetricProvider`.
+
+[source,java]
+----
+public class MyMetricProvider implements IMetricProvider {
+
+  @Override
+  public void register(OpenTelemetry openTelemetry) {
+    // continue with https://opentelemetry.io/docs/instrumentation/java/manual/#metrics.
+  }
+
+  @Override
+  public void close() {
+    // noop
+  }
+}
+----
+
+A metric provider is usually used for more generally or feature-independent metrics such as JVM/cpu metrics.
+It can also be used for metrics whose source code is not under your control, e.g. external libraries.
+
+TIP: It is possible to define specific link:https://opentelemetry.io/docs/specs/otel/metrics/sdk/#explicit-bucket-histogram-aggregation[explicit bucket distribution] for histogram metrics,
+see `org.eclipse.scout.rt.platform.opentelemetry.IHistogramViewHintProvider`
