@@ -60,7 +60,7 @@ In that case, you can set the alias to `inverted` as follows:
 
 [source,typescript]
 ----
-this._addPropertyDimensionAlias('enabled', 'locked', true);
+this._addPropertyDimensionAlias('enabled', 'locked', {inverted: true});
 ----
 
 == Scout Classic
