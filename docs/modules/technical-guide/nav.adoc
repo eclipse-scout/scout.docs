@@ -7,6 +7,7 @@
 *** xref:common-concepts/run-monitor.adoc[]
 *** xref:common-concepts/security.adoc[]
 *** xref:common-concepts/smtp-helper.adoc[]
+*** xref:common-concepts/observability.adoc[]
 ** User Interface
 *** xref:user-interface/widget.adoc[]
 *** xref:user-interface/object-factory.adoc[]
