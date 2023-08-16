@@ -37,4 +37,5 @@
 :simrel-faq-link: https://wiki.eclipse.org/SimRel/Simultaneous_Release_Cycle_FAQ#What_is_the_Simultaneous_Release_cycle_.3F[Simultaneous Release FAQ]
 :jswidgets: https://scout.bsi-software.com/jswidgets
 :jswidgets-code: https://github.com/bsi-software/org.eclipse.scout.docs/tree/releases/{scout-version}/code/widgets
+:docker-observability-setup: https://github.com/bsi-software/org.eclipse.scout.docs/tree/releases/{scout-version}/code/org.eclipse.scout.docs.snippets/src/main/docker/observability
 :scout-forum: http://www.eclipse.org/forums/eclipse.scout
