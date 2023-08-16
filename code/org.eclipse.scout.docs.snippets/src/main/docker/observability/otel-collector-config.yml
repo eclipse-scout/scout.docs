@@ -1,0 +1,15 @@
+receivers:
+  otlp:
+    protocols:
+      http:
+        endpoint: "0.0.0.0:4318"
+exporters:
+  logging:
+  prometheusremotewrite:
+    endpoint: "http://prometheus:9090/api/v1/write"
+service:
+  pipelines:
+    metrics:
+      receivers: [ otlp ]
+      processors: [ ]
+      exporters: [ logging, prometheusremotewrite ]
