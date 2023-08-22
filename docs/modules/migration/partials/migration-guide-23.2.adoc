@@ -254,6 +254,14 @@ The interface `org.eclipse.scout.rt.client.ui.CssClasses` was moved to `org.ecli
 The old interface was left and marked `@Deprecated` for release 23/2 and will be removed in a future release.
 Change your imports to the moved interface in order to avoid deprecation warnings.
 
+== Use DataObjectHelper#cloneLenient within IDoValueMigrationHandler#migrate
+
+`DataObjectMigrator` uses `ILenientDataObjectMapper` to create a typed representation of the given data object after structure migration and before calling value migrations.
+For any implementation of a value migration working on a data object, most likely `DataObjectHelper#clone` is currently used to get a copy of the provided input argument.
+`DataObjectHelper#cloneLenient` must be used instead.
+There might be structural inconsistencies that are migrated by later value migrations.
+`DataObjectHelper#clone` would fail in such scenarios, `DataObjectHelper#cloneLenient` won't.
+
 == Scout JS
 
 === Multi Dimension Support
