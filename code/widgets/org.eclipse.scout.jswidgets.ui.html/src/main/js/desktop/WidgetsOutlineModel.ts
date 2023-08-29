@@ -12,7 +12,7 @@ import {
   AccordionForm, BreadcrumbBarFieldForm, BrowserFieldForm, ButtonForm, CarouselForm, ChartFieldForm, CheckBoxFieldForm, DateFieldForm, DesktopForm, DesktopNotificationForm, EditableTableForm, FileChooserButtonForm, FileChooserFieldForm,
   FileChooserForm, FormForm, GroupBoxForm, HierarchicalTableForm, ImageFieldForm, ImageForm, IntegerFieldForm, LabelFieldForm, LabelForm, ListBoxForm, LogicalGridForm, MenuBarForm, MessageBoxForm, ModeSelectorForm, MultilineSmartFieldForm,
   MultilineStringFieldForm, NumberFieldForm, PopupForm, ProposalFieldForm, RadioButtonGroupForm, RestForm, SamplePageWithNodes, SamplePageWithTable, SequenceBoxForm, SmartFieldForm, StringFieldForm, SwitchForm, TabBoxForm, TableForm,
-  TableSmartFieldForm, TagFieldForm, TileAccordionForm, TileGridForm, TooltipForm, TreeBoxForm, TreeForm, TreeSmartFieldForm, VirtualTileGridForm, WatchFieldForm, WidgetsOutlineOverview, WrappedFormFieldForm
+  TableSmartFieldForm, TagFieldForm, TileAccordionForm, TileGridForm, TooltipForm, TreeBoxForm, TreeForm, TreeSmartFieldForm, UiNotificationForm, VirtualTileGridForm, WatchFieldForm, WidgetsOutlineOverview, WrappedFormFieldForm
 } from '../index';
 
 export default (): OutlineModel => ({
@@ -308,12 +308,23 @@ export default (): OutlineModel => ({
     },
     {
       objectType: PageWithNodes,
-      leaf: true,
       text: 'Rest',
+      expanded: true,
       detailForm: {
         objectType: RestForm
       },
-      detailTableVisible: false
+      detailTableVisible: false,
+      childNodes: [
+        {
+          objectType: PageWithNodes,
+          leaf: true,
+          text: 'Ui Notification',
+          detailForm: {
+            objectType: UiNotificationForm
+          },
+          detailTableVisible: false
+        }
+      ]
     },
     {
       objectType: PageWithNodes,

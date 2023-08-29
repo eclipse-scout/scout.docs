@@ -47,3 +47,11 @@ If you just want to play around with them without looking at the source code, yo
 * https://scout.bsi-software.com/jswidgets/
 
 // ----------------------------------------------------------------------------
+
+== UI Notifications
+
+It is now possible to push notifications from the backend directly to the UI running in the browser.
+With JavaScript, you'll just subscribe for one or more topics and add a handler that should be called when a notification for that topic is published.
+To publish a notification, just add any xref:technical-guide:working-with-data/data-object.adoc[Data Object] to the notification registry for a topic.
+
+Learn more about the usage and functionality in the chapter xref:technical-guide:working-with-data/ui-notifications.adoc[UI Notifications].

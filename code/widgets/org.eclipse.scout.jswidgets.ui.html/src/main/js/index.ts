@@ -180,6 +180,8 @@ export * from './radiobuttongroup/RadioButtonGroupFormModel';
 export * from './rest/RestForm';
 export * from './rest/RestExceptionLookupCall';
 export * from './rest/RestFormModel';
+export * from './rest/UiNotificationForm';
+export * from './rest/UiNotificationFormModel';
 export * from './sequencebox/SequenceBoxForm';
 export * from './sequencebox/SequenceBoxFormModel';
 export * from './stringfield/StringFieldForm';

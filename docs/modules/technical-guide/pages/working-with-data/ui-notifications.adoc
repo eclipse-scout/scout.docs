@@ -1,0 +1,188 @@
+= UI Notifications
+
+include::common:partial$_header.adoc[]
+
+In a typical web application, the browser connects to a backend and requests some data.
+However, some use cases require the backend to send data to the browser, e.g. to inform the browser that a certain task is finished or a new message is available.
+In Scout, we call this feature UI notifications.
+
+NOTE: xref:technical-guide:working-with-data/client-notification.adoc[Client Notifications] are a similar concept used by Scout Classic.
+With Client Notifications, you can send a message from the Scout server to the Scout client.
+With UI notifications, you can send a message from the server directly to the browser.
+
+== Concepts and Usage
+
+Sending a notification from backend to the browser is actually pretty simple:
+Using JavaScript, you need to subscribe for a topic and register a handler that should be called whenever a notification for that topic is published.
+
+[source,js]
+----
+uiNotifications.subscribe(topic, handler);
+----
+
+The framework now initiates a request to the backend and waits for a notification to be published.
+To publish a notification, you need to put a message into the UI notification registry in the backend for your topic.
+The message can be any xref:working-with-data/data-object.adoc[Data Object].
+
+[source,java]
+----
+BEANS.get(UiNotificationRegistry.class).put(topic, message);
+----
+
+As soon as that happens, the waiting request is released and returns to the UI with the notification to eventually call your registered handler.
+After calling the handler, a new request is initiated to wait for other notifications until you unsubscribe from the topic.
+
+[source,js]
+----
+uiNotifications.unsubscribe(topic, handler);
+----
+
+If you unsubscribed from every topic, the connection will be closed and not reopened again, unless you decide to subscribe for a topic again.
+
+You can subscribe for multiple topics or can add multiple handlers for the same topics.
+Try to make the topic as specific as possible, e.g. by appending the id of an element to the topic name, instead of filtering the notifications in the UI.
+This reduces the overhead of sending unnecessary notifications to clients.
+
+== Setup
+
+The UI notification feature basically consists of a UI and a server component.
+The UI component is part of `@eclipse-scout/core`, so you should already have it.
+
+The server component contains a REST resource, which handles the request from the UI, and a registry with the notifications to be published.
+The REST resource is part of the maven module `org.eclipse.scout.rt.api`.
+The registry is part of the maven module `org.eclipse.scout.rt.uinotification`.
+
+To publish a notification, you need to put a notification into the registry.
+So you have to add a maven dependency from the module where the publishing should happen to `org.eclipse.scout.rt.uinotification`.
+
+[source,xml]
+----
+<dependency>
+  <groupId>org.eclipse.scout.rt</groupId>
+  <artifactId>org.eclipse.scout.rt.uinotification</artifactId>
+</dependency>
+----
+
+And you have to add a maven dependency from the module containing the REST servlet to `org.eclipse.scout.rt.api`, in case you don't already have it.
+
+[source,xml]
+----
+<dependency>
+  <groupId>org.eclipse.scout.rt</groupId>
+  <artifactId>org.eclipse.scout.rt.api</artifactId>
+</dependency>
+----
+
+=== Non blocking I/O
+
+Since UI notifications require non-blocking I/O, you also have to activate Servlet 3.0 container support for Jersey by adding the following maven dependency.
+
+[source,xml]
+----
+<dependency>
+  <groupId>org.glassfish.jersey.containers</groupId>
+  <artifactId>jersey-container-servlet</artifactId>
+</dependency>
+----
+
+This also requires all filters and the Jersey servlet to support asynchronous processing.
+To enable that, you need to add `<async-supported>true</async-supported>` to the Jersey servlet and the filters for that servlet in the `web.xml`.
+
+=== HTTP/2
+
+The UI notification feature relies on long polling, which means, a connection is open for a specific time, returns to the browser and will be reopened again.
+This is problematic if there is a connection limit which is the case for HTTP/1.1.
+It gets even worse if there are multiple pollers active (e.g. to multiple UI notification systems).
+Scout Classic applications also use a poller for background tasks by default.
+Because the limitation affects all connections for the same domain over all browser tabs, only a small number of tabs could be opened for the same application.
+
+Luckily, there is a simple solution: you need to make sure your browser uses HTTP/2.
+HTTP/2 supports multiplexing, this means the browser uses only one TCP connection for every http request to the same domain.
+This makes it faster and overcomes the connection limit.
+
+The only thing you need to do is to enable HTTP/2 on the server component that is exposed to the browser.
+This may be your server running the Scout application, or a reverse proxy in front of your server.
+
+To check whether it is working, you can use Chrome's dev tools and add the protocol column in the network tab.
+If the protocol shows h2, the configuration was successful.
+
+== Advanced Usage
+
+As explained in <<Concepts and Usage>>, you need to subscribe for one or more topics using `uiNotifications.subscribe()`.
+This will initiate a request to `api/ui-notifications`, which is the REST resource `UiNotificationResource`.
+The request will return immediately containing information about the last notification per topic, most importantly, the timestamp of the last notification.
+After that handshake process, a new request is initiated and the UI is ready to receive notifications.
+
+In JavaScript, the promise returned by the `subscribe` function will be resolved once the handshake process is successful.
+Make sure to wait for that promise to be resolved before doing any other asynchronous operation (e.g. other REST calls) that relate to this specific topic.
+This ensures you won't miss any relevant UI notification that may have been published right after the subscription.
+
+[source,js]
+----
+uiNotifications.subscribe(topic, handler).then(topic => {
+  // Subscription was successful, add more dependent tasks here
+});
+----
+
+After the handshake, the UI connects again to the UI notification REST resource that will check the registry for new notifications.
+If there are no notifications yet, a listener is added to the registry that will be informed as soon as a new notification is put into the registry.
+This operation is non blocking, this means, no thread is blocked while waiting for new notifications.
+The request waits by default for 1 minute (see `scout.uinotification.waitTimeout`).
+After that time, or as soon as a new notification is added, it will be released and a new connection will be reastablished.
+
+=== Multiple Systems
+
+It is possible to register multiple systems (backends) that can publish notifications.
+To do so, call `uiNotifications.registerSystem(name, url)` before subscribing for the first topic.
+This could happen for example during application bootstrap:
+
+[source,js]
+----
+App.addListener('bootstrap', () => {
+  uiNotifications.registerSystem('custom', 'custom-api/ui-notifications');
+});
+----
+
+The system name now needs to be passed as parameter when subscribing for or unsubscribing from topics:
+
+[source,js]
+----
+uiNotifications.subscribe(topic, handler, system);
+uiNotifications.unsubscribe(topic, handler, system);
+----
+
+=== User Specific Notifications
+
+There may be notifications that are only of interest to certain users.
+To publish such notifications, you can just pass the userId as parameter when adding a notification to the registry.
+
+[source,java]
+----
+BEANS.get(UiNotificationRegistry.class).put(topic, userId, message);
+----
+
+Now, only the requests that run in the context of that user, will return these notifications to the UI, even if other requests are interested in the same topic.
+
+== Reliability
+
+The UI notification feature was designed to be as reliable as possible.
+The server does not know about the subscribers.
+It only holds a list of notifications that will be discarded after some time (see `scout.uinotification.expirationTime`).
+Until then, the notifications can be read as many times as needed, which allows for idempotency.
+
+When the UI issues a request, it sends the time of the last notification per topic and the server returns all new notifications since that time. If the connection aborts and the UI does not receive the notifications, it can just reconnect and the server will send the notifications again.
+
+The client also keeps track of the last couple of notifications it has received,
+so if it receives a notification that was already processed, which actually is very unlikely, it will discard it.
+
+On the server side, a new notification will be put into the registry only if the current transaction is committed successfully.
+In case of an error, the notifications will be discarded.
+
+== Cluster Awareness
+
+If the server runs in a cluster, the notifications will be published to the other cluster nodes when put into the registry.
+This means, every cluster node knows which notifications should be published and the UI can connect to any of the cluster nodes to get the notifications.
+
+To make it reliable even in a cluster environment, the UI is aware of the node that created the notification and will send that information along with the time of the last notification.
+This ensures every notification will be delivered to the client even if
+they are published at the same time for the same topic on different cluster nodes that may not have exactly the same time.

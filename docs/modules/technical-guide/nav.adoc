@@ -29,6 +29,7 @@
 *** xref:working-with-data/lookup-call.adoc[]
 *** xref:working-with-data/code-type.adoc[]
 *** xref:working-with-data/client-notification.adoc[]
+*** xref:working-with-data/ui-notifications.adoc[]
 *** xref:working-with-data/data-object.adoc[]
 *** xref:working-with-data/rest.adoc[]
 *** xref:working-with-data/jax-ws.adoc[]
