@@ -96,9 +96,10 @@ export class ActionPropertiesBox extends GroupBox {
       // ActionStyle may not be changed during run time officially, use this little hack to work around by rerendering the whole menu bar
       this.field.actionStyle = event.newValue;
       if (this.field.parent instanceof MenuBarBox) {
-        let menuItems = this.field.parent.menuItems;
-        this.field.parent.setMenuItems([]);
-        this.field.parent.setMenuItems(menuItems);
+        let menuBarBox = this.field.parent;
+        let menuItems = menuBarBox.menuItems;
+        menuBarBox.setMenuItems([]);
+        menuBarBox.setMenuItems(menuItems);
       }
     });
   }
