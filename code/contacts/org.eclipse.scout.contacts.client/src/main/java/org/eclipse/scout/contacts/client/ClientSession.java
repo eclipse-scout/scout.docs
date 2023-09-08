@@ -19,6 +19,7 @@ import org.eclipse.scout.rt.client.ui.ClientUIPreferences;
 public class ClientSession extends AbstractClientSession {
 
   public static final String PREF_USER_LOCALE = "PREF_USER_LOCALE";
+  public static final String PREF_USER_LAYOUT = "PREF_USER_LAYOUT";
 
   public ClientSession() {
     super(true);
@@ -35,12 +36,15 @@ public class ClientSession extends AbstractClientSession {
   protected void execLoadSession() {
     initializeSharedVariables();
 
-    // The locale needs to be set before the Desktop is created.
+    String denseLayout = ClientUIPreferences.getClientPreferences(get()).get(PREF_USER_LAYOUT, null);
     String localeString = ClientUIPreferences.getClientPreferences(get()).get(PREF_USER_LOCALE, null);
+
+    // The locale needs to be set before the Desktop is created.
     if (localeString != null) {
       setLocale(Locale.forLanguageTag(localeString));
     }
 
     setDesktop(new Desktop());
+    getDesktop().setDense(Boolean.parseBoolean(denseLayout));
   }
 }
