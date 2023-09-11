@@ -1,0 +1,62 @@
+/*
+ * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ *
+ * This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License 2.0
+ * which is available at https://www.eclipse.org/legal/epl-2.0/
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ */
+.hybrid-type-indicator {
+  display: flex;
+
+  & > .text {
+    #scout.overflow-ellipsis();
+    flex-grow: 1;
+  }
+
+  & > .type {
+    flex-grow: 0;
+    margin-right: 9px;
+    color: @hybrid-type-indicator-color;
+    border: 1px solid @hybrid-type-indicator-border-color;
+    border-radius: 3px;
+    background-color: @hybrid-type-indicator-background-color;
+    padding: 1px 6px;
+    font-size: @font-size-extra-small;
+
+    .tree-node.selected > .text > & {
+      color: @outline-selection-color;
+      border-color: @hybrid-type-indicator-node-selected-border-color;
+      font-weight: @font-weight-normal;
+    }
+
+    .breadcrumb > .tree-data .tree-node > .text > & {
+      margin-right: 0;
+    }
+  }
+}
+
+.tile-button > .field > .label > .hybrid-type-indicator {
+  align-items: flex-end;
+
+  & > .type {
+    margin-right: 0;
+    margin-left: 5px;
+    font-size: 12px;
+    font-weight: @font-weight-normal;
+
+    .inverted > & {
+      color: @tile-button-default-inverted-color;
+      border-color: fade(@palette-white, 30%);
+    }
+
+    .color-alternative.inverted > & {
+      color: @tile-button-alternative-inverted-color;
+    }
+
+    .compact > & {
+      font-size: 10px;
+    }
+  }
+}
