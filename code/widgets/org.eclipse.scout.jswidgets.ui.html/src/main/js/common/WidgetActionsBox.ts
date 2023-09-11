@@ -66,7 +66,7 @@ export class WidgetActionsBox extends GroupBox {
 
   protected _onIsFocusableButtonClick(event: Event<Button>) {
     let returned = this.field.isFocusable();
-    this.widget('IsFocusableSequenceBox').updateBooleanReturnValue(returned)
+    this.widget('IsFocusableSequenceBox').updateBooleanReturnValue(returned);
   }
 
   protected _onRevealButtonClick(event: Event<Button>) {
