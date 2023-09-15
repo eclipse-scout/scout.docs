@@ -16,7 +16,7 @@ import org.eclipse.scout.rt.platform.classid.ClassId;
 public class HybridJsPage extends AbstractJsPage {
 
   @Override
-  public String getJsPageObjectType() {
+  public String getConfiguredJsPageObjectType() {
     return "widgets.HybridJsPage";
   }
 }
