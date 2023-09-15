@@ -162,7 +162,7 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
             Date end = cal.getTime();
             CalendarAppointment calendarAppointment = new CalendarAppointment(0L, 0L, start, end, true, null, "Scout Course", null, cssClass);
             calendarAppointment.setSubjectLabel("Appointment");
-            calendarAppointment.setCalendarId(1L);
+            calendarAppointment.setCalendarId(3L);
             calendarAppointment.getDescriptionElements().add(BEANS.get(CalendarItemDescriptionElement.class).withText("Office Darmstadt").withIconId(Icons.World));
             calendarAppointment.getDescriptionElements().add(BEANS.get(CalendarItemDescriptionElement.class).withText("Learn Scout basics. Full day appointment for a single day").withIconId(Icons.List));
             result.add(calendarAppointment);
@@ -173,7 +173,7 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
             end = cal.getTime();
             calendarAppointment = new CalendarAppointment(1L, 2L, start, end, false, null, "Software Architecture", null, cssClass);
             calendarAppointment.setSubjectLabel("Appointment");
-            calendarAppointment.setCalendarId(1L);
+            calendarAppointment.setCalendarId(3L);
             calendarAppointment.getDescriptionElements().add(BEANS.get(CalendarItemDescriptionElement.class).withText("Office Bern").withIconId(Icons.World));
             calendarAppointment.getDescriptionElements().add(BEANS.get(CalendarItemDescriptionElement.class).withText("Create awesome software architecture for new Scout app").withIconId(Icons.List));
             result.add(calendarAppointment);
@@ -185,7 +185,7 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
             end = cal.getTime();
             calendarAppointment = new CalendarAppointment(2L, 2L, start, end, false, null, "Phone Call with Jeremy", null, cssClass);
             calendarAppointment.setSubjectLabel("Appointment");
-            calendarAppointment.setCalendarId(1L);
+            calendarAppointment.setCalendarId(3L);
             calendarAppointment.setSubjectIconId(Icons.Phone);
             calendarAppointment.getDescriptionElements().add(BEANS.get(CalendarItemDescriptionElement.class).withText("Office Baar").withIconId(Icons.World));
             calendarAppointment.getDescriptionElements().add(BEANS.get(CalendarItemDescriptionElement.class).withText("Inform Jeremy about news").withIconId(Icons.List));
@@ -203,7 +203,7 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
             end = cal.getTime();
             calendarAppointment = new CalendarAppointment(3L, 2L, start, end, false, null, "Time Blocker", null, cssClass);
             calendarAppointment.setSubjectLabel("Appointment");
-            calendarAppointment.setCalendarId(1L);
+            calendarAppointment.setCalendarId(3L);
             calendarAppointment.getDescriptionElements().add(BEANS.get(CalendarItemDescriptionElement.class).withText("Office Zurich").withIconId(Icons.World));
             calendarAppointment.getDescriptionElements().add(BEANS.get(CalendarItemDescriptionElement.class).withText("No other appointments").withIconId(Icons.List));
             result.add(calendarAppointment);
@@ -216,7 +216,7 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
             end = cal.getTime();
             calendarAppointment = new CalendarAppointment(4L, 2L, start, end, false, null, "Daily Meeting BSI", null, cssClass);
             calendarAppointment.setSubjectLabel("Appointment");
-            calendarAppointment.setCalendarId(1L);
+            calendarAppointment.setCalendarId(3L);
             calendarAppointment.getDescriptionElements().add(BEANS.get(CalendarItemDescriptionElement.class).withText("Daily stand-up meeting").withIconId(Icons.List));
             result.add(calendarAppointment);
 
@@ -229,7 +229,7 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
             end = cal.getTime();
             calendarAppointment = new CalendarAppointment(5L, 2L, start, end, true, null, "Education", null, cssClass);
             calendarAppointment.setSubjectLabel("Appointment");
-            calendarAppointment.setCalendarId(1L);
+            calendarAppointment.setCalendarId(3L);
             calendarAppointment.getDescriptionElements().add(BEANS.get(CalendarItemDescriptionElement.class).withText("Auditorium").withIconId(Icons.World));
             calendarAppointment.getDescriptionElements().add(BEANS.get(CalendarItemDescriptionElement.class).withText("Learn everything about Scout JS. Full day appointment, spans over 2 days").withIconId(Icons.List));
             result.add(calendarAppointment);
@@ -270,7 +270,7 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
             end = cal.getTime();
             CalendarAppointment calendarAppointment = new CalendarAppointment(7L, 2L, start, end, false, null, "Mechanic", null, cssClass);
             calendarAppointment.setSubjectLabel("Private Appointment");
-            calendarAppointment.setCalendarId(2L);
+            calendarAppointment.setCalendarId(4L);
             calendarAppointment.setSubjectIconId(Icons.ExclamationMarkCircle);
             calendarAppointment.getDescriptionElements().add(BEANS.get(CalendarItemDescriptionElement.class).withText("@Home").withIconId(Icons.World));
             calendarAppointment.getDescriptionElements().add(BEANS.get(CalendarItemDescriptionElement.class).withText("Fix broken fridge").withIconId(Icons.List));
@@ -284,7 +284,7 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
             end = cal.getTime();
             calendarAppointment = new CalendarAppointment(8L, 2L, start, end, false, null, "Dinner with Lisa", null, cssClass);
             calendarAppointment.setSubjectLabel("Private Appointment");
-            calendarAppointment.setCalendarId(2L);
+            calendarAppointment.setCalendarId(4L);
             calendarAppointment.getDescriptionElements().add(BEANS.get(CalendarItemDescriptionElement.class).withText("Lucky Dumpling, Zurich").withIconId(Icons.World));
             calendarAppointment.getDescriptionElements().add(BEANS.get(CalendarItemDescriptionElement.class).withText("Lisa Turner").withIconId(Icons.PersonSolid));
             result.add(calendarAppointment);
@@ -373,9 +373,9 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
           @Override
           protected void execAction() {
             List<ICalendarDescriptor> calendars = new ArrayList<>(getCalendars());
-            int calendarId = new Random().nextInt(1000);
+            int calendarId = new Random().nextInt(1000) + 1;
             Collections.shuffle(CALENDAR_COLORS);
-            calendars.add(new CalendarDescriptor(calendarId, "Dynamic Calendar #" + calendarId, true, CALENDAR_COLORS.get(0)));
+            calendars.add(new CalendarDescriptor(Long.valueOf(calendarId), "Dynamic Calendar #" + calendarId, true, CALENDAR_COLORS.get(0)));
             setCalendars(calendars);
           }
         }
