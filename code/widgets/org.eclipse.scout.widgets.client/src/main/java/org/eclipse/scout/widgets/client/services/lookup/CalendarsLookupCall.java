@@ -30,8 +30,16 @@ public class CalendarsLookupCall extends LocalLookupCall<ICalendarDescriptor> {
 
   public CalendarsLookupCall() {
     m_calendars = new ArrayList<>();
-    m_calendars.add(new CalendarDescriptor(1L, "Business Calendar", true, "calendar-color-orange"));
-    m_calendars.add(new CalendarDescriptor(2L, "Private Calendar", true, "calendar-color-green"));
+    CalendarDescriptor myCalendars = new CalendarDescriptor(1L, "My calendars");
+    CalendarDescriptor otherCalendars = new CalendarDescriptor(2L, "Other calendars");
+    m_calendars.add(myCalendars);
+    m_calendars.add(otherCalendars);
+
+    m_calendars.add(new CalendarDescriptor(3L, "Business Calendar", myCalendars.getCalendarId(), "calendar-color-orange"));
+    m_calendars.add(new CalendarDescriptor(4L, "Private Calendar", myCalendars.getCalendarId(), "calendar-color-green"));
+
+    m_calendars.add(new CalendarDescriptor(5L, "Lisa Turner", otherCalendars.getCalendarId(), "calendar-color-blue"));
+    m_calendars.add(new CalendarDescriptor(6L, "John Doe", otherCalendars.getCalendarId(), "calendar-color-red"));
   }
 
   public List<ICalendarDescriptor> getCalendars() {
