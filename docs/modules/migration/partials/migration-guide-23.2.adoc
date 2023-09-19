@@ -11,8 +11,6 @@ Howto:
 
 This document describes all relevant changes *from Eclipse Scout {scout-previous-version} to Eclipse Scout {scout-version}*. If existing code has to be migrated, instructions are provided here.
 
-WARNING: {NotReleasedWarning}
-
 == Obtaining the Latest Version
 
 === Scout Runtime for Java
