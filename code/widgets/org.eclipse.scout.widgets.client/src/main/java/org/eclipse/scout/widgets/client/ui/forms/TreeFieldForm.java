@@ -23,6 +23,7 @@ import org.eclipse.scout.rt.client.ui.action.menu.TreeMenuType;
 import org.eclipse.scout.rt.client.ui.basic.cell.Cell;
 import org.eclipse.scout.rt.client.ui.basic.tree.AbstractTree;
 import org.eclipse.scout.rt.client.ui.basic.tree.AbstractTreeNode;
+import org.eclipse.scout.rt.client.ui.basic.tree.AutoCheckStyle;
 import org.eclipse.scout.rt.client.ui.basic.tree.ITree;
 import org.eclipse.scout.rt.client.ui.basic.tree.ITreeNode;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
@@ -31,6 +32,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanFi
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.treefield.AbstractTreeField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
@@ -43,6 +45,7 @@ import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.visitor.DepthFirstTreeVisitor;
 import org.eclipse.scout.rt.platform.util.visitor.TreeVisitResult;
 import org.eclipse.scout.rt.shared.services.common.code.ICode;
+import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.widgets.client.ui.desktop.menu.AbstractHierarchicalTreeMenu;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipse.scout.widgets.client.ui.forms.TreeFieldForm.MainBox.CloseButton;
@@ -832,26 +835,6 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
         }
       }
 
-      @Order(35)
-      @ClassId("c8272a55-3eb5-4a88-a29e-da5ad093e369")
-      public class AutoCheckChildNodesField extends AbstractBooleanField {
-
-        @Override
-        protected String getConfiguredFont() {
-          return "ITALIC";
-        }
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("AutoCheckChildNodes");
-        }
-
-        @Override
-        protected void execChangedValue() {
-          getTreeField().getTree().setAutoCheckChildNodes(getValue());
-        }
-      }
-
       @Order(40)
       @ClassId("da0d3e69-d3b6-4bda-b7b9-9d6d50e7952d")
       public class IsEnabledField extends AbstractBooleanField {
@@ -899,6 +882,41 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
         @Override
         protected void execInitField() {
           setValue(getTreeField().getTree().isCheckable());
+        }
+      }
+
+      @Order(60)
+      @ClassId("c8272a55-3eb5-4a88-a29e-da5ad093e369")
+      public class AutoCheckStyleField extends AbstractSmartField<AutoCheckStyle> {
+
+        @Override
+        protected String getConfiguredFont() {
+          return "ITALIC";
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("AutoCheckStyle");
+        }
+
+        @Override
+        protected String getConfiguredDisplayStyle() {
+          return DISPLAY_STYLE_DROPDOWN;
+        }
+
+        @Override
+        protected Class<? extends ILookupCall<AutoCheckStyle>> getConfiguredLookupCall() {
+          return TreeAutoCheckStyleLookupCall.class;
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getTreeField().getTree().setAutoCheckStyle(getValue());
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(getTreeField().getTree().getAutoCheckStyle());
         }
       }
     }

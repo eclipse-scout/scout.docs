@@ -18,6 +18,7 @@ import java.util.Set;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.TreeMenuType;
+import org.eclipse.scout.rt.client.ui.basic.tree.AutoCheckStyle;
 import org.eclipse.scout.rt.client.ui.basic.tree.CheckableStyle;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
@@ -46,7 +47,7 @@ import org.eclipse.scout.widgets.client.services.lookup.YearsMonthsLookupCall;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipse.scout.widgets.client.ui.forms.TreeBoxForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.TreeBoxForm.MainBox.ConfigurationBox;
-import org.eclipse.scout.widgets.client.ui.forms.TreeBoxForm.MainBox.ConfigurationBox.AutoCheckChildNodesField;
+import org.eclipse.scout.widgets.client.ui.forms.TreeBoxForm.MainBox.ConfigurationBox.AutoCheckStyleField;
 import org.eclipse.scout.widgets.client.ui.forms.TreeBoxForm.MainBox.ConfigurationBox.CheckUncheckBox;
 import org.eclipse.scout.widgets.client.ui.forms.TreeBoxForm.MainBox.ConfigurationBox.CheckUncheckBox.CheckAllButton;
 import org.eclipse.scout.widgets.client.ui.forms.TreeBoxForm.MainBox.ConfigurationBox.CheckUncheckBox.UncheckAllButton;
@@ -82,8 +83,8 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
     startInternal(new PageFormHandler());
   }
 
-  public AutoCheckChildNodesField getAutoCheckChildNodesField() {
-    return getFieldByClass(AutoCheckChildNodesField.class);
+  public AutoCheckStyleField getAutoCheckStyleField() {
+    return getFieldByClass(AutoCheckStyleField.class);
   }
 
   public IsEnabledField getIsEnabledField() {
@@ -547,21 +548,6 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
         }
       }
 
-      @Order(60)
-      @ClassId("eb962203-089c-4ac6-9f06-8d076bdb2889")
-      public class AutoCheckChildNodesField extends AbstractBooleanField {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("AutoCheckChildNodes");
-        }
-
-        @Override
-        protected void execChangedValue() {
-          getTreeBoxField().setAutoCheckChildNodes(getValue());
-        }
-      }
-
       @Order(70)
       @ClassId("3cf5e0c0-0f74-4688-80cc-9834ad3608b2")
       public class IsEnabledField extends AbstractBooleanField {
@@ -602,7 +588,7 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
         }
       }
 
-      @Order(80)
+      @Order(85)
       @ClassId("a126dcfe-fd25-42d8-810b-796403c96696")
       public class MulticheckField extends AbstractBooleanField {
 
@@ -619,6 +605,36 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
         @Override
         protected void execInitField() {
           setValue(getTreeBoxField().getTree().isMultiCheck());
+        }
+      }
+
+      @Order(90)
+      @ClassId("eb962203-089c-4ac6-9f06-8d076bdb2889")
+      public class AutoCheckStyleField extends AbstractSmartField<AutoCheckStyle> {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("AutoCheckStyle");
+        }
+
+        @Override
+        protected String getConfiguredDisplayStyle() {
+          return DISPLAY_STYLE_DROPDOWN;
+        }
+
+        @Override
+        protected Class<? extends ILookupCall<AutoCheckStyle>> getConfiguredLookupCall() {
+          return TreeAutoCheckStyleLookupCall.class;
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getTreeBoxField().getTree().setAutoCheckStyle(getValue());
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(getTreeBoxField().getTree().getAutoCheckStyle());
         }
       }
 
