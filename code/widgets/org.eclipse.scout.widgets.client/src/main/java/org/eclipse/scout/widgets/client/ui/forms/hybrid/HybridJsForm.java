@@ -15,8 +15,9 @@ import org.eclipse.scout.rt.platform.classid.ClassId;
 
 @ClassId("82ad45d8-aa29-4d4d-a6da-bef34fdd38a3")
 public class HybridJsForm extends AbstractJsForm<IDoEntity, IDoEntity> {
+
   @Override
-  public String getJsFormObjectType() {
+  public String getConfiguredJsFormObjectType() {
     return "widgets.HybridJsForm";
   }
 }

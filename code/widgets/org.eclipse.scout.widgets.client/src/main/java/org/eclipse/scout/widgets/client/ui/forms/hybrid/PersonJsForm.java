@@ -16,7 +16,7 @@ import org.eclipse.scout.rt.platform.classid.ClassId;
 public class PersonJsForm extends AbstractJsForm<PersonDo, PersonDo> {
 
   @Override
-  public String getJsFormObjectType() {
+  public String getConfiguredJsFormObjectType() {
     return "widgets.PersonJsForm";
   }
 }

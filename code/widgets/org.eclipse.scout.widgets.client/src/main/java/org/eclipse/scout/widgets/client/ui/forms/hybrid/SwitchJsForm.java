@@ -17,7 +17,7 @@ import org.eclipse.scout.rt.platform.classid.ClassId;
 public class SwitchJsForm extends AbstractJsForm<IDoEntity, IDoEntity> {
 
   @Override
-  public String getJsFormObjectType() {
+  public String getConfiguredJsFormObjectType() {
     return "widgets.SwitchJsForm";
   }
 }
