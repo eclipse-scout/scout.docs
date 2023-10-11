@@ -83,3 +83,10 @@ To install the Scout SDK into your existing Eclipse IDE, use this P2 update site
 {scout-sdk-update-site}
 
 // ----------------------------------------------------------------------------
+
+== Removed Deprecated Methods in ICacheBuilder and IFormHandler
+
+The deprecated method `ICacheBuilder#withAtomicInsertion` was removed.
+No migration is required, as this method did not change behavior in any way.
+
+The method `IFormHandler#getHandlerId` was removed without a replacement as there is no use for it.
