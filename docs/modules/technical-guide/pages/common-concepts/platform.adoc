@@ -301,12 +301,13 @@ To still allow overriding of such properties, the following lookup rules are app
 . An uppercase match of your property key (`MY.PROPERTY`)
 . An uppercase match where periods are replaced by underscores (`MY_PROPERTY`)
 
-When it comes to working with mapped config properties (subclasses of `org.eclipse.scout.rt.platform.config.AbstractMapConfigProperty`), there's also some special mechanic to consider in terms of providing or overriding property map values using environment variables.
-Since it is not possible to reliably retrieve the original map key from an environment variable (again, due to the restrictions mentioned above), property map values may be supplied using environment variables whose value is a JSON object string:
+When it comes to working with String list or map value config properties (subclasses of `org.eclipse.scout.rt.platform.config.AbstractMapConfigProperty` or `org.eclipse.scout.rt.platform.config.AbstractStringListConfigProperty`), there's also some special mechanic to consider in terms of providing or overriding property list or map values using environment variables.
+Since it is not possible to reliably retrieve the original list/map key from an environment variable (again, due to the restrictions mentioned above), property map values may be supplied using environment variables whose value is a JSON object string:
 
 [source]
 ----
 my_map_property={"map-key-01": "value-01", "map-key-02": "value-02", "map-key-03": null}
+my_list_property={"0": "value-01", "1": "value-02", "2": null}
 ----
 
 The following rules apply, when such environment variables are read:
