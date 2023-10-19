@@ -14,10 +14,6 @@ import {LabelFieldFormWidgetMap} from '../index';
 export class LabelFieldForm extends Form {
   declare widgetMap: LabelFieldFormWidgetMap;
 
-  constructor() {
-    super();
-  }
-
   protected override _jsonModel(): FormModel {
     return models.get(LabelFieldFormModel);
   }
@@ -27,6 +23,10 @@ export class LabelFieldForm extends Form {
     super._init(model);
 
     let labelField = this.widget('LabelField');
+
+    let selectableField = this.widget('SelectableField');
+    selectableField.setValue(labelField.selectable);
+    selectableField.on('propertyChange:value', event => this.widget('LabelField').setSelectable(event.newValue));
 
     let wrapTextField = this.widget('WrapTextField');
     wrapTextField.setValue(labelField.wrapText);
