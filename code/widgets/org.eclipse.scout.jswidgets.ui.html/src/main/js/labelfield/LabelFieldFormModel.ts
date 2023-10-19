@@ -52,6 +52,12 @@ export default (): FormModel => ({
                 borderVisible: false,
                 fields: [
                   {
+                    id: 'SelectableField',
+                    objectType: CheckBoxField,
+                    label: 'Selectable',
+                    labelVisible: false
+                  },
+                  {
                     id: 'WrapTextField',
                     objectType: CheckBoxField,
                     label: 'Wrap Text',
@@ -105,6 +111,10 @@ export default (): FormModel => ({
   }
 });
 
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
 export type LabelFieldFormWidgetMap = {
   'MainBox': GroupBox;
   'DetailBox': GroupBox;
@@ -112,6 +122,7 @@ export type LabelFieldFormWidgetMap = {
   'ConfigurationBox': TabBox;
   'PropertiesTab': TabItem;
   'PropertiesBox': GroupBox;
+  'SelectableField': CheckBoxField;
   'WrapTextField': CheckBoxField;
   'HtmlEnabledField': CheckBoxField;
   'ValueFieldPropertiesBox': ValueFieldPropertiesBox;
