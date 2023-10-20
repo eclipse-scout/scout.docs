@@ -253,6 +253,7 @@ export * from './tree/TreePropertiesBox';
 export * from './tree/TreePropertiesBoxModel';
 export * from './treebox/TreeBoxForm';
 export * from './treebox/TreeBoxFormModel';
+export * from './treebox/AutoCheckStyleLookupCall';
 export * from './treebox/CheckableTreeStyleLookupCall';
 export * from './breadcrumbbar/BreadcrumbBarFieldForm';
 export * from './breadcrumbbar/BreadcrumbBarFieldFormModel';

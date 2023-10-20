@@ -7,8 +7,8 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {CheckBoxField, GroupBox, GroupBoxModel, SmartField, TreeCheckableStyle} from '@eclipse-scout/core';
-import {CheckableTreeStyleLookupCall} from '../index';
+import {AutoCheckStyle, CheckBoxField, GroupBox, GroupBoxModel, SmartField, TreeCheckableStyle} from '@eclipse-scout/core';
+import {AutoCheckStyleLookupCall, CheckableTreeStyleLookupCall} from '../index';
 
 export default (): GroupBoxModel => ({
   id: 'jswidgets.TreePropertiesBox',
@@ -16,13 +16,10 @@ export default (): GroupBoxModel => ({
   label: 'Tree Properties',
   fields: [
     {
-      id: 'AutoCheckChildrenField',
-      objectType: CheckBoxField,
-      label: 'Auto Check Children',
-      labelVisible: false,
-      gridDataHints: {
-        fillHorizontal: false
-      }
+      id: 'AutoCheckStyleField',
+      objectType: SmartField,
+      label: 'Auto Check Style',
+      lookupCall: AutoCheckStyleLookupCall
     },
     {
       id: 'CheckableField',
@@ -51,8 +48,12 @@ export default (): GroupBoxModel => ({
   ]
 });
 
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
 export type TreePropertiesBoxWidgetMap = {
-  'AutoCheckChildrenField': CheckBoxField;
+  'AutoCheckStyleField': SmartField<AutoCheckStyle>;
   'CheckableField': CheckBoxField;
   'MultiCheckField': CheckBoxField;
   'TextFilterEnabledField': CheckBoxField;
