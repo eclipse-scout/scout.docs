@@ -1,0 +1,11 @@
+= Group Box
+include::common:partial$_header.adoc[]
+
+The purpose of a group box is to group multiple xref:user-interface/form-field.adoc[Form Fields].
+Every xref:user-interface/form.adoc[Form] needs at least one group box which is the root group box (also known as main box).
+
+In that root group box you can put as many form fields as you like.
+You can also put another group box (or another composite field like a tab box) to create another group of fields.
+
+The fields in the group box are arranged based on the field order and their grid data hints.
+This is done by the xref:user-interface/logical-grid.adoc[Logical Grid Layout].
