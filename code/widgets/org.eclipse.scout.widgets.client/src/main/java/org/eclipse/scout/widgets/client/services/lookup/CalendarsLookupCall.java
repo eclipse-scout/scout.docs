@@ -35,11 +35,21 @@ public class CalendarsLookupCall extends LocalLookupCall<ICalendarDescriptor> {
     m_calendars.add(myCalendars);
     m_calendars.add(otherCalendars);
 
-    m_calendars.add(new CalendarDescriptor(3L, "Business Calendar", myCalendars.getCalendarId(), "calendar-color-orange"));
-    m_calendars.add(new CalendarDescriptor(4L, "Private Calendar", myCalendars.getCalendarId(), "calendar-color-green"));
+    m_calendars.add(new CalendarDescriptor(3L, "Business Calendar")
+        .withParentId(myCalendars.getCalendarId())
+        .withCssClass("calendar-color-orange"));
+    m_calendars.add(new CalendarDescriptor(4L, "Private Calendar")
+        .withParentId(myCalendars.getCalendarId())
+        .withCssClass("calendar-color-green"));
 
-    m_calendars.add(new CalendarDescriptor(5L, "Lisa Turner", otherCalendars.getCalendarId(), "calendar-color-blue"));
-    m_calendars.add(new CalendarDescriptor(6L, "John Doe", otherCalendars.getCalendarId(), "calendar-color-red"));
+    m_calendars.add(new CalendarDescriptor(5L, "Lisa Turner")
+        .withParentId(otherCalendars.getCalendarId())
+        .withSelectable(false)
+        .withCssClass("calendar-color-blue"));
+    m_calendars.add(new CalendarDescriptor(6L, "John Doe")
+        .withParentId(otherCalendars.getCalendarId())
+        .withSelectable(false)
+        .withCssClass("calendar-color-red"));
   }
 
   public List<ICalendarDescriptor> getCalendars() {
