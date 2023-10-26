@@ -73,6 +73,8 @@ public class CalendarsLookupCall extends LocalLookupCall<ICalendarDescriptor> {
   @Override
   protected List<? extends ILookupRow<ICalendarDescriptor>> execCreateLookupRows() {
     return m_calendars.stream()
+        .filter(ICalendarDescriptor::isSelectable) // Filter unselectable
+        .filter(c -> c.getParentId() != null) // Filter groups
         .map(calendar -> new LookupRow<>(calendar, calendar.getName()))
         .collect(Collectors.toList());
   }
