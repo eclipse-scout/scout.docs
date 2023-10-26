@@ -375,7 +375,8 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
             List<ICalendarDescriptor> calendars = new ArrayList<>(getCalendars());
             int calendarId = new Random().nextInt(1000) + 1;
             Collections.shuffle(CALENDAR_COLORS);
-            calendars.add(new CalendarDescriptor(Long.valueOf(calendarId), "Dynamic Calendar #" + calendarId, true, CALENDAR_COLORS.get(0)));
+            calendars.add(new CalendarDescriptor(Long.valueOf(calendarId), "Dynamic Calendar #" + calendarId)
+                .withCssClass(CALENDAR_COLORS.get(0)));
             setCalendars(calendars);
           }
         }
