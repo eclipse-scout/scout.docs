@@ -12,7 +12,7 @@ package org.eclipse.scout.docs.snippets.rest;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.Response;
 
-import org.apache.http.client.config.CookieSpecs;
+import org.apache.hc.client5.http.cookie.StandardCookieSpec;
 import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.rest.client.AbstractRestClientHelper;
 import org.eclipse.scout.rt.rest.client.RestClientProperties;
@@ -31,7 +31,7 @@ public class ExampleRestClientHelper extends AbstractRestClientHelper {
   @Override
   protected void configureClientBuilder(ClientBuilder clientBuilder) {
     super.configureClientBuilder(clientBuilder);
-    clientBuilder.property(RestClientProperties.COOKIE_SPEC, CookieSpecs.STANDARD);
+    clientBuilder.property(RestClientProperties.COOKIE_SPEC, StandardCookieSpec.RELAXED);
     clientBuilder.property(RestClientProperties.PROXY_URI, "http://my.proxy.com");
   }
   //end::client-properties[]
