@@ -1,0 +1,49 @@
+= Logical Grid
+include::common:partial$_header.adoc[]
+
+The `logical grid layout` arranges the elements in an (invisible) grid, so they are nicely aligned.
+The grid consists of rows and columns and every element is put into a grid cell.
+The width, height and gaps of the rows and columns are predefined, but could be adjusted if necessary (using `LogicalGridLayoutConfig`).
+
+The position, size and behavior of a grid cell is defined by the `grid data` of an element.
+This grid data object is computed automatically by the `logical grid` based on the order of the elements and the `grid data hints`.
+So, to control how the fields should be arranged, you need to adjust the `grid data hints` and make sure the elements have the correct order.
+
+== Grid Data Hints
+With the grid data hints you can define the dimensions of a grid cell:
+
+* `x` / `y` +
+The position inside the grid. If set to -1, it will be calculated automatically by the logical grid based on the order of the fields. Using -1 (which is the default) is the preferred way, so in most cases you should not set the position explicitly.
+* `w` / `h` +
+The logical size of the grid cell. E.g. if the grid has two columns, setting w to 2 will make the field span both columns.
+It is also used as min size if the grid cell should scale, see `weightX` / `weightY`.
+* `weightX` / `weightY` +
+Configures how much a grid cell should grow or shrink. +
+The value for this property can either be -1 or between 0 and 1.
+** 0 means fixed size and the grid cell won't grow or shrink.
+** Greater 0 means the grid cell will grab the excess space and therefore grow or shrink. If the container
+contains more than one element with `weightX` resp. `weightY` > 0, the weight is used to specify how strong the size of the grid cell should be adjusted.
+** -1 means the ui computes the optimal value so that the elements proportionally grab the excess space. +
+* `useUiWidth` / `useUiHeight` +
+Configures whether the element should be as big as preferred by the UI.
+If the element has children, the preferred size normally is the computed size of the children. +
+This property typically has less priority than `widthInPixel` resp. `heightInPixel` and therefore only has an effect if no explicit size in pixel is set.
+* `horizontalAlignment` / `verticalAlignment` +
+Configures the alignment of the element inside a grid cell, if `fillHorizontal` resp. `fillVertical` is set to false.
+* `fillHorizontal` / `fillVertical` +
+Configures whether the element should fill the grid cell.
+** If the property is set to true, the element takes all the space and therefore is as big as the grid cell.
+** If it's set to false, the size is computed based on the properties `useUiWidth` resp. `useUiHeight` and `widthInPixel` resp. `heightInPixel`.
+** If non of these are set, a default value is used which typically is the size of a logical grid column resp. logical grid row.
+* `widthInPixel` / `heightInPixel` +
+Configures the preferred size of the element in pixel.
+If the value is less than or equal to 0 the property has no effect.
+
+=== Example for WeightX
+* A group box with 3 columns contains 3 fields: every field has `w` = 1 and `weightX` = -1. This leads to 1 row and 3 grid cells which would grow and shrink proportionally because `weightX` is automatically set to > 0.
+* If the weight of these 3 fields were set to 0.1, 0.1 and 1, the first two fields would adjust the size very slowly and would mostly be as big as a logical grid column (because `w` is set to 1), whereas the third field would adjust its size very fast.
+
+=== Example for WeightY
+* A group box with 1 column contains 3 fields: every field has `h` = 1 and `weightY` = -1. This leads to 3 rows with fixed height, no additional space is grabbed, because `weightY` will automatically be set to 0.
+* If the weight of these 3 fields were set to 1, the fields would grow and shrink proportionally.
+* If the weight of these 3 fields were set to 0.1, 0.1 and 1, the first two fields would adjust the size very slowly and would mostly be a as big as one logical grid row (because `h` is set to 1), whereas the third field would adjust its size very fast.

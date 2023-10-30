@@ -1,0 +1,8 @@
+= Outline
+include::common:partial$_header.adoc[]
+
+The outline is a special variant of the tree widget mainly used in the navigation area of the xref:user-interface/desktop.adoc[Desktop].
+
+It contains xref:user-interface/page.adoc[Pages] which are a special variant of tree nodes.
+
+The desktop can contain multiple outlines but only one outline can be active at a time.

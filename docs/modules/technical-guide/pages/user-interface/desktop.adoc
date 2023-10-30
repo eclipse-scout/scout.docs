@@ -1,8 +1,19 @@
 = Desktop
 include::common:partial$_header.adoc[]
 
+The desktop is the root widget of every Scout application.
+The default desktop consists of 3 areas:
+
+. Navigation +
+  Displays an xref:user-interface/outline.adoc[Outline] with xref:user-interface/page.adoc[Pages]
+. Header +
+  Shows the tabs of views and a toolbar with menus. +
+  A view is a display mode of a xref:user-interface/form.adoc[Form].
+. Bench +
+  Contains the content of the active view or active page.
+
 == Desktop Bench Layout
-The Desktop Layout can be configured using the `IDesktop.setBenchLayoutData` method. This property is observed and might be changed during the application lifecycle.
+The layout of the desktop bench can be configured using the `IDesktop.setBenchLayoutData` method. This property is observed and might be changed during the application lifecycle.
 The desktop consists out of 9 view stacks (see <<img-benchLayout-overview>>). Each form can be assigned to a single view stack using the property DisplayViewId (`IForm.getConfiguredDisplayViewId`).
 If multiple forms are assigned to the same view stack the views will be displayed as tabs where the top form is visible and the corresponding tab selected.
 

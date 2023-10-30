@@ -1,15 +1,29 @@
 = Form Field
 include::common:partial$_header.adoc[]
 
-A form field is a special kind of a widget. It is mainly used on forms but may actually be added to any other widget.
+A form field is a special kind of widget.
+It is mainly used on forms but may actually be added to any other widget.
 
-Every form field contains of the following parts:
+Every form field consists of the following parts:
 
 [[img-formfield, Figure 000]]
 .Parts of a form field
 image::common:formfield.png[]
 
-Typical form fields are `StringField`, `DateField` or `TableField`. All these fields have the API of `FormField` in common (like `setLabel()`, `setErrorStatus()`, etc.) but also provide additional API.
+This illustrates nicely some of the main features of a form field:
+
+. It can have a label +
+  The label describes the purpose of the field.
+  It can be on the left side, on top or even in the field itself.
+. It can be mandatory +
+  A mandatory field needs to be filled in when the form is saved.
+. It can have a status +
+  The status can be a tooltip with more details about the field.
+  It may also show an error status if the field has invalid input.
+  Or it can show a menu if the field provides actions.
+
+Typical form fields are `StringField`, `DateField` or `TableField`.
+All these fields have the API of `FormField` in common (like `setLabel()`, `setErrorStatus()`, etc.) but also provide additional API.
 
 Some form fields are actually just a wrapper for another widget.
 This is for example the case for the `TableField`.
