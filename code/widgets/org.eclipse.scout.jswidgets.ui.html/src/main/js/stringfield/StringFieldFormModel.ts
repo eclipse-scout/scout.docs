@@ -7,21 +7,10 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {CheckBoxField, FormModel, GroupBox, NumberField, SmartField, StringField, StringFieldFormat, TabBox, TabItem} from '@eclipse-scout/core';
+import {Button, CheckBoxField, FormField, FormModel, GroupBox, NumberField, PlaceholderField, SequenceBox, SmartField, StringField, TabBox, TabItem} from '@eclipse-scout/core';
 import {
-  EventsTab,
-  EventsTabWidgetMap,
-  FormFieldActionsBox,
-  FormFieldActionsBoxWidgetMap,
-  FormFieldPropertiesBox,
-  FormFieldPropertiesBoxWidgetMap,
-  GridDataBox,
-  GridDataBoxWidgetMap,
-  StringFormatLookupCall,
-  ValueFieldPropertiesBox,
-  ValueFieldPropertiesBoxWidgetMap,
-  WidgetActionsBox,
-  WidgetActionsBoxWidgetMap
+  EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, StringFormatLookupCall, ValueFieldPropertiesBox,
+  ValueFieldPropertiesBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap
 } from '../index';
 
 export default (): FormModel => ({
@@ -169,6 +158,36 @@ export default (): FormModel => ({
             label: 'Actions',
             fields: [
               {
+                id: 'ActionsBox',
+                objectType: GroupBox,
+                borderVisible: false,
+                fields: [{
+                  id: 'InsertTextBox',
+                  objectType: SequenceBox,
+                  labelVisible: false,
+                  fields: [
+                    {
+                      id: 'InsertTextField',
+                      objectType: StringField,
+                      labelVisible: false,
+                      statusVisible: false,
+                      label: 'Text to insert',
+                      labelPosition: FormField.LabelPosition.ON_FIELD
+                    },
+                    {
+                      id: 'InsertTextButton',
+                      objectType: Button,
+                      label: 'Insert',
+                      labelVisible: false,
+                      processButton: false,
+                      displayStyle: Button.DisplayStyle.LINK
+                    }
+                  ]
+                }, {
+                  objectType: PlaceholderField
+                }]
+              },
+              {
                 id: 'FormFieldActionsBox',
                 objectType: FormFieldActionsBox
               },
@@ -188,34 +207,39 @@ export default (): FormModel => ({
   }
 });
 
-export type StringFieldFormWidgetMap =
-  {
-    'MainBox': GroupBox;
-    'DetailBox': GroupBox;
-    'StringField': StringField;
-    'ConfigurationBox': TabBox;
-    'PropertiesTab': TabItem;
-    'PropertiesBox': GroupBox;
-    'HasActionField': CheckBoxField;
-    'InputMaskedField': CheckBoxField;
-    'MultilineTextField': CheckBoxField;
-    'SpellCheckEnabledField': CheckBoxField;
-    'TrimTextField': CheckBoxField;
-    'UpdateDisplayTextOnModifyField': CheckBoxField;
-    'FormatField': SmartField<StringFieldFormat>;
-    'MaxLengthField': NumberField;
-    'SelectionTrackingEnabledField': CheckBoxField;
-    'SelectionStartField': NumberField;
-    'SelectionEndField': NumberField;
-    'CustomizationBox': GroupBox;
-    'BlockFormatField': CheckBoxField;
-    'ValueFieldPropertiesBox': ValueFieldPropertiesBox;
-    'FormFieldPropertiesBox': FormFieldPropertiesBox;
-    'GridDataBox': GridDataBox;
-    'ActionsTab': TabItem;
-    'FormFieldActionsBox': FormFieldActionsBox;
-    'WidgetActionsBox': WidgetActionsBox;
-    'EventsTab': EventsTab;
-  }
-  & ValueFieldPropertiesBoxWidgetMap & FormFieldPropertiesBoxWidgetMap & GridDataBoxWidgetMap
-  & FormFieldActionsBoxWidgetMap & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
+export type StringFieldFormWidgetMap = {
+  'MainBox': GroupBox;
+  'DetailBox': GroupBox;
+  'StringField': StringField;
+  'ConfigurationBox': TabBox;
+  'PropertiesTab': TabItem;
+  'PropertiesBox': GroupBox;
+  'HasActionField': CheckBoxField;
+  'InputMaskedField': CheckBoxField;
+  'MultilineTextField': CheckBoxField;
+  'SpellCheckEnabledField': CheckBoxField;
+  'TrimTextField': CheckBoxField;
+  'UpdateDisplayTextOnModifyField': CheckBoxField;
+  'FormatField': SmartField<any>;
+  'MaxLengthField': NumberField;
+  'SelectionTrackingEnabledField': CheckBoxField;
+  'SelectionStartField': NumberField;
+  'SelectionEndField': NumberField;
+  'CustomizationBox': GroupBox;
+  'BlockFormatField': CheckBoxField;
+  'ValueFieldPropertiesBox': ValueFieldPropertiesBox;
+  'FormFieldPropertiesBox': FormFieldPropertiesBox;
+  'GridDataBox': GridDataBox;
+  'ActionsTab': TabItem;
+  'ActionsBox': GroupBox;
+  'InsertTextBox': SequenceBox;
+  'InsertTextField': StringField;
+  'InsertTextButton': Button;
+  'FormFieldActionsBox': FormFieldActionsBox;
+  'WidgetActionsBox': WidgetActionsBox;
+  'EventsTab': EventsTab;
+} & ValueFieldPropertiesBoxWidgetMap & FormFieldPropertiesBoxWidgetMap & GridDataBoxWidgetMap & FormFieldActionsBoxWidgetMap & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;

@@ -14,10 +14,6 @@ import {StringFieldFormWidgetMap} from '../index';
 export class StringFieldForm extends Form {
   declare widgetMap: StringFieldFormWidgetMap;
 
-  constructor() {
-    super();
-  }
-
   protected override _jsonModel(): FormModel {
     return models.get(StringFieldFormModel);
   }
@@ -97,6 +93,10 @@ export class StringFieldForm extends Form {
         stringField.setFormatter(null);
         stringField.setParser(null);
       }
+    });
+
+    this.widget('InsertTextButton').on('click', event => {
+      stringField.insertText(this.widget('InsertTextField').value);
     });
 
     this.widget('ValueField').setEnabled(true);
