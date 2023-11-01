@@ -22,7 +22,6 @@
   <artifactId>org.eclipsescout.demo.root</artifactId>
   <version>24.1-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>root</name>
 
   <modules>
     <module>contacts/org.eclipse.scout.contacts</module>

@@ -22,7 +22,6 @@
   <artifactId>org.eclipsescout.docs.root</artifactId>
   <version>24.1-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>root</name>
 
   <build>
     <plugins>
