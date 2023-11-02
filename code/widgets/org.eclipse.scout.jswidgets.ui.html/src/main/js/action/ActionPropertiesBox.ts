@@ -66,6 +66,10 @@ export class ActionPropertiesBox extends GroupBox {
     inheritAccessibilityField.setValue(this.field.inheritAccessibility);
     inheritAccessibilityField.on('propertyChange:value', event => this.field.setInheritAccessibility(event.newValue));
 
+    let loadingField = this.widget('LoadingField');
+    loadingField.setValue(this.field.loading);
+    loadingField.on('propertyChange:value', event => this.field.setLoading(event.newValue));
+
     let iconIdField = this.widget('IconIdField');
     iconIdField.setValue(this.field.iconId);
     iconIdField.on('propertyChange:value', event => this.field.setIconId(event.newValue));

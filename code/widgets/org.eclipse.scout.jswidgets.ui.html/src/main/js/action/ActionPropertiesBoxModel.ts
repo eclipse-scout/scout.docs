@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {ActionStyle, ActionTextPosition, CheckBoxField, GroupBox, GroupBoxModel, NumberField, SmartField, StringField} from '@eclipse-scout/core';
+import {CheckBoxField, GroupBox, GroupBoxModel, NumberField, SmartField, StringField} from '@eclipse-scout/core';
 import {ActionStyleLookupCall, IconIdLookupCall, TextPositionLookupCall} from '../index';
 
 export default (): GroupBoxModel => ({
@@ -54,6 +54,12 @@ export default (): GroupBoxModel => ({
       labelVisible: false
     },
     {
+      id: 'LoadingField',
+      objectType: CheckBoxField,
+      label: 'Loading',
+      labelVisible: false
+    },
+    {
       id: 'IconIdField',
       objectType: SmartField,
       lookupCall: IconIdLookupCall,
@@ -96,6 +102,10 @@ export default (): GroupBoxModel => ({
   ]
 });
 
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
 export type ActionPropertiesBoxWidgetMap = {
   'EnabledField': CheckBoxField;
   'VisibleField': CheckBoxField;
@@ -103,11 +113,12 @@ export type ActionPropertiesBoxWidgetMap = {
   'SelectedField': CheckBoxField;
   'PreventDoubleClickField': CheckBoxField;
   'InheritAccessibilityField': CheckBoxField;
-  'IconIdField': SmartField<string>;
+  'LoadingField': CheckBoxField;
+  'IconIdField': SmartField<any>;
   'KeyStrokeField': StringField;
   'TextField': StringField;
-  'TextPositionField': SmartField<ActionTextPosition>;
+  'TextPositionField': SmartField<any>;
   'TooltipTextField': StringField;
   'HorizontalAlignmentField': NumberField;
-  'ActionStyleField': SmartField<ActionStyle>;
+  'ActionStyleField': SmartField<any>;
 };
