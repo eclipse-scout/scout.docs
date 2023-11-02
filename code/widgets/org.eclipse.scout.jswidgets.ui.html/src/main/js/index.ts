@@ -255,6 +255,7 @@ export * from './treebox/TreeBoxForm';
 export * from './treebox/TreeBoxFormModel';
 export * from './treebox/AutoCheckStyleLookupCall';
 export * from './treebox/CheckableTreeStyleLookupCall';
+export * from './treebox/TreeBoxValueFieldPropertiesBox';
 export * from './breadcrumbbar/BreadcrumbBarFieldForm';
 export * from './breadcrumbbar/BreadcrumbBarFieldFormModel';
 export * from './messagebox/MessageBoxForm';

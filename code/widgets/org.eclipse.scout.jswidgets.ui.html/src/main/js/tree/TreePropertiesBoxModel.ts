@@ -16,12 +16,6 @@ export default (): GroupBoxModel => ({
   label: 'Tree Properties',
   fields: [
     {
-      id: 'AutoCheckStyleField',
-      objectType: SmartField,
-      label: 'Auto Check Style',
-      lookupCall: AutoCheckStyleLookupCall
-    },
-    {
       id: 'CheckableField',
       objectType: CheckBoxField,
       label: 'Checkable',
@@ -40,6 +34,12 @@ export default (): GroupBoxModel => ({
       labelVisible: false
     },
     {
+      id: 'AutoCheckStyleField',
+      objectType: SmartField,
+      label: 'Auto Check Style',
+      lookupCall: AutoCheckStyleLookupCall
+    },
+    {
       id: 'CheckableStyleField',
       objectType: SmartField,
       label: 'Checkable Style',
@@ -53,9 +53,9 @@ export default (): GroupBoxModel => ({
 * **************************************************************************/
 
 export type TreePropertiesBoxWidgetMap = {
-  'AutoCheckStyleField': SmartField<AutoCheckStyle>;
   'CheckableField': CheckBoxField;
   'MultiCheckField': CheckBoxField;
   'TextFilterEnabledField': CheckBoxField;
+  'AutoCheckStyleField': SmartField<AutoCheckStyle>;
   'CheckableStyleField': SmartField<TreeCheckableStyle>;
 };

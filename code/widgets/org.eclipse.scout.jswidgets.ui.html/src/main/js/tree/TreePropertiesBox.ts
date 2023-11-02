@@ -44,7 +44,7 @@ export class TreePropertiesBox extends GroupBox {
     let autoCheckStyleField = this.widget('AutoCheckStyleField');
     autoCheckStyleField.setValue(this.tree.autoCheckStyle);
     autoCheckStyleField.on('propertyChange:value', event => {
-      this.tree.autoCheckStyle = event.newValue;
+      this.tree.setAutoCheckStyle(event.newValue);
     });
 
     let checkableField = this.widget('CheckableField');

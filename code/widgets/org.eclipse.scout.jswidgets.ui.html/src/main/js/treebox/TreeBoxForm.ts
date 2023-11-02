@@ -36,6 +36,7 @@ export class TreeBoxForm extends Form {
     this.lookupCallField.on('propertyChange:value', event => this.treeBox.setLookupCall(event.newValue));
     this.treeBox.on('propertyChange:lookupCall', event => this.lookupCallField.setValue(event.newValue));
 
+    this.widget('ValueField').setEnabled(true);
     this.widget('ValueFieldPropertiesBox').setField(this.treeBox);
     this.widget('FormFieldPropertiesBox').setField(this.treeBox);
     this.widget('PropertiesBox').setTree(this.treeBox.tree);

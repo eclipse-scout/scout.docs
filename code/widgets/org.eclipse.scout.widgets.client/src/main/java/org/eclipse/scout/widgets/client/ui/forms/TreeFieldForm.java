@@ -835,41 +835,6 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
         }
       }
 
-      @Order(35)
-      @ClassId("c8272a55-3eb5-4a88-a29e-da5ad093e369")
-      public class AutoCheckStyleField extends AbstractSmartField<AutoCheckStyle> {
-
-        @Override
-        protected String getConfiguredFont() {
-          return "ITALIC";
-        }
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("AutoCheckStyle");
-        }
-
-        @Override
-        protected String getConfiguredDisplayStyle() {
-          return DISPLAY_STYLE_DROPDOWN;
-        }
-
-        @Override
-        protected Class<? extends ILookupCall<AutoCheckStyle>> getConfiguredLookupCall() {
-          return TreeAutoCheckStyleLookupCall.class;
-        }
-
-        @Override
-        protected void execChangedValue() {
-          getTreeField().getTree().setAutoCheckStyle(getValue());
-        }
-
-        @Override
-        protected void execInitField() {
-          setValue(getTreeField().getTree().getAutoCheckStyle());
-        }
-      }
-
       @Order(40)
       @ClassId("da0d3e69-d3b6-4bda-b7b9-9d6d50e7952d")
       public class IsEnabledField extends AbstractBooleanField {
@@ -917,6 +882,41 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
         @Override
         protected void execInitField() {
           setValue(getTreeField().getTree().isCheckable());
+        }
+      }
+
+      @Order(60)
+      @ClassId("c8272a55-3eb5-4a88-a29e-da5ad093e369")
+      public class AutoCheckStyleField extends AbstractSmartField<AutoCheckStyle> {
+
+        @Override
+        protected String getConfiguredFont() {
+          return "ITALIC";
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("AutoCheckStyle");
+        }
+
+        @Override
+        protected String getConfiguredDisplayStyle() {
+          return DISPLAY_STYLE_DROPDOWN;
+        }
+
+        @Override
+        protected Class<? extends ILookupCall<AutoCheckStyle>> getConfiguredLookupCall() {
+          return TreeAutoCheckStyleLookupCall.class;
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getTreeField().getTree().setAutoCheckStyle(getValue());
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(getTreeField().getTree().getAutoCheckStyle());
         }
       }
     }

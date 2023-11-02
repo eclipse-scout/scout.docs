@@ -548,36 +548,6 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
         }
       }
 
-      @Order(60)
-      @ClassId("eb962203-089c-4ac6-9f06-8d076bdb2889")
-      public class AutoCheckStyleField extends AbstractSmartField<AutoCheckStyle> {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("AutoCheckStyle");
-        }
-
-        @Override
-        protected String getConfiguredDisplayStyle() {
-          return DISPLAY_STYLE_DROPDOWN;
-        }
-
-        @Override
-        protected Class<? extends ILookupCall<AutoCheckStyle>> getConfiguredLookupCall() {
-          return TreeAutoCheckStyleLookupCall.class;
-        }
-
-        @Override
-        protected void execChangedValue() {
-          getTreeBoxField().getTree().setAutoCheckStyle(getValue());
-        }
-
-        @Override
-        protected void execInitField() {
-          setValue(getTreeBoxField().getTree().getAutoCheckStyle());
-        }
-      }
-
       @Order(70)
       @ClassId("3cf5e0c0-0f74-4688-80cc-9834ad3608b2")
       public class IsEnabledField extends AbstractBooleanField {
@@ -618,7 +588,7 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
         }
       }
 
-      @Order(80)
+      @Order(85)
       @ClassId("a126dcfe-fd25-42d8-810b-796403c96696")
       public class MulticheckField extends AbstractBooleanField {
 
@@ -635,6 +605,36 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
         @Override
         protected void execInitField() {
           setValue(getTreeBoxField().getTree().isMultiCheck());
+        }
+      }
+
+      @Order(90)
+      @ClassId("eb962203-089c-4ac6-9f06-8d076bdb2889")
+      public class AutoCheckStyleField extends AbstractSmartField<AutoCheckStyle> {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("AutoCheckStyle");
+        }
+
+        @Override
+        protected String getConfiguredDisplayStyle() {
+          return DISPLAY_STYLE_DROPDOWN;
+        }
+
+        @Override
+        protected Class<? extends ILookupCall<AutoCheckStyle>> getConfiguredLookupCall() {
+          return TreeAutoCheckStyleLookupCall.class;
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getTreeBoxField().getTree().setAutoCheckStyle(getValue());
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(getTreeBoxField().getTree().getAutoCheckStyle());
         }
       }
 
