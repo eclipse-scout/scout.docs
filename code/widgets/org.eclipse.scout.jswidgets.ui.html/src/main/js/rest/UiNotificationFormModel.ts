@@ -43,6 +43,16 @@ export default (): FormModel => ({
                       weightX: 0
                     }
                   }, {
+                    id: 'SubscribeOneButton',
+                    objectType: Button,
+                    label: 'Subscribe One',
+                    processButton: false,
+                    labelVisible: false,
+                    gridDataHints: {
+                      useUiWidth: true,
+                      weightX: 0
+                    }
+                  }, {
                     id: 'UnsubscribeButton',
                     objectType: Button,
                     label: 'Unsubscribe',
@@ -124,6 +134,7 @@ export type UiNotificationFormWidgetMap = {
   'DetailBox': GroupBox;
   'TopicField': StringField;
   'SubscribeButton': Button;
+  'SubscribeOneButton': Button;
   'UnsubscribeButton': Button;
   'PublishTopicField': StringField;
   'MessageField': StringField;

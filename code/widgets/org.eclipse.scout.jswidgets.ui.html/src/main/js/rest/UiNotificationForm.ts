@@ -49,6 +49,15 @@ export class UiNotificationForm extends Form {
         this._addLogEntry('Subscribe failed: ' + e.message);
       }
     });
+    this.widget('SubscribeOneButton').on('click', () => {
+      try {
+        uiNotifications.subscribeOne(this.widget('TopicField').value, this._notificationHandler).then(topic => {
+          this._addLogEntry(`Subscription for topic ${topic} successful, ready to receive messages `);
+        });
+      } catch (e) {
+        this._addLogEntry('Subscribe failed: ' + e.message);
+      }
+    });
     this.widget('UnsubscribeButton').on('click', () => {
       try {
         uiNotifications.unsubscribe(this.widget('TopicField').value, this._notificationHandler);
