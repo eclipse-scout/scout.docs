@@ -1,0 +1,22 @@
+= Page
+include::common:partial$_header.adoc[]
+
+A page is a node in an xref:user-interface/outline.adoc[Outline].
+
+In addition to the basic tree node attributes like `text`, `iconId` or `expanded`, it also has a detail content that is displayed in the bench of the desktop.
+
+The content can either be a table or a form that will be shown when the page is selected.
+
+There are two types of pages:
+
+. Page with table
+. Page with nodes
+
+== Page with Table
+The purpose of a page with table is to show tabular data when the page is selected.
+
+Each row of the table can be linked to a sub-page so that double-clicking a row will select that sub-page.
+
+== Page with Nodes
+A page with nodes is mostly either used as a folder that contains sub-pages.
+Or it is used to display detailed information about a specific table row of a page with table using a detail xref:user-interface/form.adoc[form].

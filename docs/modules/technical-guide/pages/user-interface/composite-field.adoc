@@ -1,0 +1,12 @@
+= Composite Field
+include::common:partial$_header.adoc[]
+
+A composite field is a special type of xref:user-interface/form-field.adoc[Form Field] that contains other form fields.
+
+Typical examples are:
+
+. xref:user-interface/group-box.adoc[Group Box]
+. Tab Box
+. Sequence Box
+
+Since a form field itself actually can contain other form fields, the composite field is not much more than a marker interface without special abilities.
