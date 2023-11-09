@@ -9,11 +9,12 @@
  */
 
 import {ValueFieldPropertiesBox, ValueFieldPropertiesBoxWidgetMap} from '../index';
+import {scout} from '@eclipse-scout/core';
 
 export class TreeBoxValueFieldPropertiesBox extends ValueFieldPropertiesBox {
   declare widgetMap: ValueFieldPropertiesBoxWidgetMap; // Necessary to make widget map generator happy
 
   override parseValue(newValue: string): any {
-    return newValue.split(',');
+    return scout.nvl(newValue, '').split(',');
   }
 }
