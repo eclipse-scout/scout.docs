@@ -29,7 +29,7 @@ public final class WidgetsClientConfigProperties {
 
     @Override
     public String getDefaultValue() {
-      return "https://github.com/bsi-software/org.eclipse.scout.docs/blob";
+      return "https://github.com/eclipse-scout/scout.docs/blob";
     }
   }
 
