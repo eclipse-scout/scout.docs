@@ -26,9 +26,9 @@ public class TreeAutoCheckStyleLookupCall extends LocalLookupCall<AutoCheckStyle
   @Override
   protected List<? extends ILookupRow<AutoCheckStyle>> execCreateLookupRows() {
     List<ILookupRow<AutoCheckStyle>> rows = new ArrayList<>();
-    rows.add(new LookupRow<>(AutoCheckStyle.NONE, "None"));
-    rows.add(new LookupRow<>(AutoCheckStyle.CHILDREN, "Children"));
-    rows.add(new LookupRow<>(AutoCheckStyle.CHILDREN_AND_PARENT, "Children and parent"));
+    rows.add(new LookupRow<>(AutoCheckStyle.NONE, "NONE"));
+    rows.add(new LookupRow<>(AutoCheckStyle.CHILDREN, "CHILDREN"));
+    rows.add(new LookupRow<>(AutoCheckStyle.CHILDREN_AND_PARENT, "CHILDREN_AND_PARENT"));
     return rows;
   }
 }

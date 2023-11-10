@@ -16,8 +16,8 @@ export class AutoCheckStyleLookupCall extends StaticLookupCall<AutoCheckStyle> {
   }
 
   static DATA = [
-    [Tree.AutoCheckStyle.NONE, 'None'],
-    [Tree.AutoCheckStyle.CHILDREN, 'Children'],
-    [Tree.AutoCheckStyle.CHILDREN_AND_PARENT, 'Children and parent']
+    [Tree.AutoCheckStyle.NONE, 'NONE'],
+    [Tree.AutoCheckStyle.CHILDREN, 'CHILDREN'],
+    [Tree.AutoCheckStyle.CHILDREN_AND_PARENT, 'CHILDREN_AND_PARENT']
   ];
 }
