@@ -31,7 +31,7 @@ include::{mdledir}/CreateNewJsProjectIntellij.adoc[]
 == What's Next?
 
 :jswidgets: https://scout.bsi-software.com/jswidgets_{doc-short-version-underlined}/
-:jswidgets-code: https://github.com/bsi-software/org.eclipse.scout.docs/tree/releases/{doc-short-version}/code/widgets
+:jswidgets-code: https://github.com/eclipse-scout/scout.docs/tree/releases/{doc-short-version}/code/widgets
 :docs: https://eclipsescout.github.io/{doc-short-version}
 :technical-guide-js: {docs}/technical-guide-js.html
 :scout-forum: http://www.eclipse.org/forums/eclipse.scout

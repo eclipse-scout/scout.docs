@@ -286,7 +286,7 @@ See the https://git-scm.com/docs/gitignore[gitignore Documentation] for details.
 
 == What's Next?
 
-:jswidgets-code: https://github.com/bsi-software/org.eclipse.scout.docs/tree/releases/{doc-short-version}/code/widgets
+:jswidgets-code: https://github.com/eclipse-scout/scout.docs/tree/releases/{doc-short-version}/code/widgets
 :technical-guide-js: https://eclipsescout.github.io/{doc-short-version}/technical-guide-js.html
 :scout-forum: http://www.eclipse.org/forums/eclipse.scout
 

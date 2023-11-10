@@ -1,2 +1,1 @@
-
-TIP: Do you want to improve this document? Have a look at the link:https://github.com/bsi-software/org.eclipse.scout.docs/blob/{git-branch}/docs/{_footer-link-path}[sources,window=_blank] on GitHub.
+TIP: Do you want to improve this document? Have a look at the link:https://github.com/eclipse-scout/scout.docs/blob/{git-branch}/docs/{_footer-link-path}[sources,window=_blank] on GitHub.
