@@ -198,9 +198,10 @@ With `Planner.rangeSelectable = false` and `Planner.multiSelect = true` its now 
 
 are now using UTF-8 instead of ISO-8859-1 encoding.
 
-Existing files need to be converted, e.g. by the help of `native2ascii`, which is available up to (but not including) JDK 17.
-Execute the following command in your workspace directory:
+Existing files need to be converted, e.g. using the `native2ascii` tool, which is available e.g. in https://adoptium.net/temurin/releases/?version=8&package=jdk[OpenJDK 8].
+Execute the following command in your workspace directory in a Bash (also works e.g. in Git Bash or on WSL):
 
+[source,shell]
 ....
 find . -name "*.properties" -exec native2ascii -reverse -encoding utf8 {} {} \;
 ....
@@ -228,7 +229,6 @@ Eclipse: Window/Preferences/General/Content Types
 
 * Text/Java Properties File
 * Default encoding: `UTF-8` & press `Update`
-** For sub entries too (e.g. Build Properties File, ...)
 
 IntelliJ: File/Settings/Editor/File Encodings:
 
