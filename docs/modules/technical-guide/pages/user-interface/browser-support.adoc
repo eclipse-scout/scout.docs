@@ -14,3 +14,14 @@ Mobile::
 _(Due to the nature of mobile operating systems, it is hard to specify exact versions of supported browsers. Usually, the screen size and the device speed are the limiting factors.)_
 * iOS >= 13
 * Android >= 5
+
+== HTTP/2
+Starting with Scout 24 https://en.wikipedia.org/wiki/HTTP/2[HTTP/2] is supported and highly recommended to be used!
+`HTTP/2` can use multiplexing for multiple requests over a single `TCP` connection which eliminates the issue that only a few number of tabs can be open in the Browser for the same Scout application.
+
+To ensure `HTTP/2` is used for the Browser running your Scout application the following should be considered:
+
+* `HTTP/2` is only used by Browsers when the requests are encrypted (https://en.wikipedia.org/wiki/HTTPS[https]). Therefore, ensure your application is only accessible using `TLS` (which is recommended anyway).
+* `HTTP/2` must be enabled on the server that accepts the requests from the Browser. This may be a https://en.wikipedia.org/wiki/Web_application_firewall[WAF], https://en.wikipedia.org/wiki/Load_balancing_(computing)[Load balancer], or https://en.wikipedia.org/wiki/Reverse_proxy[Reverse Proxy] in front of your Scout application (for best security it is not recommended to expose the Scout server directly to the Internet). Please consult the documentation of your proxy or WAF on how to activate `HTTP/2` and `https`.
+* You may also use `HTTP/2` from the front-end proxy or WAF to the actual Scout Jetty server but this is optional.
+* The Scout Jetty server supports `HTTP/2` since version 24 out of the box.

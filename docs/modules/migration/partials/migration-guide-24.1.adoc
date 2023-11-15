@@ -94,6 +94,10 @@ Scout 24.1 requires at least the following:
 ** Node.js >= 20.10.0
 ** pnpm >= 8.11.0
 
+== HTTP/2 Support
+
+For Scout 24 and newer enabling `HTTP/2` for your application is recommended. Please refer to the xref:technical-guide:user-interface/browser-support.adoc[documentation] on how to enable `HTTP/2`.
+
 == Build changes
 
 * The Maven build has the enforcer rule https://maven.apache.org/enforcer/enforcer-rules/dependencyConvergence.html[dependencyConvergence] enabled by default.

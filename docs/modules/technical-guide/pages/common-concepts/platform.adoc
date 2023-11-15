@@ -70,7 +70,7 @@ The format XML was chosen to allow adding exclusions in large projects, but this
 TIP: It is recommended to add an emtpy `scout.xml` file into the META-INF folder of your projects, such that the classes are available in the 'ClassInventory'.
 
 Scout uses Jandex footnote:[
-https://github.com/wildfly/jandex
+https://github.com/smallrye/jandex
 ] to build the class inventory. The meta data to find classes can be pre-computed during build time into an index file describing the contents of the jar file. See the jandex project for details.
 
 [[sec-bean.manager]]
@@ -384,6 +384,108 @@ To minimize configuration files such entries should be removed from `config.prop
 [[sec-app.configProperties]]
 == Scout Config Properties
 
+`dev.username` ::
+Allows to override the username returned by the DevUsernameProvider.
++
+Data type: String
+
+`scout.app.autoCreateSelfSignedCertificate` ::
+Specifies the X-500 name to use in the self-signed certificate when starting Scout application in development mode with TLS enabled.
++
+Example:
++
+[listing]
+`CN=my-host.my-domain.com,C=US,ST=CA,L=Sunnyvale,O=My Company Inc.`.
++
+This property is only used in development mode and only if the property `scout.app.useTls` is true and no existing Java keystore is specified (property `scout.app.keyStorePath`).
++
+Data type: String
+
+`scout.app.certificateAlias` ::
+HTTPS certificate alias of the key in the keystore to use.
++
+Data type: String
+
+`scout.app.consoleInputHandlerEnabled` ::
+Specifies whether the application uses a console input handler or not. The default value is true for development, false otherwise.
++
+Data type: Boolean
+
+`scout.app.contextPath` ::
+The context path under which the application can be reached. The default value is / (i.e. root path).
++
+Data type: String
+
+`scout.app.http.request.maxHeaderSize` ::
+Specifies the maximum allowed size in bytes for a HTTP request header. The default value is 8 KB (see org.eclipse.jetty.server.HttpConfiguration).
++
+Data type: Integer
+
+`scout.app.httpSessionEnabled` ::
+Specifies whether the application uses HTTP session or not. The default value is true.
++
+Data type: Boolean
+
+`scout.app.httpSessionTimeoutInSeconds` ::
+The session timeout in seconds to use if HTTP sessions are enabled. The default value is 300 seconds (5 minutes).
++
+Data type: Integer >= 0
+
+`scout.app.jvmShutdownHookEnabled` ::
+Specifies if the JVM shutdown hook is registered. The default value is true.
++
+Data type: Boolean
+
+`scout.app.keyStorePassword` ::
+HTTPS keystore password. Supports obfuscated values prefixed with `OBF:`.
++
+Data type: String
+
+`scout.app.keyStorePath` ::
+Setting this property enables the HTTPS connector. The value of this property must point to the local key store.
++
+Example:
++
+[listing]
+`classpath:/dev/my-https.jks` or `file:///C:/Users/usr/Desktop/my-store.jks` or `C:/Users/usr/Desktop/my-store.jks`.
++
+Data type: String
+
+`scout.app.port` ::
+The port under which the application will be running. Default value is 8080.
++
+Data type: Integer between 1 and 65535
+
+`scout.app.privateKeyPassword` ::
+The password (if any) for the specific key within the key store. Supports obfuscated values prefixed with `OBF:`.
++
+Data type: String
+
+`scout.app.sessionCookieConfigHttpOnly` ::
+Specifies whether the HTTP session cookie is HTTP only or not. The default value is true.
++
+Data type: Boolean
+
+`scout.app.sessionCookieConfigSameSite` ::
+Specifies the SameSite attribute of the HTTP session cookie. Valid values are: `None`, `Strict` or `Lax`. Default value is `Lax`.
++
+Data type: SameSite
+
+`scout.app.sessionCookieConfigSecure` ::
+Specifies whether any session tracking cookies created by the web application will be marked as secure. If true, the session tracking cookie will be marked as secure even if the request initiated the corresponding session using plain HTTP instead of HTTPS (e.g. Scout application behind reverse proxy terminating SSL). If false, the session tracking cookie will only be marked as secure if the request initiated the corresponding session is secure (using HTTPS). The default value is true for non-development mode.
++
+Data type: Boolean
+
+`scout.app.useTls` ::
+Specifies if the Scout application should use TLS. If true, the server must either be started in development mode (then a new self-singed certificate is created automatically), or a Java KeyStore must be configured using property `scout.app.keyStorePath`. By default this property is true, if a Java KeyStore has been specified.
++
+Data type: Boolean
+
+`scout.app.webappDirectory` ::
+The folder to find the webapp resources. The default value is `/src/main/webapp/`
++
+Data type: File
+
 `scout.application.name` ::
 The display name of the application. Used e.g. in the info form and the diagnostic views. The default value is `unknown`.
 +
@@ -438,7 +540,7 @@ Data type: Boolean
 `scout.auth.credentials` ::
 Specifies the known credentials (username & passwords) of the `org.eclipse.scout.rt.platform.security.ConfigFileCredentialVerifier`.
 +
-Credentials are separated by semicolon. Username and password information are separated by colon. Usernames are case-insensitive, and it is recommended that they should only consist of ASCII characters. Plain text passwords are case-sensitive.
+Credentials are separated by semicolon. Username and password information are separated by colon. Usernames are case-insensitive and it is recommended that they should only consist of ASCII characters. Plain text passwords are case-sensitive.
 +
 By default the password information consists of Base64 encoded salt followed by a dot followed by the Base64 encoded SHA-512 hash of the password (using UTF-16).
 +
@@ -532,10 +634,20 @@ The maximum amount of time in millisecons a consumer blocks while waiting for ne
 +
 Data type: Integer >= 0
 
+`scout.clientnotification.maxNotificationPollerStaleTime` ::
+The maximum amount of time in milliseconds between two client notification poller invocations before the poller job is restarted. Note: this value should be at least two times of both `scout.clientnotification.maxNotificationBlockingTimeOut` and `scout.clientnotification.notificationPollerCheckInterval`. The default is 90 seconds.
++
+Data type: Long >= 0
+
 `scout.clientnotification.nodeQueueCapacity` ::
 Capacity of the client notification queue. If maximum capacity is reached, notification messages are dropped. The default value is 200.
 +
 Data type: Integer >= 0
+
+`scout.clientnotification.notificationPollerLivenessCheckInterval` ::
+Interval in milliseconds the poller job liveness check is performed. The default is 30 seconds.
++
+Data type: Long >= 0
 
 `scout.clientnotification.notificationQueueExpireTime` ::
 If no message is consumed for the specified number of milliseconds, client notification queues (with possibly pending notifications) are removed.
@@ -561,14 +673,14 @@ Data type: Boolean
 `scout.cspDirective` ::
 Configures individual Content Security Policy (CSP) directives.
 +
-See https://www.w3.org/TR/CSP2/[Content Security Policy Level 2] and the Bean `org.eclipse.scout.rt.server.commons.servlet.ContentSecurityPolicy` for more details.
+See https://www.w3.org/TR/CSP2/ and the Bean `org.eclipse.scout.rt.server.commons.servlet.ContentSecurityPolicy` for more details.
 +
 The value must be provided as a Map.
 +
 Example:
 +
 [listing]
-scout.cspDirective[img-src]=`self` data: 'self' data: https://media.example.com
+scout.cspDirective[img-src]=`self` data: https://media.example.com
 +
 Data type: Map
 
@@ -582,10 +694,30 @@ A list of regex strings. If the pathInfo of the request matches one of these str
 +
 Data type: List
 
+`scout.dev.texts.fileWatcherEnabled` ::
+Specifies if the a file watcher should be installed for every nls resource bundle to invalidate the texts cache if a file changed. This property will only have an effect if platform runs in development mode.
++
+Data type: Boolean
+
 `scout.devMode` ::
 Property to specify if the application is running in development mode. Default is false.
 +
 Data type: Boolean
+
+`scout.diagnostics.httpSessionIdLogMode` ::
+Specifies in which form the HTTP session ID is provided as diagnostic context value.
++
+Possible modes:
++
+`off`: No HTTP session ID is provided.
++
+`short`: Only a short and obfuscated version of the HTTP session is provided. The actual ID cannot be recovered from this.
++
+`full`: The full HTTP session ID is provided, as reported by the application server. CAUTION: Only use this mode if you can guarantee that no malicious third party has access to the log files. Otherwise they might be able to hijack active sessions.
++
+In development mode, the default value is `full`. Otherwise, the default value is `short`.
++
+Data type: HttpSessionIdLogMode
 
 `scout.externalBaseUrl` ::
 Absolute URL to the deployed http(s):// base of the web-application. The URL should include proxies, redirects, etc.
@@ -598,6 +730,11 @@ scout.externalBaseUrl=https://www.my-company.com/my-scout-application/.
 This URL is used to replace `<scout:base />` tags.
 +
 Data type: String
+
+`scout.headless` ::
+Specifies if the Scout Platform runs in headless mode. If true, the Java system property `java.awt.headless` is set to true as well (if not already set). The default value is true.
++
+Data type: Boolean
 
 `scout.healthCheckRemoteUrls` ::
 Comma separated list of URLs the `RemoteHealthChecker` should access.
@@ -612,7 +749,7 @@ Specifies the maximum lifetime in milliseconds for kept alive connections of the
 Data type: Integer
 
 `scout.http.ignoreProxyPatterns` ::
-Configure the proxy ignore list for the ConfigurableProxySelector. If a URI matches the pattern no proxy connection is used.
+Configure the proxy ignore list for the ConfigurableProxySelector. If an URI matches the pattern no proxy connection is used.
 +
 By default no proxy is configured.
 +
@@ -642,7 +779,7 @@ Specifies the total maximum connections of the Apache HTTP client. The default v
 Data type: Integer
 
 `scout.http.proxyPatterns` ::
-Configure proxies for the `ConfigurableProxySelector`. If a URI matches a pattern the corresponding proxy will be used.
+Configure proxies for the `ConfigurableProxySelector`. If an URI matches a pattern the corresponding proxy will be used.
 +
 By default no proxy is used.
 +
@@ -655,11 +792,6 @@ scout.http.proxyPatterns[0]=.*\.example.com(:\d+)?=127.0.0.1:8888
 scout.http.proxyPatterns[1]=.*\.example.org(:\d+)?=proxy.company.com
 +
 Data type: List
-
-`scout.http.redirectPost` ::
-Enable redirect of POST requests (includes non-idempotent requests). The default value is true
-+
-Data type: Boolean
 
 `scout.http.retryOnNoHttpResponseException` ::
 Enable retry of request (includes non-idempotent requests) on NoHttpResponseException
@@ -736,7 +868,7 @@ Data type: Integer >= 0
 `scout.jaxws.implementor` ::
 Fully qualified class name of the JAX-WS implementor to use. The class must extend `org.eclipse.scout.rt.server.jaxws.implementor.JaxWsImplementorSpecifics`.
 +
-By default JAX-WS Metro (not bundled with JRE) is used. For that to work, add the Maven dependency to JAX-WS Metro to your server application`s pom.xml: com.sun.xml.ws:jaxws-rt:2.3.5.
+By default, JAX-WS Metro (not bundled with JRE) is used. For that to work, add the Maven dependency to JAX-WS Metro to your server application`s pom.xml: com.sun.xml.ws:jaxws-rt:2.2.10.
 +
 Data type: Fully qualified class name. The class must have `org.eclipse.scout.rt.server.jaxws.implementor.JaxWsImplementorSpecifics` in its super hierarchy.
 
@@ -761,11 +893,6 @@ Technical subject used to invoke JAX-WS handlers if the request is not authentic
 The default value is `jaxws-handler`.
 +
 Data type: Subject name as String
-
-`scout.app.port` ::
-The port under which the jetty will be running.
-+
-Data type: Integer between 1 and 65535
 
 `scout.jobmanager.allowCoreThreadTimeOut` ::
 Specifies whether threads of the core-pool should be terminated after being idle for longer than the value of property `scout.jobmanager.keepAliveTime`. The defautl value is false.
@@ -813,6 +940,11 @@ Data type: List
 Non-standard email bounce detection: subject is checked against the provided list of heuristic subjects (partial match, case-insensitive)
 +
 Data type: List
+
+`scout.malwareScanner.delay` ::
+Delay in milliseconds to wait after writing the file to the temp directory. This lets the scanner some time for checking. Default is 500ms.
++
+Data type: Integer
 
 `scout.malwareScanner.path` ::
 Path to a malware scanner checked directory. The default value is null which means the system temp path is used.
@@ -869,7 +1001,7 @@ Specifies the default Marshaller to use if no marshaller is specified for a MOM 
 Data type: Fully qualified class name. The class must have `org.eclipse.scout.rt.mom.api.marshaller.IMarshaller` in its super hierarchy.
 
 `scout.mom.requestreply.cancellationTopic` ::
-Specifies the default topic to receive cancellation request for `request-reply` communication. By default a defined topic with the name `scout.mom.requestreply.cancellation` is used.
+Specifies the default topic to receive cancellation request for `request-reply` communication. By default, a defined topic with the name `scout.mom.requestreply.cancellation` is used.
 +
 Data type: IDestination
 
@@ -883,8 +1015,64 @@ Specifies the cluster node name. If not specified a default id is computed.
 +
 Data type: String
 
+`scout.otel.defaultExporter` ::
+List of exporters to be used for traces, metrics and logs, separated by commas. Default is `otlp` or `none` in dev mode. Use this property to override the default.
++
+Data type: String
+
+`scout.otel.initializerEnabled` ::
+Property to specify if the application is using the Scout OpenTelemetry initializer. Default is false. Set to false if you are using the OpenTelemetry Java Agent.
++
+Data type: Boolean
+
+`scout.platform.version` ::
+Version of the scout platform. Used e.g. in the info form and the diagnostic views. The default value is bound to the implementation version in the manifest file.
++
+Data type: String
+
+`scout.propertySupport.storeConfigValues` ::
+Defines if config values should be stored using BasicPropertySupport, this is the current default and may be changed > 22.0 in order to reduce global memory consumption.Default: true
++
+Data type: Boolean
+
 `scout.remotefileRootPath` ::
 Absolute path to the root directory of the `RemoteFileService`. The default value is null.
++
+Data type: String
+
+`scout.rest.ensureHttpHeaderConnectionClose` ::
+Ensures that the header `Connection: close` is added to every REST HTTP requests unless the header `Connection` is already set. As a result, TCP Connections are not reused by consecutive REST calls.The default value is true
++
+This solves several rather rare issues that occurred in the HTTP client implementation when a connection was closed by the server side while it was being used by the client side for the next request.
++
+Data type: Boolean
+
+`scout.serial.blacklistAppend` ::
+Specifies a blacklist regex for fully qualified class names that are blocked in object serialization.
++
+These rules are appended to the existing built-in blacklist (recommended).
++
+Comma separated list of regular expressions (regex).
++
+Data type: String
+
+`scout.serial.blacklistReplace` ::
+Specifies a blacklist regex for fully qualified class names that are blocked in object serialization.
++
+These rules replace the existing built-in blacklist (not recommended).
++
+Comma separated list of regular expressions (regex).
++
+Data type: String
+
+`scout.serial.whitelist` ::
+Specifies the secure whitelist of fully qualified class names that are allowed to be used in object serialization.
++
+Comma separated list of regular expressions (regex).
++
+The default regex .* is used for back compatibility only, this is unsafe.
++
+Make sure to define the property `scout.serial.whitelist` in the config.properties
 +
 Data type: String
 
@@ -954,7 +1142,7 @@ Socket read timeout value in milliseconds.
 Data type: Integer >= 0
 
 `scout.sql.directJdbcConnection` ::
-If true a direct JDBC connection is created. Otherwise, a JNDI connection is used. The default value is true.
+If true a direct JDBC connection is created. Otherwise a JNDI connection is used. The default value is true.
 +
 Data type: Boolean
 
@@ -1019,7 +1207,7 @@ The password to connect to the database (JDBC or JNDI)
 Data type: String
 
 `scout.sql.transactionMemberId` ::
-ID of the transaction member on which the connection is available.
+Id of the transaction member on which the connection is available.
 +
 Data type: String
 
@@ -1062,13 +1250,20 @@ By default this property is set to 1 minute.
 Data type: Long >= 0
 
 `scout.ui.locales` ::
-Contains a comma separated list of supported locales (e.g. en,en-US,de-CH).
+Contains a comma separated list of supported locales (e.g. en,en-US,de-CH). To support all locales, use the keyword `all` instead.
 +
 This is only relevant if locales.json and texts.json should be sent to the client, which is not the case for remote apps. So this property is only used for JS only apps.
 +
 By default no locales are supported.
 +
 Data type: List
+
+`scout.ui.maxUploadFileCount` ::
+For security reasons, file upload is limited to a maximum number of file that can be processed at once.
++
+By default this property is set to 100. A value of -1 means no limit
++
+Data type: Long
 
 `scout.ui.maxUserIdleTime` ::
 If a user is inactive (no user action) for the specified number of seconds, the session is stopped and the user is logged out.
@@ -1095,6 +1290,21 @@ Data type: Integer >= 0
 The name of the UI theme which is activated when the application starts.
 +
 Data type: String
+
+`scout.uinotification.cleanupJobInterval` ::
+The cleanup job removes expired notifications from the registry.This property configures in seconds, how often the cleanup job should run. Default is set to 5 minutes.If set to 0, the job won`t run.
++
+Data type: Long
+
+`scout.uinotification.expirationTime` ::
+Configures in milliseconds how long the notification has to be kept in the registry until it can be removed.This value is used if no explicit expirationTime is set for a specific notification.Important: the expiration time should be larger than the timeout for the HTTP session used for the UI.This makes sure he won`t miss any notifications if he was offline for a while, because he will be logged out anyway after getting online again.Default is 7 minutes.
++
+Data type: Long
+
+`scout.uinotification.waitTimeout` ::
+Configures in milliseconds how long the request should listen for a new notification it is interested in is put into the registry.If set to 0, the currently available list of notifications will be returned immediately.Default is 1 minute.
++
+Data type: Long
 
 `scout.urlHints.enabled` ::
 Enable or disable changing UrlHints using URL parameters in the browser address line.

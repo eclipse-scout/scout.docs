@@ -58,6 +58,16 @@ Scout 24.1 requires at least the following:
 ** Node 20 >= 20.10.0
 ** pnpm 8 >= 8.11.0
 
+== HTTP/2 Support
+
+Starting with release 24.1 the Scout https://eclipse.dev/jetty/[Jetty] server supports `HTTP/2` together with the already existing `HTTP/1.1`. It is enabled for `http` and `https` (https://en.wikipedia.org/wiki/Transport_Layer_Security[TLS]) access.
+Please note that Browsers only use `HTTP/2` when using `https`.
+
+When using `https` also https://en.wikipedia.org/wiki/Application-Layer_Protocol_Negotiation[ALPN] is supported which can upgrade an `HTTP/1.1` request to an `HTTP/2` request if the client supports it.
+
+For Scout 24 and newer enabling `HTTP/2` for your application is recommended. Please refer to the xref:technical-guide:user-interface/browser-support.adoc[documentation] on how to enable `HTTP/2`.
+
+
 == UI Notifications
 
 It is now possible to push notifications from the backend directly to the UI running in the browser.
