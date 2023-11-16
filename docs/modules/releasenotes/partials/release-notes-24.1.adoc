@@ -72,3 +72,13 @@ Of course there is also behavior and API which has changed, the following behavi
 For third-party dependencies which refer to an older HttpClient version either both versions will co-exist (see above) or it is necessary to search for updated third-party versions which reference the new version of the HttpClient.
 
 To use the new version with the Google HTTP Client library a `org.eclipse.scout.rt.shared.http.transport.ApacheHttpTransport` is introduced (as the third party library itself does not support the newer version yet as the library itself refers to an older HttpClient version this older version is explicitly excluded).
+
+== Accessibility
+
+We are excited to announce the introduction of enhanced accessibility features in Scout.
+This improves the overall user experience for individuals with diverse abilities, ensuring Scout applications are more inclusive and user-friendly.
+Scout now includes comprehensive WAI-ARIA support to provide additional information to assistive technologies.
+ARIA roles, properties, and states have been implemented to convey the purpose and state of most of Scout's widgets.
+Very few complex widgets still lack a comprehensive WAI-ARIA support as these widgets require new concepts of interaction to be completely accessible.
+
+To get familiar with Scouts new accessibility features we recommend using `aria.ts` as a starting point.
