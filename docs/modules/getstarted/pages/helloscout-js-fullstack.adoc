@@ -36,3 +36,4 @@ and its {jswidgets-code}[source code].
 
 In case you should get stuck somewhere and need help, contact us on the http://www.eclipse.org/forums/eclipse.scout[Scout Forum] or on https://stackoverflow.com/tags/eclipse-scout[Stack Overflow].
 
+
