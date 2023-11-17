@@ -84,6 +84,11 @@ To install the Scout SDK into your existing Eclipse IDE, use this P2 update site
 
 // ----------------------------------------------------------------------------
 
+
+== 3rd Party Libraries Update
+
+* Mockito 5: Uses the inline mock maker as new default and change the behavior of `any()`, which does not match varargs anymore (use `any(Class)` instead).
+
 == Removed Deprecated Methods in ICacheBuilder and IFormHandler
 
 The deprecated method `ICacheBuilder#withAtomicInsertion` was removed.
