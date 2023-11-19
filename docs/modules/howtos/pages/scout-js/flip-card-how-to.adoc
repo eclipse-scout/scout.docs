@@ -10,20 +10,20 @@ For this example we use the helloscout git repository, but you can easily create
 
 Read the readme and start the hellojs application to make sure it works.
 
-=== Add Empty JS and CSS Files
+=== Add Empty TS and CSS Files
 
 Create the following files in the folder `org.eclipse.scout.hellojs.ui.html`
 
-* `src/main/js/*flipcard/FlipCardField.js*` The JavaScript file representing the field.
+* `src/main/js/*flipcard/FlipCardField.ts*` The TypeScript file representing the field.
 * `src/main/js/*flipcard/FlipCardField.less*` The LESS file containing the styles of the field.
 
 === Add the JS file to the JS index
 
-.index.js
-[source,js]
+.index.ts
+[source,typescript]
 ----
 ...
-export {default as FlipCardField} from './flipcard/FlipCardField';
+export * from './flipcard/FlipCardField';
 ...
 ----
 
@@ -42,13 +42,13 @@ export {default as FlipCardField} from './flipcard/FlipCardField';
 === Create a Minimal FormField
 The FlipCard will inherit from FormField. Every form field consists of a container, a label, the actual field, a mandatory-indicator and a status.
 
-.FlipCardField.js
-[source,js]
+.FlipCardField.ts
+[source,typescript]
 ----
 import {FormField} from '@eclipse-scout/core';
 
-export default class FlipCardField extends FormField {
-  _render() {
+export class FlipCardField extends FormField {
+  protected override _render() {
     // Create the container
     this.addContainer(this.$parent, 'flip-card-field');
 
@@ -56,7 +56,7 @@ export default class FlipCardField extends FormField {
     this.addLabel();
 
     // Create the actual field. This will be your flip card.
-    var $field = this.$parent.appendDiv('content');
+    let $field = this.$parent.appendDiv('content');
     // add the field to the form field.
     this.addField($field);
 
@@ -67,14 +67,34 @@ export default class FlipCardField extends FormField {
 }
 ----
 
+Since we use JQuery in our FlipCardField, we should add it as dependency to our `package.json` to get code completion and proper syntax highlighting.
+Don't forget to add the types as well because JQuery does not include them.
+
+.package.json
+[source,json]
+----
+{
+  ...
+  "devDependencies": {
+    ...
+    "@types/jquery": "3.5.27"
+  },
+  "dependencies": {
+    ...
+    "jquery": "3.6.0"
+  }
+}
+----
+
 === Add the FlipCard to the HelloForm
 Don't forget to add the `import` for your `FlipCardField`.
 
-.HelloFormModel.js
-[source,js]
+.HelloFormModel.ts
+[source,typescript]
 ----
-{
-  id: "hellojs.HelloForm",
+import {FlipCardField, FormModel} from '@eclipse-scout/core';
+
+export default (): FormModel => ({
   ...
   rootGroupBox: {
     ...
@@ -86,7 +106,6 @@ Don't forget to add the `import` for your `FlipCardField`.
           {
             id: 'NameField',
             ...
-
           },
           <!--1-->
           {
@@ -106,7 +125,7 @@ Don't forget to add the `import` for your `FlipCardField`.
       }
     ]
   }
-}
+});
 ----
 <1> The FlipCard field
 
@@ -119,33 +138,35 @@ image::common:flipCard01.jpg[]
 
 == Full Featured Flip Card Field
 
-.FlipCard.js
-[source,js]
+.FlipCardField.ts
+[source,typescript]
 ----
 import {FormField} from '@eclipse-scout/core';
 
-export default class FlipCardField extends FormField {
-    constructor() {
+export class FlipCardField extends FormField {
+  $card: JQuery;
+  $front: JQuery;
+  $back: JQuery;
+  flipped: boolean;
+  frontImage: string;
+  backImage: string;
+
+  constructor() {
     super();
-      this.$card = null;
-      this.$front = null;
-      this.$back = null;
-      this.flipped = false;
-      this.frontImage = null;
-      this.backImage = null;
+    this.flipped = false;
   }
 
-  _render() {
+  protected override _render() {
     // Create the container
     this.addContainer(this.$parent, 'flip-card-field');
     // Add a label
     this.addLabel();
 
     // Create the actual field <1>
-    var $field = this.$parent.appendDiv('content');
+    let $field = this.$parent.appendDiv('content');
     // Create the card inside the field
     this.$card = $field.appendDiv('card')
-      .on('mousedown', this._onCardMouseDown.bind(this)); //(2)
+      .on('mousedown', this._onCardMouseDown.bind(this)); // <2>
     this.$front = this.$card.appendDiv('front');
     this.$back = this.$card.appendDiv('back');
     // Add the field to the form field. It will be available as this.$field.
@@ -156,41 +177,41 @@ export default class FlipCardField extends FormField {
     this.addStatus();
   }
 
-  _renderProperties() { // <3>
+  protected override _renderProperties() { // <3>
     super._renderProperties();
     this._renderFrontImage();
     this._renderBackImage();
     this._renderFlipped();
   }
 
-  _renderFrontImage() {
+  protected _renderFrontImage() {
     if (this.frontImage) {
-      this.$front.append('<img src=\"' + this.frontImage + '\">');
+      this.$front.append(`<img src="${this.frontImage}">`);
     }
   }
 
-  _renderBackImage() {
+  protected _renderBackImage() {
     if (this.backImage) {
-      this.$back.append('<img src=\"' + this.backImage + '\">');
+      this.$back.append(`<img src="${this.backImage}">`);
     }
   }
 
-  _remove() { //<4>
+  protected override _remove() { //<4>
     super._remove();
     this.$card = null;
     this.$front = null;
     this.$back = null;
   }
 
-  _onCardMouseDown() { // <2>
+  protected _onCardMouseDown(event: JQuery.MouseDownEvent) { // <2>
     this.setFlipped(!this.flipped);
   }
 
-  setFlipped(flipped) {
+  setFlipped(flipped: boolean) {
     this.setProperty('flipped', flipped);
   }
 
-  _renderFlipped() {
+  protected _renderFlipped() {
     this.$card.toggleClass('flipped', this.flipped);
   }
 }
@@ -200,8 +221,8 @@ export default class FlipCardField extends FormField {
 <3> Initial rendering of the properties. Applies the state to the DOM.
 <4> Keep the references clean. Reset DOM references when the field has been removed.
 
-.HelloForm.json
-[source,js]
+.HelloFormModel.ts
+[source,typescript]
 
 ----
 import {FlipCardField} from '../index';
@@ -219,7 +240,6 @@ export default {
           {
             id: 'NameField',
             ...
-
           },
           <!--1-->
           {
