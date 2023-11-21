@@ -48,6 +48,13 @@ If you just want to play around with them without looking at the source code, yo
 
 // ----------------------------------------------------------------------------
 
+== New Build & Runtime Requirements
+
+Scout 24.1 requires at least the following:
+
+* Build and runtime require at least Java 17
+* Build requires at least Maven 3.9.2
+
 == UI Notifications
 
 It is now possible to push notifications from the backend directly to the UI running in the browser.
