@@ -52,8 +52,11 @@ If you just want to play around with them without looking at the source code, yo
 
 Scout 24.1 requires at least the following:
 
-* Build and runtime require at least Java 17
-* Build requires at least Maven 3.9.2
+* The Java 11 support has been dropped. Build and runtime therefore require Java 17 now. Java 21 Support is planned for a future release.
+* Furthermore, the build requires
+** Maven >= 3.9.2
+** Node 20 >= 20.10.0
+** pnpm 8 >= 8.11.0
 
 == UI Notifications
 

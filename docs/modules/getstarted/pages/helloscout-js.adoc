@@ -23,7 +23,7 @@ We will start by getting the application running and then take a look at the cod
 
 == Prerequisites
 
-Make sure you have https://nodejs.org/dist/latest-v18.x/[Node.js] 18 installed.
+Make sure you have https://nodejs.org/dist/latest-v20.x/[Node.js 20] installed.
 
 == Get the Code
 
