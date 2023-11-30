@@ -53,11 +53,11 @@ Usage example in your package.json:
   "version": "1.0.0",
   "devDependencies": {
     "@eclipse-scout/cli": "{node-version}",
-    "@eclipse-scout/releng": "^22.0.0"
+    "@eclipse-scout/releng": "^24.1.0"
   },
   "dependencies": {
     "@eclipse-scout/core": "{node-version}",
-    "jquery": "3.6.0"
+    "jquery": "3.7.1"
   }
 }
 ----
@@ -84,6 +84,28 @@ To install the Scout SDK into your existing Eclipse IDE, use this P2 update site
 
 // ----------------------------------------------------------------------------
 
+== New Build & Runtime Requirements
+
+Scout 24.1 requires at least the following:
+
+* The Java 11 support has been dropped. Build and runtime therefore require Java 17 now. Java 21 Support is planned for a future release.
+* Furthermore, the build requires
+** Maven >= 3.9.2
+** Node.js >= 20.10.0
+** pnpm >= 8.11.0
+
+== Build changes
+
+* The Maven build has the enforcer rule https://maven.apache.org/enforcer/enforcer-rules/dependencyConvergence.html[dependencyConvergence] enabled by default.
+Therefore, builds will fail if different versions for the same dependency are used.
+To fix this, ensure your dependencies converge and use the https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html[dependencyManagement] where necessary to specify which version to use.
+* The property `master_dependency_tycho-compiler_version` has been deleted as the Tycho compiler is no longer used.
+Instead, the property `master_dependency_ecj_version` may be used to specify the https://search.maven.org/artifact/org.eclipse.jdt/ecj[Eclipse compiler (ECJ)] version. By default version 3.31.0 is used which is part of Eclipse 4.27 (2023-03), IntelliJ 2023.2 and IntelliJ 2023.3.
+* Typescript has been updated from 4.9.5 to 5.3.2. See https://devblogs.microsoft.com/typescript/announcing-typescript-5-0/#breaking-changes-and-deprecations[here] for a list of breaking changes and update your code accordingly.
+* Update the version of the `maven_rt_plugin_config-master` in your `pom.xml` files to the newest `24.1.x` release.
+See https://search.maven.org/artifact/org.eclipse.scout/maven_rt_plugin_config-master[Maven central] for a list of versions available.
+* Update the Scout versions (`package.json` and `pom.xml`) as shown in <<Obtaining the Latest Version>>.
+* If you are using Eclipse and web-service providers, update the `.factorypath` files as shown in xref:technical-guide:working-with-data/jax-ws.adoc#jax-ws-appendix[JAX-WS Appendix].
 
 == 3rd Party Libraries Update
 

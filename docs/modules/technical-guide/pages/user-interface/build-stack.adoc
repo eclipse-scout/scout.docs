@@ -154,7 +154,7 @@ The Scout CLI is a bunch of npm-scripts that help you building and testing your 
   "build:dev:watch": "scout-scripts build:dev:watch"
 },
 "devDependencies": {
-  "@eclipse-scout/cli": "10.0.0"
+  "@eclipse-scout/cli": "23.2.15"
 }
 ----
 
@@ -271,8 +271,8 @@ In order to use the Scout eslint-config, you need to add devDependencies to the 
 .ESLint Dependencies
 ----
 "devDependencies": {
-  "@eclipse-scout/eslint-config": "23.1.0",
-  "eslint": "8.27.0"
+  "@eclipse-scout/eslint-config": "23.2.15",
+  "eslint": "8.55.0"
 }
 ----
 

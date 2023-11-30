@@ -44,7 +44,7 @@ Now let's create a new html file called `index.html` and paste the following con
 </head>
 <body>
   <div class="scout"></div>// <3>
-  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>// <2>
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>// <2>
   <script src="https://cdn.jsdelivr.net/npm/sourcemapped-stacktrace@1.1.11/dist/sourcemapped-stacktrace.js"></script>// <2>
   <script src="https://cdn.jsdelivr.net/npm/@eclipse-scout/core@{node-version}/dist/eclipse-scout-core.js"></script>// <1>
   <script src="hello.js"></script>// <4>

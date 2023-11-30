@@ -4,8 +4,8 @@
     "build-help": "npx antora --fetch docs\\playbooks\\local-eclipse-help-playbook.yml && start docs\\playbooks\\build\\site\\index.html"
   },
   "dependencies": {
-    "@antora/cli": "3.1.2",
+    "@antora/cli": "3.1.5",
     "@antora/lunr-extension": "1.0.0-alpha.8",
-    "@antora/site-generator": "3.1.2"
+    "@antora/site-generator": "3.1.5"
   }
 }

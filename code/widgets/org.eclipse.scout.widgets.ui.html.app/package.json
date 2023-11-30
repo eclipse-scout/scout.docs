@@ -35,7 +35,7 @@
   },
   "devDependencies": {
     "@eclipse-scout/cli": ">=24.1.0-snapshot <24.1.0",
-    "@eclipse-scout/releng": "^22.0.0"
+    "@eclipse-scout/releng": "^24.1.0"
   },
   "dependencies": {
     "@eclipse-scout/core": ">=24.1.0-snapshot <24.1.0",
@@ -43,6 +43,6 @@
     "@eclipse-scout/chart": ">=24.1.0-snapshot <24.1.0",
     "@eclipse-scout/demo-widgets": ">=24.1.0-snapshot <24.1.0",
     "@eclipse-scout/demo-widgets-heatmap": ">=24.1.0-snapshot <24.1.0",
-    "leaflet": "1.9.2"
+    "leaflet": "1.9.4"
   }
 }

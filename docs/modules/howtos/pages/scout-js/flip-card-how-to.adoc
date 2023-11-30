@@ -77,11 +77,11 @@ Don't forget to add the types as well because JQuery does not include them.
   ...
   "devDependencies": {
     ...
-    "@types/jquery": "3.5.27"
+    "@types/jquery": "3.5.29"
   },
   "dependencies": {
     ...
-    "jquery": "3.6.0"
+    "jquery": "3.7.1"
   }
 }
 ----
