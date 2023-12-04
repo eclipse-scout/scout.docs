@@ -762,7 +762,7 @@ The default value is `jaxws-handler`.
 +
 Data type: Subject name as String
 
-`scout.jetty.port` ::
+`scout.app.port` ::
 The port under which the jetty will be running.
 +
 Data type: Integer between 1 and 65535

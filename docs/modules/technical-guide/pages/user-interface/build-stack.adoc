@@ -177,7 +177,7 @@ In order to start the build, use the following command:
 
 `npm run build:dev`
 
-This will fill the dev and res folders with the appropriate files. To make the files available to your browser you need to start a webserver. When using the Scout backend just start the class `JettyServer`. Once the build is complete and Jetty runs, you can open your application in the browser.
+This will fill the dev and res folders with the appropriate files. To make the files available to your browser you need to start a webserver. When using the Scout backend just start the class `Application`. Once the build is complete and Jetty runs, you can open your application in the browser.
 
 If you now make adjustments on your JS or CSS files, you would have to rerun the buid script, which could be time consuming and annoying. To make your developer life easier you can run the following script instead:
 

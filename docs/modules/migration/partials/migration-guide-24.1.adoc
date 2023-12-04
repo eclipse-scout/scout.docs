@@ -95,3 +95,39 @@ The deprecated method `ICacheBuilder#withAtomicInsertion` was removed.
 No migration is required, as this method did not change behavior in any way.
 
 The method `IFormHandler#getHandlerId` was removed without a replacement as there is no use for it.
+
+== Former JettyServer for development can be used in a productive environment
+
+`org.eclipse.scout.dev.jetty.JettyServer` was so far only used for development environments.
+With this release it was improved so that it can be used in a productive environment too (instead of building a .war file to be used in an application server).
+The Scout Application class contains a main-method which may be started directly and itself starts an embedded Jetty server.
+
+The following renaming is applied.
+
+=== Modules
+
+* `org.eclipse.scout.dev.jetty` -> `org.eclipse.scout.rt.app`
+** Check dependencies within `pom.xml`
+
+* `org.eclipse.scout.dev.jetty.test` -> `org.eclipse.scout.rt.app.test`
+* `org.eclipse.scout.dev.jetty.test.affix` -> `org.eclipse.scout.rt.app.test.affix`
+
+=== Java classes
+
+* `org.eclipse.scout.dev.jetty.JettyServer` -> `org.eclipse.scout.rt.app.Application`
+** Check run configurations etc.
+
+=== Properties
+
+* `scout.jetty.port` -> `scout.app.port`
+* `scout.jetty.consoleInputHandler` -> `scout.app.consoleInputHandlerEnabled`
+
+* `scout.jetty.webapp.contextpath` -> `scout.app.contextPath`
+* `scout.jetty.webapp.folder` -> `scout.app.webappDirectory`
+
+* `scout.jetty.keyStorePath` -> `scout.app.keyStorePath`
+* `scout.jetty.autoCreateSelfSignedCertificate` -> `scout.app.autoCreateSelfSignedCertificate`
+* `scout.jetty.keyStorePassword` -> `scout.app.keyStorePassword`
+* `scout.jetty.privateKeyPassword` -> `scout.app.privateKeyPassword`
+* `scout.jetty.certificateAlias` -> `scout.app.certificateAlias`
+
