@@ -8,7 +8,7 @@ Here is a non-exhaustive list of supported browsers:
 Desktop::
 * Mozilla Firefox >= 69
 * Chromium (like Google Chrome, Microsoft Edge, Brave or Opera) >= 71
-* Apple Safari >= 12.1
+* Apple Safari >= 13
 
 Mobile::
 _(Due to the nature of mobile operating systems, it is hard to specify exact versions of supported browsers. Usually, the screen size and the device speed are the limiting factors.)_
