@@ -10,10 +10,10 @@
 package org.eclipse.scout.contacts.client.person;
 
 import java.util.Date;
-import java.util.regex.Pattern;
 
 import org.eclipse.scout.contacts.client.Icons;
 import org.eclipse.scout.contacts.client.common.AbstractDirtyFormHandler;
+import org.eclipse.scout.contacts.client.common.AbstractEmailField;
 import org.eclipse.scout.contacts.client.common.ContactsHelper;
 import org.eclipse.scout.contacts.client.common.CountryLookupCall;
 import org.eclipse.scout.contacts.client.common.MapHelper;
@@ -637,33 +637,7 @@ public class PersonForm extends AbstractForm {
         // tag::email[]
         @Order(40)
         @ClassId("5f9d9363-8e57-4151-b281-7d401e64702c")
-        public class EmailField extends AbstractStringField {
-
-          // end::email[]
-          // http://www.mkyong.com/regular-expressions/how-to-validate-email-address-with-regular-expression/
-          // tag::email[]
-          private static final String EMAIL_PATTERN = // <1>
-              "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" +
-                  "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-
-          @Override
-          protected String getConfiguredLabel() {
-            return TEXTS.get("Email");
-          }
-
-          @Override // <2>
-          protected int getConfiguredMaxLength() {
-            return 64;
-          }
-
-          @Override // <3>
-          protected String execValidateValue(String rawValue) {
-            if (rawValue != null && !Pattern.matches(EMAIL_PATTERN, rawValue)) {
-              throw new VetoException(TEXTS.get("BadEmailAddress")); // <4>
-            }
-
-            return rawValue; // <5>
-          }
+        public class EmailField extends AbstractEmailField {
         }
         // end::email[]
         // tag::layout[]
@@ -720,12 +694,7 @@ public class PersonForm extends AbstractForm {
 
         @Order(40)
         @ClassId("7f693443-ec4e-47fb-874e-b31328cc22fb")
-        public class EmailWorkField extends AbstractStringField {
-
-          @Override
-          protected String getConfiguredLabel() {
-            return TEXTS.get("Email");
-          }
+        public class EmailWorkField extends AbstractEmailField {
         }
         // tag::layout[]
         // tag::organizationField[]
