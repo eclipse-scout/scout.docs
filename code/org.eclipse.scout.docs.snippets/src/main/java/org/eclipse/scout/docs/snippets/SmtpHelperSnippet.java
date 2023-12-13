@@ -9,7 +9,7 @@
  */
 package org.eclipse.scout.docs.snippets;
 
-import javax.mail.Session;
+import jakarta.mail.Session;
 
 import org.eclipse.scout.rt.mail.CharsetSafeMimeMessage;
 import org.eclipse.scout.rt.mail.MailAttachment;

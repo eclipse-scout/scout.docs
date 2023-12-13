@@ -17,22 +17,22 @@ import java.util.UUID;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
-import javax.annotation.Generated;
-import javax.annotation.Resource;
-import javax.jws.HandlerChain;
-import javax.jws.WebMethod;
-import javax.jws.WebParam;
-import javax.jws.WebResult;
-import javax.jws.WebService;
-import javax.jws.soap.SOAPBinding;
-import javax.jws.soap.SOAPBinding.ParameterStyle;
+import jakarta.annotation.Generated;
+import jakarta.annotation.Resource;
+import jakarta.jws.HandlerChain;
+import jakarta.jws.WebMethod;
+import jakarta.jws.WebParam;
+import jakarta.jws.WebResult;
+import jakarta.jws.WebService;
+import jakarta.jws.soap.SOAPBinding;
+import jakarta.jws.soap.SOAPBinding.ParameterStyle;
 import javax.xml.namespace.QName;
-import javax.xml.ws.WebServiceContext;
-import javax.xml.ws.handler.MessageContext;
-import javax.xml.ws.handler.MessageContext.Scope;
-import javax.xml.ws.handler.soap.SOAPHandler;
-import javax.xml.ws.handler.soap.SOAPMessageContext;
-import javax.xml.ws.soap.MTOM;
+import jakarta.xml.ws.WebServiceContext;
+import jakarta.xml.ws.handler.MessageContext;
+import jakarta.xml.ws.handler.MessageContext.Scope;
+import jakarta.xml.ws.handler.soap.SOAPHandler;
+import jakarta.xml.ws.handler.soap.SOAPMessageContext;
+import jakarta.xml.ws.soap.MTOM;
 
 import org.eclipse.scout.docs.ws.pingwebservice.PingWebService;
 import org.eclipse.scout.rt.platform.ApplicationScoped;
@@ -325,7 +325,7 @@ public final class JaxWsSnippet {
   public class PingWebServiceClient2 extends AbstractWebServiceClient<PingWebService, PingWebServicePortType> {
 
     @Override
-    protected void execInstallHandlers(List<javax.xml.ws.handler.Handler<?>> handlerChain) {
+    protected void execInstallHandlers(List<jakarta.xml.ws.handler.Handler<?>> handlerChain) {
       handlerChain.add(new BasicAuthenticationHandler());
       handlerChain.add(BEANS.get(LogHandler.class));
     }
@@ -336,7 +336,7 @@ public final class JaxWsSnippet {
   public class PingWebServiceClient3 extends AbstractWebServiceClient<PingWebService, PingWebServicePortType> {
 
     @Override
-    protected void execInstallHandlers(List<javax.xml.ws.handler.Handler<?>> handlerChain) {
+    protected void execInstallHandlers(List<jakarta.xml.ws.handler.Handler<?>> handlerChain) {
       handlerChain.add(new BasicAuthenticationHandler());
       handlerChain.add(BEANS.get(LogHandler.class));
       handlerChain.add(BEANS.get(WsConsumerCorrelationIdHandler.class)); // <1>

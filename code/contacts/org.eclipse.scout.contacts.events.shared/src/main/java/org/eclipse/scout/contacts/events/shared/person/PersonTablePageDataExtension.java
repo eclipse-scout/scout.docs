@@ -11,7 +11,7 @@ package org.eclipse.scout.contacts.events.shared.person;
 
 import java.io.Serializable;
 
-import javax.annotation.Generated;
+import jakarta.annotation.Generated;
 
 import org.eclipse.scout.contacts.shared.person.PersonTablePageData.PersonTableRowData;
 import org.eclipse.scout.rt.platform.extension.Extends;

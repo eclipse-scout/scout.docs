@@ -9,8 +9,8 @@
  */
 package org.eclipse.scout.docs.snippets.rest;
 
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.client.ClientBuilder;
+import jakarta.ws.rs.core.Response;
 
 import org.apache.hc.client5.http.cookie.StandardCookieSpec;
 import org.eclipse.scout.rt.platform.exception.VetoException;

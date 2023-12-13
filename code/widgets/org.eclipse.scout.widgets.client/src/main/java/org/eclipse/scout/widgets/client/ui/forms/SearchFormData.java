@@ -12,7 +12,7 @@ package org.eclipse.scout.widgets.client.ui.forms;
 import java.util.Date;
 import java.util.Set;
 
-import javax.annotation.Generated;
+import jakarta.annotation.Generated;
 
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.shared.data.form.AbstractFormData;
