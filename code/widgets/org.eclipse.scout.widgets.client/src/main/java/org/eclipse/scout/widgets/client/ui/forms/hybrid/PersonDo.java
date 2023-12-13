@@ -11,7 +11,7 @@ package org.eclipse.scout.widgets.client.ui.forms.hybrid;
 
 import java.util.Date;
 
-import javax.annotation.Generated;
+import jakarta.annotation.Generated;
 
 import org.eclipse.scout.rt.dataobject.DoEntity;
 import org.eclipse.scout.rt.dataobject.DoValue;

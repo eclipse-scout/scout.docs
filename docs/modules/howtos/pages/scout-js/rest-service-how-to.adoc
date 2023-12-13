@@ -40,6 +40,7 @@ Register the REST servlet in the web.xml of `org.eclipse.scout.hellojs.ui.html.a
 
 - org.eclipse.scout.hellojs.ui.html.app.dev/src/main/webapp/WEB-INF/web.xml
 - org.eclipse.scout.hellojs.ui.html.app.war/src/main/webapp/WEB-INF/web.xml
+
 [source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
@@ -50,7 +51,7 @@ Register the REST servlet in the web.xml of `org.eclipse.scout.hellojs.ui.html.a
     <servlet-name>apiServlet</servlet-name>
     <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
     <init-param>
-      <param-name>javax.ws.rs.Application</param-name>
+      <param-name>jakarta.ws.rs.Application</param-name>
       <param-value>org.eclipse.scout.rt.rest.RestApplication</param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
@@ -72,14 +73,15 @@ Register the REST servlet in the web.xml of `org.eclipse.scout.hellojs.ui.html.a
 Create the server state service in the `org.eclipse.scout.hellojs.ui.html` module. The service returns a OK status whenever it is accessible.
 
 org.eclipse.scout.hellojs.ui.html/src/main/java/org/eclipse/scout/hellojs/ui/html/helloworld/ServerStateService.java
+
 [source,java]
 ----
 package org.eclipse.scout.hellojs.ui.html.helloworld;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
 
 import org.eclipse.scout.rt.platform.status.IStatus;
 import org.eclipse.scout.rt.platform.status.Status;

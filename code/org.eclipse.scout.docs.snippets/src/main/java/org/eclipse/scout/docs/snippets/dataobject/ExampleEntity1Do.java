@@ -9,7 +9,7 @@
  */
 package org.eclipse.scout.docs.snippets.dataobject;
 
-import javax.annotation.Generated;
+import jakarta.annotation.Generated;
 
 import org.eclipse.scout.rt.dataobject.DoValue;
 import org.eclipse.scout.rt.dataobject.TypeName;

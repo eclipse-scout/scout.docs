@@ -9,7 +9,7 @@
  */
 package org.eclipse.scout.docs.snippets.rest;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.rest.cancellation.AbstractRestRequestCancellationServletFilter;

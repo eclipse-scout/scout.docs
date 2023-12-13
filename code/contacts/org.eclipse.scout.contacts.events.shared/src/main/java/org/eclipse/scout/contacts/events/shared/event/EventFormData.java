@@ -11,7 +11,7 @@ package org.eclipse.scout.contacts.events.shared.event;
 
 import java.util.Date;
 
-import javax.annotation.Generated;
+import jakarta.annotation.Generated;
 
 import org.eclipse.scout.contacts.shared.common.AbstractAddressBoxData;
 import org.eclipse.scout.contacts.shared.common.AbstractNotesBoxData;

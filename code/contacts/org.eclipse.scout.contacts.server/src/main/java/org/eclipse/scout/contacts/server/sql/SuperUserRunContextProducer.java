@@ -9,7 +9,7 @@
  */
 package org.eclipse.scout.contacts.server.sql;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 import javax.security.auth.Subject;
 
 import org.eclipse.scout.contacts.server.sql.DatabaseProperties.SuperUserSubjectProperty;

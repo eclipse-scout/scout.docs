@@ -9,7 +9,7 @@
  */
 package org.eclipse.scout.contacts.shared.organization;
 
-import javax.annotation.Generated;
+import jakarta.annotation.Generated;
 
 import org.eclipse.scout.contacts.shared.common.AbstractAddressBoxData;
 import org.eclipse.scout.contacts.shared.common.AbstractNotesBoxData;

@@ -12,7 +12,7 @@ package org.eclipse.scout.docs.snippets.dataobject;
 import java.util.Collection;
 import java.util.List;
 
-import javax.annotation.Generated;
+import jakarta.annotation.Generated;
 
 import org.eclipse.scout.docs.snippets.dataobject.LoremTypeVersions.Lorem_1_2_0;
 import org.eclipse.scout.rt.dataobject.DoEntity;

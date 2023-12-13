@@ -11,7 +11,7 @@ package org.eclipse.scout.contacts.events.shared.person;
 
 import java.util.Date;
 
-import javax.annotation.Generated;
+import jakarta.annotation.Generated;
 
 import org.eclipse.scout.contacts.shared.person.PersonFormData;
 import org.eclipse.scout.rt.platform.classid.ClassId;
