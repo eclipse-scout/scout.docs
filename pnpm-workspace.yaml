@@ -1,0 +1,7 @@
+packages:
+  - 'code/widgets/org.eclipse.scout.jswidgets.ui.html'
+  - 'code/widgets/org.eclipse.scout.jswidgets.ui.html.app'
+  - 'code/widgets/org.eclipse.scout.widgets.ui.html'
+  - 'code/widgets/org.eclipse.scout.widgets.heatmap.ui.html'
+  - 'code/widgets/org.eclipse.scout.widgets.ui.html.app'
+  - 'code/contacts/org.eclipse.scout.contacts.ui.html'
