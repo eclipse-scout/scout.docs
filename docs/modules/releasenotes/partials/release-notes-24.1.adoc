@@ -102,3 +102,16 @@ ARIA roles, properties, and states have been implemented to convey the purpose a
 Very few complex widgets still lack a comprehensive WAI-ARIA support as these widgets require new concepts of interaction to be completely accessible.
 
 To get familiar with Scouts new accessibility features we recommend using `aria.ts` as a starting point.
+
+== Login form: Add support for second-factor (form-based)
+
+For the `FormBasedAccessController` and the corresponding login box a basic second-factor support was added; a new credential verifier return value `org.eclipse.scout.rt.platform.security.ICredentialVerifier.AUTH_2FA_REQUIRED` was added which will prompt for a second factor token. To verify this token a second-factor verifier `ICredentialVerifier` needs to be registered.
+
+During form-based login, for second-factor enabled accounts, a token is requested (after first challenge has been completed successful), for this token a new text `ui.Token` has been added to the login form and must be added to the `[...].ui.html/src/main/resources/WebContent/login.html`:
+
+[source,html]
+----
+<scout:message style="tag" key="ui.Login" key="ui.LoginFailed" key="ui.User" key="ui.Password" key="ui.Token" />
+----
+
+
