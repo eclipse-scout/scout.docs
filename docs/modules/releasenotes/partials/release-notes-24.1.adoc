@@ -93,6 +93,10 @@ For third-party dependencies which refer to an older HttpClient version either b
 
 To use the new version with the Google HTTP Client library a `org.eclipse.scout.rt.shared.http.transport.ApacheHttpTransport` is introduced (as the third party library itself does not support the newer version yet as the library itself refers to an older HttpClient version this older version is explicitly excluded).
 
+For `org.eclipse.scout.rt.server.commons.servlet.HttpProxy` the Google HTTP Client library is not used anymore, instead a new class `org.eclipse.scout.rt.shared.http.async.DefaultAsyncHttpClientManager` (configurable using a config property) is used. The new concept uses the HttpClient directly as async variant. `org.eclipse.scout.rt.shared.http.transport.ApacheHttpTransport` still uses the classic variant.
+
+`org.eclipse.scout.rt.shared.http.BasicAuthHttpTransportManager` was removed, users may provide pre-emptive basic authentication using a custom `org.apache.hc.client5.http.protocol.HttpClientContext` for specific hosts (e.g for the `HttpProxy` using `org.eclipse.scout.rt.server.commons.servlet.HttpProxy.withHttpClientContextSupplier`).
+
 == Accessibility
 
 We are excited to announce the introduction of enhanced accessibility features in Scout.
