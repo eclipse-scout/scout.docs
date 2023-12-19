@@ -150,7 +150,7 @@ But sometimes it is necessary to create beans already at the application startup
 
 ==== Constructors
 
-Beans must have empty constructors so that the bean manager can create instances. But furthermore it is possible to mark methods with the `javax.annotation.@PostConstruct` annotation. Those methods must have no parameters and will be called after instances have been created.
+Beans must have empty constructors so that the bean manager can create instances. But furthermore it is possible to mark methods with the `jakarta.annotation.@PostConstruct` annotation. Those methods must have no parameters and will be called after instances have been created.
 
 TIP: When querying the bean manager for an application scoped bean, it will always return the same instance. However, the constructor of an application scoped bean may run more than once, whereas a method annotated with @PostConstruct in an application scoped been is guaranteed to run exactly once.
 
@@ -244,7 +244,7 @@ include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclips
 
 === Destroy Beans
 
-Application scoped beans can declare methods annotated with `javax.annotation.@PreDestroy`. These methods will be called when the Scout platform is stopping.
+Application scoped beans can declare methods annotated with `jakarta.annotation.@PreDestroy`. These methods will be called when the Scout platform is stopping.
 The methods may have any visibility modifier but must not be static and must not declare any parameters.
 If such a pre-destroy method throws an exception, the platform will continue to call all other pre-destroy methods (even methods on the same bean).
 

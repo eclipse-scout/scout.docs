@@ -139,7 +139,7 @@ include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclips
 
 But, if running in an EE container, it is most likely that a Servlet configuration must not be configured, because the endpoints are discovered by the application server, or registered in a vendor specific way. Refer to the containers documentation for more information.
 
-TIP: Some application servers like Oracle WebLogic Server (WLS) allow the port types to be registered as a Servlet in web.xml. However, this is vendor specific, and works despite the fact that port type does not implement 'javax.servlet.Servlet'.
+TIP: Some application servers like Oracle WebLogic Server (WLS) allow the port types to be registered as a Servlet in web.xml. However, this is vendor specific, and works despite the fact that port type does not implement 'jakarta.servlet.Servlet'.
 
 WARNING: Do not forget to exclude the webservice's Servlet URL pattern from authentication filter.
 
@@ -407,7 +407,7 @@ See for valid port names in the WSDL: `<wsdl:service name="..."><wsdl:port name=
 See <<jaxws.provider.authentication>> for more information.
 
 |handlerChain
-|Specifies the handlers to be installed. The order of the handlers is as declared. A handler is looked up as a bean, and must implement `javax.xml.ws.handler.Handler` interface. +
+|Specifies the handlers to be installed. The order of the handlers is as declared. A handler is looked up as a bean, and must implement `jakarta.xml.ws.handler.Handler` interface. +
 See <<jaxws.provider.handlerChain>> for more information.
 |===
 
@@ -508,7 +508,7 @@ See <<example.entrypoint.definition,listing>> for an example of how to configure
 
 JAX-WS handlers are configured directly on the entry point definition via the array field `handlerChain`. In turn, _JaxWsAnnotationProcessor_ generates a 'handler XML file' with the handler's order preserved, and which is registered in entry point via annotation `handlerChain`.
 
-A handler can be initialized with static 'init parameters', which will be injected into the handler instance. For the injection to work, declare a member of the type `Map` in the handler class, and annotate it with `javax.annotation.Resource` annotation.
+A handler can be initialized with static 'init parameters', which will be injected into the handler instance. For the injection to work, declare a member of the type `Map` in the handler class, and annotate it with `jakarta.annotation.Resource` annotation.
 
 Because handlers are looked up via bean manager, a handler must be annotated with `ApplicationScoped` annotation.
 
@@ -528,7 +528,7 @@ include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclips
 [[jaxws.provider.statepropagation]]
 === Propagate state among Handlers and port type
 
-Sometimes it is useful to share state among handlers, and even with the port type. This can be done via `javax.xml.ws.handler.MessageContext`. By default, a property put onto message context is only available in the handler chain. To make it available to the port type as well, set its scope to 'APPLICATION' accordingly.
+Sometimes it is useful to share state among handlers, and even with the port type. This can be done via `jakarta.xml.ws.handler.MessageContext`. By default, a property put onto message context is only available in the handler chain. To make it available to the port type as well, set its scope to 'APPLICATION' accordingly.
 
 The following listings gives an example of how to propagate state among handlers and port type.
 

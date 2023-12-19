@@ -87,7 +87,7 @@ Add the following snippet to your `web.xml` file to expose your REST API using t
 
 === Extend REST Application
 
-The JAX-RS application API (`javax.ws.rs.core.Application`) allows a REST application implementation to specify a set of classes, a set of singleton instances and a map of custom properties to be registered.
+The JAX-RS application API (`jakarta.ws.rs.core.Application`) allows a REST application implementation to specify a set of classes, a set of singleton instances and a map of custom properties to be registered.
 The Scout implementation of the REST application class `org.eclipse.scout.rt.rest.RestApplication` allows contributing classes, singletons and properties without needing to extend the `RestApplication` class.
 
 Three different contributor interfaces are available for contributions:

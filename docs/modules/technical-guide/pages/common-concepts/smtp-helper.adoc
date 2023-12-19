@@ -5,8 +5,8 @@ include::common:partial$_header.adoc[]
 // This file describes the SmtpHelper Bean and the connection pooling it provides.
 //-----------------------------------------------------------------------------
 
-The `org.eclipse.scout.rt.mail.smtp.SmtpHelper` is an `@ApplicationScoped` Bean that provides means of sending emails described by `javax.mail.internet.MimeMessage` objects via SMTP.
-The SMTP connection can either be provided as a `org.eclipse.scout.rt.mail.smtp.SmtpServerConfig` object containing all the required connection parameters or as an already created `javax.mail.Session` object.
+The `org.eclipse.scout.rt.mail.smtp.SmtpHelper` is an `@ApplicationScoped` Bean that provides means of sending emails described by `jakarta.mail.internet.MimeMessage` objects via SMTP.
+The SMTP connection can either be provided as a `org.eclipse.scout.rt.mail.smtp.SmtpServerConfig` object containing all the required connection parameters or as an already created `jakarta.mail.Session` object.
 The `SmtpHelper` also supports pooling of SMTP connections as described in the section <<connection-pooling-chapter>>.
 
 == SmtpServerConfig
@@ -23,7 +23,7 @@ The `org.eclipse.scout.rt.mail.smtp.SmtpServerConfig` class allows to specify de
 |useSmtps|If true, the protocol will be 'smtps', else the protocol will be 'smtp'.|-
 |useStartTls|If true, STARTTLS will be used to create the connection to the SMTP server.|-
 |sslProtocols|Limits the SSL protocols to support when connecting to the SMTP server. The value is a space separated list of protocol names returned by the `javax.net.ssl.SSLSocket.getSupportedProtocols()` method.|E.g. "TLSv1.1 TLSv1.2"
-|additionalSessionProperties|Can be used to specify any other property for the `javax.mail.Session` that is created from `org.eclipse.scout.rt.mail.smtp.SmtpServerConfig`. These additional properties are applied after all the other properties, thus may override already specified properties.|"mail.smtp.socketFactory.class": "com.example.net.SocketFactory"
+|additionalSessionProperties|Can be used to specify any other property for the `jakarta.mail.Session` that is created from `org.eclipse.scout.rt.mail.smtp.SmtpServerConfig`. These additional properties are applied after all the other properties, thus may override already specified properties.|"mail.smtp.socketFactory.class": "com.example.net.SocketFactory"
 |poolSize|Allows to specify the size of the connection pool for this `SmtpServerConfig`. The Default value is 0 which effectively deactives connection pooling.|4
 |maxMessagesPerConnection|Allows to specify the max number of messages to be sent per connection when using connection pooling (`poolSize` > 0). The default value is 0 which effectively disables limiting the maximum number of messages sent per connection. You should consult with the operator of the SMTP server you are using to define this value. Local mail servers probably allow less than 20 messages per connection, bigger white mailers may allow up to 100 or even more.|20
 |===
@@ -57,7 +57,7 @@ Messages can be sent using the `sendMessage` Methods of the `SmtpHelper` class. 
 include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/SmtpHelperSnippet.java[tags=SmtpHelper.prepareMimeMessage]
 ----
 
-In order to send the message you can either use a `org.eclipse.scout.rt.mail.smtp.SmtpServerConfig` object or an existing `javax.mail.Session` object as demonstrated in <<lst-SmtpHelper.sendWithSmtpServerConfig>> and <<lst-SmtpHelper.sendWithSession>>.
+In order to send the message you can either use a `org.eclipse.scout.rt.mail.smtp.SmtpServerConfig` object or an existing `jakarta.mail.Session` object as demonstrated in <<lst-SmtpHelper.sendWithSmtpServerConfig>> and <<lst-SmtpHelper.sendWithSession>>.
 
 [[lst-SmtpHelper.sendWithSmtpServerConfig]]
 [source,java,indent=0]
@@ -69,7 +69,7 @@ include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclips
 
 [[lst-SmtpHelper.sendWithSession]]
 [source,java,indent=0]
-.Send email using an existing `javax.mail.Session` object.
+.Send email using an existing `jakarta.mail.Session` object.
 ----
 include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/SmtpHelperSnippet.java[tags=SmtpHelper.sendWithSession]
 ----
@@ -91,7 +91,7 @@ Normally, the `SmtpHelper` opens a new connection for every email which is then 
 If you want to send a lot of emails, this behaviour is rather inefficient as opening a new SMTP connection takes a long time compared to sending the email especially when using encrypted connections.
 To mitigate this overhead, the `SmtpHelper` supports pooling of SMTP connections which is activated using the `poolSize` property of `SmtpServerConfig` objects.
 If you set the pool size property to a value > 0, the `SmtpHelper` will create parallel connections up to the specified number.
-This means, that connection pooling is not possible when you use the `sendMessage` method accepting an already prepared `javax.mail.Session` object.
+This means, that connection pooling is not possible when you use the `sendMessage` method accepting an already prepared `jakarta.mail.Session` object.
 
 *Pooling* in this context means the following:
 
