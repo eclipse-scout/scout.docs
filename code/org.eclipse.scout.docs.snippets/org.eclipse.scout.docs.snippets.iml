@@ -51,8 +51,8 @@
     <orderEntry type="library" name="Maven: jakarta.ws.rs:jakarta.ws.rs-api:2.1.6" level="project" />
     <orderEntry type="library" name="Maven: jakarta.xml.bind:jakarta.xml.bind-api:2.3.3" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:jul-to-slf4j:1.7.36" level="project" />
-    <orderEntry type="library" name="Maven: ch.qos.logback:logback-classic:1.2.12" level="project" />
-    <orderEntry type="library" name="Maven: ch.qos.logback:logback-core:1.2.12" level="project" />
+    <orderEntry type="library" name="Maven: ch.qos.logback:logback-classic:1.2.13" level="project" />
+    <orderEntry type="library" name="Maven: ch.qos.logback:logback-core:1.2.13" level="project" />
     <orderEntry type="library" name="Maven: com.sun.xml.ws:jaxws-rt:2.3.2" level="project" />
     <orderEntry type="library" name="Maven: jakarta.xml.soap:jakarta.xml.soap-api:1.4.2" level="project" />
     <orderEntry type="library" name="Maven: org.glassfish.jaxb:jaxb-runtime:2.3.3" level="project" />

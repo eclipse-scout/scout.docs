@@ -39,8 +39,8 @@
     <orderEntry type="module" module-name="org.eclipse.scout.contacts.shared" />
     <orderEntry type="library" name="Maven: org.slf4j:jul-to-slf4j:1.7.36" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.36" level="project" />
-    <orderEntry type="library" name="Maven: ch.qos.logback:logback-classic:1.2.12" level="project" />
-    <orderEntry type="library" name="Maven: ch.qos.logback:logback-core:1.2.12" level="project" />
+    <orderEntry type="library" name="Maven: ch.qos.logback:logback-classic:1.2.13" level="project" />
+    <orderEntry type="library" name="Maven: ch.qos.logback:logback-core:1.2.13" level="project" />
     <orderEntry type="module" module-name="org.eclipse.scout.rt.server.jdbc" />
     <orderEntry type="library" name="Maven: org.apache.derby:derby:10.14.2.0" level="project" />
     <orderEntry type="module" module-name="org.eclipse.scout.contacts.events.shared" />
