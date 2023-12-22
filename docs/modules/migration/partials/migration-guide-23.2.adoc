@@ -260,6 +260,11 @@ For any implementation of a value migration working on a data object, most likel
 There might be structural inconsistencies that are migrated by later value migrations.
 `DataObjectHelper#clone` would fail in such scenarios, `DataObjectHelper#cloneLenient` won't.
 
+== Update logback.xml
+
+Due to third-party dependency update of slf4j/logback and an additional improvement regarding MDC handling, the logback.xml files were slightly adjusted.
+Compare with the ones generate for a new Scout project to update yours accordingly.
+
 == Scout JS
 
 === Multi Dimension Support
