@@ -113,6 +113,80 @@ See https://search.maven.org/artifact/org.eclipse.scout/maven_rt_plugin_config-m
 
 == 3rd Party Libraries Update
 
+=== Update to Jakarta EE
+
+Until now, Scout was based on the Java EE Servlet Specification 4.0, many of our third-party libraries also depends on this specification
+(e.g. Jetty, HttpServlet API, JMS, JAX-WS, JAX-RS etc).
+With release 24/1 the Scout framework is moving towards Jakarta EE and is now based on the 5.0 specification.
+As part of this Jakarta EE version update all module names and packages have been renamed from javax to jakarta
+(due to legal requirements by Oracle as part of the open source donation of Java EE to the Eclipse Foundation).
+
+Together with the Jakarta EE update many third-party libraries have received a new version defined in Scout parent POM.
+Additionally, all Java EE imports have been migrated from `javax` to `jakarta`.
+
+==== Migration guide
+
+* Update Scout dependency to release 24.1
+* Check third party library dependencies in your project, upgrade to Jakarta version if necessary
+* Reload all maven projects in IntelliJ or Eclipse IDE
+* Migrate your own code to Jakarta (e.g. using IntelliJ Migrator or similar Eclipse tooling)
+** IntelliJ Menu: Refactor -> Migrate Packages and Classes -> Java EE to Jakarta EE
+** Eclipse see _Eclipse Transformer_ tool
+** All packages and classes are updated automatically
+
+===== JAX-WS services
+
+After the upgrade to 24.1, projects that use JAX-WS (Soap) as a provider should check the connection both on DEV and on the deployed system
+to ensure that everything is working as desired.
+This applies above all to cases when own libraries in /WEB-INF/lib are used or the corresponding resources in /META-INF/resources.
+
+If your JAX-WS service uses global bindings, the _global-bindings.xml_ file must be updated according to the following example:
+
+.Example global-bindings.xml
+[source=xml]
+----
+<jaxb:bindings version="3.0"    <1>
+xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb">  <2>
+<jaxb:globalBindings>
+  <!-- your global mappings here -->
+</jaxb:globalBindings>
+</jaxb:bindings>
+----
+
+<1> Update to version 3.0
+<2> Update to namespace _https://jakarta.ee/xml/ns/jaxb_
+
+===== UI Server web.xml
+
+As part of the switch to Jakarta EE the third party library dependency to Apache File Upload was eliminated.
+Scout now relies on plain Jakarta EE API to process HTTP multipart requests.
+Servlets processing multipart requests using Jakarta EE API requires a multipart-config in their servlet registration.
+Make sure to add a _<multipart-config>_ section to your `web.xml` where the `UiServlet` is registered:
+
+.Example multipart-config in _web.xml_ of Scout UI server
+[source=xml]
+----
+<servlet>
+<servlet-name>UiServlet</servlet-name>
+<servlet-class>org.eclipse.scout.rt.ui.html.UiServlet</servlet-class>
+<multipart-config>
+  <location>/tmp</location>
+  <max-file-size>104857600</max-file-size> <1>
+  <max-request-size>104857600</max-request-size>   <2>
+  <file-size-threshold>20971520</file-size-threshold>   <3>
+</multipart-config>
+</servlet>
+----
+
+<1> Maximum size of single file, e.g. 100mb
+<2> Maximum size of multi-part request, e.g. 100mb
+<3> Threshold for file chunking, e.g. 20mb
+
+=== Other libraries
+
 * Mockito 5: Uses the inline mock maker as new default and change the behavior of `any()`, which does not match varargs anymore (use `any(Class)` instead).
 
 == Removed Deprecated Methods in ICacheBuilder and IFormHandler
