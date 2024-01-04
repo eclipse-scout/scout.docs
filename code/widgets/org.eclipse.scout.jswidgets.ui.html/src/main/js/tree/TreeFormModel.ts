@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -74,6 +74,13 @@ export default (): FormModel => ({
                       text: '${textKey:DeleteAllChildNodes}'
                     }
                   ]
+                },
+                {
+                  id: 'ToggleNodeEnabledMenu',
+                  objectType: Menu,
+                  text: '${textKey:ToggleNodeEnabled}',
+                  inheritAccessibility: false,
+                  menuTypes: [Tree.MenuType.SingleSelection]
                 }
               ]
             }
@@ -135,27 +142,29 @@ export default (): FormModel => ({
   }
 });
 
-export type TreeFormWidgetMap =
-  {
-    'MainBox': GroupBox;
-    'DetailBox': GroupBox;
-    'TreeField': TreeField;
-    'Tree': Tree;
-    'AddNodeMenu': Menu;
-    'AddChildNodeMenu': Menu;
-    'DeleteNodeMenu': Menu;
-    'DeleteAllMenu': Menu;
-    'DeleteAllNodesMenu': Menu;
-    'DeleteAllChildNodesMenu': Menu;
-    'ConfigurationBox': ConfigurationBox;
-    'PropertiesTab': TabItem;
-    'PropertiesBox': TreePropertiesBox;
-    'FormFieldPropertiesBox': FormFieldPropertiesBox;
-    'GridDataBox': GridDataBox;
-    'ActionsTab': TabItem;
-    'FormFieldActionsBox': FormFieldActionsBox;
-    'WidgetActionsBox': WidgetActionsBox;
-    'EventsTab': EventsTab;
-  }
-  & TreePropertiesBoxWidgetMap & FormFieldPropertiesBoxWidgetMap & GridDataBoxWidgetMap
-  & FormFieldActionsBoxWidgetMap & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
+export type TreeFormWidgetMap = {
+  'MainBox': GroupBox;
+  'DetailBox': GroupBox;
+  'TreeField': TreeField;
+  'Tree': Tree;
+  'AddNodeMenu': Menu;
+  'AddChildNodeMenu': Menu;
+  'DeleteNodeMenu': Menu;
+  'DeleteAllMenu': Menu;
+  'DeleteAllNodesMenu': Menu;
+  'DeleteAllChildNodesMenu': Menu;
+  'ToggleNodeEnabledMenu': Menu;
+  'ConfigurationBox': ConfigurationBox;
+  'PropertiesTab': TabItem;
+  'PropertiesBox': TreePropertiesBox;
+  'FormFieldPropertiesBox': FormFieldPropertiesBox;
+  'GridDataBox': GridDataBox;
+  'ActionsTab': TabItem;
+  'FormFieldActionsBox': FormFieldActionsBox;
+  'WidgetActionsBox': WidgetActionsBox;
+  'EventsTab': EventsTab;
+} & TreePropertiesBoxWidgetMap & FormFieldPropertiesBoxWidgetMap & GridDataBoxWidgetMap & FormFieldActionsBoxWidgetMap & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;
