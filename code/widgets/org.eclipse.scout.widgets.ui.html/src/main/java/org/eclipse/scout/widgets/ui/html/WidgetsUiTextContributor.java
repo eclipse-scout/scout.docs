@@ -17,7 +17,7 @@ import org.eclipse.scout.rt.ui.html.IUiTextContributor;
 public class WidgetsUiTextContributor implements IUiTextContributor {
 
   @Override
-  public void contributeUiTextKeys(Set<String> textKeys) {
+  public void contribute(Set<String> textKeys) {
     textKeys.addAll(Arrays.asList(
         "AppDescription",
         "ApplicationTitle",

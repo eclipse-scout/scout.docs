@@ -26,6 +26,8 @@ export * from './forms/switch/SwitchJsFormModel';
 export * from './pages/hybrid/HybridJsPage';
 export * from './tile/CustomTile';
 export * from './tile/CustomTileAdapter';
+export * from './code/ColorsCodeType';
+export * from './code/LightBlueCode';
 
 export default self;
 ObjectFactory.get().registerNamespace('widgets', self);

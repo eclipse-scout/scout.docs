@@ -13,17 +13,23 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.scout.rt.api.data.ApiExposed;
+import org.eclipse.scout.rt.api.data.FieldName;
+import org.eclipse.scout.rt.api.data.ObjectType;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.AbstractCode;
 import org.eclipse.scout.rt.shared.services.common.code.AbstractCodeType;
+import org.eclipse.scout.rt.shared.services.common.code.AbstractCodeToDoFunction.ICodeTypeDoIdConverter;
 import org.eclipse.scout.rt.shared.services.common.code.CodeRow;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeRow;
 
 /**
  * @author mzi
  */
+@ApiExposed
+@ObjectType("widgets.ColorsCodeType")
 @ClassId("8e558241-1d69-4a17-8f3a-afe9f6a081b3")
 public class ColorsCodeType extends AbstractCodeType<Long, Color> {
 
@@ -38,6 +44,17 @@ public class ColorsCodeType extends AbstractCodeType<Long, Color> {
   @Override
   protected String getConfiguredTextPlural() {
     return TEXTS.get("Colors");
+  }
+
+  public static class ColorCodeTypeDoIdConverter implements ICodeTypeDoIdConverter {
+    @Override
+    public String apply(Object id) {
+      if (id instanceof Color) {
+        Color c = (Color) id;
+        return String.format("#%02x%02x%02x", c.getRed(), c.getGreen(), c.getBlue());
+      }
+      return null;
+    }
   }
 
   @Override
@@ -92,6 +109,8 @@ public class ColorsCodeType extends AbstractCodeType<Long, Color> {
   }
 
   @Order(90)
+  @FieldName("lightBlue")
+  @ObjectType("widgets.LightBlueCode")
   @ClassId("fb0c1bec-149a-466b-8832-e380b363a317")
   public static class CyanCode extends AbstractCode<Color> {
     private static final long serialVersionUID = 1L;
