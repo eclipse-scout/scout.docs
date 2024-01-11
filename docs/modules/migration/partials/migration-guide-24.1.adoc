@@ -231,3 +231,7 @@ The following renaming is applied.
 * `scout.jetty.privateKeyPassword` -> `scout.app.privateKeyPassword`
 * `scout.jetty.certificateAlias` -> `scout.app.certificateAlias`
 
+== IdExternalFormatter removed
+
+The former deprecated class `IdExternalFormatter` was removed.
+This class was replaced by `IdCodec` and `IdInventory` in release 23.
