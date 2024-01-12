@@ -231,6 +231,15 @@ The following renaming is applied.
 * `scout.jetty.privateKeyPassword` -> `scout.app.privateKeyPassword`
 * `scout.jetty.certificateAlias` -> `scout.app.certificateAlias`
 
+== Add streaming support to hashing (SecurityUtility)
+
+`org.eclipse.scout.rt.platform.security.SecurityUtility` supports streaming:
+
+* `byte[] hash(byte[] data, byte[] salt)` -> `byte[] hash(byte[] data)`
+** Use the new method where possible, if required use `ILegacySecurityProvider.createHash(byte[] data, byte[] salt)`.
+* NEW: `DigestInputStream toHashingStream(InputStream stream)`
+* NEW: `DigestOutputStream toHashingStream(OutputStream stream)`
+
 == IdExternalFormatter removed
 
 The former deprecated class `IdExternalFormatter` was removed.
