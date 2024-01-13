@@ -21,35 +21,13 @@
     <relativePath>../org.eclipse.scout.contacts</relativePath>
   </parent>
 
+  <!-- Application leaf module with dependencies only relevant for development including config.properties/logback.xml -->
   <artifactId>org.eclipse.scout.contacts.ui.html.app.dev</artifactId>
-  <packaging>war</packaging>
 
   <dependencies>
-    <!-- Contacts Application -->
     <dependency>
       <groupId>org.eclipse.scout.contacts</groupId>
-      <artifactId>org.eclipse.scout.contacts.ui.html</artifactId>
-    </dependency>
-    <!-- Events module -->
-    <dependency>
-      <groupId>org.eclipse.scout.contacts</groupId>
-      <artifactId>org.eclipse.scout.contacts.events.client</artifactId>
-    </dependency>
-
-    <!-- Jetty Server -->
-    <dependency>
-      <groupId>org.eclipse.scout.rt</groupId>
-      <artifactId>org.eclipse.scout.rt.app</artifactId>
-    </dependency>
-
-    <!-- Logging -->
-    <dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-classic</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>jul-to-slf4j</artifactId>
+      <artifactId>org.eclipse.scout.contacts.ui.html.app</artifactId>
     </dependency>
   </dependencies>
 </project>

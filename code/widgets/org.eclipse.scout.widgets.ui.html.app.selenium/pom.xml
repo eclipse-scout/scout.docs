@@ -59,22 +59,13 @@
     <dependency>
       <groupId>org.eclipse.scout.widgets</groupId>
       <artifactId>org.eclipse.scout.widgets.ui.html.app</artifactId>
-    </dependency>
-
-    <!-- Jetty Server -->
-    <dependency>
-      <groupId>org.eclipse.scout.rt</groupId>
-      <artifactId>org.eclipse.scout.rt.app</artifactId>
-    </dependency>
-
-    <!-- Logging -->
-    <dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-classic</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>jul-to-slf4j</artifactId>
+      <exclusions>
+        <!-- exclusions required because for running in an embedded jetty, we must not include jetty -->
+        <exclusion>
+          <groupId>org.eclipse.jetty</groupId>
+          <artifactId>jetty-webapp</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
 
     <dependency>
@@ -94,7 +85,6 @@
       <artifactId>selenium-java</artifactId>
       <scope>test</scope>
     </dependency>
-
   </dependencies>
 
   <profiles>

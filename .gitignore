@@ -7,6 +7,7 @@
 # Package Files #
 *.jar
 *.zip
+!*.zip/
 
 *.log
 

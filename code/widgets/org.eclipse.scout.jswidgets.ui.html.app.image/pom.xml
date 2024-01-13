@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+  ~
+  ~ This program and the accompanying materials are made
+  ~ available under the terms of the Eclipse Public License 2.0
+  ~ which is available at https://www.eclipse.org/legal/epl-2.0/
+  ~
+  ~ SPDX-License-Identifier: EPL-2.0
+  -->
+<project
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+  xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.eclipse.scout.widgets</groupId>
+    <artifactId>org.eclipse.scout.widgets</artifactId>
+    <version>24.1-SNAPSHOT</version>
+    <relativePath>../org.eclipse.scout.widgets</relativePath>
+  </parent>
+
+  <!-- Application leaf module with dependencies only relevant for docker image build including config.properties/logback.xml -->
+  <artifactId>org.eclipse.scout.jswidgets.ui.html.app.image</artifactId>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.google.cloud.tools</groupId>
+        <artifactId>jib-maven-plugin</artifactId>
+        <configuration>
+          <to>
+            <image>${docker.app.image.registry}/scout-jswidgets</image>
+            <tags>
+              <tag>${docker.app.image.tag}</tag>
+            </tags>
+          </to>
+          <from>
+            <image>${docker.java.image}</image>
+          </from>
+          <container>
+            <entrypoint>INHERIT</entrypoint>
+            <mainClass>org.eclipse.scout.rt.app.Application</mainClass>
+            <ports>
+              <port>8080</port>
+            </ports>
+            <environment>
+              <scout_app_port>8080</scout_app_port>
+            </environment>
+          </container>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>build</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.eclipse.scout.widgets</groupId>
+      <artifactId>org.eclipse.scout.jswidgets.ui.html.app</artifactId>
+    </dependency>
+
+    <dependency>
+      <!-- logback.xml: LogstashEncoder -->
+      <groupId>net.logstash.logback</groupId>
+      <artifactId>logstash-logback-encoder</artifactId>
+    </dependency>
+  </dependencies>
+</project>

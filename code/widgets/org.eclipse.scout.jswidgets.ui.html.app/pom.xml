@@ -18,6 +18,7 @@
     <relativePath>../org.eclipse.scout.widgets</relativePath>
   </parent>
 
+  <!-- Application base module that collects all dependencies relevant for all application leafs (dev, image, ...) -->
   <artifactId>org.eclipse.scout.jswidgets.ui.html.app</artifactId>
 
   <dependencies>
@@ -28,6 +29,28 @@
     <dependency>
       <groupId>org.eclipse.scout.widgets</groupId>
       <artifactId>org.eclipse.scout.jswidgets.rest</artifactId>
+    </dependency>
+
+    <!-- Scout app (Jetty) -->
+    <dependency>
+      <groupId>org.eclipse.scout.rt</groupId>
+      <artifactId>org.eclipse.scout.rt.app</artifactId>
+    </dependency>
+
+    <!-- Jackson -->
+    <dependency>
+      <groupId>org.eclipse.scout.rt</groupId>
+      <artifactId>org.eclipse.scout.rt.rest.jackson</artifactId>
+    </dependency>
+
+    <!-- Logging -->
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>jul-to-slf4j</artifactId>
     </dependency>
   </dependencies>
 </project>
