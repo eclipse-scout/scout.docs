@@ -22,6 +22,16 @@
     <org.eclipse.scout.rt.version>24.1-SNAPSHOT</org.eclipse.scout.rt.version>
     <master_npm_release_dependency_mapping>--mapping.0.regex=@eclipse-scout --mapping.0.version=${org.eclipse.scout.rt.version}</master_npm_release_dependency_mapping>
     <master_npm_workspace_dir>${project.basedir}${file.separator}${project.parent.relativePath}${file.separator}..${file.separator}..</master_npm_workspace_dir>
+
+    <!-- docker image build settings -->
+    <!-- build target (push) -->
+    <docker.app.image.registry>registry.hub.docker.com/yourusername</docker.app.image.registry> <!-- overridden via Maven property -->
+    <docker.app.image.tag>24.1-latest</docker.app.image.tag>
+    <!-- java source image (pull) -->
+    <docker.java.image.registry>docker.io</docker.java.image.registry>
+    <docker.java.image.name>eclipse-temurin</docker.java.image.name>
+    <docker.java.image.tag>17-jdk-jammy</docker.java.image.tag>
+    <docker.java.image>${docker.java.image.registry}/${docker.java.image.name}:${docker.java.image.tag}</docker.java.image>
   </properties>
 
   <groupId>org.eclipse.scout.contacts</groupId>
@@ -35,11 +45,13 @@
     <module>../org.eclipse.scout.contacts.client</module>
     <module>../org.eclipse.scout.contacts.shared</module>
     <module>../org.eclipse.scout.contacts.server</module>
+    <module>../org.eclipse.scout.contacts.server.app</module>
     <module>../org.eclipse.scout.contacts.server.app.dev</module>
-    <module>../org.eclipse.scout.contacts.server.app.war</module>
+    <module>../org.eclipse.scout.contacts.server.app.image</module>
     <module>../org.eclipse.scout.contacts.ui.html</module>
+    <module>../org.eclipse.scout.contacts.ui.html.app</module>
     <module>../org.eclipse.scout.contacts.ui.html.app.dev</module>
-    <module>../org.eclipse.scout.contacts.ui.html.app.war</module>
+    <module>../org.eclipse.scout.contacts.ui.html.app.image</module>
 
     <!-- Events module -->
     <module>../org.eclipse.scout.contacts.events.client</module>
@@ -76,10 +88,40 @@
         <artifactId>org.eclipse.scout.contacts.server</artifactId>
         <version>${project.version}</version>
       </dependency>
+      <dependency>
+        <groupId>org.eclipse.scout.contacts</groupId>
+        <artifactId>org.eclipse.scout.contacts.server.app</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.scout.contacts</groupId>
+        <artifactId>org.eclipse.scout.contacts.server.app.dev</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.scout.contacts</groupId>
+        <artifactId>org.eclipse.scout.contacts.server.app.image</artifactId>
+        <version>${project.version}</version>
+      </dependency>
 
       <dependency>
         <groupId>org.eclipse.scout.contacts</groupId>
         <artifactId>org.eclipse.scout.contacts.ui.html</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.scout.contacts</groupId>
+        <artifactId>org.eclipse.scout.contacts.ui.html.app</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.scout.contacts</groupId>
+        <artifactId>org.eclipse.scout.contacts.ui.html.app.dev</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.scout.contacts</groupId>
+        <artifactId>org.eclipse.scout.contacts.ui.html.app.image</artifactId>
         <version>${project.version}</version>
       </dependency>
 

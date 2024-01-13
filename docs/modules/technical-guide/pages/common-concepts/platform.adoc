@@ -427,7 +427,7 @@ Specifies whether the application uses HTTP session or not. The default value is
 Data type: Boolean
 
 `scout.app.httpSessionTimeout` ::
-The session timeout in seconds to use if HTTP sessions are enabled. The default value is 300 seconds (5 minutes).
+The session timeout in seconds to use if HTTP sessions are enabled. The default value is 300 seconds (5 minutes) for non-development mode, 3600 seconds (60 minutes) for development mode.
 +
 Data type: Integer >= 0
 

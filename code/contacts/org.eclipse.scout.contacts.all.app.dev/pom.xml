@@ -22,11 +22,6 @@
   </parent>
 
   <artifactId>org.eclipse.scout.contacts.all.app.dev</artifactId>
-  <packaging>war</packaging>
-
-  <properties>
-    <docker.image.prefix>eclipsescout</docker.image.prefix>
-  </properties>
 
   <dependencies>
     <!-- Contacts Application Client -->
@@ -41,7 +36,7 @@
       <artifactId>org.eclipse.scout.contacts.events.client</artifactId>
     </dependency>
 
-    <!-- Jetty Server -->
+    <!-- Scout app (Jetty) -->
     <dependency>
       <groupId>org.eclipse.scout.rt</groupId>
       <artifactId>org.eclipse.scout.rt.app</artifactId>
@@ -74,25 +69,4 @@
       <artifactId>org.eclipse.scout.rt.serverbridge</artifactId>
     </dependency>
   </dependencies>
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>com.spotify</groupId>
-        <artifactId>docker-maven-plugin</artifactId>
-        <version>1.2.2</version>
-        <configuration>
-          <imageName>${docker.image.prefix}/${project.groupId}</imageName>
-          <dockerDirectory>.</dockerDirectory>
-          <resources>
-            <resource>
-              <targetPath>/</targetPath>
-              <directory>${project.build.directory}</directory>
-              <include>${project.build.finalName}.war</include>
-            </resource>
-          </resources>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
 </project>

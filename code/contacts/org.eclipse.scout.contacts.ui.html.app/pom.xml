@@ -21,13 +21,35 @@
     <relativePath>../org.eclipse.scout.contacts</relativePath>
   </parent>
 
-  <!-- Application leaf module with dependencies only relevant for development including config.properties/logback.xml -->
-  <artifactId>org.eclipse.scout.contacts.server.app.dev</artifactId>
+  <!-- Application base module that collects all dependencies relevant for all application leafs (dev, image, ...) -->
+  <artifactId>org.eclipse.scout.contacts.ui.html.app</artifactId>
 
   <dependencies>
     <dependency>
+      <!-- Contacts Application -->
       <groupId>org.eclipse.scout.contacts</groupId>
-      <artifactId>org.eclipse.scout.contacts.server.app</artifactId>
+      <artifactId>org.eclipse.scout.contacts.ui.html</artifactId>
+    </dependency>
+    <dependency>
+      <!-- Events module -->
+      <groupId>org.eclipse.scout.contacts</groupId>
+      <artifactId>org.eclipse.scout.contacts.events.client</artifactId>
+    </dependency>
+
+    <!-- Scout app (Jetty) -->
+    <dependency>
+      <groupId>org.eclipse.scout.rt</groupId>
+      <artifactId>org.eclipse.scout.rt.app</artifactId>
+    </dependency>
+
+    <!-- Logging -->
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>jul-to-slf4j</artifactId>
     </dependency>
   </dependencies>
 </project>

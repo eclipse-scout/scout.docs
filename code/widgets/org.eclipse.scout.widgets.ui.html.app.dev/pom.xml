@@ -20,57 +20,13 @@
     <relativePath>../org.eclipse.scout.widgets</relativePath>
   </parent>
 
+  <!-- Application leaf module with dependencies only relevant for development including config.properties/logback.xml -->
   <artifactId>org.eclipse.scout.widgets.ui.html.app.dev</artifactId>
-  <packaging>war</packaging>
-
-  <properties>
-    <docker.image.prefix>eclipsescout</docker.image.prefix>
-  </properties>
 
   <dependencies>
-    <!-- Widget Application -->
     <dependency>
       <groupId>org.eclipse.scout.widgets</groupId>
       <artifactId>org.eclipse.scout.widgets.ui.html.app</artifactId>
     </dependency>
-
-    <!-- Jetty Server -->
-    <dependency>
-      <groupId>org.eclipse.scout.rt</groupId>
-      <artifactId>org.eclipse.scout.rt.app</artifactId>
-    </dependency>
-
-    <!-- Logging -->
-    <dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-classic</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>jul-to-slf4j</artifactId>
-    </dependency>
-
   </dependencies>
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>com.spotify</groupId>
-        <artifactId>docker-maven-plugin</artifactId>
-        <version>1.2.2</version>
-        <configuration>
-        <!-- TODO [7.0] avd: reset to explicit group id to ${project.groupId} once the renaming from org.eclipse.scout.widgets to org.eclipse.scout.widgets is complete -->
-          <imageName>${docker.image.prefix}/org.eclipse.scout.widgets</imageName>
-          <dockerDirectory>.</dockerDirectory>
-          <resources>
-            <resource>
-              <targetPath>/</targetPath>
-              <directory>${project.build.directory}</directory>
-              <include>${project.build.finalName}.war</include>
-            </resource>
-          </resources>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
 </project>
