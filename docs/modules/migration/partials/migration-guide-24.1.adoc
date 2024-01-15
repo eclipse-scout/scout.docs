@@ -244,3 +244,35 @@ The following renaming is applied.
 
 The former deprecated class `IdExternalFormatter` was removed.
 This class was replaced by `IdCodec` and `IdInventory` in release 23.
+
+== Apache HttpComponents Client 5.2.x
+
+With Scout version 7 the usage of Apache HttpComponents Client was introduced (for example for communication between frontend and backend server). At that time version 4.5.3 was used which received only minor updates between releases (for major defects and security issues), version 24.1 of Scout upgrades the Apache HTTP Client to the next major version - now version 5.2.x is used.
+
+Scout does not depend itself on an older Apache HttpComponents Client version anymore; however the new client version can be co-located with earlier major version on the same classpath as package names and maven coordinates have been changed.
+
+This may result in changes if your project references (imports) Apache HttpComponents classes itself, e.g. `org.apache.http.HttpHeaders` has been moved to `org.apache.hc.core5.http.HttpHeaders`, `org.apache.http.impl.client.HttpClientBuilder` has been moved to `org.apache.hc.client5.http.impl.classic.HttpClientBuilder`, for further details the link:https://hc.apache.org/httpcomponents-client-5.2.x/migration-guide/index.html[Apache HttpClient 5.x migration guide] may be consulted (at the moment the classic API is still used to avoid too many changes).
+
+There is also behavior and API which has changed, the following behavioral changes have been noticed during development:
+
+* `org.eclipse.scout.rt.shared.http.EnhancedLaxRedirectStrategy` is removed, this strategy previously enforced a second HTTP POST request for certain HTTP redirect status codes (e.g. 302 Found). According to link:https://www.rfc-editor.org/rfc/rfc9110.html#status.302[RFC 9110] in this case the POST request may be replaced with a GET request which the HttpClient will now respect. For redirects which require to re-send the POST request a different status code must be used (e.g. 307 Temporary Redirect). The config property `scout.http.redirectPost` has been removed.
+* Internal test `org.eclipse.scout.rt.server.commons.http.HttpRetryTest.testPostWithUnsupportedRetryAndFailureWhileHeadersAreSent` has been removed as retry-strategy has been changed, requests failing with a `org.apache.hc.core5.http.ConnectionClosedException` while sending the request are not retried anymore in general, furthermore only idempotent requests will be retried by default. However, the Scout specific implementation to retry requests dealing with a stale socket channel is kept (regardless of the request method).
+
+For third-party dependencies which refer to an older HttpClient version either both versions will co-exist (see above) or it is necessary to search for updated third-party versions which reference the new version of the HttpClient.
+
+To use the new version with the Google HTTP Client library a `org.eclipse.scout.rt.shared.http.transport.ApacheHttpTransport` is introduced (as the third party library itself does not support the newer version yet as the library itself refers to an older HttpClient version this older version is explicitly excluded).
+
+For `org.eclipse.scout.rt.server.commons.servlet.HttpProxy` the Google HTTP Client library is not used anymore, instead a new class `org.eclipse.scout.rt.shared.http.async.DefaultAsyncHttpClientManager` (configurable using a config property) is used. The new concept uses the HttpClient directly as async variant. `org.eclipse.scout.rt.shared.http.transport.ApacheHttpTransport` still uses the classic variant.
+
+`org.eclipse.scout.rt.shared.http.BasicAuthHttpTransportManager` was removed, users may provide pre-emptive basic authentication using a custom `org.apache.hc.client5.http.protocol.HttpClientContext` for specific hosts (e.g for the `HttpProxy` using `org.eclipse.scout.rt.server.commons.servlet.HttpProxy.withHttpClientContextSupplier`).
+
+== Login form: Add support for second-factor (form-based)
+
+For the `FormBasedAccessController` and the corresponding login box a basic second-factor support was added; a new credential verifier return value `org.eclipse.scout.rt.platform.security.ICredentialVerifier.AUTH_2FA_REQUIRED` was added which will prompt for a second factor token. To verify this token a second-factor verifier `ICredentialVerifier` needs to be registered.
+
+During form-based login, for second-factor enabled accounts, a token is requested (after first challenge has been completed successful), for this token a new text `ui.Token` has been added to the login form and must be added to the `[...].ui.html/src/main/resources/WebContent/login.html`:
+
+[source,html]
+----
+<scout:message style="tag" key="ui.Login" key="ui.LoginFailed" key="ui.User" key="ui.Password" key="ui.Token" />
+----
