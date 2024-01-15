@@ -64,6 +64,17 @@
     <pluginManagement>
       <plugins>
         <plugin>
+          <groupId>com.mycila</groupId>
+          <artifactId>license-maven-plugin</artifactId>
+          <configuration>
+            <header>${project.basedir}/../../../license_files/copyright.txt</header>
+            <headerDefinitions>
+              <headerDefinition>${project.basedir}/../../../license_files/scoutLicenceHeaderJava.xml</headerDefinition>
+            </headerDefinitions>
+          </configuration>
+        </plugin>
+
+        <plugin>
           <!-- required for .app.image module to build and publish docker image -->
           <groupId>com.google.cloud.tools</groupId>
           <artifactId>jib-maven-plugin</artifactId>
@@ -163,23 +174,6 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-
-  <build>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>com.mycila</groupId>
-          <artifactId>license-maven-plugin</artifactId>
-          <configuration>
-            <header>${project.basedir}/../../../license_files/copyright.txt</header>
-            <headerDefinitions>
-              <headerDefinition>${project.basedir}/../../../license_files/scoutLicenceHeaderJava.xml</headerDefinition>
-            </headerDefinitions>
-          </configuration>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-  </build>
 
   <repositories>
     <repository>
