@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -255,9 +255,7 @@ export * from './tree/TreePropertiesBox';
 export * from './tree/TreePropertiesBoxModel';
 export * from './treebox/TreeBoxForm';
 export * from './treebox/TreeBoxFormModel';
-export * from './treebox/AutoCheckStyleLookupCall';
 export * from './treebox/CheckableTreeStyleLookupCall';
-export * from './treebox/TreeBoxValueFieldPropertiesBox';
 export * from './breadcrumbbar/BreadcrumbBarFieldForm';
 export * from './breadcrumbbar/BreadcrumbBarFieldFormModel';
 export * from './messagebox/MessageBoxForm';

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -9,8 +9,8 @@
  */
 import {FormModel, GroupBox, LookupCall, SmartField, TabBox, TabItem, TreeBox} from '@eclipse-scout/core';
 import {
-  EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, LookupCallLookupCall, TreeBoxValueFieldPropertiesBox,
-  TreePropertiesBox, TreePropertiesBoxWidgetMap, ValueFieldPropertiesBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap, WorldLookupCall
+  EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, LookupCallLookupCall, TreePropertiesBox,
+  TreePropertiesBoxWidgetMap, ValueFieldPropertiesBox, ValueFieldPropertiesBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap, WorldLookupCall
 } from '../index';
 
 export default (): FormModel => ({
@@ -67,7 +67,7 @@ export default (): FormModel => ({
               },
               {
                 id: 'ValueFieldPropertiesBox',
-                objectType: TreeBoxValueFieldPropertiesBox,
+                objectType: ValueFieldPropertiesBox,
                 expanded: false
               },
               {
@@ -120,7 +120,7 @@ export type TreeBoxFormWidgetMap = {
   'PropertiesTab': TabItem;
   'LookupCallField': SmartField<any>;
   'PropertiesBox': TreePropertiesBox;
-  'ValueFieldPropertiesBox': TreeBoxValueFieldPropertiesBox;
+  'ValueFieldPropertiesBox': ValueFieldPropertiesBox;
   'FormFieldPropertiesBox': FormFieldPropertiesBox;
   'GridDataBox': GridDataBox;
   'ActionsTab': TabItem;

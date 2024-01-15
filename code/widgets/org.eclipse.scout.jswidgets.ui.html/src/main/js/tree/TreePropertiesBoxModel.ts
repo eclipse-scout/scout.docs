@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -7,14 +7,23 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {AutoCheckStyle, CheckBoxField, GroupBox, GroupBoxModel, SmartField, TreeCheckableStyle} from '@eclipse-scout/core';
-import {AutoCheckStyleLookupCall, CheckableTreeStyleLookupCall} from '../index';
+import {CheckBoxField, GroupBox, GroupBoxModel, SmartField} from '@eclipse-scout/core';
+import {CheckableTreeStyleLookupCall} from '../index';
 
 export default (): GroupBoxModel => ({
   id: 'jswidgets.TreePropertiesBox',
   objectType: GroupBox,
   label: 'Tree Properties',
   fields: [
+    {
+      id: 'AutoCheckChildrenField',
+      objectType: CheckBoxField,
+      label: 'Auto Check Children',
+      labelVisible: false,
+      gridDataHints: {
+        fillHorizontal: false
+      }
+    },
     {
       id: 'CheckableField',
       objectType: CheckBoxField,
@@ -34,12 +43,6 @@ export default (): GroupBoxModel => ({
       labelVisible: false
     },
     {
-      id: 'AutoCheckStyleField',
-      objectType: SmartField,
-      label: 'Auto Check Style',
-      lookupCall: AutoCheckStyleLookupCall
-    },
-    {
       id: 'CheckableStyleField',
       objectType: SmartField,
       label: 'Checkable Style',
@@ -53,9 +56,9 @@ export default (): GroupBoxModel => ({
 * **************************************************************************/
 
 export type TreePropertiesBoxWidgetMap = {
+  'AutoCheckChildrenField': CheckBoxField;
   'CheckableField': CheckBoxField;
   'MultiCheckField': CheckBoxField;
   'TextFilterEnabledField': CheckBoxField;
-  'AutoCheckStyleField': SmartField<AutoCheckStyle>;
-  'CheckableStyleField': SmartField<TreeCheckableStyle>;
+  'CheckableStyleField': SmartField<any>;
 };
