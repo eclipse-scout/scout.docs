@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -41,10 +41,10 @@ export class TreePropertiesBox extends GroupBox {
       return;
     }
 
-    let autoCheckStyleField = this.widget('AutoCheckStyleField');
-    autoCheckStyleField.setValue(this.tree.autoCheckStyle);
-    autoCheckStyleField.on('propertyChange:value', event => {
-      this.tree.setAutoCheckStyle(event.newValue);
+    let autoCheckChildrenField = this.widget('AutoCheckChildrenField');
+    autoCheckChildrenField.setValue(this.tree.autoCheckChildren);
+    autoCheckChildrenField.on('propertyChange:value', event => {
+      this.tree.setAutoCheckChildren(event.newValue);
     });
 
     let checkableField = this.widget('CheckableField');
