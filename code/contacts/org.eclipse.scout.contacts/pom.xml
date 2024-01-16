@@ -60,6 +60,32 @@
     <module>../org.eclipse.scout.contacts.all.app.dev</module>
   </modules>
 
+  <profiles>
+    <profile>
+      <!-- required for .app.image module to apply filtering on config.properties -->
+      <id>filter.config.property</id>
+      <activation>
+        <file>
+          <exists>${basedir}${file.separator}src${file.separator}main${file.separator}resources${file.separator}config.properties</exists>
+        </file>
+      </activation>
+      <build>
+        <resources>
+          <resource>
+            <directory>${project.basedir}${file.separator}src${file.separator}main${file.separator}resources</directory>
+            <filtering>true</filtering>
+          </resource>
+        </resources>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>properties-maven-plugin</artifactId>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
   <build>
     <pluginManagement>
       <plugins>
