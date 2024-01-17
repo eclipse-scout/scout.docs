@@ -15,7 +15,8 @@ This will help you to decide whether you should do the Scout Classic or Scout JS
 Scout Classic Tutorials
 
 * xref:getstarted:helloscout.adoc[]
-* xref:getstarted:deploy-to-tomcat.adoc[Deploy to Tomcat]
+* xref:getstarted:run-as-service.adoc[Run as Service]
+* xref:getstarted:run-as-docker-container.adoc[Run as Docker Container]
 * xref:getstarted:one-day-tutorial.adoc[One Day Tutorial]
 
 Scout JS Tutorials

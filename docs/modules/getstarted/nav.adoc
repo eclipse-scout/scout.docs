@@ -1,7 +1,8 @@
 * xref:getstarted.adoc[Get Started]
 ** Scout Classic
 *** xref:helloscout.adoc[]
-*** xref:deploy-to-tomcat.adoc[]
+*** xref:run-as-service.adoc[]
+*** xref:run-as-docker-container.adoc[]
 *** xref:one-day-tutorial.adoc[One Day Tutorial]
 ** Scout JS
 *** xref:helloscout-js.adoc[]

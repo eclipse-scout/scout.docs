@@ -90,3 +90,11 @@ To get familiar with Scouts new accessibility features we recommend using `aria.
 
 For the form-based login box a basic second-factor support was added.
 To verify the second factor a second credential verifier must be registered via `FormBasedAuthConfig#withSecondFactorVerifier`.
+
+== Scout App as embedded Jetty Server to run in a productive environment
+
+The former `org.eclipse.scout.dev.jetty.JettyServer` (now `Application`) was so far only used for development environments.
+With this release it was improved so that it can be used in a productive environment too.
+The Scout Application class (`org.eclipse.scout.rt.app.Application`) contains a main-method which may be started directly and itself starts an embedded Jetty server.
+Therefore, an application server isn't required anymore.
+See the migration guide for further information.

@@ -65,7 +65,7 @@ If using the Community Edition, follow these instructions instead:
 Execute `npm run pnpm-install` on the command line in the root of your project (next to the `pnpm-workspace.yaml`) to install all JavaScript dependencies.
 Then execute `npm run build:dev:watch` in the `helloscoutjs.app` module to start the JavaScript build and watcher.
 The watcher keeps on running and will continuously update the JavaScript assets as you change your JavaScript source files (hot-code-replace).
-Finally start the run configuration `Launch helloscoutjs dev server`.
+Finally start the run configuration `[webapp] dev server`.
 
 Once the JS build has been completed (this may take a while for the first time as some dependencies need to be downloaded) and the server has been started, the `Hello Scout JS Full Stack` application can be accessed by navigating to http://localhost:8084/ in your favorite web browser.
 
