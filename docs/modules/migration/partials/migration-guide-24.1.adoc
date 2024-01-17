@@ -159,12 +159,15 @@ xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb">  <2>
 <1> Update to version 3.0
 <2> Update to namespace _https://jakarta.ee/xml/ns/jaxb_
 
-===== UI Server web.xml
+===== UI Server: Multipart request configuration
 
 As part of the switch to Jakarta EE the third party library dependency to Apache File Upload was eliminated.
 Scout now relies on plain Jakarta EE API to process HTTP multipart requests.
 Servlets processing multipart requests using Jakarta EE API requires a multipart-config in their servlet registration.
-Make sure to add a _<multipart-config>_ section to your `web.xml` where the `UiServlet` is registered:
+
+====== Deployment using web.xml
+
+If you use a `web.xml`-based deployment, make sure to add a _<multipart-config>_ section to your `web.xml` where the `UiServlet` is registered:
 
 .Example multipart-config in _web.xml_ of Scout UI server
 [source=xml]
@@ -185,6 +188,19 @@ Make sure to add a _<multipart-config>_ section to your `web.xml` where the `UiS
 <2> Maximum size of multi-part request, e.g. 100mb
 <3> Threshold for file chunking, e.g. 20mb
 
+====== Deployment using Jetty server
+
+If you switch to a Jetty-based deployment (see chapter <<cha-jettyserver>> for details) a default multipart configuration providing the ability
+to upload multipart requests with unlimited size is automatically added by Scout framework.
+This corresponds to the same behavior as using the former Apache File Upload based implementation.
+
+Unlimited request size means, there is no global request size limit at level of the UI servlet.
+In practice the upload size is limited by implementations of `IUploadable` and the corresponding implementations in various JSON form fields,
+see `getConfiguredMaximumUploadSize()` implementations for default value for each type of field: e.g. `AbstractFileChooserField.getConfiguredMaximumUploadSize`.
+
+See `UiServletMultipartConfigProperty` and the config property `scout.ui.servletMultipartConfig` to provide a custom global multipart
+request configuration for your UI server.
+
 === Other libraries
 
 * Mockito 5: Uses the inline mock maker as new default and change the behavior of `any()`, which does not match varargs anymore (use `any(Class)` instead).
@@ -196,6 +212,7 @@ No migration is required, as this method did not change behavior in any way.
 
 The method `IFormHandler#getHandlerId` was removed without a replacement as there is no use for it.
 
+[[cha-jettyserver]]
 == Former JettyServer for development can be used in a productive environment
 
 `org.eclipse.scout.dev.jetty.JettyServer` was so far only used for development environments.
