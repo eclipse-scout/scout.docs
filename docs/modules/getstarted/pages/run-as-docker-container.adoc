@@ -1,0 +1,107 @@
+= Run as Docker Container
+
+include::common:partial$_header.adoc[]
+
+A different approach than to use the output of the `.app.zip` module builds is to build docker images instead.
+The docker images might be used within a Kubernetes setup or similar to run your application.
+In this guide we use a local Docker installation.
+
+== Setup Local Registry
+
+The Maven property `docker.app.image.registry` (in the parent `pom.xml`) defines where the docker image is pushed to.
+By default, `localhost:5000` is used which represents a locally running Docker registry without authentication.
+If you like to use a public docker registry or have a private one already running,
+modify that property accordingly and make sure to add authentication details to your Maven settings if required.
+
+To run a local Docker registry, execute the following command:
+
+  docker run -d --rm -p 5000:5000 --name registry registry:2.8
+
+This will run the container in background (`-d`),
+automatically removes the container when it exits (`--rm`),
+binds port 5000 of the container to port 5000 of the host machine port (`-p 5000:5000`)
+and names the Docker container `registry` (`--name registry`).
+
+To check the logs of the registry, run
+
+  docker logs -f registry
+
+== Build and push Docker images
+
+For the `.app.image` modules to be built, the Maven profile `exec.docker.image` must be activated.
+This manual activation is to avoid that a full Maven build of the project would fail because usually there is no local Docker registry running that would accept the built images.
+
+https://github.com/GoogleContainerTools/jib[Google Jib] is used to build Docker images without the need of a Docker daemon.
+
+To run the Maven build including the build and publish of the Docker images for your backend and UI server, use the following command in your parent module (`helloscout`):
+
+  mvn clean install -Pexec.docker.image -Djib.allowInsecureRegistries=true
+
+We activate the required Maven profile (`-Pexec.docker.image`)
+and tell Google JIB to allow insecure registries (`-Djib.allowInsecureRegistries=true`) because our local registry is only running on `http`.
+
+Check the output of the build, it should say something as
+
+  Built and pushed image as localhost:5000/helloscout-server, localhost:5000/helloscout-server:1.0.0-latest
+
+for the module `helloscout.server.app.image` and similar for `helloscout.ui.html.app.image`.
+
+== Run the servers
+
+Because the frontend server needs to be able to communicate with the backend server, we create an own network
+
+  docker network create helloscout-network
+
+which will be used by both servers.
+
+The docker images always expose port 8080 (see `pom.xml` of the `.app.image` modules).
+For the backend server we use port 8080 on the host machine too (`-p 8080:8080`).
+It wouldn't be necessary to expose the backend server port, because only the frontend servers needs to communicate with it, through the newly created network.
+Start the backend server with
+
+  docker run -d -p 8080:8080 --pull always --network helloscout-network --name helloscout-server localhost:5000/helloscout-server:1.0.0-latest
+
+`--pull always` is used to ensure that if new images are built via Maven, these are pulled and used (instead of the existing ones).
+
+To check the logs, use
+
+  docker logs helloscout-server
+
+If everything was successful, a log output containing
+
+  Server ready. The application is available on the following addresses
+
+should be present.
+
+The default `logback.xml` configuration of the `.app.image` modules use a JSON format to be easily parsed by https://grafana.com/oss/loki/[Loki] or a similar log aggregation tool.
+If you prefer plain text, change the encoder class from `net.logstash.logback.encoder.LogstashEncoder` too `org.eclipse.scout.rt.platform.logger.FixedPatternLogbackEncoder`.
+
+In the `config.properties` of your frontend server (`helloscout.ui.html.app.image`) the property `scout.backendUrl` is not defined (because not known before).
+Within a docker network, the containers are accessible by their names (`--name` argument when container is run).
+To set/override property values via environment variables, use the `-e` argument (i.e. `-e scout_backendUrl=http://helloscout-server:8080`, environment variables use `_` instead of `.`).
+
+  docker run -d -p 8082:8080 --pull always --network helloscout-network --name helloscout-ui -e scout_backendUrl=http://helloscout-server:8080 localhost:5000/helloscout-ui:1.0.0-latest
+
+Check if the frontend server was successfully started too by having a look at the logs
+
+  docker logs helloscout-ui
+
+If everything seems okay, visit `http://localhost:8082` and enjoy your application running within Docker containers.
+
+== Cleanup
+
+This section is only used to get rid of everything just created.
+
+* Remove the containers (and stop them if still running)
+* Remove the network
+* Remove the images
+* Stop the local registry (will auto-remove itself due to started with `--rm`)
+
+----
+docker container rm --force helloscout-ui
+docker container rm --force helloscout-server
+docker network remove helloscout-network
+docker rmi localhost:5000/helloscout-ui:1.0.0-latest
+docker rmi localhost:5000/helloscout-server:1.0.0-latest
+docker container stop registry
+----

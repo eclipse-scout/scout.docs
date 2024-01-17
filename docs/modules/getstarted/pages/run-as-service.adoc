@@ -1,0 +1,320 @@
+= Build Scout App and Run as Service
+
+include::common:partial$_header.adoc[]
+
+//-----------------------------------------------------------------------------
+//Asciidoctor input file: "Export the hello scout application"
+//
+//WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
+//-----------------------------------------------------------------------------
+
+
+At some point during the application development you will want to install your software on a machine that is intended for productive use.
+This is the moment where you need to be able to build and package your Scout application in a way that can be deployed on a server.
+
+A Scout applications can be deployed to any server running Java.
+For the purpose of this tutorial we will use https://ubuntu.com/download/server[Ubuntu Server 22.04].
+
+== Prepare directory
+
+The applications will be placed in `/opt/helloscout`.
+
+  mkdir /opt/helloscout
+
+== Prepare Java
+
+Java 17 is required to run the Scout applications
+
+  apt install openjdk-17-jdk
+
+Run
+
+  update-alternatives --config java
+
+and select Java 17 as default.
+
+== Verify the Security Settings
+
+You need to decide if the users of your application should communicate with the Scout frontend server using HTTPS.
+We strongly recommend to use HTTPS for any productive environment.
+This is why the `Hello Scout` applications are configured to expect HTTPS between the browser and the frontend server for production by default.
+
+In case you don't want to use HTTPS the application must be slightly modified.
+Then you can skip the next two sections and instead follow the instructions in section <<run-as-service-work-with-http>>.
+
+== Frontend: Create and Install a Self-Signed Certificate
+
+If you're planing to use a reverse proxy (e.g. https://nginx.org/[nginx]) handling the SSL for your frontend server,
+you may skip this section and make sure to use the URL of the reverse proxy instead of the one of the frontend server
+when accessing the application in the browser.
+
+The first step is to create a self-signed certificate using the keytool provided with the Java runtime.
+The example command line below will create such a certificate using the alias `helloscout_ui_localhost` and place it into the keystore file `helloscout_ui_localhost.jks`
+
+  mkdir /opt/helloscout/certs
+  keytool -genkey -keyalg RSA -dname CN=localhost -alias helloscout_ui_localhost -keystore /opt/helloscout/certs/helloscout_ui_localhost.jks -keypass changeit_key -storepass changeit_store
+
+The second step is to adapt the configuration of the frontend server to use the newly created certificate
+
+[source]
+.helloscout.ui.html.app.zip/config.properties
+----
+scout.app.port=8443
+scout.app.keyStorePassword=changeit_store
+scout.app.privateKeyPassword=changeit_key
+scout.app.certificateAlias=helloscout_ui_localhost
+scout.app.keyStorePath=/opt/helloscout/certs/helloscout_ui_localhost.jks
+----
+
+== Frontend-backend server communication over an encrypted channel
+
+The communication between the frontend and the backend server isn't encrypted by default
+because they might be running on the same machine or in a protected environment and no access to the backend server is available from "outside".
+
+You might skip this section if encryption of that communication isn't required.
+
+The first two steps are similar to the ones described for the frontend server.
+
+  keytool -genkey -keyalg RSA -dname CN=localhost -alias helloscout_server_localhost -keystore /opt/helloscout/certs/helloscout_server_localhost.jks -keypass changeit_key -storepass changeit_store
+
+[source]
+.helloscout.server.app.zip/config.properties
+----
+scout.app.keyStorePassword=changeit_store
+scout.app.privateKeyPassword=changeit_key
+scout.app.certificateAlias=helloscout_server_localhost
+scout.app.keyStorePath=/opt/helloscout/certs/helloscout_server_localhost.jks
+----
+
+We don't change the port of the backend server here.
+Because the backend server is using HTTPS now, the URL in the frontend server must be modified:
+
+[source]
+.helloscout.ui.html.app.zip/config.properties
+----
+scout.backendUrl=https://localhost:8080
+----
+
+Because the frontend server connects over HTTPS, the SSL certificate of the backend server must be trusted by the Java runtime running in the frontend server.
+
+For that, export the newly created self-signed certificate from the `helloscout_server_localhost.jks` keystore file into the `helloscout_server_localhost.der` certificate file.
+
+  keytool -exportcert -alias helloscout_server_localhost -storepass changeit_store -keystore /opt/helloscout/certs/helloscout_server_localhost.jks -file /opt/helloscout/certs/helloscout_server_localhost.der
+
+In the last step add the self-signed certificate to the trusted certificates of the frontend server.
+
+[source]
+.helloscout.ui.html.app.zip/config.properties
+----
+scout.trustedCertificates[0]=/opt/helloscout/certs/helloscout_server_localhost.der
+----
+
+As alternative to changing `scout.trustedCertificates`, you could also add the self-signed certificate to the known certificates of the Java runtime (not described here).
+
+Your applications are now properly configured to use an encrypted communication between the frontend und the backend server.
+
+[[run-as-service-work-with-http]]
+== Update the Scout Application to work with HTTP
+
+If you prefer to work with HTTP only on the frontend server, you need to modify the security settings of your Scout application.
+This can be done with the steps described below.
+
+* In file `config.properties` (in the directory `helloscout.ui.html.app.war/src/main/resources`):
+** Add the property `scout.app.sessionCookieConfigSecure=false` to remove the secure flag on the session cookie.
+** Add the property `scout.auth.cookieSessionValidateSecure=false` to disable the check for an encrypted channel (HTTPS).
+
+[[run-as-service-create-deployable-unit]]
+== Create deployable unit
+
+You are now ready to move the `Hello Scout` application from our development environment to a productive setup.
+The simplest option to move our application into the 'wild' is to build it using Maven.
+
+The default output to be used in a productive environment is provided by the `.app.zip` modules.
+It will provide two `.zip` archives
+The first ZIP file contains the Scout backend server with all business logic.
+The second ZIP file contains the Scout frontend server that is responsible for communicating with the web browser of the user.
+
+Each ZIP file contains the following directories:
+
+* bin
+** Shell scripts for Unix (`app.sh`) and Windows (`.app.cmd`)
+* lib
+** All libraries (`*.jar`) required to run the Java application
+* conf
+** `config.properties` and `logback.xml`
+
+To start the build, use the following command in your parent module (`helloscout`):
+
+  mvn clean verify
+
+This starts the compilation, executes all test cases and bundles the result into two ZIP files.
+As soon as the build is reporting success (this may take a few minutes) you can find the built ZIP files:
+
+* The Scout backend ZIP file `helloscout-server.zip` in directory `helloscout/helloscout.server.app.zip/target`
+* The Scout frontend ZIP file `helloscout-ui.zip` in directory `helloscout/helloscout.ui.html.app.zip/target`
+
+To see the new files within Eclipse you may need to refresh the `target` directory below each project using the F5 keystroke.
+
+== Unzip & Run
+
+Copy the two ZIP files mentioned above to `/opt/helloscout` and unzip them:
+
+----
+cd /opt/helloscout
+unzip helloscout-server.zip -d .
+unzip helloscout-ui.zip -d .
+----
+
+Now start the backend server, then the frontend server
+
+----
+cd /opt/helloscout/helloscout-server
+bin/app.sh
+cd /opt/helloscout/helloscout-ui
+bin/app.sh
+----
+
+If you've got an exception like
+
+  -bash: bin/app.sh: /bin/bash^M: bad interpreter: No such file or directory
+
+then the bash scripts are using Windows line separators. Convert them to unix line separators by
+
+----
+dos2unix /opt/helloscout/helloscout-server/bin/app.sh
+dos2unix /opt/helloscout/helloscout-ui/bin/app.sh
+----
+
+Check the logs if both applications started successfully
+
+----
+cat /opt/helloscout/helloscout-server/logs/app.plain.log
+cat /opt/helloscout/helloscout-ui/logs/app.plain.log
+----
+
+You can now connect to the application using the browser of your choice by navigating to:
+
+  http://localhost:8082/
+
+or
+
+  https://localhost:8443/
+
+if you have chosen to configure HTTPS.
+In this case you might need to accept your self-signed certificate as the browser does not yet trust it.
+
+Then you will see the login page.
+Two users have been predefined: `admin` with password `admin` and `scott` with password `tiger`.
+You can find this configuration in the `config.properties` file of the application.
+
+To stop the servers, call
+
+----
+kill -15 `cat /opt/helloscout/helloscout-ui/bin/app.pid`
+kill -15 `cat /opt/helloscout/helloscout-server/bin/app.pid`
+----
+
+== Create a service definition
+
+As the final step of this tutorial, we create two services, one for the frontend, one for the backend server, so that your applications are started automatically.
+
+Stop the servers as mentioned above if not already stopped.
+
+Start by creating a new user
+
+  sudo adduser --system --group --disabled-password --shell /bin/bash --home /home/helloscout --gecos 'Helloscout' helloscout
+
+Make sure that the directory `/opt/helloscout` can be accessed by the user
+
+----
+sudo chown -R helloscout:helloscout /opt/helloscout/
+sudo chmod -R 750 /opt/helloscout/
+----
+
+Now create two service files
+
+[source]
+./etc/systemd/system/helloscout-server.service
+----
+[Unit]
+Description=Helloscout Server
+After=syslog.target network.target
+
+[Service]
+Type=forking
+WorkingDirectory=/opt/helloscout/helloscout-server/
+ExecStart=/opt/helloscout/helloscout-server/bin/app.sh
+PIDFile=/opt/helloscout/helloscout-server/bin/app.pid
+
+Environment=JAVA_BIN=/usr/lib/jvm/java-17-openjdk-amd64/bin/java
+
+User=helloscout
+Group=helloscout
+
+[Install]
+WantedBy=multi-user.target
+----
+
+[source]
+./etc/systemd/system/helloscout-ui.service
+----
+[Unit]
+Description=Helloscout UI
+After=syslog.target network.target
+
+[Service]
+Type=forking
+WorkingDirectory=/opt/helloscout/helloscout-ui/
+ExecStart=/opt/helloscout/helloscout-ui/bin/app.sh
+PIDFile=/opt/helloscout/helloscout-ui/bin/app.pid
+
+Environment=JAVA_BIN=/usr/lib/jvm/java-17-openjdk-amd64/bin/java
+
+User=helloscout
+Group=helloscout
+
+[Install]
+WantedBy=multi-user.target
+----
+
+You're now ready to register the services and start them
+
+----
+sudo systemctl daemon-reload
+sudo systemctl enable --now helloscout-server
+sudo systemctl enable --now helloscout-ui
+----
+
+To check the status, call
+
+----
+sudo systemctl status helloscout-server
+sudo systemctl status helloscout-ui
+----
+
+Instead of `status` the keywords: `start`, `stop`, `restart` might be used for the appropriate actions.
+
+NOTE: In a productive environment it is recommended to deploy the server and the user interface into two dedicated machines.
+This is because these two tiers have different requirements on resources, load balancing and access protection.
+Furthermore, it is strongly recommended using an encrypted connection (e.g. TLS 1.3 footnote:[TLS: https://en.wikipedia.org/wiki/Transport_Layer_Security])
+between client browsers and the Scout frontend server AND between the Scout frontend and backend server!
+
+== Cleanup
+
+This section is only used to get rid of everything just created.
+
+* Remove the services (and stop them if still running)
+* Remove the service definitions
+* Remove the directory structure
+* Remove the user
+
+----
+sudo systemctl disable --now helloscout-server
+sudo systemctl disable --now helloscout-ui
+rm /etc/systemd/system/helloscout-server.service
+rm /etc/systemd/system/helloscout-ui.service
+sudo systemctl daemon-reload
+rm -rf /opt/helloscout
+deluser helloscout
+----
+
