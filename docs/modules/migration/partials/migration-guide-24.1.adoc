@@ -431,10 +431,12 @@ The session cookie config is now handled by the properties:
 ** `session-config/cookie-config/http-only` in `web.xml`
 * `scout.app.sessionCookieConfigSecure` (default `true` for non-development mode)
 ** `session-config/cookie-config/secure` in `web.xml`
-** `scout.auth.cookieSessionValidateSecure` (existing property) is used in the `UiServlet` for validation of HTTP only and secure flags.
-Make sure to set accordingly, if any of the other 2 properties are set to false
 * `scout.app.sessionCookieConfigSameSite` (default `Lax`)
 ** `context.xml`: `CookieProcessor` attribute `sameSiteCookies`
+
+The property `scout.auth.cookieSessionValidateSecure` was removed.
+It was used in the `UiServlet` for validation of HTTP only and secure flags (to check if they were correctly defined in the `web.xml`).
+Because these two flags are now set via property, an additional property for validation isn't required anymore.
 
 ==== logbackDisableServletContainerInitializer
 

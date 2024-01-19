@@ -526,17 +526,6 @@ By default `sso.user.id` is used as cookie name.
 +
 Data type: String
 
-`scout.auth.cookieSessionValidateSecure` ::
-Specifies if the UI server should ensure a secure cookie configuration of the webapp.
-+
-If enabled the application validates that the `httpOnly` and `Secure` flags are set via `scout.app.sessionCookieConfigHttpOnly` and `scout.app.sessionCookieConfigSecure`.
-+
-This property should be disabled if no secure connection (https) is used to the client browser (not recommended).
-+
-The default value is true.
-+
-Data type: Boolean
-
 `scout.auth.credentials` ::
 Specifies the known credentials (username & passwords) of the `org.eclipse.scout.rt.platform.security.ConfigFileCredentialVerifier`.
 +

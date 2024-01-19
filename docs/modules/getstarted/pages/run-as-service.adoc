@@ -119,9 +119,8 @@ Your applications are now properly configured to use an encrypted communication 
 If you prefer to work with HTTP only on the frontend server, you need to modify the security settings of your Scout application.
 This can be done with the steps described below.
 
-* In file `config.properties` (in the directory `helloscout.ui.html.app.war/src/main/resources`):
-** Add the property `scout.app.sessionCookieConfigSecure=false` to remove the secure flag on the session cookie.
-** Add the property `scout.auth.cookieSessionValidateSecure=false` to disable the check for an encrypted channel (HTTPS).
+In file `config.properties` (in the directory `helloscout.ui.html.app.war/src/main/resources`),
+add the property `scout.app.sessionCookieConfigSecure=false` to remove the secure flag on the session cookie.
 
 [[run-as-service-create-deployable-unit]]
 == Create deployable unit

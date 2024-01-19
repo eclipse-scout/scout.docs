@@ -63,16 +63,6 @@ This flag is enabled by default for non-development builds via `scout.app.sessio
 
 This of course only makes sense if the application is exposed to the end user using an encrypted channel like https://en.wikipedia.org/wiki/HTTPS[HTTPS] (which is strongly recommended).
 
-Unfortunately for the UI server it is not possible to detect if an application uses a secured channel. Consider the following example: The servlet container is protected by a reverse proxy. The communication between the user agent and the proxy is encrypted while the channel between the proxy and the servlet container is not. In this scenario the container cannot know that from a user agent point of view the channel is secured.
-
-Because of this the validation assumes that the channel from the user agent to the entering node is secured and by default checks for the `Secure` flag. In case this assumption is not true and an unencrypted channel must be used this validation step can be disabled by setting the following property in the `config.propertis` file:
-
-`scout.auth.cookieSessionValidateSecure=false`
-
-This skips the `Secure` flag check completely.
-In this scenario (not using https) it is also required to set `scout.app.sessionCookieConfigSecure` to `false`.
-
-
 == Secure Output
 This chapter describes how HTML Output can be handled in a secure way.
 
