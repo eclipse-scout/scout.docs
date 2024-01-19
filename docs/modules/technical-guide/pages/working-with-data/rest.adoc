@@ -63,26 +63,24 @@ include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclips
 
 All available REST resources are automatically registered by the `RestApplication` class while the Scout platform startup.
 
-Add the following snippet to your `web.xml` file to expose your REST API using the `/api` context path:
+Add an implementor of `IServletContributor` in your `UiServletContributors` container class to expose your REST API using the `/api` context path (set `@Order` appropriately):
 
-[source,xml]
-.web.xml
+[source,java]
 ----
-<!-- JAX-RS Jersey Servlet -->
-<servlet>
-  <servlet-name>api</servlet-name>
-  <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
-  <init-param>
-    <param-name>jakarta.ws.rs.Application</param-name>
-    <param-value>org.eclipse.scout.rt.rest.RestApplication</param-value>
-  </init-param>
-  <load-on-startup>1</load-on-startup>
-</servlet>
+/**
+ * JAX-RS Jersey Servlet.
+ */
+@Order(20)
+public static class ApiServletContributor implements IServletContributor {
 
-<servlet-mapping>
-  <servlet-name>api</servlet-name>
-  <url-pattern>/api/*</url-pattern>
-</servlet-mapping>
+  @Override
+  public void contribute(ServletContextHandler handler) {
+    ServletHolder servlet = handler.addServlet(ServletContainer.class, "/api/*");
+    servlet.setInitParameter(ServerProperties.WADL_FEATURE_DISABLE, Boolean.TRUE.toString());
+    servlet.setInitParameter(ServletProperties.JAXRS_APPLICATION_CLASS, RestApplication.class.getName());
+    servlet.setInitOrder(1); // load-on-startup
+  }
+}
 ----
 
 === Extend REST Application
@@ -128,26 +126,22 @@ The `HttpServerRunContextFilter` or `HttpRunContextFilter` can be used to interc
 The `HttpRunContextFilter` on the other hand does not provide session support and is always stateless.
 
 Therefore, a REST resource implementation is not required to deal with setting up a RunContext to wrap the request within each method.
-The filter must be added in the `web.xml` configuration file and should be configured to be called after the authentication filter.
+The filter must be added via `IServletFilterContributor` and should be configured to be called after the authentication filter (set `@Order` appropriately).
 The filter expects that the authentication has been performed and that a `subject` is available (JAAS context).
 All following filters and servlets and thus also the REST resources run automatically in the correct context.
 
-[source,xml]
-.web.xml registration example for HttpServerRunContextFilter.
+[source,java]
+.Registration example for HttpServerRunContextFilter.
 ----
-<filter>
-   <filter-name>HttpServerRunContextFilter</filter-name>
-   <filter-class>org.eclipse.scout.rt.server.context.HttpServerRunContextFilter</filter-class>
-   <init-param>
-     <param-name>session</param-name>
-     <param-value>false</param-value>
-   </init-param>
- </filter>
+@Order(40)
+public static class HttpServerRunContextFilterContributor implements IServletFilterContributor {
 
-<filter-mapping>
-  <filter-name>HttpServerRunContextFilter</filter-name>
-  <url-pattern>/api/*</url-pattern>
-</filter-mapping>
+  @Override
+  public void contribute(ServletContextHandler handler) {
+    FilterHolder filter = handler.addFilter(HttpServerRunContextFilter.class, "/api/*", null);
+    filter.setInitParameter("session", "false");
+  }
+}
 ----
 
 Beside the `subject` and other attributes the `HttpServerRunContextFilter` and `HttpRunContextFilter` setup the Correlation ID, as well as the locale.
@@ -308,20 +302,19 @@ include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclips
 ----
 <1> Implement the same `userId` Lookup as in the `CancellationResource`.
 
-Finally, declare the servlet filter in your `web.xml`:
+Finally, register servlet filter via `IServletFilterContributor` (set `@Order` appropriately):
 
-[source,xml]
-.web.xml registration example for RestRequestCancellationFilter.
+[source,java]
+.Registration example for RestRequestCancellationFilter.
 ----
-<filter>
-   <filter-name>RestRequestCancellationFilter</filter-name>
-   <filter-class>org.eclipse.scout.docs.snippets.rest.RestRequestCancellationServletFilter</filter-class>
- </filter>
+@Order(45)
+public static class CancellationFilterContributor implements IServletFilterContributor {
 
-<filter-mapping>
-  <filter-name>RestRequestCancellationFilter</filter-name>
-  <url-pattern>/api/*</url-pattern>
-</filter-mapping>
+  @Override
+  public void contribute(ServletContextHandler handler) {
+    handler.addFilter(RestRequestCancellationServletFilter.class, "/api/*", null);
+  }
+}
 ----
 
 IMPORTANT: Make sure the cancellation filter is registered after the HttpServerRunContextFilter.

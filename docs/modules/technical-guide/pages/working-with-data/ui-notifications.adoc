@@ -87,6 +87,7 @@ Since UI notifications require non-blocking I/O, you also have to activate Servl
 
 This also requires all filters and the Jersey servlet to support asynchronous processing.
 To enable that, you need to add `<async-supported>true</async-supported>` to the Jersey servlet and the filters for that servlet in the `web.xml`.
+When using `org.eclipse.scout.rt.app.Application` async is enabled by default.
 
 === HTTP/2
 

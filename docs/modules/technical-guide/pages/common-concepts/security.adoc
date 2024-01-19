@@ -54,58 +54,12 @@ If the validation fails, a corresponding error message is logged to the server a
 First the existence of the `HttpOnly` flag is checked. The servlet container will then add this flag to the `Set-Cookie` HTTP response header. If the user agent supports this flag, the cookie cannot be accessed through a client side script. As a result even if a cross-site scripting (XSS) flaw exists and a user accidentally accesses a link that exploits this flaw, the user agent will not reveal the cookie to a third party.
 For a list of user agents supporting this feature please refer to https://www.owasp.org/index.php/HTTPOnly#Browsers_Supporting_HttpOnly[OWASP].
 
-It is recommended to always enable this flag.
-
-Since Java Servlet 3.0 specification this property can be set in the configuration in the deployment descriptor `WEB-INF/web.xml`:
-
-[source,xml]
-----
-<?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee  http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
-         version="4.0"
-         metadata-complete="true">
-  ...
-  <session-config>
-    ...
-    <cookie-config>
-      <http-only>true</http-only> <!--1-->
-      ...
-    </cookie-config>
-    ...
-  </session-config>
-  ...
-</web-app>
-----
-<1> The HttpOnly flag activated
+This flag is enabled by default via `scout.app.sessionCookieConfigHttpOnly`.
 
 === Secure
 Second the existence of the `Secure` flag is checked. The servlet container will then add this flag to the `Set-Cookie` HTTP response header. The purpose of the secure flag is to prevent cookies from being observed by unauthorized parties due to the transmission of a cookie in clear text. Therefore, setting this flag will prevent the user agent from transmitting the session id over an unencrypted channel.
 
-Since Java Servlet 3.0 specification this property can be set in the configuration in the deployment descriptor `WEB-INF/web.xml`:
-
-[source,xml]
-----
-<?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
-         version="4.0"
-         metadata-complete="true">
-  ...
-  <session-config>
-    ...
-    <cookie-config>
-      <secure>true</secure> <!--1-->
-      ...
-    </cookie-config>
-    ...
-  </session-config>
-  ...
-</web-app>
-----
-<1> The Secure flag activated
+This flag is enabled by default for non-development builds via `scout.app.sessionCookieConfigSecure`.
 
 This of course only makes sense if the application is exposed to the end user using an encrypted channel like https://en.wikipedia.org/wiki/HTTPS[HTTPS] (which is strongly recommended).
 
@@ -115,7 +69,8 @@ Because of this the validation assumes that the channel from the user agent to t
 
 `scout.auth.cookieSessionValidateSecure=false`
 
-This skips the `Secure` flag check completely. In this scenario (not using https) it is also required to remove the secure tag from the cookie config in the `WEB-INF/web.xml`.
+This skips the `Secure` flag check completely.
+In this scenario (not using https) it is also required to set `scout.app.sessionCookieConfigSecure` to `false`.
 
 
 == Secure Output
