@@ -190,47 +190,6 @@ org.eclipse.jdt.core.compiler.processAnnotations=enabled
 </dependency>
 // end::jaxws.pom.dependency.cxf[]
 
-// tag::jaxws.webxml.metro[]
-<!-- JAX-WS METRO not bundled with JRE -->
-<context-param>
-  <param-name>com.sun.xml.ws.server.http.publishStatusPage</param-name>
-  <param-value>true</param-value>
-</context-param>
-<context-param>
-  <param-name>com.sun.xml.ws.server.http.publishWSDL</param-name>
-  <param-value>true</param-value>
-</context-param>
-<listener>
-  <listener-class>com.sun.xml.ws.transport.http.servlet.WSServletContextListener</listener-class>
-</listener>
-<servlet>
-  <servlet-name>jaxws</servlet-name>
-  <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
-</servlet>
-<servlet-mapping>
-  <servlet-name>jaxws</servlet-name>
-  <url-pattern>/jaxws/*</url-pattern> <1>
-</servlet-mapping>
-// end::jaxws.webxml.metro[]
-
-// tag::jaxws.webxml.cxf[]
-<!-- JAX-WS Apache CXF -->
-<servlet>
-  <display-name>CXF Servlet</display-name>
-  <servlet-name>jaxws</servlet-name>
-  <servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
-  <init-param>
-    <param-name>config-location</param-name>
-    <param-value>/WEB-INF/cxf-jaxws.xml</param-value> <1>
-  </init-param>
-  <load-on-startup>1</load-on-startup>
-</servlet>
-<servlet-mapping>
-  <servlet-name>jaxws</servlet-name>
-  <url-pattern>/jaxws/*</url-pattern> <2>
-</servlet-mapping>
-// end::jaxws.webxml.cxf[]
-
 // tag::jaxws_pingws_handler_file[]
 <handler-chains xmlns="http://java.sun.com/xml/ns/javaee">
   <handler-chain>

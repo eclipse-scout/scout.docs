@@ -36,37 +36,24 @@ org.eclipse.scout.hellojs.ui.html/pom.xml
 
 == REST Servlet
 
-Register the REST servlet in the web.xml of `org.eclipse.scout.hellojs.ui.html.app.dev` and `org.eclipse.scout.hellojs.ui.html.app.war`.
+Register the REST servlet via `IServletContributor` (i.e. `AppServletContributors` in `org.eclipse.scout.hellojs.ui.html.app`).
 
-- org.eclipse.scout.hellojs.ui.html.app.dev/src/main/webapp/WEB-INF/web.xml
-- org.eclipse.scout.hellojs.ui.html.app.war/src/main/webapp/WEB-INF/web.xml
-
-[source,xml]
+[source,java]
 ----
-<?xml version="1.0" encoding="UTF-8"?>
-<web-app>
-  ...
-  <!-- JAX-RS Jersey Servlet -->
-  <servlet>
-    <servlet-name>apiServlet</servlet-name>
-    <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
-    <init-param>
-      <param-name>jakarta.ws.rs.Application</param-name>
-      <param-value>org.eclipse.scout.rt.rest.RestApplication</param-value>
-    </init-param>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
+/**
+ * JAX-RS Jersey Servlet.
+ */
+@Order(20)
+public static class ApiServletContributor implements IServletContributor {
 
-  ...
-
-  <servlet-mapping>
-    <servlet-name>apiServlet</servlet-name>
-    <url-pattern>/api/*</url-pattern>
-  </servlet-mapping>
-
-  ...
-
-</web-app>
+  @Override
+  public void contribute(ServletContextHandler handler) {
+    ServletHolder servlet = handler.addServlet(ServletContainer.class, "/api/*");
+    servlet.setInitParameter(ServerProperties.WADL_FEATURE_DISABLE, Boolean.TRUE.toString());
+    servlet.setInitParameter(ServletProperties.JAXRS_APPLICATION_CLASS, RestApplication.class.getName());
+    servlet.setInitOrder(1); // load-on-startup
+  }
+}
 ----
 
 == Provide a RESTful service
@@ -100,7 +87,8 @@ public class ServerStateService implements IRestResource {
   }
 }
 ----
-<1> The path under which the service will be provided. Note: the full path is `/api/serverstatus` since the apiServlet is mapped to `/api/*` in the web.xml.
+
+<1> The path under which the service will be provided. Note: the full path is `/api/serverstatus` since the apiServlet is mapped to `/api/*` in the `AppServletContributors` class.
 
 === Test if the service is up an running
 Start the dev ui application `org.eclipse.scout.hellojs.ui.html.app.dev/[org.eclipse.scout.hellojs] dev ui.launch`.
