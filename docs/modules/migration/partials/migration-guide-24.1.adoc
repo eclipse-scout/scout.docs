@@ -646,3 +646,22 @@ During form-based login, for second-factor enabled accounts, a token is requeste
 ----
 <scout:message style="tag" key="ui.Login" key="ui.LoginFailed" key="ui.User" key="ui.Password" key="ui.Token" />
 ----
+
+== UiTextContributor
+
+The interface org.eclipse.scout.rt.ui.html.IUiTextContributor has changed its signature. The function `contributeUiTextKeys` has been renamed to `contribute`.
+All implementations of this interface must rename this method as well.
+
+== TypeScript CodeType API Changes
+
+The TypeScript API to access CodeTypes and Codes has been streamlined and simplified:
+
+* `codes` utility
+** `codes.get`: only accepts one parameter now (for the CodeType class or CodeType id). Accordingly, it no longer returns a `Code` but a `CodeType` instead. Furthermore, it no longer throws an error if the `CodeType` could not be found but returns null instead. To access a `Code` within a `CodeType` use `codes.get(MyCodeType).get(myCodeId)`.
+** `codes.optGet` and `codes.codeType`: has been deleted in favor of the new codes.get (see above).
+* `CodeType`
+** `CodeType.add`: has been marked protected as it should not be called from the outside.
+** `CodeType.get`: Throws no error anymore if the requested Code could not be found but returns null instead.
+** `CodeType.optGet`: Has been deleted as `CodeType.get` can be used now (see above).
+** `CodeType.codes`: It is no longer a property but a function instead which by default returns all `Codes` of the `CodeType` recursively. It has a parameter which allows to only return the root `Codes`.
+** `CodeType.getCodes`: has been removed. Use the new function `CodeType.codes()` instead (see above).

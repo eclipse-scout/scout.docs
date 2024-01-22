@@ -98,3 +98,9 @@ With this release it was improved so that it can be used in a productive environ
 The Scout Application class (`org.eclipse.scout.rt.app.Application`) contains a main-method which may be started directly and itself starts an embedded Jetty server.
 Therefore, an application server isn't required anymore.
 See the migration guide for further information.
+
+== CodeTypes in TypeScript
+
+Scout now contains a REST endpoint that returns CodeTypes. By default, only CodeTypes marked with `@ApiExposed` are returned (opt-in).
+Such CodeTypes can then be loaded by the Scout TypeScript code to be reused in the UI.
+Please refer to the xref:technical-guide:working-with-data/code-type.adoc#codetypes-in-typescript[documentation] for more details and examples.

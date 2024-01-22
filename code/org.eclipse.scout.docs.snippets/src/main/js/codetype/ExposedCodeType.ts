@@ -7,10 +7,13 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {Code, CodeType} from '@eclipse-scout/core';
-import {LightBlueCode} from './LightBlueCode';
 
-export class ColorsCodeType extends CodeType<string> {
-  black: Code<string>;
-  lightBlue: LightBlueCode;
+// @ts-expect-error
+//tag::ExposedCodeType[]
+import {Code, CodeType} from '@eclipse-scout/core';
+
+export class ExposedCodeType extends CodeType<string> {
+  first: Code<string>; // <1>
+  second: Code<string>; // <1>
 }
+//end::ExposedCodeType[]

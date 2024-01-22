@@ -1,4 +1,5 @@
 = Code Type
+
 include::common:partial$_header.adoc[]
 
 A CodeType is a structure to represent a tree key-code association. They are used in SmartField and SmartColumn.
@@ -7,6 +8,7 @@ A CodeType is a structure to represent a tree key-code association. They are use
 * extends: `AbstractCodeType<T>`
 
 == Description
+
 CodeTypes are used in https://wiki.eclipse.org/Scout/Concepts/SmartField[SmartField] to let the user choose between a finite list of values. The value stored by the field corresponds to the key of the selected code.
 
 image::common:Scout_SmartField_Hierarchy_SWT.png[]
@@ -33,7 +35,9 @@ There is no obligation to have the same type for the Id between the codes of a C
 
 == Using a CodeType
 
-=== SmartField or SmartColumn
+=== In Java
+
+==== SmartField or SmartColumn
 
 CodeType in a SmartField (or SmartColumn).
 
@@ -44,7 +48,7 @@ include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclips
 
 If the SmartField (or SmartColumn) works with a CodeType, a specific LookupCall is instantiated to get the LookupRows based on the Codes contained in a CodeType.
 
-=== Accessing a code directly
+==== Accessing a code directly
 
 Scout-runtime will handle the instantiation and the caching of CodeTypes.
 
@@ -53,6 +57,96 @@ This function returns the text corresponding to the key using a CodeType:
 [source,java]
 ----
 include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/codetype/CodetypeExamples.java[tags=getCodeText]
+----
+
+[#codetypes-in-typescript]
+=== In TypeScript
+
+CodeTypes can also be used in TypeScript. Typical examples are `CodeLookupCall`, `SmartField` or `SmartColumn`.
+
+Generally there are two options: either the CodeTypes and their corresponding Codes are managed directly in TypeScript (then there is no such CodeType in Java) or a Java CodeType should be made available in the TypeScript code as well.
+
+==== TypeScript only
+
+CodeTypes can be managed using the `codes` utility. See the following example:
+
+[source,typescript]
+----
+import {codes} from '@eclipse-scout/core';
+
+codes.init([{
+  id: '1',
+  codes: [{
+    id: 'code0',
+    children: [{ id: 'code01' }, { id: 'code02' }]
+  }]
+}]);
+codes.add({
+  id: '2',
+  codes: [{
+    id: '2.1'
+  }, {
+    id: '2.2'
+  }]
+});
+
+// returns 3 codes (default is recursive): code0, code01 and code02
+codes.get('1').codes();
+
+codes.remove(['1', '2']);
+
+----
+
+If there is no CodeType in the JavaCode, it would of course also be possible to use other TypeScript specific structures like https://www.typescriptlang.org/docs/handbook/enums.html[enums] instead of Scout CodeTypes.
+To use CodeTypes is especially handy if they already exist in the JavaCode and the structure and values should be reused.
+
+==== Reuse a Java CodeType in TypeScript
+
+The easiest way to expose a Java CodeType to TypeScript is by adding the `@ApiExposed` annotation to it as shown in this example:
+
+[source,java]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/codetype/ExposedCodeType.java[tags=ExposedCodeType]
+----
+
+<1> Marks the CodeType to be exposed by the Scout API. Such CodeTypes may then be accessed using the REST API. For more control over the exposed CodeTypes create an implementation of `IApiExposedCodeTypeContributor`.
+<2> Specifies the TypeScript `objectType` for the CodeType. Only necessary if there is a dedicated TypeScript class for this CodeType.
+<3> The IDs must be serialized to Strings to expose them in the REST API. This works most straight forward, if String IDs are used in Java too. If this is not possible, the Ids will be converted using `toString`. If this is not sufficient you can implement an `ICodeTypeDoIdConverter` and manually convert your IDs.
+
+On the TypeScript side you have to specify the URL to the API that exposes the marked CodeType so that they can be fetched. For this the URL to codes is added to the init config of your TypeScript App:
+
+[source,typescript]
+----
+new App().init({
+  bootstrap: {
+    textsUrl: 'texts.json',
+    permissionsUrl: 'api/permissions',
+    codesUrl: 'api/codes'
+  }
+});
+----
+
+Because in the example above a custom `objectType` has been specified, a corresponding CodeType class must be created in TypeScript. This is only required if you need some custom fields or functions on your CodeType, but it is often quite handy.
+
+[source,typescript]
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/js/codetype/ExposedCodeType.ts[tags=ExposedCodeType]
+----
+
+<1> Optional: A field that matches the simple classname of the Java Code (lowercase first letter, no 'Code' suffix) can be added to the TypeScript CodeType. If such a field is available, the corresponding Code is automatically stored in that field. This makes accessing specific Codes easier (see examples below). If the automatic name matching should not be used the Java Code can be annotated with `@FieldName` to explicitly specify the name of the TypeScript field.
+
+NOTE: All attributes from the Java CodeType are automatically applied to the TypeScript CodeType. So there is no need to repeat any ID values, texts or other configuration of the Java code!
+
+It is then possible to access the CodeType in TypeScript. Some examples:
+
+[source,typescript]
+----
+import {codes} from '@eclipse-scout/core';
+import {ExposedCodeType} from '../index';
+
+let idOfFirstCode = codes.get(ExposedCodeType).first.id; // Access CodeType by class and Code by field. Returns '1'.
+let isSecondCodeActive = codes.get('10000').get('2').active; // Access CodeType and Code by id. Returns true.
+let allCodesRecursively = codes.get(ExposedCodeType).codes(); // Access all codes of a CodeType. Returns two Codes.
 ----
 
 == Static CodeType
@@ -68,10 +162,17 @@ See the Java Code of a simple `YesOrNoCodeType` having just two codes:
 * `YesOrNoCodeType.YesCode`
 * `YesOrNoCodeType.NoCode`
 
-=== With the SDK
+=== With the IDE
 
 The SDK provides some help to generate CodeTypes and Codes.
-Use File -> New -> Scout -> Scout Code Type to generate a new code.
+
+==== Eclipse
+
+Use File -> New -> Scout -> Scout Code Type.
+
+==== IntelliJ
+
+Right-click on a Java package (production, not test) -> New -> Scout Element -> Code Type.
 
 == Dynamic CodeType
 
