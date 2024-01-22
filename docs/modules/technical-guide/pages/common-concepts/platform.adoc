@@ -481,11 +481,6 @@ Specifies if the Scout application should use TLS. If true, the server must eith
 +
 Data type: Boolean
 
-`scout.app.webappDirectory` ::
-The folder to find the webapp resources. The default value is `/src/main/webapp/`
-+
-Data type: File
-
 `scout.application.name` ::
 The display name of the application. Used e.g. in the info form and the diagnostic views. The default value is `unknown`.
 +

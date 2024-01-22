@@ -37,7 +37,7 @@ public final class ContactsServerServletContributors {
     public void contribute(ServletContextHandler handler) {
       FilterHolder filter = handler.addFilter(ServerServletFilter.class, "/*", null);
       // values needs to be defined relative to application root path (which isn't always the same as servlet root path)
-      List<String> filterExcludes = Arrays.asList("/jaxws/*");
+      List<String> filterExcludes = Arrays.asList();
       filter.setInitParameter("filter-exclude", StringUtility.join("\n", filterExcludes));
     }
   }
