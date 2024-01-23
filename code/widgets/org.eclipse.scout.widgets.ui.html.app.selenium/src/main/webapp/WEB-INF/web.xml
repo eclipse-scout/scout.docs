@@ -19,6 +19,7 @@
 
   <!-- Platform Startup listener -->
   <listener>
+    <!--suppress DeprecatedClassUsageInspection -->
     <listener-class>org.eclipse.scout.rt.server.commons.WebappEventListener</listener-class>
   </listener>
 
