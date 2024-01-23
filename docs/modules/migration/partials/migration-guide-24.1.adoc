@@ -577,6 +577,30 @@ For the UI server's `pom.xml`, additionally add the following section within the
 Now when building your application, this should result in two `.war` files that can be deployed to an application server.
 As mentioned before, this might not be supported anymore in a future release of Scout.
 
+=== Deprecation of WebappEventListener
+
+`org.eclipse.scout.rt.server.commons.WebappEventListener` was responsible for the following tasks when the servlet context was initialized/destroyed:
+
+* Starting/stopping the Scout plattform
+* Setting context path to PlatformIdentifier
+* Registering the servlet context as accessible bean (`ServletContext`)
+
+The first task remains, the other two were removed (see next two sections).
+
+`WebappEventListener` is still available and might be used for legacy applications running within an application server (see <<migration-guide-24-1-jetty-removal-of-war-modules>>),
+but it is marked as deprecated and might be removed in a future release.
+
+==== Removal of PlatformIdentifier
+
+`org.eclipse.scout.rt.platform.context.PlatformIdentifier` was removed with replacement.
+Because deploying to an application server is legacy only, each application will have its own Java runtime and `NodeIdentifier` can be used instead.
+
+==== ServletContext not accessible via BEANS.get/.opt anymore
+
+ServletContext could be accessed via BEANS.get/.opt so far because it was registered via `WebappEventListener`.
+It was only used within `ServletContextMimeTypeDetector` to ask the servlet context for its mime type mapping.
+This mime type detector was removed too.
+
 == Add streaming support to hashing (SecurityUtility)
 
 `org.eclipse.scout.rt.platform.security.SecurityUtility` supports streaming:
