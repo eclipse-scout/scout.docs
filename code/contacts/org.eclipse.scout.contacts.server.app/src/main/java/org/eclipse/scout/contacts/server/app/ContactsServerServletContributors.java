@@ -21,6 +21,7 @@ import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.server.ServiceTunnelServlet;
 import org.eclipse.scout.rt.server.admin.diagnostic.DiagnosticServlet;
+import org.eclipse.scout.rt.server.commons.healthcheck.HealthCheckServlet;
 
 /**
  * {@link IServletContributor} and {@link IServletFilterContributor} for contacts server.
@@ -37,7 +38,7 @@ public final class ContactsServerServletContributors {
     public void contribute(ServletContextHandler handler) {
       FilterHolder filter = handler.addFilter(ServerServletFilter.class, "/*", null);
       // values needs to be defined relative to application root path (which isn't always the same as servlet root path)
-      List<String> filterExcludes = Arrays.asList();
+      List<String> filterExcludes = Arrays.asList("/status");
       filter.setInitParameter("filter-exclude", StringUtility.join("\n", filterExcludes));
     }
   }
@@ -52,6 +53,15 @@ public final class ContactsServerServletContributors {
   }
 
   @Order(20)
+  public static class StatusServletContributor implements IServletContributor {
+
+    @Override
+    public void contribute(ServletContextHandler handler) {
+      handler.addServlet(HealthCheckServlet.class, "/status");
+    }
+  }
+
+  @Order(30)
   public static class DiagnosticServletContributor implements IServletContributor {
 
     @Override
