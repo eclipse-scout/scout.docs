@@ -601,6 +601,22 @@ ServletContext could be accessed via BEANS.get/.opt so far because it was regist
 It was only used within `ServletContextMimeTypeDetector` to ask the servlet context for its mime type mapping.
 This mime type detector was removed too.
 
+=== Cleanup/Improving of NodeIdentifier#compute
+
+`NodeIdentifier` previously used the first property with a value according to the following priority:
+
+. `scout.nodeId`
+. `weblogic.Name`
+. `jboss.node.name`
+
+As fallback a newly generated UUID was used.
+
+Only the first one (`scout.nodeId`) is considered now because not running within an application server anymore.
+
+Newly added was the computation of a node identifier in development mode.
+If no `scout.nodeId` is set, the local host name and the port of the Scout application is used as node identifier (e.g. `mycomputer:8082`).
+Therefore, for development mode, setting `scout.nodeId` in `config.properties` is not required anymore to have a static node identifier.
+
 == Add streaming support to hashing (SecurityUtility)
 
 `org.eclipse.scout.rt.platform.security.SecurityUtility` supports streaming:
