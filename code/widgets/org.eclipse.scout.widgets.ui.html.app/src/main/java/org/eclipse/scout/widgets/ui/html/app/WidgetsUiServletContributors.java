@@ -21,6 +21,7 @@ import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.config.CONFIG;
 import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.server.commons.HttpSessionMutex;
+import org.eclipse.scout.rt.server.commons.healthcheck.HealthCheckServlet;
 import org.eclipse.scout.rt.ui.html.UiHtmlConfigProperties.UiServletMultipartConfigProperty;
 import org.eclipse.scout.rt.ui.html.UiServlet;
 import org.eclipse.scout.widgets.ui.html.WidgetsUiServletFilter;
@@ -50,6 +51,7 @@ public final class WidgetsUiServletContributors {
       FilterHolder filter = handler.addFilter(WidgetsUiServletFilter.class, "/*", null);
       // values needs to be defined relative to application root path (which isn't always the same as servlet root path)
       List<String> filterExcludes = Arrays.asList(
+          "/status",
           "/favicon/*",
           "/fonts/*",
           "/logo.png",
@@ -70,6 +72,15 @@ public final class WidgetsUiServletContributors {
     public void contribute(ServletContextHandler handler) {
       ServletHolder servletHolder = handler.addServlet(UiServlet.class, "/*");
       servletHolder.getRegistration().setMultipartConfig(CONFIG.getPropertyValue(UiServletMultipartConfigProperty.class));
+    }
+  }
+
+  @Order(20)
+  public static class StatusServletContributor implements IServletContributor {
+
+    @Override
+    public void contribute(ServletContextHandler handler) {
+      handler.addServlet(HealthCheckServlet.class, "/status");
     }
   }
 }
