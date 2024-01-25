@@ -21,4 +21,8 @@ public interface ICalendarService extends IService {
   ICalendarDescriptor getBusinessCalendar();
 
   ICalendarDescriptor getPrivateCalendar();
+
+  ICalendarDescriptor getLisaTurnerCalendar();
+
+  ICalendarDescriptor getJohnDoeCalendar();
 }

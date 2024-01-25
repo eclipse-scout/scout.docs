@@ -11,12 +11,15 @@ package org.eclipse.scout.widgets.client.ui.forms;
 
 import static java.util.Calendar.*;
 
+import java.security.AccessController;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+
+import javax.security.auth.Subject;
 
 import org.eclipse.scout.rt.client.IClientSession;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
@@ -304,6 +307,43 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
             protected Set<? extends IMenuType> getConfiguredMenuTypes() {
               return CollectionUtility.hashSet(CalendarMenuType.EmptySpace);
             }
+          }
+        }
+
+        public class ExternalItemProvider extends AbstractCalendarItemProvider {
+
+          @Override
+          protected void execLoadItems(Date minDate, Date maxDate, Set<ICalendarItem> result) {
+            String cssClass = "calendar-task";
+            java.util.Calendar cal = getInstance();
+            DateUtility.truncCalendarToHour(cal);
+            Date start, end;
+
+            cal.set(HOUR_OF_DAY, 16);
+            start = cal.getTime();
+            cal.add(MINUTE, 30);
+            end = cal.getTime();
+            CalendarAppointment calendarAppointment = new CalendarAppointment(7L, 2L, start, end, false, null, "Hair dresser", null, cssClass);
+            calendarAppointment.setSubjectLabel("Out of office");
+            calendarAppointment.setCalendarId(BEANS.get(ICalendarService.class).getJohnDoeCalendar().getCalendarId());
+            calendarAppointment.getDescriptionElements().add(BEANS.get(CalendarItemDescriptionElement.class).withText("At THE LINE, Zurich").withIconId(Icons.World));
+            result.add(calendarAppointment);
+
+            cal.add(DAY_OF_YEAR, 3);
+            cal.set(HOUR_OF_DAY, 18);
+            cal.set(MINUTE, 0);
+            start = cal.getTime();
+            cal.add(HOUR_OF_DAY, 3);
+            end = cal.getTime();
+            String userName = CollectionUtility.firstElement(Subject.getSubject(AccessController.getContext()).getPrincipals()).getName();
+            calendarAppointment = new CalendarAppointment(8L, 2L, start, end, false, null, "Dinner with " + userName, null, cssClass);
+            calendarAppointment.setSubjectLabel("Private Appointment");
+            calendarAppointment.setCalendarId(BEANS.get(ICalendarService.class).getLisaTurnerCalendar().getCalendarId());
+            calendarAppointment.getDescriptionElements().add(BEANS.get(CalendarItemDescriptionElement.class).withText("Lucky Dumpling, Zurich").withIconId(Icons.World));
+            calendarAppointment.getDescriptionElements().add(BEANS.get(CalendarItemDescriptionElement.class).withText(userName).withIconId(Icons.PersonSolid));
+            result.add(calendarAppointment);
+
+            result.addAll(m_configuredAppointments);
           }
         }
 
