@@ -93,10 +93,12 @@ public class CalendarService implements ICalendarService {
     return m_privateCalendar.get();
   }
 
+  @Override
   public ICalendarDescriptor getLisaTurnerCalendar() {
     return m_lisaTurnerCalendar.get();
   }
 
+  @Override
   public ICalendarDescriptor getJohnDoeCalendar() {
     return m_johnDoeCalendar.get();
   }
