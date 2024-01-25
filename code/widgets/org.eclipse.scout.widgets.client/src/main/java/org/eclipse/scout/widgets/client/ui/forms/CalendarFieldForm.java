@@ -321,7 +321,7 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
 
             cal.set(HOUR_OF_DAY, 16);
             start = cal.getTime();
-            cal.add(MINUTE, 30);
+            cal.add(HOUR_OF_DAY, 1);
             end = cal.getTime();
             CalendarAppointment calendarAppointment = new CalendarAppointment(7L, 2L, start, end, false, null, "Hair dresser", null, cssClass);
             calendarAppointment.setSubjectLabel("Out of office");
