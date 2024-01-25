@@ -321,15 +321,9 @@ The following rules apply, when such properties are read:
 ** `my.map.property[map-key-02]=overridden-value-02`
 ** Results in the value `overridden-value-02 for `map-key-02`
 
-The parsing of JSON object strings is abstracted away using the new `org.eclipse.scout.rt.platform.config.IJsonPropertyReader` interface as parsing JSON strings is not implemented in the platform itself.
-However, there is a default implementation of this interface available in org.eclipse.scout.rt.dataobject which uses the `org.eclipse.scout.rt.platform.dataobject.IDataObjectMapper` feature to deserialize the JSON string into a Java Map.
-In order to use this, an implementation of the `IDataObjectMapper` interface is also required (e.g. `org.eclipse.scout.rt.jackson.dataobject.JacksonDataObjectMapper`).
-So in case you want to use this feature, you have to define
+To parse the JSON object strings the `org.eclipse.scout.json` (lightweight JSON parsing) module is used as the bean manager is not yet available during configuration property initialization.
+Otherwise `org.eclipse.scout.rt.dataobject`/`org.eclipse.scout.rt.jackson` would be used if the bean manager would be available yet (more sophisticated JSON parsing modules).
 
-* org.eclipse.scout.rt:org.eclipse.scout.rt.dataobject
-* org.eclipse.scout.rt:org.eclipse.scout.rt.jackson
-
-as new dependencies of your application aggregator module (if they are not already present).
 
 
 A properties file may import other config files from the classpath or any other absolute URL. This is done using the special key `import`. It can be a single value or a list or map (e.g. `import[anyKey or number]`:
