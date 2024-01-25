@@ -326,7 +326,7 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
             CalendarAppointment calendarAppointment = new CalendarAppointment(7L, 2L, start, end, false, null, "Hair dresser", null, cssClass);
             calendarAppointment.setSubjectLabel("Out of office");
             calendarAppointment.setCalendarId(BEANS.get(ICalendarService.class).getJohnDoeCalendar().getCalendarId());
-            calendarAppointment.getDescriptionElements().add(BEANS.get(CalendarItemDescriptionElement.class).withText("At THE LINE, Zurich").withIconId(Icons.World));
+            calendarAppointment.getDescriptionElements().add(BEANS.get(CalendarItemDescriptionElement.class).withText("THE LINE, Zurich").withIconId(Icons.World));
             result.add(calendarAppointment);
 
             cal.add(DAY_OF_YEAR, 3);
