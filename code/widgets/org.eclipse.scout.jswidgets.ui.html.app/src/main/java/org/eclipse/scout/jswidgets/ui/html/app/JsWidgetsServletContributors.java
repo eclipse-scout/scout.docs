@@ -14,14 +14,10 @@ import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.scout.rt.jetty.IServletContributor;
 import org.eclipse.scout.rt.jetty.IServletFilterContributor;
 import org.eclipse.scout.rt.platform.Order;
-import org.eclipse.scout.rt.platform.config.CONFIG;
 import org.eclipse.scout.rt.rest.RestApplication;
-import org.eclipse.scout.rt.server.commons.HttpSessionMutex;
 import org.eclipse.scout.rt.server.commons.context.HttpRunContextFilter;
-import org.eclipse.scout.rt.server.commons.healthcheck.HealthCheckServlet;
-import org.eclipse.scout.rt.server.commons.servlet.filter.gzip.GzipServletFilter;
-import org.eclipse.scout.rt.ui.html.UiHtmlConfigProperties.UiServletMultipartConfigProperty;
-import org.eclipse.scout.rt.ui.html.UiServlet;
+import org.eclipse.scout.rt.ui.html.app.UiServletContributors.GzipFilterContributor;
+import org.eclipse.scout.rt.ui.html.app.UiServletContributors.UiServletContributor;
 import org.glassfish.jersey.server.ServerProperties;
 import org.glassfish.jersey.servlet.ServletContainer;
 import org.glassfish.jersey.servlet.ServletProperties;
@@ -34,25 +30,12 @@ public final class JsWidgetsServletContributors {
   private JsWidgetsServletContributors() {
   }
 
-  @Order(10)
-  public static class HttpSessionMutexFilterContributor implements IServletFilterContributor {
+  // no auth filter on / for UiServlet required
 
-    @Override
-    public void contribute(ServletContextHandler handler) {
-      handler.addEventListener(new HttpSessionMutex());
-    }
-  }
-
-  @Order(20)
-  public static class GzipFilterContributor implements IServletFilterContributor {
-
-    @Override
-    public void contribute(ServletContextHandler handler) {
-      handler.addFilter(GzipServletFilter.class, "/*", null);
-    }
-  }
-
-  @Order(30)
+  /**
+   * After {@link GzipFilterContributor}.
+   */
+  @Order(4000)
   public static class ApiRunContextFilterContributor implements IServletFilterContributor {
 
     @Override
@@ -61,20 +44,12 @@ public final class JsWidgetsServletContributors {
     }
   }
 
-  @Order(10)
-  public static class UiServletContributor implements IServletContributor {
-
-    @Override
-    public void contribute(ServletContextHandler handler) {
-      ServletHolder servletHolder = handler.addServlet(UiServlet.class, "/*");
-      servletHolder.getRegistration().setMultipartConfig(CONFIG.getPropertyValue(UiServletMultipartConfigProperty.class));
-    }
-  }
-
   /**
    * JAX-RS Jersey Servlet.
+   * <p>
+   * After {@link UiServletContributor}.
    */
-  @Order(20)
+  @Order(3000)
   public static class ApiServletContributor implements IServletContributor {
 
     @Override
@@ -83,15 +58,6 @@ public final class JsWidgetsServletContributors {
       servlet.setInitParameter(ServerProperties.WADL_FEATURE_DISABLE, Boolean.TRUE.toString());
       servlet.setInitParameter(ServletProperties.JAXRS_APPLICATION_CLASS, RestApplication.class.getName());
       servlet.setInitOrder(1); // load-on-startup
-    }
-  }
-
-  @Order(30)
-  public static class StatusServletContributor implements IServletContributor {
-
-    @Override
-    public void contribute(ServletContextHandler handler) {
-      handler.addServlet(HealthCheckServlet.class, "/status");
     }
   }
 }
