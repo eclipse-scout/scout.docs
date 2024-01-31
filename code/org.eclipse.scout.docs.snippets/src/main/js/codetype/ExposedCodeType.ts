@@ -9,11 +9,12 @@
  */
 
 // @ts-expect-error
-//tag::ExposedCodeType[]
+// tag::ExposedCodeType[]
 import {Code, CodeType} from '@eclipse-scout/core';
 
 export class ExposedCodeType extends CodeType<string> {
   first: Code<string>; // <1>
   second: Code<string>; // <1>
 }
-//end::ExposedCodeType[]
+
+// end::ExposedCodeType[]
