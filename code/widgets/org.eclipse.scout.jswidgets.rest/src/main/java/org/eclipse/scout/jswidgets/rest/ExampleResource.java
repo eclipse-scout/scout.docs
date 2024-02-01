@@ -11,6 +11,17 @@ package org.eclipse.scout.jswidgets.rest;
 
 import java.util.concurrent.TimeUnit;
 
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.WebApplicationException;
+import jakarta.ws.rs.core.MediaType;
+
 import org.eclipse.scout.rt.dataobject.exception.AccessForbiddenException;
 import org.eclipse.scout.rt.dataobject.exception.ResourceNotFoundException;
 import org.eclipse.scout.rt.platform.exception.ProcessingException;
@@ -25,17 +36,6 @@ import org.eclipse.scout.rt.rest.IRestResource;
 import org.eclipse.scout.rt.rest.RestApplication;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
-
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.DELETE;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.PUT;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.WebApplicationException;
-import jakarta.ws.rs.core.MediaType;
 
 /**
  * This is an example of a rest service provider. Implementing {@link IRestResource} makes sure the resource is
