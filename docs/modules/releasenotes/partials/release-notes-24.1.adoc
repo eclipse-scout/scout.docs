@@ -67,7 +67,6 @@ When using `https` also https://en.wikipedia.org/wiki/Application-Layer_Protocol
 
 For Scout 24 and newer enabling `HTTP/2` for your application is recommended. Please refer to the xref:technical-guide:user-interface/browser-support.adoc[documentation] on how to enable `HTTP/2`.
 
-
 == UI Notifications
 
 It is now possible to push notifications from the backend directly to the UI running in the browser.
@@ -104,3 +103,9 @@ See the migration guide for further information.
 Scout now contains a REST endpoint that returns CodeTypes. By default, only CodeTypes marked with `@ApiExposed` are returned (opt-in).
 Such CodeTypes can then be loaded by the Scout TypeScript code to be reused in the UI.
 Please refer to the xref:technical-guide:working-with-data/code-type.adoc#codetypes-in-typescript[documentation] for more details and examples.
+
+== Tree: Improved auto-check behavior when checking nodes
+
+When enabling `AutoCheckChildNodes` for a Tree or TreeBox widget, the behavior of automatic node checking has changed.
+The new behavior improves the consistence and represents better the real world requirements. For more details, consider
+reading the corresponding chapter in the migration guide.

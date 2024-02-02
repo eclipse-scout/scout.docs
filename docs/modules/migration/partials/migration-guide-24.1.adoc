@@ -686,3 +686,81 @@ The TypeScript API to access CodeTypes and Codes has been streamlined and simpli
 ** `CodeType.optGet`: Has been deleted as `CodeType.get` can be used now (see above).
 ** `CodeType.codes`: It is no longer a property but a function instead which by default returns all `Codes` of the `CodeType` recursively. It has a parameter which allows to only return the root `Codes`.
 ** `CodeType.getCodes`: has been removed. Use the new function `CodeType.codes()` instead (see above).
+
+== Tree: Improved auto-check behavior when checking nodes
+
+=== New behavior explained
+
+When the `autoCheckChildren` property of the Tree or TreeBox widget is set to `true` (e.g. by overriding
+`getConfiguredAutoCheckChildNodes()`) the automatic check behavior has changed.
+
+Assuming, the following Tree structure is given:
+
+[source,text]
+----
+[ ] Node A
+  [ ] Child node 1
+  [ ] Child node 2
+
+
+Legend:
+[ ] -> Node unchecked
+[-] -> Node partly-checked
+[*] -> Node checked
+----
+
+==== Example 1
+
+When checking or unchecking 'Node A' all its children are checked/unchecked too.
+
+[source,text]
+----
+[*] Node A
+  [*] Child node 1    <- Automatically checked
+  [*] Child node 2    <- Automatically checked
+----
+
+==== Example 2
+
+When some of the child nodes are checked, the parent nodes get partly-checked.
+
+[source,text]
+----
+[-] Node A            <- Partly checked
+  [*] Child node 1
+  [ ] Child node 2
+----
+
+Continuing this example, if additionally to 'Child Node 1' also 'Child node 2' gets checked,
+the parent node is checked automatically. *Attention: The mechanism of auto-checking the parent is new.
+It may break the logic in your application.*
+
+[source,text]
+----
+[*] Node A            <- Automatically checked
+  [*] Child node 1
+  [*] Child node 2
+----
+
+=== API Changes in `AbstractTree`
+
+==== `execAutoCheckChildNodes`
+
+Before this change, the auto-check logic was implemented in Java and JavaScript. In the
+`org.eclipse.scout.rt.client.ui.basic.tree.AbstractTree#execAutoCheckChildNodes` implemented the logic
+on Java side. This method was removed. The complete auto-check logic is now on JavaScript side.
+
+==== Checking all nodes
+
+To check all nodes of a tree in java, it was possible to check the root node while `autoCheckChildren` was true.
+This is no longer supported. The new best practice is to use the
+`org.eclipse.scout.rt.client.ui.basic.tree.AbstractTree#checkAllNodes` method.
+
+[source,java]
+----
+// No longer supported
+tree.setNodeChecked(tree.getRootNode(), true);
+
+// Use this
+tree.checkAllNodes();
+----
