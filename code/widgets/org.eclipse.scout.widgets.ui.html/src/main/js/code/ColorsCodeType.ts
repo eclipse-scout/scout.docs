@@ -10,7 +10,7 @@
 import {Code, CodeType} from '@eclipse-scout/core';
 import {LightBlueCode} from './LightBlueCode';
 
-export class ColorsCodeType extends CodeType<string> {
+export class ColorsCodeType extends CodeType {
   black: Code<string>;
   lightBlue: LightBlueCode;
 }
