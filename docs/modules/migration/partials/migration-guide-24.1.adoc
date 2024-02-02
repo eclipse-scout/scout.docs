@@ -749,9 +749,9 @@ It may break the logic in your application.*
 
 ==== `execAutoCheckChildNodes`
 
-Before this change, the auto-check logic was implemented in Java and JavaScript. In the
-`org.eclipse.scout.rt.client.ui.basic.tree.AbstractTree#execAutoCheckChildNodes` implemented the logic
-on Java side. This method was removed. The complete auto-check logic is now on JavaScript side.
+Before this change, the auto-check logic was implemented in Java and JavaScript. The
+`org.eclipse.scout.rt.client.ui.basic.tree.AbstractTree#execAutoCheckChildNodes` method implemented the logic
+on Java side. This method was removed. The complete auto-check logic is now only on JavaScript side.
 
 ==== Checking all nodes
 
