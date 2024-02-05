@@ -419,13 +419,10 @@ public static class UiServletContributor implements IServletContributor {
 
   @Override
   public void contribute(ServletContextHandler handler) {
-    ServletHolder servletHolder = handler.addServlet(UiServlet.class, "/*");
-    servletHolder.getRegistration().setMultipartConfig(CONFIG.getPropertyValue(UiServletMultipartConfigProperty.class)); <1>
+    handler.addServlet(UiServlet.class, "/*");
   }
 }
 ----
-
-<1> Make sure to add the multipart config.
 
 Servlet contributor for `UiServlet` is already provided by `org.eclipse.scout.rt.ui.html.app.UiServletContributors`.
 

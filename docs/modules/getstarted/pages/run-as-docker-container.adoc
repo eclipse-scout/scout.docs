@@ -88,6 +88,9 @@ Check if the frontend server was successfully started too by having a look at th
 
 If everything seems okay, visit `http://localhost:8082` and enjoy your application running within Docker containers.
 
+The client preferences (column widths, ...) are by default written to `/tmp` (see UI `config.properties`, property `scout.client.userArea`), thus lost after a container restart.
+If desired, you might change the path for `scout.client.userArea` via environment variable and point it to a dedicated docker volume create for this purpose.
+
 == Cleanup
 
 This section is only used to get rid of everything just created.

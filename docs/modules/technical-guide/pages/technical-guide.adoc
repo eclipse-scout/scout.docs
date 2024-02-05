@@ -16,7 +16,7 @@ The scout client layer provides utilities to simplify the most common tasks. For
 Callbacks, e.g. for validating a field or calling services when opening a form run inside a xref:technical-guide:common-concepts/job-manager.adoc#model-jobs[Model Job].
 * A UI layer responsible for rendering the client model in the browser. Since the scout UI layer already provides JavaScript/HTML/CSS code for many common UIs, the project specific code in this layer is typically quite small. Examples are specific CSS styling or a new custom input field for special purposes.
 
-Server and client both run in a servlet container, such as link:http://tomcat.apache.org[Apache Tomcat]. They are usually deployed as separate war files in order to be able to scale them differently. However, it is also possible to create a single war file.
+Server and client both run in an embedded servlet container (Jetty).
 
 == Scout JS
 Scout JS is used to build the user interface of an Eclipse Scout application.
