@@ -59,7 +59,6 @@ The second step is to adapt the configuration of the frontend server to use the 
 [source]
 .helloscout.ui.html.app.zip/config.properties
 ----
-scout.app.port=8443
 scout.app.keyStorePassword=changeit_store
 scout.app.privateKeyPassword=changeit_key
 scout.app.certificateAlias=helloscout_ui_localhost
@@ -86,7 +85,6 @@ scout.app.certificateAlias=helloscout_server_localhost
 scout.app.keyStorePath=/opt/helloscout/certs/helloscout_server_localhost.jks
 ----
 
-We don't change the port of the backend server here.
 Because the backend server is using HTTPS now, the URL in the frontend server must be modified:
 
 [source]
@@ -184,6 +182,9 @@ dos2unix /opt/helloscout/helloscout-server/bin/app.sh
 dos2unix /opt/helloscout/helloscout-ui/bin/app.sh
 ----
 
+The provided shell scripts (`app.sh`/`app.cmd`) are applying Java memory settings (`-Xms64m` and `-Xmx512m`) and override the HTTP port used for the Scout app (`scout.app.port`).
+The UI server uses 8082, while the backend server uses 8080.
+
 Check the logs if both applications started successfully
 
 ----
@@ -191,15 +192,7 @@ cat /opt/helloscout/helloscout-server/logs/app.plain.log
 cat /opt/helloscout/helloscout-ui/logs/app.plain.log
 ----
 
-You can now connect to the application using the browser of your choice by navigating to:
-
-  http://localhost:8082/
-
-or
-
-  https://localhost:8443/
-
-if you have chosen to configure HTTPS.
+You can now connect to the application using the browser of your choice by navigating to `http://localhost:8082/` or `https://localhost:8082/` if you have chosen to configure HTTPS.
 In this case you might need to accept your self-signed certificate as the browser does not yet trust it.
 
 Then you will see the login page.
