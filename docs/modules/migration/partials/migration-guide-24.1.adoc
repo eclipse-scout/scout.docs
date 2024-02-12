@@ -98,7 +98,7 @@ Scout 24.1 requires at least the following:
 
 For Scout 24 and newer enabling `HTTP/2` for your application is recommended. Please refer to the xref:technical-guide:user-interface/browser-support.adoc[documentation] on how to enable `HTTP/2`.
 
-== Build changes
+== Build Changes
 
 * The Maven build has the enforcer rule https://maven.apache.org/enforcer/enforcer-rules/dependencyConvergence.html[dependencyConvergence] enabled by default.
 Therefore, builds will fail if different versions for the same dependency are used.
@@ -124,7 +124,7 @@ As part of this Jakarta EE version update all module names and packages have bee
 Together with the Jakarta EE update many third-party libraries have received a new version defined in Scout parent POM.
 Additionally, all Java EE imports have been migrated from `javax` to `jakarta`.
 
-==== Migration guide
+==== Migration Guide
 
 * Update Scout dependency to release 24.1
 * Check third party library dependencies in your project, upgrade to Jakarta version if necessary
@@ -134,7 +134,7 @@ Additionally, all Java EE imports have been migrated from `javax` to `jakarta`.
 ** Eclipse see _Eclipse Transformer_ tool
 ** All packages and classes are updated automatically
 
-===== JAX-WS services
+===== JAX-WS Services
 
 After the upgrade to 24.1, projects that use JAX-WS (Soap) as a provider should check the connection both on DEV and on the deployed system
 to ensure that everything is working as desired.
@@ -159,13 +159,13 @@ xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb">  <2>
 <1> Update to version 3.0
 <2> Update to namespace _https://jakarta.ee/xml/ns/jaxb_
 
-===== UI Server: Multipart request configuration
+===== UI Server: Multipart Request Configuration
 
 As part of the switch to Jakarta EE the third party library dependency to Apache File Upload was eliminated.
 Scout now relies on plain Jakarta EE API to process HTTP multipart requests.
 Servlets processing multipart requests using Jakarta EE API requires a multipart-config in their servlet registration.
 
-====== Deployment using web.xml
+====== Deployment Using web.xml
 
 If you use a `web.xml`-based deployment (legacy only, see <<migration-guide-24-1-jetty-removal-of-war-modules>>), make sure to add a _<multipart-config>_ section to your `web.xml` where the `UiServlet` is registered:
 
@@ -201,7 +201,7 @@ see `getConfiguredMaximumUploadSize()` implementations for default value for eac
 See `UiServletMultipartConfigProperty` and the config property `scout.ui.servletMultipartConfig` to provide a custom global multipart
 request configuration for your UI server.
 
-=== Other libraries
+=== Other Libraries
 
 * Mockito 5: Uses the inline mock maker as new default and change the behavior of `any()`, which does not match varargs anymore (use `any(Class)` instead).
 
@@ -213,7 +213,7 @@ No migration is required, as this method did not change behavior in any way.
 The method `IFormHandler#getHandlerId` was removed without a replacement as there is no use for it.
 
 [[cha-jettyserver]]
-== Former JettyServer for development can be used in a productive environment
+== Former JettyServer for Development Can Be Used in a Productive Environment
 
 `org.eclipse.scout.dev.jetty.JettyServer` was so far only used for development environments.
 With this release it was improved so that it can be used in a productive environment too (instead of building a .war file to be used in an application server).
@@ -465,7 +465,7 @@ Because these two flags are now set via property, an additional property for val
 No migration required, automatically handled by the Scout application.
 
 [[migration-guide-24-1-jetty-removal-of-war-modules]]
-=== Removal of .war modules
+=== Removal of .war Modules
 
 The build of a `.war` file to be used within an application server (e.g. Tomcat) is deprecated now and might not work anymore in a further release (due to dependencies issues).
 Thus, it's highly recommended to either use shell scripts to run your productive environment as a service or built docker images to be used in Kubernetes or a similar setup.
@@ -600,7 +600,7 @@ but it is marked as deprecated and might be removed in a future release.
 `org.eclipse.scout.rt.platform.context.PlatformIdentifier` was removed with replacement.
 Because deploying to an application server is legacy only, each application will have its own Java runtime and `NodeIdentifier` can be used instead.
 
-==== ServletContext not accessible via BEANS.get/.opt anymore
+==== ServletContext Not Accessible via BEANS.get/.opt Anymore
 
 ServletContext could be accessed via BEANS.get/.opt so far because it was registered via `WebappEventListener`.
 It was only used within `ServletContextMimeTypeDetector` to ask the servlet context for its mime type mapping.
@@ -622,7 +622,7 @@ Newly added was the computation of a node identifier in development mode.
 If no `scout.nodeId` is set, the local host name and the port of the Scout application is used as node identifier (e.g. `mycomputer:8082`).
 Therefore, for development mode, setting `scout.nodeId` in `config.properties` is not required anymore to have a static node identifier.
 
-== Add streaming support to hashing (SecurityUtility)
+== Add Streaming Support to Hashing (SecurityUtility)
 
 `org.eclipse.scout.rt.platform.security.SecurityUtility` supports streaming:
 
@@ -631,7 +631,7 @@ Therefore, for development mode, setting `scout.nodeId` in `config.properties` i
 * NEW: `DigestInputStream toHashingStream(InputStream stream)`
 * NEW: `DigestOutputStream toHashingStream(OutputStream stream)`
 
-== IdExternalFormatter removed
+== IdExternalFormatter Removed
 
 The former deprecated class `IdExternalFormatter` was removed.
 This class was replaced by `IdCodec` and `IdInventory` in release 23.
@@ -657,7 +657,7 @@ For `org.eclipse.scout.rt.server.commons.servlet.HttpProxy` the Google HTTP Clie
 
 `org.eclipse.scout.rt.shared.http.BasicAuthHttpTransportManager` was removed, users may provide pre-emptive basic authentication using a custom `org.apache.hc.client5.http.protocol.HttpClientContext` for specific hosts (e.g for the `HttpProxy` using `org.eclipse.scout.rt.server.commons.servlet.HttpProxy.withHttpClientContextSupplier`).
 
-== Login form: Add support for second-factor (form-based)
+== Login Form: Add Support for Second-Factor (Form-Based)
 
 For the `FormBasedAccessController` and the corresponding login box a basic second-factor support was added; a new credential verifier return value `org.eclipse.scout.rt.platform.security.ICredentialVerifier.AUTH_2FA_REQUIRED` was added which will prompt for a second factor token. To verify this token a second-factor verifier `ICredentialVerifier` needs to be registered.
 
@@ -687,14 +687,15 @@ The TypeScript API to access CodeTypes and Codes has been streamlined and simpli
 ** `CodeType.codes`: It is no longer a property but a function instead which by default returns all `Codes` of the `CodeType` recursively. It has a parameter which allows to only return the root `Codes`.
 ** `CodeType.getCodes`: has been removed. Use the new function `CodeType.codes()` instead (see above).
 
-== Tree: Improved auto-check behavior when checking nodes
+[#tree-improved-auto-check-behavior-when-checking-nodes]
+== Tree: Improved Auto-Check Behavior When Checking Nodes
 
-=== New behavior explained
+=== New Behavior Explained
 
 When the `autoCheckChildren` property of the Tree or TreeBox widget is set to `true` (e.g. by overriding
 `getConfiguredAutoCheckChildNodes()`) the automatic check behavior has changed.
 
-Assuming, the following Tree structure is given:
+Assuming the following tree structure is given:
 
 [source,text]
 ----
@@ -731,9 +732,8 @@ When some of the child nodes are checked, the parent nodes get partly-checked.
   [ ] Child node 2
 ----
 
-Continuing this example, if additionally to 'Child Node 1' also 'Child node 2' gets checked,
-the parent node is checked automatically. *Attention: The mechanism of auto-checking the parent is new.
-It may break the logic in your application.*
+When 'Child Node 2' gets checked too, the parent node is checked automatically.
+*Attention: The mechanism of auto-checking the parent is new. It may break the logic in your application.*
 
 [source,text]
 ----
@@ -750,7 +750,7 @@ Before this change, the auto-check logic was implemented in Java and JavaScript.
 `org.eclipse.scout.rt.client.ui.basic.tree.AbstractTree#execAutoCheckChildNodes` method implemented the logic
 on Java side. This method was removed. The complete auto-check logic is now only on JavaScript side.
 
-==== Checking all nodes
+==== Checking All Nodes
 
 To check all nodes of a tree in java, it was possible to check the root node while `autoCheckChildren` was true.
 This is no longer supported. The new best practice is to use the
