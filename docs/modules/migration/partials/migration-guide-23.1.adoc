@@ -404,6 +404,15 @@ The following modules are affected:
 
 IMPORTANT: This applies only to imports of `js` files. Imports to `less` files should stay untouched (for now).
 
+== JavaScript Library Build
+
+If code is written with TypeScript, it needs to be transpiled to JavaScript before it can be used.
+Because this task takes some time, it should not be done by the project using a TypeScript library but by the library itself.
+This is true for Scout as well. Therefore, Scout 23.1 is shipped with prebuilt JavaScript code.
+
+IMPORTANT: If you are a library developer, you must do the same.
+To do so, you can use the support provided by Scout's build tooling as described here: xref:technical-guide:user-interface/build-stack.adoc#authoring-libraries[Authoring Libraries].
+
 == IId types, IdFactory and IdExternalFormatter
 
 Up to release 2022 the support for typed identifiers (IId) was limited to root ids wrapping one specific Java identifier.

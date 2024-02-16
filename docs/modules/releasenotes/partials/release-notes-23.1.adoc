@@ -283,7 +283,7 @@ This is true for Scout as well. Therefore, Scout 23.1 is shipped with prebuilt J
 To make sure your build uses the prebuilt version, your import statements need to be correct.
 Please have a look at the migration guide for details: xref:migration:migration-guide.adoc#imports[Migration Guide].
 
-If you are a library developer, you should consider doing the same.
+IMPORTANT: If you are a library developer, you must do the same.
 To do so, you can use the support provided by Scout's build tooling as described here: xref:technical-guide:user-interface/build-stack.adoc#authoring-libraries[Authoring Libraries].
 
 === Faster and more Efficient Minification
