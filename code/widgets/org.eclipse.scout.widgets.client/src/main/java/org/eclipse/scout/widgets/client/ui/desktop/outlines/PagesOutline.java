@@ -16,6 +16,7 @@ import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.widgets.client.ui.desktop.pages.PageWithDetailFormTablePage;
 import org.eclipse.scout.widgets.client.ui.desktop.pages.PageWithEditableTableTablePage;
+import org.eclipse.scout.widgets.client.ui.desktop.pages.PageWithHierarchicalTableTablePage;
 import org.eclipse.scout.widgets.client.ui.desktop.pages.PageWithNodesNodePage;
 import org.eclipse.scout.widgets.client.ui.desktop.pages.PageWithSearchFormTablePage;
 import org.eclipse.scout.widgets.client.ui.desktop.pages.PageWithTableRecTablePage;
@@ -43,5 +44,6 @@ public class PagesOutline extends AbstractWidgetsOutline {
     pageList.add(new PageWithSearchFormTablePage());
     pageList.add(new PageWithNodesNodePage());
     pageList.add(new PageWithDetailFormTablePage());
+    pageList.add(new PageWithHierarchicalTableTablePage());
   }
 }
