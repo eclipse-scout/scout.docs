@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -37,6 +37,7 @@ export class TreeForm extends Form {
     this.widget('DeleteNodeMenu').on('action', this._onDeleteNodeMenuAction.bind(this));
     this.widget('DeleteAllNodesMenu').on('action', this._onDeleteAllNodesMenuAction.bind(this));
     this.widget('DeleteAllChildNodesMenu').on('action', this._onDeleteAllChildNodesMenuAction.bind(this));
+    this.widget('ToggleNodeEnabledMenu').on('action', this._onToggleNodeEnabledAction.bind(this));
 
     this.widget('PropertiesBox').setTree(this.tree);
     let treeField = this.widget('TreeField');
@@ -86,5 +87,10 @@ export class TreeForm extends Form {
 
   protected _onDeleteAllChildNodesMenuAction() {
     this.tree.deleteAllChildNodes(this.tree.selectedNodes[0]);
+  }
+
+  protected _onToggleNodeEnabledAction() {
+    this.tree.selectedNode().enabled = !this.tree.selectedNode().enabled;
+    this.tree.updateNodes(this.tree.selectedNodes);
   }
 }
