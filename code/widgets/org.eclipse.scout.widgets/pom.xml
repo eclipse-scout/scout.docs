@@ -19,7 +19,7 @@
   </parent>
 
   <properties>
-    <org.eclipse.scout.rt.version>24.1-SNAPSHOT</org.eclipse.scout.rt.version>
+    <org.eclipse.scout.rt.version>24.1.1</org.eclipse.scout.rt.version>
     <master_npm_release_dependency_mapping>--mapping.0.regex=@eclipse-scout --mapping.0.version=${org.eclipse.scout.rt.version}</master_npm_release_dependency_mapping>
     <master_npm_workspace_dir>${project.basedir}${file.separator}${project.parent.relativePath}${file.separator}..${file.separator}..</master_npm_workspace_dir>
 
@@ -36,7 +36,7 @@
 
   <groupId>org.eclipse.scout.widgets</groupId>
   <artifactId>org.eclipse.scout.widgets</artifactId>
-  <version>24.1-SNAPSHOT</version>
+  <version>24.1.1</version>
   <packaging>pom</packaging>
   <description>Widgets Application</description>
 
