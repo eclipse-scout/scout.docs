@@ -59,6 +59,6 @@ image::scout_sdk_super_class_proposals.png[]
 - [ ] Create a new LookupCall (Ctrl+N) and verify that it is created correctly (no compilation errors)
 - [ ] Create a new Table Page (Ctrl+N) and verify that it is created correctly (no compilation errors)
 - [ ] Create a new Permission (Ctrl+N) and verify that it is created correctly (no compilation errors)
-- [ ] Create a new Web Service (Ctrl+N) Consumer for WSDL http://services.nexus6studio.com/StockQuoteService.asmx?wsdl and verify that it is created correctly (no compilation errors)
+- [ ] Create a new Web Service (Ctrl+N) Consumer for WSDL xref:attachment$wsdl/StockQuoteService.asmx.wsdl[StockQuoteService] and verify that it is created correctly (no compilation errors)
 
 
