@@ -10,7 +10,7 @@ A `Smart Field` provides a list of proposals the user can choose from to pick on
 .Smart Field
 image::common:smart_field.png[]
 
-If you don't need the search as you type feature, you can switch it off by setting the property `displayHint` to `dropdown` so that it behaves like a regular drop down list. This means the user cannot filter the values anymore using key board and can choose the values only by mouse / touch.
+If you don't need the search as you type feature, you can switch it off by setting the property `displayHint` to `dropdown` so that it behaves like a regular drop down list. This means the user cannot filter the values anymore using the keyboard and can choose the values only by mouse / touch.
 
 [[img-drop_down_field]]
 .Smart Field with display style set to 'dropdown'
