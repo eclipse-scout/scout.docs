@@ -316,3 +316,17 @@ protected override _evalPermission(permission: Permission): JQuery.Promise<boole
 The `PermissionResource` will automatically collect the granted ``IOwnPermission``s of a user (see xref:authorization-granting[Authorization (Granting)]).
 These ``IOwnPermission``s will be transformed by the `ToOwnPermissionDoFunction` and send to the browser where `OwnPermission` instances are created.
 Each access check will now automatically consider the `matches`-, `implies`- and `evaluate`-logic of `OwnPermission`.
+
+== Login Form
+
+Scout provides support for form based login.
+To activate the form based login, a `login.html` needs to be provided and the `FormBasedAccessController` along with a `ICredentialVerifier` needs to be added to the `AuthFilter`.
+An example setup can be found in the archetype.
+
+[[two-factor-auth]]
+=== Two-factor Authentication (2FA)
+
+The form based login also supports two-factor-authentication.
+
+If the registered `ICredentialVerifier` requests a second factor by returning `AUTH_2FA_REQUIRED`, the `FormBasedAccessController` instructs the UI to show an input field so the user can enter the token.
+To verify this token a second-factor verifier `ICredentialVerifier` needs to be registered.
