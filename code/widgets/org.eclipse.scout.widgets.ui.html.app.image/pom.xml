@@ -26,6 +26,7 @@
   <build>
     <plugins>
       <plugin>
+        <!-- Google Jib goal 'build' is bound to phase 'package' via profile 'exec.docker.image' -->
         <groupId>com.google.cloud.tools</groupId>
         <artifactId>jib-maven-plugin</artifactId>
         <configuration>
