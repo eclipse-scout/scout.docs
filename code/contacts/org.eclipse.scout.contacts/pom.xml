@@ -84,6 +84,29 @@
         </plugins>
       </build>
     </profile>
+
+    <profile>
+      <id>exec.docker.image</id>
+      <build>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <!-- phase binding required for .app.image module to build and publish docker image -->
+              <groupId>com.google.cloud.tools</groupId>
+              <artifactId>jib-maven-plugin</artifactId>
+              <executions>
+                <execution>
+                  <phase>package</phase>
+                  <goals>
+                    <goal>build</goal>
+                  </goals>
+                </execution>
+              </executions>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+      </build>
+    </profile>
   </profiles>
 
   <build>
@@ -98,20 +121,6 @@
               <headerDefinition>${project.basedir}/../../../license_files/scoutLicenceHeaderJava.xml</headerDefinition>
             </headerDefinitions>
           </configuration>
-        </plugin>
-
-        <plugin>
-          <!-- required for .app.image module to build and publish docker image -->
-          <groupId>com.google.cloud.tools</groupId>
-          <artifactId>jib-maven-plugin</artifactId>
-          <executions>
-            <execution>
-              <phase>package</phase>
-              <goals>
-                <goal>build</goal>
-              </goals>
-            </execution>
-          </executions>
         </plugin>
       </plugins>
     </pluginManagement>
