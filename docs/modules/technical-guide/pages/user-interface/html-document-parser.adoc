@@ -5,7 +5,7 @@ The HTML document parser is only available in the Scout UI server. If your Scout
 
 The class `HtmlDocumentParser` is used by the Scout UI server in order to create dynamic HTML output on the server-side. Like JSP the parser supports a set of tags that are processed by the sever. The main purpose of the parser is to provide functions used for `login.html` and `index.html`, like bootstrapping and  localization _before_ JavaScript can be executed in the browser.
 
-Note: some tags like `scout-version` and `scout-text` will be removed from the DOM once the Scout `App` is initialized.
+Note: some tags like `scout-text` will be removed from the DOM once the Scout `App` is initialized.
 
 == scout:base
 
@@ -20,7 +20,8 @@ Output:
   <base href="helloworld_1_0/">
 
 == scout:include
-This tag is used for server-side inlcudes, which means you can embed the HTML content of another file into the current HTML document. This avoids unnecessary code duplication by referencing the same fragement in multiple HTML documents.
+
+This tag is used for server-side includes, which means you can embed the HTML content of another file into the current HTML document. This avoids unnecessary code duplication by referencing the same fragment in multiple HTML documents.
 
 Example:
 
@@ -93,15 +94,3 @@ Output:
 
   <link rel="stylesheet" type="text/css" href="yourapp-theme-9858a5b3.min.css">
   <link rel="stylesheet" type="text/css" href="vendors~yourapp-theme-675d7813.min.css">
-
-== scout:version
-
-Outputs the current version of the Scout application as `scout-version` tag in the HTML document. This tag is read by `scout.App#_initVersion`.
-
-Example:
-
-  <scout:version>
-
-Output:
-
-  <scout-version data-value="16.1.0.002"></scout-version>
