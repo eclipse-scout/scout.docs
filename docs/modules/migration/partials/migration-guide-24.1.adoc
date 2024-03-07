@@ -113,18 +113,11 @@ See https://search.maven.org/artifact/org.eclipse.scout/maven_rt_plugin_config-m
 
 == 3rd Party Libraries Update
 
+[[update-to-jakarta]]
 === Update to Jakarta EE
 
-Until now, Scout was based on the Java EE Servlet Specification 4.0, many of our third-party libraries also depends on this specification
-(e.g. Jetty, HttpServlet API, JMS, JAX-WS, JAX-RS etc).
-With release 24/1 the Scout framework is moving towards Jakarta EE and is now based on the 5.0 specification.
-As part of this Jakarta EE version update all module names and packages have been renamed from javax to jakarta
-(due to legal requirements by Oracle as part of the open source donation of Java EE to the Eclipse Foundation).
-
-Together with the Jakarta EE update many third-party libraries have received a new version defined in Scout parent POM.
-Additionally, all Java EE imports have been migrated from `javax` to `jakarta`.
-
-==== Migration Guide
+As part of the Jakarta EE version update all imports need to be renamed from javax to jakarta.
+The update also requires some changes on the usage of third party libraries.
 
 * Update Scout dependency to release 24.1
 * Check third party library dependencies in your project, upgrade to Jakarta version if necessary
@@ -134,7 +127,7 @@ Additionally, all Java EE imports have been migrated from `javax` to `jakarta`.
 ** Eclipse see _Eclipse Transformer_ tool
 ** All packages and classes are updated automatically
 
-===== JAX-WS Services
+==== JAX-WS Services
 
 After the upgrade to 24.1, projects that use JAX-WS (Soap) as a provider should check the connection both on DEV and on the deployed system
 to ensure that everything is working as desired.
@@ -159,13 +152,13 @@ xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb">  <2>
 <1> Update to version 3.0
 <2> Update to namespace _https://jakarta.ee/xml/ns/jaxb_
 
-===== UI Server: Multipart Request Configuration
+==== UI Server: Multipart Request Configuration
 
 As part of the switch to Jakarta EE the third party library dependency to Apache File Upload was eliminated.
 Scout now relies on plain Jakarta EE API to process HTTP multipart requests.
 Servlets processing multipart requests using Jakarta EE API requires a multipart-config in their servlet registration.
 
-====== Deployment Using web.xml
+===== Deployment Using web.xml
 
 If you use a `web.xml`-based deployment (legacy only, see <<migration-guide-24-1-jetty-removal-of-war-modules>>), make sure to add a _<multipart-config>_ section to your `web.xml` where the `UiServlet` is registered:
 
@@ -188,7 +181,7 @@ If you use a `web.xml`-based deployment (legacy only, see <<migration-guide-24-1
 <2> Maximum size of multi-part request, e.g. 100mb
 <3> Threshold for file chunking, e.g. 20mb
 
-====== Deployment using Jetty server
+===== Deployment using Jetty server
 
 If you switch to a Jetty-based deployment (see chapter <<cha-jettyserver>> for details) a default multipart configuration providing the ability
 to upload multipart requests with unlimited size is used by default (see chapter <<migration-guide-24-1-jetty-web.xml-ui-servlet>>).
@@ -657,16 +650,18 @@ For `org.eclipse.scout.rt.server.commons.servlet.HttpProxy` the Google HTTP Clie
 
 `org.eclipse.scout.rt.shared.http.BasicAuthHttpTransportManager` was removed, users may provide pre-emptive basic authentication using a custom `org.apache.hc.client5.http.protocol.HttpClientContext` for specific hosts (e.g for the `HttpProxy` using `org.eclipse.scout.rt.server.commons.servlet.HttpProxy.withHttpClientContextSupplier`).
 
-== Login Form: Add Support for Second-Factor (Form-Based)
+[[two-factor-auth]]
+== Login Form: Support for Second-Factor (Form-Based)
 
-For the `FormBasedAccessController` and the corresponding login box a basic second-factor support was added; a new credential verifier return value `org.eclipse.scout.rt.platform.security.ICredentialVerifier.AUTH_2FA_REQUIRED` was added which will prompt for a second factor token. To verify this token a second-factor verifier `ICredentialVerifier` needs to be registered.
-
-During form-based login, for second-factor enabled accounts, a token is requested (after first challenge has been completed successful), for this token a new text `ui.Token` has been added to the login form and must be added to the `[...].ui.html/src/main/resources/WebContent/login.html`:
+During form-based login, for second-factor enabled accounts, a token is requested (after first challenge has been completed successful).
+For this token a new text `ui.Token` has been added to the login form and must be added to the `WebContent/login.html` if you plan to use 2FA.
 
 [source,html]
 ----
 <scout:message style="tag" key="ui.Login" key="ui.LoginFailed" key="ui.User" key="ui.Password" key="ui.Token" />
 ----
+
+To enable 2FA support in your application, see xref:technical-guide:common-concepts/security.adoc#two-factor-auth[Two-factor Authentication].
 
 == UiTextContributor
 
@@ -687,7 +682,7 @@ The TypeScript API to access CodeTypes and Codes has been streamlined and simpli
 ** `CodeType.codes`: It is no longer a property but a function instead which by default returns all `Codes` of the `CodeType` recursively. It has a parameter which allows to only return the root `Codes`.
 ** `CodeType.getCodes`: has been removed. Use the new function `CodeType.codes()` instead (see above).
 
-[#tree-improved-auto-check-behavior-when-checking-nodes]
+[[tree-improved-auto-check-behavior-when-checking-nodes]]
 == Tree: Improved Auto-Check Behavior When Checking Nodes
 
 === New Behavior Explained
@@ -764,3 +759,7 @@ tree.setNodeChecked(tree.getRootNode(), true);
 // Use this
 tree.checkAllNodes();
 ----
+
+== IOUtility: Removed Duplicate Method getFileExtension
+
+Method getFileExtension from FileUtility should be used instead.
