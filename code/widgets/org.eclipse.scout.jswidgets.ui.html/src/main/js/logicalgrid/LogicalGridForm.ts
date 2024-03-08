@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -42,6 +42,17 @@ export class LogicalGridForm extends Form {
     logicalGridField.setValue(groupBox.logicalGrid);
     logicalGridField.on('propertyChange:value', event => this.widget('DetailBox').setLogicalGrid(event.newValue));
 
+    let gridColumnCountField = this.widget('GridColumnCountField');
+    gridColumnCountField.setValue(groupBox.gridColumnCount);
+    gridColumnCountField.on('propertyChange:value', event => this.widget('DetailBox').setGridColumnCount(event.newValue));
+
+    let bodyLayoutConfigBox = this.widget('BodyLayoutConfigBox');
+    bodyLayoutConfigBox.getLayoutConfig = () => groupBox.bodyLayoutConfig;
+    bodyLayoutConfigBox.setLayoutConfig = layoutConfig => {
+      groupBox.setBodyLayoutConfig(layoutConfig);
+    };
+    bodyLayoutConfigBox.setField(groupBox);
+
     this.widget('GridDataBox').setEnabled(!!targetField.value);
 
     this.widget('Actions.AddFieldBox').setField(groupBox);
@@ -49,10 +60,10 @@ export class LogicalGridForm extends Form {
   }
 
   protected _initFields(fields: FormField[]) {
-    fields.forEach(function(field) {
+    fields.forEach(field => {
       field.off('render', this._fieldRenderHandler);
       field.on('render', this._fieldRenderHandler);
-    }, this);
+    });
   }
 
   protected _onFieldRender(event: Event<FormField>) {
