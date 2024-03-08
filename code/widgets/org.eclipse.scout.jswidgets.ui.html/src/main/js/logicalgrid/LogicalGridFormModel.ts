@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -7,8 +7,10 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {FormModel, GroupBox, SmartField, StringField, TabBox, TabItem} from '@eclipse-scout/core';
-import {GridDataBox, GridDataBoxWidgetMap, GroupBoxAddFieldBox, GroupBoxAddFieldBoxWidgetMap, GroupBoxDeleteFieldBox, GroupBoxDeleteFieldBoxWidgetMap, LogicalGridLookupCall} from '../index';
+import {FormModel, GroupBox, NumberField, SmartField, StringField, TabBox, TabItem} from '@eclipse-scout/core';
+import {
+  GridDataBox, GridDataBoxWidgetMap, GroupBoxAddFieldBox, GroupBoxAddFieldBoxWidgetMap, GroupBoxDeleteFieldBox, GroupBoxDeleteFieldBoxWidgetMap, LogicalGridLayoutConfigBox, LogicalGridLayoutConfigBoxWidgetMap, LogicalGridLookupCall
+} from '../index';
 
 export default (): FormModel => ({
   id: 'jswidgets.LogicalGridForm',
@@ -72,8 +74,16 @@ export default (): FormModel => ({
                     label: 'Logical Grid',
                     lookupCall: LogicalGridLookupCall,
                     tooltipText: '${textKey:LogicalGridTooltip}'
+                  }, {
+                    id: 'GridColumnCountField',
+                    objectType: NumberField,
+                    label: 'Grid Column Count'
                   }
                 ]
+              },
+              {
+                id: 'BodyLayoutConfigBox',
+                objectType: LogicalGridLayoutConfigBox
               },
               {
                 id: 'GridDataBox',
@@ -127,9 +137,11 @@ export type LogicalGridFormWidgetMap = {
   'PropertiesBox': GroupBox;
   'TargetField': SmartField<any>;
   'LogicalGridField': SmartField<any>;
+  'GridColumnCountField': NumberField;
+  'BodyLayoutConfigBox': LogicalGridLayoutConfigBox;
   'GridDataBox': GridDataBox;
   'CalculatedGridDataBox': GridDataBox;
   'ActionsTab': TabItem;
   'Actions.AddFieldBox': GroupBoxAddFieldBox;
   'Actions.DeleteFieldBox': GroupBoxDeleteFieldBox;
-} & GridDataBoxWidgetMap & GroupBoxAddFieldBoxWidgetMap & GroupBoxDeleteFieldBoxWidgetMap;
+} & LogicalGridLayoutConfigBoxWidgetMap & GridDataBoxWidgetMap & GroupBoxAddFieldBoxWidgetMap & GroupBoxDeleteFieldBoxWidgetMap;
