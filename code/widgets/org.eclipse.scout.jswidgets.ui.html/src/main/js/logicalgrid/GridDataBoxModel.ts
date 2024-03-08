@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -71,6 +71,26 @@ export default (): GroupBoxModel => ({
       label: 'Height In Pixel'
     },
     {
+      id: 'MinWidthInPixelField',
+      objectType: NumberField,
+      label: 'Min Width In Pixel'
+    },
+    {
+      id: 'MinHeightInPixelField',
+      objectType: NumberField,
+      label: 'Min Height In Pixel'
+    },
+    {
+      id: 'MaxWidthInPixelField',
+      objectType: NumberField,
+      label: 'Max Width In Pixel'
+    },
+    {
+      id: 'MaxHeightInPixelField',
+      objectType: NumberField,
+      label: 'Max Height In Pixel'
+    },
+    {
       id: 'FillHorizontalField',
       objectType: CheckBoxField,
       label: 'Fill Horizontal',
@@ -97,6 +117,10 @@ export default (): GroupBoxModel => ({
   ]
 });
 
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
 export type GridDataBoxWidgetMap = {
   'WField': NumberField;
   'HField': NumberField;
@@ -107,7 +131,11 @@ export type GridDataBoxWidgetMap = {
   'HorizontalAlignmentField': NumberField;
   'VerticalAlignmentField': NumberField;
   'WidthInPixelField': NumberField;
+  'MinWidthInPixelField': NumberField;
+  'MaxWidthInPixelField': NumberField;
   'HeightInPixelField': NumberField;
+  'MinHeightInPixelField': NumberField;
+  'MaxHeightInPixelField': NumberField;
   'FillHorizontalField': CheckBoxField;
   'FillVerticalField': CheckBoxField;
   'UseUiWidthField': CheckBoxField;
