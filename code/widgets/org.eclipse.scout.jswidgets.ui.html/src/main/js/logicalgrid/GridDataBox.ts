@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -51,6 +51,8 @@ export class GridDataBox extends GroupBox {
     this.widget('FillVerticalField').on('propertyChange:value', event => this._updateGridDataByEvent(event));
     this.widget('WidthInPixelField').on('propertyChange:value', event => this._updateGridDataByEvent(event));
     this.widget('HeightInPixelField').on('propertyChange:value', event => this._updateGridDataByEvent(event));
+    this.widget('MaxWidthInPixelField').on('propertyChange:value', event => this._updateGridDataByEvent(event));
+    this.widget('MaxHeightInPixelField').on('propertyChange:value', event => this._updateGridDataByEvent(event));
   }
 
   setField(field: FormField) {
@@ -84,6 +86,8 @@ export class GridDataBox extends GroupBox {
     this.widget('FillVerticalField').setValue(gridData.fillVertical);
     this.widget('WidthInPixelField').setValue(gridData.widthInPixel);
     this.widget('HeightInPixelField').setValue(gridData.heightInPixel);
+    this.widget('MaxWidthInPixelField').setValue(gridData.maxWidthInPixel);
+    this.widget('MaxHeightInPixelField').setValue(gridData.maxHeightInPixel);
   }
 
   protected _updateGridDataByEvent(event: PropertyChangeEvent<any, FormField>) {
@@ -121,6 +125,10 @@ export class GridDataBox extends GroupBox {
       gridData.widthInPixel = event.newValue;
     } else if (event.source.id === 'HeightInPixelField') {
       gridData.heightInPixel = event.newValue;
+    } else if (event.source.id === 'MaxWidthInPixelField') {
+      gridData.maxWidthInPixel = event.newValue;
+    } else if (event.source.id === 'MaxHeightInPixelField') {
+      gridData.maxHeightInPixel = event.newValue;
     }
   }
 }
