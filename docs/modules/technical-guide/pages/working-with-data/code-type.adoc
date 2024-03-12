@@ -76,21 +76,20 @@ CodeTypes can be managed using the `codes` utility. See the following example:
 ----
 import {codes} from '@eclipse-scout/core';
 
-codes.init([{
+codes.add([{
   id: '1',
   codes: [{
     id: 'code0',
-    children: [{ id: 'code01' }, { id: 'code02' }]
+    children: [{id: 'code01'}, {id: 'code02'}]
   }]
-}]);
-codes.add({
+}, {
   id: '2',
   codes: [{
     id: '2.1'
   }, {
     id: '2.2'
   }]
-});
+}]);
 
 // returns 3 codes (default is recursive): code0, code01 and code02
 codes.get('1').codes();
