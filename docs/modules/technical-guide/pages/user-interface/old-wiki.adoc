@@ -1,0 +1,2696 @@
+// TODO this was copied from the old wiki and needs refactoring, may also be deleted if obsolete
+
+= Communication
+
+Client and backend communicate using the HTTP protocol or its extension HTTPS, providing Transport Layer Security (TLS). Client requests are sent as HTTP POST requests, carrying SOAP messages as payload. <br> Although the interface looks like a standard web service, there is no WSDL interface description for internal Scout services. The interface is extracted directly out of implementing classes using Java serialization. The serialized service invocation and its result are written into the SOAP message’s body. The SOAP body is enriched with additional plain-text elements, since the serialized data looks obscured for external parties being involved in the transportation chain (e.g. content filters). This communication scheme is called mixed-mode.<br> Scout provides support out of the box for switching to an exclusive XML-based communication scheme. However performance will be impacted by verbose messages exchanged between client and backend and the interfaces are still not described by WSDL documents (actually the data is just serialized into XML). Performance will decrease with a factor of about 3 to 5 times.<br> Additionally Scout makes use of HTTP sessions for performance reasons. Using the session notion contradicts common web service principles, demanding for stateless service implementations.
+
+Several switches exist to control how a Scout client handles [[Proxy settings]].
+
+== Service Tunnel
+
+Scout client - server communication is designed so it can be used completely transparent and easy. Although the communication is based on SOAP it is not necessary to define a WSDL for each service and create their stubs on the client. Instead those remote services are accessible through the OSGi service registry like any other (client) service. The key of that simple but powerful concept is called "dynamic proxy".
+
+The steps to create such a remote service are as follows:
+
+#Create a service interface in the shared plugin
+#Implement the service in the server plugin
+#Register the implementation as scout server service in the server plugin
+#Register the service interface as scout client service proxy in the client plugin
+
+=== Request Response Roundtrip
+
+At the core of the scout client proxy service registry a new interface of the desired type is created as a reflection java proxy with a handler that delegates all invocations to that interface to the <code>HttpServiceTunnel: ServiceTunnelInvocationHandler.invoke()</code> --&gt; <code>HttpServiceTunnel.tunnelOnline()</code>.
+
+The HttpServiceTunnel wraps the invocation as HttpServletRequest and sends it via <code>IServiceTunnelContentHandler</code> to the server servlet with path /process. In the server the path /process is mapped in the <code>plugin.xml</code> to the {{ScoutLink|Concepts|Servlets#ServiceTunnelServlet|ServiceTunnelServlet}}.
+
+Before the call is received by the servlet it has to pass the active {{ScoutLink|Concepts|Security#Security_Filters|servlet filters}}, one after another. These filters are also defined in the <code>plugin.xml</code> of the server and typically used for authentication checks. The <code>BasicSecurityFilter</code> for example enforces a valid username/password using HTTP BASIC Auth.
+
+Finally the {{ScoutLink|Concepts|Servlets#ServiceTunnelServlet|ServiceTunnelServlet}} is receiving the request. At that moment the code is running inside a JAAS security context due to the SecurityFilter. Before delegating the call to the actual service the <code>ServiceTunnelServlet</code> deserializes the request using the same <code>IServiceTunnelContentHandler</code> as the client, creates and loads the <code>ServerSession</code> and also creates a <code>ServerJob</code>, which opens a transaction for the incoming request. That <code>ServerJob</code> delegates the call to the <code>ITransactionDelegate</code>, which invokes the actual service.
+
+When the processing is finished the transaction will be committed and the response serialized by the <code>IServiceTunnelContentHandler</code> and sent back to the client.
+
+=== Message Structure
+
+Base64 encoded Serialized objects
+
+The request parameters as well as the response data can be transmitted in different customizable formats (contents of the &lt;data&gt;...&lt;/data&gt; tags). Scout provides support out of the box for switching to an exclusive XML-based communication scheme.
+
+==== Request Message
+
+The request SOAP message consists of:
+
+#Service reference, operation, version, formatting, language
+#Service arguments
+#Information like timestamp, TCP/IP origin, varia (xsd:any)
+<pre>Mime-type: application/soap+xml
+&lt;?xml version="1.0" encoding="UTF-16"?&gt;
+&lt;SOAP-ENV:Envelope SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+&lt;SOAP-ENV:Body&gt;
+&lt;request version="3.0.0" format="de_CH" language="de_CH"
+service="com.bsiag.scout.shared.services.common.ping.IPingService" operation="ping"/&gt;
+&lt;data&gt;…&lt;/data&gt;
+&lt;info ts="20080715114301917" origin="192.168.1.105"&gt;…&lt;/info&gt;
+&lt;/SOAP-ENV:Body&gt;
+&lt;/SOAP-ENV:Envelope&gt;
+</pre>
+
+==== Response Message
+
+The response SOAP message consists of:
+
+#Service invocation status, maybe exception type
+#Service response data
+#Information like timestamp, TCP/IP origin, varia (xsd:any)
+
+Example with Status: „OK“
+<pre>Mime-type: application/soap+xml
+&lt;?xml version="1.0" encoding="UTF-16"?&gt;
+&lt;SOAP-ENV:Envelope SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+&lt;SOAP-ENV:Body&gt;
+&lt;response status="OK" type="String"/&gt;
+&lt;data&gt;…&lt;/data&gt;
+&lt;info ts="20080715114301917" origin="192.168.3.2"&gt;…&lt;/info&gt;
+&lt;/SOAP-ENV:Body&gt;
+&lt;/SOAP-ENV:Envelope&gt;
+</pre>
+Example with Status „ERROR“
+<pre>Mime-type: application/soap+xml
+&lt;?xml version="1.0" encoding="UTF-16"?&gt;
+&lt;SOAP-ENV:Envelope SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+&lt;SOAP-ENV:Body&gt;
+&lt;response status="ERROR"&gt;
+&lt;exception type="SecurityException"&gt;Access denied&lt;/exception&gt;
+&lt;/response&gt;
+&lt;data&gt;…&lt;/data&gt;
+&lt;info ts="20080715114301917" origin="192.168.3.2"&gt;…&lt;/info&gt;
+&lt;/SOAP-ENV:Body&gt;
+&lt;/SOAP-ENV:Envelope&gt;
+</pre>
+
+== GetConfigured Methods
+
+Properties can be configured on a lot of elements (Page, Form, Fields, Table, Columns ...). {{ScoutLink|SDK|name=Scout SDK}} with the {{ScoutLink|SDK|Object Properties View|Object Properties View}} offers a manner to configure theses properties very quickly.
+
+In the code, a property is defined with special getter functions:
+
+<source lang="java">
+@Override
+protected ... getConfiguredXxxxxxx() {
+return /*the value of the property*/;
+}
+</source>
+
+The Scout framework reads the configured properties during the initialization, and adapts the behavior of the object depending to its configuration. The <code>getXxxxxxx()</code> function should only return a constant. It is not expected to find an <code>if</code>-statement or call to another private or public method.
+
+Often the properties can also be set dynamically with the corresponding setter [<code>setXxxxxxx()</code>]. To access the properties you can use the getter [<code>getXxxxxxx()</code>]. There should be no need to call <code>getConfiguredXxxxxxx()</code> function directly.
+
+== Exec Methods
+
+Exec Method are present in Page, Form, Fields, Actions... The abstract class contains a default implementation that can be overridden in the concrete child class.
+
+  @Override
+  protected ... execXxxxxxx(...) throws ProcessingException{
+    //specific logic here
+  }
+
+The scout framework call them when the event they represent occurs (value changed, form is validating, ...) These methods provide to the scout developer a way to add the business logic to the different elements: control that a value is in a specific range, disable an action if some conditions are not meet...
+
+These <code>execXxxxxxx(...)</code> methods are not intended to be called directly, even if it is possible to call them inside the class (visibility is protected).
+
+== Outline
+
+Outline is a container of pages.
+
+Typically a {{ScoutLink|Concepts|Desktop|Desktop}} holds multiple outlines. They represent different entry points for the navigation within the application.
+
+Every outline contains {{ScoutLink|Concepts|Page|Pages}}, represented as a tree which allows to navigate within the application.
+
+== Page
+
+Pages are elements allowing the user to browse through the content of the application.
+
+* implements: {{ScoutJavadoc|IPage|I}}
+* extends: {{ScoutJavadoc|AbstractPage|C}}
+
+'''Note:''' Typically when you want to create a Page, choose the type of page you want ({{ScoutLink|Concepts|TablePage|Table Page}} or {{ScoutLink|Concepts|NodePage|Node Page}}) and extend one of these pages.
+
+A page allows the user to browse to a specific point of an application. Pages have a hierarchical organisation: Each page can contains other pages. On the top of the hierarchy is an {{ScoutLink|Concepts|Outline|Outline}} that create the first root pages.
+
+In {{ScoutLink|Concepts|Outline based application|outline based applications}}, pages are represented as node of a tree on the left. It is possible to drill down the page to access the child pages (unless the page is configured as leaf). On the right the content of the page is displayed. Instead of the page content, it is possible to display a {{ScoutLink|Concepts|Page Detail Form|detail form}} in this area.
+
+It is possible to reference them with a {{ScoutLink|Concepts|Bookmark|Bookmark}}.
+
+There are two types of pages, depending on the type of content you want to represent, you will probably consider one of the two types:
+
+[[Image:HG_Page.png]]
+=== {{ScoutLink|Concepts|TablePage|Table Page}} ===
+
+[[Image:ScoutTablePage.png]]
+A table page is suitable if you want to represent many elements as rows of a {{ScoutLink|Concepts|Table|Table}} (displayed on the right). The table is loaded on event {{ScoutEvent|LoadTableData}}. It is possible to create a child for each row with the event {{ScoutEvent|CreateChildPage}}.
+
+=== {{ScoutLink|Concepts|NodePage|Node Page}} ===
+
+[[Image:ScoutNodePage.png]]
+A node page is suitable to represent a single element. The content is a list of child pages created on event {{ScoutEvent|CreateChildPages}}. The child pages are represented on the left in the tree representation of the page hierarchy. The {{ScoutLink|Concepts|Table|Table}} on the right contains also the list of child pages.
+
+== Events ==
+
+With {{ScoutEvent|PageActivated}} and {{ScoutEvent|PageDeactivated}} you are notified when the page is selected and de-selected in the outline tree. This can be useful to handle the {{ScoutLink|Concepts|Page_Detail_Form|lifecycle of a detail form}}.
+
+= Page Detail Form
+
+https://wiki.eclipse.org/index.php?title=Scout/Concepts/Page_Detail_Form
+
+A page detail form is typically created and started when the page gets activated. With the function <code>IPage#setDetailForm()</code> it can be attached to the page. Until now the page resp. the desktop takes care of showing and hiding the form on page activation and deactivation.
+
+The following code shows an example how to create and attach a detail form.
+<source lang="java">
+@Override
+protected void execPageActivated() throws ProcessingException {
+if (getDetailForm() == null) {
+PersonDetailForm form = new PersonDetailForm();
+form.setPersonNr(getPersonNr());
+setDetailForm(form);
+form.startView();
+}
+}
+</source>
+
+As already said, attaching a detail form to a page means the detail form will automatically be hidden when the page gets deactivated and shown when the page gets activated (see {{ScoutEvent|PageDetailFormChanged}} on {{ScoutLink|Concepts|Desktop}}). So the detail form actually gets cached and does not need to be started more than once per page. This requires that the form does not get closed.
+{{note|Start vs Show|Note the difference between starting and showing a form. Starting means executing the form handler which normally loads the data and fills the fields. Showing the form means displaying it. This is normally automatically done after the form has been started. In case of the detail form it's not because the property autoAddRemoveOnDesktop is set to false by the method setDetailForm(). Now the form explicitly needs to be added to the desktop which will tell the UI to display it.}}
+This is how it is done mostly. If you have a special kind of detail form which requires explicit closing, you could do this on page deactivation. But remember: <b>This will break the caching and the form always needs to be started again on page activation.</b>
+
+<source lang="java">
+@Override
+protected void execPageDeactivated() throws ProcessingException {
+if (getDetailForm() != null) {
+getDetailForm().doClose();
+setDetailForm(null);
+}
+}
+</source>
+
+If you would like to hide the page table and only show the detail form instead, you can set the property {{ScoutProp|tableVisible}} to <code>false</code>.
+<source lang="java">
+@Override
+protected boolean getConfiguredTableVisible() {
+return false;
+}
+</source>
+
+= TablePage
+
+https://wiki.eclipse.org/index.php?title=Scout/Concepts/TablePage
+
+Table-oriented {{ScoutLink|Concepts|Page|page}}
+
+* implements: {{ScoutJavadoc|IPageWithTable|I}}
+* extends: {{ScoutJavadoc|AbstractPageWithTable|C}}
+
+
+== Description ==
+
+{{note|TODO|Add a description}}
+* {{ScoutLink|Concepts|Table|Table}}
+
+[[Image:HG_TablePage.png]]
+In {{ScoutLink|Concepts|Outline_based_application|outline based application}}, the child-pages are represented a nodes in the page tree. The cell of this node is defined by the {{ScoutLink|Concepts|Table#Summary_Cell|summary cell}} of the table.
+
+Here an example with only the Name column as summary column:
+
+[[Image:Scout summary cell name.png]]
+Here an example with Id and Name column as summary column:
+
+[[Image:Scout summary cell id and name.png]]
+In case of multiple summary column, the texts are concatenated (with a space as separator).
+A column can be set to a summary column by overriding the following method:
+<source lang="java">
+@Override
+protected boolean getConfiguredSummary() {
+return true;
+}
+</source>
+
+== Screenshot ==
+
+[[Image:ScoutScreenshotTablePage.png]]
+== Properties ==
+
+''Defined with {{ScoutLink|Concepts|GetConfigured Methods|getConfiguredXxxxxx()}} methods''.
+
+{{note|TODO|Add a description of the more important properties (ore the properties specific to this element)}}
+
+=== Force the user to use the search form ===
+
+With the Property {{ScoutProp|SearchRequired}} you can indicate whether the data can be displayed without searching (value <tt>false</tt>, default value) or if the user need to click on the search form to get any data (value: <tt>true</tt>).
+
+In the second case, to indicate to the user that he should search instead of waiting for the data, an warning is displayed in the table status bar: ''Large dataset. Please narrow using the search function.''
+
+[[Image:Scout Table LargeDataSet.png]]
+== Events ==
+
+''Defined with {{ScoutLink|Concepts|Exec_Methods|execXxxxxx()}} methods''.
+
+=== child page and virtual child page ===
+
+{{ScoutEvent|CreateChildPage}} is triggered for each row of the table (the corresponding row is given as parameter). It is possible to get some of the values in the table to pass them to
+the chid page.
+
+<source lang="java">
+@Override
+protected IPage execCreateChildPage(final ITableRow row) throws ProcessingException {
+MyNodePage childPage = new MyNodePage();
+childPage.setId(getTable().getIDColumn().getValue(row));
+childPage.setName(getTable().getNameColumn().getValue(row));
+childPage.setComment(getTable().getNotesColumn().getValue(row));
+return childPage;
+}
+</source>
+
+For performance reason, because sometimes instantiating a page can be expansive, the concept of virtual page was introduced. Virtual pages are created by {{ScoutEvent|CreateVirtualChildPage}}. Virtual pages act like a proxy: only when they are activated the real corresponding page is instanciated with the corresponding call to {{ScoutEvent|CreateChildPage}}.
+
+It is possible to have child pages only for some of the rows. Imagine a Table Page representing some files (like in a file system):
+
+[[Image:Scout_Folder_Outline.png]]
+The implementation is simple: if it should be no child page, {{ScoutEvent|CreateChildPage}} should return null.
+
+<source lang="java">
+@Override
+protected IPage execCreateChildPage(ITableRow row) throws ProcessingException {
+if (CompareUtility.equals(FileTypeCodeType.FolderCode.ID, getTable().getTypeColumn().getValue(row))) {
+FolderTablePage page = new FolderTablePage();
+page.setParentId(getTable().getIDColumn().getValue(row));
+return page;
+}
+else {
+return null;
+}
+}
+</source>
+
+Because of the Virtual pages mechanism, this will not work as expected. One virtual page for each rows of the table (folder and file). On clic on a child page representing a file, the node will disappear. This is because on clic on the virtual page, the real page will be instantiated (by calling {{ScoutEvent|CreateChildPage}} for the corresponding row). The method will return null, meaning no child page for this row.
+
+[[Image:Scout_Folder_Outline_Bug.png]]
+It is important to implement {{ScoutEvent|CreateVirtualChildPage}} with according to {{ScoutEvent|CreateChildPage}}: if {{ScoutEvent|CreateChildPage}} returns null, {{ScoutEvent|CreateVirtualChildPage}} should also return null.
+
+An implementation could be:
+<source lang="java">
+@Override
+protected IPage execCreateVirtualChildPage(ITableRow row) throws ProcessingException {
+if (isFolder(row)) {
+return super.execCreateVirtualChildPage(row);
+}
+else {
+return null;
+}
+}
+
+@Override
+protected IPage execCreateChildPage(ITableRow row) throws ProcessingException {
+if (isFolder(row)) {
+FolderTablePage page = new FolderTablePage();
+page.setParentId(getTable().getIDColumn().getValue(row));
+return page;
+}
+else {
+return null;
+}
+}
+
+private boolean isFolder(ITableRow row) {
+return CompareUtility.equals(FileTypeCodeType.FolderCode.ID, getTable().getTypeColumn().getValue(row));
+}
+</source>
+
+A related topic is child page decoration:
+If some decoration occurs on the child page, the page will be decorated only after a user clic:
+
+[[Image:Scout_Decorate_Child_Page_Bug.png]]
+This is again because of the virtual page. The virtual page has no idea of the decoration of the real page it represent. The virtual page only display information of the summary cell of the row.
+
+Often the table contains enough information to compute the decoration of the child page. A solution is to compute the cell decoration in the table (as summary cell) instead of in the child page. A possible solution is to add an invisible column (displayable == false). This column is defined as summary column (summary == true).
+
+<source lang="java">
+@Order(1000.0)
+public class SummaryColumn extends AbstractStringColumn {
+
+  @Override
+  protected boolean getConfiguredDisplayable() {
+    return false;
+  }
+
+  @Override
+  protected boolean getConfiguredSummary() {
+    return true;
+  }
+
+  @Override
+  protected void execDecorateCell(Cell cell, ITableRow row) throws ProcessingException {
+    final StringBuilder sb = new StringBuilder();
+    sb.append('[');
+    sb.append(getIDColumn().getValue(row));
+    sb.append(']');
+    sb.append('[');
+    sb.append(getNameColumn().getValue(row));
+    sb.append(']');
+    sb.append('[');
+    sb.append(getNotesColumn().getValue(row));
+    sb.append(']');
+    cell.setText(sb.toString());
+  }
+}
+</source>
+
+There is no need to decorate the child page, because the summary cell will be used on both the virtual and the "real" child page.
+
+=== Other events ===
+
+{{note|TODO|Add a description of the more important event and a list of the other events (grouped by type)}}
+
+== See Also ==
+
+* {{ScoutLink|Concepts|Table|Table}}
+* {{ScoutLink|Concepts|Page|Page}}
+* {{ScoutLink|Concepts|NodePage|Node Page}}
+* {{ScoutLink|Concepts|Outline|Outline}}
+
+= Client
+
+One of the key concepts in Scout is the strict separation of the business relevant user interface from its graphical representation. This is achieved by providing a custom component model which is represented to the user in form of a desktop application (SWT or Swing) or a web application (Rap).
+
+That component model consists of typical components used in modern business applications. Beside the ability to separate the UI and GUI these components also enable  automated and central control of recurring tasks like validation, parsing and other component specific behavior.
+
+Strict subclassing of these abstract components leads to a strong typed application model where each application entity (Forms, Wizards, TablePages, ...) contains its component elements as inner classes, therefore entities are kept together as single unit.
+
+== Separation of UI and GUI  ==
+
+An important reason to create an own component model was to decouple the complex GUI code which needed to be implemented only once, as a result. So what we actually get is a separation of UI and GUI where the business logic for the UI is independent of any specific GUI implementation. This leads to the fact that you can easily switch between Swing, SWT, the web or any other upcoming GUI implementation if you like.
+
+In the diagram you can see how the UI and the GUI of scout and your application based on scout work together. On the left there is the plugin org.eclipse.scout.rt.client (UI) and the plugin org.eclipse.scout.rt.ui.swt (GUI). The UI plugin does not have any dependency to the GUI plugin so that it stays independent. On the right side there are the counterparts of the scout plugins which form your applications client.
+
+== Threading and Jobs  ==
+
+Another fundament of Eclipse Scout's simplicity is the Client Job Queue. Every logic processed on client side like calling services, opening a form, validating a field, etc. is run inside a ClientSyncJob and therefore synchronously. As soon the processing is finished and the data ready to be displayed the GUI Thread takes over and displays the data. This approach minimizes the execution time of the GUI Thread and therefore reduces the time of a blocking or freezing window.
+
+== Layouting ==
+
+How the fields are arranged on the form depends on the used form field container (composite). The default containers shipped with scout like {{ScoutLink|Concepts|GroupBox}} or {{ScoutLink|Concepts|TabBox}} use a so called body grid, which guarantees a uniform layout through the whole application. There are a lot of properties to control the layouting like vertical or horizontal span (gridH, gridW). If you still need more control you can create your own field composite with a custom layout manager.
+See {{ScoutLink|Concepts|Layout}} for a detailed explanation of the layout.
+
+== Component Model  ==
+
+=== Client Session  ===
+
+The {{ScoutLink|Concepts|ClientSession|Client Session}} is the main entry point for client-server communication.
+
+=== Desktop  ===
+
+The {{ScoutLink|Concepts|Desktop|Desktop}} is the entry point of every Scout client application. It can (may) consist of top-level menus, active message box stack, set of available outline, active outline, active tableview, active detail form, active search form, form stack (swing: dialogs on desktop as JInternalFrames; eclipse: editors or views), dialog stack of modal and non-modal dialogs (swing: dialogs as JDialog, JFrame; eclipse: dialogs in a new Shell).
+
+=== Outline  ===
+
+Typically a Desktop holds multiple {{ScoutLink|Concepts|Outline|Outline}}s. They represent different entry points for the navigation within the application. For every outline a tree is available which allows navigating within the application. The nodes of the tree are called {{ScoutLink|Concepts|Page}}s.
+
+=== Form  ===
+
+A {{ScoutLink|Concepts|Form|Form}} is both a model structure of a ui concept known as dialog or view and also a model of a wizard page.
+
+==== Form Handler  ====
+
+Every form is started by a {{ScoutLink|Concepts|Form Handler}}. Form handlers provide for a controlled form lifecycle. There typically exist at least a ModifyFormHandler and a NewFormHandler which are responsible for handling the modification respectively the creation of the form's data by calling the responsible services.
+
+=== Form fields  ===
+
+[[Scout/Concepts/Field | Form fields]]
+are the basic elements for user inputs fiels within a form. Examples are:
+
+*{{ScoutLink|Concepts|Button}}
+*{{ScoutLink|Concepts|CheckboxField}}
+*{{ScoutLink|Concepts|DateField}}
+*{{ScoutLink|Concepts|DoubleField}}
+*{{ScoutLink|Concepts|FileChooserField}}
+*{{ScoutLink|Concepts|IntegerField}}
+*{{ScoutLink|Concepts|ListBox}}
+*{{ScoutLink|Concepts|LongField}}
+*{{ScoutLink|Concepts|PageField}}
+*{{ScoutLink|Concepts|PlaceholderField}}
+*{{ScoutLink|Concepts|RadioButton}}
+*{{ScoutLink|Concepts|SmartField}}
+*{{ScoutLink|Concepts|StringField}}
+*{{ScoutLink|Concepts|TableField}}
+*{{ScoutLink|Concepts|TimeField}}
+*{{ScoutLink|Concepts|TreeBox}}
+
+Futhermore there exists composite fields which are able to group normal fields:
+
+*{{ScoutLink|Concepts|GroupBox}}
+*{{ScoutLink|Concepts|TabBox}}
+*{{ScoutLink|Concepts|SequenceBox}}
+*{{ScoutLink|Concepts|SnapBox}}
+*{{ScoutLink|Concepts|RadioButtonGroup}}
+
+=== Menu  ===
+
+The {{ScoutLink|Concepts|Menu|Menu}} component include all links, functionalities, etc... available within the application.
+
+=== Tool  ===
+
+A {{ScoutLink|Concepts|Tool|Tool}} component is used for grouping or dividing different views. This can be used for building business views on datas or just structuring your own application.
+
+=== Wizard  ===
+
+A {{ScoutLink|Concepts|Wizard|Wizard}} supports a user to work in a process driven approach on a task.
+
+== Templating ==
+
+[[Scout/Concepts/Template]]
+{{note|TODO|Describe what template fields are}}
+
+== Examples ==
+
+=== Forms ===
+
+*{{ScoutLink|Examples|SimpleForms}}
+=== Fields ===
+*{{ScoutLink|Examples|SequenceBox}}
+
+= Application types
+{{ScoutPage|cat=Concepts}}
+
+During the creation of  {{ScoutLink|HowTo|Create_a_new_project|a new Scout Project}} in the {{ScoutLink|SDK}}, it is possible to chose the type of application that should be created. This page gives an overview of the different types.
+
+== Single form application ==
+
+As shown in the example screenshot below, form based applications are well suited for smaller and simpler applications.
+To cover many entities and allow for sophisticated navigation (see example below), table and tree based applications are usually a better match.
+
+[[Image:Scout single form application.png]]
+In this type of application, the main window displays a form. In this example (Swing, Nimbus look and feel, Windows), the menu bar is displayed in this main window on top of the main form.
+
+During the initial project creation the SDK creates:
+* In the Scout client plugin: A {{ScoutLink|Concepts|Form|form}} (DesktopForm.java).
+* In the Scout server plugin: A {{ScoutLink|Concepts|Process_Service|process service}} (DesktopService.java)
+* In the Scout shared plugin: The process interface (IDesktopService.java) and the a {{ScoutLink|Concepts|FormData|form data}} (DesktopFormData.java)
+* The necessary wiring to open the DesktopForm in the client applications' {{ScoutLink|Concepts|Desktop|desktop}} (method execOpened in Desktop.java).
+
+The desktop form is opened on client startup.
+Before it is displayed in the client application frame, the wiring provided with the single form application fetches data from the Scout server using the desktop process service.
+For this, the Desktop's method ''execOpened'' is implemented as follows:
+
+<source lang="java">
+@Override
+protected void execOpened() throws ProcessingException {
+//If it is a mobile or tablet device, the DesktopExtension in the mobile plugin takes care of starting the correct forms.
+if (!UserAgentUtility.isDesktopDevice()) {
+return;
+}
+DesktopForm desktopForm = new DesktopForm();
+desktopForm.setIconId(Icons.EclipseScout);
+desktopForm.startView();
+}
+</source>
+
+See the {{ScoutLink|Tutorial|HelloWorld|'Hello World' tutorial}} to read more about the creation of a single form based application.
+
+== Outline based application ==
+
+{{ScoutLink|Concepts|Outline based application|Outline based application}} are well suited for larger business applications that cover many elements, user roles, complex navigation, etc.
+
+[[Image:Scout outline based application.png]]
+In example screenshot above (Swing, Nimbus look and feel, Windows), the main window provides:
+* A menu bar
+* A way to switch between the outlines attached to the desktop
+* A representation of the active outline:
+** A tree on the left
+** A page on the right
+
+During the initial project creation the SDK creates:
+* In the Scout client plugin: An {{ScoutLink|Concepts|Outline|outline}} (StandardOutline.java)
+* In the Scout server plugin: An {{ScoutLink|Concepts|Process_Service|outline service}}, (StandardOutlineService.java)
+* In the Scout shared plugin: A service interface (IStandardOutlineService.java)
+* The necessary wiring to open a tree form on the left and a table form on the right in the client applications' {{ScoutLink|Concepts|Desktop|desktop}} (method execOpened in Desktop.java).
+
+The Desktop's method ''execOpened'' is implemented as follows:
+
+<source lang="java">
+@Override
+protected void execOpened() throws ProcessingException {
+//If it is a mobile or tablet device, the DesktopExtension in the mobile plugin takes care of starting the correct forms.
+if (!UserAgentUtility.isDesktopDevice()) {
+return;
+}
+
+    // outline tree
+    DefaultOutlineTreeForm treeForm = new DefaultOutlineTreeForm();
+    treeForm.setIconId(Icons.EclipseScout);
+    treeForm.startView();
+
+    //outline table
+    DefaultOutlineTableForm tableForm = new DefaultOutlineTableForm();
+    tableForm.setIconId(Icons.EclipseScout);
+    tableForm.startView();
+
+    if (getAvailableOutlines().length > 0) {
+      setOutline(getAvailableOutlines()[0]);
+    }
+  }
+</source>
+
+{{ScoutLink|Concepts|Outline|Outlines}} may be used to group application functionality by business needs (Customer, Order management, Reporting), user roles (Sales, Marketing, Backoffice), or any other criteria.
+
+{{ScoutLink|Concepts|Page|Trees and pages}} are used to provide access to the content and functionality of an outline.
+In the screenshot above, the tree is used to represent categories.
+Frequently, it is used to provide access to different entities.
+In a ''Customer'' outline, the top level elements in the tree could be Companies, Persons, Communications, Tasks etc.
+
+See the {{ScoutLink|Tutorial|Minicrm_Step-by-Step|'Hello World' tutorial}} to read more about the creation of a single form based application.
+
+== Empty application ==
+
+The empty application templates allows for maximum flexibility.
+However, the developer needs to know exactely what she/he is doing.
+
+This type of application correspond to a minimal client server application.
+* Empty desktop client application frame
+* No forms in the Scout client
+* No related form services in the Scout server
+
+= Form
+
+== Form lifecycle ==
+
+Typically a form will be loaded with data coming from the server (using a FormData as data transfert object) and be displayed to the user. The user can interact with the form and if he makes some modifications that needs to be persisted in the server.
+
+In a lot of applications, the flow of data is not the same if the form is used to create a new entity or to modify an existing entity. This is why each form works with Form Handler that precise. By default the SDK creates a ModifyHandle and a NewHandler, but everything is possible depending on your use case. For example a ViewHandler might be useful for the case where the user cannot do any modification, or a WizardHandler might be useful for the special case where the form is embedded as step of a wizard. In a typical scenario the Form Handler will at least load the data during its {{ScoutEvent|Load}} event and store them during its {{ScoutEvent|Store}} event.
+
+The state of the form can be checked with different methods:
+* isFormOpen()
+* isFormLoading()
+* isFormStored()
+* isFormClosed()
+
+=== Unsaved changes ===
+
+Scout handles the notion of unsaved changes in a form. Depending on the rendering UI technology the user gets a visual confirmation that he needs to save the form. For example on SWT a form displayed in a view will have a star character <code>*</code> in its title to indicate that the form needs to be saved. Some developers speak from a “dirty marker” for this char. On Mac OSX, the red closing button is also lightly different when the form needs to be saved.
+
+The behavior of the framework will not be the same when the user leaves a form if the form contains unsaved changes or not.
+
+Each field can contribute information to determine if the form contains unsaved changes or not. By default the value fields compare the current value with the initial values. But custom logic can be implemented.
+
+To check if the form contains unsaved changes the method: <code>IForm.isSaveNeeded()</code> can be called. The state returned by this function might be out of date (for example if the state changes due to some business logic like “wait 5 minutes” and not due to some user input). To be sure to get the correct state, you should call <code>IForm. checkSaveNeeded()</code> before calling <code>IForm.isSaveNeeded()</code>.
+
+In addition of asking each fields it is also possible to mark that the form contains unsaved changes with the method <code>IForm.touch()</code>. Do not call this method during the formLoading phase (in other words: call <code>touch()</code> in <code>AbstractFormHandler.execPostLoad()</code> and not during <code>AbstractFormHandler.execLoad()</code>).
+<code>IForm.markSaved()</code> is the counter part of <code>IForm.touch()</code>. It will indicate that the form contains no unsaved changes. Concretely the state will be changed in each field (the markedChanged() call is propagated in each field of the form).
+
+=== Field Contribution to unsaved changes
+
+Each field controls if he contains modifications or not. This information is used by the form for its lifecycle management in particular to decide if a save action is required or not.
+
+Each field defines if it contains unsaved modifications with the method isSaveNeeded(). The property is updated when checkSaveNeeded() is called on the field. The implementation of this method checks:
+
+the value of the m_touched flag.
+the value returned by execIsSaveNeeded() (IsSaveNeeded event).
+The m_touched flag can be modified with touch() (flag is set to true) and markSaved() (flag is set to false). Additionally when the flag is set to false the event MarkSaved is triggered. Depending on the type of field this event will: reset the initial value to the current value for value fields or propagate the call to all the children for a composite field.
+
+The execIsSaveNeeded() method provides a way to add field-specific logic to tell if the field contains informations that require a save action (at form level) or not. The default implementation just compares the initial value with the current value. If they are not equals the method return true (to indicate that a save action is needed to save the content of this field).
+
+=== Actions and buttons ===
+
+TODO:
+* Ok button
+* Cancel Button
+* Save Button
+*Close Button
+*closing icon (“X”)
+* execOnCloseRequest
+https://www.eclipse.org/forums/index.php/mv/msg/796762/1416232/#msg_1416232
+
+== Form Handler
+
+Form Handler specify how a {{ScoutLink|Concepts|Form|form}} should be started.
+
+== Events ==
+
+''Defined with {{ScoutLink|Concepts|Exec_Methods|execXxxxxx()}} methods''.
+
+* {{ScoutEvent|Load}}: Load the data into the form, typically calling a {{ScoutLink|Concepts|Process_Service|ProcessService}} (with <code>prepareCreate()</code>, <code>load()</code>...) to get the {{ScoutLink|Concepts|FormData|FormData}} and using the the <code>importFormData(FormData)</code> function on the Form.
+* {{ScoutEvent|PostLoad}}: This event occurs right after load. This event is suitable if you want select some rows in a TableField or touch the form (to force the store mechanism).
+* {{ScoutEvent|CheckField}}: During the validation of a form this is the first method being called. At this point it is possible to block the validation process by returning <code>false</code>.
+* {{ScoutEvent|Validate}}: During the validation of a form, if the {{ScoutEvent|CheckField}} events (on the Form and on the FormHandler) return true, and every Field do not have any error status, this event occurs. It provides another possibility to block the validation process, knowing that every field contains a valid input (all mandatory fields are set for example). This point is suitable to compute some logic using the field inputs and considering the form as one entity.
+* {{ScoutEvent|Store}}: Store the form content, typically calling a {{ScoutLink|Concepts|Process_Service|ProcessService}} (with <code>create()</code>, <code>store()</code>...).
+
+= Keystroke
+
+Special type of {{ScoutLink|Concepts|Action|Action}} for key actions.
+
+* implements: {{ScoutJavadoc|IKeyStroke|I}}
+* extends: {{ScoutJavadoc|AbstractKeyStroke|C}}
+
+== Description ==
+
+In Eclipse Scout you can set KeyStrokes to components (such as Menus, Buttons, StringFields, GroupBoxes...). A KeyStroke represents a certain key sequence on the keyboard and can be associated with an action if the key sequence is pressed. For example one can associate a KeyStroke (F5) on a table in order to refresh it.
+
+A KeyStroke in Scout is defined as a String and set via
+<source lang="java">
+@Override
+protected String getConfiguredKeyStroke() {
+return "<keyStrokeDefinition>";
+}
+</source>
+
+Below you will see some examples of keyStrokes:
+
+* <tt>"Alt-F4"</tt> --> alternate-f4
+* <tt>"Ctrl+Alt+1"</tt> --> control-alternate-1
+* <tt>"F1"</tt> --> f1
+* <tt>"F10"</tt> --> f10
+* <tt>"Ctrl-Shift-1"</tt> --> control-shift-1
+* <tt>"Ctrl-Shift-a"</tt> --> control-shift-a
+
+If you want to map keys from the numeric keypad you need to use those keys identifiers in scout:
+* <tt>"ADD"</tt> --> the "+" key in the numpad
+* <tt>"SUBTRACT"</tt> --> the "-" key in the numpad
+* <tt>"DIVIDE"</tt> -->  the "/" key in the numpad
+* <tt>"MULTIPLY"</tt> --> the "*" key in the numpad
+
+Scout defines predefined Strings which will be mapped to keyStrokes:
+* alternate --> Alt
+* control --> Ctrl
+* f1 - f12 --> F1 - F12
+* shift --> Shift
+
+== Examples ==
+
+=== KeyStroke on StringField ===
+
+The following snippet shows a StringField with a keyStroke "F5", which will open a MessageBox if pressed:
+
+<source lang="java">
+public class StringField extends AbstractStringField {
+
+  @Override
+  protected String getConfiguredLabel() {
+    return "StringField";
+  }
+
+  public class KeyStroke extends AbstractKeyStroke {
+
+    @Override
+    protected String getConfiguredKeyStroke() {
+      return "f5";
+    }
+
+    @Override
+    protected void execAction() throws ProcessingException {
+      MessageBox.showOkMessage("KeyStroke", "F5 pressed on TextField", "");
+    }
+  }
+}
+</source>
+
+=== KeyStroke on ContextMenu ===
+
+The following snippet shows a SmartField with a context menu and a keyStroke "F5", which will open a MessageBox if pressed:
+
+<source lang="java">
+public class SmartFieldMenu extends AbstractExtensibleMenu {
+
+  @Override
+  protected void execAction() throws ProcessingException {
+    MessageBox.showOkMessage("KeyStroke", "Alt+2 pressed on SmartField", "");
+  }
+
+  @Override
+  protected String getConfiguredKeyStroke() {
+    return "alt-2";
+  }
+
+  @Override
+  protected String getConfiguredText() {
+    return TEXTS.get("ContextMenu with KeyStroke");
+    }
+  }
+}</source>
+Will result in:
+[[File:Keystroke_menu.png]]
+
+= DateField
+
+=== Differences between DateField and UTCDateField  ===
+
+On the UI side there is no difference to be seen between a DateField and an UTCDateField (especially, even if the name might imply this, there is no mechanism to manually set a time zone on an UTCDateField). The difference is in how the contained date and time are treated when such a field is accessed in applications in different time zones.
+
+java.util.Date objects are manipulated by the Scout framework when transferred between client and server: a java.util.Date object is replaced by a static date (org.eclipse.scout.rt.shared.servicetunnel.StaticDate) during serialization. A StaticDate is "time zone and daylight saving time independent", you can think of it similar to a string representation, such as "15:00", which does not change when displayed on other systems. Any information regarding the time zone is lost, a StaticDate is always implicitly interpreted in the systems' current time zone. Or in other words: A date is always displayed exactly the way as it would be on the system that created it!
+
+UTCDate objects are not treated in any specific way by the Scout framework. They represent a given point in time, encoded as the offset in milliseconds to the 'epoch' January 1, 1970, 0:00:00 UTC. So they behave just as you would expect of normal java.util.Date objects. If the same date is displayed on two systems in different time zones, you will have two different representations.
+
+Example (Note: when talking about 'dates', we're actually talking about its time part here. It's the time part that matters in this context.)
+
+'''Date'''
+<pre>Server UTC+0            Client1 UTC+1            Client2 UTC+2
+
+--------------------------------------------------------------
+d = new Date()
+                       "15:00" UTC+1
+            &lt;-- "15:00" --
+
+"15:00" UTC+0
+
+            --------------- "15:00" -------------&gt;
+                                                "15:00" UTC+2
+</pre>
+'''UTCDate'''
+<pre>Server UTC+0            Client1 UTC+1            Client2 UTC+2
+--------------------------------------------------------------
+
+d = new UTCDate()
+"15:00" UTC+1
+&lt;----- d -----
+"14:00" UTC+0
+----------------- d ---------------&gt;
+"16:00" UTC+2
+</pre>
+<br>
+
+{{Note|Problematic behaviour|The current default behavior for java.util.Date is problematic in many cases where systems in different time zones are involved, a discussion on how this could be resolved in Scout is being held in [http://www.eclipse.org/forums/index.php/mv/msg/449566/1004813/#msg_1004813 this forum thread]}}
+
+= SmartField
+{{ScoutPage|cat=Component Model}}
+
+Specific type of {{ScoutLink|Concepts|ValueField|value field}} to use a Smart association (with {{ScoutLink|Concepts|CodeType|CodeType}} or {{ScoutLink|Concepts|LookupCall|LookupCall}}).
+
+* implements: {{ScoutJavadoc|ISmartField<T>|I}}
+* extends: {{ScoutJavadoc|AbstractSmartField<T>|C}}
+
+== Description ==
+
+A SmartField gives a selection of available values to the client. The field gets his contents from a CodeType or a LookupCall.
+
+If the client doesn't write something into the SmartField, it will show all available values. (Lookup-Service Statement <code>&lt;all>&lt;/all></code>)
+
+If the client write text into the field, it will show all values, which starts with this text. (Lookup-Service Statement <code>&lt;text>&lt;/text></code>)<br>
+Wildcards like <code>*</code>, <code>%</code> or <code>_</code> are also possible to write into the SmartField.
+
+The functions:
+* setValue(value)
+* getValue()
+
+use the key of the CodeType or the LookupCall. (Lookup-Service Statement <code>&lt;key>&lt;/key></code>)
+
+== Screenshot ==
+
+{|{{BMTableStyle}}
+|-{{BMTHStyle}}
+! Type
+! RAP
+! SWT
+! Swing
+! Swing Rayo
+|-
+| Without values || [[Image:Scout_3.8_SmartField_all_RAP.png]] || [[Image:Scout_3.8_SmartField_all_SWT.png]] || [[Image:Scout_3.8_SmartField_all_Swing.png]] || [[Image:Scout_3.8_SmartField_all_Swing_Rayo.png]]
+|-
+| With text || [[Image:Scout_3.8_SmartField_text_RAP.png]] || [[Image:Scout_3.8_SmartField_text_SWT.png]] || [[Image:Scout_3.8_SmartField_text_Swing.png]] || [[Image:Scout_3.8_SmartField_text_Swing_Rayo.png]]
+|-
+| With text and wildcard || [[Image:Scout_3.8_SmartField_wildcard_RAP.png]] || [[Image:Scout_3.8_SmartField_wildcard_SWT.png]] || [[Image:Scout_3.8_SmartField_wildcard_Swing.png]] || [[Image:Scout_3.8_SmartField_wildcard_Swing_Rayo.png]]
+|-
+|}
+
+== Properties ==
+
+''Defined with {{ScoutLink|Concepts|GetConfigured Methods|getConfiguredXxxxxx()}} methods''.
+
+See also the {{ScoutLink|Concepts|Field|Field}} and the {{ScoutLink|Concepts|ValueField|Value field}} pages for the properties that all fields have in common.
+
+{{ScoutProp|BrowseHierarchy}}: overwrites the property of {{ScoutProp|IsHierarchy}} of the CodeType. If true the CodeType will be displayed as a tree, if false it will be displayed as a list.
+
+<gallery>
+Image:Scout SmartField BrowseHierarchy True.png|BrowseHierarchy is true
+Image:Scout SmartField BrowseHierarchy False.png|BrowseHierarchy is false
+</gallery>
+
+== Events ==
+
+''Defined with {{ScoutLink|Concepts|Exec_Methods|execXxxxxx()}} methods''.
+
+See also the {{ScoutLink|Concepts|Field|Field}} and the {{ScoutLink|Concepts|ValueField|Value field}} pages for the events that all fields have in common.
+
+== Concepts ==
+
+=== Replace the SmartFields proposal table ===
+
+The proposal table can be replaced or extended by an own implementation. This feature is primarily used for adding more columns to a smart field.
+
+[[File:Scout_MultiColumnSmartField.png]]
+How to get there:
+<ol>
+<li>
+Write your own table <code>implements org.eclipse.scout.rt.client.ui.form.fields.smartfield.IContentAssistFieldTable<KEY_TYPE></code> or extend the default table <code>extends org.eclipse.scout.rt.client.ui.form.fields.smartfield.ContentAssistFieldTable<KEY></code> providing already a key and text column and several utility functions. This table can be written in its own class file or as an inner class of the smart field.
+</li>
+<li>
+In case the table is implemented in its own compilation unit the <code>org.eclipsescout.demo.widgets.client.ui.forms.SmartFieldForm.MainBox.GroupBox.LeftBox.ListWithTableProposalField.getConfiguredContentAssistTable()</code> must be implemented and return the table class.
+</li>
+<li>
+To provide additional data to the created table use the <code>org.eclipse.scout.rt.shared.services.lookup.ILookupRow.setAdditionalTableRowData(AbstractTableRowData)</code> method. Create your own table row data class (a simple property bean with access methods name-matching with the column names and add it to the lookup row in the lookup service.
+
+</li>
+</ol>
+
+==== Example ====
+
+===== Smart Field =====
+
+<source lang="java">
+@Order(10.0)
+public class PersonField extends AbstractSmartField<Long> {
+
+  @Override
+  protected String getConfiguredLabel() {
+    return TEXTS.get("Person");
+  }
+
+  @Override
+  protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
+    return PersonLookupCall.class;
+  }
+
+  @Order(10.0)
+  public class Table extends ContentAssistFieldTable<Long> {
+
+    /**
+     * @return the CityColumn
+     */
+    public CityColumn getCityColumn() {
+      return getColumnSet().getColumnByClass(CityColumn.class);
+    }
+
+    /**
+     * @return the BirthdateColumn
+     */
+    public BirthdateColumn getBirthdateColumn() {
+      return getColumnSet().getColumnByClass(BirthdateColumn.class);
+    }
+
+    @Order(100.0)
+    public class BirthdateColumn extends AbstractDateColumn {
+
+      @Override
+      protected String getConfiguredHeaderText() {
+        return TEXTS.get("Birthdate");
+      }
+
+      @Override
+      protected int getConfiguredWidth() {
+        return 100;
+      }
+    }
+
+    @Order(110.0)
+    public class CityColumn extends AbstractStringColumn {
+
+      @Override
+      protected String getConfiguredHeaderText() {
+        return TEXTS.get("City");
+      }
+
+      @Override
+      protected int getConfiguredWidth() {
+        return 100;
+      }
+    }
+  }
+}
+</source>
+
+===== Lookup call =====
+
+<source lang="java">
+public class PersonLookupCall extends LocalLookupCall<Long> {
+
+  private static final long serialVersionUID = 1L;
+
+  @Override
+  protected List<? extends ILookupRow<Long>> execCreateLookupRows() throws ProcessingException {
+    List<LookupRow<Long>> rows = new ArrayList<LookupRow<Long>>();
+    rows.add(createLookupRow(23L, true, "Robert", "Smith", "1983-03-23", "Chicago"));
+    rows.add(createLookupRow(34L, false, "Mary", "Johnson", "1962-10-19", "New-York"));
+    rows.add(createLookupRow(45L, true, "David", "Jones", "1984-12-07", "New-York"));
+    rows.add(createLookupRow(56L, true, "James", "Wilson", "1979-05-29", "Chicago"));
+    rows.add(createLookupRow(67L, true, "Donald", "Johnson", "1972-08-13", "Boston"));
+    rows.add(createLookupRow(78L, false, "Susan", "Jackson", "1989-02-17", "Boston"));
+    rows.add(createLookupRow(89L, false, "Betty", "Taylor", "1964-04-24", "New-York"));
+    rows.add(createLookupRow(90L, true, "James", "Jones", "1957-06-30", "Chicago"));
+    return rows;
+  }
+
+  private LookupRow<Long> createLookupRow(Long id, boolean male, String firstName, String lastName, String date, String city) {
+    String text = firstName + " " + lastName;
+    String iconId = (male) ? Icons.MALE : Icons.FEMALE;
+    LookupRow<Long> row = new LookupRow<Long>(id, text, iconId);
+    PersonTableRowData data = new PersonTableRowData();
+    data.setBirthdate(DateUtility.parse(date, "yyyy-MM-dd"));
+    data.setCity(city);
+    row.setAdditionalTableRowData(data);
+    return row;
+  }
+}
+</source>
+
+===== Table row data =====
+
+<source lang="java">
+public class PersonTableRowData extends AbstractTableRowData {
+
+  private static final long serialVersionUID = 1L;
+  public static final String birthdate = "birthdate";
+  public static final String city = "city";
+  private Date m_birthdate;
+  private String m_city;
+
+  public PersonTableRowData() {
+  }
+
+  /**
+   * @return the Birthdate
+   */
+  public Date getBirthdate() {
+    return m_birthdate;
+  }
+
+  /**
+   * @param birthdate
+   *          the Birthdate to set
+   */
+  public void setBirthdate(Date birthdate) {
+    m_birthdate = birthdate;
+  }
+
+  /**
+   * @return the City
+   */
+  public String getCity() {
+    return m_city;
+  }
+
+  /**
+   * @param city
+   *          the City to set
+   */
+  public void setCity(String city) {
+    m_city = city;
+  }
+}
+</source>
+
+= Wizard
+
+A wizard presents to the user with a sequence of {{ScoutLink|Concepts|Form|forms}} that allow him to work in a process driven approach on a task.
+
+* implements: {{ScoutJavadoc|IWizard|I}}
+* extends: {{ScoutJavadoc|AbstractWizard|C}}
+
+== Description ==
+
+A wizard contains of one or more wizard steps. Each wizard step is typically bound to a form and responsible to start, show and save the form. If a form is started by a wizard step it will be opened inside a wizard container form. The top level system buttons of the form like Ok or Cancel will be hidden since the wizard container form will show wizard buttons instead. Such wizard buttons are Cancel, Next, Previous, Suspend and Finish.
+
+A typical wizard step looks as follows:
+
+<source lang="java">
+@Order(10.0)
+public class FirstStep extends AbstractWizardStep<FirstForm> {
+
+  @Override
+  protected String getConfiguredTitle() {
+    return TEXTS.get("First");
+  }
+
+  @Override
+  protected void execActivate(int stepKind) throws ProcessingException {
+    FirstForm form = getForm();
+    if (getForm() == null) {
+      form = new FirstForm();
+
+      // Start the form by executing the form handler
+      form.startWizardStep(this, FirstForm.ModifyHandler.class);
+
+      // Register the form on the step
+      setForm(form);
+    }
+
+    // Set the form on the wizard
+    // This will automatically display it as inner form of the wizard container form
+    getWizard().setWizardForm(form);
+  }
+
+  @Override
+  @Order(20.0)
+  protected void execDeactivate(int stepKind) throws ProcessingException {
+    // Save the form if the user clicks next
+    if (stepKind == STEP_NEXT) {
+      FirstForm form = getForm();
+      if (form != null) {
+        form.doSave();
+      }
+    }
+  }
+}
+</source>
+
+Wizards can be coupled with {{ScoutLink|Concepts|Workflow|Workflows}} on the server.
+
+= Template
+
+A template is some portion of code (a class) that is defined to be used many times in the {{ScoutLink|Concepts|Client Plug-In|Client}}.
+
+== Overview ==
+
+The templates are visible in the {{ScoutLink|SDK|Explorer View|Explorer View}} under '''your scout project > Client > Templates'''
+
+[[Image:ScoutExplorer Templates.png]]
+== Form Field template ==
+
+An easy way to reuse form field code is to use templates. Templates are implemented as abstract classes that may be extended by form fields. Creation and usage of templates is supported by the Scout SDK.
+
+Templates may be extracted from existing fields or other templates. The Scout SDK template support allows for quite powerful refactorings and helps keeping your code clean and DRY with little effort.
+
+=== Example ===
+
+Consider the following example: A group box for the billing address containing some fields.
+
+<source lang="java">
+@Order(10.0)
+public class BillingAddressBox extends AbstractGroupBox {
+@Override
+protected String getConfiguredLabel() {
+return TEXTS.get("BillingAddress");
+}
+@Order(10.0)
+public class StreetField extends AbstractStringField {
+@Override
+protected String getConfiguredLabel() {
+return TEXTS.get("Street");
+}
+}
+@Order(20.0)
+public class CityField extends AbstractSmartField<Long> {
+@Override
+protected Class<? extends ICodeType<?>> getConfiguredCodeType() {
+return CityCodeType.class;
+}
+@Override
+protected String getConfiguredLabel() {
+return TEXTS.get("City");
+}
+}
+}
+</source>
+
+Now let's assume you would like to create a similar box for the correspondence address without copying the code. This is possible by selecting "Create template..." on the group box.
+
+[[Image:Scout_createNewTemplate.jpg]]
+[[Image:Scout_createTemplateDialog.jpg]]
+A new abstract class is created containing the code of BillingAddressBox. To make the AddressBox template more useful, we move the configured label code to the BillingAddressBox.
+<source lang="java">
+//...
+@FormData(value = AbstractAddressBoxData.class, sdkCommand = SdkCommand.CREATE, defaultSubtypeSdkCommand = DefaultSubtypeSdkCommand.CREATE)
+public abstract class AbstractAddressBox extends AbstractGroupBox {
+/* @Override
+protected String getConfiguredLabel() {
+return TEXTS.get("BillingAddress");
+} */
+public CityField getCityField() {
+return getFieldByClass(CityField.class);
+}
+//...
+</source>
+The commented getConfiguredLabel is moved in the concrete class:
+<source lang="java">
+@Order(10.0)
+public class BillingAddressBox extends AbstractAddressBox {
+@Override
+protected String getConfiguredLabel() {
+return TEXTS.get("BillingAddress");
+}
+}
+</source>
+
+Now the correspondance address field can be created by choosing the template as type for the new field.
+
+<source lang="java">
+@Order(20.0)
+public class CorrespondanceAddressBox extends AbstractAddressBox {
+@Override
+protected String getConfiguredLabel() {
+return TEXTS.get("Correspondance");
+}
+}
+</source>
+
+<!--
+Form
+In some cases you have the  GroupBox that is displayed in multiple forms, you might be interested in
+-->
+
+{{note|TODO| {{ScoutLink|Concepts|FormData|FormData}} annotation in the Form.}}
+
+{{note|TODO|Template and SQL binding (in Process Service). Merge with this post: [http://www.eclipse.org/forums/index.php/t/261235/ Process Service and Templates]}}
+
+== Form template ==
+
+A form template is nothing more than an Abstract class extending {{ScoutJavadoc|org.eclipse.scout.rt.client.ui.form.AbstractForm|C}}. Your template can be located where you want (where it makes sense, depending on your code organization). Possible package: <tt><your_app>.client.ui.template.form</tt>
+
+There isn't any support yet in the Scout Perspective to create a form template. You need to use the Java tooling from the IDE.
+
+This is a minimal example:
+
+<source lang="java">
+import org.eclipse.scout.commons.exception.ProcessingException;
+import org.eclipse.scout.rt.client.ui.form.AbstractForm;
+
+public abstract class AbstractMyForm extends AbstractForm {
+
+  /**
+   * @throws ProcessingException
+   */
+  public AbstractMyForm() throws ProcessingException {
+    super();
+  }
+}
+</source>
+
+= Table
+Table can contains a set of structured data: the structure of the entity is defined by the {{ScoutLink|Concepts|Column|columns}}. Each entity contained in the table is a {{ScoutLink|Concepts|TableRow| row}}. At the intersection of a column and a row is a {{ScoutLink|Concepts|Cell|Cell}}. A Cell describes how the value is represented (displayed text, colors, style, icon...).
+
+== Example ==
+
+Imagine that you want to have a table of persons that are structured as followed:
+* Name (String)
+* First name (String)
+* Age (Integer)
+* Date of birth (Date)
+
+A such table needs to contains 4 columns :
+* <code>NameColumn</code> a {{ScoutLink|Concepts|StringColumn|String Column}}
+* <code>FirstNameColumn</code> a {{ScoutLink|Concepts|StringColumn|String Column}}
+* <code>AgeColumn</code> a {{ScoutLink|Concepts|IntegerColumn|Integer Column}}
+* <code>BirthDateColumn</code> a {{ScoutLink|Concepts|DateColumn|Date Column}}
+
+Here is how this table looks like in the {{ScoutLink|SDK|Explorer View|Explorer View of the SDK}}:
+
+[[Image:Scout sdk example table.png]]
+=== Access to the data ===
+
+To access a value of a table, the common pattern is to go through the column. For example if you want to access the age of a person, at a precise row index r, the code is:
+<source lang="java">
+private Integer getAgeOfPersonAtRow(int r){
+return getTable().getAgeColumn().getValue(r);
+}
+</source>
+
+=== Add a rows in the table ===
+
+The table API (client-side) offers different ways to add rows in the table:
+
+1: One row, with type check on set value. (you get compile error if you change something in your table):
+<source lang="java">
+ITableRow row = getTable().createRow();
+getTable().getNameColumn().setValue(row, "Smith");
+getTable().getFirstNameColumn().setValue(row, "John");
+getTable().getAgeColumn().setValue(row, 42);
+getTable().getBirthDateColumn().setValue(row, DateUtility.parse("14.12.1970", "dd.MM.yyyy"));
+getTable().addRow(row, true);
+</source>
+The second parameter correspond to "mark as inserted". <code>false</code> (default value - if the parameter is omitted) the row will be insterted with a row Status: <code>ITableRow.STATUS_NON_CHANGED</code>. If <code>true</code>, the row will be inserted with the status <code>ITableRow.STATUS_INSERTED</code>.
+
+2: One row as Object[] array.
+<source lang="java">
+getTable().addRowsByArray(
+new Object[]{"Johnny", "Mcgee", 26, DateUtility.parse("25.05.1986", "dd.MM.yyyy")},
+ITableRow.STATUS_INSERTED);
+</source>
+The second parameter indicate the status of the new row. <code>ITableRow.STATUS_INSERTED</code> is the default status (it could be omitted in this example).
+
+3: Multiple rows as Object[][] array.
+<source lang="java">
+getTable().addRowsByMatrix(new Object[][]{
+new Object[]{"Isabella", "Barton", 32, DateUtility.parse("21.01.1980", "dd.MM.yyyy")},
+new Object[]{"Dana", "Reyes", 56, DateUtility.parse("16.08.1956", "dd.MM.yyyy")}
+}, ITableRow.STATUS_INSERTED);
+</source>
+The second parameter indicate the status of the new row. <code>ITableRow.STATUS_INSERTED</code> is the default status (it could be omitted in this example).
+
+For method 2 and 3 you need to be ensure that the array elements order match with the order of your table columns.
+
+=== Delete a row from the table ===
+
+In a Table client-side, you have two ways to remove a row:
+* deleteRow(..)
+* discardRow(..)
+
+==== deleteRow(..) ====
+
+the row disappear from Table (as expected by the user), but is still present in the table. You can access it with ITableRow#getDeletedRows(). Later if you export the form content in a {{ScoutLink|Concepts|TableData}}, you will get row in the table with the status <tt>ITableHolder.STATUS_DELETED</tt> and you can persist the deletion in the database.
+
+==== discardRow(..) ====
+
+The row is removed from the table and lost. Nothing is sent to the server.
+
+Now if you set {{ScoutProp|AutoDiscardOnDelete}} to <code>true</code> on the table, calling deleteRow(..) is equivalent to discardRow(..).
+
+The semantic of a discarded row is: the row is deleted + there is no modification to commit to the server. The TableField assume there is no modifications. There is no "saveNeeded" status, the user will not be informed that he has pending modifications on the form...
+
+== TODO ==
+
+{{note|TODO| Organize these subsections in section + subsection. Add description }}
+
+=== Display/Hide the data (Organize Table) ===
+
+Table provides support to sort, to filter how the content is represented.
+
+=== Sorting possibility ===
+
+properties
+
+=== Selection ===
+
+Table also manages selection.
+
+properties
+
+=== Menu ===
+
+Table can also contains Menus, to provide a possibility to trigger some actions (Menus are displayed in the context menu of the table).
+
+=== Checkable ===
+
+=== Summary Cell ===
+
+In outline based application, the child-pages are represented a nodes in the page tree. The cell of this node is defined by the summary cell of the table.
+
+The set a column as summary cell, the column must override the following method:
+
+<source lang="java">
+@Override
+protected boolean getConfiguredSummary() {
+return true;
+}
+</source>
+
+If more than 1 column is defined as summary column, they will be concatenated
+
+=== Primary Columns ===
+
+{{note|TODO|Describe this here or in the [[Scout/Concepts/Column#Properties|Column property]]}}
+
+= TreeBox
+
+*Value is stored in a Array: <code>T[]</code> <br>It cointains the keys, whose entries were checked by the user. If no entry was checked, the value will be null.
+*Like a {{ScoutLink|Concepts|SmartField|Smart field}} but for multiple Values. Differ from a {{ScoutLink|Concepts|ListBox|ListBox}} because it is hierarchical.
+*Use a {{ScoutLink|Concepts|CodeType|CodeType}} or a {{ScoutLink|Concepts|LookupCall|LookupCall}}
+
+<br>
+
+== Screenshot  ==
+
+{|
+|-
+! RAP
+! SWT
+! Swing
+! Swing Rayo
+|-
+| [[Image:Scout 3.8 TreeBox RAP.png]]
+| [[Image:Scout 3.8 TreeBox SWT.png]]
+| [[Image:Scout 3.8 TreeBox Swing.png]]
+| [[Image:Scout 3.8 TreeBox Swing Rayo.png]]
+|}
+
+== Properties  ==
+
+''Defined with {{ScoutLink|Concepts|GetConfigured Methods|getConfiguredXxxxxx()}} methods''.
+
+See also the {{ScoutLink|Concepts|Field|Field}} and the {{ScoutLink|Concepts|ValueField|Value field}} pages for the properties that all fields have in common.
+
+'''getConfiguredLookupCall()'''
+
+The fields of a TreeBox are populated through the use of a <code>LookupCall</code>:
+
+<source lang="java">
+@Override
+protected Class<? extends LookupCall> getConfiguredLookupCall() {
+return MyLookupCall.class;
+}
+</source>
+
+That lookup call in turn uses a lookup service:
+<source lang="java">
+public class MyLookupCall extends LookupCall{
+private static final long serialVersionUID = 1L;
+@Override
+protected Class<? extends ILookupService> getConfiguredService() {
+return IMyLookupService.class;
+}
+}
+</source>
+The lookup service on the server uses an SQL query to return the content for those fields (see below).
+
+'''getConfiguredAutoExpandAll()'''
+
+By default the TreeBoxField shows a collapsed tree if not all elements of the tree can be shown in the field at the current size. This can be changed to always expand the tree by setting the <code>AutoExpandAll</code> property to true
+
+<source lang="java">
+@Override
+protected boolean getConfiguredAutoExpandAll() {
+return true;
+}
+</source>
+
+== Events  ==
+
+''Defined with {{ScoutLink|Concepts|Exec_Methods|execXxxxxx()}} methods''.
+
+See also the {{ScoutLink|Concepts|Field|Field}} and the {{ScoutLink|Concepts|ValueField|Value field}} pages for the events that all fields have in common.
+
+'''execFilterLookupResult()'''
+
+By default the entries in the list and tree are sorted by the <code>text</code> attribute (i.e. the visible text), not the <code>key</code>. This can be changed by defining a filtering function:
+
+<source lang="java">
+@Override
+protected void execFilterLookupResult(LookupCall call, List<LookupRow> result) throws ProcessingException {
+java.util.Collections.sort(result, new MyLookupRowComparator());
+}
+</source>
+This filter function requires a comparator class which implements <code>Comparator<LookupRow></code>:
+<source lang="java">
+public class MyRowComparator implements Comparator<LookupRow> {
+@Override
+public int compare(LookupRow object1, LookupRow object2) {
+if (object1 == null) return -1;
+if (object2 == null) return 1;
+// sort on 'text' (default behaviour)
+//return object1.getText().compareTo(object2.getText());
+
+    // sort on 'key'
+    return ((Long) object1.getKey()).compareTo((Long) object2.getKey());
+  }
+}
+</source>
+
+== LookupService ==
+
+{{Warning|Review needed|This section needs a review: There are 2 pages that mentioned LookupService:
+* {{ScoutLink|Concepts|Lookup Service}} (lookup service that is not specific)
+* {{ScoutLink|Concepts|Sql Lookup Service}} (convenience lookup service, ready to use a database (eg providing getConfiguredSqlSelect()))
+In my opinion the content of this section needs to be merged to one of these 2 pages (probably the second one).
+}}
+
+The [[Scout/Tutorial/3.8/Minicrm/Lookup Calls and Lookup Services|MiniCRM tutorial]] describes how to use a lookup service to populate SmartFields (e.g. dropdown boxes).
+
+Populating TreeBoxFields and ListBoxFields require more fields to be returned.<br>
+
+The LookupService has a '''getConfiguredSqlSelect()''' method which returns a number of fields. The first two attributes (<code>key</code> and <code>text</code>) are compulsory, any of the other attributes are optional (and can be skipped by returning null or an empty string; if all remaining fields would be skipped, the query can just end early). The attributes are returned in the following order:
+<source lang="java">
+@Override
+protected String getConfiguredSqlSelect() {
+return "" +
+"SELECT " +
+"   C.COMPANY_NR, " +                     // key
+"   C.SHORT_NAME || ': ' || C.NAME, " +   // text
+"   C.LOGO, " +                           // iconId
+"   C.TOOLTIP, " +                        // tooltip
+"   'F0F0F0', " +                         // background
+"   '404040', " +                         // foreground
+"   '" + Font.SERIF + "', " +             // font: not yet clear how this works
+"   1, "+                                 // enabled
+"   null, "+                              // parent
+"   1 "+                                  // active
+"FROM COMPANY C " +
+"WHERE 1=1 " +
+"AND (C.TYPE_UID =&nbsp;:master OR&nbsp;:master IS NULL) " +
+"     AND C.COMPANY_NR =&nbsp;:key  " +
+"     AND ((UPPER(C.NAME) LIKE '%'|| UPPER(:text)||'%') OR (UPPER(C.SHORT_NAME) LIKE '%'||UPPER(:text)||'%')) " +
+"      ";
+}
+</source>
+In principle a LookupService can be used for SmartFields, TreeBoxFields and ListBoxFields, however not all attributes are used for all fields (and behaviour between Swing and SWT differs for some of them).
+
+The attributes have the following functions:
+
+*<code>key</code><br>This is the value which will be returned in the array T[]<br>
+*<code>text</code><br>This is the text being displayed<br>
+*<code>iconId</code><br>This is an icon id that needs to be resolvable using an IconProviderService/IconLocator. With TreeBoxFields and ListBoxFields the icon will only be shown for Swing but not SWT<br>
+*<code>tooltip</code><br>The tooltip text will be shown when hovering over the entry with the mouse.<br>
+*<code>background</code><br>The background colour used for this entry ("RRGGBB" in hex)<br>
+*<code>foreground</code><br>The foreground colour used for this entry ("RRGGBB" in hex)<br>
+*<code>font</code><br>The font to be used (TODO: needs more information on how to use this)<br>
+*<code>enabled</code><br>TODO: needs more information on the difference between enabled and active<br>
+*<code>parent</code><br>A reference to the key attribute of another entry and is used to build the hierarchy of elements<br>
+*<code>active</code><br>TODO: needs more information on the difference between enabled and active<br>
+{{Note|TODO|Update description for <code>font</code>, <code>enabled</code> and <code>active</code>}}
+<br>
+
+= Texts
+
+<source lang="java">
+TEXTS.get("persons");
+</source>
+
+It is possible to use some Parameters:
+<source lang="java">
+String name = "Bob";
+int age = 13;
+
+TEXTS.get("NameWithAge", name, age);
+</source>
+
+In this case, some placeholders for the parameters are needed in the translated text:
+NameWithAge={0} is {1} years old;
+
+=== properties files ===
+
+Scout uses the java.util.ResourceBundle mechanism for native language support. So whatever language files you have in your <code><project-prefix>.shared/resources/texts/*.properties</code> are taken as translation base.
+
+Example setup:
+* <code><project-prefix>.shared/resources/texts/Texts.properties</code>
+* <code><project-prefix>.shared/resources/texts/Texts_fr.properties</code>
+
+If your application starts with the -vmargs -Duser.language=fr or eclipse.exe -nl=fr the translations in <code>Texts_fr.properties</code> are considered. In case of any other user language the translations in <code>Texts.properties</code> are considered.
+
+It is possible to edit these files in the Eclipse Scout SDK with the {{ScoutLink|SDK|NLS Editor}}.
+
+= Server
+
+https://wiki.eclipse.org/index.php?title=Scout/Concepts/Server_Plug-In
+
+The server part of a Scout application (backend) is responsible for processing business objects. In order to do this Scout provides an infrastructure for accessing data and expose it to the client in a simple way. All this is done in a transactional and secure environment which is yet transparent and easy to use.
+
+To increase the simplicity even more osgi is not only used on client side but on server side as well. This gives the possibility to use the same techniques and tools like extension points, osgi services, pde build etc. as on client side.
+
+== Providing data for the client ==
+
+In order to deliver data to the client the server provides several services.
+
+[[Image:Scout services.png|thumb|right|200px|Scout Services]]
+=== Service Types  ===
+
+Services are managed by the service registry. There is a variety of service types:
+
+*Data Services
+* {{ScoutLink|Concepts|Lookup Service|Lookup Services}}
+*Enumeration/Code Services
+* {{ScoutLink|Concepts|Process Service|Process Services}}
+*Workflow services
+* {{ScoutLink|Concepts|Outline Service|Outline Services}}
+*Remote File Services
+
+A data service is normally a server service providing read-only data with aggregation and composition logic. Data services offer search and filter capabilities. From the client (frontend) such services are called using service remoting over HTTP(S).
+
+A {{ScoutLink|Concepts|Lookup Service|Lookup Service}} is normally a server service providing read-only lookup data for dynamic list-of-values such as “Companies”, “Persons”, etc. Lookup Services offer filter and search capabilities and specific data access “by key”, “by display text”, and “by parent key” (for hierarchical lookup data). From the client these services are called using a lookup service call representing the call data.
+
+An enumeration service is normally a server service providing read-only enumeration data for static list-of-values such as “Project State”, “Address Type”, etc. Note that the word “static” does not mean that the data is fixed and constant, but that the character of the data is rather static. Like Lookup services also code services offer filter and search capabilities. From the client these services are called using a code service call representing the call data.
+
+A {{ScoutLink|Concepts|Process Service|Process Services}} is normally a server service providing data manipulation or control operations such as “Company.create”, “Company.modify” etc. From the client these services are called using service remoting over HTTP(S). Most processing services managed by Scout SDK are the backend of UI {{ScoutLink|Concepts|Form|form}} models. In order to maximally assist developers, Scout SDK can automatically create a value structure ({{ScoutLink|Concepts|FormData|FormData}}) for every UI form that is created and also generate a load/store/create processing service for it.
+
+A workflow service is normally a server service providing state machine and workflow control operations such as “AddressChange.start”, “AddressChange.nextStep” etc. From the client these services are called using service remoting over HTTP(S). Most workflow services managed by Scout SDK are the backend of UI wizard models. In order to maximally assist developers, Scout SDK automatically creates a value structure for every UI wizard that is created and also generates a workflow service for it.
+
+An {{ScoutLink|Concepts|Outline Service|Outline Service}} is used to fill the content of the different {{ScoutLink|Concepts|Outline|Outlines}} (mainly for the {{ScoutLink|Concepts|TablePage|TablePages}}).
+
+A remote file service is used to upload files from the server to the client. See {{ScoutLink|HowTo|Use RemoteFileService}}
+
+== Accessing persistent data ==
+
+* {{ScoutLink|Concepts|Outline_Service|Data/Outline Services}}
+* {{ScoutLink|Concepts|Lookup_Service|Lookup Services}}
+* Enumeration/Code Services
+* {{ScoutLink|Concepts|Process_Service|Processing Services}}
+* Workflow services
+
+=== Database / SQL support ===
+
+{{note|TODO|Add description}}
+* {{ScoutLink|Concepts|Sql Service|Sql Service}}
+* {{ScoutLink|Concepts|SqlStyle|Sql Style}}
+
+=== Statement Builder  ===
+
+See {{ScoutLink|Concepts|StatementBuilder|FormDataStatementBuilder}}.
+
+== Webservice (JAX-WS) support ==
+
+Since version 3.8 scout provides support for webservices based on JAX-WS. This support lets you easily consume and publish webservices from within Scout applications. It also helps you with transaction handling, logging, authentication, authorization and more. See the following links to learn more about it.
+* [[:Category:Scout_JAXWS-RT|JAX-WS Runtime]]
+* [[:Category:Scout_JAXWS-SDK|JAX-WS SDK]]
+* [[Scout/Tutorial/3.8/webservices/Webservices_with_JAX-WS|Tutorial]]
+
+== Server Side Equinox  ==
+
+{{note|TODO|Describe ServerApplication as Startup Point, Jetty as http server, server product}}
+
+== Transaction Handling  ==
+
+Basically every request to the server is one transaction. This transaction is created by the servlet which receives the request ({{ScoutLink|Concepts|Servlets#ServiceTunnelServlet|ServiceTunnelServlet}}). If the processing was successful (which means the service did not throw an exception) the transaction will be committed when the response is sent to the client.
+
+The servlet which is responsible for that is called ServiceTunnelServlet and registered at /process. The transaction runs under the user's (JAAS) Subject with a ITransaction in the thread context. ThreadContext.get(ITransaction) delivers the "current" transaction. The wrapper of the transaction is always a scout ServerJob. Every resource taking part in the transaction (similar to xa) can register a ITransactionMember to the transaction. Once the transaction is closed it is either committed (2-phase) or rolled back based on the property ITransaction.getFailures() that must be null for a commit.
+
+== Configuration  ==
+
+=== config.ini  ===
+
+Inside of the <code>config.ini</code> in the server it is possible to override the member variables of services.
+
+For example:
+
+  <your application>.server.services.common.sql.SqlService#directJdbcConnection=true
+
+If the service SqlService has a setter method for the member directJdbcConnection then the member has at runtime the value true.
+
+With Eclipse Scout this works for all classes which extends AbstractService
+
+For other classes it must be done by yourself for example with the class FilterConfigInjection at startup.
+
+=== Server Side Proxy  ===
+
+If the server application needs to access a server in the web and in between your application server and the server in the web is a proxy that needs authentication, you need to set the proxy parameters (like username or password) somewhere.
+
+In the web you find several sites that tell you to start Java with the following options:
+
+  -Dhttp.proxyHost&#61;proxyHost
+  -Dhttp.proxyPort&#61;proxyPort
+  -Dhttp.proxyUser&#61;proxyUser
+  -Dhttp.proxyPassword&#61;proxyPassword
+
+(You can set these options in the Tomcat by right-clicking on the Tomcat tray icon, then click on 'Configure...', go to the Java tab &amp; add the four lines to the Java options)
+
+When the request is sent, the proxy host and the proxy port are known &amp; the request is sent over the proxy. However the authentication does not work. Even though these options are loaded when Java / the Tomcat is started.
+
+Either Java does not care about the options for the username and the password or the proxy we use does the authentication not as expected / usual.
+
+If you have problems with the upper solution, you can solve the problem by setting the proxy informations in Java before you send the request (read the proxy informations from the <code>config.ini</code>-file).
+
+ Your code could look similar to the following code snippet:
+
+  URL url &#61; new URL(myUrl);
+  URLConnection conn;
+  Proxy proxy &#61; new Proxy(Proxy.Type.HTTP, new InetSocketAddress(myProxyHost, myProxyPort));
+  conn &#61; url.openConnection(proxy);
+  String encoded &#61; Base64Utility.encode((myProxyUsername + ":" + myProxyPassword).getBytes());
+  conn.setRequestProperty("Proxy-Authorization", "Basic " + encoded);
+
+However, with this solution you need to set the proxy parameters for each request anew.
+
+= Lookup Service
+
+A '''SQL lookup Service''' is a specific type of {{ScoutLink|Concepts|Lookup_Service|Lookup Service}} that works with a database.
+
+* implements: {{ScoutJavadoc|ILookupService|I}}
+* extends: {{ScoutJavadoc|AbstractSqlLookupService|C}}
+
+
+== Description ==
+
+A '''SQL lookup Service''' provide a way to implement a {{ScoutLink|Concepts|Lookup_Service|Lookup Service}} that is very efficient to configured, if the {{ScoutLink|Concepts|LookupCall|call}} is resolved with a database.
+
+Instead of implementing the 4 methods (<code>getDataByKey(LookupCall call)</code>, <code>getDataByText(LookupCall call)</code>, <code>getDataByAll(LookupCall call)</code>, <code>getDataByRec(LookupCall call)</code>), it is possible to defined the behavior of the lookup service with some configuration properties and events.
+
+== Properties ==
+
+''Defined with {{ScoutLink|Concepts|GetConfigured Methods|getConfiguredXxxxxx()}} methods''.
+
+{{ScoutProp|SqlSelect}}
+
+The property SqlSelect expects a SQL query which is used to load the records for the lookup call.
+
+Here is an example of a such SQL query:
+<source lang="sql">
+select language_id, name, null, null, null, null, null, 1, null, 1
+from languages
+<key>where language_id = :key</key>
+<text>where upper(name) like upper('%'||:text||'%')</text>
+</source>
+
+Looking at this implementation we see that for each record returned by our lookup service we provide both a (unique) key and a text, which is a general characteristic of lookup services.
+Further we see that parts of the SQL statement are enclosed in tags. This is because a lookup can be performed in several ways:
+* '''Key-Lookup''': Single-result lookup based on a unique key (e.g. when loading a form with a smartfield containing a value).
+* '''Text-Lookup''': Multi-result lookup based on a textual search-term (e.g. when entering text into a smartfield).
+* '''All-Lookup''': Unrestricted lookup that returns all available key-text pairs (e.g. when clicking the magnifier button on a smartfield).
+
+Depending on the way the lookup is performed, only one SQL part in tags is used. If for example a '''Text-Lookup''' is performed, only the SQL code in the corresponding '''<text>''' tag is used, whereas the SQL code in the other tags is ignored.
+
+As you might have noticed, the SQL statement contains two binding variables :key and :text. These bindings are available because the <code>LookupCall</code> itself is bound to the SQL statement. Therefore every public property of the <code>LookupCall</code> can be used as binding variable in the query. (<code>:key</code> for <code>call.getKey()</code>, <code>:text</code> for <code>call.getText()</code>, <code>:master</code> for <code>call.getMaster()</code> ...)
+
+The above example showed a SQL statement with a complete variable where part. In a more complex query you probably have an additional fix where part which you do not want to add in the key, text and all section. If that's the case you should move the WHERE key word out of the tags like in the following example.
+
+<source lang="java">
+public class CompanyLookupService extends AbstractSqlLookupService implements ICompanyLookupService {
+
+  @Override
+  public String getConfiguredSqlSelect() {
+    return "SELECT  C.COMPANY_NR, " +
+        "        C.NAME " +
+        "FROM    COMPANY C " +
+        "WHERE   C.ASSET > 10000 " +
+        "<key>   AND     C.COMPANY_NR = :key </key> " +
+        "<text>  AND     UPPER(C.NAME) LIKE UPPER(:text||'%') </text> " +
+        "<all> </all> ";
+  }
+}
+</source>
+
+{{note|'''AbstractSqlLookupService'''|In the above section we have shown you how to return key-text pairs in your lookup service implementation. There is nothing wrong about that, but it is also not the whole truth. The '''AbstractSqlLookupService''' actually allows you to return additional ''meta-data'' that controls how the returned data is presented to the users. You can for example return icon IDs, color codes, tooltip texts or font descriptions. The complete list and order of all columns supported by the '''AbstractSqlLookupService''' is as follows:
+* Object key
+* String text
+* String iconId
+* String tooltip
+* String background color
+* String foreground color
+* String font
+* Boolean enabled
+* Object parentKey used in hierarchical structures to point to the parents primary key
+* Boolean active (0,1)
+}}
+
+When the SQL Statement is executed, the Lookup-call is passed as bind-variable. You can access every properties of your call (see {{ScoutLink|Concepts|LookupCall#Members|lookupCall members}}):
+
+<source lang="java">
+public String getConfiguredSqlSelect() {
+return "language_id, name, null, null, null, null, null, 1, null, 1 " +
+" from languages" +
+" <key>where language_id = :key</key>" +
+" <text>where upper(name) like upper('%'||:text||'%')</text> " +
+" and nvl(start_date, to_date('19000101', 'yyyymmdd')) < NVL(:validityTo, to_date('99990101', 'yyyymmdd')) " +
+" and nvl(end_date, to_date('99990101', 'yyyymmdd')) > NVL(:validityFrom, to_date('19000101', 'yyyymmdd')) ";
+}
+</source>
+
+= FormData
+
+https://wiki.eclipse.org/index.php?title=Scout/Concepts/FormData
+
+FormData is the standard data transfer object for {{ScoutLink|Concepts|Form|forms}} between the {{ScoutLink|Concepts|Client Plug-In|client Plug-In}} and the {{ScoutLink|Concepts|Server Plug-In|server}}.
+
+Contains a transfer object for each {{ScoutLink|Concepts|Field|field}} and each {{ScoutLink|Concepts|Variable|variable}} of a {{ScoutLink|Concepts|Form|form}}.
+
+=== Usage ===
+
+* Used as parameter of the <code>prepareCreate(..)</code>, <code>create(..)</code>, <code>load(..)</code>, <code>store(..)</code> functions in the {{ScoutLink|Concepts|Process Service|process service}}.
+
+* Importation in {{ScoutLink|Concepts|Form|Form}}: {{ScoutEvent|Load}} and {{ScoutEvent|Store}} events of {{ScoutLink|Concepts|Form Handler|FormHandler}}:
+** <code>exportFormData()</code>
+** service call (depending of the action exectuted with the {{ScoutLink|Concepts|Process Service|ProcessService}})
+** <code>importFormData()</code>
+
+=== Access ===
+
+{{note|TODO|Add a description and example of how to access to a value, how to know if a value was set}}
+
+== Generation ==
+
+=== SDK Support ===
+
+* Generation of FormData with the {{ScoutLink|SDK|Explorer_View|Explorer View}}
+
+{{note|TODO|Add a screenshot}}
+
+=== FormData anotation ===
+
+* {{ScoutJavadoc|FormData|A}} FormData annotation
+** Is needed on the form Class
+<!-- old: ** "CREATE EXTERNAL" parameter is needed on fiels (a GroupBoxField for example) defined in an external Class that contains other fields. -->
+
+== Structure of a FormData ==
+
+The FormData depends from the {{ScoutLink|Concepts|Form}} it contains the data. The SDK generate:
+* For each {{ScoutLink|Concepts|ValueField}} a <tt>AbstractValueFieldData<T></tt> is generated.
+* For each {{ScoutLink|Concepts|TableField}} a {{ScoutLink|Concepts|TableData}} is generated.
+* For each form-variable an <tt>AbstractPropertyData<T></tt>
+
+The inner-class structure from the composite field (like groupboxes) get lost, unless Group-Box templates are used.
+
+The value fields properties (<tt>getConfiguredMandatory()</tt>, <tt>getConfiguredMaxValue()</tt>, <tt>getConfiguredMaxLength()</tt>...) are mapped to <tt>ValidationRules</tt> conatained in the formData. Those rules are used to redo the basic UI client-side validations on the server.
+
+= TableData
+
+https://wiki.eclipse.org/index.php?title=Scout/Concepts/TableData
+
+TableData is the data transfert object for {{ScoutLink|Concepts|Table}}.
+
+== Description ==
+
+TableData is contained in a {{ScoutLink|Concepts|FormData}} or in a {{ScoutLink|Concepts|TablePageData}} to hold the content of a {{ScoutLink|Concepts|Table}} (of a {{ScoutLink|Concepts|TableField}} or of a {{ScoutLink|Concepts|TablePage}}).
+
+There are two different kinds of TableData:
+* Array based TableData
+* Bean based TableData
+
+Concrete TableData extends abstract classes (different one depending on the type of table data, see below) and are generated by the SDK given the concrete table (in the TableField or in the TablePage). The SDK decide the type TableData given the {{ScoutLink|Concepts|FormData}} anotation.
+
+The bean based tableData was introduced with Scout 3.10.0. It makes inheritance possible: the TableData has the same inheritance graph as the Table. Inheritance is not supported by Array-based table Data.
+
+=== Usage ===
+
+Client side, you can import and export the table content of a TableField with importFormData() and exportFormData(). For a table in a TablePage, there is a importPageData() function.
+
+Server side, you can use the built in SQL Support from Eclipse Scout. Reading from a Database:
+<source lang="java">
+SQL.selectInto("SELECT PERSON_NR, PERSON_NAME FROM PERSONS INTO :{id}, :{name}", formData.getPersonTable());
+</source>
+
+You can also fill and read the TableData by ourself. In this case, the syntax will depend on the type of table data you have chosen(array based or bean based).
+
+== Bean based TableData ==
+
+{{important|Required version|The API described here requires version 3.10.0 or bigger. With Mars-M5 (version 4.3.0) this becomes the default}}
+
+{{ScoutJavadoc|AbstractTableFieldBeanData|C}}
+
+This kind of TableData is used by default in TablePageData. It is also possible to use it for a Table Field using the {{ScoutJavadoc|FormData|A}} to control the generation of FormData.
+
+In bean based TableData, a row is represented by a bean. Like in any bean, a java field, a setter and a getter is generated for each column.
+
+=== Using bean based TableData for TableField ===
+
+To use it in FormData for Table Field, the table field needs to be annotated with:
+<source lang="java">
+@FormData(sdkCommand = SdkCommand.USE, value = AbstractTableFieldBeanData.class, defaultSubtypeSdkCommand = DefaultSubtypeSdkCommand.CREATE)
+public class TableField extends AbstractTableField {
+//... Table inner class.
+}
+</source>
+
+If you work with template (for a table field), you need to add an empty TableField template (that does not contain any Table) on top of your hierarchy to indicate that want to use bean based table data:
+* AbstractTableBeanField
+** annotation: <source lang="java">@FormData(sdkCommand = SdkCommand.USE, value = AbstractTableFieldBeanData.class, defaultSubtypeSdkCommand = DefaultSubtypeSdkCommand.CREATE)</source>
+** class declaration: <source lang="java">AbstractTableBeanField<T extends ITable> extends AbstractTableField<T></source>
+** no table included
+* AbstractPersonTableField
+** annotation: <source lang="java">@FormData(sdkCommand = SdkCommand.CREATE, value = AbstractPersonTableFieldData.class)</source>
+** form-field declaration: <source lang="java">AbstractPersonTableField<T extends PersonTable> extends AbstractTableBeanField<T></source>
+** table: <source lang="java">PersonTable extends AbstractExtensibleTable</source>
+** table columns: IdColumn (Long) and NameColumn (String)
+* PersonWithAgeTableField
+** no specific FormData annotation
+** form-field declaration: <source lang="java">PersonWithAgeTableField extends AbstractPersonTableField<PersonWithAgeTable></source>
+** table: <source lang="java">PersonWithAgeTable extends PersonTable</source>
+** table columns: AgeColumn (Integer)
+
+=== Example ===
+
+<source lang="java">
+public static class PersonTable extends AbstractTableFieldBeanData {
+
+  private static final long serialVersionUID = 1L;
+
+  public PersonTable() {
+  }
+
+  @Override
+  public PersonTableRowData addRow() {
+    return (PersonTableRowData) super.addRow();
+  }
+
+  @Override
+  public PersonTableRowData addRow(int rowState) {
+    return (PersonTableRowData) super.addRow(rowState);
+  }
+
+  @Override
+  public PersonTableRowData createRow() {
+    return new PersonTableRowData();
+  }
+
+  @Override
+  public Class<? extends AbstractTableRowData> getRowType() {
+    return PersonTableRowData.class;
+  }
+
+  @Override
+  public PersonTableRowData[] getRows() {
+    return (PersonTableRowData[]) super.getRows();
+  }
+
+  @Override
+  public PersonTableRowData rowAt(int index) {
+    return (PersonTableRowData) super.rowAt(index);
+  }
+
+  public void setRows(PersonTableRowData[] rows) {
+    super.setRows(rows);
+  }
+
+  public static class PersonTableRowData extends AbstractTableRowData {
+
+    private static final long serialVersionUID = 1L;
+    public static final String id = "id";
+    public static final String name = "name";
+    private Long m_id;
+    private String m_name;
+
+    public TableRowData() {
+    }
+
+    public Long getId() {
+      return m_id;
+    }
+
+    public void setId(Long id) {
+      m_id = id;
+    }
+
+    public String getName() {
+      return m_name;
+    }
+
+    public void setName(String name) {
+      m_name = name;
+    }
+  }
+}
+</source>
+
+=== Usage example ===
+
+In the server you might want to map the data from an object (like the Person POJO in this case) to the TableData in the form data. Here is how you can do it:
+<source lang="java">
+private void mapPersonsToFormData(AFormData formData, List<Person> persons) {
+PersonTable table = formData.getPersonTable();
+table.clearRows();
+for (Person person : persons) {
+PersonTableRowData personRow = table.addRow();
+personRow.setId(person.getId());
+personRow.setName(person.getName());
+}
+}
+</source>
+
+Notice the clearRows() before the for-each loop. This is important if your formData already contains data.
+
+When you map the data back in your business object, you might use a switch on <tt>AbstractTableRowData.getRowState()</tt>, because the persistance operation depends on the row status:
+<source lang="java">
+private void mapPersonsFromFormData(AFormData formData, List<Person> persons) {
+PersonTable table = formData.getPersonTable();
+for (PersonTableRowData personRow : table.getRows()) {
+switch (personRow.getRowState()) {
+case ITableHolder.STATUS_INSERTED:
+//insert a new person corresponding to the row:
+insertPerson(persons, personRow.getId(), personRow.getName());
+break;
+case ITableHolder.STATUS_DELETED:
+//delete the person corresponding to the row:
+deletePerson(persons, personRow.getId());
+break;
+case ITableHolder.STATUS_UPDATED:
+//modify the person corresponding to the row:
+updatePerson(persons, personRow.getId(), personRow.getName());
+break;
+case ITableHolder.STATUS_NON_CHANGED:
+default:
+//Do nothing
+break;
+}
+}
+}
+</source>
+
+== Array based TableData ==
+
+{{ScoutJavadoc|AbstractTableFieldData|C}}
+
+This kind of Table Data is was the default in FormData until Mars-M5 and is not available for TablePage. It stores the row content as array, and provides some getter and setter methods to ensure that the row content is properly type casted.
+
+=== Using array based TableData for TableField ===
+
+The easiest way to do so is to extend from the class <code>AbstractArrayTableField</code> (introduced with Mars-M5) instead of <code>AbstractTableField</code>. You can also work with the @FormData annotation.
+
+<source lang="java">
+@FormData(value = AbstractTableFieldData.class, sdkCommand = SdkCommand.USE, defaultSubtypeSdkCommand = DefaultSubtypeSdkCommand.CREATE)
+public class CitiesTableField extends AbstractTableField<CitiesTableField.Table> {
+
+  @Override
+  protected String getConfiguredLabel() {
+    return TEXTS.get("Person");
+  }
+
+  @Order(10.0)
+  public class Table extends AbstractExtensibleTable {
+
+    public CityColumn getCityColumn() {
+      return getColumnSet().getColumnByClass(CityColumn.class);
+    }
+
+    public ZipCodeColumn getZipCodeColumn() {
+      return getColumnSet().getColumnByClass(ZipCodeColumn .class);
+    }
+
+    @Order(10.0)
+    public class ZipCodeColumn extends AbstractStringColumn {
+
+      @Override
+      protected String getConfiguredHeaderText() {
+        return TEXTS.get("ZipCode");
+      }
+    }
+
+    @Order(20.0)
+    public class CityColumn extends AbstractStringColumn {
+
+      @Override
+      protected String getConfiguredHeaderText() {
+        return TEXTS.get("City");
+      }
+    }
+  }
+}
+</source>
+
+=== Example ===
+
+<source lang="java">
+public static class PersonTable extends AbstractTableFieldData {
+
+  private static final long serialVersionUID = 1L;
+  public static final int ID_COLUMN_ID = 0;
+  public static final int NAME_COLUMN_ID = 1;
+
+  public PersonTable() {
+  }
+
+  public Long getId(int row) {
+    return (Long) getValueInternal(row, ID_COLUMN_ID);
+  }
+
+  public void setId(int row, Long id) {
+    setValueInternal(row, ID_COLUMN_ID, id);
+  }
+
+  public String getName(int row) {
+    return (String) getValueInternal(row, NAME_COLUMN_ID);
+  }
+
+  public void setName(int row, String name) {
+    setValueInternal(row, NAME_COLUMN_ID, name);
+  }
+
+  @Override
+  public int getColumnCount() {
+    return 2;
+  }
+
+  @Override
+  public Object getValueAt(int row, int column) {
+    switch (column) {
+      case ID_COLUMN_ID:
+        return getId(row);
+      case NAME_COLUMN_ID:
+        return getName(row);
+      default:
+        return null;
+    }
+  }
+
+  @Override
+  public void setValueAt(int row, int column, Object value) {
+    switch (column) {
+      case ID_COLUMN_ID:
+        setId(row, (Long) value);
+        break;
+      case NAME_COLUMN_ID:
+        setName(row, (String) value);
+        break;
+    }
+  }
+}
+</source>
+
+=== Usage example ===
+
+In the server you might want to map the data from an object (like the Person POJO in this case) to the TableData in the form data. Here is how you can do it:
+<source lang="java">
+private void mapPersonToFormData(AFormData formData, List<Person> persons) {
+PersonTable table = formData.getPersonTable();
+table.clearRows();
+for (Person person : persons) {
+int rowNum = table.addRow();
+table.setId(rowNum, person.getId());
+table.setName(rowNum, person.getName());
+}
+}
+</source>
+
+Notice the clearRows() before the for-each loop. This is important if your formData already contains data.
+
+Using the method <tt>AbstractTableFieldData.addRow(Object[])</tt> is not recommended. It is not typed and not safe during refactoring on the client side.
+
+<source lang="java">
+private void mapPersonToFormData(AFormData formData, List<Person> persons) {
+//This pattern is not recommended:
+PersonTable table = formData.getPersonTable();
+table.clearRows();
+for (Person person : persons) {
+table.addRow(new Object[]{person.getId(), person.getName()}); //Do not use AbstractTableFieldData#addRow(Object[])
+}
+}
+</source>
+
+When you map the data back in your business object, you might use a switch on <tt>getRowState(int)</tt>, because the persistance operation depends on the row status:
+
+<source lang="java">
+private void mapPersonsFromFormData(AFormData formData, List<Person> persons) {
+PersonTable table = formData.getPersonTable();
+for (int rowNum = 0; rowNum < table.getRowCount(); rowNum++) {
+switch (table.getRowState(rowNum)) {
+case ITableHolder.STATUS_INSERTED:
+//insert a new person corresponding to the row:
+insertPerson(persons, table.getId(rowNum), table.getName(rowNum));
+break;
+case ITableHolder.STATUS_DELETED:
+//delete the person corresponding to the row:
+deletePerson(persons, table.getId(rowNum));
+break;
+case ITableHolder.STATUS_UPDATED:
+//modify the person corresponding to the row:
+updatePerson(persons, table.getId(rowNum), table.getName(rowNum));
+break;
+case ITableHolder.STATUS_NON_CHANGED:
+default:
+//Do nothing
+break;
+}
+}
+}
+</source>
+
+= TablePageData
+
+https://wiki.eclipse.org/index.php?title=Scout/Concepts/TablePageData
+
+TablePageData is the standard data transfert object for {{ScoutLink|Concepts|TablePage}} between the {{ScoutLink|Concepts|Client Plug-In|client Plug-In}} and the {{ScoutLink|Concepts|Server Plug-In|server}}.
+
+* extends: {{ScoutJavadoc|AbstractTablePageData|C}}
+
+== Description ==
+
+{{important|Required version|The API described here requires version 3.10.0 or bigger.}}
+
+TablePageData are based on {{ScoutLink|Concepts|TableData|bean-based TableData}} to hold the data. In Addition, TablePageData also contains a boolean flag (<tt>limitedResult</tt>) to indicate if the table contains all rows or if the request was limited to X rows in the server. In this case, when the PageData is imported, a status is displayed in the status bar of the table.
+
+=== Usage ===
+
+* A page date is the typical return value for the methods of the {{ScoutLink|Concepts|Outline Service|outline services}}.
+* Importation in {{ScoutLink|Concepts|TablePage}} during the {{ScoutEvent|LoadData}} event. Here an example:
+
+<source lang="java">
+@Override
+protected void execLoadData(SearchFilter filter) throws ProcessingException {
+PersonSearchFormData formData = (PersonSearchFormData) filter.getFormData();
+if (formData == null) {
+formData = new PersonSearchFormData();
+}
+
+  PersonTablePageData pageData = SERVICES.getService(IStandardOutlineService.class).getPersonTableData(formData);
+  importPageData(pageData);
+}
+</source>
+
+* OutlineService
+
+The {{ScoutLink|Concepts|Sql_Service|SQL Support}} of Scout also offer support to select into TablePage data. For example:
+
+<source lang="java">SQL.selectInto("SELECT person_nr, last_name, first_name FROM person INTO :{personNr}, :{lastName}, :{firstName}", pageData);</source>
+
+For your table field, if you decide to switch your {{ScoutLink|Concepts|TableData}} from array based table data to bean based table data, the SQL support provides you the same possibilites (holder, input bind, output bind, filter...).
+
+Please note that it is not possible to use input and output bindings which use the same field names (e.g. input bind SearchForm :lastName and output bind TablePageData :{lastName}) as [https://www.eclipse.org/forums/index.php/t/803695/ discussed in the forum]. As a workaround please provide a name for the output bindings:
+
+<source lang="java">
+SQL.selectInto(""
++ "SELECT person_nr, last_name, first_name FROM person "
++ "WHERE last_name like :lastName "
++ "INTO :{out.personNr}, :{out.lastName}, :{out.firstName}",
+searchFormData,
+new NVPair("out", pageData));
+</source>
+
+== Generation ==
+
+=== SDK Support ===
+
+* Generation of TablePageData with the {{ScoutLink|SDK|Explorer_View|Explorer View}}
+
+{{note|TODO|Add a screenshot}}
+
+=== PageData anotation ===
+
+{{ScoutJavadoc|PageData|A}} FormData annotation
+
+{{note|TODO|Add a description}}
+
+= SQL Service
+
+https://wiki.eclipse.org/index.php?title=Scout/Concepts/Sql_Service
+
+The SqlService provides access to a database.
+
+==Minimal configuration==
+To be able to connect to a database, these properties needs to be configured:
+* {{ScoutProp|JdbcDriverName}} the qualified name of the JDBC driver.
+* {{ScoutProp|JdbcMappingName}} the JDBC path <code>"jdbc:..."</code>.
+* {{ScoutProp|Username}} the user name to connect to the database.
+* {{ScoutProp|Password}} the password to connect to the database.
+* {{ScoutProp|SqlStyle}} provides the class of the {{ScoutLink|Concepts|SqlStyle|Sql Style}} that should be used.
+
+===Delegation of the configuration to config.ini===
+If the Property {{ScoutProp|JdbcMappingName}} is set (using the {{ScoutLink|SDK|Object Properties View}}), the Java code looks like this:
+
+<source lang="java">
+package myapp.server.services.common.sql;
+
+import org.eclipse.scout.rt.services.common.jdbc.AbstractSqlService;
+import org.eclipse.scout.service.IService;
+
+public class MySqlService extends AbstractSqlService implements IService {
+@Override
+protected String getConfiguredJdbcMappingName() {
+return "jdbc:derby:C:/MyDB";
+}
+// + other configurations...
+}
+</source>
+
+The path to the database is hard coded in the code. You might want to delegate this configuration to the <code>config.ini</code> to have more flexibility (e.g one path for development and one path for production). Because the {{ScoutJavadoc|AbstractSqlService|C}} also provides a setter for this property <code>setJdbcMappingName(String)</code>, it is possible to set the property with the <code>config.ini</code> file:
+
+ <qualified name of the class>#<setter name without set prefix>=<value>
+
+This pattern works in Eclipse Scout for all classes extending the {{ScoutJavadoc|AbstractService|C}}
+
+For this example:
+
+  myapp.server.services.common.sql.MySqlService#JdbcMappingName=jdbc:derby:C:/MyDB
+
+==SQL convenience class==
+Scout proposes a convenience singleton class to access the default SqlService: {{ScoutJavadoc|SQL|C}}
+
+Here a simple select statement:
+<source lang="java">
+Object[][] s = SQL.select("" +
+"SELECT COMPANY_NR," +
+"       SHORT_NAME," +
+"       NAME" +
+" FROM  COMPANY");
+</source>
+
+This update example uses binds. The data are read from the formData variable. <code>":firstName"</code> will access the value in <code>formData.getFirstName()</code> or <code>formData.getFirstName().getValue()</code>
+<source lang="java">
+SQL.update(
+" update      actor " +
+" set         first_name = :firstName," +
+"             last_name = :lastName " +
+" where       actor_id = :id ",
+formData
+);
+</source>
+
+== Multiple SQL Services ==
+
+{{Note|TODO|Using 2 services, more information in [http://www.eclipse.org/forums/index.php/mv/msg/369585/902322/#msg_902322 forum thread]}}
+
+== Advanced binding ==
+
+=== Solve conflicts between bindings ===
+
+{{Note|TODO|Add explanations from this [https://www.eclipse.org/forums/index.php/t/803695/ forum thread] (extended to a more common case: for example read from 2 formDatas)}}
+
+=== Select into an array holder ===
+
+Example:
+<source lang="java">
+BeanArrayHolder<AnswerBean> holder = new BeanArrayHolder<AnswerBean>(AnswerBean.class);
+SQL.selectInto(" select question_id, name, answer_id " +
+" from answers " +
+" into  :{list.questionNr}, :{list.yourName}, :{list.answerNr}", new NVPair("list", holder));
+</source>
+
+{{Note|TODO|Add explanations from this [http://www.eclipse.org/forums/index.php/mv/msg/310526/824186/#msg_824186 forum thread]}}
+
+= SQL Style
+
+https://wiki.eclipse.org/index.php?title=Scout/Concepts/SqlStyle
+
+SqlStyle is a Scout concept used to have SQL code that is independent from the database engine.
+
+{{ScoutJavadoc|AbstractSqlStyle|C}}
+
+==Description==
+{{Note|TODO|Add a description}}
+
+=== Test connection ===
+
+Eclipse Scout needs to check if the database is available or not. There is no simple SQL statement that works on every database engine. That is the reason why this is delegated the SQL Style method <code>testConnection(Connection conn)</code>
+
+For Derby:
+<source lang="SQL">
+SELECT 1 FROM SYSIBM.SYSDUMMY1
+</source>
+
+For MySql, Oracle:
+<source lang="sql">
+SELECT 1 FROM DUAL
+</source>
+
+For Microsoft :
+<source lang="sql">
+SELECT count(1) FROM dbo.sysobjects
+</source>
+
+== Included SqlStyle ==
+
+Eclipse Scout is shipped with some SqlStyles:
+* DB2SqlStyle
+* DerbySqlStyle
+* MSSQLSqlStyle
+* OracleSqlStyle
+
+= Form Data Statement Builder
+
+https://wiki.eclipse.org/Scout/Concepts/StatementBuilder
+
+Statement builders enables to write WHERE statements for a SQL query based on the content of a {{ScoutLink|Concepts|SearchForm|SearchForm}} (using its {{ScoutLink|Concepts|FormData|FormData}}). This speeds up the development of {{ScoutLink|Concepts|Outline_Service|Outline Services}}.
+
+* class: {{ScoutJavadoc|FormDataStatementBuilder|C}}
+
+== Description ==
+
+Statements builders provide the possibility to write dynamically some SQL in an {{ScoutLink|Concepts|Outline_Service|OutlineService}}. It is the junction between the database and Java in order to write the query that corresponds to the values contained in the formData. The builder rely on {{ScoutLink|Concepts|SqlStyle}} to make the code independent from the Database Engine.
+
+Basically the Statements builder needs to be initialized with knowledge on how should the statements be written. This is achieve with <code>setValueDefinition(..)</code> function that binds a FieldData of the FormData, with the corresponding name of the field in the Database and one operator.
+
+The operators are defined as constants of <!-- org.eclipse.scout.rt.shared.data.model.DataModelConstants --> {{ScoutJavadoc|DataModelConstants|C}}. The most useful are:
+
+For values (like numbers) :
+* OPERATOR_EQ (value equal)
+* OPERATOR_GE (value greater or equal than)
+* OPERATOR_LE (value lower or equal than)
+
+For Dates (without the day part), there are the same kind of operators :
+* OPERATOR_DATE_EQ
+* OPERATOR_DATE_GE (date greater or equal than)
+* OPERATOR_DATE_LE (date lower or equal than)
+
+For Strings / varchars
+* OPERATOR_CONTAINS (is a string in an other)
+* OPERATOR_STARTS_WITH (beginning of a string matches)
+* OPERATOR_ENDS_WITH (end of a string matches)
+
+The <code>build(..)</code> takes the corresponding {{ScoutLink|Concepts|FormData|FormData}} as input. It may comes from the {{ScoutLink|Concepts|SearchFilter|SearchFilter}}. Foreach value set in the FormData, the corresponding WHERE condition is added (depending on the operator)
+
+The statement starts with an <code>and</code> and is an empty string if there is no constraint. Therefore it can not be used right after WHERE. If you have no other condition to add, you can add a <code>WHERE 1=1</code> witch is ignored by your database engine.
+
+In the <code>SQL.select(..)</code> function, it is necessary to add the corresponding variables binding. That is very simple: add the map returned by the function <code>getBindMap()</code>
+
+== Example ==
+
+Lets consider a simple Table CATEGORY containing three columns:
+* category_id (int)
+* name (varchar)
+* last_update (timestamp)
+
+[[Image:Scout SearchForm.png]]
+The SearchForm contains this fields:
+* A {{ScoutLink|Concepts|SequenceBox|SequenceBox field}} From - To (two LongFields) for the Id
+* A {{ScoutLink|Concepts|StringField|StringField}} for the name
+* A {{ScoutLink|Concepts|SequenceBox|SequenceBox field}} From - To (two DateFields) for the last update.
+
+In the {{ScoutLink|Concepts|Outline_Service|Outline Services}} the <code>loadCategories(..)</code> uses a {{ScoutLink|Concepts|SearchFilter|SearchFilter}} as parameter. This SearchFilter contains the {{ScoutLink|Concepts|FormData|FormData}} corresponding to the {{ScoutLink|Concepts|Search_Form|SearchForm}} in the Client.
+
+<source lang="java">
+public Object[][] loadCategories(SearchFilter filter) throws ProcessingException {
+FormDataStatementBuilder categoriesStatementBuilder = new FormDataStatementBuilder(SQL.getSqlStyle());
+categoriesStatementBuilder.setValueDefinition(
+CategoriesSearchFormData.CategoryIdFrom.class, "category_id", DataModelConstants.OPERATOR_GE);
+categoriesStatementBuilder.setValueDefinition(
+CategoriesSearchFormData.CategoryIdTo.class, "category_id", DataModelConstants.OPERATOR_LE);
+categoriesStatementBuilder.setValueDefinition(
+CategoriesSearchFormData.Name.class, "name", DataModelConstants.OPERATOR_CONTAINS);
+categoriesStatementBuilder.setValueDefinition(
+CategoriesSearchFormData.LastUpdateFrom.class, "last_update", DataModelConstants.OPERATOR_DATE_GE);
+categoriesStatementBuilder.setValueDefinition(
+CategoriesSearchFormData.LastUpdateTo.class, "last_update", DataModelConstants.OPERATOR_DATE_LE);
+
+    Object[][] result = SQL.select(
+        "select  category_id, " +
+        "        name, " +
+        "        last_update" +
+        " from   category " +
+        " where  1 = 1 " +
+        categoriesStatementBuilder.build(filter.getFormData()),
+        categoriesStatementBuilder.getBindMap());
+    return result;
+  }
+</source>
+
+= Security
+
+https://wiki.eclipse.org/index.php?title=Scout/Concepts/Security
+
+In order to understand this chapter it is important to know the difference between the two terms "Authentication" and "Authorization".
+
+;Authentication
+:Authentication means identifing the user trying to access the system.
+;Authorization
+:Authorization means determing the users rights and permissions according to his identity.
+
+== Security principles of Scout ==
+
+Scout security actually relies on concepts of the java’s standard and pluggable authentication and authorization service (JAAS) by representing the source of a request as a subject with principals associated. In turn, any action is performed on behalf of that subject in a respective doAs-call.
+
+Instead of using the core JAAS classes for authentication (<code>LoginContext</code>, <code>LoginModule</code>, <code>CallbackHandler</code> and <code>Callback</code>), Scout authenticates users directly in so called <code>SecurityFilters</code>. Those filters are chainable, meaning that you might have several filters knowing of how to authenticate user credentials against database (<code>DataSourceSecurityFilter</code>), LDAP directory (<code>LDAPSecurityFilter</code>) or whatever you like. Those filters are registered as an extension to the extension point '<code>org.eclipse.scout.http.servletfilter.filters</code>'. If a filter can authenticate the user successfully, the request is passed within a doAs call to the endpoint servlet ({{ScoutLink|Concepts|Servlets#ServiceTunnelServlet|ServiceTunnelServlet}}) to dispatch the call to the requested OSGi service.
+
+Because Scout does not use the LoginContext for authentication and is not based on the static policy configuration files for principal-based granting (Policy API), permission loading (authorization) is done by Scout <code>AccessControlService</code>. There are gathered all the permissions that belong to the authenticated subject and are maintained in Scout <code>AccessControlStore</code>. In consequence, authorization cannot be delegated to JAAS <code>AccessController</code>, but is done in a very convenient way by Scout <code>AccessControlService</code> itself.
+
+== Authentication ==
+
+{{note|The following sections apply to Scout OSGi only (i.e. version <5.0)}}
+
+Let us have a look on how the system prompts for authentication.
+First you have to know, that all code on client is run within a doAs call with the user's account name as subject. By default, authentication is only triggered by calling the backend. That means that if you have a standalone client application without a server running, you are never prompted for authentication.
+So when doing your first backend call, a connection to the server is established. In the application's life cycle, this typically occurs if initializing the client session which is quite the first thing done. Thereby, the security filter on server side intercepts the call. Because no subject is associated yet, a 401 Unauthorized error code is sent back to the client. On client side, before being propagated back to the caller, this 401 is intercepted by the installed net authenticator. By default, the installed authenticator first looks in the Eclipse secure preference store for credentials. If not available, a login dialog is presented to the user to enter username and password. In turn, those are sent back to the server to continue authentication.
+Please note, that the authenticator mechanism can be installed in your Swing application by calling NetActivator.install().
+
+<source lang="java">
+@Override
+protected Object startInSubject(IApplicationContext context) throws Exception {
+NetActivator.install();
+return super.startInSubject(context);
+}
+</source>
+
+Thereby, the default Scout authenticator InternalNetAuthenticator is installed. This can be easily overwritten by registering an OSGi service with the name java.net.Authenticator and a ranking higher than -2. Alternatively, you can register an extension to the Eclipse extension point org.eclipse.core.net.authenticator that contains your custom java.net.Authenticator.
+
+=== Security Filters  ===
+
+Scout Security Filters are responsible for the authentication of the user. They can simply assigned to on ore more servlets by adding an extension of extension point 'org.eclipse.scout.http.servletfilter.filters'. Since the filters are chainable an order can be set. Additionally it can be defined if the filter should be active or not. This behaviour can easily be overriden by using the config.ini (see [[#Settings_in_config.ini]]).
+
+The following SecurityFilters come with scout and can be found in the package <code>org.eclipse.scout.http.servletfilter.security</code>. If you need a custom behaviour (like using the subject provided by an application server) just create your own filter.
+
+==== AnonymousSecurityFilter ====
+
+A security filter allowing anonymous access to the application
+
+==== BasicSecurityFilter ====
+
+The basic filter with the usernames and passwords directly configured in the configuration file (or the extension point).
+E.g.:
+org.eclipse.scout.http.servletfilter.security.BasicSecurityFilter#users=frank\=test,mark\=test,steve\=test
+
+==== DataSourceSecurityFilter ====
+
+Uses the users and passwords defined in the database. This filter does a Base64 encryption in its default negotiate implementation (see <code>DataSourceSecurityFilter.negotiate</code> and <code>DataSourceSecurityFilter.encryptPass</code>). So the expected password in the database is also Base64 encrypted.
+It is possible to change this behavior: in a subclass of DataSourceSecurityFilter override one or the other implementation of the two methods.
+
+Here an example:
+
+Create table to store users in your database (For the default DataSourceSecurityFilter, password are expected to be Base64 encrypted):
+<source lang="sql">
+CREATE TABLE MYAPP_USERS (
+USER_NR DECIMAL NOT NULL,
+NAME VARCHAR(128),
+PASSWORD VARCHAR(128),
+PRIMARY KEY (USER_NR)
+);
+</source>
+
+Add DataSourceSecurityFilter to your the dependencies of your server application <code>com.yourapp.server/plugin.xml</code>
+
+<source lang="xml">
+<filter
+aliases="/process"
+class="org.eclipse.scout.http.servletfilter.security.DataSourceSecurityFilter"
+ranking="40">
+</filter>
+</source>
+
+Add some configurations for the DataSourceSecurityFilter in the config.ini file (<code>com.yourapp.server/producs/development/config.ini</code>)
+
+  org.eclipse.scout.http.servletfilter.security.DataSourceSecurityFilter#active=true
+  org.eclipse.scout.http.servletfilter.security.DataSourceSecurityFilter#realm=TEST APPLICATION
+  org.eclipse.scout.http.servletfilter.security.DataSourceSecurityFilter#jdbcDriverName=org.apache.derby.jdbc.EmbeddedDriver
+  org.eclipse.scout.http.servletfilter.security.DataSourceSecurityFilter#jdbcMappingName=jdbc:derby:D:/Temp/scoutJuno/derbyDb
+  org.eclipse.scout.http.servletfilter.security.DataSourceSecurityFilter#jdbcUsername=***
+  org.eclipse.scout.http.servletfilter.security.DataSourceSecurityFilter#jdbcPassword=***
+  org.eclipse.scout.http.servletfilter.security.DataSourceSecurityFilter#selectUserPass=SELECT LOWER(NAME) FROM MYAPP_USERS WHERE LOWER(NAME)=? AND PASSWORD=?
+
+Ensure to have '''no white spaces''' at the end of the parameters and set all other security filters to <code>active=false</code>.
+
+Ensure the bundle <code>org.eclipse.scout.http.servletfilter</code> is added as required bundle in the product file.
+
+==== LDAPSecurityFilter ====
+
+A security filter to authenticate against a ldap server.
+
+==== Settings in config.ini  ====
+
+In order to activate or deactivate a certain filter in a specific environment you typically set the property "active" to true or false in the config.ini belonging to the environment. Lets say you would like to use the BasicSecurityFilter in development environment but not in production, instead you would like to use DataSourceSecurityFilter. Good practice is to define DataSourceSecurityFilter as active in your plugin.xml and BasicSecurityFilter as inactive. In the config.ini assigned to the development product you can override this defaults and inactivate DataSourceSecurityFilter and activate BasicSecurityFilter.
+<pre>
+org.eclipse.scout.http.servletfilter.security.BasicSecurityFilter/process#active=true
+org.eclipse.scout.http.servletfilter.security.DataSourceSecurityFilter/process#active=false
+</pre>
+
+Please note: You can activate/deactive the filters for a specific servlet path. If the property for a given servlet is not explicitly set the default of the plugin.xml is used.
+
+/process is typically assigned to the main entry point servlet called ServiceTunnelServlet. This is where all scout internals connect, i.e. the calls from the client to the server.
+
+Another property of the servlet filter is called "failover".
+This property determines whether the filter should deny access, if not successfully authenticated (<code>false</code>) or if the next filter should try to authenticate (<code>true</code>).
+<pre>org.eclipse.scout.http.servletfilter.security.BasicSecurityFilter#failover=true
+</pre>
+
+== Authorization (Granting) ==
+
+Granting access to a specific resource is done with permissions. Permissions represent atomic data and operation-level security tokens. They are checked before a privileged operation is performed.
+
+=== Access restriction on CRUD operations ===
+
+Typically there are four different permissions per entity for performing CRUD operations on an object. With this four permissions you are able to restrict the access to that entity for create, read, update and delete operations.
+
+Let us assume you require a permission to allow a user to access companies. Thereto, you create the permission class 'ReadCompanyPermission' in the package x.y.shared.security:
+
+<source lang="java">
+public class ReadCompanyPermission extends BasicPermission {
+
+  public ReadCompanyPermission() {
+    super("ReadCompany");
+  }
+}
+</source>
+As you can see ReadCompanyPermission extends from BasicPermission which is a class of the package java.security provided by java itself. Every permission in a scout project needs to extend from that class or rather from java.security.Permission directly.
+
+The name you provide in the constructor is the name of the permission. Among other things, it is used to decide whether to grant access to a specific resource. For more detail, please refer to BasicPermission#implies(Permission p) which is evaluated in IAccessControlService#checkPermission(Permission p).
+
+With the help of that ReadCompanyPermission you are now able to check if the user has the right to read a company entity.
+
+<source lang="java">
+if (!ACCESS.check(new ReadCompanyPermission())) {
+throw new VetoException("Authorization failed");
+}
+else {
+// user is authorized, do some business logic here
+}
+</source>
+
+Please note, that the class ACCESS is simply a delegate to IAccessControlService. The IAccessControlService is responsible for loading and caching the permissions as well as checking them. In order to do that it is necessary to specify how the permissions belonging to the current user can be loaded. This is done by overriding the method execLoadPermissions in your IAccessControlService.
+
+"Your" IAccessControlService means you need to have a custom AccessControlService extending AbstractAccessControlService in your project.
+
+=== How permissions are discovered ===
+
+Permission are discovered by IPermissionService. The default implementation looks for permission classes in all modules. Thereby, the following criteria must be satisfied:
+#The class must be of the type java.security.Permission
+#The type must be a public concrete class, meaning not an interface nor an abstract class
+
+Please note: This behavior can be overwritten by writing an own implementation for IPermissionService.
+
+=== Fine-grained access control ===
+
+In contrast to the BasicPermission mentioned above, which allows access control based on users permissions, Scout also provided means to implement an access control based on a concret resource. For example a user can only update his own companies and not just all.
+
+Fine-grained access permissions must be of type BasicHierarchyPermission. The concept is based on various levels in the range from 0 up to 100. Thereby, 0 means no-access, whereas 100 mean full-access. Basically, if the permission of the user (loaded from database) has a level higher or equals than/to the level requested, access is granted.
+In BasicHierarchyPermission, the following levels are defined:
+
+<pre>
+LEVEL_NONE = 0
+LEVEL_ALL = 100
+LEVEL_UNDEFINED = -1
+</pre>
+
+Again, let us elaborate a tiny example:
+The requirement would be that users should only access companies which they really belong to. For that purpose, we introduce a new access level LEVEL_OWN=10.
+
+The permission ReadCompanyPermission would be changed as follows:
+
+<source lang="java">
+
+public class ReadCompanyPermission extends BasicHierarchyPermission {
+private static final long serialVersionUID = 1L;
+
+  public static final int LEVEL_OWN = 10;
+
+  private final long m_companyId;
+
+  /**
+   * Constructor used to check access for projectId
+   */
+  public ReadCompanyPermission(long companyId) {
+    super("ReadCompany");
+    m_companyId = companyId;
+  }
+
+  /**
+   * Constructor used in {@link AbstractAccessControlService#execLoadPermissions}.
+   */
+  public ReadCompanyPermission(int level) {
+    super(ReadCompanyPermission.class.getSimpleName(), level);
+    this.m_companyId = 0;
+  }
+
+  public long getCompanyId() {
+    return m_companyId;
+  }
+
+  @Override
+  protected int execCalculateLevel(BasicHierarchyPermission other) {
+    int result = LEVEL_ALL; // default implementation requires level ALL; Therefore permission is only granted if user has level ALL.
+    if (other instanceof ReadCompanyPermission) {
+      boolean ownCompany = BEANS.get(ICompanyService.class).isOwnCompany(((ReadCompanyPermission) other).getCompanyId());
+      if (ownCompany) {
+        // if company for which the permission check evaluate is a own company then the user only requires the level OWN.
+        return LEVEL_OWN;
+      }
+    }
+    return result;
+  }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = super.hashCode();
+    result = prime * result + (int) (m_companyId ^ (m_companyId >>> 32));
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (!super.equals(obj)) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    ReadCompanyPermission other = (ReadCompanyPermission) obj;
+    if (m_companyId != other.m_companyId) {
+      return false;
+    }
+    return true;
+  }
+}
+</source>
+
+In order to enable fine-grained access control so the user can only access his personal company objects, the user's permission level of the permission 'ReadCompanyPermission' must be set to 10 when loading the permissions with execLoadPermissions.
+
+The access-check to protect the company resource would be changed as follows:
+
+<source lang="java">
+long companyId=23L;
+if (!ACCESS.check(new ReadCompanyPermission(companyId))) {
+throw new VetoException("Authorization failed");
+}
+else {
+// user is authorized, do some business logic here
+}
+</source>
+
+Calling ACCESS.getLevel(Permission p) will return the level of access a user has.
+
+= Order Annotation
+
+https://wiki.eclipse.org/index.php?title=Scout/Concepts/Order_Annotation
+
+{{ScoutJavadoc|Order|A}}
+
+The order annotation is a class annotation that need to be added on top of each inner class declaration to define a ranking between them.
+
+The annotation expect a parameter (a double) that define the rank: inner classes are sorted in the ascending order.
+
+== First example ==
+
+The annotation is used to define the order of the sub-menus.
+
+[[Image:Scout ContextMenu SWT.png]]
+In the code corresponding to this context menu, we see that each sub-menu class is annotated with '''@Order''':
+<source lang="java">
+public class AddMenu extends AbstractMenu {
+
+  @Override
+  protected String getConfiguredText() {
+    return Texts.get("Add");
+  }
+
+  @Order(10.0)
+  public class CollectionMenu extends AbstractMenu {
+
+    @Override
+    protected String getConfiguredText() {
+      return Texts.get("Collection");
+    }
+
+    @Override
+    protected void execAction() throws ProcessingException {
+      //... logic to add a new collection
+    }
+  }
+
+  @Order(20.0)
+  public class PictureMenu extends AbstractMenu {
+
+    @Override
+    protected String getConfiguredText() {
+      return Texts.get("Picture");
+    }
+
+    @Override
+    protected void execAction() throws ProcessingException {
+      //... logic to add a new image
+    }
+  }
+}
+</source>
+
+==Detailed explanation==
+A lot of scout concepts uses a possibility of the Java programming language: declaration of inner classes. For example {{ScoutLink|Concepts|Field|fields}} can be declared as inner classes of the {{ScoutLink|Concepts|Form|form}} class or of {{ScoutLink|Concepts|CompositeField|composite fields}} (like a {{ScoutLink|Concepts|GroupBox|groupbox field}}). Hardcoded declaration of {{ScoutLink|Concepts|CodeType|CodeType}} also works that way (see the example of a {{ScoutLink|Concepts|CodeType|CodeType}}), with {{ScoutLink|Concepts|Code|Codes}} being inner classes. This pattern can also be found for the declaration of {{ScoutLink|Concepts|Menu|menus}} in a main menu.
+
+In the source code, the inner classes are defined a precise order. This constitute what could be qualified as a declarative definition of object, near to what can be achieved with an XML syntax.
+
+Unfortunately there is nothing like the order of two inner classes in Java. Like elements of a set, it is not possible to know witch class was defined before the other. Therefore the Scout Framework uses an Order annotation to preserve the order information at runtime.
+
+As soon as the order of the declaration is relevant (for example to order fields in a form), an order annotation must be added on each inner class. The Order annotation has an Double parameter. This parameter define the order in which the inner classes are considered (ascending order).
+
+==Good practices==
+The good practices are implemented in the SDK.
+
+=== Same order in the code and with the annotation ===
+
+Have the same order for the declaration in source code and defined with the order annotation.
+Even if the order of declaration in the source code do not mean anything (it is lost during compilation), keeping it consistent with the order defined with the annotation makes the code more readable.
+
+=== Let enough space between consecutive items ===
+
+Do not use consecutive number for two consecutive classes. Prefer a ten by ten count. This allows to insert a new class easily.
+
+=== No additional information ===
+
+Do not put any information in the ordering parameter. The SDK can assign new values (changing “10, 15 and 20” into “10, 20 and 30”). Therefore any additional information put in the values might me lost. It is not a good idea to have order parameter meaning something for the developer (like in the first example separator menu ending with a seven and admin menus with a rank bigger than 1000)
+
