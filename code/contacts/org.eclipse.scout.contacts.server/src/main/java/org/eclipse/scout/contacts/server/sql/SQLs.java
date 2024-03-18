@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2021 BSI Business Systems Integration AG.
+ * Copyright (c) 2024 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
@@ -244,7 +244,7 @@ public interface SQLs {
       + "         'Brussels', "
       + "         'BE', "
       + "         'https://www.eclipse.org/org/foundation/', "
-      + "         'https://wiki.eclipse.org/images/a/ab/Eclipse_foundation_logo.png')";
+      + "         'https://www.eclipse.org/images/logos/eclipse-foundation-400x400.png')";
 
   String ORGANIZATION_VALUES_02 = ""
       + "VALUES  ('org02', "
@@ -252,7 +252,7 @@ public interface SQLs {
       + "         'Baden', "
       + "         'CH', "
       + "         'https://www.bsi-software.com', "
-      + "         'https://wiki.eclipse.org/images/4/4f/Bsiag.png')";
+      + "         'https://membership.eclipse.org/organization/images/954-web.png')";
 
   String PERSON_INSERT_SAMPLE = ""
       + "INSERT   INTO PERSON "

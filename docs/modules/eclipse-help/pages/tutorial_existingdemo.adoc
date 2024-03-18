@@ -9,7 +9,7 @@ The tutorial consists of the following two parts:
 
 ==== Install the Scout Demo Applications
 
-In the first part of the tutorial we import the demo applications using the https://wiki.eclipse.org/Eclipse_Installer[Oomph Eclipse installer,window=_blank] tool.
+In the first part of the tutorial we import the demo applications using the https://projects.eclipse.org/projects/tools.oomph[Oomph Eclipse installer,window=_blank] tool.
 
 In the Eclipse IDE open the [wizard]_Import_ wizard with menu menu:File[Import...].
 This opens the dialog shown in <<img-oomph_existing_project>>.

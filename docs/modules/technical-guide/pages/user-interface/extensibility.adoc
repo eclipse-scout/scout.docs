@@ -37,7 +37,7 @@ Then, register it in your `index` file as usual and use it in your code by creat
 // ...
 export {default as SpecialStringField} from './SpecialStringField';
 // ...
-window.yournamespace == Object.assign(window.yournamespace || {}, self);
+window.yournamespace = Object.assign(window.yournamespace || {}, self);
 ----
 
 [source,javascript]
@@ -102,7 +102,7 @@ import ExtendedFormModel from './ExtendedFormModel';
 
 export default class ExtendedForm extends ExampleForm {
   _jsonModel() {
-    let baseModel == super._jsonModel();
+    let baseModel = super._jsonModel();
     return models.extend(ExtendedFormModel, baseModel);
   }
 }
@@ -208,7 +208,7 @@ export default class CustomApp extends App {
 ----
 import CustomApp from './CustomApp';
 
-let app == new CustomApp();
+let app = new CustomApp();
 app.init();
 ----
 
@@ -228,13 +228,13 @@ To achieve this two new elements have been introduced:
 * Extension Classes: Contains modifications for a target class. Modifications can be new elements or changed behavior of existing elements.
 * Extension Registry: Service holding all Extensions that should be active in the application.
 
-The Scout extensibility concept offers three basic possibilites to extend existing components:
+The Scout extensibility concept offers three basic possibilities to extend existing components:
 
 * *Extensions* Changing behavior of a class
 * *Contributions* Add new elements to a class
 * *Moves* Move existing elements within a class
 
-The following chapers will introduce this concepts and present some examples.
+The following chapters will introduce this concepts and present some examples.
 
 === Extensions
 Extensions contain modifications to a target class. This target class must be extensible. All elements that implement `org.eclipse.scout.rt.shared.extension.IExtensibleObject` are extensible. And for all extensible elements there exists a corresponding abstract extension class.
@@ -246,7 +246,7 @@ Examples:
 
 Target classes can be all that are instanceof those extensible elements. This means an `AbstractStringFieldExtension` can be applied to `AbstractStringField` and all child classes.
 
-Extensions contain methods for all Scout Operations (see https://wiki.eclipse.org/Scout/Concepts/Exec_Methods[Exec Methods]). Those methods have the same signature except that they have one more input parameter. This method allows you to intercept the given Scout Operation and execute your own code even though the declaring class exists in a binary library. It is then your decision if you call the original code or completely replace it. To achieve this the http://en.wikipedia.org/wiki/Chain-of-responsibility_pattern[Chain Pattern] is used: All extensions for a target class are called as part of a chain. The order is given by the order in which the extensions are registered. And the original method of the Scout element is an extension as well.
+Extensions contain methods for all Scout operations (inherited methods starting with `exec`). Those methods have the same signature except that they have one more input parameter. This method allows you to intercept the given Scout Operation and execute your own code even though the declaring class exists in a binary library. It is then your decision if you call the original code or completely replace it. To achieve this the http://en.wikipedia.org/wiki/Chain-of-responsibility_pattern[Chain Pattern] is used: All extensions for a target class are called as part of a chain. The order is given by the order in which the extensions are registered. And the original method of the Scout element is an extension as well.
 
 Extensions to specific types of elements are prepared as abstract classes:
 
@@ -259,7 +259,7 @@ image::common:scout_extensibility_chain_concept.png[]
 
 ==== Extending a StringField example
 
-The following example changes the initial value of a https://wiki.eclipse.org/Scout/Concepts/StringField[StringField] called `NameField`:
+The following example changes the initial value of a StringField called `NameField`:
 
 [source,java,indent=0]
 .Extension for NameField
@@ -269,7 +269,7 @@ include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclips
 
 Note: The type parameter of the extension (e.g. `NameField`) denotes the element which is extended.
 
-The extension needs to be registeres when starting the application:
+The extension needs to be registered when starting the application:
 
 [source,java,indent=0]
 .Register extension for NameField
@@ -280,9 +280,9 @@ include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclips
 === Contributions
 The section before explained how to modify the behavior of existing Scout elements. This section will describe how to contribute new elements into existing containers.
 
-This is done by using the same mechanism as before. It is required to create an Extension too. But instead of overwriting any Scout Operation we directly define the new elements within the Extension. A lot of new elements can be added this way: https://wiki.eclipse.org/Scout/Concepts/Field[Fields], https://wiki.eclipse.org/Scout/Concepts/Menu[Menus], https://wiki.eclipse.org/Scout/Concepts/Column[Columns], https://wiki.eclipse.org/Scout/Concepts/Code[Codes], ...
+This is done by using the same mechanism as before. It is required to create an Extension too. But instead of overwriting any Scout Operation we directly define the new elements within the Extension. A lot of new elements can be added this way: Fields, Menus, Columns, Codes, ...
 
-Some new elements may also require a new http://en.wikipedia.org/wiki/Data_transfer_object[DTO] (https://wiki.eclipse.org/Scout/Concepts/FormData[FormData], https://wiki.eclipse.org/Scout/Concepts/TablePageData[TablePageData], https://wiki.eclipse.org/Scout/Concepts/TableData[TableData]) to be filled with data from the server. The corresponding DTO for the extension is automatically created when using the https://wiki.eclipse.org/Scout/SDK[SDK] 4.2 or newer and having the `@Data` annotation specified on your extension. As soon as the DTO extension has been registered in the `IExtensionRegistry` service it is automatically created when the target DTO is created and will also be imported and exported automatically!
+Some new elements may also require a new http://en.wikipedia.org/wiki/Data_transfer_object[DTO] (FormData, TablePageData, TableData) to be filled with data from the server. The corresponding DTO for the extension is automatically created when using the Scout Plugin 4.2 or newer in your IDE and having the `@Data` annotation specified on your extension. As soon as the DTO extension has been registered in the `IExtensionRegistry` service it is automatically created when the target DTO is created and will also be imported and exported automatically!
 
 The following example adds two new fields for salary and birthday to a `PersonForm`. Please note the `@Data` annotation which describes where the DTO for this extension should be created.
 
@@ -302,7 +302,7 @@ The extension data must be registered manually in the job like in the example be
 include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/ExtensibilitySnippets.java[tags=RegisterPersonFormMainBoxExtension]
 ----
 
-Then the https://wiki.eclipse.org/Scout/SDK[SDK] automatically creates the extension DTO which could look as follows. Please note: The DTO is generated automatically, but you have to register the generated DTO manually!
+Then the Scout IDE plugin automatically creates the extension DTO which could look as follows. Please note: The DTO is generated automatically, but you have to register the generated DTO manually!
 
 [source,java,indent=0]
 .Extension Data for PersonForm
@@ -345,7 +345,7 @@ include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclips
 ----
 
 === Migration
-The new extensibility concept is added on top of all existing extension possibilities like injection or sub-classing. Therefore, it works together with the current mechanisms. But for some use cases (like modifying template classes) it offers a lot of benefits. Therefore no migration is necessary. The concepts do exist alongside each others.
+The new extensibility concept is added on top of all existing extension possibilities like injection or sub-classing. Therefore, it works together with the current mechanisms. But for some use cases (like modifying template classes) it offers a lot of benefits. Therefore, no migration is necessary. The concepts do exist alongside each others.
 
-However there is one impact: Because the Scout Operation methods are now part of a call chain they may no longer be invoked directly. So any call to e.g. `execValidateValue()` is no longer allowed because this would exclude the extensions for this call. The Scout SDK marks such calls with error markers in the Eclipse Problems view. If really required the corresponding intercept-Method can be used. So instead directly calling `myField.execChangedValue` you may call `myField.interceptChangedValue()`.
+However, there is one impact: Because the Scout Operation methods are now part of a call chain they may no longer be invoked directly. So any call to e.g. `execValidateValue()` is no longer allowed because this would exclude the extensions for this call. The Scout SDK marks such calls with error markers in the Eclipse Problems view. If really required the corresponding intercept-Method can be used. So instead directly calling `myField.execChangedValue` you may call `myField.interceptChangedValue()`.
 

@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2015 BSI Business Systems Integration AG.
+ * Copyright (c) 2024 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
@@ -95,10 +95,6 @@ public class SvgFieldForm extends AbstractForm implements IAdvancedExampleForm {
   @Order(10)
   @ClassId("8d623dc9-f589-4c19-b427-c52893d7f4b5")
   public class MainBox extends AbstractGroupBox {
-
-    public static final String SCOUT_LOGO = "http://wiki.eclipse.org/images/e/eb/ScoutIconLarge.gif";
-    public static final String BIRD = "http://2.bp.blogspot.com/_LDF9z4ZzZHo/TQZI-CUPl2I/AAAAAAAAAfc/--DuSZRxywM/s1600/bird_1008.jpg";
-    public static final String BIRD_OFFLINE = "images/bird_1008.jpg";
 
     @Override
     protected int getConfiguredGridColumnCount() {
@@ -209,7 +205,7 @@ public class SvgFieldForm extends AbstractForm implements IAdvancedExampleForm {
 
         private SVGDocument liveUpdateCircle(SVGDocument doc, String id) {
           SVGCircleElement circle = (SVGCircleElement) doc.getElementById(id);
-          SVGLength x = (SVGLength) circle.getCx().getBaseVal();
+          SVGLength x = circle.getCx().getBaseVal();
           x.setValue((x.getValue() + 40) % 400);
           return doc;
         }

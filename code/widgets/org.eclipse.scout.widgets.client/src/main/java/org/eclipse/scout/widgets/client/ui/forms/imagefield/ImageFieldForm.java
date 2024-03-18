@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2020 BSI Business Systems Integration AG.
+ * Copyright (c) 2024 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
+ * https://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
@@ -124,7 +124,7 @@ public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm
 
     public static final String SCOUT_LOGO = "images/eclipse_scout_logo.png";
     public static final String SCOUT_LOGO_FILENAME = "eclipse_scout_logo.png";
-    public static final String BIRD = "http://2.bp.blogspot.com/_LDF9z4ZzZHo/TQZI-CUPl2I/AAAAAAAAAfc/--DuSZRxywM/s1600/bird_1008.jpg";
+    public static final String BIRD = "https://2.bp.blogspot.com/_LDF9z4ZzZHo/TQZI-CUPl2I/AAAAAAAAAfc/--DuSZRxywM/s1600/bird_1008.jpg";
     public static final String BIRD_OFFLINE = "images/bird_1008.jpg";
 
     @Override
