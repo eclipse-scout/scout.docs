@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -28,8 +28,7 @@ export default (): OutlineModel => ({
       text: 'Accordion',
       detailForm: {
         objectType: AccordionForm
-      },
-      detailTableVisible: false
+      }
     },
     {
       objectType: PageWithNodes,
@@ -37,8 +36,7 @@ export default (): OutlineModel => ({
       text: 'Breadcrumb Bar Field',
       detailForm: {
         objectType: BreadcrumbBarFieldForm
-      },
-      detailTableVisible: false
+      }
     },
     {
       objectType: PageWithNodes,
@@ -46,8 +44,7 @@ export default (): OutlineModel => ({
       text: 'Button',
       detailForm: {
         objectType: ButtonForm
-      },
-      detailTableVisible: false
+      }
     },
     {
       objectType: PageWithNodes,
@@ -55,8 +52,7 @@ export default (): OutlineModel => ({
       text: 'Browser Field',
       detailForm: {
         objectType: BrowserFieldForm
-      },
-      detailTableVisible: false
+      }
     },
     {
       objectType: PageWithNodes,
@@ -64,8 +60,7 @@ export default (): OutlineModel => ({
       text: 'Carousel',
       detailForm: {
         objectType: CarouselForm
-      },
-      detailTableVisible: false
+      }
     },
     {
       objectType: PageWithNodes,
@@ -73,8 +68,7 @@ export default (): OutlineModel => ({
       text: 'Chart Field',
       detailForm: {
         objectType: ChartFieldForm
-      },
-      detailTableVisible: false
+      }
     },
     {
       objectType: PageWithNodes,
@@ -82,8 +76,7 @@ export default (): OutlineModel => ({
       text: 'Check Box Field',
       detailForm: {
         objectType: CheckBoxFieldForm
-      },
-      detailTableVisible: false
+      }
     },
     {
       objectType: PageWithNodes,
@@ -96,8 +89,7 @@ export default (): OutlineModel => ({
           text: 'Watch Field',
           detailForm: {
             objectType: WatchFieldForm
-          },
-          detailTableVisible: false
+          }
         }
       ]
     },
@@ -107,8 +99,7 @@ export default (): OutlineModel => ({
       text: 'Date Field',
       detailForm: {
         objectType: DateFieldForm
-      },
-      detailTableVisible: false
+      }
     },
     {
       objectType: PageWithNodes,
@@ -116,8 +107,7 @@ export default (): OutlineModel => ({
       text: 'Desktop',
       detailForm: {
         objectType: DesktopForm
-      },
-      detailTableVisible: false
+      }
     },
     {
       objectType: PageWithNodes,
@@ -125,8 +115,7 @@ export default (): OutlineModel => ({
       text: 'Desktop Notification',
       detailForm: {
         objectType: DesktopNotificationForm
-      },
-      detailTableVisible: false
+      }
     },
     {
       objectType: PageWithNodes,
@@ -134,9 +123,8 @@ export default (): OutlineModel => ({
       text: 'Form',
       detailForm: {
         objectType: FormForm,
-        detailForm: true
-      },
-      detailTableVisible: false
+        detailForm: true // mark manually to hide CurrentFormPropertiesTab in constructor
+      }
     },
     {
       objectType: PageWithNodes,
@@ -152,8 +140,7 @@ export default (): OutlineModel => ({
           text: 'File Chooser Button',
           detailForm: {
             objectType: FileChooserButtonForm
-          },
-          detailTableVisible: false
+          }
         },
         {
           objectType: PageWithNodes,
@@ -161,8 +148,7 @@ export default (): OutlineModel => ({
           text: 'File Chooser',
           detailForm: {
             objectType: FileChooserForm
-          },
-          detailTableVisible: false
+          }
         }
       ]
     },
@@ -172,8 +158,7 @@ export default (): OutlineModel => ({
       text: 'Group Box',
       detailForm: {
         objectType: GroupBoxForm
-      },
-      detailTableVisible: false
+      }
     },
     {
       objectType: PageWithNodes,
@@ -181,8 +166,7 @@ export default (): OutlineModel => ({
       text: 'Image',
       detailForm: {
         objectType: ImageForm
-      },
-      detailTableVisible: false
+      }
     },
     {
       objectType: PageWithNodes,
@@ -190,8 +174,7 @@ export default (): OutlineModel => ({
       text: 'Image Field',
       detailForm: {
         objectType: ImageFieldForm
-      },
-      detailTableVisible: false
+      }
     },
     {
       objectType: PageWithNodes,
@@ -199,8 +182,7 @@ export default (): OutlineModel => ({
       text: 'Label',
       detailForm: {
         objectType: LabelForm
-      },
-      detailTableVisible: false
+      }
     },
     {
       objectType: PageWithNodes,
@@ -208,8 +190,7 @@ export default (): OutlineModel => ({
       text: 'Label Field',
       detailForm: {
         objectType: LabelFieldForm
-      },
-      detailTableVisible: false
+      }
     },
     {
       objectType: PageWithNodes,
@@ -217,8 +198,7 @@ export default (): OutlineModel => ({
       text: 'List Box',
       detailForm: {
         objectType: ListBoxForm
-      },
-      detailTableVisible: false
+      }
     },
     {
       objectType: PageWithNodes,
@@ -226,8 +206,7 @@ export default (): OutlineModel => ({
       text: 'Logical Grid',
       detailForm: {
         objectType: LogicalGridForm
-      },
-      detailTableVisible: false
+      }
     },
     {
       objectType: PageWithNodes,
@@ -235,8 +214,7 @@ export default (): OutlineModel => ({
       text: 'Menu Bar',
       detailForm: {
         objectType: MenuBarForm
-      },
-      detailTableVisible: false
+      }
     },
     {
       objectType: PageWithNodes,
@@ -244,8 +222,7 @@ export default (): OutlineModel => ({
       text: 'MessageBox',
       detailForm: {
         objectType: MessageBoxForm
-      },
-      detailTableVisible: false
+      }
     },
     {
       objectType: PageWithNodes,
@@ -253,8 +230,7 @@ export default (): OutlineModel => ({
       text: 'Mode Selector',
       detailForm: {
         objectType: ModeSelectorForm
-      },
-      detailTableVisible: false
+      }
     },
     {
       objectType: PageWithNodes,
@@ -270,8 +246,7 @@ export default (): OutlineModel => ({
           text: 'Integer Field',
           detailForm: {
             objectType: IntegerFieldForm
-          },
-          detailTableVisible: false
+          }
         }
       ]
     },
@@ -294,8 +269,7 @@ export default (): OutlineModel => ({
       text: 'Popup',
       detailForm: {
         objectType: PopupForm
-      },
-      detailTableVisible: false
+      }
     },
     {
       objectType: PageWithNodes,
@@ -303,8 +277,7 @@ export default (): OutlineModel => ({
       text: 'Radio Button Group',
       detailForm: {
         objectType: RadioButtonGroupForm
-      },
-      detailTableVisible: false
+      }
     },
     {
       objectType: PageWithNodes,
@@ -313,7 +286,6 @@ export default (): OutlineModel => ({
       detailForm: {
         objectType: RestForm
       },
-      detailTableVisible: false,
       childNodes: [
         {
           objectType: PageWithNodes,
@@ -321,8 +293,7 @@ export default (): OutlineModel => ({
           text: 'Ui Notification',
           detailForm: {
             objectType: UiNotificationForm
-          },
-          detailTableVisible: false
+          }
         }
       ]
     },
@@ -332,8 +303,7 @@ export default (): OutlineModel => ({
       text: 'Sequence Box',
       detailForm: {
         objectType: SequenceBoxForm
-      },
-      detailTableVisible: false
+      }
     },
     {
       objectType: PageWithNodes,
@@ -349,8 +319,7 @@ export default (): OutlineModel => ({
           text: 'Proposal Field',
           detailForm: {
             objectType: ProposalFieldForm
-          },
-          detailTableVisible: false
+          }
         },
         {
           objectType: PageWithNodes,
@@ -358,8 +327,7 @@ export default (): OutlineModel => ({
           text: 'Multiline Smart Field',
           detailForm: {
             objectType: MultilineSmartFieldForm
-          },
-          detailTableVisible: false
+          }
         },
         {
           objectType: PageWithNodes,
@@ -367,8 +335,7 @@ export default (): OutlineModel => ({
           text: 'Table Smart Field',
           detailForm: {
             objectType: TableSmartFieldForm
-          },
-          detailTableVisible: false
+          }
         },
         {
           objectType: PageWithNodes,
@@ -376,8 +343,7 @@ export default (): OutlineModel => ({
           text: 'Tree Smart Field',
           detailForm: {
             objectType: TreeSmartFieldForm
-          },
-          detailTableVisible: false
+          }
         }
       ]
     },
@@ -395,8 +361,7 @@ export default (): OutlineModel => ({
           text: 'Multiline String Field',
           detailForm: {
             objectType: MultilineStringFieldForm
-          },
-          detailTableVisible: false
+          }
         }
       ]
     },
@@ -406,8 +371,7 @@ export default (): OutlineModel => ({
       leaf: true,
       detailForm: {
         objectType: SwitchForm
-      },
-      detailTableVisible: false
+      }
     },
     {
       objectType: PageWithNodes,
@@ -415,8 +379,7 @@ export default (): OutlineModel => ({
       text: 'Tab Box',
       detailForm: {
         objectType: TabBoxForm
-      },
-      detailTableVisible: false
+      }
     },
     {
       objectType: PageWithNodes,
@@ -432,8 +395,7 @@ export default (): OutlineModel => ({
           text: 'Editable Table',
           detailForm: {
             objectType: EditableTableForm
-          },
-          detailTableVisible: false
+          }
         },
         {
           objectType: PageWithNodes,
@@ -441,8 +403,7 @@ export default (): OutlineModel => ({
           text: 'Hierarchical Table',
           detailForm: {
             objectType: HierarchicalTableForm
-          },
-          detailTableVisible: false
+          }
         }
       ]
     },
@@ -452,8 +413,7 @@ export default (): OutlineModel => ({
       text: 'Tag Field',
       detailForm: {
         objectType: TagFieldForm
-      },
-      detailTableVisible: false
+      }
     },
     {
       objectType: PageWithNodes,
@@ -469,8 +429,7 @@ export default (): OutlineModel => ({
           text: 'Virtual Tile Grid',
           detailForm: {
             objectType: VirtualTileGridForm
-          },
-          detailTableVisible: false
+          }
         }
       ]
     },
@@ -480,8 +439,7 @@ export default (): OutlineModel => ({
       text: 'Tile Accordion',
       detailForm: {
         objectType: TileAccordionForm
-      },
-      detailTableVisible: false
+      }
     },
     {
       objectType: PageWithNodes,
@@ -489,8 +447,7 @@ export default (): OutlineModel => ({
       text: 'Tooltip',
       detailForm: {
         objectType: TooltipForm
-      },
-      detailTableVisible: false
+      }
     },
     {
       objectType: PageWithNodes,
@@ -498,8 +455,7 @@ export default (): OutlineModel => ({
       text: 'Tree',
       detailForm: {
         objectType: TreeForm
-      },
-      detailTableVisible: false
+      }
     },
     {
       objectType: PageWithNodes,
@@ -507,8 +463,7 @@ export default (): OutlineModel => ({
       text: 'Tree Box',
       detailForm: {
         objectType: TreeBoxForm
-      },
-      detailTableVisible: false
+      }
     },
     {
       objectType: PageWithNodes,
@@ -516,8 +471,7 @@ export default (): OutlineModel => ({
       text: 'Wrapped Form Field',
       detailForm: {
         objectType: WrappedFormFieldForm
-      },
-      detailTableVisible: false
+      }
     }
   ]
 });
