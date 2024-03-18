@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -243,7 +243,7 @@ public interface SQLs {
       + "         'Brussels', "
       + "         'BE', "
       + "         'https://www.eclipse.org/org/foundation/', "
-      + "         'https://wiki.eclipse.org/images/a/ab/Eclipse_foundation_logo.png')";
+      + "         'https://www.eclipse.org/images/logos/eclipse-foundation-400x400.png')";
 
   String ORGANIZATION_VALUES_02 = ""
       + "VALUES  ('org02', "
@@ -251,7 +251,7 @@ public interface SQLs {
       + "         'Baden', "
       + "         'CH', "
       + "         'https://www.bsi-software.com', "
-      + "         'https://wiki.eclipse.org/images/4/4f/Bsiag.png')";
+      + "         'https://membership.eclipse.org/organization/images/954-web.png')";
 
   String PERSON_INSERT_SAMPLE = ""
       + "INSERT   INTO PERSON "

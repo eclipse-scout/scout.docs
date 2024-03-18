@@ -260,7 +260,7 @@ For security reasons, the browser is not allowed to load content from other serv
 [source,text]
 .Content Security Policy Configuration (_config.properties_)
 ----
-scout.cspDirective[img-src]='self' www.gravatar.com wiki.eclipse.org upload.wikimedia.org
+scout.cspDirective[img-src]='self' www.gravatar.com membership.eclipse.org www.eclipse.org
 ----
 
 The remaining fields for the general box can then be added using the Scout content assist or by copying <<lst-contacts_general_fields>> into the code below the picture field, again not forgetting the getters above the MainBox.
