@@ -9,7 +9,7 @@ The `TEXTS` class is a convenience class to access the default Text Provider Ser
 TEXTS.get("persons");
 ----
 
-Its also possible to use some parameters:
+It's also possible to use some parameters:
 
 [source,java]
 .Text lookup
@@ -30,32 +30,27 @@ In this case, some placeholders for the parameters are needed in the translated 
 
 == Text properties files
 
-Scout uses the java.util.ResourceBundle mechanism for native language support. So whatever language files you have in your `<project-prefix>.shared/resources/texts/*.properties` are taken as translation base.
+Scout uses the `java.util.ResourceBundle` mechanism for native language support. So whatever language files you have in your `<project-prefix>.shared/resources/texts/*.properties` are taken as translation base.
 
 Example setup:
 
 * <project-prefix>.shared/resources/texts/Texts.properties
 * <project-prefix>.shared/resources/texts/Texts_fr.properties
 
-If your application starts with the `-vmargs -Duser.language=fr` or `eclipse.exe -nl=fr` the translations in Texts_fr.properties are considered.
-In case of any other user language the translations in Texts.properties are considered.
-
-It is possible to edit these files in the Eclipse Scout SDK with the NLS Editor.
+It is possible to edit these files in the Eclipse Scout SDK or IntelliJ Scout Plugin using the xref:sdk:sdk-eclipse.adoc#sec-sdk_nls[NLS Editor].
 
 == Text Provider Service
 
-Text Provider Services are services responsible to provide localization for texts in the user interface. A typical application contains a such service contributed by the Shared Project.
+Text Provider Services are services responsible to provide localization for texts in the user interface. A typical application contains such a service contributed by the Shared Project.
 
 * implements: `ITextProviderService`
 * extends: `AbstractDynamicNlsTextProviderService` (default, translations are stored in properties files)
 
-Using Text Provider Services developers can decide to store the translations in a custom container like a database or XML files. Furthermore using TextProviderServices it is very easy to overwrite any translated text in the application (also texts used in Scout itself) using the service ranking.
-
-The mechanism is aligned with the icon retrieval which is also managed using https://wiki.eclipse.org/index.php?title=Scout/Concepts/Icon_Provider_Service&action=edit&redlink=1[Icon Provider Services].
+Using Text Provider Services developers can decide to store the translations in a custom container like a database or XML files. Furthermore, using TextProviderServices it is very easy to overwrite any translated text in the application (also texts used in Scout itself) using the bean order.
 
 === Localization using .properties files
 
-By default the internationalization mechanism relies on .properties files using a reference implementation of the TextProviderServices:
+By default, the internationalization mechanism relies on .properties files using a reference implementation of the TextProviderServices:
 
 Service extending the `AbstractDynamicNlsTextProviderService` class.
 
@@ -71,14 +66,15 @@ This is realized by overriding the getter getDynamicNlsBaseName(). Here an examp
   }
 ----
 
-If configured like this, it means that the .properties files will be located in the same plug-in at the location:
+If configured like this, it means that the `.properties` files will be located in the same module at the location:
 
 * `/resources/texts/Texts.properties` (default)
 * `/resources/texts/Texts_fr.properties` (french)
 * `/resources/texts/Texts_de.properties` (german)
 * `...` (additional languages)
 
-If you decide to store your translated texts in .properties files, you migth want to use the https://wiki.eclipse.org/Scout/SDK/NLS_Editor[NLS Editor] to edit them.
+
+If you decide to store your translated texts in .properties files, you might want to use the xref:sdk:sdk-eclipse.adoc#sec-sdk_nls[NLS Editor] to edit them.
 
 You need to respect the format defined by the Java Properties class. In particular the encoding of a .properties file is ISO-8859-1 (also known as Latin-1). All non-Latin-1 characters must be encoded. Examples:
 
