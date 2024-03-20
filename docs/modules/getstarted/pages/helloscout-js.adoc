@@ -38,22 +38,23 @@ After that, the file and folder structure of your local copy should look like th
 ----
 .
 │   package.json
+│   tsconfig.json
 │   webpack.config.js
 │
 ├───res
 │       index.html
 │
 └───src
-    │   helloworld.js
+    │   helloworld.ts
     │   helloworld.less
     │
     ├───desktop
-    │       Desktop.js
-    │       DesktopModel.js
+    │       Desktop.ts
+    │       DesktopModel.ts
     │
     └───greeting
-            HelloForm.js
-            HelloFormModel.js
+            HelloForm.ts
+            HelloFormModel.ts
 ----
 // structure generated with `tree /F` on Windows
 
@@ -108,7 +109,7 @@ include::example$helloscout-js/package.json[]
 
 The `scripts` define what `npm run` should execute.
 They work a bit like aliases in Bash.
-To have all needed files available at `http://127.0.0.1:8080/`,
+To have all required files available at `http://127.0.0.1:8080/`,
 we need to mount the folder `dist` to the root path `/` when starting the development server.
 
 Modules defined in `devDependencies` and `dependencies` are downloaded to the `node_modules` folder on `npm install`.
@@ -120,6 +121,9 @@ or is already defined in the `package-lock.json` file.
 For more detailed and general information about `package.json` and `package-lock.json`,
 see the official documentation on Node.js:
 {the-package-json-guide}[The package.json guide] and {the-package-lock-json-file}[The package-lock.json file].
+
+==== tsconfig
+The tsconfig.json file configures the TypeScript compiler. It extends a default config from Scout and specifies output dir and the directories that contain TypeScript files. For more details on tsconfig see the https://www.typescriptlang.org/docs/handbook/tsconfig-json.html[TypeScript documentation].
 
 ==== webpack
 
@@ -141,7 +145,7 @@ In addition to the static resources of our application, we also need Scout's sta
 
 In `**config.entry**`, the entry points for bundling JavaScript and CSS files are defined.
 For our application, the target files `helloworld.js` and `helloworld-theme.css` (defined without the file extension)
-are generated from the source files `src/helloworld.js` and `src/helloworld.less`, respectively.
+are generated from the source files `src/helloworld.ts` and `src/helloworld.less`, respectively.
 
 The `**-theme**` **suffix** of the target CSS file is important for Scout's post-processing to work properly.
 Also, make sure that you don't use exactly the same name as for the target _JS_ file.
@@ -167,19 +171,17 @@ The order of these elements is important.
 In particular, the `<div>` element with the class "scout" has to be placed before the inclusion of the scripts,
 since it is used to build the final DOM for our application.
 
-The other file in our `res/` folder, `**helloworld-texts.json**`, contains your own texts used in the application.
-
 === Source Files
 
 ==== Entry Points
 
-.src/helloworld.js
-[source,js]
+.src/helloworld.ts
+[source,typescript]
 ----
-include::example$helloscout-js/src/helloworld.js[]
+include::example$helloscout-js/src/helloworld.ts[]
 ----
 
-In our main JavaScript file, we import the `scout` namespace object as well as the class `App`.
+In our main TypeScript file, we import the `scout` namespace object as well as the class `App`.
 
 Before we initialize an instance of the Scout application (passing the location of the text urls and the locales url)
 we do two other things:
@@ -189,7 +191,7 @@ that provides an instance of our `Desktop` class.
 The desktop is the main widget of a Scout application and the root of every other widget.
 On application initialization, Scout is using that factory to create the desktop of our application.
 2. Define our own namespace object, `helloworld`, and put our `HelloForm` class in it,
-so Scout can use it to build modular widgets at runtime (see `DesktopModel.js`).
+so Scout can use it to build modular widgets at runtime (see `DesktopModel.ts`).
 
 .src/helloworld.less
 [source,less]
@@ -207,15 +209,14 @@ We follow the best practice of separating model (layout, structure) and behavior
 This also makes it easier to e.g. reuse a form that should look similar elsewhere but behave differently.
 
 A typical model definition for a Scout widget defines an `objectType`.
-This is specified as a string containing the corresponding class, prefixed with the namespace in which it is accessible.
-Without a namespace prefix, the namespace `scout` is used as default.
+This is specified as a reference to the corresponding class.
 
 Other object properties are used to configure the widget based on the specified `objectType`.
 
-.src/greeting/DesktopModel.js
-[source,js]
+.src/greeting/DesktopModel.ts
+[source,typescript]
 ----
-include::example$helloscout-js/src/desktop/DesktopModel.js[]
+include::example$helloscout-js/src/desktop/DesktopModel.ts[]
 ----
 
 The default desktop consists of a navigation, a header and a bench.
@@ -224,18 +225,18 @@ We only need the bench for our application, so we hide the other parts, includin
 A desktop can contain outlines and/or views.
 We provide an instance of our HelloForm as a view on our desktop.
 
-.src/greeting/Desktop.js
-[source,js]
+.src/greeting/Desktop.ts
+[source,typescript]
 ----
-include::example$helloscout-js/src/desktop/Desktop.js[]
+include::example$helloscout-js/src/desktop/Desktop.ts[]
 ----
 
 Our desktop doesn't have any custom behavior, so we only import the `DesktopModel` here, in the `_jsonModel()` function.
 
-.src/greeting/HelloFormModel.js
-[source,js]
+.src/greeting/HelloFormModel.ts
+[source,typescript]
 ----
-include::example$helloscout-js/src/greeting/HelloFormModel.js[]
+include::example$helloscout-js/src/greeting/HelloFormModel.ts[]
 ----
 
 Our form is defined to be non-modal and displayed as a view (rather than a dialog).
@@ -243,19 +244,20 @@ It consists of a string field and a button.
 These are in a group box inside the form.
 We define an empty border decoration around this group box to have a little padding.
 
-The _Enter_ key is defined as the keyboard shortcut for our button
-and we set `processButton: false` to place the button next to our field instead of above it.
+The _Enter_ key is defined as the keyboard shortcut for our button, and we set `processButton: false` to place the button next to our field instead of above it.
 
-.src/greeting/HelloForm.js
-[source,js]
+At the bottom an auto generated type holding the WidgetMap can be found. Such a WidgetMap specifies which field id points to which type of widget as a flattened type. This is used later on in the Form when accessing such a widget using the `this.widget()` function to directly return the correct widget data type.
+
+.src/greeting/HelloForm.ts
+[source,typescript]
 ----
-include::example$helloscout-js/src/greeting/HelloForm.js[]
+include::example$helloscout-js/src/greeting/HelloForm.ts[]
 ----
 
-As in `Desktop.js`, we import the model but additionally add an event handler in the `_init(model)` function
+As in `Desktop.ts`, we import the model but additionally add an event handler in the `_init(model)` function
 to implement the desired behavior when the button is clicked.
 
-To accomplish this, we can access our button and field by their respective `id` (see `HelloFormModel.js`).
+To accomplish this, we can access our button and field by their respective `id` (see `HelloFormModel.ts`).
 An OK message box with the desired text is displayed using the convenience class `MessageBoxes` from Scout.
 
 === Git configuration

@@ -1,7 +1,7 @@
+import {Desktop, DesktopModel} from "@eclipse-scout/core";
 import {HelloForm} from "../greeting/HelloForm";
-import {Desktop} from "./Desktop";
 
-export default () => ({
+export default (): DesktopModel => ({
   objectType: Desktop,
   navigationHandleVisible: false,
   navigationVisible: false,
