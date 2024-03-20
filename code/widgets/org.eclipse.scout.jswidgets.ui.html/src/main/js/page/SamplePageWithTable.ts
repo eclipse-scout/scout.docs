@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -13,6 +13,7 @@ import $ from 'jquery';
 import {MiniForm, SamplePageWithNodes, SamplePageWithTableTable} from '../index';
 
 export class SamplePageWithTable extends PageWithTable {
+  declare detailTable: SamplePageWithTableTable;
 
   constructor() {
     super();
@@ -154,8 +155,11 @@ export class SamplePageWithTable extends PageWithTable {
   }
 
   override createChildPage(row: TableRow): Page {
-    return scout.create(SamplePageWithNodes, {
-      parent: this.getOutline()
-    });
+    if (this.detailTable.columnById('BooleanColumn').cellValue(row)) {
+      return scout.create(SamplePageWithNodes, {
+        parent: this.getOutline()
+      });
+    }
+    return null;
   }
 }
