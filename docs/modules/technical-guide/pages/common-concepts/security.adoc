@@ -24,11 +24,10 @@ In Scout this header is set to `SAMEORIGIN` which allows the page to be displaye
 
 === X-XSS-Protection
 
-This header enables the XSS footnote:[https://en.wikipedia.org/wiki/Cross-site_scripting] filter built into most recent user agents.
-It's usually enabled by default anyway, so the role of this header is to re-enable the filter for the website if it was disabled by the user.
-The X-XSS-Protection header is described in https://blogs.msdn.microsoft.com/ieinternals/2011/01/31/controlling-the-xss-filter/[controlling-the-xss-filter].
+This header is no longer interpreted by modern browser engines and is considered insecure.
+Scout does no longer set this header in `HttpServletControl`.
 
-In Scout this header is configured to enable XSS protections and instructs the user-agent to block a page from loading if reflected XSS is detected.
+See MDN: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection
 
 === Content Security Policy
 
