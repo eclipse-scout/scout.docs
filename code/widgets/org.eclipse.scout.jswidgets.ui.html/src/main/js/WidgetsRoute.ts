@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -7,109 +7,107 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {arrays, ObjectFactory, objects, Page, Route, router, strings, Tree, TreeNodesSelectedEvent} from '@eclipse-scout/core';
+import {arrays, ObjectFactory, objects, Page, Route, router, Tree, TreeNodesSelectedEvent} from '@eclipse-scout/core';
 import {Desktop} from './index';
 
 export class WidgetsRoute extends Route {
   desktop: Desktop;
-  routes: [string, string][];
+  routeDatas: WidgetsRouteData[];
 
   constructor(desktop: Desktop) {
     super();
 
     this.desktop = desktop;
-    this.routes = this._createRoutes(desktop);
+    this.routeDatas = this._createRouteDatas();
 
     // This listener updates the URL in the browsers location field whenever a page has been activated
     desktop.outline.on('nodesSelected', this._onPageChanged.bind(this));
   }
 
-  /**
-   * Creates an array which maps a routeRef to an objectType.
-   * 0: routeRef
-   * 1: objectType of the detail form of a node in FormFieldOutline
-   */
-  protected _createRoutes(desktop: Desktop): [string, string][] {
-    let regex = /^jswidgets\.(\w*)(Form|PageWithTable|PageWithNodes)$/;
+  protected _createRouteDatas(): WidgetsRouteData[] {
     let routes = [];
     Tree.visitNodes((node: Page) => {
-      let routeRef = null;
-      let objectType = this._objectTypeForNode(node);
-
-      let result = regex.exec(objectType);
-      if (result !== null && result.length > 1) {
-        routeRef = result[1].toLowerCase();
-        routes.push([routeRef, objectType]);
+      let ref = this._getPageRef(node);
+      if (ref) {
+        routes.push({
+          ref: ref,
+          page: node
+        });
       }
-    }, desktop.outline.nodes);
+    }, this.desktop.outline.nodes);
     return routes;
   }
 
   override matches(location: string): boolean {
-    return !!this._getRouteData(location);
-  }
-
-  protected _getRouteData(location: string): [string, string] {
-    if (strings.empty(location)) {
-      return null;
-    }
-    return arrays.find(this.routes, routeData => {
-      return location.substring(1) === routeData[0];
-    });
-  }
-
-  protected _getRouteDataByObjectType(objectType: string): [string, string] {
-    return arrays.find(this.routes, routeData => {
-      return routeData[1] === objectType;
-    });
+    let ref = this._locationToRef(location);
+    let routeData = this._getRouteDataByRef(ref);
+    return !!routeData;
   }
 
   override activate(location: string) {
     super.activate(location);
-
-    let objectType = this._getRouteData(location)[1];
-    let foundNode = null;
-    Tree.visitNodes((node: Page) => {
-      if (this._objectTypeForNode(node) === objectType) {
-        foundNode = node;
-        return false;
-      }
-    }, this.desktop.outline.nodes);
-    this.desktop.outline.selectNode(foundNode);
+    let ref = this._locationToRef(location);
+    let routeData = this._getRouteDataByRef(ref);
+    if (routeData) {
+      this.desktop.outline.selectNode(routeData.page);
+    }
   }
 
-  protected _objectTypeForNode(node: Page): string {
-    let objectType;
-    if (node.detailForm) {
-      objectType = node.detailForm.objectType;
-    } else if (node._detailFormModel) {
-      objectType = node._detailFormModel.objectType;
-    } else {
-      objectType = node.objectType;
+  protected _getRouteDataByRef(ref: string): WidgetsRouteData {
+    return arrays.find(this.routeDatas, route => route.ref === ref);
+  }
+
+  protected _getRouteDataByPage(page: Page): WidgetsRouteData {
+    return arrays.find(this.routeDatas, route => route.page === page);
+  }
+
+  protected _locationToRef(location: string): string {
+    let match = /#(.+)$/.exec(location);
+    return match ? match[1] : null;
+  }
+
+  protected _getPageRef(page: Page): string {
+    if (typeof page['routeRef'] === 'string') {
+      return page['routeRef'];
     }
 
+    let objectType;
+    if (page.detailForm) {
+      objectType = page.detailForm.objectType;
+    } else if (page._detailFormModel) {
+      objectType = page._detailFormModel.objectType;
+    } else {
+      objectType = page.objectType;
+    }
     if (objects.isFunction(objectType)) {
       objectType = ObjectFactory.get().getObjectType(objectType);
     }
+    return this._objectTypeToRef(objectType);
+  }
 
-    return objectType;
+  protected _objectTypeToRef(objectType: string): string {
+    let regex = /^jswidgets\.(\w+)(Form|PageWithTable|PageWithNodes)$/;
+    let match = regex.exec(objectType);
+    if (match) {
+      return match[1].replace(/(.)([A-Z]+)/g, '$1-$2').toLowerCase();
+    }
+    return null;
   }
 
   protected _onPageChanged(event: TreeNodesSelectedEvent) {
     let page = event.source.selectedNode() as Page;
     if (page) {
-      let objectType;
-      if (page.detailForm) {
-        objectType = page.detailForm.objectType;
-      } else {
-        objectType = page.objectType;
-      }
-      let routeData = this._getRouteDataByObjectType(objectType);
+      let routeData = this._getRouteDataByPage(page);
       if (routeData) {
-        router.updateLocation(routeData[0]);
+        router.updateLocation(routeData.ref);
       }
     } else {
       router.updateLocation('');
     }
   }
+}
+
+export interface WidgetsRouteData {
+  ref: string;
+  page: Page;
 }
