@@ -1,6 +1,7 @@
 name: scout-docs
 title: Eclipse Scout
 version: 24.2
+prerelease: true
 asciidoc:
   attributes:
     source-language: asciidoc@
@@ -8,10 +9,10 @@ asciidoc:
     sectanchors: true
     page-pagination: true
 nav:
-- modules/ROOT/nav.adoc
-- modules/getstarted/nav.adoc
-- modules/technical-guide/nav.adoc
-- modules/sdk/nav.adoc
-- modules/howtos/nav.adoc
-- modules/releasenotes/nav.adoc
-- modules/migration/nav.adoc
+  - modules/ROOT/nav.adoc
+  - modules/getstarted/nav.adoc
+  - modules/technical-guide/nav.adoc
+  - modules/sdk/nav.adoc
+  - modules/howtos/nav.adoc
+  - modules/releasenotes/nav.adoc
+  - modules/migration/nav.adoc
