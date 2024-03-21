@@ -1,7 +1,6 @@
 name: scout-docs
 title: Eclipse Scout
 version: 24.2
-prerelease: true
 asciidoc:
   attributes:
     source-language: asciidoc@

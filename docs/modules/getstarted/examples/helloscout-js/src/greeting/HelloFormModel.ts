@@ -1,8 +1,9 @@
-import {Button, Form, GroupBox, StringField} from '@eclipse-scout/core';
+import {Button, Form, FormModel, GroupBox, StringField} from '@eclipse-scout/core';
 
-export default () => ({
+export default (): FormModel => ({
   objectType: Form,
   displayHint: Form.DisplayHint.VIEW,
+  modal: false,
   rootGroupBox: {
     objectType: GroupBox,
     borderDecoration: GroupBox.BorderDecoration.EMPTY,
@@ -21,4 +22,13 @@ export default () => ({
       }
     ]
   }
-});
+})
+
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
+export type HelloFormWidgetMap = {
+  'NameField': StringField;
+  'GreetButton': Button;
+};
