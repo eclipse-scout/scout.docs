@@ -264,6 +264,14 @@ export default (): OutlineModel => ({
         {
           objectType: SamplePageWithNodes,
           routeRef: 'sample-page-with-nodes'
+        },
+        {
+          objectType: DynamicPageWithNodes,
+          routeRef: 'dynamic-page'
+        },
+        {
+          objectType: ReloadablePageWithNodes,
+          routeRef: 'reloadable-page'
         }
       ]
     },
