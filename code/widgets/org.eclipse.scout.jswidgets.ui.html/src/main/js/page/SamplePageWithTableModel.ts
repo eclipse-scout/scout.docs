@@ -29,7 +29,7 @@ export default (): PageModel => ({
         id: 'StringColumn',
         objectType: Column,
         text: 'String Column',
-        width: 300,
+        width: 200,
         sortActive: true,
         sortIndex: 0
       },
@@ -38,13 +38,13 @@ export default (): PageModel => ({
         objectType: SmartColumn,
         lookupCall: LocaleLookupCall,
         text: 'Smart Column',
-        width: 300
+        width: 200
       },
       {
         id: 'NumberColumn',
         objectType: NumberColumn,
         text: 'Number Column',
-        width: 300
+        width: 150
       },
       {
         id: 'BooleanColumn',
