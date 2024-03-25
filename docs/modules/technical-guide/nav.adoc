@@ -1,6 +1,7 @@
 * xref:technical-guide.adoc[]
 ** Common Concepts
 *** xref:common-concepts/platform.adoc[]
+*** xref:common-concepts/application.adoc[]
 *** xref:common-concepts/exception-handling.adoc[]
 *** xref:common-concepts/job-manager.adoc[]
 *** xref:common-concepts/run-context.adoc[]
