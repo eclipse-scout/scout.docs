@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -11,6 +11,7 @@ package org.eclipse.scout.docs.snippets;
 
 import java.util.UUID;
 
+import org.eclipse.scout.rt.api.data.security.PermissionId;
 import org.eclipse.scout.rt.dataobject.exception.AccessForbiddenException;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.text.TEXTS;
@@ -20,22 +21,25 @@ import org.eclipse.scout.rt.security.IPermission;
 
 public class AccessSnippet {
 
+
   //tag::ReadCompanyPermission[]
-  public class ReadCompanyPermission extends AbstractPermission {
+  public static class ReadCompanyPermission extends AbstractPermission {
     private static final long serialVersionUID = 1L;
+    public static final PermissionId ID = PermissionId.of("scoutdoc.ReadCompany");
 
     public ReadCompanyPermission() {
-      super("scoutdoc.ReadCompany");
+      super(ID);
     }
   }
   //end::ReadCompanyPermission[]
 
   //tag::CreateCompanyPermission[]
-  public class CreateCompanyPermission extends AbstractPermission {
+  public static class CreateCompanyPermission extends AbstractPermission {
     private static final long serialVersionUID = 1L;
+    public static final PermissionId ID = PermissionId.of("scoutdoc.CreateCompany");
 
     public CreateCompanyPermission() {
-      super("scoutdoc.CreateCompany");
+      super(ID);
     }
 
     @Override
@@ -68,8 +72,9 @@ public class AccessSnippet {
   }
 
   //tag::UpdateCompanyPermission[]
-  public class UpdateCompanyPermission extends AbstractPermission {
+  public static class UpdateCompanyPermission extends AbstractPermission {
     private static final long serialVersionUID = 1L;
+    public static final PermissionId ID = PermissionId.of("scoutdoc.UpdateCompany");
 
     private final UUID m_companyId;
 
@@ -78,7 +83,7 @@ public class AccessSnippet {
     }
 
     public UpdateCompanyPermission(UUID companyId) {
-      super("scoutdoc.UpdateCompany");
+      super(ID);
       m_companyId = companyId;
     }
 
