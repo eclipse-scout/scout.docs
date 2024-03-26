@@ -84,3 +84,28 @@ To install the Scout SDK into your existing Eclipse IDE, use this P2 update site
 
 // ----------------------------------------------------------------------------
 
+[[typed-permissionId]]
+== Typed PermissionId
+
+A new `org.eclipse.scout.rt.api.data.security.PermissionId` was introduced to be used as typed identifier for permissions instead of the untyped name as `String` which was previously used.
+
+The argument of the `org.eclipse.scout.rt.security.AbstractPermission.AbstractPermission` only constructor was changed from `String` to `PermissionId`, a new `AbstractPermission#getId()` method was introduced which will return an id equal to the supplied id (actually internally the name is still stored as `String` and just wrapped on request). -> All permission names should be changed from `String` to `PermissionId` identifiers.
+
+With this change the following data objects have been adjusted:
+
+[cols="1,1,1,1,1"]
+|===
+|Type name|Attribute type|Attribute name|New type|New name
+
+|scout.PermissionCollection
+|Map<String, ? extends Collection<PermissionDo>>
+|permissions
+|Map<PermissionId, ? extends Collection<PermissionDo>>
+|(unchanged)
+
+|scout.Permission
+|String
+|name
+|PermissionId
+|id
+|===
