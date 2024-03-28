@@ -1,4 +1,4 @@
 = Eclipse Scout Release Notes
 include::common:partial$_header.adoc[]
 
-include::partial$release-notes-24.1.adoc[]
+include::partial$release-notes-24.2.adoc[]
