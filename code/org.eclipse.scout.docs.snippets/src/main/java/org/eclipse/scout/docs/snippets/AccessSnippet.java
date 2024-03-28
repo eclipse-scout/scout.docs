@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -11,6 +11,7 @@ package org.eclipse.scout.docs.snippets;
 
 import java.util.UUID;
 
+import org.eclipse.scout.rt.api.data.security.PermissionId;
 import org.eclipse.scout.rt.dataobject.exception.AccessForbiddenException;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.text.TEXTS;
@@ -25,7 +26,7 @@ public class AccessSnippet {
     private static final long serialVersionUID = 1L;
 
     public ReadCompanyPermission() {
-      super("scoutdoc.ReadCompany");
+      super(PermissionId.of("scoutdoc.ReadCompany"));
     }
   }
   //end::ReadCompanyPermission[]
@@ -35,7 +36,7 @@ public class AccessSnippet {
     private static final long serialVersionUID = 1L;
 
     public CreateCompanyPermission() {
-      super("scoutdoc.CreateCompany");
+      super(PermissionId.of("scoutdoc.CreateCompany"));
     }
 
     @Override
@@ -78,7 +79,7 @@ public class AccessSnippet {
     }
 
     public UpdateCompanyPermission(UUID companyId) {
-      super("scoutdoc.UpdateCompany");
+      super(PermissionId.of("scoutdoc.UpdateCompany"));
       m_companyId = companyId;
     }
 
