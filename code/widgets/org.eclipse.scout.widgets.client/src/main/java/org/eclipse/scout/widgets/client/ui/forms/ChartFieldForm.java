@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -1557,7 +1557,7 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
             @Override
             protected void execChangedMasterValue(Object newMasterValue) {
               setEnabled(ObjectUtility.isOneOf(newMasterValue, IChartType.PIE, IChartType.DOUGHNUT, IChartType.POLAR_AREA, IChartType.RADAR, IChartType.BAR, IChartType.BAR_HORIZONTAL, IChartType.LINE, IChartType.COMBO_BAR_LINE,
-                  IChartType.BUBBLE));
+                  IChartType.BUBBLE, IChartType.SCATTER));
             }
           }
 
