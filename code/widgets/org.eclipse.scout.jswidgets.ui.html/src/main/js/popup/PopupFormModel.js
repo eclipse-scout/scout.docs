@@ -22,6 +22,7 @@ export default () => ({
         gridDataHints: {
           weightY: 1
         },
+        responsive: false,
         fields: [
           {
             id: 'OpenPopupButton',
