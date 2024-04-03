@@ -20,7 +20,8 @@ Output:
   <base href="helloworld_1_0/">
 
 == scout:include
-This tag is used for server-side inlcudes, which means you can embed the HTML content of another file into the current HTML document. This avoids unnecessary code duplication by referencing the same fragement in multiple HTML documents.
+
+This tag is used for server-side includes, which means you can embed the HTML content of another file into the current HTML document. This avoids unnecessary code duplication by referencing the same fragment in multiple HTML documents.
 
 Example:
 

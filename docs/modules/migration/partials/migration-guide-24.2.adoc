@@ -82,6 +82,9 @@ You can download the complete Eclipse IDE with Scout SDK included here: +
 To install the Scout SDK into your existing Eclipse IDE, use this P2 update site: +
 {scout-sdk-update-site}
 
+For nightly beta builds use this P2 update site:
+{scout-sdk-update-site-nightly}
+
 // ----------------------------------------------------------------------------
 
 [[typed-permissionId]]

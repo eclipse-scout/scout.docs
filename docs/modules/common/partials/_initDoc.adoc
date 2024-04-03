@@ -32,6 +32,7 @@
 :mvnrepository-link: https://mvnrepository.com/artifact/org.eclipse.scout.rt/org.eclipse.scout.rt/{maven-version}[{maven-version}]
 :scout-sdk-download-link: https://www.eclipse.org/downloads/packages/release/{simrel-name}/r/eclipse-ide-scout-developers[Eclipse for Scout Developers]
 :scout-sdk-update-site: https://download.eclipse.org/scout/releases
+:scout-sdk-update-site-nightly: https://download.eclipse.org/scout/nightly
 :scout-docs-link: https://github.com/eclipse-scout/scout.docs/tree/features/version/{maven-version}[features/version/{maven-version}]
 :jswidgets: https://scout.bsi-software.com/jswidgets
 :jswidgets-code: https://github.com/eclipse-scout/scout.docs/tree/releases/{scout-version}/code/widgets
