@@ -30,7 +30,6 @@ export * from './carousel/CarouselFormModel';
 export * from './chartfield/ChartFieldForm';
 export * from './chartfield/ChartFieldFormModel';
 export * from './chartfield/ChartTypeLookupCall';
-export * from './chartfield/ColorMode';
 export * from './chartfield/LegendPositionLookupCall';
 export * from './chartfield/SpeedoGreenAreaPositionLookupCall';
 export * from './chartfield/ValuesProviderLookupCall';
