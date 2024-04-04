@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -11,9 +11,9 @@ import {
   Button, CheckBoxField, Column, FormField, FormModel, GroupBox, icons, IntegerField, LabelField, Menu, Mode, ModeSelector, ModeSelectorField, NumberField, SequenceBox, SmartField, StringField, TabBox, TabItem, Table, TableField, TileField,
   TileGrid, ValueField
 } from '@eclipse-scout/core';
-import {Chart, ChartField, ChartFieldTile, ChartPosition, ChartType, GreenAreaPosition} from '@eclipse-scout/chart';
+import {Chart, ChartColorMode, ChartField, ChartFieldTile, ChartPosition, ChartType, GreenAreaPosition} from '@eclipse-scout/chart';
 import {
-  ChartTypeLookupCall, ColorMode, ColorSchemeLookupCall, EventsTab, EventsTabWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, LegendPositionLookupCall, SpeedoGreenAreaPositionLookupCall,
+  ChartTypeLookupCall, ColorSchemeLookupCall, EventsTab, EventsTabWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, LegendPositionLookupCall, SpeedoGreenAreaPositionLookupCall,
   ValuesProviderLookupCall, WidgetActionsBox, WidgetActionsBoxWidgetMap
 } from '../index';
 
@@ -133,7 +133,6 @@ export default (): FormModel => ({
                       objectType: ModeSelectorField,
                       label: 'Color Mode',
                       labelVisible: false,
-                      enabled: false,
                       modeSelector: {
                         id: 'ModeSelector',
                         objectType: ModeSelector,
@@ -142,19 +141,19 @@ export default (): FormModel => ({
                             id: 'Dataset',
                             objectType: Mode,
                             text: 'Dataset',
-                            ref: ColorMode.DATASET
+                            ref: ChartColorMode.DATASET
                           },
                           {
                             id: 'Data',
                             objectType: Mode,
                             text: 'Data',
-                            ref: ColorMode.DATA
+                            ref: ChartColorMode.DATA
                           },
                           {
-                            id: 'Element',
+                            id: 'Auto',
                             objectType: Mode,
-                            text: 'Element',
-                            ref: ColorMode.ELEMENT
+                            text: 'Auto',
+                            ref: ChartColorMode.AUTO
                           }
                         ]
                       }
@@ -564,11 +563,11 @@ export type ChartFieldFormWidgetMap = {
   'ChartPropertiesBox.LeftBox': GroupBox;
   'AutoColorSequenceBox': SequenceBox;
   'AutoColorCheckBox': CheckBoxField;
-  'ColorModeSelectorField': ModeSelectorField<ColorMode>;
-  'ModeSelector': ModeSelector<ColorMode>;
-  'Dataset': Mode<ColorMode>;
-  'Data': Mode<ColorMode>;
-  'Element': Mode<ColorMode>;
+  'ColorModeSelectorField': ModeSelectorField<ChartColorMode>;
+  'ModeSelector': ModeSelector<ChartColorMode>;
+  'Dataset': Mode<ChartColorMode>;
+  'Data': Mode<ChartColorMode>;
+  'Auto': Mode<ChartColorMode>;
   'ClickableCheckBox': CheckBoxField;
   'CheckableCheckBox': CheckBoxField;
   'AnimatedCheckBox': CheckBoxField;

@@ -28,6 +28,7 @@ import org.eclipse.scout.rt.chart.client.ui.form.fields.chartfield.AbstractChart
 import org.eclipse.scout.rt.chart.client.ui.form.fields.tile.AbstractChartTile;
 import org.eclipse.scout.rt.chart.shared.data.basic.chart.ChartAxisBean;
 import org.eclipse.scout.rt.chart.shared.data.basic.chart.ChartBean;
+import org.eclipse.scout.rt.chart.shared.data.basic.chart.ColorMode;
 import org.eclipse.scout.rt.chart.shared.data.basic.chart.IChartAxisBean;
 import org.eclipse.scout.rt.chart.shared.data.basic.chart.IChartConfig;
 import org.eclipse.scout.rt.chart.shared.data.basic.chart.IChartType;
@@ -103,6 +104,7 @@ import org.eclipse.scout.widgets.client.ui.forms.ChartFieldForm.MainBox.BottomBo
 import org.eclipse.scout.widgets.client.ui.forms.ChartFieldForm.MainBox.BottomBox.ChartPropertiesBox;
 import org.eclipse.scout.widgets.client.ui.forms.ChartFieldForm.MainBox.BottomBox.ChartPropertiesBox.CustomChartPropertiesBox;
 import org.eclipse.scout.widgets.client.ui.forms.ChartFieldForm.MainBox.BottomBox.ChartPropertiesBox.FormFieldPropertiesBox;
+import org.eclipse.scout.widgets.client.ui.forms.ChartFieldForm.MainBox.BottomBox.ChartPropertiesBox.LeftBox.AutoColorSequenceBox.AutoColorCheckBox;
 import org.eclipse.scout.widgets.client.ui.forms.ChartFieldForm.MainBox.BottomBox.ChartPropertiesBox.LeftBox.AutoColorSequenceBox.ColorModeSelectorField;
 import org.eclipse.scout.widgets.client.ui.forms.ChartFieldForm.MainBox.BottomBox.ChartPropertiesBox.LeftBox.FulfillmentStartValuePropertyCheckbox;
 import org.eclipse.scout.widgets.client.ui.forms.ChartFieldForm.MainBox.BottomBox.ChartPropertiesBox.LeftBox.TileCheckBox;
@@ -187,6 +189,10 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
 
   public ChartPropertiesBox getChartPropertiesBox() {
     return getFieldByClass(ChartPropertiesBox.class);
+  }
+
+  public AutoColorCheckBox getAutoColorCheckBox() {
+    return getFieldByClass(AutoColorCheckBox.class);
   }
 
   public ColorModeSelectorField getColorModeSelectorField() {
@@ -935,7 +941,7 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
             .collect(Collectors.toList());
         valueGroups.forEach(valueGroup -> valueGroup.setColorHexValue(colorHexValues));
         break;
-      case ELEMENT:
+      case AUTO:
       default:
         valueGroups.forEach(valueGroup -> valueGroup.setColorHexValue(IntStream.range(0, getValueGroupSize.applyAsInt(valueGroup))
             .mapToObj(i -> randomHexColor())
@@ -1223,6 +1229,9 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
                 IChartConfig config = getChart().getConfig();
                 config.withAutoColor(getValue());
                 getChart().setConfig(config);
+                if (!getValue()) {
+                  renewData();
+                }
               }
             }
 
@@ -1240,18 +1249,18 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
               }
 
               @Override
-              protected boolean getConfiguredEnabled() {
-                return false;
-              }
-
-              @Override
               protected void execInitField() {
-                setValue(ColorMode.DATASET);
+                setValue(ColorMode.AUTO);
               }
 
               @Override
               protected void execChangedValue() {
-                renewData();
+                var config = getChart().getConfig();
+                config.withColorMode(getValue());
+                getChart().setConfig(config);
+                if (!getAutoColorCheckBox().getValue()) {
+                  renewData();
+                }
               }
 
               @Override
@@ -1261,7 +1270,7 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
 
               @Override
               protected void execChangedMasterValue(Object newMasterValue) {
-                setEnabled(!((Boolean) newMasterValue));
+                getModeFor(ColorMode.AUTO).setText(((boolean) newMasterValue) ? "Auto" : "Element");
               }
 
               @Order(10)
@@ -1294,15 +1303,15 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
 
               @Order(30)
               @ClassId("15d4befc-bb47-457b-92a3-98303924b78c")
-              public class Element extends AbstractMode<ColorMode> {
+              public class Auto extends AbstractMode<ColorMode> {
                 @Override
                 protected String getConfiguredText() {
-                  return "Element";
+                  return "Auto";
                 }
 
                 @Override
                 protected ColorMode getConfiguredRef() {
-                  return ColorMode.ELEMENT;
+                  return ColorMode.AUTO;
                 }
               }
             }
@@ -3394,11 +3403,5 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
       rows.add(new LookupRow<>(IChartConfig.RIGHT, "Right"));
       return rows;
     }
-  }
-
-  protected enum ColorMode {
-    DATASET,
-    DATA,
-    ELEMENT
   }
 }
