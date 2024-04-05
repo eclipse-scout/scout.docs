@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {CheckBoxField, GroupBox, GroupBoxModel, NumberField, SmartField, TableCheckableStyle, TableGroupingStyle} from '@eclipse-scout/core';
+import {CheckBoxField, GroupBox, GroupBoxModel, NumberField, SmartField} from '@eclipse-scout/core';
 import {CheckableStyleLookupCall, GroupingStyleLookupCall} from '../index';
 
 export default (): GroupBoxModel => ({
@@ -39,6 +39,12 @@ export default (): GroupBoxModel => ({
       id: 'CheckableField',
       objectType: CheckBoxField,
       label: 'Checkable',
+      labelVisible: false
+    },
+    {
+      id: 'ColumnAddableField',
+      objectType: CheckBoxField,
+      label: 'Column Addable',
       labelVisible: false
     },
     {
@@ -152,10 +158,15 @@ export default (): GroupBoxModel => ({
   ]
 });
 
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
 export type TablePropertiesBoxWidgetMap = {
   'AutoResizeColumnsField': CheckBoxField;
   'AutoOptimizeColumnWidthsField': CheckBoxField;
   'CheckableField': CheckBoxField;
+  'ColumnAddableField': CheckBoxField;
   'CompactField': CheckBoxField;
   'HeaderEnabledField': CheckBoxField;
   'HeaderVisibleField': CheckBoxField;
@@ -170,8 +181,8 @@ export type TablePropertiesBoxWidgetMap = {
   'FooterVisibleField': CheckBoxField;
   'RowIconVisibleField': CheckBoxField;
   'RowIconColumnWidthField': NumberField;
-  'CheckableStyleField': SmartField<TableCheckableStyle>;
-  'GroupingStyleField': SmartField<TableGroupingStyle>;
+  'CheckableStyleField': SmartField<any>;
+  'GroupingStyleField': SmartField<any>;
   'TileModeField': CheckBoxField;
   'TextFilterEnabledField': CheckBoxField;
 };

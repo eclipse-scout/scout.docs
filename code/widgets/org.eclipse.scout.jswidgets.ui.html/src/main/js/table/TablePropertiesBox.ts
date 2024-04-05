@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -54,6 +54,12 @@ export class TablePropertiesBox extends GroupBox {
     let checkableField = this.widget('CheckableField');
     checkableField.setValue(this.table.checkable);
     checkableField.on('propertyChange:value', event => this.table.setCheckable(event.newValue));
+
+    let columnAddableField = this.widget('ColumnAddableField');
+    columnAddableField.setValue(this.table.columnAddable);
+    columnAddableField.on('propertyChange:value', event => {
+      this.table.columnAddable = event.newValue;
+    });
 
     let compactField = this.widget('CompactField');
     compactField.setValue(this.table.compact);

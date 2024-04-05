@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -37,6 +37,13 @@ export default (): FormModel => ({
               objectType: Table,
               columns: [
                 {
+                  id: 'KeyColumn',
+                  objectType: Column,
+                  text: 'Key Column',
+                  width: 120, // set a reasonable width in case the column is made visible via ColumnPropertiesBox
+                  displayable: false
+                },
+                {
                   id: 'StringColumn',
                   objectType: Column,
                   text: 'String Column',
@@ -55,8 +62,15 @@ export default (): FormModel => ({
                   width: 120
                 },
                 {
+                  id: 'SecretNumberColumn',
+                  objectType: NumberColumn,
+                  text: 'Secret Number Column',
+                  width: 120,
+                  visible: false
+                },
+                {
                   id: 'SmartColumn',
-                  objectType: SmartColumn,
+                  objectType: SmartColumn<string>,
                   text: 'Smart Column',
                   lookupCall: LocaleLookupCall,
                   width: 120
@@ -198,7 +212,7 @@ export default (): FormModel => ({
             fields: [
               {
                 id: 'Column.TargetField',
-                objectType: SmartField,
+                objectType: SmartField<Column>,
                 label: 'Target'
               },
               {
@@ -248,7 +262,7 @@ export type TableFormWidgetMap = {
   'FormFieldPropertiesBox': FormFieldPropertiesBox;
   'GridDataBox': GridDataBox;
   'ColumnProperties': TabItem;
-  'Column.TargetField': SmartField<any>;
+  'Column.TargetField': SmartField<Column>;
   'Column.PropertiesBox': ColumnPropertiesBox;
   'ActionsTab': TabItem;
   'FormFieldActionsBox': FormFieldActionsBox;
@@ -274,10 +288,12 @@ export type TableFieldTableWidgetMap = {
 };
 
 export type TableFieldTableColumnMap = {
+  'KeyColumn': Column;
   'StringColumn': Column;
   'DateColumn': DateColumn;
   'NumberColumn': NumberColumn;
-  'SmartColumn': SmartColumn<any>;
+  'SecretNumberColumn': NumberColumn;
+  'SmartColumn': SmartColumn<string>;
   'BooleanColumn': BooleanColumn;
   'IconColumn': IconColumn;
   'HtmlColumn': Column;
