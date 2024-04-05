@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -7,14 +7,14 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {Column, dates, Form, FormModel, GroupBox, HtmlTile, icons, InitModelOf, MessageBoxes, models, scout, TabItem, Table, TableAppLinkActionEvent, TableRowModel} from '@eclipse-scout/core';
-import {BooleanColumnPropertiesBox, ColumnLookupCall, DateColumnPropertiesBox, LocaleLookupCall, NumberColumnPropertiesBox, SmartColumnPropertiesBox, TableFormWidgetMap} from '../index';
+import {Column, dates, Form, FormModel, GroupBox, HtmlTile, icons, InitModelOf, MessageBoxes, models, numbers, scout, TabItem, TableAppLinkActionEvent, TableRowModel} from '@eclipse-scout/core';
+import {BooleanColumnPropertiesBox, ColumnLookupCall, DateColumnPropertiesBox, LocaleLookupCall, NumberColumnPropertiesBox, SmartColumnPropertiesBox, TableFieldTable, TableFormWidgetMap} from '../index';
 import TableFormModel from './TableFormModel';
 
 export class TableForm extends Form {
   declare widgetMap: TableFormWidgetMap;
 
-  table: Table;
+  table: TableFieldTable;
   rowNo: number;
   groupNo: number;
 
@@ -70,20 +70,23 @@ export class TableForm extends Form {
       }
       this._removePropertiesBoxes(newColumn.objectType as string, columnPropertyTab);
     });
-    targetField.setValue(this.table.columns[0]);
+    targetField.setValue(this.table.visibleColumns()[0]);
 
     this.table.insertRows([this._createRow(), this._createRow(), this._createRow()]);
 
-    this.table.createTileForRow = function(row) {
-      let icon = icons.parseIconId(row.cells[5].iconId);
+    let stringColumn = this.table.columnById('StringColumn');
+    let dateColumn = this.table.columnById('DateColumn');
+    let iconColumn = this.table.columnById('IconColumn');
+    this.table.setTileProducer(row => {
+      let icon = icons.parseIconId(this.table.cell(iconColumn, row).iconId);
       let model = {
         parent: this,
-        content: '<div style="text-align: center;"><p>' + row.cells[0].text + '</p></div>' +
+        content: '<div style="text-align: center;"><p>' + this.table.cellText(stringColumn, row) + '</p></div>' +
           '<div class="font-icon" style="font-size: 50px; text-align: center;">' + icon.iconCharacter + '</div>' +
-          '<div style="text-align: center;"><p>' + row.cells[1].text + '</p></div>'
+          '<div style="text-align: center;"><p>' + this.table.cellText(dateColumn, row) + '</p></div>'
       };
       return scout.create(HtmlTile, model);
-    };
+    });
   }
 
   protected _createPropertiesBox(newColumn: Column, parent: TabItem): GroupBox {
@@ -149,9 +152,11 @@ export class TableForm extends Form {
 
     let rowIcon = iconList[this.rowNo % iconList.length];
     let iconValue = iconList[this.rowNo % iconList.length];
+    let internalValue = 'ROW_' + this.rowNo;
     let stringValue = 'Row #' + this.rowNo;
     let dateValue = dates.shift(date, 0, 0, -this.groupNo);
     let numberValue = this.rowNo;
+    let numberValue2 = numbers.randomInt(1000);
     let smartValue = locales[this.rowNo % locales.length];
     let booleanValue = this.rowNo % 2 === 0;
     let htmlValue = '<span class="app-link" data-ref="' + this.rowNo + '">App Link</span>';
@@ -163,7 +168,7 @@ export class TableForm extends Form {
 
     return {
       iconId: rowIcon,
-      cells: [stringValue, dateValue, numberValue, smartValue, booleanValue, iconValue, htmlValue]
+      cells: [internalValue, stringValue, dateValue, numberValue, numberValue2, smartValue, booleanValue, iconValue, htmlValue]
     };
   }
 

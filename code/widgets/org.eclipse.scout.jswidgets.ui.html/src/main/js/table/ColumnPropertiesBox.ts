@@ -53,9 +53,15 @@ export class ColumnPropertiesBox extends GroupBox {
 
     let modifiableField = this.widget('ModifiableField');
     modifiableField.setValue(this.column.modifiable);
+    modifiableField.on('propertyChange:value', event => {
+      this.column.modifiable = event.newValue;
+    });
 
     let removableField = this.widget('RemovableField');
     removableField.setValue(this.column.removable);
+    removableField.on('propertyChange:value', event => {
+      this.column.removable = event.newValue;
+    });
 
     let fixedWidthField = this.widget('FixedWidthField');
     fixedWidthField.setValue(this.column.fixedWidth);
