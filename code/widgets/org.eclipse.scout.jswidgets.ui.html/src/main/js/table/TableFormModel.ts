@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -37,6 +37,13 @@ export default (): FormModel => ({
               objectType: Table,
               columns: [
                 {
+                  id: 'KeyColumn',
+                  objectType: Column,
+                  text: 'Key Column',
+                  width: 120,
+                  displayable: false
+                },
+                {
                   id: 'StringColumn',
                   objectType: Column,
                   text: 'String Column',
@@ -53,6 +60,13 @@ export default (): FormModel => ({
                   objectType: NumberColumn,
                   text: 'Number Column',
                   width: 120
+                },
+                {
+                  id: 'SecretNumberColumn',
+                  objectType: NumberColumn,
+                  text: 'Secret Number Column',
+                  width: 120,
+                  visible: false
                 },
                 {
                   id: 'SmartColumn',
