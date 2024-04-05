@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -109,7 +109,7 @@ export class ColumnPropertiesBox extends GroupBox {
     displayableField.on('propertyChange:value', event => this.column.setDisplayable(event.newValue));
 
     let visibleField = this.widget('VisibleField');
-    visibleField.setValue(this.column.visible);
+    visibleField.setValue(this.column.getPropertyDimension('visible', 'default'));
     visibleField.on('propertyChange:value', event => this.column.setVisible(event.newValue));
 
     let visibleGrantedField = this.widget('VisibleGrantedField');

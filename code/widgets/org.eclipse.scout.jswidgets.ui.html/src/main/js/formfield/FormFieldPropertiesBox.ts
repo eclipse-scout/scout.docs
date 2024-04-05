@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -47,7 +47,7 @@ export class FormFieldPropertiesBox extends GroupBox {
     }
     this.field.on('drop', this._fileDropHandler);
     let enabledField = this.widget('EnabledField');
-    enabledField.setValue(this.field.enabled);
+    enabledField.setValue(this.field.getPropertyDimension('enabled', 'default'));
     enabledField.on('propertyChange:value', event => this.field.setEnabled(event.newValue));
 
     let enabledGrantedField = this.widget('EnabledGrantedField');
@@ -55,7 +55,7 @@ export class FormFieldPropertiesBox extends GroupBox {
     enabledGrantedField.on('propertyChange:value', event => this.field.setEnabledGranted(event.newValue));
 
     let visibleField = this.widget('VisibleField');
-    visibleField.setValue(this.field.visible);
+    visibleField.setValue(this.field.getPropertyDimension('visible', 'default'));
     visibleField.on('propertyChange:value', event => this.field.setVisible(event.newValue));
 
     let visibleGrantedField = this.widget('VisibleGrantedField');
