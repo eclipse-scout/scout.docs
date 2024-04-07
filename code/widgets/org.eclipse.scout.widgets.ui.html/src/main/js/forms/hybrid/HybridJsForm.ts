@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -61,7 +61,7 @@ export class HybridJsForm extends Form {
 
   protected async _onPingLabelAppLinkAction(event: AppLinkActionEvent) {
     if (event.ref === 'ping') {
-      await HybridManager.get(this.session).triggerHybridActionAndWait('Ping');
+      await HybridManager.get(this.session).callActionAndWait('Ping');
       this.session.desktop.addNotification(scout.create(DesktopNotification, {
         parent: this,
         duration: 2000,
@@ -74,7 +74,7 @@ export class HybridJsForm extends Form {
 
   protected _onSendDesktopNotificationLabelAppLinkAction(event: AppLinkActionEvent) {
     if (event.ref === 'sendDesktopNotification') {
-      HybridManager.get(this.session).triggerHybridAction('SendDesktopNotification');
+      HybridManager.get(this.session).callAction('SendDesktopNotification');
     }
   }
 
