@@ -240,7 +240,10 @@ public abstract class AbstractFileTableField extends AbstractTableField<Table> {
           BinaryResource value = getResourceColumn().getValue(row);
           if (value != null) {
             addAttachment(value);
-            cell.setText(HTML.imgByBinaryResource(value.getFilename()).cssClass("table-cell-html-image").toHtml());
+            cell.setText(HTML.imgByBinaryResource(value.getFilename())
+                .cssClass("table-cell-html-image")
+                .addAttribute("draggable", "false") // avoid conflict with table selection handler
+                .toHtml());
           }
         }
       }
