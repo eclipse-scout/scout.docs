@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -52,7 +52,7 @@ public class FormPageDeepLinkHandler extends AbstractDeepLinkHandler {
     return HANDLER_NAME;
   }
 
-  protected static String toWidgetName(Class<?> formClass) {
+  protected String toWidgetName(Class<?> formClass) {
     WidgetNameAlias annotation = formClass.getAnnotation(WidgetNameAlias.class);
     String widgetName;
     if (annotation == null) {
@@ -86,7 +86,7 @@ public class FormPageDeepLinkHandler extends AbstractDeepLinkHandler {
     for (IOutline outline : desktop.getAvailableOutlines()) {
       ITreeNode rootNode = outline.getRootNode();
 
-      IDepthFirstTreeVisitor<ITreeNode> v = new DepthFirstTreeVisitor<ITreeNode>() {
+      IDepthFirstTreeVisitor<ITreeNode> v = new DepthFirstTreeVisitor<>() {
         @Override
         public TreeVisitResult preVisit(ITreeNode element, int level, int index) {
           if (element.isVisible() && element.getClass().getAnnotation(FormPageParent.class) != null) {
@@ -108,7 +108,10 @@ public class FormPageDeepLinkHandler extends AbstractDeepLinkHandler {
           return TreeVisitResult.CONTINUE;
         }
       };
-      outline.visitNode(rootNode, v);
+      TreeVisitResult result = outline.visitNode(rootNode, v);
+      if (result == TreeVisitResult.TERMINATE || result == TreeVisitResult.SKIP_SIBLINGS) {
+        break;
+      }
     }
     if (outlineToActivateHolder.getValue() == null) {
       throw new DeepLinkException("outline could not be resolved for widget: " + widgetName);
