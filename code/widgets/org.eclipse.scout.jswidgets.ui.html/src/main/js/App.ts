@@ -30,6 +30,7 @@ export class App extends ScoutApp {
 
     router.register(new WidgetsRoute(desktop));
     router.activate();
+    desktop.outline.revealSelection();
 
     ResponsiveManager.get().registerHandler(desktop, scout.create(DesktopResponsiveHandler, {
       widget: desktop
