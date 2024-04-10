@@ -50,6 +50,7 @@ export class WidgetsRoute extends Route {
     let routeData = this._getRouteDataByRef(ref);
     if (routeData) {
       this.desktop.outline.selectNode(routeData.page);
+      this.desktop.outline.revealSelection();
     }
   }
 
