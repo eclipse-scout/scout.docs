@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -7,14 +7,14 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {FormField, GroupBox, GroupBoxModel, InitModelOf, LogicalGridLayout, LogicalGridLayoutConfig, models, PropertyChangeEvent, RadioButtonGroup, SequenceBox, TileAccordion, TileGrid} from '@eclipse-scout/core';
+import {FormField, GroupBox, GroupBoxModel, InitModelOf, LogicalGridLayoutConfig, models, PropertyChangeEvent, RadioButtonGroup, SequenceBox, TileAccordion, TileGrid} from '@eclipse-scout/core';
 import LogicalGridLayoutConfigBoxModel from './LogicalGridLayoutConfigBoxModel';
 import {LogicalGridLayoutConfigBoxWidgetMap} from '../index';
 
 export class LogicalGridLayoutConfigBox extends GroupBox {
   declare widgetMap: LogicalGridLayoutConfigBoxWidgetMap;
 
-  field: GroupBox | SequenceBox | RadioButtonGroup<any> | TileGrid | TileAccordion;
+  field: SequenceBox | RadioButtonGroup<any>;
 
   constructor() {
     super();
@@ -29,11 +29,11 @@ export class LogicalGridLayoutConfigBox extends GroupBox {
     super._init(model);
 
     this._setField(this.field);
-    this.widget('HGapField').on('propertyChange:value', event => this._updateLayoutConfigByEvent(event));
-    this.widget('VGapField').on('propertyChange:value', event => this._updateLayoutConfigByEvent(event));
-    this.widget('RowHeightField').on('propertyChange:value', event => this._updateLayoutConfigByEvent(event));
-    this.widget('ColumnWidthField').on('propertyChange:value', event => this._updateLayoutConfigByEvent(event));
-    this.widget('MinWidthField').on('propertyChange:value', event => this._updateLayoutConfigByEvent(event));
+    this.widget('HGapField').on('propertyChange:value', event => this._updateLayoutConfig(event));
+    this.widget('VGapField').on('propertyChange:value', event => this._updateLayoutConfig(event));
+    this.widget('RowHeightField').on('propertyChange:value', event => this._updateLayoutConfig(event));
+    this.widget('ColumnWidthField').on('propertyChange:value', event => this._updateLayoutConfig(event));
+    this.widget('MinWidthField').on('propertyChange:value', event => this._updateLayoutConfig(event));
   }
 
   setField(field: GroupBox | SequenceBox | RadioButtonGroup<any> | TileGrid | TileAccordion) {
@@ -50,46 +50,34 @@ export class LogicalGridLayoutConfigBox extends GroupBox {
   }
 
   initLayoutDefaults() {
-    let bodyLayout = this.getBodyLayout();
-    this.widget('HGapField').setValue(bodyLayout.hgap);
-    this.widget('VGapField').setValue(bodyLayout.vgap);
-    this.widget('RowHeightField').setValue(bodyLayout.rowHeight);
-    this.widget('ColumnWidthField').setValue(bodyLayout.columnWidth);
-    this.widget('MinWidthField').setValue(bodyLayout.minWidth);
+    let layoutConfig = this.getLayoutConfig();
+    this.widget('HGapField').setValue(layoutConfig.hgap);
+    this.widget('VGapField').setValue(layoutConfig.vgap);
+    this.widget('RowHeightField').setValue(layoutConfig.rowHeight);
+    this.widget('ColumnWidthField').setValue(layoutConfig.columnWidth);
+    this.widget('MinWidthField').setValue(layoutConfig.minWidth);
   }
 
-  protected _updateLayoutConfigByEvent(event: PropertyChangeEvent<any, FormField>) {
-    let layoutConfig = this.getLayoutConfig().clone();
-    this._fillLayoutConfigByEvent(layoutConfig, event);
-    this.setLayoutConfig(layoutConfig);
+  protected _updateLayoutConfig(event: PropertyChangeEvent<any, FormField>) {
+    this.setLayoutConfig(this.getLayoutConfig().clone(this._readLayoutConfig()));
   }
 
-  protected _fillLayoutConfigByEvent(layoutConfig: LogicalGridLayoutConfig, event: PropertyChangeEvent<any, FormField>) {
-    if (event.source.id === 'HGapField') {
-      layoutConfig.hgap = event.newValue;
-    } else if (event.source.id === 'VGapField') {
-      layoutConfig.vgap = event.newValue;
-    } else if (event.source.id === 'RowHeightField') {
-      layoutConfig.rowHeight = event.newValue;
-    } else if (event.source.id === 'ColumnWidthField') {
-      layoutConfig.columnWidth = event.newValue;
-    } else if (event.source.id === 'MinWidthField') {
-      layoutConfig.minWidth = event.newValue;
-    }
+  protected _readLayoutConfig(): InitModelOf<LogicalGridLayoutConfig> {
+    return {
+      hgap: this.widget('HGapField').value,
+      vgap: this.widget('VGapField').value,
+      rowHeight: this.widget('RowHeightField').value,
+      columnWidth: this.widget('ColumnWidthField').value,
+      minWidth: this.widget('MinWidthField').value
+    };
   }
 
-  /**
-   * Return the body layout of the widget. Used to initialized the config box with the default values.
-   */
-  getBodyLayout(): LogicalGridLayout {
-    return (this.field as GroupBox | SequenceBox | RadioButtonGroup<any>).htmlBody.layout as LogicalGridLayout;
-  }
-
+  // These methods will be replaced by GroupBoxForm and TileAccordionForm
   getLayoutConfig(): LogicalGridLayoutConfig {
-    return (this.field as SequenceBox | RadioButtonGroup<any> | TileGrid).layoutConfig;
+    return this.field.layoutConfig;
   }
 
   setLayoutConfig(layoutConfig: LogicalGridLayoutConfig) {
-    (this.field as SequenceBox | RadioButtonGroup<any>).setLayoutConfig(layoutConfig);
+    this.field.setLayoutConfig(layoutConfig);
   }
 }

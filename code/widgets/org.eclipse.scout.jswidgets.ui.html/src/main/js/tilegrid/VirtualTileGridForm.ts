@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -26,9 +26,10 @@ export class VirtualTileGridForm extends TileGridForm {
 
     // Make tiles a little smaller and add a column to have more visible tiles on the screen
     this.tileGrid.setGridColumnCount(5);
-    let layoutConfig = this.tileGrid.layoutConfig.clone();
-    layoutConfig.columnWidth = 100;
-    layoutConfig.rowHeight = 100;
+    let layoutConfig = this.tileGrid.layoutConfig.clone({
+      columnWidth: 100,
+      rowHeight: 100
+    });
     this.tileGrid.setLayoutConfig(layoutConfig);
 
     // Insert 1000 tiles

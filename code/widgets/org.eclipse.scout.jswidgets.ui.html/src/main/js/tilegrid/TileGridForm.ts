@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -114,11 +114,7 @@ export class TileGridForm extends Form {
     sortDescMenu.on('action', this._onSortDescMenuAction.bind(this));
 
     let tileField = this.widget('TileField');
-    let layoutConfigBox = this.widget('LayoutConfigBox');
-    layoutConfigBox.getBodyLayout = function() {
-      return this.field.htmlComp.layout;
-    };
-    layoutConfigBox.setField(this.tileGrid);
+    this.widget('LayoutConfigBox').setField(this.tileGrid);
     this.widget('FormFieldPropertiesBox').setField(tileField);
     this.widget('GridDataBox').setField(tileField);
     this.widget('WidgetActionsBox').setField(tileField);

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -128,10 +128,6 @@ export class TileAccordionForm extends Form {
     this.widget('EventsTab').setField(this.accordion);
 
     let layoutConfigBox = this.widget('LayoutConfigBox');
-    layoutConfigBox.getBodyLayout = function() {
-      // Use the layout of the first group for the initialization of the grid config box.
-      return this.field.groups[0].body.htmlComp.layout;
-    };
     layoutConfigBox.getLayoutConfig = function() {
       return this.field.tileGridLayoutConfig;
     };
