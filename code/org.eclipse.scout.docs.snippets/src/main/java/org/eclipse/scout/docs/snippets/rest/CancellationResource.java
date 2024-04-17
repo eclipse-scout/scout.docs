@@ -9,24 +9,16 @@
  */
 package org.eclipse.scout.docs.snippets.rest;
 
-import jakarta.ws.rs.PUT;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
-
 import org.eclipse.scout.rt.platform.BEANS;
-import org.eclipse.scout.rt.rest.IRestResource;
-import org.eclipse.scout.rt.rest.cancellation.RestRequestCancellationRegistry;
+import org.eclipse.scout.rt.rest.cancellation.AbstractCancellationResource;
 import org.eclipse.scout.rt.security.IAccessControlService;
 
 //tag::class[]
-@Path("cancellation")
-public class CancellationResource implements IRestResource {
+public class CancellationResource extends AbstractCancellationResource {
 
-  @PUT
-  @Path("{requestId}")
-  public void cancel(@PathParam("requestId") String requestId) {
-    String userId = BEANS.get(IAccessControlService.class).getUserIdOfCurrentSubject(); // <1>
-    BEANS.get(RestRequestCancellationRegistry.class).cancel(requestId, userId); // <2>
+  @Override
+  protected Object resolveCurrentUserId() {
+    return BEANS.get(IAccessControlService.class).getUserIdOfCurrentSubject(); // <1>;
   }
 }
 //end::class[]

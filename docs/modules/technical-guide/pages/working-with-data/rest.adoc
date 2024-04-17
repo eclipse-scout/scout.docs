@@ -258,7 +258,7 @@ transactions in the event of a cancellation. The following steps must be taken f
 
 === Cancellation Resource and Resource Client
 
-Scout does not impose nor provide a cancellation resource. It must be implemented by the project:
+Scout does not impose nor provide a cancellation resource. It must be implemented by the project using the `AbstractCancellationResource` class as base. The abstract implementation invokes invokes the cancellation registry for the given `requestId` and `userId`.
 
 [source,java]
 .Example: REST cancellation Resource
@@ -266,7 +266,6 @@ Scout does not impose nor provide a cancellation resource. It must be implemente
 include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/rest/CancellationResource.java[tags=class]
 ----
 <1> Resolve the `userId` of the current user. This is optional and may depend on the current project.
-<2> Invoke the cancellation registry for the given `requestId` and `userId`.
 
 [source,java]
 .Example: REST cancellation Resource Client
