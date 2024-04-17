@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -7,9 +7,8 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {App as ScoutApp, DesktopResponsiveHandler, models, ResponsiveManager, router, scout, Widget} from '@eclipse-scout/core';
+import {App as ScoutApp, DesktopResponsiveHandler, ResponsiveManager, router, scout, Widget} from '@eclipse-scout/core';
 import {Desktop, WidgetsRoute} from './index';
-import DesktopModel from './desktop/DesktopModel';
 
 export class App extends ScoutApp {
   scoutVersion: string;
@@ -25,8 +24,9 @@ export class App extends ScoutApp {
   }
 
   protected override _createDesktop(parent: Widget): Desktop {
-    let desktop = scout.create(Desktop,
-      models.get(DesktopModel, parent));
+    let desktop = scout.create(Desktop, {
+      parent: parent
+    });
 
     router.register(new WidgetsRoute(desktop));
     router.activate();
