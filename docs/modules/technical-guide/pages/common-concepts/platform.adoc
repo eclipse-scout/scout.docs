@@ -271,6 +271,10 @@ include::common:example$org.eclipse.scout.docs.snippets/src/test/java/org/eclips
 <1> key
 <2> default value
 
+=== Accessing Config Properties
+
+==== In Java
+
 To read the configured value you can use the `CONFIG` class as demonstrated in <<lst-getPropertyValue>>.
 
 [[lst-getPropertyValue]]
@@ -279,6 +283,64 @@ To read the configured value you can use the `CONFIG` class as demonstrated in <
 ----
 include::common:example$org.eclipse.scout.docs.snippets/src/test/java/org/eclipse/scout/docs/snippets/platform/config/ScoutConfigTest.java[tags=getPropertyValue]
 ----
+
+==== In TypeScript
+
+By default, only the properties with the following keys are available in the browser: `scout.devMode`, `scout.ui.backgroundPollingMaxWaitTime` and `scout.uinotification.waitTimeout`.
+
+The following steps describe how you can access more config properties from the TypeScript code running in the browser.
+However, be careful which properties you expose, as their values will be visible on each client. So don't use the feature for sensitive values like passwords!
+
+. Mark which properties should be available in the browser:
+.. If you want to expose your own config properties to the browser, the annotation `@ApiExposed` must be added to the corresponding property class in the Java code.
+.. In case you don't have the possibility to modify the property class (e.g. if you want to expose a Scout property), you have to create a contributor that adds the property to the list of exported properties:
++
+[[lst-addConfigPropertyByContributor]]
+[source,java,indent=0]
+.Expose a config property to the browser using a contributor.
+----
+public class YourConfigPropertyContributor extends AbstractApiExposedConfigPropertyContributor {
+  @Override
+  protected Collection<? extends IConfigProperty<?>> getExposedProperties() {
+    return Collections.singleton(BEANS.get(ApplicationVersionProperty.class));
+  }
+}
+----
+. To have it accessible in TypeScript, the key and the value data type of the property must be declared using https://www.typescriptlang.org/docs/handbook/declaration-merging.html[TypeScript declaration merging] as shown in <<lst-declareTypeScriptConfigProperty>>
++
+[[lst-declareTypeScriptConfigProperty]]
+[source,typescript,indent=0]
+.Declare the new property in TypeScript.
+----
+import {MainConfigProperties} from '@eclipse-scout/core';
+
+declare module '@eclipse-scout/core' {
+  export interface MainConfigProperties {
+    'my.custom.timeout': number;
+  }
+}
+
+----
+. If you write a Scout JS application (where the user interface is written in TypeScript), the properties are not fetched by default. In Scout Classic this step is not necessary as the config properties are always automatically fetched. For Scout JS apps enable it using the `bootstrapSystem` function of the `config` utility. Add the following code before the init of your application:
++
+[source,typescript,indent=0]
+----
+import {App} from '@YourApplication/ui';
+import {config} from '@eclipse-scout/core';
+
+App.addBootstrapper(() => config.bootstrapSystem());
+----
++
+. Then you are ready to access the property in TypeScript using the `config` utility:
++
+[source,typescript,indent=0]
+----
+import {config} from '@eclipse-scout/core';
+
+const myCustomTimeout = config.get('my.custom.timeout')?.value;
+----
++
+The variable `myCustomTimeout` will then hold the value stored in the `config.properties` file of your UI backend.
 
 === Property resolution
 
