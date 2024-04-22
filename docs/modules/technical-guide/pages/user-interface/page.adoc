@@ -1,4 +1,5 @@
 = Page
+
 include::common:partial$_header.adoc[]
 
 A page is a node in an xref:user-interface/outline.adoc[Outline].
@@ -12,11 +13,21 @@ There are two types of pages:
 . Page with table
 . Page with nodes
 
+[#page-with-table]
 == Page with Table
+
 The purpose of a page with table is to show tabular data when the page is selected.
 
 Each row of the table can be linked to a sub-page so that double-clicking a row will select that sub-page.
 
+=== Scout JS Examples
+
+* There is a xref:howtos:scout-js/rest-service-how-to.adoc[How-To] that helps to create a Page with Table in Scout JS which loads its data from a REST service.
+* A working example can also be created using the https://search.maven.org/artifact/org.eclipse.scout.archetypes/scout-hellojs-app[Scout JS Sample Application]. The easiest way to create such an application is to use the new project wizards provided by the Scout plugin for IntelliJ or Eclipse and then selecting TypeScript as the language for the user interface. The created `PersonTablePage.ts` can be used as a starting point.
+* There is a sample implementation in the https://scout.bsi-software.com/jswidgets/#sample[JS Widgets] Application. The code can be found {jswidgets-code}/org.eclipse.scout.jswidgets.ui.html/src/main/js/page/SamplePageWithTable.ts[here].
+
+[#page-with-nodes]
 == Page with Nodes
+
 A page with nodes is mostly either used as a folder that contains sub-pages.
 Or it is used to display detailed information about a specific table row of a page with table using a detail xref:user-interface/form.adoc[form].

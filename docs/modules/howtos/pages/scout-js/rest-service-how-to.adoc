@@ -1,27 +1,39 @@
-= How to Use a REST Service
+= How to Use a REST Service in Scout JS
+
 include::common:partial$_header.adoc[]
 
-This how-to shows how to provide JAX-RS RESTful services and consume them from a Scout JS Single Page Application.
+In this how-to a Jakarta RESTful Web Service is created and consumed from a Scout JS xref:technical-guide:user-interface/page.adoc#page-with-table[Page with Table].
 
-The goal is to provide a `ServerState` service in the `org.eclipse.scout.hellojs.ui.html` module.
+The goal is to create a new xref:technical-guide:user-interface/page.adoc#page-with-table[Page with Table] and load its data from a REST resource.
 
-== Maven Dependencies
-Add the following dependencies to the `org.eclipse.scout.hellojs.ui.html` module.
+A working example using the same concepts can also be created using the https://search.maven.org/artifact/org.eclipse.scout.archetypes/scout-hellojs-app[Scout JS Sample Application].
+The easiest way to create such an application is to use the new project wizards provided by the Scout plugin for IntelliJ or Eclipse and then selecting TypeScript as the language for the user interface.
+The created `PersonTablePage.ts` can be used as a starting point.
 
-org.eclipse.scout.hellojs.ui.html/pom.xml
+In this how-to a similar setup is created step by step.
+
+== Validate Prerequisites
+
+=== Maven Dependencies
+
+Ensure the following Maven dependencies are added to the App module. Add missing dependencies if necessary.
+
+hellojs.app/pom.xml
+
 [source,xml]
 ----
 <dependencies>
   ...
-  <!-- Scout RS -->
+  <!-- Jackson -->
   <dependency>
     <groupId>org.eclipse.scout.rt</groupId>
-    <artifactId>org.eclipse.scout.rt.rest</artifactId>
+    <artifactId>org.eclipse.scout.rt.rest.jackson</artifactId>
   </dependency>
-  <!-- JAX-RS Jersey -->
+
+  <!-- Jakarta RESTful Web Services with Jersey -->
   <dependency>
     <groupId>org.glassfish.jersey.containers</groupId>
-    <artifactId>jersey-container-servlet-core</artifactId>
+    <artifactId>jersey-container-servlet</artifactId>
   </dependency>
   <dependency>
     <groupId>org.glassfish.jersey.inject</groupId>
@@ -34,18 +46,17 @@ org.eclipse.scout.hellojs.ui.html/pom.xml
 </dependencies>
 ----
 
-== REST Servlet
+=== REST Servlet
 
-Register the REST servlet via `IServletContributor` (i.e. `AppServletContributors` in `org.eclipse.scout.hellojs.ui.html.app`).
+Ensure the API servlet is registered using `IServletContributor` (i.e. `AppServletContributors` in `hellojs.app`).
 
 [source,java]
 ----
 /**
- * JAX-RS Jersey Servlet.
+ * Register Jakarta RESTful Web Services Servlet from Jersey.
  */
 @Order(20)
 public static class ApiServletContributor implements IServletContributor {
-
   @Override
   public void contribute(ServletContextHandler handler) {
     ServletHolder servlet = handler.addServlet(ServletContainer.class, "/api/*");
@@ -57,78 +68,159 @@ public static class ApiServletContributor implements IServletContributor {
 ----
 
 == Provide a RESTful service
-Create the server state service in the `org.eclipse.scout.hellojs.ui.html` module. The service returns a OK status whenever it is accessible.
 
-org.eclipse.scout.hellojs.ui.html/src/main/java/org/eclipse/scout/hellojs/ui/html/helloworld/ServerStateService.java
+In this section the RESTful service and the data transfer objects (xref:technical-guide:working-with-data/data-object.adoc[DataObjects]) it uses are created.
+The design of the DataObject automatically reflects the design of the REST service.
+
+=== DataObjects
+
+The DataObjects are created in the `hellojs.data` module as they might be used in other modules as well. The sample Pizza REST service uses 3 DataObjects:
+
+. An object holding the restrictions sent to the service. These restrictions are sent by the client and may be used to configure the result: which attributes should be returned, how many elements, which elements (attribute filter), etc.
++
+[source,java]
+.hellojs.data/src/main/java/org/eclipse/scout/apps/hellojs/data/pizza/PizzaRestrictionDo.java
+----
+@TypeName("hellojs.PizzaRestriction")
+public class PizzaRestrictionDo extends DoEntity {
+  ...
+}
+----
++
+In this example, the restrictions are empty for now.
+. The business object that represent one element in the result list. Here a single Pizza.
++
+[source,java]
+.hellojs.data/src/main/java/org/eclipse/scout/apps/hellojs/data/pizza/PizzaDo.java
+----
+@TypeName("hellojs.Pizza")
+public class PizzaDo extends DoEntity {
+  public DoValue<Integer> size() {
+    return doValue("size");
+  }
+  public DoValue<BigDecimal> price() {
+    return doValue("price");
+  }
+  ...
+}
+----
+. The response object. It holds a list of Pizza but may also contain more information or error messages.
++
+[source,java]
+.hellojs.data/src/main/java/org/eclipse/scout/apps/hellojs/data/pizza/PizzaResponse.java
+----
+@TypeName("hellojs.PizzaResponse")
+public class PizzaResponse extends DoEntity {
+  public DoList<PizzaDo> items() {
+    return doList("items");
+  }
+  ...
+}
+----
+
+=== Create the RESTful service
+
+Create the RESTful service in the `hellojs.api` module. This service will answer the request and provide the table data.
 
 [source,java]
+.hellojs.api/src/main/java/org/eclipse/scout/apps/hellojs/api/pizza/PizzaResource.java
 ----
-package org.eclipse.scout.hellojs.ui.html.helloworld;
-
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.core.MediaType;
-
-import org.eclipse.scout.rt.platform.status.IStatus;
-import org.eclipse.scout.rt.platform.status.Status;
-import org.eclipse.scout.rt.rest.IRestResource;
-
-/**
- * <h3>{@link HelloWorldService}</h3>
- */
-@Path("serverstatus") //<1>
-public class ServerStateService implements IRestResource {
-
-  @GET
+@Path("pizza") // <1>
+public class PizzaResource implements IRestResource {
+  @POST // <2>
+  @Path("list") // <3>
+  @Consumes(MediaType.APPLICATION_JSON) // <4>
   @Produces(MediaType.APPLICATION_JSON)
-  public Status getStatus() {
-    return new Status(IStatus.OK);
+  public PizzaResponse list(PizzaRestrictionDo restrictions) { // <5>
+    MaxResultsHelper.ResultLimiter limiter = BEANS.get(MaxResultsHelper.class).limiter(restrictions); // <6>
+    List<PizzaDo> pizzas = listPizzas(restrictions, limiter.getQueryLimit()).collect(Collectors.toList()); // <7>
+    PizzaResponse response = BEANS.get(PizzaResponse.class);
+    return response.withItems(limiter.limit(pizzas, response)); // <8>
+  }
+
+  protected Stream<PizzaDo> listPizzas(PizzaRestrictionDo restrictions, int maxNumberOfRows) {
+    // TODO implement service to return data
+    return BEANS.get(PizzaService.class).list(restrictions, maxNumberOfRows);
   }
 }
 ----
 
-<1> The path under which the service will be provided. Note: the full path is `/api/serverstatus` since the apiServlet is mapped to `/api/*` in the `AppServletContributors` class.
+<1> The path under which the service will be provided. Note: the full path is `/api/pizza` since the apiServlet is mapped to `/api/*` in the `AppServletContributors` class.
+<2> Even this entry point only reads data, `POST` is used instead of `GET`. This allows to pass the restrictions in the body which can hold much more data than the URL query string.
+<3> The sub path of the `list` entry point. The full path to this entry point will therefore be `/api/pizza/list`.
+<4> This entrypoint expects the restrictions to be passed as `JSON` and returns the resulting response as `JSON`.
+<5> The request data object as input and the response data object as output.
+<6> Create a result limiter which will be configured using the data provided by the Scout JS Page (see below) and a server side hard limit. The limits are attached to the restriction data object in a special contribution (`MaxRowCountContributionDo`).
+<7> Loads the pizzas and uses the query-limit of the limiter as maximum number of rows to return. This limit is one element more than the requested limit to detect if all items have been loaded or more would be available.
+<8> Fills the response with the items limited to the number of maximum requested rows. The information if more rows would be available is automatically attached to the response by using a contribution (`LimitedResultInfoContributionDo`). This information can be consumed by the Page on client side to display corresponding messages to the user.
 
-=== Test if the service is up an running
-Start the dev ui application `org.eclipse.scout.hellojs.ui.html.app.dev/[org.eclipse.scout.hellojs] dev ui.launch`.
-Connect to the url `http:localhost:[ui server port]/api/serverstatus` and ensure the service is up an running.
+== Create the Page with Table
 
-== Use the service from Scout JS
-
-[source,js]
+[source,typescript]
+.hellojs.ui/src/main/js/pizza/PizzaTablePage.ts
 ----
-var ajaxOptions = {
-  type: 'GET',
-  dataType: 'json',
-  contentType: 'application/json; charset=UTF-8',
-  cache: false,
-  url: 'api/serverstatus',
-  timeout: 0
-};
+import {ajax, DoEntity, NumberColumn, ObjectOrModel, PageWithTable, PageWithTableModel, systems, Table, TableRow } from '@eclipse-scout/core';
 
-this.ajaxCall = scout.create('AjaxCall', {
-  ajaxOptions: ajaxOptions,
-  name: 'server status request'
-}, {
-  ensureUniqueId: false
-});
+export class PizzaTablePage extends PageWithTable {
+  protected override _jsonModel(): PageWithTableModel {
+    return {
+      leaf: true,
+      text: 'Pizzas',
+      detailTable: {
+        objectType: Table,
+        maxRowCount: 10, // <1>
+        columns: [
+          {
+            id: 'SizeColumn',
+            objectType: NumberColumn,
+            text: 'Size',
+            width: 200
+          },
+          {
+            id: 'PriceColumn',
+            objectType: NumberColumn,
+            text: 'Price',
+            width: 200
+          }
+        ]
+      }
+    };
+  }
 
-this.ajaxCall.retryIntervals = []; // <1>
+  protected override _loadTableData(searchFilter: any): JQuery.Promise<PizzaResponse> {
+    const resourceUrl = systems.getOrCreate().getEndpointUrl('pizza', 'pizza'); // <2>
+    const restriction = this._withMaxRowCountContribution(searchFilter); // <3>
+    return ajax.postJson(resourceUrl + '/list', restriction); // <4>
+  }
 
-this.ajaxCall.call() // <2>
-  .done(function(result) {  // <3>
-    // TODO handle the success state. result.severity if filled with the severity code.
-  }.bind(this))
-  .fail(  // <4>
-    function() {
-      // TODO handle the failure case.
-    }.bind(this)
-  );
+  protected override _transformTableDataToTableRows(tableData: PizzaResponse): ObjectOrModel<TableRow>[] {
+    return tableData.items.map(pizza => {
+      return { // <5>
+        cells: [
+          pizza.size,
+          pizza.price
+        ]
+      };
+    });
+  }
+}
+
+// <6>
+export interface PizzaResponse extends DoEntity {
+  items: PizzaDo[];
+}
+
+ // <7>
+export interface PizzaDo extends DoEntity {
+  size: number;
+  price: number;
+}
 ----
-<1> The ajax call retries by default 4 times for our example it is not needed to retry at all.
-<2> The ajax call
-<3> Success callback
-<4> Error callback
 
-
+<1> A small inline model for the PizzaTablePage having two columns. The Table is configured to only load the first 10 Pizzas.
+<2> Gets the URL to the PizzaResource. The second argument is the default value which corresponds to the `@Path` on the `PizzaResource` class.
+<3> Attaches the `MaxRowCountContributionDo` (contains the `maxRowCount` of the table) to the restrictions.
+<4> Send the `POST` to the given URL having the restriction in the body encoded as `JSON`.
+<5> Map a single `PizzaDo` from the response to the column of the table. The mapping is done by index here.
+<6> The declaration of the PizzaResponse on client side. Attribute names must correspond the PizzaResponse class in Java.
+<7> The declaration of the PizzaDo on client side. Attribute names must correspond the PizzaDo class in Java.

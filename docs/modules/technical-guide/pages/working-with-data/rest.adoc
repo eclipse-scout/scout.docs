@@ -20,9 +20,9 @@ POST is not idempotent. Making two identical POST requests will most-likely resu
 |Read
 |Only used to read or retrieve a representation of a resource.
 
-According to the http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9.1.1[HTTP specification] GET (and HEAD) requests are used to read data  and must not change anything! If a REST API wants to violate the specification, such requests must be protected against https://en.wikipedia.org/wiki/Cross-site_request_forgery[CSRF] which is not enabled for GET and HEAD requests by default. See the Scout Bean `org.eclipse.scout.rt.rest.csrf.AntiCsrfHelper` for more details.
+According to the https://www.rfc-editor.org/rfc/rfc9110.html#name-safe-methods[Internet Standard] GET (amongst others) requests are used to read data  and must not change anything! If a REST API wants to violate the specification, such requests must be protected against https://en.wikipedia.org/wiki/Cross-site_request_forgery[CSRF] which is not enabled for GET, OPTIONS, TRACE and HEAD requests by default. See the Scout Bean `org.eclipse.scout.rt.rest.csrf.HttpMethodAntiCsrfFilterExclusion` for more details.
 
-GET requests are idempotent, which means that making multiple identical requests ends up having the same result as a single request (assuming the data has not been changed in the meantime).
+GET requests are idempotent, which means making multiple identical requests ends up having the same result as a single request (assuming the data has not been changed in the meantime).
 
 |PUT
 |Update/Replace
@@ -48,7 +48,7 @@ DELETE operations are idempotent concerning the result but may return another st
 
 
 == REST Resource Provider
-A REST resource using the http://www.oracle.com/technetwork/java/javaee/tech/jax-rs-159890.html[JAX-RS] API is implemented by a POJO class annotated with a set of annotations.
+A REST resource using the https://jakartaee.github.io/rest/[Jakarta RESTful Web Services] API is implemented by a POJO class annotated with a set of annotations.
 
 The Scout module `org.eclipse.scout.rt.rest` contains the basic `IRestResource` marker interface which integrates REST resources within the Scout framework.
 The interface is annotated by `@Bean` allowing the Scout platform to load and register all REST resources automatically at startup using the Jandex class inventory.
@@ -61,14 +61,14 @@ include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclips
 
 === REST Resource Registration
 
-All available REST resources are automatically registered by the `RestApplication` class while the Scout platform startup.
+All available REST resources are automatically registered by the `RestApplication` class during the Scout platform startup.
 
 Add an implementor of `IServletContributor` in your `UiServletContributors` container class to expose your REST API using the `/api` context path (set `@Order` appropriately):
 
 [source,java]
 ----
 /**
- * JAX-RS Jersey Servlet.
+ * Jakarta RESTful Web Services Jersey Servlet.
  */
 @Order(20)
 public static class ApiServletContributor implements IServletContributor {
@@ -85,7 +85,7 @@ public static class ApiServletContributor implements IServletContributor {
 
 === Extend REST Application
 
-The JAX-RS application API (`jakarta.ws.rs.core.Application`) allows a REST application implementation to specify a set of classes, a set of singleton instances and a map of custom properties to be registered.
+The Jakarta RESTful Web Services application API (`jakarta.ws.rs.core.Application`) allows a REST application implementation to specify a set of classes, a set of singleton instances and a map of custom properties to be registered.
 The Scout implementation of the REST application class `org.eclipse.scout.rt.rest.RestApplication` allows contributing classes, singletons and properties without needing to extend the `RestApplication` class.
 
 Three different contributor interfaces are available for contributions:
@@ -113,7 +113,7 @@ See xref:technical-guide:working-with-data/data-object.adoc[] for details and ex
 === Marshaller
 
 A REST API may be used by non-Java consumers. In order to communicate using a platform-independent format, usually REST services use JSON as transport format.
-The marshaller between Java data objects and JSON is abstracted in the JAX-RS specification.
+The marshaller between Java data objects and JSON is abstracted in the Jakarta RESTful Web Services specification.
 Using the `@Produces(MediaType.APPLICATION_JSON)` annotation, each REST service method specifies the produced data format.
 
 The Scout REST integration uses the popular Jackson library as default marshaller.
@@ -149,15 +149,15 @@ Both values are read from the incoming request header, the caller must ensure th
 
 == Dependency Management
 
-Scout REST services based on JAX-RS using the Jersey library and the Jackson JSON marshaller need a maven dependency to `jersey-media-json-jackson` in the application pom.xml.
-This enables the use of Jackson as JAX-RS marshaller with the Jersey JAX-RS implementation.
+Scout REST services based on Jakarta RESTful Web Services using the Jersey library and the Jackson JSON marshaller need a maven dependency to `jersey-media-json-jackson` in the application pom.xml.
+This enables the use of Jackson as Jakarta RESTful Web Services marshaller with the Jersey Jakarta RESTful Web Services implementation.
 Additionally, a dependency to the Scout module `org.eclipse.scout.rt.rest.jackson` is necessary.
 This module adds a set of Jackson additions in order to use the Jackson library together with Scout data objects.
 
 [source,xml]
 .Dependency section of pom.xml to use Scout REST services with Jackson & Jersey
 ----
-<!-- JAX-RS Jersey -->
+<!-- Jakarta RESTful Web Services Jersey -->
 <dependency>
     <groupId>org.glassfish.jersey.containers</groupId>
     <artifactId>jersey-container-servlet-core</artifactId>
@@ -322,7 +322,7 @@ IMPORTANT: Make sure the cancellation filter is registered after the HttpServerR
 [[cha-rest-multipart]]
 == REST Multipart Support
 
-Due to missing support for multipart handling in official JAX-RS API, Scout provides an own implementation allowing to use multipart requests without requiring other third party libraries.
+Due to missing support for multipart handling in official Jakarta RESTful Web Services API, Scout provides an own implementation allowing to use multipart requests without requiring other third party libraries.
 
 [source,java]
 .Example: Client

@@ -6,3 +6,4 @@
 ** Scout JS
 *** xref:scout-js/chart-how-to.adoc[]
 *** xref:scout-js/flip-card-how-to.adoc[]
+*** xref:scout-js/rest-service-how-to.adoc[]

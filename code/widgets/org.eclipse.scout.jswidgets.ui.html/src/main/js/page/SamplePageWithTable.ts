@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -7,10 +7,9 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {HtmlTile, models, ObjectOrModel, Page, PageModel, PageWithTable, scout, strings, TableRow, TableRowModel, Tile} from '@eclipse-scout/core';
+import {ajax, DoEntity, HtmlTile, models, ObjectOrModel, Page, PageModel, PageWithTable, scout, systems, TableRow, TableRowModel, Tile} from '@eclipse-scout/core';
 import SamplePageWithTableModel from './SamplePageWithTableModel';
-import $ from 'jquery';
-import {MiniForm, SamplePageWithNodes, SamplePageWithTableTable} from '../index';
+import {MiniForm, SamplePageWithNodes, SamplePageWithTableSearchFormData, SamplePageWithTableTable} from '../index';
 
 export class SamplePageWithTable extends PageWithTable {
 
@@ -95,62 +94,25 @@ export class SamplePageWithTable extends PageWithTable {
     };
   }
 
-  protected override _loadTableData(searchFilter: any): JQuery.Promise<any> {
-    let searchFormStringFieldValue = searchFilter.stringField;
-    let filter = element => {
-      if (!strings.hasText(searchFormStringFieldValue)) {
-        return true;
-      }
-      return strings.contains(element.string, searchFormStringFieldValue);
-    };
-    let data = [{
-      id: 1,
-      string: 'string 1',
-      smartValue: null,
-      number: 103012,
-      bool: true
-    }, {
-      id: 3,
-      string: 'string 2',
-      smartValue: null,
-      number: 9214575,
-      bool: false
-    }, {
-      id: 2,
-      string: 'string 3',
-      smartValue: 'es_GT',
-      number: 5685,
-      bool: true
-    }, {
-      id: 4,
-      string: 'string 4',
-      smartValue: 'de_CH',
-      number: 168461,
-      bool: false
-    }, {
-      id: 5,
-      string: 'string 5',
-      smartValue: 'th_TH',
-      number: 959161,
-      bool: true
-    }];
-    return $.resolvedPromise(data.filter(filter));
+  protected override _loadTableData(searchFilter: SamplePageWithTableSearchFormData): JQuery.Promise<SamplePageWithTableResponse> {
+    const resourceUrl = systems.getOrCreate().getEndpointUrl('samplePageWithTable', 'samplePageWithTable');
+    const restriction = this._withMaxRowCountContribution(searchFilter);
+    return ajax.postJson(resourceUrl + '/list', restriction);
   }
 
-  protected override _transformTableDataToTableRows(tableData: any): ObjectOrModel<TableRow>[] {
-    return tableData
-      .map(row => {
-        return {
-          data: row,
-          cells: [
-            row.id,
-            row.string,
-            row.smartValue,
-            row.number,
-            row.bool
-          ]
-        };
-      });
+  protected override _transformTableDataToTableRows(tableData: SamplePageWithTableResponse): ObjectOrModel<TableRow>[] {
+    return tableData?.items?.map(row => {
+      return {
+        data: row,
+        cells: [
+          row.id,
+          row.string,
+          row.smartValue,
+          row.number,
+          row.bool
+        ]
+      };
+    });
   }
 
   override createChildPage(row: TableRow): Page {
@@ -158,4 +120,16 @@ export class SamplePageWithTable extends PageWithTable {
       parent: this.getOutline()
     });
   }
+}
+
+export interface SamplePageWithTableResponse extends DoEntity {
+  items: SamplePageWithTableRowDo[];
+}
+
+export interface SamplePageWithTableRowDo extends DoEntity {
+  id: number;
+  string: string;
+  smartValue: string;
+  number: number;
+  bool: boolean;
 }

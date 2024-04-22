@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -32,9 +32,13 @@ export class SamplePageWithTableSearchForm extends Form {
     this.on('search reset', parentTable.reload.bind(parentTable, Table.ReloadReason.SEARCH));
   }
 
-  override exportData(): any {
+  override exportData(): SamplePageWithTableSearchFormData {
     return {
       stringField: this.widget('StringField').value
     };
   }
 }
+
+export type SamplePageWithTableSearchFormData = {
+  stringField: string;
+};
