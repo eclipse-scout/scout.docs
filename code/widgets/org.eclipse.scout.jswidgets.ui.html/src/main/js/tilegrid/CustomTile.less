@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -8,10 +8,11 @@
  * SPDX-License-Identifier: EPL-2.0
  */
 .custom-tile {
-  color: white;
-  background-color: @palette-blue-3;
+  color: @palette-black;
+  background-color: @palette-orange-2;
+  border-radius: @border-radius;
   padding: @tile-padding-y + 1px @tile-padding-x + 1px;
-  overflow: hidden;
+  --resizable-color: @custom-tile-resizable-color;
 
   .tile-grid > & {
     /* TileGrid.less already defines a transition for tiles -> override by defining a more specific rule */
@@ -24,24 +25,24 @@
   }
 
   &.selectable:hover {
-    background-color: darken(@palette-blue-3, 10%);
+    background-color: darken(@palette-orange-2, 10%);
   }
 
   &.color-alternative {
-    background-color: @palette-red-3;
+    background-color: @palette-red-2;
 
     &.selectable:hover {
-      background-color: darken(@palette-red-3, 10%);
+      background-color: darken(@palette-red-2, 10%);
     }
   }
 
   &.inverted {
     color: @text-color;
-    background-color: @palette-gray-1;
+    background-color: @custom-tile-inverted-background-color;
     border: 1px solid @border-color;
 
     &.selectable:hover {
-      background-color: darken(@palette-gray-1, 10%);
+      background-color: @custom-tile-inverted-hover-background-color;
     }
   }
 }

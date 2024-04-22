@@ -62,21 +62,7 @@ export class TileGridForm extends Form {
 
     let colorSchemeField = this.widget('ColorSchemeField');
     colorSchemeField.setValue(this.tileGrid.tiles[0].colorScheme.scheme);
-    colorSchemeField.on('propertyChange:value', event => this.tileGrid.tiles.forEach(tile => {
-      let scheme = $.extend({}, tile.colorScheme, {
-        scheme: event.newValue
-      });
-      tile.setColorScheme(scheme);
-    }));
-
-    let invertColorsField = this.widget('InvertColorsField');
-    invertColorsField.setValue(this.tileGrid.tiles[0].colorScheme.inverted);
-    invertColorsField.on('propertyChange:value', event => this.tileGrid.tiles.forEach(tile => {
-      let scheme = $.extend({}, tile.colorScheme, {
-        inverted: event.newValue
-      });
-      tile.setColorScheme(scheme);
-    }));
+    colorSchemeField.on('propertyChange:value', event => this.tileGrid.tiles.forEach(tile => tile.setColorScheme(event.newValue)));
 
     let selectableField = this.widget('SelectableField');
     selectableField.setValue(this.tileGrid.selectable);
@@ -85,6 +71,14 @@ export class TileGridForm extends Form {
     let multiSelectField = this.widget('MultiSelectField');
     multiSelectField.setValue(this.tileGrid.multiSelect);
     multiSelectField.on('propertyChange:value', event => this.tileGrid.setMultiSelect(event.newValue));
+
+    let movableField = this.widget('MovableField');
+    movableField.setValue(this.tileGrid.tiles[0]?.movable);
+    movableField.on('propertyChange:value', event => this.tileGrid.tiles.forEach(tile => tile.setMovable(event.newValue)));
+
+    let resizableField = this.widget('ResizableField');
+    resizableField.setValue(this.tileGrid.tiles[0]?.resizable);
+    resizableField.on('propertyChange:value', event => this.tileGrid.tiles.forEach(tile => tile.setResizable(event.newValue)));
 
     let scrollableField = this.widget('ScrollableField');
     scrollableField.setValue(this.tileGrid.scrollable);
@@ -129,20 +123,25 @@ export class TileGridForm extends Form {
   }
 
   protected _createTile(model?: HtmlTileModel | CustomTileModel): HtmlTile | CustomTile {
-    let defaults;
+    let movable = this.widget('MovableField').value;
+    let resizable = this.widget('ResizableField').value;
+    let defaults = {
+      parent: this.tileGrid,
+      content: 'New <i>Html Tile</i> ' + this.insertedTileCount++,
+      movable: movable,
+      resizable: resizable
+    };
     let tileType = this.tileTypeField.value;
     if (tileType === 'default') {
-      defaults = {
-        parent: this.tileGrid,
+      defaults = $.extend(defaults, {
         content: 'New <i>Html Tile</i> ' + this.insertedTileCount++
-      };
+      });
       model = $.extend({}, defaults, model);
       return scout.create(HtmlTile, model as InitModelOf<HtmlTile>);
     }
-    defaults = {
-      parent: this.tileGrid,
+    defaults = $.extend(defaults, {
       label: 'New Tile ' + this.insertedTileCount++
-    };
+    });
     model = $.extend({}, defaults, model);
     return scout.create(CustomTile, model as InitModelOf<CustomTile>);
   }

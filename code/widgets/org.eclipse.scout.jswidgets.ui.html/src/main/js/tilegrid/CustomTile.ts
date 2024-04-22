@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -14,6 +14,7 @@ export class CustomTile extends Tile implements CustomTileModel {
   declare self: CustomTile;
 
   label: string;
+  $label: JQuery;
 
   constructor() {
     super();
@@ -23,6 +24,7 @@ export class CustomTile extends Tile implements CustomTileModel {
 
   protected override _render() {
     this.$container = this.$parent.appendDiv('custom-tile');
+    this.$label = this.$container.appendDiv('label');
     this.htmlComp = HtmlComponent.install(this.$container, this.session);
   }
 
@@ -36,7 +38,7 @@ export class CustomTile extends Tile implements CustomTileModel {
   }
 
   protected _renderLabel() {
-    this.$container.text(this.label);
+    this.$label.text(this.label);
   }
 }
 

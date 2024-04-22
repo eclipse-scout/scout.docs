@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -153,15 +153,21 @@ export default (): FormModel => ({
                     labelVisible: false
                   },
                   {
-                    id: 'ScrollableField',
+                    id: 'MovableField',
                     objectType: CheckBoxField,
-                    label: 'Scrollable',
+                    label: 'Movable',
                     labelVisible: false
                   },
                   {
-                    id: 'InvertColorsField',
+                    id: 'ResizableField',
                     objectType: CheckBoxField,
-                    label: 'Invert Colors',
+                    label: 'Resizable',
+                    labelVisible: false
+                  },
+                  {
+                    id: 'ScrollableField',
+                    objectType: CheckBoxField,
+                    label: 'Scrollable',
                     labelVisible: false
                   },
                   {
@@ -281,6 +287,8 @@ export type TileGridFormWidgetMap = {
   'PropertiesBox': GroupBox;
   'SelectableField': CheckBoxField;
   'MultiSelectField': CheckBoxField;
+  'MovableField': CheckBoxField;
+  'ResizableField': CheckBoxField;
   'ScrollableField': CheckBoxField;
   'InvertColorsField': CheckBoxField;
   'WithPlaceholdersField': CheckBoxField;
