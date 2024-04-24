@@ -335,3 +335,9 @@ include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclips
 ----
 include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/rest/UploadResource.java[tags=method]
 ----
+
+[[iid-signature]]
+== IId signature
+
+All instances of `IId` can be serialized and deserialized by the `IdCodec` using signatures. This can be used to add signatures to ids that are read and written by a REST endpoint.
+For more information see xref:technical-guide:common-concepts/security.adoc#iid-signature[IId signature].
