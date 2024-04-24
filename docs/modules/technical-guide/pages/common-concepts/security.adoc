@@ -329,3 +329,98 @@ The form based login also supports two-factor-authentication.
 
 If the registered `ICredentialVerifier` requests a second factor by returning `AUTH_2FA_REQUIRED`, the `FormBasedAccessController` instructs the UI to show an input field so the user can enter the token.
 To verify this token a second-factor verifier `ICredentialVerifier` needs to be registered.
+
+[[iid-signature]]
+== IId signature
+
+Scout provides a mechanism to add signatures to instances of `IId` when they are serialized into a string value.
+This feature was added to prevent key probing of sequential generated ids to sensitive transactional data.
+To use this feature simply pass the `IdCodecFlag.SIGNATURE` to the `IdCodec` while serializing or deserializing the id.
+
+.serialize an `IId` using signatures
+[source,java]
+----
+BEANS.get(IdCodec.class).toQualified(id, IdCodecFlag.SIGNATURE)
+----
+
+The default implementation will use the unqualified part of the serialized id and create a signature which is added as a suffix.
+The validity of this signature is checked again when the id is deserialized.
+
+.deserialize a `String` using signatures
+[source,java]
+----
+BEANS.get(IdCodec.class).fromQualified(idString, IdCodecFlag.SIGNATURE)
+----
+
+To use this feature one needs to set the config property `scout.idSignaturePassword` which is used to create the signature.
+
+The signature can easily be extended by replacing the `IdCodec` and overriding the `createSignature` method. One can e.g. additionally use the current user id for the signature.
+Also, the whole mechanism can be changed by overriding `addSignature` and `removeSignature`.
+
+If an `IId` needs to be signed or not, depends on why it is serialized and the type of the id itself.
+Does the `IId` need to be persisted into a database it is usually unsigned as it can't be read again if the creation of the signature changes.
+But if the `IId` is sent to the browser or another application it typically needs to be signed. All data sent to the browser is serialized in the JSON layer and this serialization will always use signatures.
+If an application provides e.g. REST endpoints two things need to be done to ensure signature creation.
+
+[#add-dependency-server]
+1. A dependency to the `org.eclipse.scout.rt.rest.jersey.server` module needs to be added to the app module of the application.
+[#add-header-server]
+2. The header `X-ScoutIdSignature` need to be added to all requests.
+
+The dependency added in xref:add-dependency-server[1.] will add the `IdSignatureRestContainerFilter` which turns on the signature creation for all requests containing the header `X-ScoutIdSignature`.
+
+.dependency to the `org.eclipse.scout.rt.rest.jersey.server` module
+----
+<dependency>
+  <groupId>org.eclipse.scout.rt</groupId>
+  <artifactId>org.eclipse.scout.rt.rest.jersey.server</artifactId>
+</dependency>
+----
+
+The header in xref:add-header-server[2.] can be added in multiple ways. It can be added e.g. by a client like the browser directly or added by the server to all requests.
+Let's say the application provides REST endpoints under `/api` the `IdSignatureFilter` can be used to add the header to all requests to this path.
+
+[source,java]
+.Registration example for `IdSignatureFilter`.
+----
+public static class ApiIdSignatureFilterContributor implements IServletFilterContributor {
+
+  @Override
+  public void contribute(ServletContextHandler handler) {
+    handler.addFilter(IdSignatureFilter.class, "/api/*", null);
+  }
+}
+----
+
+Also requests sent by a REST client can be signed automatically. To achieve this, two things need to be done.
+
+[#add-dependency-client]
+1. A dependency to the `org.eclipse.scout.rt.rest.jersey.client` module needs to be added to the app module of the application.
+[#add-header-client]
+2. The header `X-ScoutIdSignature` need to be added to all request.
+
+The dependency added in xref:add-dependency-client[1.] will add the `IdSignatureRestClientFilter` which turns on the signature creation for all requests containing the header `X-ScoutIdSignature`.
+
+.dependency to the `org.eclipse.scout.rt.rest.jersey.client` module
+----
+<dependency>
+  <groupId>org.eclipse.scout.rt</groupId>
+  <artifactId>org.eclipse.scout.rt.rest.jersey.client</artifactId>
+</dependency>
+----
+
+`IId` that are not affected by key probing like e.g. `AbstractUuId` or `AbstractStringId` will not be signed by default, while e.g. all `Long` based `IId` will be signed.
+If there is a special `IId` that does not support signatures it can be excluded from the signature mechanism using the `IdSignature` annotation.
+
+[source,java]
+.Exclude the `UnsignedId` using the `IdSignature` annotation.
+----
+@IdSignature(false)
+public final class UnsignedId extends AbstractStringId {
+  private static final long serialVersionUID = 1L;
+
+  private UnsignedId(String id) {
+    super(id);
+  }
+}
+----

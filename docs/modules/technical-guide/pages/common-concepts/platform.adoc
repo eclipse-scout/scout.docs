@@ -858,6 +858,11 @@ By default `org.eclipse.scout.rt.shared.http.ApacheHttpTransportFactory` is used
 +
 Data type: Fully qualified class name. The class must have `org.eclipse.scout.rt.shared.http.IHttpTransportFactory` in its super hierarchy.
 
+`scout.idSignaturePassword` ::
+Password to create signatures for ids that are serialized or deserialized. The value of this password must be equal for all parts of an application.
++
+Data type: String
+
 `scout.jandex.rebuild` ::
 Specifies if Jandex indexes should be rebuilt. Is only necessary to enable during development when the class files change often. The default value is false.
 +

@@ -47,3 +47,9 @@ If you just want to play around with them without looking at the source code, yo
 * https://scout.bsi-software.com/jswidgets/
 
 // ----------------------------------------------------------------------------
+
+[[iid-signature]]
+== IId signature
+
+This release introduces a mechanism to add signatures to `IId` that are e.g. sent to the browser or provided by a REST endpoint.
+For more information see xref:technical-guide:common-concepts/security.adoc#iid-signature[IId signature].
