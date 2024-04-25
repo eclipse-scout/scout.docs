@@ -342,6 +342,15 @@ The library will be created in the `dist` folder, as well as the type declaratio
 The attributes in the `publishConfig` will replace the regular attributes when the library is published.
 During development, the `publishConfig` has no effect.
 . Ensure the `dist` folder will be part of the bundled module by adding it to the list of files in `package.json`.
+. In the pom.xml of the module add the following property:
++
+[source,xml]
+----
+<properties>
+  <master_skip_copy_webpack_build_output>true</master_skip_copy_webpack_build_output>
+</properties>
+----
+This prevents the Maven build to include the transpiled JavaScript code in the jar. It is not required there as it will be provided by the Node module instead.
 . Consult the https://webpack.js.org/guides/author-libraries/[Webpack Guide] if you want to learn more about authoring libraries in general.
 
 [source,JavaScript]
