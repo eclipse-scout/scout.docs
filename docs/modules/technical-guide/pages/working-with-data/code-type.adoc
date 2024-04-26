@@ -128,6 +128,9 @@ new App().init({
 });
 ----
 
+The url `api/codes` points to the `CodeResource` of the `org.eclipse.scout.rt.api` module.
+To make this work you need to ensure there is a dependency to that module in the `pom.xml` of your server module.
+
 Because in the example above a custom `objectType` has been specified, a corresponding CodeType class must be created in TypeScript. This is only required if you need some custom fields or functions on your CodeType, but it is often quite handy.
 
 [source,typescript]

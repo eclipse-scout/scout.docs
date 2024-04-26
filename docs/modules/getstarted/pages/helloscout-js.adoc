@@ -23,12 +23,40 @@ We will start by getting the application running and then take a look at the cod
 
 == Prerequisites
 
-Make sure you have https://nodejs.org/dist/latest-v20.x/[Node.js 20] installed.
+For this tutorial you need to have https://nodejs.org/dist/latest-v20.x/[Node.js 20] installed.
+If you have multiple node versions installed, make sure the correct version is used by running the following command in your terminal.
+
+[source,shell]
+----
+node --version
+----
+
+If this does not print the required version, you need to adjust your PATH variable (replace NODE_DIR with your installation directory).
+
+.Windows Terminal
+[source,shell]
+----
+set PATH=NODE_DIR;%PATH%
+----
+
+.Shell
+[source,shell]
+----
+export PATH=NODE_DIR:$PATH
+----
 
 == Get the Code
 
 Clone the https://github.com/bsi-software/helloscoutjs.git[helloscoutjs] repository
 and checkout the branch `releases/{scout-version}`.
+
+.Clone repository and checkout branch
+[source,shell]
+[subs=attributes+]
+----
+git clone https://github.com/bsi-software/helloscoutjs.git --branch releases/{scout-version}
+----
+
 Alternatively, you can also download and extract a
 https://github.com/bsi-software/helloscoutjs/archive/refs/heads/releases/{scout-version}.zip[ZIP file of the repository].
 
@@ -60,10 +88,18 @@ After that, the file and folder structure of your local copy should look like th
 
 == Build the Application
 
-In the main folder, where the file `package.json` is located, open a terminal and execute `**npm install --ignore-scripts**`.
+Change the directory to the main folder where the file `package.json` is located and execute `**pnpm install**`.
+If this command fails, you likely don't have pnpm installed.
+In that case execute `**npm install**` instead.
+
+[source,shell]
+----
+cd helloscoutjs
+pnpm install
+----
 
 This creates a folder `node_modules`, containing all (direct and transitive) dependencies,
-as well as a file `package-lock.json`, listing all the specific versions of these dependencies.
+as well as a file `package-lock.json` resp. `pnpm-lock.yaml` when using pnpm, listing all the specific versions of these dependencies.
 
 NOTE: If the dependencies defined in `package.json` change, run `npm install` again to update the `node_modules` folder.
 
