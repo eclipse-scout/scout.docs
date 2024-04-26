@@ -112,3 +112,15 @@ With this change the following data objects have been adjusted:
 |PermissionId
 |id
 |===
+
+[[value-migration-primary-sort-order]]
+== Primary sort order for IDoValueMigrationHandler
+
+Untyped data object value migration handlers need to be applied before regular value migrations because they may convert typed values to the expected target type.
+A typical use case is conversion from `UnknownId` to a typed target ID in case of renaming a type ID name.
+
+Classes implementing `IDoValueMigrationHandler` need to implement the new method `IDoValueMigrationHandler.primarySortOrder()`.
+Existing value migration handlers typically should return `IDoValueMigrationHandler.DEFAULT_PRIMARY_SORT_ORDER` or use `AbstractDoValueMigrationHandler` as baseclass which defines `DEFAULT_PRIMARY_SORT_ORDER` by default.
+
+The primary sort order can be used to group different types of value migrations.
+Regular value migrations (i.e. sub-classes of `AbstractDoValueMigrationHandler` use `IDoValueMigrationHandler.DEFAULT_PRIMARY_SORT_ORDER` and are applied after untyped value migrations (i.e. sub-classes of `AbstractDoValueUntypedMigrationHandler`) which use `IDoValueMigrationHandler.UNTYPED_PRIMARY_SORT_ORDER`.
