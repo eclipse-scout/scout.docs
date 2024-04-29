@@ -10,7 +10,7 @@ This section describes the module structure of a Scout application and how the b
 
 == Module structure
 
-For each server (i.e. single server for Scout JS and UI/backend server for Scout Classic application), the following modules are used to build or run the application:
+For each server (typically there is one server for Scout JS and two servers, UI and backend, for Scout Classic applications), the following modules are used to build or run the application:
 
 * `.app`: main module serving as base for all dependencies
 ** `.app.dev`: used for development
@@ -35,7 +35,7 @@ Own servlets or servlet filters are registered by providing an implementation of
 * `org.eclipse.scout.rt.jetty.IServletContributor`
 * `org.eclipse.scout.rt.jetty.IServletFilterContributor`
 
-For .war deployments on an application servers (e.g. Tomcat) a servlet (filter) registration is configured via `web.xml`.
+For .war deployments on an application server (e.g. Tomcat) a servlet (filter) registration is configured via `web.xml`.
 The registration described above is the programmatic equivalent for the Scout application.
 
 It's a good practice to put the implementing class as static inner classes within a container class in the `.app` module
