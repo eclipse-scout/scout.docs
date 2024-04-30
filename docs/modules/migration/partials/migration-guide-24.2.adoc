@@ -120,7 +120,7 @@ Untyped data object value migration handlers need to be applied before regular v
 A typical use case is the conversion from `UnknownId` to a typed target ID in case of renaming a type ID name.
 
 Classes implementing `IDoValueMigrationHandler` directly need to implement the new method `IDoValueMigrationHandler.primarySortOrder()`.
-Existing value migration handlers typically should return `IDoValueMigrationHandler.DEFAULT_PRIMARY_SORT_ORDER` or use `AbstractDoValueMigrationHandler` as baseclass which defines `DEFAULT_PRIMARY_SORT_ORDER` by default.
+It's highly recommended to extend `AbstractDoValueMigrationHandler` which defines `DEFAULT_PRIMARY_SORT_ORDER` by default instead of implementing only the interface.
 
 The primary sort order can be used to group different types of value migrations.
 Regular value migrations (i.e. sub-classes of `AbstractDoValueMigrationHandler` use `IDoValueMigrationHandler.DEFAULT_PRIMARY_SORT_ORDER` and are applied after untyped value migrations (i.e. sub-classes of `AbstractDoValueUntypedMigrationHandler`) which use `IDoValueMigrationHandler.UNTYPED_PRIMARY_SORT_ORDER`.
