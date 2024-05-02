@@ -124,3 +124,19 @@ It's highly recommended to extend `AbstractDoValueMigrationHandler` which define
 
 The primary sort order can be used to group different types of value migrations.
 Regular value migrations (i.e. sub-classes of `AbstractDoValueMigrationHandler` use `IDoValueMigrationHandler.DEFAULT_PRIMARY_SORT_ORDER`) and are applied after untyped value migrations (i.e. sub-classes of `AbstractDoValueUntypedMigrationHandler`) which use `IDoValueMigrationHandler.UNTYPED_PRIMARY_SORT_ORDER`.
+
+[[data-object-mapper-unknown-id-lenient-mode]]
+== Data object mapper support reading of unknown ids in lenient mode
+
+The Scout data object mapper was improved to allow to deserialize qualified ids with unknown type (e.g. a serialized qualified id whose id type class is no longer available).
+In lenient mode such ids are now deserialized as instance of `UnknownId` allowing to retain the unknown id value for further usage and migration of those ids.
+The former implementation returned `null` in this case.
+The default (non-lenient) deserialization remains unchanged and throws a `PlatformException` if a qualified id with an unknown type is deserialized.
+
+Check usages of `org.eclipse.scout.rt.dataobject.ILenientDataObjectMapper` and `org.eclipse.scout.rt.dataobject.id.IdCodec.fromQualifiedLenient` and change the existing code which checks for a `null` value accordingly to retain the existing code behavior.
+
+[source,java]
+----
+IId id = BEANS.get(IdCodec.class).fromQualifiedLenient(idString);
+return id instanceof UnknownId ? null : id;
+----
