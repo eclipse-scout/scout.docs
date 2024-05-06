@@ -140,3 +140,9 @@ Check usages of `org.eclipse.scout.rt.dataobject.ILenientDataObjectMapper` and `
 IId id = BEANS.get(IdCodec.class).fromQualifiedLenient(idString);
 return id instanceof UnknownId ? null : id;
 ----
+
+== BasicCache: Removal of Deprecated Constructors
+
+The two constructors of `BasicCache` not supporting the label supplier were removed.
+As replacement, use the constructor including label supplier as second argument.
+The label supplier can be retrieved via `CacheBuilder#getLabelSupplier()`.
