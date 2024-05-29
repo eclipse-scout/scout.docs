@@ -136,6 +136,17 @@ It may be configured and also disabled using several new configuration propertie
 If the application is not run using the recommended main class `org.eclipse.scout.rt.app.Application`, e.g. for .war deployments the `GzipHandler` is not registered automatically.
 For example for a Jetty .war deployment it may be registered by activating the `gzip` Jetty module.
 
+=== ID handling of Scout JS objects
+
+The following changed for Scout JS IDs:
+
+* In older releases an attribute `data-classid` has been written to the browser DOM if the corresponding URL hints have been enabled (e.g. `debug` or `inspector`). The attribute name has been changed to `data-uuid`. It holds the following:
+** For Scout Classic elements (Java): the values returned by the `InspectorObjectIdProvider`. By default, this is the `ITypeWithClassId#classId()` value for most of the elements.
+** For Scout JS elements (TypeScript): the value of the new `uuid` attribute.
+* `widgets.createUniqueId()` has been moved to `ObjectUuidProvider.createUiId()` and requires no argument anymore.
+* `ObjectFactory.get().createUniqueId()` has been moved to `ObjectUuidProvider.createUiId()`.
+* Ids of `ObjectUuidProvider.createUiId()` have a new format. The old `ui` prefix has been replaced with `\_ui_`. So instead of `ui1234` it has now the value `_ui_1234`. This helps to read the values as it separates the number from the prefix and also improves detection if an ID is coming from the UI sequence.
+
 [[new-DO-api]]
 == Switch to the New Data Object API
 
