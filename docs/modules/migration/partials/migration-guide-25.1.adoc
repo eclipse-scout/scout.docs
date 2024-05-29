@@ -109,3 +109,14 @@ If your implementation references implementation classes the package name needs 
 `org.eclipse.scout.rt.client.ui.desktop.ClientCallback` has been renamed to `org.eclipse.scout.rt.client.ui.desktop.hybrid.uicallback.UiCallback`.
 
 Furthermore, invoking TypeScript code from the client Java code has been simplified using `org.eclipse.scout.rt.client.ui.desktop.hybrid.uicallback.UiCallbacks`. See the xref:technical-guide:user-interface/ui-callback.adoc[UI Callback technical guide] for more details.
+
+== ID handling of Scout JS objects
+
+The following changed for Scout JS IDs:
+
+* In older releases an attribute `data-classid` has been written to the browser DOM if the corresponding URL hints have been enabled (e.g. `debug` or `inspector`). The attribute name has been changed to `data-uuid`. It holds the following:
+** For Scout Classic elements (Java): the values returned by the `InspectorObjectIdProvider`. By default, this is the `ITypeWithClassId#classId()` value for most of the elements.
+** For Scout JS elements (TypeScript): the value of the new `uuid` attribute.
+* `widgets.createUniqueId()` has been moved to `ObjectUuidProvider.createUiId()` and requires no argument anymore.
+* `ObjectFactory.get().createUniqueId()` has been moved to `ObjectUuidProvider.createUiId()`.
+* Ids of `ObjectUuidProvider.createUiId()` have a new format. The old `ui` prefix has been replaced with `\_ui_`. So instead of `ui1234` it has now the value `_ui_1234`. This helps to read the values as it separates the number from the prefix and also improves detection if an ID is coming from the UI sequence.

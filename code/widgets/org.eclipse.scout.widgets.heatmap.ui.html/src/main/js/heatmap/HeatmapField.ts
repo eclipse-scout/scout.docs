@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {Dimension, FormField, graphics, HtmlComponent, ObjectFactory} from '@eclipse-scout/core';
+import {Dimension, FormField, graphics, HtmlComponent, ObjectUuidProvider} from '@eclipse-scout/core';
 import {HeatmapFieldEventMap, HeatmapFieldLayout, HeatmapFieldModel} from '../index';
 import * as L from 'leaflet';
 import {LeafletMouseEvent} from 'leaflet';
@@ -27,7 +27,7 @@ export class HeatmapField extends FormField implements HeatmapFieldModel {
     this.addLabel();
     this.addStatus();
 
-    let heatmapId = ObjectFactory.get().createUniqueId();
+    let heatmapId = ObjectUuidProvider.createUiId();
     let $field = this.$container
       .makeDiv('heatmap')
       .attr('id', heatmapId);
@@ -43,8 +43,8 @@ export class HeatmapField extends FormField implements HeatmapFieldModel {
     this.heatmap = L.map(heatmapId, {
       trackResize: false
     });
-    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.heatmap);
 
     this.heatmap.on('zoomend', this._onViewParameterChange.bind(this));
