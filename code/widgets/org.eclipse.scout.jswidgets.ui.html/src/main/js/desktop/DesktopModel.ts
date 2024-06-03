@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -23,6 +23,26 @@ export default (): DesktopModel => ({
     objectType: WidgetsOutline
   },
   menus: [
+    {
+      id: 'BookmarksMenu',
+      objectType: Menu,
+      iconId: icons.BOOK,
+      text: 'Bookmarks',
+      childActions: [
+        {
+          id: 'StoreBookmarkMenu',
+          objectType: Menu,
+          iconId: scoutIcons.STAR,
+          text: 'Create bookmark'
+        },
+        {
+          id: 'ManageBookmarksMenu',
+          objectType: Menu,
+          iconId: scoutIcons.GEAR,
+          text: 'Manage bookmarks'
+        }
+      ]
+    },
     {
       id: 'SettingsMenu',
       objectType: Menu,
@@ -63,6 +83,9 @@ export default (): DesktopModel => ({
 * **************************************************************************/
 
 export type DesktopWidgetMap = {
+  'BookmarksMenu': Menu;
+  'StoreBookmarkMenu': Menu;
+  'ManageBookmarksMenu': Menu;
   'SettingsMenu': Menu;
   'ThemeMenu': Menu;
   'DefaultThemeMenu': Menu;

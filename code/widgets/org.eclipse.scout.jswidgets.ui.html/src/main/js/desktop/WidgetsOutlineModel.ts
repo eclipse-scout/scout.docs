@@ -18,12 +18,14 @@ import {
 
 export default (): OutlineModel => ({
   id: 'jswidgets.WidgetsOutline',
+  uuid: 'ff0876f4-e8c9-40b7-9374-39469ad34244',
   title: '${textKey:Widgets}',
   outlineOverview: {
     objectType: WidgetsOutlineOverview
   },
   nodes: [
     {
+      uuid: 'e06c3603-3991-40d8-9816-ecdd67957606',
       objectType: PageWithNodes,
       leaf: true,
       text: 'Accordion',
@@ -32,6 +34,7 @@ export default (): OutlineModel => ({
       }
     },
     {
+      uuid: '5623270d-457b-45a4-b1ea-3466a11f8abe',
       objectType: PageWithNodes,
       leaf: true,
       text: 'Breadcrumb Bar Field',
@@ -234,6 +237,7 @@ export default (): OutlineModel => ({
       }
     },
     {
+      uuid: '19a1aeeb-ee96-4a63-b119-5cab5debccfd',
       objectType: PageWithNodes,
       text: 'Number Field',
       detailForm: {
@@ -242,6 +246,7 @@ export default (): OutlineModel => ({
       expanded: true,
       childNodes: [
         {
+          uuid: '124e9564-7aee-4509-a7a7-2fa0fd28f319',
           objectType: PageWithNodes,
           leaf: true,
           text: 'Integer Field',
@@ -252,6 +257,7 @@ export default (): OutlineModel => ({
       ]
     },
     {
+      uuid: '9900cc65-13ae-408d-bd48-89dd900d844f',
       objectType: PageWithNodes,
       text: 'Pages',
       expanded: true,
