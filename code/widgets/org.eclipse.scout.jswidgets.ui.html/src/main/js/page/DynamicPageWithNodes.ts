@@ -15,6 +15,7 @@ export class DynamicPageWithNodes extends PageWithNodes {
 
   constructor() {
     super();
+    this.uuid = 'cae39844-2d59-4467-a5c5-492e8f526a1d';
     this.detailFormVisible = false; // hidden by default
   }
 
