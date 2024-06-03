@@ -22,6 +22,7 @@ export * from './forms/hybrid/PersonDo';
 export * from './forms/hybrid/PersonJsForm';
 export * from './forms/switch/SwitchAllCombinationsJsForm';
 export * from './forms/switch/SwitchAllCombinationsJsFormModel';
+export * from './pages/hybrid/HybridJsPageParamDo';
 export * from './pages/hybrid/HybridJsPage';
 export * from './tile/CustomTile';
 export * from './tile/CustomTileAdapter';
