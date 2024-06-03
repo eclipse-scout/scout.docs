@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -16,6 +16,7 @@ export class SamplePageWithNodes extends PageWithNodes {
 
   constructor() {
     super();
+    this.uuid = 'eead3ddc-1827-4cf3-9e53-076c9270635d';
   }
 
   protected override _jsonModel(): PageModel {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -7,12 +7,13 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {BaseDoEntity, Form, FormModel, FormTableControl, InitModelOf, models, scout, Table, typeName} from '@eclipse-scout/core';
-import SamplePageWithTableSearchFormModel from './SamplePageWithTableSearchFormModel';
+import {BaseDoEntity, Form, FormModel, FormTableControl, InitModelOf, scout, Table, typeName} from '@eclipse-scout/core';
 import {SamplePageWithTableSearchFormWidgetMap} from '../index';
+import model from './SamplePageWithTableSearchFormModel';
 
 export class SamplePageWithTableSearchForm extends Form {
   declare widgetMap: SamplePageWithTableSearchFormWidgetMap;
+  declare data: SamplePageWithTableRestrictionDo;
 
   constructor() {
     super();
@@ -24,7 +25,7 @@ export class SamplePageWithTableSearchForm extends Form {
   }
 
   protected override _jsonModel(): FormModel {
-    return models.get(SamplePageWithTableSearchFormModel);
+    return model();
   }
 
   protected _initListeners() {
@@ -36,6 +37,10 @@ export class SamplePageWithTableSearchForm extends Form {
     return scout.create(SamplePageWithTableRestrictionDo, {
       stringField: this.widget('StringField').value
     });
+  }
+
+  override importData() {
+    this.widget('StringField').setValue(this.data?.stringField);
   }
 }
 
