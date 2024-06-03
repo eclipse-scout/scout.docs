@@ -1,4 +1,5 @@
 packages:
+  - '.'
   - 'code/widgets/org.eclipse.scout.jswidgets.ui.html'
   - 'code/widgets/org.eclipse.scout.jswidgets.ui.html.app'
   - 'code/widgets/org.eclipse.scout.widgets.ui.html'
