@@ -23,7 +23,8 @@ export default (): PageModel => ({
       {
         id: 'IdColumn',
         objectType: NumberColumn,
-        displayable: false
+        displayable: false,
+        primaryKey: true
       },
       {
         id: 'StringColumn',

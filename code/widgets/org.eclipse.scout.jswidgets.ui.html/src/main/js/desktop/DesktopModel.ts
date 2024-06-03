@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -8,7 +8,7 @@
  * SPDX-License-Identifier: EPL-2.0
  */
 import {icons, WidgetsOutline} from '../index';
-import {Desktop, DesktopModel, icons as icons_1, Menu} from '@eclipse-scout/core';
+import {Desktop, DesktopModel, icons as scoutIcons, Menu} from '@eclipse-scout/core';
 
 export default (): DesktopModel => ({
   id: 'jswidgets.Desktop',
@@ -24,6 +24,26 @@ export default (): DesktopModel => ({
   },
   menus: [
     {
+      id: 'BookmarksMenu',
+      objectType: Menu,
+      iconId: icons.BOOK,
+      text: 'Bookmarks',
+      childActions: [
+        {
+          id: 'StoreBookmarkMenu',
+          objectType: Menu,
+          iconId: scoutIcons.STAR,
+          text: 'Create bookmark'
+        },
+        {
+          id: 'ManageBookmarksMenu',
+          objectType: Menu,
+          iconId: scoutIcons.GEAR,
+          text: 'Manage bookmarks'
+        }
+      ]
+    },
+    {
       id: 'SettingsMenu',
       objectType: Menu,
       iconId: icons.PAINT_BRUSH,
@@ -33,7 +53,7 @@ export default (): DesktopModel => ({
           id: 'ThemeMenu',
           objectType: Menu,
           text: '${textKey:Theme}',
-          iconId: icons_1.CHECKED_BOLD, /* used as placeholder */
+          iconId: scoutIcons.CHECKED_BOLD, /* used as placeholder */
           cssClass: 'theme-menu',
           childActions: [
             {
@@ -58,7 +78,14 @@ export default (): DesktopModel => ({
   ]
 });
 
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
 export type DesktopWidgetMap = {
+  'BookmarksMenu': Menu;
+  'StoreBookmarkMenu': Menu;
+  'ManageBookmarksMenu': Menu;
   'SettingsMenu': Menu;
   'ThemeMenu': Menu;
   'DefaultThemeMenu': Menu;
