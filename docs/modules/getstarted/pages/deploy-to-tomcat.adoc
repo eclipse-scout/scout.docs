@@ -1,0 +1,10 @@
+= Deployment to Tomcat
+include::common:partial$_header.adoc[]
+
+// This file is included in order to avoid the error "target of xref
+// not found: 24.1@deploy-to-tomcat.adoc"
+
+A deployment to Tomcat is no longer required.
+See xref:migration:migration-guide.adoc#cha-jettyserver[Former JettyServer for Development Can Be Used in a Productive Environment]
+and xref:migration:migration-guide.adoc#migration-guide-24-1-jetty-removal-of-war-modules[Removal of .war Modules]
+in the migration guide.
