@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -22,6 +22,10 @@ export class WrappedFormFieldForm extends Form {
     super._init(model);
 
     let wrappedFormField = this.widget('WrappedFormField');
+
+    let initialFocusEnabledField = this.widget('InitialFocusEnabledField');
+    initialFocusEnabledField.setValue(wrappedFormField.initialFocusEnabled);
+    initialFocusEnabledField.on('propertyChange:value', event => wrappedFormField.setInitialFocusEnabled(event.newValue));
 
     let innerFormField = this.widget('InnerFormField');
     innerFormField.on('propertyChange:value', event => {
