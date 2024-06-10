@@ -365,13 +365,13 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
           protected void execAction() {
             CalendarComponentForm form = new CalendarComponentForm();
             form.start();
-            form.setCalendars(getCalendars());
+            form.setCalendars(getCalendarDescriptors());
             if (getSelectedRange() != null) {
               form.getStartDateField().setValue(getSelectedRange().getFrom());
               form.getEndDateField().setValue(getSelectedRange().getTo());
             }
-            if (getSelectedCalendar() != null) {
-              form.getCalendarField().setValue(getSelectedCalendar());
+            if (getSelectedCalendarDescriptor() != null) {
+              form.getCalendarField().setValue(getSelectedCalendarDescriptor());
             }
             form.waitFor();
             if (form.isFormStored()) {
@@ -411,12 +411,12 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
 
           @Override
           protected void execAction() {
-            List<ICalendarDescriptor> calendars = new ArrayList<>(getCalendars());
+            List<ICalendarDescriptor> calendars = new ArrayList<>(getCalendarDescriptors());
             Collections.shuffle(CALENDAR_COLORS);
             calendars.add(new CalendarDescriptor()
                 .withName("Dyn #" + calendars.size())
                 .withCssClass(CALENDAR_COLORS.get(0)));
-            setCalendars(calendars);
+            setCalendarDescriptors(calendars);
           }
         }
       }
