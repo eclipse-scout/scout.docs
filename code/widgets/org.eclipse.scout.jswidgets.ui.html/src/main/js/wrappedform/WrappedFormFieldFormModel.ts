@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -7,8 +7,11 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {Button, Form, FormModel, GroupBox, SmartField, TabBox, TabItem, WrappedFormField} from '@eclipse-scout/core';
-import {EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap, WrappedFormLookupCall} from '../index';
+import {Button, CheckBoxField, FormModel, GroupBox, SmartField, TabBox, TabItem, WrappedFormField} from '@eclipse-scout/core';
+import {
+  EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap,
+  WrappedFormLookupCall
+} from '../index';
 
 export default (): FormModel => ({
   id: 'jswidgets.WrappedFormFieldForm',
@@ -61,6 +64,12 @@ export default (): FormModel => ({
               enabled: false
             },
             {
+              id: 'InitialFocusEnabledField',
+              objectType: CheckBoxField,
+              label: 'Initial Focus Enabled',
+              labelVisible: false
+            },
+            {
               id: 'FormFieldPropertiesBox',
               objectType: FormFieldPropertiesBox,
               expanded: false
@@ -94,13 +103,18 @@ export default (): FormModel => ({
   }
 });
 
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
 export type WrappedFormFieldFormWidgetMap = {
   'MainBox': GroupBox;
   'WrappedFormFieldBox': GroupBox;
   'WrappedFormField': WrappedFormField;
   'ConfigurationBox': TabBox;
   'WrappedFormFieldPropertiesBox': TabItem;
-  'InnerFormField': SmartField<Form>;
+  'InitialFocusEnabledField': CheckBoxField;
+  'InnerFormField': SmartField<any>;
   'CloseInnerFormButton': Button;
   'FormFieldPropertiesBox': FormFieldPropertiesBox;
   'GridDataBox': GridDataBox;
@@ -108,4 +122,4 @@ export type WrappedFormFieldFormWidgetMap = {
   'FormFieldActionsBox': FormFieldActionsBox;
   'WidgetActionsBox': WidgetActionsBox;
   'EventsTab': EventsTab;
-} & FormFieldPropertiesBoxWidgetMap & GridDataBoxWidgetMap & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;
+} & FormFieldPropertiesBoxWidgetMap & GridDataBoxWidgetMap & FormFieldActionsBoxWidgetMap & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;
