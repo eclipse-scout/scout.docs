@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -463,10 +463,14 @@ public class HeatmapFieldForm extends AbstractForm implements IAdvancedExampleFo
         }
         catch (InterruptedException | ExecutionException e) {
           LOG.warn("Error while getting location", e);
+          Throwable ex = e;
+          if (e instanceof ExecutionException) {
+            ex = e.getCause();
+          }
           MessageBoxes.createOk()
               .withSeverity(IStatus.ERROR)
               .withHeader(TEXTS.get("ErrorWhileGettingLocation"))
-              .withBody(e.getMessage())
+              .withBody(ex.getMessage())
               .show();
         }
       }

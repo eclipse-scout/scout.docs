@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -8,14 +8,12 @@
  * SPDX-License-Identifier: EPL-2.0
  */
 
-import {HybridManager, InitModelOf, models, PageWithNodes} from '@eclipse-scout/core';
+import {HybridManager, InitModelOf, models, pageParam, PageWithNodes} from '@eclipse-scout/core';
 import HybridJsPageModel from './HybridJsPageModel';
+import {HybridJsPageParamDo} from '../../index';
 
+@pageParam(HybridJsPageParamDo)
 export class HybridJsPage extends PageWithNodes {
-
-  constructor() {
-    super();
-  }
 
   protected override _jsonModel(): Record<string, any> {
     return models.get(HybridJsPageModel);

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -23,6 +23,7 @@ export * from './forms/hybrid/PersonJsForm';
 export * from './forms/switch/SwitchDisplayStyleLookupCall';
 export * from './forms/switch/SwitchJsForm';
 export * from './forms/switch/SwitchJsFormModel';
+export * from './pages/hybrid/HybridJsPageParamDo';
 export * from './pages/hybrid/HybridJsPage';
 export * from './tile/CustomTile';
 export * from './tile/CustomTileAdapter';
