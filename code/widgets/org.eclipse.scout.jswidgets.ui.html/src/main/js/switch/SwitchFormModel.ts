@@ -50,7 +50,8 @@ export default (): FormModel => ({
             fieldWidget: {
               id: 'Switch',
               objectType: Switch,
-              label: 'Switch'
+              label: 'Switch',
+              tooltipText: '${textKey:GenericTooltipText}'
             }
           }
         ]
