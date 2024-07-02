@@ -27,21 +27,21 @@ public class CalendarsLookupCall extends LocalLookupCall<ICalendarDescriptor> {
 
   private static final long serialVersionUID = 1L;
 
-  private List<ICalendarDescriptor> m_calendars;
+  private List<ICalendarDescriptor> m_calendarDescriptors;
 
   public CalendarsLookupCall() {
-    m_calendars = new ArrayList<>(BEANS.get(ICalendarService.class).getAllCalendars());
+    m_calendarDescriptors = new ArrayList<>(BEANS.get(ICalendarService.class).getAllCalendars());
   }
 
-  public List<ICalendarDescriptor> getCalendars() {
-    return m_calendars;
+  public List<ICalendarDescriptor> getCalendarDescriptors() {
+    return m_calendarDescriptors;
   }
 
   public void addCalendar(ICalendarDescriptor calendar) {
-    boolean isPresent = m_calendars.stream()
+    boolean isPresent = m_calendarDescriptors.stream()
         .anyMatch(cal -> Objects.equals(cal.getCalendarId(), calendar.getCalendarId()));
     if (!isPresent) {
-      m_calendars.add(calendar);
+      m_calendarDescriptors.add(calendar);
     }
   }
 
@@ -53,7 +53,7 @@ public class CalendarsLookupCall extends LocalLookupCall<ICalendarDescriptor> {
 
   @Override
   protected List<? extends ILookupRow<ICalendarDescriptor>> execCreateLookupRows() {
-    return m_calendars.stream()
+    return m_calendarDescriptors.stream()
         .filter(ICalendarDescriptor::isSelectable) // Filter unselectable
         .filter(c -> c.getParentId() != null) // Filter groups
         .map(calendar -> new LookupRow<>(calendar, calendar.getName()))

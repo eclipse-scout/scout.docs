@@ -395,30 +395,25 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
             }
           }
         }
+      }
+    }
 
-        @Order(2000)
-        @ClassId("0918cbdd-c96d-4f4e-b280-1490ec28ad68")
-        public class AddCalendarMenu extends AbstractMenu {
-          @Override
-          protected String getConfiguredText() {
-            return "Add calendar";
-          }
+    @Order(20)
+    @ClassId("0918cbdd-c96d-4f4e-b280-1490ec28ad68")
+    public class AddCalendarMenu extends AbstractMenu {
+      @Override
+      protected String getConfiguredText() {
+        return "Add calendar";
+      }
 
-          @Override
-          protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-            return CollectionUtility.hashSet(CalendarMenuType.EmptySpace);
-          }
-
-          @Override
-          protected void execAction() {
-            List<ICalendarDescriptor> calendars = new ArrayList<>(getCalendarDescriptors());
-            Collections.shuffle(CALENDAR_COLORS);
-            calendars.add(new CalendarDescriptor()
-                .withName("New calendar #" + calendars.size())
-                .withCssClass(CALENDAR_COLORS.get(0)));
-            setCalendarDescriptors(calendars);
-          }
-        }
+      @Override
+      protected void execAction() {
+        List<ICalendarDescriptor> calendars = new ArrayList<>(getCalendarField().getCalendar().getCalendarDescriptors());
+        Collections.shuffle(CALENDAR_COLORS);
+        calendars.add(new CalendarDescriptor()
+            .withName("New calendar #" + calendars.size())
+            .withCssClass(CALENDAR_COLORS.get(0)));
+        getCalendarField().getCalendar().setCalendarDescriptors(calendars);
       }
     }
 
