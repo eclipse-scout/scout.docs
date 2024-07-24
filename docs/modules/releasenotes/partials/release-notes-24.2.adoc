@@ -93,3 +93,14 @@ A `CalendarResourceDo` can be added to the calendar by using `ICalendar#setResou
 A calendar item can be assigned to a resource by referencing the resource by its ID using `ICalendarItem#setResourceId`.
 
 When a CalendarItemProvider only produces items for one specific calendar, the method `AbstractCalendarItemProvider#getConfiguredAssociatedResource` can be overridden. All items produced by it are automatically assigned to the specified resource.
+
+== Max Row Count and Limited Result for Scout JS Pages
+
+Pages written in TypeScript now support a maximum row count and inform the user if there would be more data than allowed to fetch (limited result).
+If you want to use this feature for your Scout JS pages as well, follow these instructions in the xref:migration:migration-guide.adoc#limitedResult[Migration Guide].
+
+== Access Config Properties from Scout JS
+
+Selected config properties can now be accessed from Scout JS.
+See the xref:technical-guide:common-concepts/platform.adoc#access-config-ts[Configuration documentation] on how to expose more properties to the browser and how to access them from TypeScript.
+

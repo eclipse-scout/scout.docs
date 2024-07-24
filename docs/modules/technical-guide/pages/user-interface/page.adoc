@@ -20,6 +20,7 @@ The purpose of a page with table is to show tabular data when the page is select
 
 Each row of the table can be linked to a sub-page so that double-clicking a row will select that sub-page.
 
+[#scout-js-examples]
 === Scout JS Examples
 
 * There is a xref:howtos:scout-js/rest-service-how-to.adoc[How-To] that helps to create a Page with Table in Scout JS which loads its data from a REST service.

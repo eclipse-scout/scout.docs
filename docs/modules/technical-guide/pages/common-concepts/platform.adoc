@@ -284,6 +284,7 @@ To read the configured value you can use the `CONFIG` class as demonstrated in <
 include::common:example$org.eclipse.scout.docs.snippets/src/test/java/org/eclipse/scout/docs/snippets/platform/config/ScoutConfigTest.java[tags=getPropertyValue]
 ----
 
+[[access-config-ts]]
 ==== In TypeScript
 
 By default, only the properties with the following keys are available in the browser: `scout.devMode`, `scout.ui.backgroundPollingMaxWaitTime` and `scout.uinotification.waitTimeout`.

@@ -86,6 +86,16 @@ For nightly beta builds use this P2 update site:
 {scout-sdk-update-site-nightly}
 
 // ----------------------------------------------------------------------------
+[[limitedResult]]
+== Max Row Count and Limited Result for Scout JS Pages
+
+Pages written in TypeScript now support a maximum row count and inform the user if there would be more data than allowed to fetch (limited result).
+If you want to use this feature for your Scout JS pages as well, follow these instructions:
+
+. The page must tell the maximum numbers of rows it would like to load. This is done using the new function `_withMaxRowCountContribution`.
+. The data source must read this maximum value and limit the number of rows in case there are more. It reports back if there would have been more data available. This is done with the `MaxResultsHelper`.
+
+There are several xref:technical-guide:user-interface/page.adoc#scout-js-examples[Examples] which explain how to use these new components.
 
 [[typed-permissionId]]
 == Typed PermissionId
