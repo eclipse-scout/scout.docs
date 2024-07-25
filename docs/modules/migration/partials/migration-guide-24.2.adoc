@@ -86,17 +86,6 @@ For nightly beta builds use this P2 update site:
 {scout-sdk-update-site-nightly}
 
 // ----------------------------------------------------------------------------
-[[limitedResult]]
-== Max Row Count and Limited Result for Scout JS Pages
-
-Pages written in TypeScript now support a maximum row count and inform the user if there would be more data than allowed to fetch (limited result).
-If you want to use this feature for your Scout JS pages as well, follow these instructions:
-
-. The page must tell the maximum numbers of rows it would like to load. This is done using the new function `_withMaxRowCountContribution`.
-. The data source must read this maximum value and limit the number of rows in case there are more. It reports back if there would have been more data available. This is done with the `MaxResultsHelper`.
-
-There are several xref:technical-guide:user-interface/page.adoc#scout-js-examples[Examples] which explain how to use these new components.
-
 [[typed-permissionId]]
 == Typed PermissionId
 
@@ -157,8 +146,49 @@ The two constructors of `BasicCache` not supporting the label supplier were remo
 As replacement, use the constructor including label supplier as second argument.
 The label supplier can be retrieved via `CacheBuilder#getLabelSupplier()`.
 
-== Calendar Widget: Support for Multiple Calendars
+== Calendar: Support for Multiple Calendars
 
 The calendar widget is now capable of handling multiple calendars. See xref:releasenotes:release-notes.adoc#multiple-calendars[multiple calendar support] in the release notes for details.
 
 In most cases no changes have to be done. Some minor API changes have been made in the TypeScript part of the widget (Calendar.ts).
+
+[[limitedResult]]
+== Max Row Count and Limited Result for Scout JS Pages
+
+Pages written in TypeScript now support a maximum row count and inform the user if there would be more data than allowed to fetch (limited result).
+If you want to use this feature for your Scout JS pages as well, follow these instructions:
+
+. The page must tell the maximum numbers of rows it would like to load. This is done using the new function `_withMaxRowCountContribution`.
+. The data source must read this maximum value and limit the number of rows in case there are more. It reports back if there would have been more data available. This is done with the `MaxResultsHelper`.
+
+There are several xref:technical-guide:user-interface/page.adoc#scout-js-examples[Examples] which explain how to use these new components.
+
+== SplitBox (Scout JS)
+
+The following constants have been deprecated.
+
+[source,typescript]
+----
+SplitBox.SPLITTER_POSITION_TYPE_RELATIVE_FIRST
+SplitBox.SPLITTER_POSITION_TYPE_RELATIVE_SECOND
+SplitBox.SPLITTER_POSITION_TYPE_ABSOLUTE_FIRST
+SplitBox.SPLITTER_POSITION_TYPE_ABSOLUTE_SECOND
+----
+
+Use the new enum instead: `SplitBox.SplitterPositionType`.
+
+== Logical Grid Layout Config (Scout JS)
+
+The properties on the `LogicalGridLayoutConfig` are not writable anymore.
+Setting them will no longer have an effect.
+If you need to adjust the properties you have to use the new `clone` method.
+
+.New way to modify the logical grid layout configuration
+[source,typescript]
+----
+tileGrid.setLayoutConfig(tileGrid.layoutConfig.clone({columnWidth: 130}));
+----
+
+So you need to check whether you write the properties directly, e.g. using `layoutConfig.columnWidth = 130` and replace that by using the `clone` method.
+
+The layout configuration is available on several widgets like `GroupBox`, `RadioButtonGroup`,  `TileGrid` and more.

@@ -38,6 +38,9 @@ Configures whether the element should fill the grid cell.
 * `widthInPixel` / `heightInPixel` +
 Configures the preferred size of the element in pixel.
 If the value is less than or equal to 0 the property has no effect.
+* `maxWidthInPixel` / `maxHeightInPixel` +
+Configures the maximum size of the element in pixel.
+If the value is less than or equal to 0 there is no maximum.
 
 === Example for WeightX
 * A group box with 3 columns contains 3 fields: every field has `w` = 1 and `weightX` = -1. This leads to 1 row and 3 grid cells which would grow and shrink proportionally because `weightX` is automatically set to > 0.
@@ -47,3 +50,18 @@ If the value is less than or equal to 0 the property has no effect.
 * A group box with 1 column contains 3 fields: every field has `h` = 1 and `weightY` = -1. This leads to 3 rows with fixed height, no additional space is grabbed, because `weightY` will automatically be set to 0.
 * If the weight of these 3 fields were set to 1, the fields would grow and shrink proportionally.
 * If the weight of these 3 fields were set to 0.1, 0.1 and 1, the first two fields would adjust the size very slowly and would mostly be a as big as one logical grid row (because `h` is set to 1), whereas the third field would adjust its size very fast.
+
+[#logical-grid-spy]
+== Logical Grid Spy
+
+If you are curious how the logical grid works or have problems arranging your widgets inside a logical grid, the logical grid spy may help you to understand it better.
+
+image::common:logical_grid_spy.png[]
+
+To enable the spy, open the developer tools of your browser (usually F12), select an element you want to inspect and execute the following command in your console:
+
+.Enable the spy ($0 refers to the selected element)
+[source,javascript]
+----
+scout.setLogicalGridSpyEnabled($0, true)
+----

@@ -55,7 +55,7 @@ This release introduces a mechanism to add signatures to `IId` that are e.g. sen
 For more information see xref:technical-guide:common-concepts/security.adoc#iid-signature[IId signature].
 
 [[multiple-calendars]]
-== Calendar Widget: Support for Multiple Calendars
+== Calendar: Support for Multiple Calendars
 
 The calendar widget is now capable of handling multiple calendar resources. In the left sidebar of the calendar appears a widget, which allows choosing the current visible resources.
 
@@ -104,3 +104,60 @@ If you want to use this feature for your Scout JS pages as well, follow these in
 Selected config properties can now be accessed from Scout JS.
 See the xref:technical-guide:common-concepts/platform.adoc#access-config-ts[Configuration documentation] on how to expose more properties to the browser and how to access them from TypeScript.
 
+== Tile Grid
+
+=== Movable (Scout JS)
+
+Tiles can now be marked as "movable", see `TileModel.movable`.
+This allows them to be moved to another position using drag & drop.
+
+Please note that this feature is only available for Scout JS based tile grids.
+
+=== Resizable (Scout JS)
+
+Tiles can now be marked as "resizable", see `TileModel.resizable`.
+This allows them to be resized by grabbing an edge or corner of the tile.
+
+Please note that this feature is only available for Scout JS based tile grids.
+
+=== Wrappable
+
+The wrapping behavior of a tile grid can now be disabled using the new `wrappable` property.
+
+If you don't need your grid to wrap the tiles you can consider disabling it which may slightly improve the performance.
+
+=== Tile: AnimateBoundsChange
+
+The new property makes it possible to disable the animation for size and position changes for a specific tile.
+
+== Logical Grid
+
+=== Max Width and Height (Scout JS)
+
+The logical grid now supports the new grid data properties `maxWidthInPixel` and `maxHeightInPixel`.
+As the names imply these properties make it possible to limit the size of a grid cell.
+
+=== Spy
+
+If you are curious how the logical grid works or have problems arranging your widgets inside a logical grid, the new logical grid spy may help you to understand it better.
+
+image::common:logical_grid_spy.png[]
+
+Please see xref:technical-guide:user-interface/logical-grid.adoc#logical-grid-spy[Logical Grid Spy] for more information on how to enable it.
+
+=== Clone Method (Scout JS)
+
+With the new clone method on the `GridData` object you can modify the grid data hints of a widget a lot easier.
+
+[source,typescript]
+----
+widget.setGridDataHints(widget.gridDataHints.clone({h: 2}))
+----
+
+This also helps adjusting the grid data hints on the fly for debugging purposes in the developer tools of your browser.
+
+image::grid_data_clone.png[]
+
+=== Event for Grid Data Property Change
+
+Form fields and tiles now trigger a property change event whenever the calculated grid data object changes.
