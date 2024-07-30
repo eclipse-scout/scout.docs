@@ -322,7 +322,7 @@ export class ChartFieldForm extends Form {
       });
       this._setChartConfig(config);
     });
-    accordingToValuesCheckbox.setValue(((this._getChartConfig().options || {}).salesfunnel || {}).normalized || false);
+    accordingToValuesCheckbox.setValue(scout.nvl(this._getChartConfig().options?.salesfunnel?.normalized || true));
 
     this.fulfillmentStartValuePropertyCheckbox = this.widget('FulfillmentStartValuePropertyCheckbox');
 

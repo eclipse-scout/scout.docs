@@ -284,7 +284,7 @@ export default (): FormModel => ({
                 {
                   id: 'ColorSchemeField',
                   objectType: SmartField<string>,
-                  label: 'Chart Scheme',
+                  label: 'Color Scheme',
                   labelPosition: FormField.LabelPosition.TOP,
                   lookupCall: ColorSchemeLookupCall,
                   displayStyle: 'dropdown'
