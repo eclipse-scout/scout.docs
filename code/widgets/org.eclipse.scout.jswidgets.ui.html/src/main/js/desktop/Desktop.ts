@@ -115,26 +115,27 @@ export class Desktop extends ScoutDesktop {
   }
 
   protected _onStoreBookmarkAction(event: Event<Action>) {
-    let bookmark = this.bookmarkSupport.createBookmark();
-    if (!bookmark) {
-      return; // FIXME bsh [js-bookmark] Exception vs. return null?
-    }
-    let form = scout.create(BookmarkForm, {
-      parent: this,
-      bookmark: bookmark
-    });
-    form.open();
-    form.whenSave().then(() => {
-      this.setBusy(true);
-      this.bookmarkSupport.storeBookmark(form.bookmark)
-        .then(bookmark => {
-          scout.create(DesktopNotification, {
-            parent: this,
-            message: 'Bookmark saved' // FIXME bsh [js-bookmark] NLS
-          }).show();
-        })
-        .catch(error => App.get().errorHandler.handle(error))
-        .then(() => this.setBusy(false));
+    this.bookmarkSupport.createBookmark().then(bookmark => {
+      if (!bookmark) {
+        return; // FIXME bsh [js-bookmark] Exception vs. return null?
+      }
+      let form = scout.create(BookmarkForm, {
+        parent: this,
+        bookmark: bookmark
+      });
+      form.open();
+      form.whenSave().then(() => {
+        this.setBusy(true);
+        this.bookmarkSupport.storeBookmark(form.bookmark)
+          .then(bookmark => {
+            scout.create(DesktopNotification, {
+              parent: this,
+              message: 'Bookmark saved' // FIXME bsh [js-bookmark] NLS
+            }).show();
+          })
+          .catch(error => App.get().errorHandler.handle(error))
+          .then(() => this.setBusy(false));
+      });
     });
   }
 
