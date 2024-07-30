@@ -1970,6 +1970,11 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
             }
 
             @Override
+            protected String getConfiguredDisplayStyle() {
+              return DISPLAY_STYLE_DROPDOWN;
+            }
+
+            @Override
             protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
               return ChartTypeLookupCall.class;
             }
@@ -2044,6 +2049,11 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
             @Override
             protected byte getConfiguredLabelPosition() {
               return LABEL_POSITION_TOP;
+            }
+
+            @Override
+            protected String getConfiguredDisplayStyle() {
+              return DISPLAY_STYLE_DROPDOWN;
             }
 
             @Override
@@ -2401,6 +2411,11 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
             @Override
             protected byte getConfiguredLabelPosition() {
               return LABEL_POSITION_TOP;
+            }
+
+            @Override
+            protected String getConfiguredDisplayStyle() {
+              return DISPLAY_STYLE_DROPDOWN;
             }
 
             @Override
@@ -3216,6 +3231,11 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
             @Override
             protected byte getConfiguredLabelPosition() {
               return LABEL_POSITION_TOP;
+            }
+
+            @Override
+            protected String getConfiguredDisplayStyle() {
+              return DISPLAY_STYLE_DROPDOWN;
             }
 
             @Override
