@@ -8,8 +8,8 @@
  * SPDX-License-Identifier: EPL-2.0
  */
 import {
-  App, arrays, CancelMenu, CheckBoxField, colorSchemes, Column, DesktopNotification, Form, FormModel, GridData, GroupBox, InitModelOf, Menu, models, ModeSelectorField, NumberColumn, objects, OkMenu, scout, Status, StringField, strings,
-  TableField
+  App, arrays, CancelMenu, CheckBoxField, colorSchemes, Column, DesktopNotification, Form, FormModel, GridData, GroupBox, InitModelOf, Menu, models, ModeSelectorField, NumberColumn, objects, OkMenu, scout, SmartField, Status, StringField,
+  strings, TableField
 } from '@eclipse-scout/core';
 import {Chart, ChartColorMode, ChartConfig, ChartData, ChartField, ChartPosition, ChartValueClickEvent, ChartValueGroup} from '@eclipse-scout/chart';
 import ChartFieldFormModel from './ChartFieldFormModel';
@@ -25,8 +25,8 @@ export class ChartFieldForm extends Form {
   customChartConfig: Partial<ChartConfig>;
   chartField: ChartField;
   tileChartField: ChartField;
-  autoColorCheckBox: CheckBoxField;
-  colorModeSelectorField: ModeSelectorField<ChartColorMode>;
+  customColorModeSelectorField: ModeSelectorField<CustomColorMode>;
+  colorModeField: SmartField<ChartColorMode>;
   formFieldPropertiesBox: FormFieldPropertiesBox;
   gridDataBox: GridDataBox;
   widgetActionsBox: WidgetActionsBox;
@@ -55,8 +55,8 @@ export class ChartFieldForm extends Form {
     this.chartField = null;
     this.tileChartField = null;
 
-    this.autoColorCheckBox = null;
-    this.colorModeSelectorField = null;
+    this.customColorModeSelectorField = null;
+    this.colorModeField = null;
 
     this.formFieldPropertiesBox = null;
     this.gridDataBox = null;
@@ -114,9 +114,9 @@ export class ChartFieldForm extends Form {
     });
     this.fieldChart.on('valueClick', this._onChartValueClick.bind(this));
 
-    this.autoColorCheckBox = this.widget('AutoColorCheckBox');
-    this.autoColorCheckBox.setValue(this._getChartConfig().options?.autoColor);
-    this.autoColorCheckBox.on('propertyChange:value', event => {
+    const autoColorCheckBox = this.widget('AutoColorCheckBox');
+    autoColorCheckBox.setValue(this._getChartConfig().options?.autoColor);
+    autoColorCheckBox.on('propertyChange:value', event => {
       let config = this._getChartConfig();
       config = $.extend(true, {}, config, {
         options: {
@@ -124,26 +124,14 @@ export class ChartFieldForm extends Form {
         }
       });
       this._setChartConfig(config);
-      this.colorModeSelectorField.modeSelector.findModeByRef(ChartColorMode.AUTO).setText(event.newValue ? 'Auto' : 'Element');
-      if (!event.newValue) {
-        this._renewData();
-      }
+      this.customColorModeSelectorField.setEnabled(!event.newValue);
+      this.colorModeField.setPropertyDimension('enabled', 'autoColor', event.newValue);
     });
 
-    this.colorModeSelectorField = this.widget('ColorModeSelectorField');
-    this.colorModeSelectorField.modeSelector.selectModeByRef(ChartColorMode.AUTO);
-    this.colorModeSelectorField.setValue(ChartColorMode.AUTO);
-    this.colorModeSelectorField.on('propertyChange:value', event => {
-      const config = $.extend(true, {}, this._getChartConfig(), {
-        options: {
-          colorMode: event.newValue
-        }
-      });
-      this._setChartConfig(config);
-      if (!this.autoColorCheckBox.value) {
-        this._renewData();
-      }
-    });
+    this.customColorModeSelectorField = this.widget('CustomColorModeSelectorField');
+    this.customColorModeSelectorField.modeSelector.selectModeByRef(CustomColorMode.ELEMENT);
+    this.customColorModeSelectorField.setValue(CustomColorMode.ELEMENT);
+    this.customColorModeSelectorField.on('propertyChange:value', event => this._renewData());
 
     let clickableCheckBox = this.widget('ClickableCheckBox');
     clickableCheckBox.setValue((this._getChartConfig().options || {}).clickable);
@@ -411,6 +399,17 @@ export class ChartFieldForm extends Form {
       chartTile.setColorScheme(colorScheme);
     });
     colorSchemeField.setValue(colorSchemes.ColorSchemeId.DEFAULT);
+
+    this.colorModeField = this.widget('ColorModeField');
+    this.colorModeField.on('propertyChange:value', event => {
+      const config = $.extend(true, {}, this._getChartConfig(), {
+        options: {
+          colorMode: event.newValue
+        }
+      });
+      this._setChartConfig(config);
+    });
+    this.colorModeField.setValue(ChartColorMode.AUTO);
 
     let tensionField = this.widget('TensionField');
     tensionField.on('propertyChange:value', event => {
@@ -698,6 +697,7 @@ export class ChartFieldForm extends Form {
       transparentCheckBox.setEnabled(scout.isOneOf(type, Chart.Type.BAR, Chart.Type.BAR_HORIZONTAL, Chart.Type.COMBO_BAR_LINE));
       accordingToValuesCheckbox.setEnabled(scout.isOneOf(type, Chart.Type.SALESFUNNEL));
       this.fulfillmentStartValuePropertyCheckbox.setEnabled(scout.isOneOf(type, Chart.Type.FULFILLMENT));
+      this.colorModeField.setPropertyDimension('enabled', 'chartType', !scout.isOneOf(type, Chart.Type.SALESFUNNEL, Chart.Type.FULFILLMENT, Chart.Type.SPEEDO, Chart.Type.VENN));
       tensionField.setEnabled(scout.isOneOf(type, Chart.Type.LINE, Chart.Type.COMBO_BAR_LINE, Chart.Type.RADAR));
       greenAreaPositionField.setEnabled(scout.isOneOf(type, Chart.Type.SPEEDO));
       sizeOfLargestBubbleField.setEnabled(scout.isOneOf(type, Chart.Type.BUBBLE));
@@ -871,13 +871,13 @@ export class ChartFieldForm extends Form {
       return;
     }
 
-    switch (this.colorModeSelectorField.value) {
-      case ChartColorMode.DATASET:
+    switch (this.customColorModeSelectorField.value) {
+      case CustomColorMode.DATASET:
         valueGroups.forEach(valueGroup => {
           valueGroup.colorHexValue = this._randomHexColor();
         });
         break;
-      case ChartColorMode.DATA: {
+      case CustomColorMode.DATA: {
         const maxValueGroupSize = Math.max(...valueGroups.map(valueGroup => arrays.length(valueGroup.values as any[])));
         const colorHexValues = arrays.init(maxValueGroupSize, null).map(v => this._randomHexColor());
         valueGroups.forEach(valueGroup => {
@@ -885,7 +885,7 @@ export class ChartFieldForm extends Form {
         });
         break;
       }
-      case ChartColorMode.AUTO:
+      case CustomColorMode.ELEMENT:
       default:
         valueGroups.forEach(valueGroup => {
           valueGroup.colorHexValue = arrays.init(arrays.length(valueGroup.values as any[]), null).map(v => this._randomHexColor());
@@ -1667,3 +1667,10 @@ type ChartBean = {
 
 type ChartDataRowRaw = (number | string)[];
 type ChartDataRaw = ChartDataRowRaw[];
+
+export enum CustomColorMode {
+  ELEMENT,
+  DATASET,
+  DATA
+}
+

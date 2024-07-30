@@ -13,8 +13,8 @@ import {
 } from '@eclipse-scout/core';
 import {Chart, ChartColorMode, ChartField, ChartFieldTile, ChartPosition, ChartType, GreenAreaPosition} from '@eclipse-scout/chart';
 import {
-  ChartTypeLookupCall, ColorSchemeLookupCall, EventsTab, EventsTabWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, LegendPositionLookupCall, SpeedoGreenAreaPositionLookupCall,
-  ValuesProviderLookupCall, WidgetActionsBox, WidgetActionsBoxWidgetMap
+  ChartColorModeLookupCall, ChartTypeLookupCall, ColorSchemeLookupCall, CustomColorMode, EventsTab, EventsTabWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, LegendPositionLookupCall,
+  SpeedoGreenAreaPositionLookupCall, ValuesProviderLookupCall, WidgetActionsBox, WidgetActionsBoxWidgetMap
 } from '../index';
 
 export default (): FormModel => ({
@@ -126,36 +126,45 @@ export default (): FormModel => ({
                       id: 'AutoColorCheckBox',
                       objectType: CheckBoxField,
                       label: 'Auto Color',
-                      labelVisible: false
+                      labelVisible: false,
+                      gridDataHints: {
+                        useUiWidth: true,
+                        weightX: 0
+                      }
                     },
                     {
-                      id: 'ColorModeSelectorField',
-                      objectType: ModeSelectorField<ChartColorMode>,
-                      label: 'Color Mode',
+                      id: 'CustomColorModeSelectorField',
+                      objectType: ModeSelectorField<CustomColorMode>,
+                      label: 'Custom color Mode',
                       labelVisible: false,
+                      enabled: false,
                       modeSelector: {
                         id: 'ModeSelector',
-                        objectType: ModeSelector<ChartColorMode>,
+                        objectType: ModeSelector<CustomColorMode>,
                         modes: [
                           {
                             id: 'Dataset',
-                            objectType: Mode<ChartColorMode>,
+                            objectType: Mode<CustomColorMode>,
                             text: 'Dataset',
-                            ref: ChartColorMode.DATASET
+                            ref: CustomColorMode.DATASET
                           },
                           {
                             id: 'Data',
-                            objectType: Mode<ChartColorMode>,
+                            objectType: Mode<CustomColorMode>,
                             text: 'Data',
-                            ref: ChartColorMode.DATA
+                            ref: CustomColorMode.DATA
                           },
                           {
-                            id: 'Auto',
-                            objectType: Mode<ChartColorMode>,
-                            text: 'Auto',
-                            ref: ChartColorMode.AUTO
+                            id: 'Element',
+                            objectType: Mode<CustomColorMode>,
+                            text: 'Element',
+                            ref: CustomColorMode.ELEMENT
                           }
                         ]
+                      },
+                      gridDataHints: {
+                        fillHorizontal: false,
+                        horizontalAlignment: 1
                       }
                     }
                   ]
@@ -278,6 +287,14 @@ export default (): FormModel => ({
                   label: 'Chart Scheme',
                   labelPosition: FormField.LabelPosition.TOP,
                   lookupCall: ColorSchemeLookupCall,
+                  displayStyle: 'dropdown'
+                },
+                {
+                  id: 'ColorModeField',
+                  objectType: SmartField<ChartColorMode>,
+                  label: 'Color Mode',
+                  labelPosition: FormField.LabelPosition.TOP,
+                  lookupCall: ChartColorModeLookupCall,
                   displayStyle: 'dropdown'
                 },
                 {
@@ -570,11 +587,11 @@ export type ChartFieldFormWidgetMap = {
   'ChartPropertiesBox.LeftBox': GroupBox;
   'AutoColorSequenceBox': SequenceBox;
   'AutoColorCheckBox': CheckBoxField;
-  'ColorModeSelectorField': ModeSelectorField<ChartColorMode>;
-  'ModeSelector': ModeSelector<ChartColorMode>;
-  'Dataset': Mode<ChartColorMode>;
-  'Data': Mode<ChartColorMode>;
-  'Auto': Mode<ChartColorMode>;
+  'CustomColorModeSelectorField': ModeSelectorField<CustomColorMode>;
+  'ModeSelector': ModeSelector<CustomColorMode>;
+  'Dataset': Mode<CustomColorMode>;
+  'Data': Mode<CustomColorMode>;
+  'Element': Mode<CustomColorMode>;
   'ClickableCheckBox': CheckBoxField;
   'CheckableCheckBox': CheckBoxField;
   'AnimatedCheckBox': CheckBoxField;
@@ -593,6 +610,7 @@ export type ChartFieldFormWidgetMap = {
   'ChartPropertiesBox.RightBox': GroupBox;
   'ChartTypeField': SmartField<ChartType>;
   'ColorSchemeField': SmartField<string>;
+  'ColorModeField': SmartField<ChartColorMode>;
   'TensionField': NumberField;
   'GreenAreaPositionField': SmartField<GreenAreaPosition>;
   'SizeOfLargestBubbleField': NumberField;
