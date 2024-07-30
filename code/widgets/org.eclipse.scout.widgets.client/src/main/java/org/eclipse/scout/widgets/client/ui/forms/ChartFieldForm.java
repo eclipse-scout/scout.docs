@@ -105,7 +105,7 @@ import org.eclipse.scout.widgets.client.ui.forms.ChartFieldForm.MainBox.BottomBo
 import org.eclipse.scout.widgets.client.ui.forms.ChartFieldForm.MainBox.BottomBox.ChartPropertiesBox.CustomChartPropertiesBox;
 import org.eclipse.scout.widgets.client.ui.forms.ChartFieldForm.MainBox.BottomBox.ChartPropertiesBox.FormFieldPropertiesBox;
 import org.eclipse.scout.widgets.client.ui.forms.ChartFieldForm.MainBox.BottomBox.ChartPropertiesBox.LeftBox.AutoColorSequenceBox.AutoColorCheckBox;
-import org.eclipse.scout.widgets.client.ui.forms.ChartFieldForm.MainBox.BottomBox.ChartPropertiesBox.LeftBox.AutoColorSequenceBox.ColorModeSelectorField;
+import org.eclipse.scout.widgets.client.ui.forms.ChartFieldForm.MainBox.BottomBox.ChartPropertiesBox.LeftBox.AutoColorSequenceBox.CustomColorModeSelectorField;
 import org.eclipse.scout.widgets.client.ui.forms.ChartFieldForm.MainBox.BottomBox.ChartPropertiesBox.LeftBox.FulfillmentStartValuePropertyCheckbox;
 import org.eclipse.scout.widgets.client.ui.forms.ChartFieldForm.MainBox.BottomBox.ChartPropertiesBox.LeftBox.TileCheckBox;
 import org.eclipse.scout.widgets.client.ui.forms.ChartFieldForm.MainBox.BottomBox.ChartPropertiesBox.LeftBox.TransparentCheckBox;
@@ -195,8 +195,8 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
     return getFieldByClass(AutoColorCheckBox.class);
   }
 
-  public ColorModeSelectorField getColorModeSelectorField() {
-    return getFieldByClass(ColorModeSelectorField.class);
+  public CustomColorModeSelectorField getCustomColorModeSelectorField() {
+    return getFieldByClass(CustomColorModeSelectorField.class);
   }
 
   public XAxisStackedCheckBox getXAxisStackedCheckBox() {
@@ -927,7 +927,7 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
 
     valueGroups = CollectionUtility.arrayListWithoutNullElements(valueGroups);
 
-    switch (getColorModeSelectorField().getValue()) {
+    switch (getCustomColorModeSelectorField().getValue()) {
       case DATASET:
         valueGroups.forEach(valueGroup -> valueGroup.setColorHexValue(randomHexColor()));
         break;
@@ -941,7 +941,7 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
             .collect(Collectors.toList());
         valueGroups.forEach(valueGroup -> valueGroup.setColorHexValue(colorHexValues));
         break;
-      case AUTO:
+      case ELEMENT:
       default:
         valueGroups.forEach(valueGroup -> valueGroup.setColorHexValue(IntStream.range(0, getValueGroupSize.applyAsInt(valueGroup))
             .mapToObj(i -> randomHexColor())
@@ -1220,6 +1220,16 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
               }
 
               @Override
+              protected boolean getConfiguredGridUseUiWidth() {
+                return true;
+              }
+
+              @Override
+              protected double getConfiguredGridWeightX() {
+                return 0;
+              }
+
+              @Override
               protected void execInitField() {
                 setValue(getChart().getConfig().isAutoColor());
               }
@@ -1237,10 +1247,11 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
 
             @Order(20)
             @ClassId("bc19b509-1a51-4f8c-94ea-42d741504bf3")
-            public class ColorModeSelectorField extends AbstractModeSelectorField<ColorMode> {
+            public class CustomColorModeSelectorField extends AbstractModeSelectorField<CustomColorMode> {
+
               @Override
               protected String getConfiguredLabel() {
-                return "Color mode";
+                return "Custom color mode";
               }
 
               @Override
@@ -1249,18 +1260,28 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
               }
 
               @Override
+              protected boolean getConfiguredEnabled() {
+                return false;
+              }
+
+              @Override
+              protected boolean getConfiguredFillHorizontal() {
+                return false;
+              }
+
+              @Override
+              protected int getConfiguredHorizontalAlignment() {
+                return 1;
+              }
+
+              @Override
               protected void execInitField() {
-                setValue(ColorMode.AUTO);
+                setValue(CustomColorMode.ELEMENT);
               }
 
               @Override
               protected void execChangedValue() {
-                var config = getChart().getConfig();
-                config.withColorMode(getValue());
-                getChart().setConfig(config);
-                if (!getAutoColorCheckBox().getValue()) {
-                  renewData();
-                }
+                renewData();
               }
 
               @Override
@@ -1270,48 +1291,48 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
 
               @Override
               protected void execChangedMasterValue(Object newMasterValue) {
-                getModeFor(ColorMode.AUTO).setText(((boolean) newMasterValue) ? "Auto" : "Element");
+                setEnabled(!(boolean) newMasterValue);
               }
 
               @Order(10)
               @ClassId("2624e524-13da-4cca-bd19-225602b1ec03")
-              public class Dataset extends AbstractMode<ColorMode> {
+              public class Dataset extends AbstractMode<CustomColorMode> {
                 @Override
                 protected String getConfiguredText() {
                   return "Dataset";
                 }
 
                 @Override
-                protected ColorMode getConfiguredRef() {
-                  return ColorMode.DATASET;
+                protected CustomColorMode getConfiguredRef() {
+                  return CustomColorMode.DATASET;
                 }
               }
 
               @Order(20)
               @ClassId("e12d1798-a588-43df-9cef-312c8a16eeb9")
-              public class Data extends AbstractMode<ColorMode> {
+              public class Data extends AbstractMode<CustomColorMode> {
                 @Override
                 protected String getConfiguredText() {
                   return "Data";
                 }
 
                 @Override
-                protected ColorMode getConfiguredRef() {
-                  return ColorMode.DATA;
+                protected CustomColorMode getConfiguredRef() {
+                  return CustomColorMode.DATA;
                 }
               }
 
               @Order(30)
               @ClassId("15d4befc-bb47-457b-92a3-98303924b78c")
-              public class Auto extends AbstractMode<ColorMode> {
+              public class Element extends AbstractMode<CustomColorMode> {
                 @Override
                 protected String getConfiguredText() {
-                  return "Auto";
+                  return "Element";
                 }
 
                 @Override
-                protected ColorMode getConfiguredRef() {
-                  return ColorMode.AUTO;
+                protected CustomColorMode getConfiguredRef() {
+                  return CustomColorMode.ELEMENT;
                 }
               }
             }
@@ -2038,6 +2059,55 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
             @Override
             protected void execChangedValue() {
               setColorScheme(getValue());
+            }
+          }
+
+          @Order(25)
+          @ClassId("4564b9e0-1a7f-4d31-94be-0c02202ce55d")
+          public class ColorModeField extends AbstractSmartField<ColorMode> {
+
+            @Override
+            protected String getConfiguredLabel() {
+              return "Color Mode";
+            }
+
+            @Override
+            protected byte getConfiguredLabelPosition() {
+              return LABEL_POSITION_TOP;
+            }
+
+            @Override
+            protected String getConfiguredDisplayStyle() {
+              return DISPLAY_STYLE_DROPDOWN;
+            }
+
+            @Override
+            protected Class<? extends ILookupCall<ColorMode>> getConfiguredLookupCall() {
+              return P_ColorModeLookupCall.class;
+            }
+
+            @Override
+            protected void execInitField() {
+              getAutoColorCheckBox().addPropertyChangeListener(IValueField.PROP_VALUE, e -> setEnabled((boolean) e.getNewValue(), "autoColor"));
+              setValue(ColorMode.AUTO);
+            }
+
+            @Override
+            protected void execChangedValue() {
+              IChartConfig config = getChart().getConfig();
+              config.withColorMode(getValue());
+              getChart().setConfig(config);
+            }
+
+            @Override
+            protected Class<? extends IValueField> getConfiguredMasterField() {
+              return ChartTypeField.class;
+            }
+
+            @Override
+            protected void execChangedMasterValue(Object newMasterValue) {
+              setEnabled(ObjectUtility.isOneOf(newMasterValue, IChartType.PIE, IChartType.DOUGHNUT, IChartType.POLAR_AREA, IChartType.RADAR, IChartType.BAR, IChartType.BAR_HORIZONTAL, IChartType.LINE, IChartType.COMBO_BAR_LINE,
+                  IChartType.BUBBLE, IChartType.SCATTER), "chartType");
             }
           }
 
@@ -3451,5 +3521,26 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
       rows.add(new LookupRow<>(IChartConfig.RIGHT, "Right"));
       return rows;
     }
+  }
+
+  @ClassId("922b5a5f-920e-4d99-9802-55715f732134")
+  public static class P_ColorModeLookupCall extends LocalLookupCall<ColorMode> {
+
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    protected List<? extends ILookupRow<ColorMode>> execCreateLookupRows() {
+      var rows = new ArrayList<ILookupRow<ColorMode>>();
+      rows.add(new LookupRow<>(ColorMode.AUTO, "Auto"));
+      rows.add(new LookupRow<>(ColorMode.DATASET, "Dataset"));
+      rows.add(new LookupRow<>(ColorMode.DATA, "Data"));
+      return rows;
+    }
+  }
+
+  public enum CustomColorMode {
+    ELEMENT,
+    DATASET,
+    DATA
   }
 }

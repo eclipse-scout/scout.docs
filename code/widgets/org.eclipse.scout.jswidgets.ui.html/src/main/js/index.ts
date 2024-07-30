@@ -27,6 +27,7 @@ export * from './browserfield/BrowserFieldForm';
 export * from './browserfield/BrowserFieldFormModel';
 export * from './carousel/CarouselForm';
 export * from './carousel/CarouselFormModel';
+export * from './chartfield/ChartColorModeLookupCall';
 export * from './chartfield/ChartFieldForm';
 export * from './chartfield/ChartFieldFormModel';
 export * from './chartfield/ChartTypeLookupCall';
