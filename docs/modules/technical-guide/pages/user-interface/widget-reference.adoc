@@ -73,6 +73,7 @@ Here's how the request for a Scout JS SmartField lookup call could look like. Yo
 }
 ----
 
+[[chart]]
 == Chart
 
 A `Chart` visualizes data in several ways like bars, lines or a pie. The `Chart` has two main properties, a data and a config object.
@@ -90,12 +91,14 @@ In addition to the chart.js-properties we added custom properties, some of them 
 
 * `options.autoColor` Whether the colors should be computed automatically.
 * `options.colorScheme` A specific color scheme for the colors, also inverted ones are possible for dark backgrounds.
+* `options.colorMode` Determines what parts of the chart data is colored with the same colors.
 * `options.transparent` Whether the chart should be transparent or opaque.
 * `options.maxSegments` Max. number of segments for radial charts like pie, doughnut, radar, polar area.
 * `options.clickable` Whether a chart is clickable.
 * `options.checkable` Whether a chart is checkable.
 * `options.otherSegmentClickable` Whether the consolidated others segment is clickable.
 * `options.plugins.legend.clickable` Whether the legend is clickable.
+* `options.plugins.legend.pointsVisible` Whether the colored points in the legend are visible.
 * `options.xLabelMap` and `options.yLabelMap` Label mapping for discrete values.
 * `options.handleResize` Whether the chart should handle resizing itself (not necessary if the containers size is updated).
 * `options.numberFormatter` A custom number formatter, e.g. 1000000 -> 1 Mio. €.

@@ -1500,6 +1500,54 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
             }
           }
 
+          @Order(70)
+          @ClassId("a969ce83-ccbc-49e4-881b-4c8f10438a88")
+          public class LegendPointsVisibleCheckBox extends AbstractBooleanField {
+
+            @Override
+            protected String getConfiguredLabel() {
+              return "Legend Points Visible";
+            }
+
+            @Override
+            protected String getConfiguredTooltipText() {
+              return "Show the colored points in the legend";
+            }
+
+            @Override
+            protected boolean getConfiguredLabelVisible() {
+              return false;
+            }
+
+            @Override
+            protected boolean getConfiguredEnabled() {
+              return false;
+            }
+
+            @Override
+            protected void execInitField() {
+              setValue(getChart().getConfig().isLegendPointsVisible());
+            }
+
+            @Override
+            protected void execChangedValue() {
+              IChartConfig config = getChart().getConfig();
+              config.withLegendPointsVisible(getValue());
+              getChart().setConfig(config);
+            }
+
+            @Override
+            protected Class<? extends IValueField> getConfiguredMasterField() {
+              return ChartTypeField.class;
+            }
+
+            @Override
+            protected void execChangedMasterValue(Object newMasterValue) {
+              setEnabled(ObjectUtility.isOneOf(newMasterValue, IChartType.PIE, IChartType.DOUGHNUT, IChartType.POLAR_AREA, IChartType.RADAR, IChartType.BAR, IChartType.BAR_HORIZONTAL, IChartType.LINE, IChartType.COMBO_BAR_LINE,
+                  IChartType.BUBBLE, IChartType.SCATTER));
+            }
+          }
+
           @Order(80)
           @ClassId("b30ec3b2-e1b7-4e61-9948-219032728e52")
           public class TooltipsEnabledBox extends AbstractBooleanField {

@@ -130,28 +130,28 @@ export default (): FormModel => ({
                     },
                     {
                       id: 'ColorModeSelectorField',
-                      objectType: ModeSelectorField,
+                      objectType: ModeSelectorField<ChartColorMode>,
                       label: 'Color Mode',
                       labelVisible: false,
                       modeSelector: {
                         id: 'ModeSelector',
-                        objectType: ModeSelector,
+                        objectType: ModeSelector<ChartColorMode>,
                         modes: [
                           {
                             id: 'Dataset',
-                            objectType: Mode,
+                            objectType: Mode<ChartColorMode>,
                             text: 'Dataset',
                             ref: ChartColorMode.DATASET
                           },
                           {
                             id: 'Data',
-                            objectType: Mode,
+                            objectType: Mode<ChartColorMode>,
                             text: 'Data',
                             ref: ChartColorMode.DATA
                           },
                           {
                             id: 'Auto',
-                            objectType: Mode,
+                            objectType: Mode<ChartColorMode>,
                             text: 'Auto',
                             ref: ChartColorMode.AUTO
                           }
@@ -189,6 +189,13 @@ export default (): FormModel => ({
                   objectType: CheckBoxField,
                   label: 'Legend clickable',
                   tooltipText: 'Datasets can be shown and hidden using the legend',
+                  labelVisible: false
+                },
+                {
+                  id: 'LegendPointsVisibleCheckBox',
+                  objectType: CheckBoxField,
+                  label: 'Legend points visible',
+                  tooltipText: 'Show the colored points in the legend',
                   labelVisible: false
                 },
                 {
@@ -259,7 +266,7 @@ export default (): FormModel => ({
               fields: [
                 {
                   id: 'ChartTypeField',
-                  objectType: SmartField,
+                  objectType: SmartField<ChartType>,
                   label: 'Chart Type',
                   labelPosition: FormField.LabelPosition.TOP,
                   lookupCall: ChartTypeLookupCall,
@@ -267,7 +274,7 @@ export default (): FormModel => ({
                 },
                 {
                   id: 'ColorSchemeField',
-                  objectType: SmartField,
+                  objectType: SmartField<string>,
                   label: 'Chart Scheme',
                   labelPosition: FormField.LabelPosition.TOP,
                   lookupCall: ColorSchemeLookupCall,
@@ -287,7 +294,7 @@ export default (): FormModel => ({
                 },
                 {
                   id: 'GreenAreaPositionField',
-                  objectType: SmartField,
+                  objectType: SmartField<GreenAreaPosition>,
                   label: 'Green area position',
                   labelPosition: FormField.LabelPosition.TOP,
                   lookupCall: SpeedoGreenAreaPositionLookupCall,
@@ -317,7 +324,7 @@ export default (): FormModel => ({
                 },
                 {
                   id: 'LegendPositionField',
-                  objectType: SmartField,
+                  objectType: SmartField<ChartPosition>,
                   label: 'Legend position',
                   labelPosition: FormField.LabelPosition.TOP,
                   lookupCall: LegendPositionLookupCall,
@@ -484,7 +491,7 @@ export default (): FormModel => ({
               processButton: false
             }, {
               id: 'ValuesProviderField',
-              objectType: SmartField,
+              objectType: SmartField<number>,
               label: 'Values',
               labelPosition: FormField.LabelPosition.TOP,
               gridDataHints: {
@@ -573,6 +580,7 @@ export type ChartFieldFormWidgetMap = {
   'AnimatedCheckBox': CheckBoxField;
   'LegendVisibleBox': CheckBoxField;
   'LegendClickableCheckBox': CheckBoxField;
+  'LegendPointsVisibleCheckBox': CheckBoxField;
   'TooltipsEnabledBox': CheckBoxField;
   'DatalabelsVisibleCheckBox': CheckBoxField;
   'XAxisStackedCheckBox': CheckBoxField;
