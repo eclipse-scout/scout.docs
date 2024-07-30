@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -1892,6 +1892,11 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
             }
 
             @Override
+            protected String getConfiguredDisplayStyle() {
+              return DISPLAY_STYLE_DROPDOWN;
+            }
+
+            @Override
             protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
               return ChartTypeLookupCall.class;
             }
@@ -1966,6 +1971,11 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
             @Override
             protected byte getConfiguredLabelPosition() {
               return LABEL_POSITION_TOP;
+            }
+
+            @Override
+            protected String getConfiguredDisplayStyle() {
+              return DISPLAY_STYLE_DROPDOWN;
             }
 
             @Override
@@ -2274,6 +2284,11 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
             @Override
             protected byte getConfiguredLabelPosition() {
               return LABEL_POSITION_TOP;
+            }
+
+            @Override
+            protected String getConfiguredDisplayStyle() {
+              return DISPLAY_STYLE_DROPDOWN;
             }
 
             @Override
@@ -3089,6 +3104,11 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
             @Override
             protected byte getConfiguredLabelPosition() {
               return LABEL_POSITION_TOP;
+            }
+
+            @Override
+            protected String getConfiguredDisplayStyle() {
+              return DISPLAY_STYLE_DROPDOWN;
             }
 
             @Override
