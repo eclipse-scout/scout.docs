@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -71,11 +71,11 @@ export class DateFieldForm extends Form {
 
     this.widget('AllowedSampleDatesMenu').on('action', event => {
       allowedDatesField.setValue([
-        this._dateFormat().format(dates.shift(new Date(), 0, 3, 1), false),
-        this._dateFormat().format(dates.shift(new Date(), 0, 2, 3), false),
+        this._dateFormat().format(dates.shift(new Date(), 0, 3, 1)),
+        this._dateFormat().format(dates.shift(new Date(), 0, 2, 3)),
         this._dateFormat().format(new Date()),
-        this._dateFormat().format(dates.shift(new Date(), 0, 0, -1), false),
-        this._dateFormat().format(dates.shift(new Date(), 0, -2, -1), false)
+        this._dateFormat().format(dates.shift(new Date(), 0, 0, -1)),
+        this._dateFormat().format(dates.shift(new Date(), 0, -2, -1))
       ].join(','));
     });
 

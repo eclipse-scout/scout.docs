@@ -192,3 +192,22 @@ tileGrid.setLayoutConfig(tileGrid.layoutConfig.clone({columnWidth: 130}));
 So you need to check whether you write the properties directly, e.g. using `layoutConfig.columnWidth = 130` and replace that by using the `clone` method.
 
 The layout configuration is available on several widgets like `GroupBox`, `RadioButtonGroup`,  `TileGrid` and more.
+
+== DateFormat: format()
+
+The `format()` function on the `DateFormat` class accepts two arguments.
+The first argument `date` specifies the `Date` object to format.
+The optional second boolean argument was used specify a hint for the formatting of a previously analyzed user input.
+
+The second argument was replaced with an _options_ object with the following properties:
+
+analyzeInfo::
+The result of a previously analyzed user input when formatting it again.
+It helps the internal format functions to adjust the length of an accepted term to match to the corresponding user input.
+Normally, it is not necessary to set this value.
+
+*Migration*:
+
+* No migration is necessary if the `format()` function is called with a single `Date` argument.
+* If the second argument was set to `false`, it can simply be removed (that was the default, anyway).
+* If the second argument was set to `true`, replace it with an options object with the `analyzeInfo` property set.
