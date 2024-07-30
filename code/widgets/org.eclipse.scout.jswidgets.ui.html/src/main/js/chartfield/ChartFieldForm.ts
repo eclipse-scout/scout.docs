@@ -215,6 +215,21 @@ export class ChartFieldForm extends Form {
       this._setChartConfig(config);
     });
 
+    const legendPointsVisibleCheckBox = this.widget('LegendPointsVisibleCheckBox');
+    legendPointsVisibleCheckBox.setValue(this._getChartConfig().options?.plugins?.legend?.pointsVisible);
+    legendPointsVisibleCheckBox.on('propertyChange:value', event => {
+      const config = $.extend(true, {}, this._getChartConfig(), {
+        options: {
+          plugins: {
+            legend: {
+              pointsVisible: event.newValue
+            }
+          }
+        }
+      });
+      this._setChartConfig(config);
+    });
+
     let tooltipsEnabledBox = this.widget('TooltipsEnabledBox');
     tooltipsEnabledBox.setValue((((this._getChartConfig().options || {}).plugins || {}).tooltip || {}).enabled as boolean);
     tooltipsEnabledBox.on('propertyChange:value', event => {
@@ -675,6 +690,7 @@ export class ChartFieldForm extends Form {
       checkableCheckBox.setEnabled(!scout.isOneOf(type, Chart.Type.SALESFUNNEL, Chart.Type.FULFILLMENT, Chart.Type.SPEEDO, Chart.Type.VENN));
       legendVisibleBox.setEnabled(!scout.isOneOf(type, Chart.Type.SALESFUNNEL, Chart.Type.FULFILLMENT, Chart.Type.SPEEDO, Chart.Type.VENN));
       legendClickableCheckBox.setEnabled(!scout.isOneOf(type, Chart.Type.SALESFUNNEL, Chart.Type.FULFILLMENT, Chart.Type.SPEEDO, Chart.Type.VENN));
+      legendPointsVisibleCheckBox.setEnabled(!scout.isOneOf(type, Chart.Type.SALESFUNNEL, Chart.Type.FULFILLMENT, Chart.Type.SPEEDO, Chart.Type.VENN));
       datalabelsVisibleCheckBox.setEnabled(!scout.isOneOf(type, Chart.Type.SALESFUNNEL, Chart.Type.FULFILLMENT, Chart.Type.SPEEDO, Chart.Type.VENN));
       xAxisStackedCheckBox.setEnabled(scout.isOneOf(type, Chart.Type.BAR, Chart.Type.BAR_HORIZONTAL, Chart.Type.LINE, Chart.Type.COMBO_BAR_LINE));
       yAxisStackedCheckBox.setEnabled(scout.isOneOf(type, Chart.Type.BAR, Chart.Type.BAR_HORIZONTAL, Chart.Type.LINE, Chart.Type.COMBO_BAR_LINE));

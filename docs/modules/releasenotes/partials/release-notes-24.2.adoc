@@ -161,3 +161,12 @@ image::grid_data_clone.png[]
 === Event for Grid Data Property Change
 
 Form fields and tiles now trigger a property change event whenever the calculated grid data object changes.
+
+== Chart
+
+The chart introduces two new properties:
+
+* `options.colorMode` Determines what parts of the chart data is colored with the same colors.
+* `options.plugins.legend.pointsVisible` Whether the colored points in the legend are visible.
+
+For more information about the Chart widget see xref:technical-guide:user-interface/widget-reference.adoc#chart[Chart].
