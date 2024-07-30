@@ -18,12 +18,12 @@
 :sdk_editor_nls: Scout NLS Editor
 
 // Constants
-:maven-version: 24.2.0-beta.0
-:node-version: 24.2.0-beta.0
+:maven-version: 24.2.0-beta.2
+:node-version: 24.2.0-beta.2
 :scout-previous-version: 24.1
 :scout-version: 24.2
-:simrel-name: 2024-09
-:simrel-date: September, 2024
+:simrel-name: 2024-06
+:simrel-date: June, 2024
 
 // Links
 :github-changelog-link: https://github.com/eclipse-scout/scout.rt/compare/releases/{scout-previous-version}%2E%2E%2Ereleases/{scout-version}[detailed change log]
