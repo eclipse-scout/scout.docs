@@ -1086,17 +1086,6 @@ Absolute path to the root directory of the `RemoteFileService`. The default valu
 +
 Data type: String
 
-`scout.permissionResource.throughput` ::
-Specifies how many requests to the PermissionResource the server can handle per second.
-The value is used to spread a permission refresh on the browser to reduce server load.
-+
-Use a high value for fast servers. Then the permission refresh on the browser will be very soon after permissions on the server have been reloaded, but load on the server is increased.
-Use smaller values to reduce server load but increase the delay between the reload on the server and the refresh on the browser.
-+
-The default is 30 requests per second.
-+
-Data type: Integer > 0
-
 `scout.rest.ensureHttpHeaderConnectionClose` ::
 Ensures that the header `Connection: close` is added to every REST HTTP requests unless the header `Connection` is already set. As a result, TCP Connections are not reused by consecutive REST calls.The default value is true
 +
@@ -1363,13 +1352,24 @@ Configures in milliseconds how long the request should listen for a new notifica
 +
 Data type: Long
 
+`scout.uinotification.handler.throughput` ::
+Specifies how many requests of browser side UI notification handlers can be processed per second.
+The value is used to delay requests from the UI notification handlers to the server.
++
+Use a high value for fast servers. Then the refresh on the browser will be very soon, but peak load on the server is increased.
++
+Use smaller values to reduce server load but increase the delay between the reload on the server and the refresh on the browser.
++
+The default is 30 requests per second.
++
+Data type: Integer >= 0
+
 `scout.urlHints.enabled` ::
 Enable or disable changing UrlHints using URL parameters in the browser address line.
 +
 By default has the same value as the config property `scout.devMode` meaning it is by default only enabled in development mode.
 +
 Data type: Boolean
-
 `scout.util.defaultDecimalSupportProvider` ::
 Specifies the default DefaultDecimalSupportProvider to use. By default the `DefaultDecimalSupportProvider` is used.
 +
