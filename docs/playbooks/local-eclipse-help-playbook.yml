@@ -4,7 +4,7 @@ site:
 content:
   sources:
   - url: ./../..
-    branches: releases/24.2
+    branches: releases/25.1
     start_path: docs
 ui:
   bundle:
