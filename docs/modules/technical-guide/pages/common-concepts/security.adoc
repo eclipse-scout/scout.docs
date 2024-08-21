@@ -392,6 +392,12 @@ public static class ApiIdSignatureFilterContributor implements IServletFilterCon
 }
 ----
 
+IMPORTANT: A signed `IId` may contain special characters such as `#` or `;`.
+When such an `IId` is used as an URL parameter it needs to be encoded (see https://www.ietf.org/rfc/rfc3986.html#section-2[RFC 3986]).
+This encoding needs to be done in the application, you can use e.g. `encodeURIComponent()` in JS or `IOUtility.urlEncode()` in Java.
+In addition, make sure that no part of your infrastructure setup (e.g. a proxy) decodes these URL encoded parameters before the request reaches your Scout server as this will lead to unexpected behaviour.
+If you are using e.g. an Apache reverse proxy (see https://httpd.apache.org/docs/current/mod/mod_proxy.html[Apache documentation]) consider enabling the `nocanon` flag as this particular proxy will decode all URLs by default.
+
 Also requests sent by a REST client can be signed automatically. To achieve this, two things need to be done.
 
 [#add-dependency-client]
