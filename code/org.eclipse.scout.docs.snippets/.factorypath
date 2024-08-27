@@ -1,8 +1,8 @@
 <factorypath>
-    <factorypathentry kind="VARJAR" id="M2_REPO/org/eclipse/scout/rt/org.eclipse.scout.jaxws.apt/24.2-SNAPSHOT/org.eclipse.scout.jaxws.apt-24.2-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/eclipse/scout/rt/org.eclipse.scout.jaxws.apt/24.2.1/org.eclipse.scout.jaxws.apt-24.2.1.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/glassfish/jaxb/codemodel/4.0.4/codemodel-4.0.4.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/org/eclipse/scout/rt/org.eclipse.scout.rt.platform/24.2-SNAPSHOT/org.eclipse.scout.rt.platform-24.2-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/org/eclipse/scout/rt/org.eclipse.scout.rt.server.jaxws/24.2-SNAPSHOT/org.eclipse.scout.rt.server.jaxws-24.2-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/eclipse/scout/rt/org.eclipse.scout.rt.platform/24.2.1/org.eclipse.scout.rt.platform-24.2.1.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/eclipse/scout/rt/org.eclipse.scout.rt.server.jaxws/24.2.1/org.eclipse.scout.rt.server.jaxws-24.2.1.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/jakarta/servlet/jakarta.servlet-api/5.0.0/jakarta.servlet-api-5.0.0.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/slf4j/slf4j-api/2.0.9/slf4j-api-2.0.9.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/jakarta/jws/jakarta.jws-api/3.0.0/jakarta.jws-api-3.0.0.jar" enabled="true" runInBatchMode="false"/>
