@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -28,48 +28,50 @@ export class StringFieldForm extends Form {
 
     let hasActionField = this.widget('HasActionField');
     hasActionField.setValue(stringField.hasAction);
-    hasActionField.on('propertyChange:value', event => this.widget('StringField').setHasAction(event.newValue));
+    hasActionField.on('propertyChange:value', event => stringField.setHasAction(event.newValue));
 
     let inputMaskedField = this.widget('InputMaskedField');
     inputMaskedField.setValue(stringField.inputMasked);
-    inputMaskedField.on('propertyChange:value', event => this.widget('StringField').setInputMasked(event.newValue));
+    inputMaskedField.on('propertyChange:value', event => stringField.setInputMasked(event.newValue));
 
     let multilineTextField = this.widget('MultilineTextField');
     multilineTextField.setValue(stringField.multilineText);
     multilineTextField.on('propertyChange:value', event => {
-      let field = this.widget('StringField');
-      field.setMultilineText(event.newValue);
-      (field.parent as GroupBox).rerenderControls();
+      stringField.setMultilineText(event.newValue);
+      (stringField.parent as GroupBox).rerenderControls();
     });
 
     let spellCheckEnabledField = this.widget('SpellCheckEnabledField');
     spellCheckEnabledField.setValue(stringField.spellCheckEnabled);
-    spellCheckEnabledField.on('propertyChange:value', event => this.widget('StringField').setSpellCheckEnabled(event.newValue));
+    spellCheckEnabledField.on('propertyChange:value', event => stringField.setSpellCheckEnabled(event.newValue));
 
     let trimTextField = this.widget('TrimTextField');
     trimTextField.setValue(stringField.trimText);
-    trimTextField.on('propertyChange:value', event => this.widget('StringField').setTrimText(event.newValue));
+    trimTextField.on('propertyChange:value', event => stringField.setTrimText(event.newValue));
 
     let updateDisplayTextOnModifyField = this.widget('UpdateDisplayTextOnModifyField');
     updateDisplayTextOnModifyField.setValue(stringField.updateDisplayTextOnModify);
-    updateDisplayTextOnModifyField.on('propertyChange:value', event => this.widget('StringField').setUpdateDisplayTextOnModify(event.newValue));
+    updateDisplayTextOnModifyField.on('propertyChange:value', event => stringField.setUpdateDisplayTextOnModify(event.newValue));
+
+    let wrapTextField = this.widget('WrapTextField');
+    wrapTextField.setValue(stringField.wrapText);
+    wrapTextField.on('propertyChange:value', event => stringField.setWrapText(event.newValue));
 
     let formatField = this.widget('FormatField');
     formatField.setValue(stringField.format);
-    formatField.on('propertyChange:value', event => this.widget('StringField').setFormat(event.newValue));
+    formatField.on('propertyChange:value', event => stringField.setFormat(event.newValue));
 
     let maxLengthField = this.widget('MaxLengthField');
     maxLengthField.setValue(stringField.maxLength);
-    maxLengthField.on('propertyChange:value', event => this.widget('StringField').setMaxLength(event.newValue));
+    maxLengthField.on('propertyChange:value', event => stringField.setMaxLength(event.newValue));
 
     let selectionTrackingEnabledField = this.widget('SelectionTrackingEnabledField');
     selectionTrackingEnabledField.setValue(stringField.selectionTrackingEnabled);
-    selectionTrackingEnabledField.on('propertyChange:value', event => this.widget('StringField').setSelectionTrackingEnabled(event.newValue));
+    selectionTrackingEnabledField.on('propertyChange:value', event => stringField.setSelectionTrackingEnabled(event.newValue));
 
     let selectionStartField = this.widget('SelectionStartField');
     selectionStartField.setValue(stringField.selectionStart);
     selectionStartField.on('propertyChange:value', event => {
-      let stringField = this.widget('StringField');
       stringField.focus();
       stringField.setSelectionStart(event.newValue);
     });
@@ -77,7 +79,6 @@ export class StringFieldForm extends Form {
     let selectionEndField = this.widget('SelectionEndField');
     selectionEndField.setValue(stringField.selectionEnd);
     selectionEndField.on('propertyChange:value', event => {
-      let stringField = this.widget('StringField');
       stringField.focus();
       stringField.setSelectionEnd(event.newValue);
     });
@@ -85,7 +86,6 @@ export class StringFieldForm extends Form {
     let blockFormatField = this.widget('BlockFormatField');
     blockFormatField.setValue(!!stringField.format);
     blockFormatField.on('propertyChange:value', event => {
-      let stringField = this.widget('StringField');
       if (event.newValue) {
         stringField.setFormatter(StringFieldForm.blockFormatter);
         stringField.setParser(StringFieldForm.blockParser);
