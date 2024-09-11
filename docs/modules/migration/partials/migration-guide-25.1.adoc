@@ -83,3 +83,16 @@ To install the Scout SDK into your existing Eclipse IDE, use this P2 update site
 {scout-sdk-update-site}
 
 // ----------------------------------------------------------------------------
+[[jakarta-activation-and-mail-update]]
+== New version for Jakarta Activation and Jakarta Mail
+
+For these dependencies the versions have been updated to the Jakarta EE 10 version:
+
+* Jakarta Activation 2.1
+* Jakarta Mail 2.1
+
+As the _groupId_ has been changed for these dependencies, exclusions for the older version _com.sun.activation:jakarta.activation_ (resp. _mail_) have been added for other dependencies which did depend on these (maven duplicate-finder should point them out).
+Existing exclusions for _jakarta.activation:jakarta.activation-api_ and _org.eclipse.angus:angus-activation_ (resp. _mail_) should be removed for other dependencies (two new dependencies instead of one to differ between API and implementation).
+
+Modules including dependencies to _com.sun.activation:jakarta.activation_ should instead use _org.eclipse.angus:angus-activation_ (same for _mail_) as dependency (which includes the API and implementation).
+If your implementation references implementation classes the package name needs to be adjusted (implementation has been moved).
