@@ -326,7 +326,7 @@ public final class JaxWsSnippet {
 
     @Override
     protected void execInstallHandlers(List<jakarta.xml.ws.handler.Handler<?>> handlerChain) {
-      handlerChain.add(new BasicAuthenticationHandler());
+      handlerChain.add(BEANS.get(BasicAuthenticationHandler.class));
       handlerChain.add(BEANS.get(LogHandler.class));
     }
   }
@@ -337,7 +337,7 @@ public final class JaxWsSnippet {
 
     @Override
     protected void execInstallHandlers(List<jakarta.xml.ws.handler.Handler<?>> handlerChain) {
-      handlerChain.add(new BasicAuthenticationHandler());
+      handlerChain.add(BEANS.get(BasicAuthenticationHandler.class));
       handlerChain.add(BEANS.get(LogHandler.class));
       handlerChain.add(BEANS.get(WsConsumerCorrelationIdHandler.class)); // <1>
     }
