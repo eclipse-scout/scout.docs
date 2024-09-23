@@ -1,0 +1,88 @@
+= UI Callbacks
+
+include::common:partial$_header.adoc[]
+
+UI Callbacks can be used to invoke TypeScript code running in the browser from Java code running on the client backend.
+It consists of two main parts:
+
+. A TypeScript handler that contains the code to be called from the client. It implements the interface `UiCallbackHandler`.
+It receives the id of the current callback, the widget the callback belongs to (owner) and an optional DataObject as arguments.
+. An optional Java handler to process the response from the TypeScript handler.
+
+The following code illustrates a simple example for a `UiCallbackHandler` on browser side:
+
+[source,typescript]
+.The TypeScript handler with the browser side logic.
+----
+import {Desktop, UiCallbackHandler} from '@eclipse-scout/core';
+export class SampleUiCallbackHandler implements UiCallbackHandler {
+  handle(callbackId: string, owner: Desktop, request: CallbackInputDo): JQuery.Promise<CallbackResultDo> {
+    const result: CallbackResultDo = {
+      _type: 'scout.CallbackResult',
+      message: 'message from the browser'
+    };
+    return $.resolvedPromise(result);
+  }
+}
+----
+
+This `UiCallbackHandler` can be invoked from the Java client as follows:
+
+[source,java]
+.Java code on the client to start the callback.
+----
+CallbackInputDo dataToSendToUi = BEANS.get(CallbackInputDo.class).withValue("Data to send to the browser.");  // <1>
+UiCallback<CallbackResultDo> callback = UiCallbacks.get().send(IDesktop.CURRENT.get(), "scout.SampleUiCallbackHandler", dataToSendToUi);  // <2>
+CallbackResultDo result = callback.get(5, TimeUnit.SECONDS);  // <3>
+----
+
+<1> Creates a new `DataObject` which holds the data to send to the `SampleUiCallbackHandler` on the browser.
+<2> Starts the callback in the context of the current `Desktop` widget and sends the given input `DataObject` to the `SampleUiCallbackHandler` on the browser.
+The context widget specifies the maximum lifetime of the callback. As soon as the context widget is disposed, the callback is automatically cancelled.
+<3> Retrieves the result from the UI callback and waits no more than 5 seconds for a result to be available. A result can be of the following form:
++
+* The `DataObject` as returned by the UI handler in case the call was successful.
+* Throwing an `ExecutionException` holding the `ProcessingException` if the browser returned an error.
+* Throwing a `CancellationException` if the callback has been cancelled (by the user itself or because e.g. the context `Widget` has been disposed).
+* Throwing a `TimeoutException` in case the timeout elapsed (only possible if a timeout was specified).
+* Throwing an `InterruptedException` in case the thread was interrupted while waiting for the result to arrive.
+
+
+
+== Optional Java handler
+
+It is possible to further process the response from the UI handler before returning the result. For this an `org.eclipse.scout.rt.client.ui.desktop.hybrid.uicallback.IUiCallbackHandler` can be implemented:
+
+[source,java]
+.Java UI callback handler example.
+----
+@ObjectType("scout.SampleUiCallbackHandler")  // <1>
+class SampleUiCallbackHandler implements IUiCallbackHandler<CallbackResultDo, String> { // <2>
+  @Override
+  public Pair<String, ? extends Throwable> onCallbackDone(CallbackResultDo callbackResultDo) {
+    return ImmutablePair.of(callbackResultDo.getMessage(), null); // <3>
+  }
+
+  @Override
+  public Pair<String, ? extends Throwable> onCallbackFailed(Throwable exception, String message, String code) {
+    return ImmutablePair.of(null, new ProcessingException("My custom message.")); // <4>
+  }
+}
+----
+
+<1> This handler specifies the `ObjectType` of the TypeScript handler using an annotation. As an alternative the handler could overwrite `uiCallbackHandlerObjectType` to specify the `ObjectType`.
+<2> This handler converts the result from the `CallbackResultDo` returned by the UI handler to a string.
+<3> `onCallbackDone` can be used to convert the resulting DO (either to another value or to an Exception).
+<4> `onCallbackFailed` can be used to convert the Exception (either to a result or to another Exception).
+
+Such a handler can then be used as follows:
+
+[source,java]
+.Java UI callback in use.
+----
+CallbackInputDo dataToSendToUi = BEANS.get(CallbackInputDo.class).withValue("Data to send to the browser.");   // <1>
+String message = UiCallbacks.get().send(myForm, new SampleUiCallbackHandler(), dataToSendToUi).get(5, TimeUnit.SECONDS);   // <2>
+----
+
+<1> Creates a new `DataObject` which holds the data to send to the `SampleUiCallbackHandler` on the browser.
+<2> Callback using a `Form` as context and the `SampleUiCallbackHandler` which directly converts the result to only returning the message in case the call is successful and to throw a custom `ProcessingException` in case the call fails.

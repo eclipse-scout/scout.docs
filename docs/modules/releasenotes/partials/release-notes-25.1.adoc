@@ -53,3 +53,7 @@ If you just want to play around with them without looking at the source code, yo
 Scout 25.1 requires at least the following:
 
 * Build and runtime of Scout 25.1 require Java 21 (Java 17 support has been dropped).
+
+== Simplified UiCallback
+
+The API to call TypeScript code from the Java client code has been simplified and streamlined. See the xref:technical-guide:user-interface/ui-callback.adoc[UI Callback technical guide] for more details.

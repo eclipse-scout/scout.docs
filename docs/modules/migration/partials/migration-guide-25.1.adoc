@@ -103,3 +103,9 @@ Existing exclusions for _jakarta.activation:jakarta.activation-api_ and _org.ecl
 
 Modules including dependencies to _com.sun.activation:jakarta.activation_ should instead use _org.eclipse.angus:angus-activation_ (same for _mail_) as dependency (which includes the API and implementation).
 If your implementation references implementation classes the package name needs to be adjusted (implementation has been moved).
+
+== ClientCallback renamed to UiCallback
+
+`org.eclipse.scout.rt.client.ui.desktop.ClientCallback` has been renamed to `org.eclipse.scout.rt.client.ui.desktop.hybrid.uicallback.UiCallback`.
+
+Furthermore, invoking TypeScript code from the client Java code has been simplified using `org.eclipse.scout.rt.client.ui.desktop.hybrid.uicallback.UiCallbacks`. See the xref:technical-guide:user-interface/ui-callback.adoc[UI Callback technical guide] for more details.

@@ -27,6 +27,7 @@
 *** xref:user-interface/texts.adoc[]
 *** xref:user-interface/icons.adoc[]
 *** xref:user-interface/widget-reference.adoc[]
+*** xref:user-interface/ui-callback.adoc[]
 *** xref:user-interface/html-document-parser.adoc[]
 *** xref:user-interface/typescript.adoc[]
 *** xref:user-interface/build-stack.adoc[]
