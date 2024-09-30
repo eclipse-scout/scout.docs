@@ -23,15 +23,15 @@ The applications will be placed in `/opt/helloscout`.
 
 == Prepare Java
 
-Java 17 is required to run the Scout applications
+Java 21 is required to run the Scout applications
 
-  apt install openjdk-17-jdk
+  apt install openjdk-21-jdk
 
 Run
 
   update-alternatives --config java
 
-and select Java 17 as default.
+and select Java 21 as default.
 
 == Verify the Security Settings
 
@@ -238,7 +238,7 @@ WorkingDirectory=/opt/helloscout/helloscout-server/
 ExecStart=/opt/helloscout/helloscout-server/bin/app.sh
 PIDFile=/opt/helloscout/helloscout-server/bin/app.pid
 
-Environment=JAVA_BIN=/usr/lib/jvm/java-17-openjdk-amd64/bin/java
+Environment=JAVA_BIN=/usr/lib/jvm/java-21-openjdk-amd64/bin/java
 
 User=helloscout
 Group=helloscout
@@ -260,7 +260,7 @@ WorkingDirectory=/opt/helloscout/helloscout-ui/
 ExecStart=/opt/helloscout/helloscout-ui/bin/app.sh
 PIDFile=/opt/helloscout/helloscout-ui/bin/app.pid
 
-Environment=JAVA_BIN=/usr/lib/jvm/java-17-openjdk-amd64/bin/java
+Environment=JAVA_BIN=/usr/lib/jvm/java-21-openjdk-amd64/bin/java
 
 User=helloscout
 Group=helloscout
