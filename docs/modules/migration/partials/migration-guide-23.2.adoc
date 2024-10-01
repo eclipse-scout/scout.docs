@@ -291,6 +291,12 @@ Widget.isVisible -> Widget.visible
 Column.isVisible -> Column.visible
 ----
 
+=== Table: Enabled State of Menus Depends on Selected Rows
+
+Menus on a table with menu type `SingleSelection` or `MultiSelection` are now disabled if some of the selected rows are disabled.
+This makes it consistent with the existing Scout Classic behavior.
+If you need these menus to always be enabled, you can set the property `inheritAccessibility` to false.
+
 === Tree: Insert Order Changed
 
 `Tree.insertNodes` now adds new nodes (without an explicit childNodeIndex) at the bottom of the existing nodes instead of the top.
