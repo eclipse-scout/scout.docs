@@ -40,7 +40,7 @@ export class PersonDo {
     if (objects.isString(stringOrObject)) {
       stringOrObject = JSON.parse(stringOrObject);
     }
-    if (!objects.isPlainObject(stringOrObject)) {
+    if (!objects.isObject(stringOrObject)) {
       return null;
     }
     const personDo = new PersonDo();

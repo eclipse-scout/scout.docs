@@ -521,7 +521,7 @@ export class ChartFieldForm extends Form {
       if (parsedValue) {
         formatted = JSON.stringify(parsedValue, null, 2);
       }
-      if (!formatted || objects.isPlainObject(parsedValue)) {
+      if (!formatted || objects.isObject(parsedValue)) {
         return formatted;
       }
       throw 'Expected JSON type: Object {}';
