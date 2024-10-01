@@ -35,7 +35,7 @@ Before you proceed make sure that all shown variables are set appropriately for 
 
 * `Git clone location rule`: "`Located in a folder named '.git/{lt}repo{gt}' within the workspace folder`"
 * `Target Platform`: "`None`"
-* `JRE Location`: Path to your Java 11 or 17 JRE
+* `JRE Location`: Path to your Java 21
 * `Scout Demo App Github repository`: "`HTTPS (read-only, anonymous)`"
 
 Once you finished setting the variables click btn:[Next].
@@ -74,7 +74,7 @@ Demo Docs:: The scout documentation and the project containing most of the code 
 .Projects in the workspace after the "Scout Demo App" setup.
 image::common:oomph_workingsets.png[]
 
-If you do not see the workingsets, you might need to select "menu:Top Level Elements[Working Sets]" from the Menu as displayed in <<img-workingsets_top_level>>
+If you do not see the working-sets, you might need to select "menu:Top Level Elements[Working Sets]" from the Menu as displayed in <<img-workingsets_top_level>>
 
 [[img-workingsets_top_level]]
 .Select "Working Sets" as "Top Level Elements" in the "Package Explorer".
@@ -104,7 +104,7 @@ image::common:oomph_contacts_console.png[]
 ===== Use the Contacts Demo in a Browser
 
 With the Contacts demo running in the IDE open the application in your favorite browser via URL http://localhost:8082[http://localhost:8082,window=_blank].
-To get the screen shown in <<img-contacts_persons_alice>> first click on the [folder]_Persons_ node and then double click on the ''Alice'' row.
+To get the screen shown in <<img-contacts_persons_alice>> first click on the [folder]_Persons_ node and then double-click on the ''Alice'' row.
 
 [[img-contacts_persons_alice]]
 .The Contacts application.

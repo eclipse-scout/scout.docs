@@ -83,6 +83,13 @@ To install the Scout SDK into your existing Eclipse IDE, use this P2 update site
 {scout-sdk-update-site}
 
 // ----------------------------------------------------------------------------
+
+== New Build & Runtime Requirements
+
+Scout 25.1 requires at least the following:
+
+* Build and runtime of Scout 25.1 require Java 21 (Java 17 support has been dropped).
+
 [[jakarta-activation-and-mail-update]]
 == New version for Jakarta Activation and Jakarta Mail
 

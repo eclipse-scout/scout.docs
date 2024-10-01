@@ -47,3 +47,9 @@ If you just want to play around with them without looking at the source code, yo
 * https://scout.bsi-software.com/jswidgets/
 
 // ----------------------------------------------------------------------------
+
+== New Build & Runtime Requirements
+
+Scout 25.1 requires at least the following:
+
+* Build and runtime of Scout 25.1 require Java 21 (Java 17 support has been dropped).
