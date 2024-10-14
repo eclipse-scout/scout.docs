@@ -109,3 +109,10 @@ If your implementation references implementation classes the package name needs 
 `org.eclipse.scout.rt.client.ui.desktop.ClientCallback` has been renamed to `org.eclipse.scout.rt.client.ui.desktop.hybrid.uicallback.UiCallback`.
 
 Furthermore, invoking TypeScript code from the client Java code has been simplified using `org.eclipse.scout.rt.client.ui.desktop.hybrid.uicallback.UiCallbacks`. See the xref:technical-guide:user-interface/ui-callback.adoc[UI Callback technical guide] for more details.
+
+== Scout JS
+
+=== FormField: use _computeEmpty instead of _updateEmpty
+
+If a widget implements `_updateEmpty` it should now implement `_computeEmpty` instead.
+This guarantees that a property change event is triggered and the render function called, if there is any.
