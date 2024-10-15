@@ -20,7 +20,7 @@
 
   <groupId>org.eclipsescout.demo</groupId>
   <artifactId>org.eclipsescout.demo.root</artifactId>
-  <version>24.2-SNAPSHOT</version>
+  <version>24.2.12</version>
   <packaging>pom</packaging>
 
   <modules>
