@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -13,11 +13,11 @@ import org.eclipse.scout.rt.client.ui.form.js.AbstractJsForm;
 import org.eclipse.scout.rt.dataobject.IDoEntity;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 
-@ClassId("fe858c64-a99b-46bd-ad08-4afa7d78142b")
-public class SwitchJsForm extends AbstractJsForm<IDoEntity, IDoEntity> {
+@ClassId("f7147967-0749-4488-9330-bb31139300f2")
+public class SwitchAllCombinationsJsForm extends AbstractJsForm<IDoEntity, IDoEntity> {
 
   @Override
   public String getConfiguredJsFormObjectType() {
-    return "widgets.SwitchJsForm";
+    return "widgets.SwitchAllCombinationsJsForm";
   }
 }
