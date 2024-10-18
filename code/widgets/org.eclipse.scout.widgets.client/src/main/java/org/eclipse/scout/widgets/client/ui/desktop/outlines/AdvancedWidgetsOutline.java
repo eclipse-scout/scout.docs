@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -20,8 +20,8 @@ import org.eclipse.scout.rt.platform.inventory.IClassInfo;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.widgets.client.ui.desktop.pages.FormPage;
 import org.eclipse.scout.widgets.client.ui.desktop.pages.IAdvancedFormPage;
-import org.eclipse.scout.widgets.client.ui.desktop.pages.SwitchJsNodePage;
 import org.eclipse.scout.widgets.client.ui.forms.IPageForm;
+import org.eclipse.scout.widgets.client.ui.forms.toggleswitch.ToggleSwitchForm;
 
 @Order(1100)
 @ClassId("2218fc69-7297-4478-8c1b-a18bea3191fd")
@@ -56,7 +56,7 @@ public class AdvancedWidgetsOutline extends AbstractWidgetsOutline {
         .map(FormPage::new)
         .forEach(pageList::add);
 
-    pageList.add(new SwitchJsNodePage());
+    pageList.add(new FormPage(ToggleSwitchForm.class, "Switch"));
 
     FormPage.sort(pageList);
   }
