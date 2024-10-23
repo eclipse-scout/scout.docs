@@ -384,7 +384,7 @@ The following rules apply, when such properties are read:
 * a property value given by the [] pattern will override the value given by a JSON object string defined by the same source. Example within the same source (e.g. config.properties file):
 ** `my.map.property={"map-key-01": "value-01", "map-key-02": "value-02"}`
 ** `my.map.property[map-key-02]=overridden-value-02`
-** Results in the value `overridden-value-02 for `map-key-02`
+** Results in the value `overridden-value-02` for `map-key-02`
 
 To parse the JSON object strings the `org.eclipse.scout.json` (lightweight JSON parsing) module is used as the bean manager is not yet available during configuration property initialization.
 Otherwise `org.eclipse.scout.rt.dataobject`/`org.eclipse.scout.rt.jackson` would be used if the bean manager would be available yet (more sophisticated JSON parsing modules).
