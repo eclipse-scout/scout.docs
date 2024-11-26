@@ -191,7 +191,7 @@ org.eclipse.jdt.core.compiler.processAnnotations=enabled
 // end::jaxws.pom.dependency.cxf[]
 
 // tag::jaxws_pingws_handler_file[]
-<handler-chains xmlns="http://java.sun.com/xml/ns/javaee">
+<handler-chains xmlns="https://jakarta.ee/xml/ns/jakartaee">
   <handler-chain>
     <!-- Executed as 4. handler-->
     <handler>
