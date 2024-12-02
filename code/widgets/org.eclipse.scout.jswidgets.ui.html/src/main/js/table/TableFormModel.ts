@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -7,10 +7,10 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {AggregateTableControl, BooleanColumn, Column, DateColumn, FormModel, GroupBox, IconColumn, Menu, NumberColumn, SmartColumn, SmartField, TabItem, Table, TableField} from '@eclipse-scout/core';
+import {AggregateTableControl, BooleanColumn, Column, DateColumn, FormModel, GroupBox, IconColumn, LookupColumn, Menu, NumberColumn, SmartColumn, SmartField, TabItem, Table, TableField} from '@eclipse-scout/core';
 import {
   ColumnPropertiesBox, ColumnPropertiesBoxWidgetMap, ConfigurationBox, EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox,
-  GridDataBoxWidgetMap, LocaleLookupCall, TablePropertiesBox, TablePropertiesBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap
+  GridDataBoxWidgetMap, LocaleLookupCall, SalutationLookupCall, TablePropertiesBox, TablePropertiesBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap
 } from '../index';
 
 export default (): FormModel => ({
@@ -60,6 +60,13 @@ export default (): FormModel => ({
                   text: 'Smart Column',
                   lookupCall: LocaleLookupCall,
                   width: 120
+                },
+                {
+                  id: 'LookupColumn',
+                  objectType: LookupColumn<string>,
+                  text: 'Lookup Column',
+                  lookupCall: SalutationLookupCall,
+                  width: 240
                 },
                 {
                   id: 'BooleanColumn',
@@ -278,6 +285,7 @@ export type TableFieldTableColumnMap = {
   'DateColumn': DateColumn;
   'NumberColumn': NumberColumn;
   'SmartColumn': SmartColumn<any>;
+  'LookupColumn': LookupColumn<string>;
   'BooleanColumn': BooleanColumn;
   'IconColumn': IconColumn;
   'HtmlColumn': Column;
