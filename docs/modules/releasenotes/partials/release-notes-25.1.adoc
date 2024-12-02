@@ -98,6 +98,12 @@ combination.
 |Ctrl-Shift-Z
 |===
 
+== ListBox: New Default for MultiSelect
+
+The default for the `multiSelect` property has been changed from `false` to `true`.
+If it is true, the user can select all rows at once and check or uncheck them.
+Also, when creating a list box with Scout JS, the default is already true, so this makes it more consistent.
+
 == LookupColumn
 
 The `LookupColumn` is a multivalued lookup call column. If editable it opens a popup containing a `LookupBox` in order to select multiple values.
