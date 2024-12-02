@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -7,14 +7,14 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {Column, dates, Form, FormModel, GroupBox, HtmlTile, icons, InitModelOf, MessageBoxes, models, scout, TabItem, Table, TableAppLinkActionEvent, TableRowModel} from '@eclipse-scout/core';
-import {BooleanColumnPropertiesBox, ColumnLookupCall, DateColumnPropertiesBox, LocaleLookupCall, NumberColumnPropertiesBox, SmartColumnPropertiesBox, TableFormWidgetMap} from '../index';
+import {Column, dates, Form, FormModel, GroupBox, HtmlTile, icons, InitModelOf, MessageBoxes, models, scout, StaticLookupCall, TabItem, TableAppLinkActionEvent, TableRowModel} from '@eclipse-scout/core';
+import {BooleanColumnPropertiesBox, ColumnLookupCall, DateColumnPropertiesBox, LocaleLookupCall, LookupCallColumnPropertiesBox, LookupColumnPropertiesBox, NumberColumnPropertiesBox, TableFieldTable, TableFormWidgetMap} from '../index';
 import TableFormModel from './TableFormModel';
 
 export class TableForm extends Form {
   declare widgetMap: TableFormWidgetMap;
 
-  table: Table;
+  table: TableFieldTable;
   rowNo: number;
   groupNo: number;
 
@@ -107,10 +107,16 @@ export class TableForm extends Form {
           parent: parent
         });
       case 'SmartColumn':
-        return scout.create(SmartColumnPropertiesBox, {
+        return scout.create(LookupCallColumnPropertiesBox, {
           id: 'SmartColumnPropertyField',
           label: 'Smart Column Properties',
           parent: parent
+        });
+      case 'LookupColumn':
+        return scout.create(LookupColumnPropertiesBox, {
+          id: 'LookupColumnPropertyField',
+          label: 'Lookup Column Properties',
+          parent
         });
       default:
         return null;
@@ -129,6 +135,9 @@ export class TableForm extends Form {
     }
     if (newColumnTypeName !== 'SmartColumn') {
       this._removePropertyBox('SmartColumnPropertyField', tabBox);
+    }
+    if (newColumnTypeName !== 'LookupColumn') {
+      this._removePropertyBox('LookupColumnPropertyField', tabBox);
     }
   }
 
@@ -153,6 +162,12 @@ export class TableForm extends Form {
     let dateValue = dates.shift(date, 0, 0, -this.groupNo);
     let numberValue = this.rowNo;
     let smartValue = locales[this.rowNo % locales.length];
+
+    const lookupCall = this.table.columnById('LookupColumn').lookupCall as StaticLookupCall<string>;
+    const lookupCallKeys = lookupCall.data.map(lookupRow => lookupRow[0]);
+    const start = Math.floor(Math.random() * lookupCallKeys.length);
+    const lookupValue = lookupCallKeys.slice(start, start + 1 + Math.floor(Math.random() * 3));
+
     let booleanValue = this.rowNo % 2 === 0;
     let htmlValue = '<span class="app-link" data-ref="' + this.rowNo + '">App Link</span>';
 
@@ -163,7 +178,7 @@ export class TableForm extends Form {
 
     return {
       iconId: rowIcon,
-      cells: [stringValue, dateValue, numberValue, smartValue, booleanValue, iconValue, htmlValue]
+      cells: [stringValue, dateValue, numberValue, smartValue, lookupValue, booleanValue, iconValue, htmlValue]
     };
   }
 
