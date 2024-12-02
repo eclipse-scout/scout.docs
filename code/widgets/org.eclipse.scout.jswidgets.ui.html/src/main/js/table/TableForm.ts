@@ -7,8 +7,8 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {Column, dates, Form, FormModel, GroupBox, HtmlTile, icons, InitModelOf, MessageBoxes, models, numbers, scout, TabItem, TableAppLinkActionEvent, TableRowModel} from '@eclipse-scout/core';
-import {BooleanColumnPropertiesBox, ColumnLookupCall, DateColumnPropertiesBox, LocaleLookupCall, NumberColumnPropertiesBox, SmartColumnPropertiesBox, TableFieldTable, TableFormWidgetMap} from '../index';
+import {Column, dates, Form, FormModel, GroupBox, HtmlTile, icons, InitModelOf, MessageBoxes, models, numbers, scout, StaticLookupCall, TabItem, TableAppLinkActionEvent, TableRowModel} from '@eclipse-scout/core';
+import {BooleanColumnPropertiesBox, ColumnLookupCall, DateColumnPropertiesBox, LocaleLookupCall, LookupCallColumnPropertiesBox, LookupColumnPropertiesBox, NumberColumnPropertiesBox, TableFieldTable, TableFormWidgetMap} from '../index';
 import TableFormModel from './TableFormModel';
 
 export class TableForm extends Form {
@@ -110,10 +110,16 @@ export class TableForm extends Form {
           parent: parent
         });
       case 'SmartColumn':
-        return scout.create(SmartColumnPropertiesBox, {
+        return scout.create(LookupCallColumnPropertiesBox, {
           id: 'SmartColumnPropertyField',
           label: 'Smart Column Properties',
           parent: parent
+        });
+      case 'LookupColumn':
+        return scout.create(LookupColumnPropertiesBox, {
+          id: 'LookupColumnPropertyField',
+          label: 'Lookup Column Properties',
+          parent
         });
       default:
         return null;
@@ -132,6 +138,9 @@ export class TableForm extends Form {
     }
     if (newColumnTypeName !== 'SmartColumn') {
       this._removePropertyBox('SmartColumnPropertyField', tabBox);
+    }
+    if (newColumnTypeName !== 'LookupColumn') {
+      this._removePropertyBox('LookupColumnPropertyField', tabBox);
     }
   }
 
@@ -158,6 +167,12 @@ export class TableForm extends Form {
     let numberValue = this.rowNo;
     let numberValue2 = numbers.randomInt(1000);
     let smartValue = locales[this.rowNo % locales.length];
+
+    const lookupCall = this.table.columnById('LookupColumn').lookupCall as StaticLookupCall<string>;
+    const lookupCallKeys = lookupCall.data.map(lookupRow => lookupRow[0]);
+    const start = numbers.randomInt(lookupCallKeys.length);
+    const lookupValue = lookupCallKeys.slice(start, start + 1 + numbers.randomInt(3));
+
     let booleanValue = this.rowNo % 2 === 0;
     let htmlValue = '<span class="app-link" data-ref="' + this.rowNo + '">App Link</span>';
 
@@ -168,7 +183,7 @@ export class TableForm extends Form {
 
     return {
       iconId: rowIcon,
-      cells: [internalValue, stringValue, dateValue, numberValue, numberValue2, smartValue, booleanValue, iconValue, htmlValue]
+      cells: [internalValue, stringValue, dateValue, numberValue, numberValue2, smartValue, lookupValue, booleanValue, iconValue, htmlValue]
     };
   }
 

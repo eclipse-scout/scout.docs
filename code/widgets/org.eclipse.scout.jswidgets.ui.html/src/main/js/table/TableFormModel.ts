@@ -7,10 +7,10 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {AggregateTableControl, BooleanColumn, Column, DateColumn, FormModel, GroupBox, IconColumn, Menu, NumberColumn, SmartColumn, SmartField, TabItem, Table, TableField} from '@eclipse-scout/core';
+import {AggregateTableControl, BooleanColumn, Column, DateColumn, FormModel, GroupBox, IconColumn, LookupColumn, Menu, NumberColumn, SmartColumn, SmartField, TabItem, Table, TableField} from '@eclipse-scout/core';
 import {
   ColumnPropertiesBox, ColumnPropertiesBoxWidgetMap, ConfigurationBox, EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox,
-  GridDataBoxWidgetMap, LocaleLookupCall, TablePropertiesBox, TablePropertiesBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap
+  GridDataBoxWidgetMap, LocaleLookupCall, SalutationLookupCall, TablePropertiesBox, TablePropertiesBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap
 } from '../index';
 
 export default (): FormModel => ({
@@ -74,6 +74,13 @@ export default (): FormModel => ({
                   text: 'Smart Column',
                   lookupCall: LocaleLookupCall,
                   width: 120
+                },
+                {
+                  id: 'LookupColumn',
+                  objectType: LookupColumn<string>,
+                  text: 'Lookup Column',
+                  lookupCall: SalutationLookupCall,
+                  width: 240
                 },
                 {
                   id: 'BooleanColumn',
@@ -294,6 +301,7 @@ export type TableFieldTableColumnMap = {
   'NumberColumn': NumberColumn;
   'SecretNumberColumn': NumberColumn;
   'SmartColumn': SmartColumn<string>;
+  'LookupColumn': LookupColumn<string>;
   'BooleanColumn': BooleanColumn;
   'IconColumn': IconColumn;
   'HtmlColumn': Column;

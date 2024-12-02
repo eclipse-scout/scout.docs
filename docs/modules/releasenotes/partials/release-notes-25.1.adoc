@@ -93,3 +93,14 @@ combination.
 |Ctrl-F6
 |Ctrl-Shift-Z
 |===
+
+== LookupColumn
+
+The `LookupColumn` is a multivalued lookup call column. If editable it opens a popup containing a `LookupBox` in order to select multiple values.
+The column supports lookup calls and code types and has a `distinct` property to enforce that the same value is not selected in more than one row.
+
+.The `LookupColumn` with `distinct` set to `true`
+image::lookup_column_salutation.png[]
+
+.The `LookupColumn` with a hierarchical lookup call
+image::lookup_column_world.png[]
