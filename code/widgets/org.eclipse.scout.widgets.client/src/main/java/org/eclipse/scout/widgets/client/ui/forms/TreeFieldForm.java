@@ -329,7 +329,7 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
                 getTree().visitTree(new DepthFirstTreeVisitor<>() {
                   @Override
                   public TreeVisitResult preVisit(ITreeNode node, int level, int index) {
-                    node.getCellForUpdate().setText("Dynamic Text " + number.getValue());
+                    node.getCellForUpdate().setText("Dynamic Text Dynamic TextDynamic TextDynamic TextDynamic TextDynamic TextDynamic TextDynamic TextDynamic TextDynamic TextDynamic TextDynamic Text " + number.getValue());
                     number.setValue(m_reverse ? number.getValue() - 1: number.getValue() + 1);
                     return TreeVisitResult.CONTINUE;
                   }
