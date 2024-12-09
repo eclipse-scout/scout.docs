@@ -13,7 +13,7 @@ Make sure the Node.js installation is on the PATH. You can verify it by using yo
 
 ----
 c:\> node -v
-v20.10.0
+v22.12.0
 ----
 
 ==== Add pnpm
@@ -22,12 +22,12 @@ Scout uses https://pnpm.io/[pnpm 8] as package manager.
 Therefore, install it into your Node installation by using your command line:
 
 ----
-npm install -g pnpm@8.11.0
+npm install -g pnpm@9.15.0
 ----
 
 and verify that it was installed successfully with:
 
 ----
 c:\> pnpm -v
-8.11.0
+9.15.0
 ----

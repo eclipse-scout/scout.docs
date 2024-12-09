@@ -55,6 +55,8 @@ Scout 25.1 requires at least the following:
 * Build and runtime of Scout 25.1 require Java 21 (Java 17 support has been dropped).
 * Furthermore, the build requires
 ** Maven >= 3.9.9
+** Node: >= 22.12.0
+** Pnpm: >= 9.15.0
 
 == Simplified UiCallback
 

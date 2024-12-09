@@ -91,6 +91,19 @@ Scout 25.1 requires at least the following:
 * Build and runtime of Scout 25.1 require Java 21 (Java 17 support has been dropped).
 * Furthermore, the build requires
 ** Maven >= 3.9.9
+** Node: >= 22.12.0
+** Pnpm: >= 9.15.0
+
+=== Pnpm Settings Changes
+
+Pnpm 9 changed the default of `link-workspace-packages` from false to true, see
+https://github.com/pnpm/pnpm/releases/tag/v9.0.0
+
+Scout uses snapshot ranges (>=25.1.0-snapshot <25.1.0) in the `package.json` files instead of the `workspace:` protocol to link workspace packages together.
+
+If the flag is false, `pnpm install` or `pnpm update` downloads the dependencies instead of using the ones from the workspace.
+
+So this flag needs to be true when having more than one npm package in the workspace that depend on each other. To do so, add the property `link-workspace-packages=true` to your `.npmrc` file in your workspace or user home directory. We also recommend to put `prefer-workspace-packages=false` to ensure workspace packages are always preferred even if there are newer versions in the remote repository.
 
 == Build Changes
 
