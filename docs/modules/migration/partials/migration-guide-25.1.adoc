@@ -53,7 +53,7 @@ Usage example in your package.json:
   "version": "1.0.0",
   "devDependencies": {
     "@eclipse-scout/cli": "{node-version}",
-    "@eclipse-scout/releng": "^24.1.0"
+    "@eclipse-scout/releng": "^25.1.0"
   },
   "dependencies": {
     "@eclipse-scout/core": "{node-version}",
