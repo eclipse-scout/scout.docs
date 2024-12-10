@@ -7,21 +7,27 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-.about-menu.menu-item {
-  margin-left: 0;
-
-  & > .icon {
-    font-size: 26px;
-    top: 0;
-  }
-}
-
-.about-info > .field > p > a:focus {
-  outline: none;
-}
-
 .theme-menu.menu-item {
   & > .icon {
     visibility: hidden;
+  }
+}
+
+.desktop-logo {
+  // Use fixed size to prevent jumping during page reload
+  width: 32px;
+  height: 32px;
+}
+
+.about-info > .field {
+
+  & a:focus {
+    // Hide initial focus (because there is nothing else to focus on this form, would look ugly)
+    outline: none;
+  }
+
+  & > p:last-child {
+    // Reduce default margin at the end of the field (group box already has a margin)
+    margin-bottom: 0;
   }
 }

@@ -7,8 +7,8 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
+import {Desktop, DesktopModel, icons as scoutIcons, Menu} from '@eclipse-scout/core';
 import {icons, WidgetsOutline} from '../index';
-import {Desktop, DesktopModel, icons as icons_1, Menu} from '@eclipse-scout/core';
 
 export default (): DesktopModel => ({
   id: 'jswidgets.Desktop',
@@ -33,7 +33,7 @@ export default (): DesktopModel => ({
           id: 'ThemeMenu',
           objectType: Menu,
           text: '${textKey:Theme}',
-          iconId: icons_1.CHECKED_BOLD, /* used as placeholder */
+          iconId: scoutIcons.CHECKED_BOLD, /* used as placeholder */
           cssClass: 'theme-menu',
           childActions: [
             {

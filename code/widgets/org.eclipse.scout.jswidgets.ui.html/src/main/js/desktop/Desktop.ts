@@ -57,7 +57,12 @@ export class Desktop extends Desktop_1 {
   }
 
   protected _onLogoAction(event: Event<Desktop>) {
-    let form = scout.create(Form, {
+    let form = this._createAboutInfoForm();
+    form.open();
+  }
+
+  protected _createAboutInfoForm(): Form {
+    return scout.create(Form, {
       parent: this,
       resizable: false,
       title: 'Scout JS Widgets Application',
@@ -73,11 +78,10 @@ export class Desktop extends Desktop_1 {
           cssClass: 'about-info',
           statusVisible: false,
           gridDataHints: {
-            h: 2
+            useUiHeight: true
           }
         }]
       }
     });
-    form.open();
   }
 }
