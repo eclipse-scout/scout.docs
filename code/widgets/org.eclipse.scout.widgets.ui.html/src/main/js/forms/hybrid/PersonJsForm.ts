@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {Form, FormModel, models} from '@eclipse-scout/core';
+import {Form, FormModel, models, scout} from '@eclipse-scout/core';
 import PersonJsFormModel, {PersonJsFormWidgetMap} from './PersonJsFormModel';
 import {PersonDo} from '../../index';
 
@@ -24,8 +24,7 @@ export class PersonJsForm extends Form {
       return;
     }
 
-    const personDo = PersonDo.of(this.data);
-
+    const personDo = this.data as PersonDo;
     this.widget('NameField').setValue(personDo.name);
     this.widget('FirstNameField').setValue(personDo.firstName);
     this.widget('DateOfBirthField').setValue(personDo.dateOfBirth);
@@ -33,11 +32,11 @@ export class PersonJsForm extends Form {
   }
 
   override exportData(): object {
-    return PersonDo.of({
+    return scout.create(PersonDo, {
       name: this.widget('NameField').value,
       firstName: this.widget('FirstNameField').value,
       dateOfBirth: this.widget('DateOfBirthField').value,
       active: this.widget('ActiveField').value
-    }).toJson();
+    });
   }
 }
