@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {ajax, AjaxError, Form, FormModel, InitModelOf, models, UiNotificationEvent, UiNotificationHandler, uiNotifications} from '@eclipse-scout/core';
+import {ajax, AjaxError, BaseDoEntity, dataObjects, DoEntity, Form, FormModel, InitModelOf, models, scout, typeName, UiNotificationEvent, UiNotificationHandler, uiNotifications} from '@eclipse-scout/core';
 import UiNotificationFormModel from './UiNotificationFormModel';
 import {UiNotificationFormWidgetMap} from '../index';
 
@@ -73,10 +73,11 @@ export class UiNotificationForm extends Form {
     this.widget('PublishButton').on('click', () => {
       let message = JSON.parse(this.widget('MessageField').value);
       let topic = this.widget('PublishTopicField').value;
-      ajax.postJson('api/ui-notifications/put', {
+      let request = scout.create(SampleUiNotificationPutRequest, {
         message: message,
         topic: topic
-      }).then(() => {
+      });
+      ajax.postDataObject('api/ui-notifications/put', request).then(() => {
         this._addLogEntry('Message published');
       }).catch((error: AjaxError) => {
         this._addLogEntry('Publish failed: ' + error.errorDo?.message);
@@ -110,7 +111,13 @@ export class UiNotificationForm extends Form {
       id: event.id,
       topic: event.topic,
       creationTime: event.creationTime,
-      message: event.message
+      message: dataObjects.serialize(event.message)
     })}`);
   }
+}
+
+@typeName('jswidgets.SampleUiNotificationPutRequest')
+export class SampleUiNotificationPutRequest extends BaseDoEntity {
+  message: DoEntity;
+  topic: string;
 }
