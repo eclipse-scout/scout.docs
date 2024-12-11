@@ -131,6 +131,11 @@ After the upgrade to 24.1, projects that use JAX-WS (Soap) as a provider should 
 to ensure that everything is working as desired.
 This applies above all to cases when own libraries in /WEB-INF/lib are used or the corresponding resources in /META-INF/resources.
 
+==== Update namespace in binding files
+
+If your JAX-WS service uses bindings in _jaxb-binding.xml_ or _jaxws-binding.xml_ the namespace attribute must be updated.
+Use the new namespace _https://jakarta.ee/xml/ns/jaxb_.
+
 If your JAX-WS service uses global bindings, the _global-bindings.xml_ file must be updated according to the following example:
 
 .Example global-bindings.xml
