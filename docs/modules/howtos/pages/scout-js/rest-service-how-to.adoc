@@ -187,15 +187,16 @@ export class PizzaTablePage extends PageWithTable {
     };
   }
 
-  protected override _loadTableData(searchFilter: any): JQuery.Promise<PizzaResponse> {
+  protected override _loadTableData(searchFilter: PizzaRestrictionDo): JQuery.Promise<PizzaResponse> {
     const resourceUrl = systems.getOrCreate().getEndpointUrl('pizza', 'pizza'); // <2>
     const restriction = this._withMaxRowCountContribution(searchFilter); // <3>
-    return ajax.postJson(resourceUrl + '/list', restriction); // <4>
+    return ajax.postDataObject(restriction, resourceUrl + '/list'); // <4>
   }
 
   protected override _transformTableDataToTableRows(tableData: PizzaResponse): ObjectOrModel<TableRow>[] {
     return tableData.items.map(pizza => {
       return { // <5>
+        data: pizza,
         cells: [
           pizza.size,
           pizza.price
@@ -206,12 +207,21 @@ export class PizzaTablePage extends PageWithTable {
 }
 
 // <6>
-export interface PizzaResponse extends DoEntity {
+@typeName('hellojs.PizzaResponse')
+export class PizzaResponse extends BaseDoEntity {
   items: PizzaDo[];
 }
 
  // <7>
-export interface PizzaDo extends DoEntity {
+@typeName('hellojs.Pizza')
+export class PizzaDo extends BaseDoEntity {
+  size: number;
+  price: number;
+}
+
+// <8>
+@typeName('hellojs.PizzaRestriction')
+export class PizzaRestrictionDo extends BaseDoEntity {
   size: number;
   price: number;
 }
@@ -222,5 +232,6 @@ export interface PizzaDo extends DoEntity {
 <3> Attaches the `MaxRowCountContributionDo` (contains the `maxRowCount` of the table) to the restrictions.
 <4> Send the `POST` to the given URL having the restriction in the body encoded as `JSON`.
 <5> Map a single `PizzaDo` from the response to the column of the table. The mapping is done by index here.
-<6> The declaration of the PizzaResponse on client side. Attribute names must correspond the PizzaResponse class in Java.
-<7> The declaration of the PizzaDo on client side. Attribute names must correspond the PizzaDo class in Java.
+<6> The declaration of the PizzaResponse on client side. Attribute names and typeName must correspond the PizzaResponse class in Java.
+<7> The declaration of the PizzaDo on client side. Attribute names and typeName must correspond the PizzaDo class in Java.
+<8> The declaration of the PizzaRestrictionDo on client side. Attribute names and typeName must correspond the PizzaRestrictionDo class in Java.
