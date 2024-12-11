@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {Form, FormModel, FormTableControl, InitModelOf, models, Table} from '@eclipse-scout/core';
+import {BaseDoEntity, Form, FormModel, FormTableControl, InitModelOf, models, scout, Table, typeName} from '@eclipse-scout/core';
 import SamplePageWithTableSearchFormModel from './SamplePageWithTableSearchFormModel';
 import {SamplePageWithTableSearchFormWidgetMap} from '../index';
 
@@ -32,13 +32,14 @@ export class SamplePageWithTableSearchForm extends Form {
     this.on('search reset', parentTable.reload.bind(parentTable, Table.ReloadReason.SEARCH));
   }
 
-  override exportData(): SamplePageWithTableSearchFormData {
-    return {
+  override exportData(): SamplePageWithTableRestrictionDo {
+    return scout.create(SamplePageWithTableRestrictionDo, {
       stringField: this.widget('StringField').value
-    };
+    });
   }
 }
 
-export type SamplePageWithTableSearchFormData = {
+@typeName('jswidgets.SamplePageWithTableRestriction')
+export class SamplePageWithTableRestrictionDo extends BaseDoEntity {
   stringField: string;
-};
+}

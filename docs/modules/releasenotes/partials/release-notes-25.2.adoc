@@ -35,3 +35,13 @@ WARNING: {NotReleasedWarning}
 // WARNING: {NotReleasedWarning}
 //
 // * <<New Feature (since 25.2.xyz)>>
+
+== Behavior Change of Scout JS Utilities objects.valueCopy, objects.equals And objects.equalsRecursive
+
+In order to support the new class-based Data Objects, these functions had to be improved as follows:
+
+* `Date`: is compared by its value (rather than the reference `===` as before) and copied by value (new instance is created).
+* `Map`: is deeply compared by its content (rather than the reference `===` as before) and deeply copied.
+* `Set`: is deeply compared by its content (rather than the reference `===` as before) and deeply copied.
+* The function `objects.valueCopy` uses the function `clone` if existing to create deep clones (except for `Widgets`).
+* The function `objects.equalsRecursive` uses the same equals logic as `objects.equals` which includes equality for empty arrays and the use of the `equals` functions of the objects, if available.

@@ -135,3 +135,81 @@ It may be configured and also disabled using several new configuration propertie
 
 If the application is not run using the recommended main class `org.eclipse.scout.rt.app.Application`, e.g. for .war deployments the `GzipHandler` is not registered automatically.
 For example for a Jetty .war deployment it may be registered by activating the `gzip` Jetty module.
+
+[[new-DO-api]]
+== Switch to the New Data Object API
+
+Scout JS now supports DataObjects to be written as classes in TypeScript.
+A new serialization mechanisms takes care of recursively (de)serializing such DataObjects in a way compatible with the Scout Java backends.
+It supports base types like `number`, `string`, `boolean`, but also more complex types like `Array`, `Date`, `Map`, `Set` or nested Data Objects.
+Also, TypeScript specific types like `Record` or https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#literal-types[string literal types] are supported.
+
+It is recommended to switch to the new API where possible by following these steps:
+
+. Convert existing DOs (typically declared as TypeScript interfaces extending `DoEntity`) to classes.
+The `typeName` must be declared as https://www.typescriptlang.org/docs/handbook/decorators.html#class-decorators[Decorator] (like Java Annotations but first character lowercase):
++
+[source,typescript]
+----
+import {BaseDoEntity, typeName} from '@eclipse-scout/core';
+
+@typeName('mynamespace.MyEntity') // <1>
+export class MyEntityDo extends BaseDoEntity { // <2>
+  entityId: string;
+  timestamp: Date;
+  items: Record<string, MyOtherDo>;
+  descriptions: Map<string, DescriptionDo>;
+  attachments: AttachmentDo[];
+}
+----
+<1> Declare the `typeName` of the Data Object as decorator. Typically, this is the class name without the `Do` suffix and must match the `@TypeName` annotation of the matching Java Data Object class.
+<2> Convert to a class extending `BaseDoEntity`.
+. If sending or receiving Data Objects to/from the Scout backend migrate the ajax calls to the newly provided convenience methods for Data Objects:
+.. `ajax.getDataObject`: `GET` request receiving a Data Object.
+.. `ajax.postDataObject`: `POST` request sending and receiving a Data Object.
+.. `ajax.putDataObject`: `PUT` request sending and receiving a Data Object.
+.. `ajax.removeDataObject`: `DELETE` request sending and receiving a Data Object.
+. The new (de)serialization mechanism converts most of the data types automatically between its `json` format and the Data Object class.
+Therefore, manual conversions (e.g. for `Date`) can be removed. This includes the use of utilities like `JsonValueMapper`, `objects.parseJson` or `objects.stringifyJson`.
+Accordingly, these functions have been removed.
+If custom data types need to be converted, try implementing a `DoNodeSerializer` in TypeScript and register your new converter in `dataObjects.serializers`.
+. As Data Objects are classes now, they can no longer be created as object literals (Pojo).
+Instead, `scout.create` should be used:
++
+[source,typescript]
+----
+import {scout} from '@eclipse-scout/core';
+
+const entityDo = scout.create(MyEntityDo, {
+  entityId: '12345',
+  ...
+});
+----
+. To create a shallow copy of a Data Object a new instance must be created as well:
++
+[source,typescript]
+----
+import {scout} from '@eclipse-scout/core';
+
+const shallowCopy = scout.create(MyEntityDo, {
+  ...originalEntityDo,
+  additionalPropertyForTheCopy: 'ShallowCopyWillHaveThisAdditionalValue'
+});
+----
+Important: If the spread operator is not the first statement, you need to convert the DO to a Pojo first (`.toPojo()`), otherwise undefined values from the DO may override actual values.
+Therefore, it is recommended to always use the original Data Object as the first spread statement.
+. To create a deep copy of a Data Object use the `clone` function:
++
+[source,typescript]
+----
+const deepCopy = originalEntityDo.clone({
+  additionalPropertyForTheCopy: 'DeepCopyWillHaveThisAdditionalValue'
+});
+----
+Important: In the (optional) extra model passed to the `clone` function only primitives and pojos are copied deeply.
+Complex objects like `Date` or `Map` in this extra model are copied by value!
+. When using the `HybridManager` or the `JsForm`: It uses the Data Object class and deserializes to these classes (instead of a Pojo as before) as soon as a class having a matching `@typeName` decorator is found in TypeScript.
+So to use the new API for `HybridManager` or `JsForm`, just create the necessary Data Object classes. But keep in mind that as soon it is converted, these instances will be returned instead of a Pojo.
+So this might require some more code migrations on your side (see above).
+
+An example implementation can be found in the xref:howtos:scout-js/rest-service-how-to.adoc[REST HowTo].
