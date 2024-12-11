@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {AppLinkActionEvent, DesktopNotification, Form, FormModel, HybridManager, InitModelOf, Label, objects, scout, Status, StringField, strings, WrappedFormField} from '@eclipse-scout/core';
+import {AppLinkActionEvent, dataObjects, DesktopNotification, Form, FormModel, HybridManager, InitModelOf, Label, objects, scout, Status, StringField, strings, WrappedFormField} from '@eclipse-scout/core';
 import model, {HybridJsFormWidgetMap} from './HybridJsFormModel';
 import {PersonDo} from '../../index';
 
@@ -80,9 +80,9 @@ export class HybridJsForm extends Form {
 
   protected async _onOpenPersonFormLabelAppLinkAction(event: AppLinkActionEvent) {
     if (event.ref === 'openPersonForm') {
-      const personDo = PersonDo.of(this.openFormPersonDoField.value);
-      const form = await HybridManager.get(this.session).openForm('Person', personDo ? personDo.toJson() : null);
-      form.whenSave().then(() => this.openFormPersonDoField.setValue(JSON.stringify(form.data)));
+      const personDo = dataObjects.parse(this.openFormPersonDoField.value, PersonDo);
+      const form = await HybridManager.get(this.session).openForm('Person', personDo);
+      form.whenSave().then(() => this.openFormPersonDoField.setValue(dataObjects.stringify(form.data)));
     }
   }
 
@@ -98,9 +98,9 @@ export class HybridJsForm extends Form {
         }));
         return;
       }
-      const personDo = PersonDo.of(this.createFormPersonDoField.value);
-      const form = await HybridManager.get(this.session).createForm('Person', personDo ? personDo.toJson() : null);
-      form.whenSave().then(() => this.createFormPersonDoField.setValue(JSON.stringify(form.data)));
+      const personDo = dataObjects.parse(this.createFormPersonDoField.value, PersonDo);
+      const form = await HybridManager.get(this.session).createForm('Person', personDo);
+      form.whenSave().then(() => this.createFormPersonDoField.setValue(dataObjects.stringify(form.data)));
       this.createPersonFormWrappedFormField.setInnerForm(form);
       form.show();
     }
@@ -121,8 +121,8 @@ export class HybridJsForm extends Form {
     if (parsedValue) {
       formatted = JSON.stringify(parsedValue, null, 2);
     }
-    const personDo = PersonDo.of(parsedValue);
-    if (!formatted || objects.equalsRecursive(parsedValue, personDo ? personDo.toJson() : null)) {
+    const personDo = dataObjects.deserialize(parsedValue, PersonDo);
+    if (!formatted || objects.equalsRecursive(parsedValue, personDo ? personDo.toPojo() : null)) {
       return formatted;
     }
     throw 'Expected JSON type: PersonDo';

@@ -7,9 +7,9 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {ajax, DoEntity, HtmlTile, models, ObjectOrModel, Page, PageModel, PageWithTable, scout, systems, TableRow, TableRowModel, Tile} from '@eclipse-scout/core';
+import {ajax, BaseDoEntity, HtmlTile, models, ObjectOrModel, Page, PageModel, PageWithTable, scout, systems, TableRow, TableRowModel, Tile, typeName} from '@eclipse-scout/core';
 import SamplePageWithTableModel from './SamplePageWithTableModel';
-import {MiniForm, SamplePageWithNodes, SamplePageWithTableSearchFormData, SamplePageWithTableTable} from '../index';
+import {MiniForm, SamplePageWithNodes, SamplePageWithTableRestrictionDo, SamplePageWithTableTable} from '../index';
 
 export class SamplePageWithTable extends PageWithTable {
 
@@ -96,10 +96,10 @@ export class SamplePageWithTable extends PageWithTable {
     };
   }
 
-  protected override _loadTableData(searchFilter: SamplePageWithTableSearchFormData): JQuery.Promise<SamplePageWithTableResponse> {
+  protected override _loadTableData(searchFilter: SamplePageWithTableRestrictionDo): JQuery.Promise<SamplePageWithTableResponse> {
     const resourceUrl = systems.getOrCreate().getEndpointUrl('samplePageWithTable', 'samplePageWithTable');
     const restriction = this._withMaxRowCountContribution(searchFilter);
-    return ajax.postJson(resourceUrl + '/list', restriction);
+    return ajax.postDataObject(resourceUrl + '/list', restriction);
   }
 
   protected override _transformTableDataToTableRows(tableData: SamplePageWithTableResponse): ObjectOrModel<TableRow>[] {
@@ -124,11 +124,13 @@ export class SamplePageWithTable extends PageWithTable {
   }
 }
 
-export interface SamplePageWithTableResponse extends DoEntity {
+@typeName('jswidgets.SamplePageWithTableResponse')
+export class SamplePageWithTableResponse extends BaseDoEntity {
   items: SamplePageWithTableRowDo[];
 }
 
-export interface SamplePageWithTableRowDo extends DoEntity {
+@typeName('jswidgets.SamplePageWithTableRow')
+export class SamplePageWithTableRowDo extends BaseDoEntity {
   id: number;
   string: string;
   smartValue: string;
