@@ -108,6 +108,7 @@ So this flag needs to be true when having more than one npm package in the works
 == Build Changes
 
 * The Maven coordinates of the `git-commit-id-plugin` changed from `pl.project13.maven:git-commit-id-plugin` to `io.github.git-commit-id:git-commit-id-maven-plugin`.
+* The Maven coordinates of the `download-maven-plugin` changed from `com.googlecode.maven-download-plugin:download-maven-plugin` to `io.github.download-maven-plugin:download-maven-plugin`.
 * The support for the outdated `org.apache.tomcat.maven:tomcat7-maven-plugin` has been dropped. If you still rely on this plugin, you have to specify the desired version in your own scripts.
 
 [[jakarta-activation-and-mail-update]]
