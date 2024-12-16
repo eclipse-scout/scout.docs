@@ -114,3 +114,10 @@ image::lookup_column_salutation.png[]
 
 .The `LookupColumn` with a hierarchical lookup call
 image::lookup_column_world.png[]
+
+== Removed deprecated code
+
+The following code has been marked as deprecated for removal in previous releases and was now  removed:
+
+* (Java) `ActionUtility`  -> use `MenuUtility` instead
+* (TS) `Page#pageForTableRow` -> use `TableRow#page` instead
