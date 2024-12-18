@@ -93,7 +93,7 @@ export class ChartFieldForm extends Form {
   protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
-    this.rootGroupBox.visitFields(field => field.setStatusVisible(false));
+    this.rootGroupBox.setStatusVisible(false);
     this.chartField = this.widget('ChartField');
     this.fieldChart = this.chartField.chart;
     this.chart = this.fieldChart;
