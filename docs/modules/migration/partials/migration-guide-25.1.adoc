@@ -140,6 +140,18 @@ The LESS constant `@icon-error` for the xref:technical-guide:user-interface/icon
 _Migration:_
 Search for references to the constant `@icon-error` in your own *.less files and replace it with `@icon-exclamation-mark-circle` where appropriate.
 
+==  Deprecated meta tag "apple-mobile-web-app-capable" removed
+
+The <meta> tag "apple-mobile-web-app-capable" has been deprecated in iOS for several years.
+Chromium-based browsers recently started reporting this with a warning on the console.
+Because the tag had no effect anyway, it can simply be removed.
+
+_Migration:_
+In existing projects, search for the text `<meta name="apple-mobile-web-app-capable" content="yes"/>` in all *.html files and remove it.
+The template in the Scout archetype was updated accordingly, so newly created projects will no longer contain the deprecated tag.
+
+TIP: Mobile browsers will still offer the possibility to add a home screen icon for the application (which will just be a bookmark, opened in the regular browser). To properly configure it as an "app", consider adding a https://developer.mozilla.org/en-US/docs/Web/Manifest[PWA manifest].
+
 == Scout JS
 
 === FormField: use _computeEmpty instead of _updateEmpty
