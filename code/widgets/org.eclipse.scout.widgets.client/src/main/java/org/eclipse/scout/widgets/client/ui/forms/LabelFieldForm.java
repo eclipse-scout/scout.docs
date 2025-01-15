@@ -353,17 +353,17 @@ public class LabelFieldForm extends AbstractForm implements IPageForm {
         @Override
         protected void execAction() {
           getLabelField().setValue(HTML.div(
-              HTML.fragment("Lorem "),
-              HTML.appLink("ipsum", "ipsum"),
-              HTML.fragment(" dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua."),
-              HTML.br(),
-              HTML.br(),
-              HTML.fragment("At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum "),
-              HTML.appLink("dolor", "dolor"),
-              HTML.fragment(" sit amet. "),
-              HTML.appLink("lorem", "Lorem"),
-              HTML.fragment(" ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. " +
-                  "At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est."))
+                  HTML.fragment("Lorem "),
+                  HTML.appLink("ipsum", "ipsum"),
+                  HTML.fragment(" dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua."),
+                  HTML.br(),
+                  HTML.br(),
+                  HTML.fragment("At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum "),
+                  HTML.appLink("dolor", "dolor"),
+                  HTML.fragment(" sit amet. "),
+                  HTML.appLink("lorem", "Lorem"),
+                  HTML.fragment(" ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. " +
+                      "At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est."))
               .toHtml());
           getLabelField().setWrapText(true);
           getLabelField().setHtmlEnabled(true);

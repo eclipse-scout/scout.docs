@@ -23,8 +23,8 @@ public class HybridPage extends AbstractPageWithNodes {
   @Override
   protected String getConfiguredTitle() {
     return HTML.span(
-        HTML.span("Hybrid Page").addCssClass("text"),
-        HTML.span("Java").addCssClass("type")).addCssClass("hybrid-type-indicator")
+            HTML.span("Hybrid Page").addCssClass("text"),
+            HTML.span("Java").addCssClass("type")).addCssClass("hybrid-type-indicator")
         .toHtml();
   }
 

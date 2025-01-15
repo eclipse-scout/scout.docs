@@ -361,7 +361,6 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
             sortTiles(false);
           }
         }
-
       }
 
       @Order(1500)
@@ -500,7 +499,6 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
           return 1;
         }
       }
-
     }
 
     @Order(200)
@@ -910,5 +908,4 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
     Accordion tileAccordion = getAccordionField().getAccordion();
     getStatusField().setValue(TEXTS.get("TilesStatus", tileAccordion.getTileCount() + "", tileAccordion.getSelectedTileCount() + ""));
   }
-
 }

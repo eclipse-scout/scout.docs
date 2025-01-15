@@ -86,7 +86,6 @@ public abstract class AbstractActionPropertiesBox<ACTION extends IAction> extend
     protected void execChangedValue() {
       Optional.ofNullable(getAction()).ifPresent(a -> a.setVisible(getValue()));
     }
-
   }
 
   @Order(2000)
@@ -126,5 +125,4 @@ public abstract class AbstractActionPropertiesBox<ACTION extends IAction> extend
       Optional.ofNullable(getAction()).ifPresent(a -> a.setIconId(getValue()));
     }
   }
-
 }

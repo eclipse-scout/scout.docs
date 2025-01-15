@@ -77,7 +77,6 @@ public class CachedBenchLayoutNodePage extends AbstractBenchLayoutPageWithNodes 
       benchLayoutData.withWest(layoutData);
       getDesktop().setBenchLayoutData(benchLayoutData);
     }
-
   }
 
   @ClassId("813ae61b-aaa9-4b37-a55c-c5d8f65d0ebd")
@@ -159,5 +158,4 @@ public class CachedBenchLayoutNodePage extends AbstractBenchLayoutPageWithNodes 
       getDesktop().setBenchLayoutData(benchLayoutData);
     }
   }
-
 }

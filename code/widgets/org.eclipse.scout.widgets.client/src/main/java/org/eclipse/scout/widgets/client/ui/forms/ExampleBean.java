@@ -114,5 +114,4 @@ public class ExampleBean implements Comparable<ExampleBean> {
     }
     return true;
   }
-
 }

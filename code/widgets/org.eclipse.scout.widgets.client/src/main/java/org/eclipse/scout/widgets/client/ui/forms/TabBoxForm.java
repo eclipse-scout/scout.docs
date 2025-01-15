@@ -161,7 +161,6 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
       protected String getConfiguredLabel() {
         return TEXTS.get("Examples");
       }
-
     }
 
     @Order(20)
@@ -552,7 +551,6 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
         protected void execInitField() {
           setValue(getCommentsBox().isVisible());
         }
-
       }
 
       @Order(30)
@@ -584,7 +582,6 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
       @ClassId("77b0cce4-f0aa-4d65-ad44-e8265f989472")
       public class Placeholder1Field extends AbstractPlaceholderField {
       }
-
     }
 
     @Order(40)
@@ -640,7 +637,6 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
           getTabBox().setSelectedTab(getDocumentsBox());
         }
       }
-
     }
 
     @Order(50)
@@ -711,7 +707,6 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
           getTabBox().requestFocus();
         }
       }
-
     }
 
     @Order(60)

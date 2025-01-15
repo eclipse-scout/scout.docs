@@ -14,5 +14,4 @@ import org.eclipse.scout.rt.client.ui.form.fields.IFormField;
 public interface IPropertiesBox<F extends IFormField> {
 
   void setField(F field);
-
 }

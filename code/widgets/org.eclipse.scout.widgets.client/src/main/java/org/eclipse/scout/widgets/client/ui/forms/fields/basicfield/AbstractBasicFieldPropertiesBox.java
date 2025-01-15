@@ -20,5 +20,4 @@ public abstract class AbstractBasicFieldPropertiesBox<V> extends AbstractPropert
   protected String getConfiguredLabel() {
     return "Basic Field Properties";
   }
-
 }

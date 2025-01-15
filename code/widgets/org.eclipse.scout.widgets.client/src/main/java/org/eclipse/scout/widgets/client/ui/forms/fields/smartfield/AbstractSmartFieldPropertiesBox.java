@@ -45,5 +45,4 @@ public abstract class AbstractSmartFieldPropertiesBox<V> extends AbstractPropert
       m_field.setActiveFilterEnabled(getValue());
     }
   }
-
 }

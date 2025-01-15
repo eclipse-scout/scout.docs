@@ -134,5 +134,4 @@ public abstract class AbstractMonthsBox extends AbstractGroupBox {
       return 80;
     }
   }
-
 }

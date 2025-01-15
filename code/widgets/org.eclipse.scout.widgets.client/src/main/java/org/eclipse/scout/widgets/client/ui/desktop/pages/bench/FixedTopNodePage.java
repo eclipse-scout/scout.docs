@@ -32,7 +32,6 @@ public class FixedTopNodePage extends AbstractBenchLayoutPageWithNodes {
             new BenchColumnData()
                 .withNorth(new FlexboxLayoutData().withInitial(-1).withGrow(0).withShrink(0))
                 .withCenter(new FlexboxLayoutData()));
-
   }
 
   @Override
@@ -54,7 +53,6 @@ public class FixedTopNodePage extends AbstractBenchLayoutPageWithNodes {
     c1.setDisplayParent(getOutline());
     c1.start();
     formList.add(c1);
-
   }
 
   @ClassId("f7eb276e-25b2-4ec2-9072-c33d0e954bce")
@@ -75,7 +73,6 @@ public class FixedTopNodePage extends AbstractBenchLayoutPageWithNodes {
       benchLayoutData.getCenter().withNorth(layoutData);
       getDesktop().setBenchLayoutData(benchLayoutData);
     }
-
   }
 
   @ClassId("49ad0efa-6f20-442f-ac0e-ba25ef2740a8")
@@ -97,5 +94,4 @@ public class FixedTopNodePage extends AbstractBenchLayoutPageWithNodes {
       getDesktop().setBenchLayoutData(benchLayoutData);
     }
   }
-
 }

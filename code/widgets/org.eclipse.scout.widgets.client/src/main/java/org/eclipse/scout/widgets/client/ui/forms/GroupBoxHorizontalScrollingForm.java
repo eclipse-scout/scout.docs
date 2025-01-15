@@ -518,7 +518,6 @@ public class GroupBoxHorizontalScrollingForm extends AbstractForm implements IPa
             return TEXTS.get("HorizontalLayout");
           }
         }
-
       }
 
       @Order(30)

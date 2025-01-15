@@ -36,5 +36,4 @@ public class JsonCustomTile<T extends ICustomTile> extends JsonTile<T> {
       }
     });
   }
-
 }

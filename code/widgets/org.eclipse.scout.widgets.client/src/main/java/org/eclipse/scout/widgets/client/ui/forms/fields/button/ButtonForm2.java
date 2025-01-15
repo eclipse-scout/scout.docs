@@ -89,7 +89,6 @@ public class ButtonForm2 extends AbstractForm implements IPageForm {
       }
     }
 
-
     @ClassId("909942c9-3ab5-4962-a531-19ff0fc0b1d0")
     public class FormFieldPropertiesBox extends AbstractFormFieldPropertiesBox {
 
@@ -118,5 +117,4 @@ public class ButtonForm2 extends AbstractForm implements IPageForm {
 
   public class PageFormHandler extends AbstractFormHandler {
   }
-
 }

@@ -36,5 +36,4 @@ public class JsonWidgetsOutline extends JsonOutline<IWidgetsOutline> {
       }
     });
   }
-
 }

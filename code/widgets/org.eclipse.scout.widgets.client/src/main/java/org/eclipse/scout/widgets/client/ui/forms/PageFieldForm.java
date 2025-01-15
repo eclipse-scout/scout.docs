@@ -78,7 +78,6 @@ public class PageFieldForm extends AbstractForm implements IAdvancedExampleForm 
           ((DetailForm) getPage().getDetailForm()).getNavigationButtonInfoField().setVisible(false);
         }
       }
-
     }
 
     @Order(150)
@@ -91,7 +90,6 @@ public class PageFieldForm extends AbstractForm implements IAdvancedExampleForm 
         // Fields inside the page field are configured to use FULL_WIDTH -> changing the grid column count would not have any effect
         getFieldByClass(GridColumnCountField.class).setVisible(false);
       }
-
     }
 
     @ClassId("8674389c-6636-4752-9c72-10249de56dc4")

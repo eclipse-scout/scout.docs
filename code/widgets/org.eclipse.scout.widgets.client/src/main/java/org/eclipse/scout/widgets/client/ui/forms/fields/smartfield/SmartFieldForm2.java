@@ -125,5 +125,4 @@ public class SmartFieldForm2 extends AbstractForm implements IPageForm {
 
   public class PageFormHandler extends AbstractFormHandler {
   }
-
 }

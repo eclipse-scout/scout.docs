@@ -85,7 +85,7 @@ import org.eclipse.scout.widgets.shared.Icons;
  * &lt;/script&gt;
  * &lt;button onclick="postMessage()"&gt;Post message&lt;/button&gt;
  * </pre>
- *
+ * <p>
  * The second parameter (targetOrigin) of the postMessage function is important, it points to the domain where the Scout
  * application runs. When the IFRAME content is called from another domain than localhost:8082, the browser will NOT
  * execute the function. You could also use '*' as targetOrigin, when you don't care which domain exactly should be
