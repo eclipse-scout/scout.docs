@@ -65,7 +65,7 @@ export default (): FormModel => ({
                   },
                   {
                     id: 'IconIdField',
-                    objectType: SmartField,
+                    objectType: SmartField<string>,
                     lookupCall: IconIdLookupCall,
                     label: 'Icon Id'
                   }
@@ -110,6 +110,10 @@ export default (): FormModel => ({
     ]
   }
 });
+
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
 
 export type FileChooserButtonFormWidgetMap = {
   'MainBox': GroupBox;

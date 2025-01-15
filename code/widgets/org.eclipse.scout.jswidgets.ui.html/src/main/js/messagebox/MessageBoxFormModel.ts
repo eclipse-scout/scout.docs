@@ -40,7 +40,7 @@ export default (): FormModel => ({
         fields: [
           {
             id: 'SeverityField',
-            objectType: SmartField,
+            objectType: SmartField<StatusSeverity>,
             lookupCall: StatusSeverityLookupCall,
             label: 'Severity'
           },
@@ -65,7 +65,7 @@ export default (): FormModel => ({
           },
           {
             id: 'IconField',
-            objectType: SmartField,
+            objectType: SmartField<string>,
             lookupCall: IconIdLookupCall,
             label: 'Icon'
           },
@@ -95,6 +95,10 @@ export default (): FormModel => ({
     ]
   }
 });
+
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
 
 export type MessageBoxFormWidgetMap = {
   'MainBox': GroupBox;

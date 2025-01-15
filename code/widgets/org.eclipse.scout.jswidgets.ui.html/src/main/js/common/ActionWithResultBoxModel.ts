@@ -29,6 +29,10 @@ export default (): SequenceBoxModel => ({
   }]
 });
 
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
 export type ActionWithResultBoxWidgetMap = {
   'ActionButton': Button;
   'ResultField': LabelField;

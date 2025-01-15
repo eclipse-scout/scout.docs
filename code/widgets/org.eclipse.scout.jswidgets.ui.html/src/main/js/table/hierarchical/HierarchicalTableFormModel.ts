@@ -145,7 +145,7 @@ export default (): FormModel => ({
             fields: [
               {
                 id: 'Column.TargetField',
-                objectType: SmartField,
+                objectType: SmartField<Column>,
                 label: 'Target'
               },
               {
@@ -180,42 +180,47 @@ export default (): FormModel => ({
   }
 });
 
-export type HierarchicalTableFormWidgetMap =
-  {
-    'MainBox': GroupBox;
-    'DetailBox': GroupBox;
-    'TableField': TableField;
-    'Table': HierarchicalTableFieldTable;
-    'AggregateTableControl': AggregateTableControl;
-    'ContentMenu': Menu;
-    'RemoveAll': Menu;
-    'InsertFew': Menu;
-    'InsertMany': Menu;
-    'AddRowMenu': Menu;
-    'DeleteRowMenu': Menu;
-    'ConfigurationBox': ConfigurationBox;
-    'PropertiesTab': TabItem;
-    'PropertiesBox': HierarchicalTablePropertiesBox;
-    'FormFieldPropertiesBox': FormFieldPropertiesBox;
-    'GridDataBox': GridDataBox;
-    'ColumnProperties': TabItem;
-    'Column.TargetField': SmartField<Column>;
-    'Column.PropertiesBox': ColumnPropertiesBox;
-    'ActionsTab': TabItem;
-    'FormFieldActionsBox': FormFieldActionsBox;
-    'WidgetActionsBox': WidgetActionsBox;
-    'EventsTab': EventsTab;
-  }
-  & HierarchicalTablePropertiesBoxWidgetMap & FormFieldPropertiesBoxWidgetMap & GridDataBoxWidgetMap & ColumnPropertiesBoxWidgetMap & FormFieldActionsBoxWidgetMap
-  & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
 
-export type HierarchicalTableFieldTableColumnMap = {
+export type HierarchicalTableFormWidgetMap = {
+  'MainBox': GroupBox;
+  'DetailBox': GroupBox;
+  'TableField': TableField;
+  'Table': TableFieldTable0;
+  'ConfigurationBox': ConfigurationBox;
+  'PropertiesTab': TabItem;
+  'PropertiesBox': HierarchicalTablePropertiesBox;
+  'FormFieldPropertiesBox': FormFieldPropertiesBox;
+  'GridDataBox': GridDataBox;
+  'ColumnProperties': TabItem;
+  'Column.TargetField': SmartField<Column>;
+  'Column.PropertiesBox': ColumnPropertiesBox;
+  'ActionsTab': TabItem;
+  'FormFieldActionsBox': FormFieldActionsBox;
+  'WidgetActionsBox': WidgetActionsBox;
+  'EventsTab': EventsTab;
+} & TableFieldTable0WidgetMap & HierarchicalTablePropertiesBoxWidgetMap & FormFieldPropertiesBoxWidgetMap & GridDataBoxWidgetMap & ColumnPropertiesBoxWidgetMap & FormFieldActionsBoxWidgetMap & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;
+
+export class TableFieldTable0 extends Table {
+  declare widgetMap: TableFieldTable0WidgetMap;
+  declare columnMap: TableFieldTable0ColumnMap;
+}
+
+export type TableFieldTable0WidgetMap = {
+  'AggregateTableControl': AggregateTableControl;
+  'ContentMenu': Menu;
+  'RemoveAll': Menu;
+  'InsertFew': Menu;
+  'InsertMany': Menu;
+  'AddRowMenu': Menu;
+  'DeleteRowMenu': Menu;
+};
+
+export type TableFieldTable0ColumnMap = {
   'Name': Column;
   'Detail': Column;
   'Date': Column;
   'Active': BooleanColumn;
 };
-
-export class HierarchicalTableFieldTable extends Table {
-  declare columnMap: HierarchicalTableFieldTableColumnMap;
-}

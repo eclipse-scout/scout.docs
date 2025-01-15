@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {Button, CheckBoxField, GroupBox, GroupBoxModel, NumberField, SmartField, StringField} from '@eclipse-scout/core';
+import {Button, CheckBoxField, GroupBox, GroupBoxModel, Menu, NumberField, SmartField, StringField} from '@eclipse-scout/core';
 import {IconIdLookupCall, MenuBarItemTypeLookupCall} from '../index';
 
 export default (): GroupBoxModel => ({
@@ -24,13 +24,13 @@ export default (): GroupBoxModel => ({
     },
     {
       id: 'MenuBarItemType',
-      objectType: SmartField,
+      objectType: SmartField<Button | Menu>,
       lookupCall: MenuBarItemTypeLookupCall,
       label: 'Type'
     },
     {
       id: 'IconIdField',
-      objectType: SmartField,
+      objectType: SmartField<string>,
       lookupCall: IconIdLookupCall,
       label: 'Icon Id'
     },
@@ -61,9 +61,13 @@ export default (): GroupBoxModel => ({
   ]
 });
 
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
 export type GroupBoxAddMenuBoxWidgetMap = {
   'LabelField': StringField;
-  'MenuBarItemType': SmartField<'Button' | 'Menu'>;
+  'MenuBarItemType': SmartField<Button | Menu>;
   'IconIdField': SmartField<string>;
   'HorizontalAlignmentField': NumberField;
   'StackableField': CheckBoxField;

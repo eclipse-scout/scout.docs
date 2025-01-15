@@ -108,6 +108,10 @@ export default (): FormModel => ({
   }
 });
 
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
 export type FormFormWidgetMap = {
   'MainBox': GroupBox;
   'CloseMenu': CloseMenu;

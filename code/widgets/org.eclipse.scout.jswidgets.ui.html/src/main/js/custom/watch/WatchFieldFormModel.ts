@@ -76,6 +76,10 @@ export default (): FormModel => ({
   }
 });
 
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
 export type WatchFieldFormWidgetMap = {
   'MainBox': GroupBox;
   'DetailBox': GroupBox;

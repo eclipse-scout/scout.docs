@@ -60,7 +60,7 @@ export default (): FormModel => ({
                   },
                   {
                     id: 'DisplayParentField',
-                    objectType: SmartField,
+                    objectType: SmartField<string>,
                     lookupCall: DisplayParentLookupCall,
                     label: 'Display Parent'
                   },
@@ -102,6 +102,10 @@ export default (): FormModel => ({
     ]
   }
 });
+
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
 
 export type FileChooserFormWidgetMap = {
   'MainBox': GroupBox;

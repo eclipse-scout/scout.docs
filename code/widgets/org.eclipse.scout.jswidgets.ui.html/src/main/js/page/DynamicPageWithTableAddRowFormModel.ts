@@ -8,7 +8,7 @@
  * SPDX-License-Identifier: EPL-2.0
  */
 import {CancelMenu, Form, FormModel, GroupBox, OkMenu, RadioButtonGroup, StringField} from '@eclipse-scout/core';
-import {PageTypeLookupCall, PageTypeType} from './PageTypeLookupCall';
+import {PageTypeLookupCall, PageTypeType} from '../index';
 
 export default (): FormModel => ({
   objectType: Form,
@@ -37,7 +37,7 @@ export default (): FormModel => ({
       },
       {
         id: 'PageTypeField',
-        objectType: RadioButtonGroup,
+        objectType: RadioButtonGroup<PageTypeType>,
         label: 'Child type',
         mandatory: true,
         gridColumnCount: 1,
@@ -62,5 +62,5 @@ export type DynamicPageWithTableAddRowFormWidgetMap = {
   'OkMenu': OkMenu;
   'CancelMenu': CancelMenu;
   'NameField': StringField;
-  'PageTypeField': RadioButtonGroup<PageTypeType>; // defined by hand
+  'PageTypeField': RadioButtonGroup<PageTypeType>;
 };

@@ -58,7 +58,7 @@ export default (): FormModel => ({
                   },
                   {
                     id: 'StatusSeverityField',
-                    objectType: SmartField,
+                    objectType: SmartField<StatusSeverity>,
                     lookupCall: StatusSeverityLookupCall,
                     label: 'Severity'
                   },
@@ -70,7 +70,7 @@ export default (): FormModel => ({
                   },
                   {
                     id: 'IconField',
-                    objectType: SmartField,
+                    objectType: SmartField<string>,
                     lookupCall: IconIdLookupCall,
                     label: 'Icon'
                   },
@@ -113,14 +113,14 @@ export default (): FormModel => ({
                   },
                   {
                     id: 'NativeNotificationIconIdField',
-                    objectType: SmartField,
+                    objectType: SmartField<string>,
                     lookupCall: ImageLookupCall,
                     label: 'Native Notification Icon Id',
                     labelWidthInPixel: 170
                   },
                   {
                     id: 'NativeNotificationVisibilityField',
-                    objectType: SmartField,
+                    objectType: SmartField<NativeNotificationVisibility>,
                     lookupCall: NativeNotificationVisibilityLookupCall,
                     label: 'Native Notification Visibility',
                     labelWidthInPixel: 170,
@@ -146,6 +146,10 @@ export default (): FormModel => ({
     ]
   }
 });
+
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
 
 export type DesktopNotificationFormWidgetMap = {
   'MainBox': GroupBox;

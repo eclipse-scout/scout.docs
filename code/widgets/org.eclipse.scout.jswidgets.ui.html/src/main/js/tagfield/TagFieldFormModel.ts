@@ -113,23 +113,24 @@ export default (): FormModel => ({
   }
 });
 
-export type TagFieldFormWidgetMap =
-  {
-    'MainBox': GroupBox;
-    'DetailBox': GroupBox;
-    'TagField': TagField;
-    'ConfigurationBox': TabBox;
-    'PropertiesTab': TabItem;
-    'TagBarProperties': GroupBox;
-    'EnabledField': CheckBoxField;
-    'ClickableField': CheckBoxField;
-    'ValueFieldPropertiesBox': ValueFieldPropertiesBox;
-    'FormFieldPropertiesBox': FormFieldPropertiesBox;
-    'GridDataBox': GridDataBox;
-    'ActionsTab': TabItem;
-    'FormFieldActionsBox': FormFieldActionsBox;
-    'WidgetActionsBox': WidgetActionsBox;
-    'EventsTab': EventsTab;
-  }
-  & ValueFieldPropertiesBoxWidgetMap & FormFieldPropertiesBoxWidgetMap & GridDataBoxWidgetMap
-  & FormFieldActionsBoxWidgetMap & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
+export type TagFieldFormWidgetMap = {
+  'MainBox': GroupBox;
+  'DetailBox': GroupBox;
+  'TagField': TagField;
+  'ConfigurationBox': TabBox;
+  'PropertiesTab': TabItem;
+  'TagBarProperties': GroupBox;
+  'EnabledField': CheckBoxField;
+  'ClickableField': CheckBoxField;
+  'ValueFieldPropertiesBox': ValueFieldPropertiesBox;
+  'FormFieldPropertiesBox': FormFieldPropertiesBox;
+  'GridDataBox': GridDataBox;
+  'ActionsTab': TabItem;
+  'FormFieldActionsBox': FormFieldActionsBox;
+  'WidgetActionsBox': WidgetActionsBox;
+  'EventsTab': EventsTab;
+} & ValueFieldPropertiesBoxWidgetMap & FormFieldPropertiesBoxWidgetMap & GridDataBoxWidgetMap & FormFieldActionsBoxWidgetMap & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;

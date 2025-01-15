@@ -47,6 +47,10 @@ export default (): GroupBoxModel => ({
   ]
 });
 
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
 export type EventsTabWidgetMap = {
   'EventsOverviewField': LabelField;
   'EventLogField': StringField;

@@ -27,6 +27,10 @@ export default (): TabItemModel => ({
   ]
 });
 
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
 export type DynamicTabWidgetMap = {
   'label': LabelField;
   'StringField': StringField;

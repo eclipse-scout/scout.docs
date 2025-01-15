@@ -18,7 +18,7 @@ export default (): GroupBoxModel => ({
   fields: [
     {
       id: 'DeleteTabItem.TabItem',
-      objectType: SmartField,
+      objectType: SmartField<TabItem>,
       label: 'Tab Item'
     },
     {
@@ -31,6 +31,10 @@ export default (): GroupBoxModel => ({
     }
   ]
 });
+
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
 
 export type TabBoxDeleteTabItemBoxWidgetMap = {
   'DeleteTabItem.TabItem': SmartField<TabItem>;

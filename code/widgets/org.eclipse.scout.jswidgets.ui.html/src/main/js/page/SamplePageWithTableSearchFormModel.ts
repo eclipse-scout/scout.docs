@@ -42,10 +42,14 @@ export default (): FormModel => ({
   }
 });
 
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
 export type SamplePageWithTableSearchFormWidgetMap = {
   'MainBox': GroupBox;
   'DetailBox': GroupBox;
   'StringField': StringField;
-  'SearchButton': Menu;
+  'SearchButton': SearchMenu;
   'ResetMenu': ResetMenu;
 };

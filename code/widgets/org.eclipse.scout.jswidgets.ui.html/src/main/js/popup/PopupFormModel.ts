@@ -136,13 +136,13 @@ export default (): FormModel => ({
                   },
                   {
                     id: 'HorizontalAlignmentField',
-                    objectType: SmartField,
+                    objectType: SmartField<PopupAlignment>,
                     lookupCall: PopupHorizontalAlignLookupCall,
                     label: 'Horizontal Alignment'
                   },
                   {
                     id: 'VerticalAlignmentField',
-                    objectType: SmartField,
+                    objectType: SmartField<PopupAlignment>,
                     lookupCall: PopupVerticalAlignLookupCall,
                     label: 'Vertical Alignment'
                   }
@@ -174,6 +174,10 @@ export default (): FormModel => ({
     ]
   }
 });
+
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
 
 export type PopupFormWidgetMap = {
   'MainBox': GroupBox;

@@ -17,7 +17,7 @@ export default (): TabItemModel => ({
   fields: [
     {
       id: 'TabItemProperties.TargetField',
-      objectType: SmartField,
+      objectType: SmartField<TabItem>,
       label: 'Target Item'
     },
     {
@@ -41,6 +41,10 @@ export default (): TabItemModel => ({
     }
   ]
 });
+
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
 
 export type TabItemPropertiesWidgetMap = {
   'TabItemProperties.TargetField': SmartField<TabItem>;

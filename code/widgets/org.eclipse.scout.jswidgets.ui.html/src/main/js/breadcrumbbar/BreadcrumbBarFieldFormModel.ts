@@ -114,6 +114,10 @@ export default (): FormModel => ({
   }
 });
 
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
 export type BreadcrumbBarFieldFormWidgetMap = {
   'MainBox': GroupBox;
   'DetailBox': GroupBox;

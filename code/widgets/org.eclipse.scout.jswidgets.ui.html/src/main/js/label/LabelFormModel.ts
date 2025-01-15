@@ -102,6 +102,10 @@ export default (): FormModel => ({
   }
 });
 
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
 export type LabelFormWidgetMap = {
   'MainBox': GroupBox;
   'DetailBox': GroupBox;

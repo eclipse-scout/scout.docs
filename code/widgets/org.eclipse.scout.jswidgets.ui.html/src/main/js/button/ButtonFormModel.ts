@@ -84,13 +84,13 @@ export default (): FormModel => ({
                   },
                   {
                     id: 'DisplayStyleField',
-                    objectType: SmartField,
+                    objectType: SmartField<ButtonDisplayStyle>,
                     lookupCall: ButtonDisplayStyleLookupCall,
                     label: 'Display Style'
                   },
                   {
                     id: 'IconIdField',
-                    objectType: SmartField,
+                    objectType: SmartField<string>,
                     lookupCall: IconIdLookupCall,
                     label: 'Icon Id'
                   },
@@ -136,6 +136,10 @@ export default (): FormModel => ({
     ]
   }
 });
+
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
 
 export type ButtonFormWidgetMap = {
   'MainBox': GroupBox;

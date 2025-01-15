@@ -8,11 +8,7 @@
  * SPDX-License-Identifier: EPL-2.0
  */
 import {CheckBoxField, GroupBox, GroupBoxModel, LookupCall, NumberField, SmartField, SmartFieldActiveFilter, SmartFieldDisplayStyle} from '@eclipse-scout/core';
-import {
-  LookupCallLookupCall,
-  SmartFieldActiveFilterLookupCall,
-  SmartFieldDisplayStyleLookupCall
-} from '../index';
+import {LookupCallLookupCall, SmartFieldActiveFilterLookupCall, SmartFieldDisplayStyleLookupCall} from '../index';
 
 export default (): GroupBoxModel => ({
   id: 'jswidgets.SmartFieldPropertiesBox',
@@ -22,13 +18,13 @@ export default (): GroupBoxModel => ({
   fields: [
     {
       id: 'LookupCallField',
-      objectType: SmartField,
+      objectType: SmartField<LookupCall<any>>,
       label: 'LookupCall',
       lookupCall: LookupCallLookupCall
     },
     {
       id: 'DisplayStyleField',
-      objectType: SmartField,
+      objectType: SmartField<SmartFieldDisplayStyle>,
       lookupCall: SmartFieldDisplayStyleLookupCall,
       label: 'Display Style'
     },
@@ -49,13 +45,17 @@ export default (): GroupBoxModel => ({
     },
     {
       id: 'ActiveFilterField',
-      objectType: SmartField,
+      objectType: SmartField<SmartFieldActiveFilter>,
       displayStyle: SmartField.DisplayStyle.DROPDOWN,
       lookupCall: SmartFieldActiveFilterLookupCall,
       label: 'Active Filter'
     }
   ]
 });
+
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
 
 export type SmartFieldPropertiesBoxWidgetMap = {
   'LookupCallField': SmartField<LookupCall<any>>;

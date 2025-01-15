@@ -27,7 +27,7 @@ export default (): FormModel => ({
         fields: [
           {
             id: 'TreeSmartField',
-            objectType: SmartField,
+            objectType: SmartField<string>,
             lookupCall: WorldLookupCall,
             label: 'Tree Smart Field',
             browseHierarchy: true
@@ -94,21 +94,22 @@ export default (): FormModel => ({
   }
 });
 
-export type TreeSmartFieldFormWidgetMap =
-  {
-    'MainBox': GroupBox;
-    'DetailBox': GroupBox;
-    'TreeSmartField': SmartField<string>;
-    'ConfigurationBox': TabBox;
-    'PropertiesTab': TabItem;
-    'TreeSmartFieldPropertiesBox': TreeSmartFieldPropertiesBox;
-    'ValueFieldPropertiesBox': ValueFieldPropertiesBox;
-    'FormFieldPropertiesBox': FormFieldPropertiesBox;
-    'GridDataBox': GridDataBox;
-    'ActionsTab': TabItem;
-    'FormFieldActionsBox': FormFieldActionsBox;
-    'WidgetActionsBox': WidgetActionsBox;
-    'EventsTab': EventsTab;
-  }
-  & TreeSmartFieldPropertiesBoxWidgetMap & ValueFieldPropertiesBoxWidgetMap & FormFieldPropertiesBoxWidgetMap & GridDataBoxWidgetMap
-  & FormFieldActionsBoxWidgetMap & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
+export type TreeSmartFieldFormWidgetMap = {
+  'MainBox': GroupBox;
+  'DetailBox': GroupBox;
+  'TreeSmartField': SmartField<string>;
+  'ConfigurationBox': TabBox;
+  'PropertiesTab': TabItem;
+  'TreeSmartFieldPropertiesBox': TreeSmartFieldPropertiesBox;
+  'ValueFieldPropertiesBox': ValueFieldPropertiesBox;
+  'FormFieldPropertiesBox': FormFieldPropertiesBox;
+  'GridDataBox': GridDataBox;
+  'ActionsTab': TabItem;
+  'FormFieldActionsBox': FormFieldActionsBox;
+  'WidgetActionsBox': WidgetActionsBox;
+  'EventsTab': EventsTab;
+} & TreeSmartFieldPropertiesBoxWidgetMap & ValueFieldPropertiesBoxWidgetMap & FormFieldPropertiesBoxWidgetMap & GridDataBoxWidgetMap & FormFieldActionsBoxWidgetMap & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;

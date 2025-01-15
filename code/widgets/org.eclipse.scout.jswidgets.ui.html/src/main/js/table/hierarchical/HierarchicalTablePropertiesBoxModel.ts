@@ -24,7 +24,7 @@ export default (): ExtensionModel => ({
       extension: [
         {
           id: 'HierarchicalStyleField',
-          objectType: SmartField,
+          objectType: SmartField<TableHierarchicalStyle>,
           label: 'Hierarchical Style',
           lookupCall: HierarchicalStyleLookupCall
         },
@@ -38,6 +38,10 @@ export default (): ExtensionModel => ({
     }
   ]
 });
+
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
 
 export type HierarchicalTablePropertiesBoxWidgetMap = {
   'HierarchicalStyleField': SmartField<TableHierarchicalStyle>;

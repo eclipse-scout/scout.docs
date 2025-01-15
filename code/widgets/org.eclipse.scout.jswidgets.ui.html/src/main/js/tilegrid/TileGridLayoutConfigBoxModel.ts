@@ -32,6 +32,10 @@ export default (): ExtensionModel => ({
   ]
 });
 
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
 export type TileGridLayoutConfigBoxWidgetMap = {
   'MaxWidthField': NumberField;
 } & LogicalGridLayoutConfigBoxWidgetMap;

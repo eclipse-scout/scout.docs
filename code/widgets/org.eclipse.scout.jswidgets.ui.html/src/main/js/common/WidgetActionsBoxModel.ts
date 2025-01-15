@@ -9,6 +9,7 @@
  */
 import {Button, GroupBox, GroupBoxModel, NumberField} from '@eclipse-scout/core';
 import {ActionWithResultBox} from '../index';
+import {ActionWithResultBoxWidgetMap} from './ActionWithResultBoxModel';
 
 export default (): GroupBoxModel => ({
   id: 'jswidgets.WidgetActionsBox',
@@ -62,6 +63,10 @@ export default (): GroupBoxModel => ({
   ]
 });
 
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
 export type WidgetActionsBoxWidgetMap = {
   'FocusSequenceBox': ActionWithResultBox;
   'IsFocusableSequenceBox': ActionWithResultBox;
@@ -69,4 +74,4 @@ export type WidgetActionsBoxWidgetMap = {
   'ScrollToTopButton': Button;
   'ScrollToBottomButton': Button;
   'ScrollTopField': NumberField;
-};
+} & ActionWithResultBoxWidgetMap;

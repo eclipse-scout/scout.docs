@@ -44,6 +44,10 @@ export default (): GroupBoxModel => ({
   ]
 });
 
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
 export type LogicalGridLayoutConfigBoxWidgetMap = {
   'HGapField': NumberField;
   'VGapField': NumberField;

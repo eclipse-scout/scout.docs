@@ -9,20 +9,8 @@
  */
 import {AccordionField, Button, CheckBoxField, FormModel, Group, GroupBox, LabelField, Menu, NumberField, SequenceBox, SmartField, TabItem, TileAccordion, TileGrid} from '@eclipse-scout/core';
 import {
-  ConfigurationBox,
-  EventsTab,
-  EventsTabWidgetMap,
-  FormFieldActionsBox,
-  FormFieldActionsBoxWidgetMap,
-  FormFieldPropertiesBox,
-  FormFieldPropertiesBoxWidgetMap,
-  GridDataBox,
-  GridDataBoxWidgetMap,
-  TileGridLayoutConfigBox,
-  TileGridLayoutConfigBoxWidgetMap,
-  TileTypeLookupCall,
-  WidgetActionsBox,
-  WidgetActionsBoxWidgetMap
+  ConfigurationBox, EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, TileGridLayoutConfigBox,
+  TileGridLayoutConfigBoxWidgetMap, TileTypeLookupCall, WidgetActionsBox, WidgetActionsBoxWidgetMap
 } from '../index';
 
 export default (): FormModel => ({
@@ -245,7 +233,7 @@ export default (): FormModel => ({
                       },
                       {
                         id: 'InsertTileTypeField',
-                        objectType: SmartField,
+                        objectType: SmartField<'default' | 'simple'>,
                         displayStyle: 'dropdown',
                         label: 'Tile Type',
                         labelVisible: false,
@@ -262,7 +250,7 @@ export default (): FormModel => ({
                     fields: [
                       {
                         id: 'InsertTileTargetField',
-                        objectType: SmartField,
+                        objectType: SmartField<Group<TileGrid>>,
                         displayStyle: 'dropdown',
                         labelVisible: false,
                         statusVisible: false
@@ -296,49 +284,50 @@ export default (): FormModel => ({
   }
 });
 
-export type TileAccordionFormWidgetMap =
-  {
-    'MainBox': GroupBox;
-    'DetailBox': GroupBox;
-    'GroupsMenu': Menu;
-    'InsertMenu': Menu;
-    'DeleteFirstMenu': Menu;
-    'InsertTileIntoGroup0Menu': Menu;
-    'InsertTileIntoGroup1Menu': Menu;
-    'DeleteSelectedTilesMenu': Menu;
-    'SelectNextMenu': Menu;
-    'SelectAllMenu': Menu;
-    'SortMenu': Menu;
-    'SortAscMenu': Menu;
-    'SortDescMenu': Menu;
-    'AccordionField': AccordionField;
-    'Accordion': TileAccordion;
-    'StatusField': LabelField;
-    'ConfigurationBox': ConfigurationBox;
-    'PropertiesTab': TabItem;
-    'PropertiesBox': GroupBox;
-    'SelectableField': CheckBoxField;
-    'MultiSelectField': CheckBoxField;
-    'ExclusiveExpandField': CheckBoxField;
-    'ScrollableField': CheckBoxField;
-    'WithPlaceholdersField': CheckBoxField;
-    'VirtualField': CheckBoxField;
-    'TextFilterEnabledField': CheckBoxField;
-    'GridColumnCountField': NumberField;
-    'FormFieldPropertiesBox': FormFieldPropertiesBox;
-    'GridDataBox': GridDataBox;
-    'LayoutConfigBox': TileGridLayoutConfigBox;
-    'ActionsTab': TabItem;
-    'TileAccordionActionsBox': GroupBox;
-    'InsertTileField': SequenceBox;
-    'InsertTileCountField': NumberField;
-    'InsertTileTypeField': SmartField<'default' | 'simple'>;
-    'InsertTileIntoField': SequenceBox;
-    'InsertTileTargetField': SmartField<Group<TileGrid>>;
-    'InsertTileButton': Button;
-    'FormFieldActionsBox': FormFieldActionsBox;
-    'WidgetActionsBox': WidgetActionsBox;
-    'EventsTab': EventsTab;
-  }
-  & FormFieldPropertiesBoxWidgetMap & GridDataBoxWidgetMap & TileGridLayoutConfigBoxWidgetMap
-  & FormFieldActionsBoxWidgetMap & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
+export type TileAccordionFormWidgetMap = {
+  'MainBox': GroupBox;
+  'DetailBox': GroupBox;
+  'GroupsMenu': Menu;
+  'InsertMenu': Menu;
+  'DeleteFirstMenu': Menu;
+  'InsertTileIntoGroup0Menu': Menu;
+  'InsertTileIntoGroup1Menu': Menu;
+  'DeleteSelectedTilesMenu': Menu;
+  'SelectNextMenu': Menu;
+  'SelectAllMenu': Menu;
+  'SortMenu': Menu;
+  'SortAscMenu': Menu;
+  'SortDescMenu': Menu;
+  'AccordionField': AccordionField;
+  'Accordion': TileAccordion;
+  'StatusField': LabelField;
+  'ConfigurationBox': ConfigurationBox;
+  'PropertiesTab': TabItem;
+  'PropertiesBox': GroupBox;
+  'SelectableField': CheckBoxField;
+  'MultiSelectField': CheckBoxField;
+  'ExclusiveExpandField': CheckBoxField;
+  'ScrollableField': CheckBoxField;
+  'WithPlaceholdersField': CheckBoxField;
+  'VirtualField': CheckBoxField;
+  'TextFilterEnabledField': CheckBoxField;
+  'GridColumnCountField': NumberField;
+  'FormFieldPropertiesBox': FormFieldPropertiesBox;
+  'GridDataBox': GridDataBox;
+  'LayoutConfigBox': TileGridLayoutConfigBox;
+  'ActionsTab': TabItem;
+  'TileAccordionActionsBox': GroupBox;
+  'InsertTileField': SequenceBox;
+  'InsertTileCountField': NumberField;
+  'InsertTileTypeField': SmartField<'default' | 'simple'>; // manually changed
+  'InsertTileIntoField': SequenceBox;
+  'InsertTileTargetField': SmartField<Group<TileGrid>>;
+  'InsertTileButton': Button;
+  'FormFieldActionsBox': FormFieldActionsBox;
+  'WidgetActionsBox': WidgetActionsBox;
+  'EventsTab': EventsTab;
+} & FormFieldPropertiesBoxWidgetMap & GridDataBoxWidgetMap & TileGridLayoutConfigBoxWidgetMap & FormFieldActionsBoxWidgetMap & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;

@@ -9,9 +9,9 @@
  */
 import {FormField, FormModel, GroupBox, Menu, SmartField, StringField, TabBox, TabItem} from '@eclipse-scout/core';
 import {
-  EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, GroupBoxAddFieldBox, GroupBoxAddFieldBoxWidgetMap, GroupBoxAddMenuBox,
-  GroupBoxAddMenuBoxWidgetMap, GroupBoxDeleteFieldBox, GroupBoxDeleteFieldBoxWidgetMap, GroupBoxDeleteMenuBox, GroupBoxDeleteMenuBoxWidgetMap, GroupBoxPropertiesBox, GroupBoxPropertiesBoxWidgetMap, LogicalGridLayoutConfigBox,
-  WidgetActionsBox, WidgetActionsBoxWidgetMap
+  EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, GroupBoxAddFieldBox, GroupBoxAddFieldBoxWidgetMap,
+  GroupBoxAddMenuBox, GroupBoxAddMenuBoxWidgetMap, GroupBoxDeleteFieldBox, GroupBoxDeleteFieldBoxWidgetMap, GroupBoxDeleteMenuBox, GroupBoxDeleteMenuBoxWidgetMap, GroupBoxPropertiesBox, GroupBoxPropertiesBoxWidgetMap,
+  LogicalGridLayoutConfigBox, LogicalGridLayoutConfigBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap
 } from '../index';
 
 export default (): FormModel => ({
@@ -96,7 +96,7 @@ export default (): FormModel => ({
             fields: [
               {
                 id: 'Field.TargetField',
-                objectType: SmartField,
+                objectType: SmartField<FormField>,
                 label: 'Target'
               },
               {
@@ -151,6 +151,10 @@ export default (): FormModel => ({
   }
 });
 
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
 export type GroupBoxFormWidgetMap =
   {
     'MainBox': GroupBox;
@@ -179,6 +183,14 @@ export type GroupBoxFormWidgetMap =
     'WidgetActionsBox': WidgetActionsBox;
     'EventsTab': EventsTab;
   }
-  & GroupBoxPropertiesBoxWidgetMap & FormFieldPropertiesBoxWidgetMap & GridDataBoxWidgetMap
-  & GroupBoxAddMenuBoxWidgetMap & GroupBoxDeleteMenuBoxWidgetMap & GroupBoxAddFieldBoxWidgetMap & GroupBoxDeleteFieldBoxWidgetMap
-  & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;
+  & GroupBoxPropertiesBoxWidgetMap
+  & FormFieldPropertiesBoxWidgetMap
+  & GridDataBoxWidgetMap
+  & LogicalGridLayoutConfigBoxWidgetMap
+  & GroupBoxAddMenuBoxWidgetMap
+  & GroupBoxDeleteMenuBoxWidgetMap
+  & GroupBoxAddFieldBoxWidgetMap
+  & GroupBoxDeleteFieldBoxWidgetMap
+  & FormFieldActionsBoxWidgetMap
+  & WidgetActionsBoxWidgetMap
+  & EventsTabWidgetMap;

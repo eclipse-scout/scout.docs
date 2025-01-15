@@ -70,7 +70,7 @@ export default (): FormModel => ({
                 fields: [
                   {
                     id: 'TargetField',
-                    objectType: SmartField,
+                    objectType: SmartField<Mode>,
                     label: 'Target'
                   },
                   {
@@ -80,7 +80,7 @@ export default (): FormModel => ({
                   },
                   {
                     id: 'IconIdField',
-                    objectType: SmartField,
+                    objectType: SmartField<string>,
                     lookupCall: IconIdLookupCall,
                     label: 'Icon Id'
                   },
@@ -139,6 +139,10 @@ export default (): FormModel => ({
     ]
   }
 });
+
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
 
 export type ModeSelectorFormWidgetMap = {
   'MainBox': GroupBox;

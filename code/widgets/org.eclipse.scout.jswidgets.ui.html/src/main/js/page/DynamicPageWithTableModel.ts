@@ -24,7 +24,7 @@ export default (): PageModel => ({
       },
       {
         id: 'PageTypeColumn',
-        objectType: SmartColumn,
+        objectType: SmartColumn<PageTypeType>,
         text: 'Type',
         width: 250,
         lookupCall: PageTypeLookupCall
@@ -43,5 +43,5 @@ export class DynamicPageWithTableTable extends Table {
 
 export type DynamicPageWithTableTableColumnMap = {
   'NameColumn': Column;
-  'PageTypeColumn': SmartColumn<PageTypeType>; // defined by hand
+  'PageTypeColumn': SmartColumn<PageTypeType>;
 };

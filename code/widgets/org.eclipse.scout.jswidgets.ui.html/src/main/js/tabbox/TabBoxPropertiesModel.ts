@@ -8,13 +8,7 @@
  * SPDX-License-Identifier: EPL-2.0
  */
 import {CheckBoxField, SmartField, TabAreaStyle, TabItem, TabItemModel} from '@eclipse-scout/core';
-import {
-  FormFieldPropertiesBox,
-  FormFieldPropertiesBoxWidgetMap,
-  GridDataBox,
-  GridDataBoxWidgetMap,
-  TabAreaStyleLookupCall
-} from '../index';
+import {FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, TabAreaStyleLookupCall} from '../index';
 
 export default (): TabItemModel => ({
   id: 'jswidgets.TabBoxProperties',
@@ -23,12 +17,12 @@ export default (): TabItemModel => ({
   fields: [
     {
       id: 'TabBoxProperties.SelectedTabField',
-      objectType: SmartField,
+      objectType: SmartField<TabItem>,
       label: 'Selected Tab Item'
     },
     {
       id: 'TabBoxProperties.TabAreaStyleField',
-      objectType: SmartField,
+      objectType: SmartField<TabAreaStyle>,
       lookupCall: TabAreaStyleLookupCall,
       label: 'Tab Area Style'
     },
@@ -48,6 +42,10 @@ export default (): TabItemModel => ({
     }
   ]
 });
+
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
 
 export type TabBoxPropertiesWidgetMap = {
   'TabBoxProperties.SelectedTabField': SmartField<TabItem>;

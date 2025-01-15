@@ -44,7 +44,7 @@ export default (): GroupBoxModel => ({
     },
     {
       id: 'BackgroundEffectField',
-      objectType: SmartField,
+      objectType: SmartField<NumberColumnBackgroundEffect>,
       lookupCall: BackgroundEffectLookupCall,
       label: 'Background Effect',
       displayStyle: 'default'

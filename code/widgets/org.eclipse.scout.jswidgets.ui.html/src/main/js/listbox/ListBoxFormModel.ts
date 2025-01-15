@@ -55,7 +55,7 @@ export default (): FormModel => ({
             fields: [
               {
                 id: 'LookupCallField',
-                objectType: SmartField,
+                objectType: SmartField<LookupCall<any>>,
                 label: 'LookupCall',
                 lookupCall: LookupCallLookupCall
               },
@@ -104,22 +104,23 @@ export default (): FormModel => ({
   }
 });
 
-export type ListBoxFormWidgetMap =
-  {
-    'MainBox': GroupBox;
-    'DetailBox': GroupBox;
-    'ListBox': ListBox<any>;
-    'ConfigurationBox': TabBox;
-    'PropertiesTab': TabItem;
-    'LookupCallField': SmartField<LookupCall<any>>;
-    'ValueFieldPropertiesBox': ValueFieldPropertiesBox;
-    'FormFieldPropertiesBox': FormFieldPropertiesBox;
-    'PropertiesBox': TablePropertiesBox;
-    'GridDataBox': GridDataBox;
-    'ActionsTab': TabItem;
-    'FormFieldActionsBox': FormFieldActionsBox;
-    'WidgetActionsBox': WidgetActionsBox;
-    'EventsTab': EventsTab;
-  }
-  & ValueFieldPropertiesBoxWidgetMap & FormFieldPropertiesBoxWidgetMap & TablePropertiesBoxWidgetMap & GridDataBoxWidgetMap & FormFieldActionsBoxWidgetMap
-  & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
+export type ListBoxFormWidgetMap = {
+  'MainBox': GroupBox;
+  'DetailBox': GroupBox;
+  'ListBox': ListBox<any>;
+  'ConfigurationBox': TabBox;
+  'PropertiesTab': TabItem;
+  'LookupCallField': SmartField<LookupCall<any>>;
+  'ValueFieldPropertiesBox': ValueFieldPropertiesBox;
+  'FormFieldPropertiesBox': FormFieldPropertiesBox;
+  'PropertiesBox': TablePropertiesBox;
+  'GridDataBox': GridDataBox;
+  'ActionsTab': TabItem;
+  'FormFieldActionsBox': FormFieldActionsBox;
+  'WidgetActionsBox': WidgetActionsBox;
+  'EventsTab': EventsTab;
+} & ValueFieldPropertiesBoxWidgetMap & FormFieldPropertiesBoxWidgetMap & TablePropertiesBoxWidgetMap & GridDataBoxWidgetMap & FormFieldActionsBoxWidgetMap & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;

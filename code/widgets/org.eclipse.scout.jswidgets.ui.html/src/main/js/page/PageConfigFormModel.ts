@@ -8,7 +8,7 @@
  * SPDX-License-Identifier: EPL-2.0
  */
 import {CancelMenu, CheckBoxField, Form, FormField, FormModel, GroupBox, Mode, ModeSelector, ModeSelectorField, OkMenu, Page, StringField} from '@eclipse-scout/core';
-import {PageTypeType} from './PageTypeLookupCall';
+import {PageTypeType} from '../index';
 
 export default (): FormModel => ({
   objectType: Form,
@@ -38,7 +38,7 @@ export default (): FormModel => ({
       },
       {
         id: 'PageTypeField',
-        objectType: ModeSelectorField,
+        objectType: ModeSelectorField<PageTypeType>,
         label: 'Page type',
         labelPosition: FormField.LabelPosition.TOP,
         fieldStyle: FormField.FieldStyle.CLASSIC,
@@ -126,7 +126,7 @@ export type PageConfigFormWidgetMap = {
   'OkMenu': OkMenu;
   'CancelMenu': CancelMenu;
   'NameField': StringField;
-  'PageTypeField': ModeSelectorField<PageTypeType>; // defined by hand
+  'PageTypeField': ModeSelectorField<PageTypeType>;
   'FlagsBox': GroupBox;
   'DetailFormVisibleCheckBox': CheckBoxField;
   'DetailTableVisibleCheckBox': CheckBoxField;

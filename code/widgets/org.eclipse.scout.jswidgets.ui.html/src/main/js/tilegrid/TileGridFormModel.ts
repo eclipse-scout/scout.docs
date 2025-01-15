@@ -290,7 +290,6 @@ export type TileGridFormWidgetMap = {
   'MovableField': CheckBoxField;
   'ResizableField': CheckBoxField;
   'ScrollableField': CheckBoxField;
-  'InvertColorsField': CheckBoxField;
   'WithPlaceholdersField': CheckBoxField;
   'VirtualField': CheckBoxField;
   'TextFilterEnabledField': CheckBoxField;

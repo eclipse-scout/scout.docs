@@ -37,6 +37,10 @@ export default (): ExtensionModel => ({
   ]
 });
 
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
 export type TreeSmartFieldPropertiesBoxWidgetMap = {
   'BrowseAutoExpandAllField': CheckBoxField;
   'BrowseLoadIncrementalField': CheckBoxField;

@@ -19,7 +19,7 @@ export default (): GroupBoxModel => ({
   fields: [
     {
       id: 'BeforeField',
-      objectType: SmartField,
+      objectType: SmartField<FormField>,
       label: 'Before'
     },
     {
@@ -29,7 +29,7 @@ export default (): GroupBoxModel => ({
     },
     {
       id: 'LabelType',
-      objectType: SmartField,
+      objectType: SmartField<string>,
       lookupCall: FormFieldTypeLookupCall,
       label: 'Type'
     },
@@ -42,6 +42,10 @@ export default (): GroupBoxModel => ({
     }
   ]
 });
+
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
 
 export type GroupBoxAddFieldBoxWidgetMap = {
   'BeforeField': SmartField<FormField>;

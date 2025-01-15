@@ -13,6 +13,8 @@ import {MiniForm, SamplePageWithNodes, SamplePageWithTableSearchFormData, Sample
 
 export class SamplePageWithTable extends PageWithTable {
 
+  declare detailTable: SamplePageWithTableTable;
+
   constructor() {
     super();
   }

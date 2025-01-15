@@ -88,7 +88,7 @@ export default (): FormModel => ({
                 fields: [
                   {
                     id: 'Field.TargetField',
-                    objectType: SmartField,
+                    objectType: SmartField<FormField>,
                     label: 'Target'
                   },
                   {
@@ -129,28 +129,29 @@ export default (): FormModel => ({
   }
 });
 
-export type SequenceBoxFormWidgetMap =
-  {
-    'MainBox': GroupBox;
-    'TopBox': GroupBox;
-    'SequenceBox': SequenceBox;
-    'StringField1': StringField;
-    'StringField2': StringField;
-    'StringField3': StringField;
-    'StringField4': StringField;
-    'ConfigurationBox': TabBox;
-    'PropertiesTab': TabItem;
-    'FormFieldPropertiesBox': FormFieldPropertiesBox;
-    'GridDataBox': GridDataBox;
-    'LayoutConfigBox': LogicalGridLayoutConfigBox;
-    'FieldPropertiesTab': TabItem;
-    'Field.TargetField': SmartField<FormField>;
-    'Field.FormFieldPropertiesBox': FormFieldPropertiesBox;
-    'Field.GridDataBox': GridDataBox;
-    'ActionsTab': TabItem;
-    'FormFieldActionsBox': FormFieldActionsBox;
-    'WidgetActionsBox': WidgetActionsBox;
-    'EventsTab': EventsTab;
-  }
-  & FormFieldPropertiesBoxWidgetMap & GridDataBoxWidgetMap & LogicalGridLayoutConfigBoxWidgetMap
-  & FormFieldActionsBoxWidgetMap & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
+export type SequenceBoxFormWidgetMap = {
+  'MainBox': GroupBox;
+  'TopBox': GroupBox;
+  'SequenceBox': SequenceBox;
+  'StringField1': StringField;
+  'StringField2': StringField;
+  'StringField3': StringField;
+  'StringField4': StringField;
+  'ConfigurationBox': TabBox;
+  'PropertiesTab': TabItem;
+  'FormFieldPropertiesBox': FormFieldPropertiesBox;
+  'GridDataBox': GridDataBox;
+  'LayoutConfigBox': LogicalGridLayoutConfigBox;
+  'FieldPropertiesTab': TabItem;
+  'Field.TargetField': SmartField<FormField>;
+  'Field.FormFieldPropertiesBox': FormFieldPropertiesBox;
+  'Field.GridDataBox': GridDataBox;
+  'ActionsTab': TabItem;
+  'FormFieldActionsBox': FormFieldActionsBox;
+  'WidgetActionsBox': WidgetActionsBox;
+  'EventsTab': EventsTab;
+} & FormFieldPropertiesBoxWidgetMap & GridDataBoxWidgetMap & LogicalGridLayoutConfigBoxWidgetMap & FormFieldActionsBoxWidgetMap & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;

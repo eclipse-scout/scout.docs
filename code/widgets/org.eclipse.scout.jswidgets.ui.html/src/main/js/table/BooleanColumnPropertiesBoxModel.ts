@@ -25,6 +25,10 @@ export default (): GroupBoxModel => ({
   ]
 });
 
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
 export type BooleanColumnPropertiesBoxWidgetMap = {
   'TriStateEnabledField': CheckBoxField;
 };

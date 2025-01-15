@@ -79,7 +79,7 @@ export default (): FormModel => ({
                   },
                   {
                     id: 'SeverityField',
-                    objectType: SmartField,
+                    objectType: SmartField<StatusSeverity>,
                     lookupCall: StatusSeverityLookupCall,
                     label: 'Severity'
                   }
@@ -107,6 +107,10 @@ export default (): FormModel => ({
     ]
   }
 });
+
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
 
 export type TooltipFormWidgetMap = {
   'MainBox': GroupBox;

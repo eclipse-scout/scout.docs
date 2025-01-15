@@ -58,6 +58,10 @@ export default (): DesktopModel => ({
   ]
 });
 
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
 export type DesktopWidgetMap = {
   'SettingsMenu': Menu;
   'ThemeMenu': Menu;

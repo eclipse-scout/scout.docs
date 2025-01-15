@@ -110,7 +110,7 @@ export default (): FormModel => ({
                       },
                       {
                         id: 'UriActionField',
-                        objectType: SmartField,
+                        objectType: SmartField<DesktopUriAction>,
                         label: 'Action',
                         lookupCall: {
                           objectType: StaticLookupCall,
@@ -148,6 +148,10 @@ export default (): FormModel => ({
     ]
   }
 });
+
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
 
 export type DesktopFormWidgetMap = {
   'MainBox': GroupBox;

@@ -31,7 +31,7 @@ export default (): GroupBoxModel => ({
       fields: [
         {
           id: 'MenuToDeleteField',
-          objectType: SmartField,
+          objectType: SmartField<Menu>,
           labelVisible: false,
           statusVisible: false
         },
@@ -78,13 +78,17 @@ export default (): GroupBoxModel => ({
   ]
 });
 
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
 export type FormFieldActionsBoxWidgetMap = {
   'InsertMenuButton': Button;
   'DeleteMenuBox': SequenceBox;
   'MenuToDeleteField': SmartField<Menu>;
-  'MarkAsSavedButton': Button;
   'DeleteMenuButton': Button;
+  'MarkAsSavedButton': Button;
+  'TouchButton': Button;
   'SaveNeededField': CheckBoxField;
   'TouchedField': CheckBoxField;
-  'TouchButton': Button;
 };

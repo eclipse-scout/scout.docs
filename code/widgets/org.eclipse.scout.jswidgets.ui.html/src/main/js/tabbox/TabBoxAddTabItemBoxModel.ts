@@ -28,7 +28,7 @@ export default (): GroupBoxModel => ({
     },
     {
       id: 'AddTabItem.TabItemSmartField',
-      objectType: SmartField,
+      objectType: SmartField<TabItem>,
       label: 'Before'
     },
     {
@@ -40,6 +40,10 @@ export default (): GroupBoxModel => ({
     }
   ]
 });
+
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
 
 export type TabBoxAddTabItemBoxWidgetMap = {
   'AddTabItem.Label': StringField;

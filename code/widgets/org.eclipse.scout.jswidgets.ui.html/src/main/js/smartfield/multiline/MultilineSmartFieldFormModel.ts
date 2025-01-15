@@ -27,7 +27,7 @@ export default (): FormModel => ({
         fields: [
           {
             id: 'MultilineSmartField',
-            objectType: SmartFieldMultiline,
+            objectType: SmartFieldMultiline<number>,
             lookupCall: MultilinePersonLookupCall,
             label: 'Multiline Smart Field',
             gridDataHints: {
@@ -97,21 +97,22 @@ export default (): FormModel => ({
   }
 });
 
-export type MultilineSmartFieldFormWidgetMap =
-  {
-    'MainBox': GroupBox;
-    'DetailBox': GroupBox;
-    'MultilineSmartField': SmartFieldMultiline<number>;
-    'ConfigurationBox': TabBox;
-    'PropertiesTab': TabItem;
-    'SmartFieldPropertiesBox': SmartFieldPropertiesBox;
-    'ValueFieldPropertiesBox': ValueFieldPropertiesBox;
-    'FormFieldPropertiesBox': FormFieldPropertiesBox;
-    'GridDataBox': GridDataBox;
-    'ActionsTab': TabItem;
-    'FormFieldActionsBox': FormFieldActionsBox;
-    'WidgetActionsBox': WidgetActionsBox;
-    'EventsTab': EventsTab;
-  }
-  & SmartFieldPropertiesBoxWidgetMap & ValueFieldPropertiesBoxWidgetMap & FormFieldPropertiesBoxWidgetMap & GridDataBoxWidgetMap
-  & FormFieldActionsBoxWidgetMap & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
+export type MultilineSmartFieldFormWidgetMap = {
+  'MainBox': GroupBox;
+  'DetailBox': GroupBox;
+  'MultilineSmartField': SmartFieldMultiline<number>;
+  'ConfigurationBox': TabBox;
+  'PropertiesTab': TabItem;
+  'SmartFieldPropertiesBox': SmartFieldPropertiesBox;
+  'ValueFieldPropertiesBox': ValueFieldPropertiesBox;
+  'FormFieldPropertiesBox': FormFieldPropertiesBox;
+  'GridDataBox': GridDataBox;
+  'ActionsTab': TabItem;
+  'FormFieldActionsBox': FormFieldActionsBox;
+  'WidgetActionsBox': WidgetActionsBox;
+  'EventsTab': EventsTab;
+} & SmartFieldPropertiesBoxWidgetMap & ValueFieldPropertiesBoxWidgetMap & FormFieldPropertiesBoxWidgetMap & GridDataBoxWidgetMap & FormFieldActionsBoxWidgetMap & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;

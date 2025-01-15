@@ -139,7 +139,7 @@ export default (): FormModel => ({
                   },
                   {
                     id: 'CollapseStyleField',
-                    objectType: SmartField,
+                    objectType: SmartField<GroupCollapseStyle>,
                     label: 'Collapse Style',
                     lookupCall: CollapseStyleLookupCall
                   }
@@ -182,6 +182,10 @@ export default (): FormModel => ({
     ]
   }
 });
+
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
 
 export type AccordionFormWidgetMap = {
   'MainBox': GroupBox;

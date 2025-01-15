@@ -35,7 +35,7 @@ export default (): PageModel => ({
       },
       {
         id: 'SmartColumn',
-        objectType: SmartColumn,
+        objectType: SmartColumn<string>,
         lookupCall: LocaleLookupCall,
         text: 'Smart Column',
         width: 200
@@ -116,6 +116,15 @@ export default (): PageModel => ({
   }
 });
 
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
+export class SamplePageWithTableTable extends Table {
+  declare widgetMap: SamplePageWithTableTableWidgetMap;
+  declare columnMap: SamplePageWithTableTableColumnMap;
+}
+
 export type SamplePageWithTableTableWidgetMap = {
   'FormMenu': FormMenu;
   'AddRowMenu': Menu;
@@ -124,6 +133,7 @@ export type SamplePageWithTableTableWidgetMap = {
   'TileToggleMenu': Menu;
   'SearchFormTableControl': FormTableControl;
   'SearchForm': SamplePageWithTableSearchForm;
+  'ChartTableControl': ChartTableControl;
   'AggregateTableControl': AggregateTableControl;
 } & SamplePageWithTableSearchFormWidgetMap;
 
@@ -134,8 +144,3 @@ export type SamplePageWithTableTableColumnMap = {
   'NumberColumn': NumberColumn;
   'BooleanColumn': BooleanColumn;
 };
-
-export class SamplePageWithTableTable extends Table {
-  declare widgetMap: SamplePageWithTableTableWidgetMap;
-  declare columnMap: SamplePageWithTableTableColumnMap;
-}

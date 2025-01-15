@@ -27,7 +27,7 @@ export default (): FormModel => ({
         fields: [
           {
             id: 'TableSmartField',
-            objectType: SmartField,
+            objectType: SmartField<string>,
             lookupCall: LocaleTableLookupCall,
             label: 'Table Smart Field',
             columnDescriptors: [
@@ -104,21 +104,22 @@ export default (): FormModel => ({
   }
 });
 
-export type TableSmartFieldFormWidgetMap =
-  {
-    'MainBox': GroupBox;
-    'DetailBox': GroupBox;
-    'TableSmartField': SmartField<string>;
-    'ConfigurationBox': TabBox;
-    'PropertiesTab': TabItem;
-    'SmartFieldPropertiesBox': SmartFieldPropertiesBox;
-    'ValueFieldPropertiesBox': ValueFieldPropertiesBox;
-    'FormFieldPropertiesBox': FormFieldPropertiesBox;
-    'GridDataBox': GridDataBox;
-    'ActionsTab': TabItem;
-    'FormFieldActionsBox': FormFieldActionsBox;
-    'WidgetActionsBox': WidgetActionsBox;
-    'EventsTab': EventsTab;
-  }
-  & SmartFieldPropertiesBoxWidgetMap & ValueFieldPropertiesBoxWidgetMap & FormFieldPropertiesBoxWidgetMap & GridDataBoxWidgetMap
-  & FormFieldActionsBoxWidgetMap & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
+export type TableSmartFieldFormWidgetMap = {
+  'MainBox': GroupBox;
+  'DetailBox': GroupBox;
+  'TableSmartField': SmartField<string>;
+  'ConfigurationBox': TabBox;
+  'PropertiesTab': TabItem;
+  'SmartFieldPropertiesBox': SmartFieldPropertiesBox;
+  'ValueFieldPropertiesBox': ValueFieldPropertiesBox;
+  'FormFieldPropertiesBox': FormFieldPropertiesBox;
+  'GridDataBox': GridDataBox;
+  'ActionsTab': TabItem;
+  'FormFieldActionsBox': FormFieldActionsBox;
+  'WidgetActionsBox': WidgetActionsBox;
+  'EventsTab': EventsTab;
+} & SmartFieldPropertiesBoxWidgetMap & ValueFieldPropertiesBoxWidgetMap & FormFieldPropertiesBoxWidgetMap & GridDataBoxWidgetMap & FormFieldActionsBoxWidgetMap & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;

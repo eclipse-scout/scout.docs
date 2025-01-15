@@ -131,7 +131,7 @@ export default (): FormModel => ({
             horizontalAlignment: 1,
             field: {
               id: 'SmartField',
-              objectType: SmartField,
+              objectType: SmartField<string>,
               label: 'Form Field Menu',
               lookupCall: LocaleLookupCall,
               labelVisible: false,
@@ -164,7 +164,7 @@ export default (): FormModel => ({
                 fields: [
                   {
                     id: 'SelectedMenuField',
-                    objectType: SmartField,
+                    objectType: SmartField<Menu>,
                     label: 'Target',
                     lookupCall: MenuItemLookupCall
                   },
@@ -196,7 +196,7 @@ export default (): FormModel => ({
                       },
                       {
                         id: 'SubMenuVisibilityField',
-                        objectType: SmartField,
+                        objectType: SmartField<SubMenuVisibility>,
                         lookupCall: SubMenuVisibilityLookupCall,
                         label: 'Sub Menu Visibility'
                       }
@@ -221,7 +221,7 @@ export default (): FormModel => ({
             fields: [
               {
                 id: 'ActionTargetField',
-                objectType: SmartField,
+                objectType: SmartField<Menu>,
                 label: 'Target',
                 lookupCall: MenuItemLookupCall
               },
@@ -253,45 +253,46 @@ export default (): FormModel => ({
   }
 });
 
-export type MenuBarFormWidgetMap =
-  {
-    'MainBox': GroupBox;
-    'DetailBox': GroupBox;
-    'LabelField': LabelField;
-    'Menu1': Menu;
-    'Menu2': Menu;
-    'HierarchicalMenu': Menu;
-    'ReplaceMenu': Menu;
-    'SubMenu1': Menu;
-    'SubMenu2': Menu;
-    'SubSubMenu1': Menu;
-    'SubSubMenu2': Menu;
-    'SubSubSubMenu1': Menu;
-    'SubSubSubMenuMenu2': Menu;
-    'SubSubSubSubMenu1': Menu;
-    'FormMenu': FormMenu;
-    'ComboMenu': ComboMenu;
-    'ComboMenuChild1': Menu;
-    'ComboMenuChild2': Menu;
-    'FormFieldMenu': FormFieldMenu;
-    'SmartField': SmartField<string>;
-    'ConfigurationBox': TabBox;
-    'PropertiesTab': TabItem;
-    'PropertiesBox': GroupBox;
-    'SelectedMenuField': SmartField<Menu>;
-    'MenuPropertiesBox': GroupBox;
-    'ShrinkableField': CheckBoxField;
-    'StackableField': CheckBoxField;
-    'SubMenuVisibilityField': SmartField<SubMenuVisibility>;
-    'ActionPropertiesBox': ActionPropertiesBox;
-    'FormFieldPropertiesBox': FormFieldPropertiesBox;
-    'ActionsTab': TabItem;
-    'ActionTargetField': SmartField<Menu>;
-    'Actions.MenuActionsBox': MenuActionsBox;
-    'Actions.AddGroupBoxMenuBox': GroupBoxAddMenuBox;
-    'Actions.DeleteGroupBoxMenuBox': GroupBoxDeleteMenuBox;
-    'WidgetActionsBox': WidgetActionsBox;
-    'EventsTab': EventsTab;
-  }
-  & ActionPropertiesBoxWidgetMap & FormFieldPropertiesBoxWidgetMap & MenuActionsBoxWidgetMap & GroupBoxAddMenuBoxWidgetMap & GroupBoxDeleteMenuBoxWidgetMap
-  & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
+export type MenuBarFormWidgetMap = {
+  'MainBox': GroupBox;
+  'DetailBox': GroupBox;
+  'LabelField': LabelField;
+  'Menu1': Menu;
+  'Menu2': Menu;
+  'HierarchicalMenu': Menu;
+  'ReplaceMenu': Menu;
+  'SubMenu1': Menu;
+  'SubMenu2': Menu;
+  'SubSubMenu1': Menu;
+  'SubSubMenu2': Menu;
+  'SubSubSubMenu1': Menu;
+  'SubSubSubMenuMenu2': Menu;
+  'SubSubSubSubMenu1': Menu;
+  'FormMenu': FormMenu;
+  'ComboMenu': ComboMenu;
+  'ComboMenuChild1': Menu;
+  'ComboMenuChild2': Menu;
+  'FormFieldMenu': FormFieldMenu;
+  'SmartField': SmartField<string>;
+  'ConfigurationBox': TabBox;
+  'PropertiesTab': TabItem;
+  'PropertiesBox': GroupBox;
+  'SelectedMenuField': SmartField<Menu>;
+  'MenuPropertiesBox': GroupBox;
+  'ShrinkableField': CheckBoxField;
+  'StackableField': CheckBoxField;
+  'SubMenuVisibilityField': SmartField<SubMenuVisibility>;
+  'ActionPropertiesBox': ActionPropertiesBox;
+  'FormFieldPropertiesBox': FormFieldPropertiesBox;
+  'ActionsTab': TabItem;
+  'ActionTargetField': SmartField<Menu>;
+  'Actions.MenuActionsBox': MenuActionsBox;
+  'Actions.AddGroupBoxMenuBox': GroupBoxAddMenuBox;
+  'Actions.DeleteGroupBoxMenuBox': GroupBoxDeleteMenuBox;
+  'WidgetActionsBox': WidgetActionsBox;
+  'EventsTab': EventsTab;
+} & ActionPropertiesBoxWidgetMap & FormFieldPropertiesBoxWidgetMap & MenuActionsBoxWidgetMap & GroupBoxAddMenuBoxWidgetMap & GroupBoxDeleteMenuBoxWidgetMap & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;

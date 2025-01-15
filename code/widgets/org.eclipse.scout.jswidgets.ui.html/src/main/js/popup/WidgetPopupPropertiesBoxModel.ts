@@ -37,6 +37,10 @@ export default (): GroupBoxModel => ({
   ]
 });
 
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
 export type WidgetPopupPropertiesBoxWidgetMap = {
   'ClosableField': CheckBoxField;
   'MovableField': CheckBoxField;

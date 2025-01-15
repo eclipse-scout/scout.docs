@@ -18,7 +18,7 @@ export default (): GroupBoxModel => ({
   fields: [
     {
       id: 'ToDeleteField',
-      objectType: SmartField,
+      objectType: SmartField<FormField>,
       label: 'Field'
     },
     {
@@ -31,6 +31,10 @@ export default (): GroupBoxModel => ({
     }
   ]
 });
+
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
 
 export type GroupBoxDeleteFieldBoxWidgetMap = {
   'ToDeleteField': SmartField<FormField>;

@@ -9,8 +9,8 @@
  */
 import {FormModel, GroupBox, icons, Menu, TabBox, TabItem} from '@eclipse-scout/core';
 import {
-  DynamicTab, EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, TabBoxAddTabItemBox, TabBoxAddTabItemBoxWidgetMap, TabBoxDeleteTabItemBox, TabBoxDeleteTabItemBoxWidgetMap, TabBoxProperties,
-  TabBoxPropertiesWidgetMap, TabItemProperties, TabItemPropertiesWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap
+  DynamicTab, DynamicTabWidgetMap, EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, TabBoxAddTabItemBox, TabBoxAddTabItemBoxWidgetMap, TabBoxDeleteTabItemBox, TabBoxDeleteTabItemBoxWidgetMap,
+  TabBoxProperties, TabBoxPropertiesWidgetMap, TabItemProperties, TabItemPropertiesWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap
 } from '../index';
 
 export default (): FormModel => ({
@@ -132,26 +132,27 @@ export default (): FormModel => ({
   }
 });
 
-export type TabBoxFormWidgetMap =
-  {
-    'MainBox': GroupBox;
-    'DetailBox': GroupBox;
-    'TabBox': TabBox;
-    'TabItem1': DynamicTab;
-    'TabItem2': DynamicTab;
-    'TabItem3': DynamicTab;
-    'AddTabMenu': Menu;
-    'DeleteTabMenu': Menu;
-    'SettingsMenu': Menu;
-    'ConfigurationBox': TabBox;
-    'Properties.TabBox': TabBoxProperties;
-    'Properties.TabItem': TabItemProperties;
-    'ActionsBox': TabItem;
-    'ActionBox.AddTabItem': TabBoxAddTabItemBox;
-    'ActionBox.DeleteTabItem': TabBoxDeleteTabItemBox;
-    'FormFieldActionsBox': FormFieldActionsBox;
-    'WidgetActionsBox': WidgetActionsBox;
-    'EventsTab': EventsTab;
-  }
-  & TabBoxPropertiesWidgetMap & TabItemPropertiesWidgetMap & TabBoxAddTabItemBoxWidgetMap & TabBoxDeleteTabItemBoxWidgetMap
-  & FormFieldActionsBoxWidgetMap & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
+export type TabBoxFormWidgetMap = {
+  'MainBox': GroupBox;
+  'DetailBox': GroupBox;
+  'TabBox': TabBox;
+  'TabItem1': DynamicTab;
+  'TabItem2': DynamicTab;
+  'TabItem3': DynamicTab;
+  'AddTabMenu': Menu;
+  'DeleteTabMenu': Menu;
+  'SettingsMenu': Menu;
+  'ConfigurationBox': TabBox;
+  'Properties.TabBox': TabBoxProperties;
+  'Properties.TabItem': TabItemProperties;
+  'ActionsBox': TabItem;
+  'ActionBox.AddTabItem': TabBoxAddTabItemBox;
+  'ActionBox.DeleteTabItem': TabBoxDeleteTabItemBox;
+  'FormFieldActionsBox': FormFieldActionsBox;
+  'WidgetActionsBox': WidgetActionsBox;
+  'EventsTab': EventsTab;
+} & DynamicTabWidgetMap & TabBoxPropertiesWidgetMap & TabItemPropertiesWidgetMap & TabBoxAddTabItemBoxWidgetMap & TabBoxDeleteTabItemBoxWidgetMap & FormFieldActionsBoxWidgetMap & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;

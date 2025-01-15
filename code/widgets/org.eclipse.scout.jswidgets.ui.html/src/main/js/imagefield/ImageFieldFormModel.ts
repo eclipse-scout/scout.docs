@@ -117,6 +117,10 @@ export default (): FormModel => ({
   }
 });
 
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
 export type ImageFieldFormWidgetMap = {
   'MainBox': GroupBox;
   'DetailBox': GroupBox;

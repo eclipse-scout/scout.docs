@@ -161,6 +161,10 @@ export default (): FormModel => ({
   }
 });
 
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
 export type CarouselFormWidgetMap = {
   'MainBox': GroupBox;
   'DetailBox': GroupBox;

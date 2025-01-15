@@ -198,6 +198,10 @@ export default (): FormModel => ({
   }
 });
 
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
 export type BrowserFieldFormWidgetMap = {
   'MainBox': GroupBox;
   'DetailBox': GroupBox;

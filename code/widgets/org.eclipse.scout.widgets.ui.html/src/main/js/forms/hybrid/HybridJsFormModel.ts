@@ -202,6 +202,10 @@ export default (): FormModel => ({
   }
 });
 
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
 export type HybridJsFormWidgetMap = {
   'MainBox': GroupBox;
   'DetailBox': GroupBox;

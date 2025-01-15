@@ -113,9 +113,9 @@ export type WrappedFormFieldFormWidgetMap = {
   'WrappedFormField': WrappedFormField;
   'ConfigurationBox': TabBox;
   'WrappedFormFieldPropertiesBox': TabItem;
-  'InitialFocusEnabledField': CheckBoxField;
   'InnerFormField': SmartField<any>;
   'CloseInnerFormButton': Button;
+  'InitialFocusEnabledField': CheckBoxField;
   'FormFieldPropertiesBox': FormFieldPropertiesBox;
   'GridDataBox': GridDataBox;
   'ActionsTab': TabItem;

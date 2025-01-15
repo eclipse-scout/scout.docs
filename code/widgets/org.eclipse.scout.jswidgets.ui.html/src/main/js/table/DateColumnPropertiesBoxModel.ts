@@ -41,6 +41,10 @@ export default (): GroupBoxModel => ({
   ]
 });
 
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
 export type DateColumnPropertiesBoxWidgetMap = {
   'FormatField': StringField;
   'GroupFormatField': StringField;
