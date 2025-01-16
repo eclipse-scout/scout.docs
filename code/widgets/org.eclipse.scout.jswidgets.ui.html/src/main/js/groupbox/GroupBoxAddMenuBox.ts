@@ -36,7 +36,7 @@ export class GroupBoxAddMenuBox extends GroupBox {
     super._init(model);
     this._setField(this.field);
 
-    this.widget('MenuBarItemType').setValue('Menu');
+    this.widget('MenuBarItemType').setValue(Menu);
   }
 
   setField(field: GroupBox) {
@@ -70,7 +70,7 @@ export class GroupBoxAddMenuBox extends GroupBox {
   protected _onAddMenuButtonClick(event: Event<Button>) {
     let label = this.labelField.value || '';
     this.dynamicMenuCounter++;
-    let newMenu: Menu | Button = scout.create(scout.nvl(this.widget('MenuBarItemType').value, 'Menu'), {
+    let newMenu: Menu | Button = scout.create(scout.nvl(this.widget('MenuBarItemType').value, Menu), {
       parent: this.field,
       id: 'DynMenu ' + this.dynamicMenuCounter,
       label: label,

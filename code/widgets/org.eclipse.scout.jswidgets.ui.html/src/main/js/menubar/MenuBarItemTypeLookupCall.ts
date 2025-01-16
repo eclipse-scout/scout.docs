@@ -7,20 +7,15 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {StaticLookupCall} from '@eclipse-scout/core';
+import {Button, Menu} from '@eclipse-scout/core';
+import {ObjectTypeLookupCall} from '../index';
 
-export class MenuBarItemTypeLookupCall extends StaticLookupCall<'Button' | 'Menu'> {
-
-  constructor() {
-    super();
-  }
+export class MenuBarItemTypeLookupCall extends ObjectTypeLookupCall {
 
   protected override _data(): any[] {
-    return MenuBarItemTypeLookupCall.DATA;
+    return [
+      [Button, 'Button'],
+      [Menu, 'Menu']
+    ];
   }
-
-  static DATA = [
-    ['Button', 'Button'],
-    ['Menu', 'Menu']
-  ];
 }
