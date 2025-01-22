@@ -107,3 +107,31 @@ This means you can remove `sortActive: true` from your model files if you set a 
   sortIndex: 0
 }
 ----
+
+[[gzipfilter-deprecated]]
+== Deprecation of `GzipServletFilter` and `LegacyGzipServletFilter`
+
+`org.eclipse.scout.rt.server.commons.servlet.filter.gzip.GzipServletFilter` and
+`org.eclipse.scout.rt.server.commons.servlet.filter.gzip.LegacyGzipServletFilter` have been deprecated and should not be used anymore.
+Among other things these filters do not support async requests which are used in some parts of the application.
+If an applications keeps using the deprecated filters a warning will be logged during initialization of these classes.
+
+Instead of these filters the Jetty built-in `org.eclipse.jetty.server.handler.gzip.GzipHandler` should be used.
+This handler has been added to the main class `org.eclipse.scout.rt.app.Application` and is enabled by default.
+
+It may be configured and also disabled using several new configuration properties:
+
+* `scout.app.gzip.enabled`: Boolean (default: true); specifies whether the `GzipHandler` is used
+* `scout.app.gzip.excluded.inflate.paths`: List of String; excluded inflate paths for `GzipHandler` (respected only if at least one is set otherwise Jetty default is used)
+* `scout.app.gzip.excluded.methods`: List of String; excluded methods for `GzipHandler` (respected only if at least one is set otherwise Jetty default is used)
+* `scout.app.gzip.excluded.mimeTypes`: List of String; excluded MIME types for `GzipHandler` (respected only if at least one is set otherwise Jetty default is used)
+* `scout.app.gzip.excluded.paths`: List of String; excluded paths for `GzipHandler` (respected only if at least one is set otherwise Jetty default is used)
+* `scout.app.gzip.included.inflate.paths`: List of String; included inflate paths for `GzipHandler` (respected only if at least one is set otherwise Jetty default is used)
+* `scout.app.gzip.included.methods`: List of String; included methods for `GzipHandler` (respected only if at least one is set otherwise Jetty default is used)
+* `scout.app.gzip.included.mimeTypes`: List of String; included MIME types for `GzipHandler` (respected only if at least one is set otherwise Jetty default is used)
+* `scout.app.gzip.included.paths`: List of String; included paths for `GzipHandler` (respected only if at least one is set otherwise Jetty default is used)
+* `scout.app.gzip.minSize`: Positive integer; minimum size to trigger compression for `GzipHandler` (respected only if at value is set otherwise Jetty default is used)
+* `scout.app.gzip.syncFlush`: Boolean (default: true); enables sync flush for `GzipHandler`
+
+If the application is not run using the recommended main class `org.eclipse.scout.rt.app.Application`, e.g. for .war deployments the `GzipHandler` is not registered automatically.
+For example for a Jetty .war deployment it may be registered by activating the `gzip` Jetty module.

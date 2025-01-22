@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -16,7 +16,6 @@ import org.eclipse.scout.rt.jetty.IServletFilterContributor;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.rest.RestApplication;
 import org.eclipse.scout.rt.server.commons.context.HttpRunContextFilter;
-import org.eclipse.scout.rt.ui.html.app.UiServletContributors.GzipFilterContributor;
 import org.eclipse.scout.rt.ui.html.app.UiServletContributors.UiServletContributor;
 import org.glassfish.jersey.server.ServerProperties;
 import org.glassfish.jersey.servlet.ServletContainer;
@@ -32,9 +31,6 @@ public final class JsWidgetsServletContributors {
 
   // no auth filter on / for UiServlet required
 
-  /**
-   * After {@link GzipFilterContributor}.
-   */
   @Order(4000)
   public static class ApiRunContextFilterContributor implements IServletFilterContributor {
 
