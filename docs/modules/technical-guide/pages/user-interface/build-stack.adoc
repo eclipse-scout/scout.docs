@@ -171,7 +171,12 @@ Content hashes are generated and added to the bundles for optimal cashing.
 The Scout server delivers such bundles if it runs in production mode (`scout.devMode=false`).
 . res: contains all static resources from the various resource folders specified by the `resDir` array, see <<Static Web Resources>>.
 
-TIP: If the property `scout.urlHints.enabled` is set to `true`, the dev files can be requested on the fly even if the server does not run in `devMode`. Just add the query parameter `?debug=true` and the files in the dev folder instead of the ones in the prod folder are delivered. This can be very useful to debug a deployed application.
+[TIP]
+--
+If the property `scout.urlHints.enabled` is set to `true`, the dev files can be requested on the fly even if the server does not run in `devMode`. Just add the query parameter `?debug=true` and the files in the dev folder instead of the ones in the prod folder are delivered. This can be very useful to debug a deployed application.
+
+In detail: Setting the query parameter `?debug=true` changes the defaults for all url hint query parameters: `compress=false` (w/o debug default would be `true`), `cache=false` (w/o debug default would be `true`), `inspector=true` (w/o debug default would be `false`), `minify=false` (w/o debug default would be `true`). These settings are stored in a session cookie.
+--
 
 In order to start the build, use the following command:
 
