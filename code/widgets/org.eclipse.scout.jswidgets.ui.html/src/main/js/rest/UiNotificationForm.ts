@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -40,30 +40,31 @@ export class UiNotificationForm extends Form {
     });
     messageField.setValue(this._createSampleMessage());
 
-    this.widget('SubscribeButton').on('click', () => {
+    this.widget('SubscribeButton').on('click', async () => {
+      let topic = this.widget('TopicField').value;
       try {
-        uiNotifications.subscribe(this.widget('TopicField').value, this._notificationHandler).then(topic => {
-          this._addLogEntry(`Subscription for topic ${topic} successful, ready to receive messages `);
-        });
-      } catch (e) {
-        this._addLogEntry('Subscribe failed: ' + e.message);
+        topic = await uiNotifications.subscribe(topic, this._notificationHandler);
+        this._addLogEntry(`Subscription for topic ${topic} successful, ready to receive messages `);
+      } catch (error) {
+        this._addLogEntry(`Failed to subscribe for topic ${topic}. Error: ` + (error.message || error.errorDo?.message));
       }
     });
-    this.widget('SubscribeOneButton').on('click', () => {
+    this.widget('SubscribeOneButton').on('click', async () => {
+      let topic = this.widget('TopicField').value;
       try {
-        uiNotifications.subscribeOne(this.widget('TopicField').value, this._notificationHandler).then(topic => {
-          this._addLogEntry(`Subscription for topic ${topic} successful, ready to receive messages `);
-        });
-      } catch (e) {
-        this._addLogEntry('Subscribe failed: ' + e.message);
+        topic = await uiNotifications.subscribeOne(topic, this._notificationHandler);
+        this._addLogEntry(`Subscription for topic ${topic} successful, ready to receive messages `);
+      } catch (error) {
+        this._addLogEntry(`Failed to subscribe for topic ${topic}. Error: ` + (error.message || error.errorDo?.message));
       }
     });
     this.widget('UnsubscribeButton').on('click', () => {
+      let topic = this.widget('TopicField').value;
       try {
-        uiNotifications.unsubscribe(this.widget('TopicField').value, this._notificationHandler);
-        this._addLogEntry(`Unsubscribed from topic ${this.widget('TopicField').value}`);
-      } catch (e) {
-        this._addLogEntry('Unsubscribe failed: ' + e.message);
+        uiNotifications.unsubscribe(topic, this._notificationHandler);
+        this._addLogEntry(`Unsubscribed from topic ${topic}`);
+      } catch (error) {
+        this._addLogEntry(`Failed to unsubscribe from topic ${topic}: ` + error);
       }
     });
     this.widget('SampleMenu').on('action', () => {
