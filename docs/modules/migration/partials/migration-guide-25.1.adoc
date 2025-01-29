@@ -152,6 +152,52 @@ The template in the Scout archetype was updated accordingly, so newly created pr
 
 TIP: Mobile browsers will still offer the possibility to add a home screen icon for the application (which will just be a bookmark, opened in the regular browser). To properly configure it as an "app", consider adding a https://developer.mozilla.org/en-US/docs/Web/Manifest[PWA manifest].
 
+== Use scout properties for selenium test module configuration
+
+Test setup provided by module `org.eclipse.scout.rt.ui.html.selenium` now uses scout properties instead of system properties.
+The following table contains the mapping (see also class `SeleniumProperties`).
+
+[cols="2,1",options="header"]
+|===
+|old system property |scout config properties
+
+|`web.app.url`
+|`scout.selenium.webAppUrl`
+
+|`query.params`
+|`scout.selenium.webQueryParams`
+
+|`take.screenshot.on.failure`
+|`scout.selenium.screenshotOnFailure`
+
+|`webdriver.chrome.driver`
+|`scout.selenium.driverConfig[webdriver.chrome.driver]`
+
+(now optional)
+
+|new property
+|`scout.selenium.driver`
+
+Must be set either to `chrome`, `edge` or `firefox`.
+
+|new property
+|`scout.selenium.driverRemoteServerUrl`
+
+May be set (usually to `http://localhost:4444`) in order to use selenium docker grid.
+
+|===
+
+All driver-specific configurations may be set with the property `scout.selenium.driverConfig`.
+For example, the following setting will set up logging for the chrome driver as before:
+
+[source]
+----
+scout.selenium.driverConfig[webdriver.chrome.logfile]=${java.io.tmpdir}webdriver.log
+scout.selenium.driverConfig[webdriver.chrome.verboseLogging]=true
+----
+
+See also module `org.eclipse.scout.widgets.ui.html.app.selenium` for a sample properties file.
+
 == Scout JS
 
 === FormField: use _computeEmpty instead of _updateEmpty

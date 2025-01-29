@@ -121,3 +121,9 @@ The following code has been marked as deprecated for removal in previous release
 
 * (Java) `ActionUtility`  -> use `MenuUtility` instead
 * (TS) `Page#pageForTableRow` -> use `TableRow#page` instead
+
+== Use scout properties for selenium test module configuration
+
+Configuration for selenium test setup is now done through scout properties instead of system properties.
+Refer to the migration guide for more details.
+

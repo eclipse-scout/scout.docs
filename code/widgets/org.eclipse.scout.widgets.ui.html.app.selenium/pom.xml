@@ -25,12 +25,6 @@
 
   <properties>
     <master_test_timeout>3600</master_test_timeout>
-    <seleniumDrivers>${project.build.directory}/test-classes/seleniumDrivers</seleniumDrivers>
-    <!-- https://chromedriver.storage.googleapis.com/index.html -->
-    <chromedriver_base_url>https://chromedriver.storage.googleapis.com/102.0.5005.61</chromedriver_base_url>
-    <chromedriver_hash_linux64>29452b3ec1afadc764820f8894fd81ea</chromedriver_hash_linux64>
-    <chromedriver_hash_mac64>17c3e75d98e7787e5715e10f845c9d09</chromedriver_hash_mac64>
-    <chromedriver_hash_win32>21c5d8c3dd0a59d9c71148dfbdeea380</chromedriver_hash_win32>
   </properties>
 
   <build>
@@ -69,6 +63,16 @@
 
     <dependency>
       <groupId>org.eclipse.scout.rt</groupId>
+      <artifactId>org.eclipse.scout.rt.platform.test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.scout.rt</groupId>
       <artifactId>org.eclipse.scout.rt.ui.html.selenium</artifactId>
       <scope>test</scope>
     </dependency>
@@ -90,127 +94,6 @@
             <configuration>
               <skipTests>true</skipTests>
             </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-    <profile>
-      <id>win32_chrome_driver</id>
-      <activation>
-        <os>
-          <family>windows</family>
-        </os>
-      </activation>
-      <properties>
-        <chromedriver_url>${chromedriver_base_url}/chromedriver_win32.zip</chromedriver_url>
-        <chromedriver_md5>${chromedriver_hash_win32}</chromedriver_md5>
-        <webdriver.chrome.driver>${seleniumDrivers}/chromedriver.exe</webdriver.chrome.driver>
-      </properties>
-    </profile>
-    <profile>
-      <id>linux64_chrome_driver_x86_64</id>
-      <activation>
-        <os>
-          <family>unix</family>
-          <arch>x86_64</arch>
-        </os>
-      </activation>
-      <properties>
-        <chromedriver_url>${chromedriver_base_url}/chromedriver_linux64.zip</chromedriver_url>
-        <chromedriver_md5>${chromedriver_hash_linux64}</chromedriver_md5>
-        <webdriver.chrome.driver>${seleniumDrivers}/chromedriver</webdriver.chrome.driver>
-      </properties>
-    </profile>
-    <profile>
-      <!-- x64 architecture can be advertised as amd64 or x86_64 on linux -->
-      <id>linux64_chrome_driver_amd64</id>
-      <activation>
-        <os>
-          <family>unix</family>
-          <arch>amd64</arch>
-        </os>
-      </activation>
-      <properties>
-        <chromedriver_url>${chromedriver_base_url}/chromedriver_linux64.zip</chromedriver_url>
-        <chromedriver_md5>${chromedriver_hash_linux64}</chromedriver_md5>
-        <webdriver.chrome.driver>${seleniumDrivers}/chromedriver</webdriver.chrome.driver>
-      </properties>
-    </profile>
-    <profile>
-      <id>osx_chrome_driver</id>
-      <activation>
-        <os>
-          <family>mac</family>
-        </os>
-      </activation>
-      <properties>
-        <chromedriver_url>${chromedriver_base_url}/chromedriver_mac64.zip</chromedriver_url>
-        <chromedriver_md5>${chromedriver_hash_mac64}</chromedriver_md5>
-        <webdriver.chrome.driver>${seleniumDrivers}/chromedriver</webdriver.chrome.driver>
-      </properties>
-    </profile>
-
-    <profile>
-      <id>download_chrome_driver</id>
-      <activation>
-        <file>
-          <missing>${seleniumDrivers}/chrome*</missing>
-        </file>
-      </activation>
-      <build>
-        <pluginManagement>
-          <plugins>
-            <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself. -->
-            <plugin>
-              <groupId>org.eclipse.m2e</groupId>
-              <artifactId>lifecycle-mapping</artifactId>
-              <version>1.0.0</version>
-              <configuration>
-                <lifecycleMappingMetadata>
-                  <pluginExecutions>
-                    <pluginExecution>
-                      <pluginExecutionFilter>
-                        <groupId>io.github.download-maven-plugin</groupId>
-                        <artifactId>download-maven-plugin</artifactId>
-                        <versionRange>[2,)</versionRange>
-                        <goals>
-                          <goal>wget</goal>
-                        </goals>
-                      </pluginExecutionFilter>
-                      <action>
-                        <execute>
-                          <!-- to run on full and incremental build -->
-                          <runOnIncremental>true</runOnIncremental>
-                          <!-- to run once a this module is imported into workspace -->
-                          <runOnConfiguration>true</runOnConfiguration>
-                        </execute>
-                      </action>
-                    </pluginExecution>
-                  </pluginExecutions>
-                </lifecycleMappingMetadata>
-              </configuration>
-            </plugin>
-          </plugins>
-        </pluginManagement>
-        <plugins>
-          <plugin>
-            <groupId>io.github.download-maven-plugin</groupId>
-            <artifactId>download-maven-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>get-chromedriver</id>
-                <goals>
-                  <goal>wget</goal>
-                </goals>
-                <phase>validate</phase>
-                <configuration>
-                  <url>${chromedriver_url}</url>
-                  <md5>${chromedriver_md5}</md5>
-                  <outputDirectory>${seleniumDrivers}</outputDirectory>
-                  <unpack>true</unpack>
-                </configuration>
-              </execution>
-            </executions>
           </plugin>
         </plugins>
       </build>
