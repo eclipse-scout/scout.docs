@@ -62,6 +62,77 @@ Scout 25.1 requires at least the following:
 
 The API to call TypeScript code from the Java client code has been simplified and streamlined. See the xref:technical-guide:user-interface/ui-callback.adoc[UI Callback technical guide] for more details.
 
+== HybridAction: Support for Context Elements
+
+_HybridActions_ allow you to call Java code from JavaScript in Scout Classic applications.
+A hybrid action consists of an ID (identifying the corresponding action in the other layer) and an arbitrary data object (holding an action-specific payload).
+Additionally, you can now also include references to other UI elements, e.g. form fields, tree nodes or table rows.
+The JSON adapter layer automatically converts these so-called _context elements_ to identifiers and resolves them to the corresponding counter-part on the other side.
+
+_HybridEvents_ have a new property `contextElements` of type _HybridActionContextElements_.
+This object can hold multiple lists of context elements, each list identified by a string key.
+Every list consists of one or more _HybridActionContextElement_ objects with the following properties:
+
+* `widget`: mandatory, points to a Scout widget (e.g. a table).
+It is automatically converted to an adapter ID and vice versa by the JSON layer.
+* `element`: optional, points to an element owned by the widget (e.g. a table row).
+Only the widget-specific model adapter knows how to serialize and deserialize this reference.
+This kind of conversion is handled by a matching implementation of `(I)HybridActionContextElementConverter`.
+Currently, Scout provides implementations for tree nodes, table rows and table columns.
+See the documentation of these classes on how to add your own custom implementation.
+
+Example:
+
+.Calling a HybridAction with context elements in JavaScript
+[source,javascript]
+----
+let data = {maxRows: 5};
+// Send selected row as context element to UI server
+let contextElements = scout.create(HybridActionContextElements)
+  .withElement('selectedRow', this.table, this.table.selectedRow());
+HybridManager.get(this.session).callActionAndWaitWithContext('myapp.FindSimilarRows', data, contextElements)
+  .then(result => {
+    // Result rows are sent back from the UI server as context elements
+    if (result.contextElements.isEmpty()) {
+      MessageBoxes.openOk(this, 'No similar rows found!');
+    } else {
+      let similarRows = result.contextElements.getList('similarRows').map(contextElement => contextElement.getElement(TableRow));
+      this.table.selectRows(similarRows);
+    }
+  });
+----
+
+.Consuming and sending back context elements in the HybridAction implementation in Java
+[source,java]
+----
+@HybridActionType(FindSimilarRowsHybridAction.TYPE)
+public class FindSimilarRowsHybridAction extends AbstractHybridAction<IDoEntity> {
+
+  protected static final String TYPE = "myapp.FindSimilarRows";
+
+  @Override
+  public void execute(IDoEntity data) {
+    HybridActionContextElements resultContextElements = BEANS.get(HybridActionContextElements.class);
+    try {
+      // Get table and selected row sent from the UI
+      ITable table = getContextElement("selectedRow").getWidget(ITable.class);
+      ITableRow selectedRow = getContextElement("selectedRow").getElement(ITableRow.class);
+      Long maxRows = TypeCastUtility.castValue(data.get("maxRows"), Long.class);
+
+      List<ITableRow> similarRows = BEANS.get(SimilarRowsFinder.class).findSimilarRows(table, selectedRow, maxRows);
+
+      // Send back similar rows as context elements
+      resultContextElements.withElements("similarRows", similarRows.stream()
+        .map(row -> HybridActionContextElement.of(table, row))
+        .collect(Collectors.toList()));
+    }
+    finally { // always signal the end of the action to the UI, even in the case of an error on the server
+      fireHybridActionEndEvent(resultContextElements);
+    }
+  }
+}
+----
+
 == REST MetaResource version endpoint: IApiVersion removed, new support for build date provider
 
 The `IApiVersion` interface which was references by `MetaResource` operation `/version` was removed.
@@ -74,10 +145,10 @@ The `MetaResource` endpoint `/version` (e.g. `https://<server-url>/api/meta/vers
 
 ----
 {
-"_type": "suite.MetaVersionInfo",
-"applicationName": "My Application",
-"applicationVersion": "1.2.34",
-"buildDate": "2024-11-20 16:01:32.000"
+  "_type": "suite.MetaVersionInfo",
+  "applicationName": "My Application",
+  "applicationVersion": "1.2.34",
+  "buildDate": "2024-11-20 16:01:32.000"
 }
 ----
 
