@@ -34,5 +34,4 @@ public class ButtonFormTest extends AbstractSeleniumTest {
     toggleButton.click();
     SeleniumAssert.assertInputFieldValue(this, getValueField, "true");
   }
-
 }

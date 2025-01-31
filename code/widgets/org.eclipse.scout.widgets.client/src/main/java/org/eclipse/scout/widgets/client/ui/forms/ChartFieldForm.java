@@ -3057,7 +3057,6 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
                   public class CancelButton extends AbstractCancelButton {
                   }
                 }
-
               }
 
               @Order(150)

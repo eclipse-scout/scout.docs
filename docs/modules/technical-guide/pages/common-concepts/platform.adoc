@@ -1,4 +1,5 @@
 = Platform
+
 include::common:partial$_header.adoc[]
 
 //-----------------------------------------------------------------------------
@@ -268,6 +269,7 @@ For each property a class cares about default values and value validation. These
 ----
 include::common:example$org.eclipse.scout.docs.snippets/src/test/java/org/eclipse/scout/docs/snippets/platform/config/MyCustomTimeoutProperty.java[tags=ConfigProperties]
 ----
+
 <1> key
 <2> default value
 
@@ -387,8 +389,6 @@ The following rules apply, when such properties are read:
 To parse the JSON object strings the `org.eclipse.scout.json` (lightweight JSON parsing) module is used as the bean manager is not yet available during configuration property initialization.
 Otherwise `org.eclipse.scout.rt.dataobject`/`org.eclipse.scout.rt.jackson` would be used if the bean manager would be available yet (more sophisticated JSON parsing modules).
 
-
-
 A properties file may import other config files from the classpath or any other absolute URL. This is done using the special key `import`. It can be a single value or a list or map (e.g. `import[anyKey or number]`:
 
 * `import[0]=classpath:myConfigs/other.properties`
@@ -396,7 +396,6 @@ A properties file may import other config files from the classpath or any other 
 * `import[2]=file:${catalina.base}/conf/db_connection.properties`
 
 Scout already has some config properties. For a list and the corresponding documentation see <<sec-app.configProperties>>.
-
 
 === Additional examples
 

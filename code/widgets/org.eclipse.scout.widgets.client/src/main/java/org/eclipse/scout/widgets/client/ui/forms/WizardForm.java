@@ -88,5 +88,4 @@ public class WizardForm extends AbstractForm implements IAdvancedExampleForm {
 
   public class PageFormHandler extends AbstractFormHandler {
   }
-
 }

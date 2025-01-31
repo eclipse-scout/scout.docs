@@ -83,5 +83,4 @@ public abstract class AbstractToggleMenu extends AbstractMenu {
   public boolean isActive() {
     return m_active;
   }
-
 }

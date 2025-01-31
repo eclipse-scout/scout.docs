@@ -374,7 +374,6 @@ public class MigrationGuideSnippet {
           .putForUser(userId, new UserChangedClientNotification(userId));
       // end::clientnotification.publish.new[]
     }
-
   }
 
   void snippetsClientNotificationHandle() {

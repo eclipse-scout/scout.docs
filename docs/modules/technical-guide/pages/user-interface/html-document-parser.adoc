@@ -1,4 +1,5 @@
 = HTML Document Parser
+
 include::common:partial$_header.adoc[]
 
 The HTML document parser is only available in the Scout UI server. If your Scout JS application uses a different backend, you cannot use the features described in this chapter.
@@ -28,6 +29,7 @@ Example:
   <scout:include template="head.html" />
 
 == scout:message
+
 Depending on the current user language provided by the browser, this tag outputs a list of localized text strings. The texts are used to display error-messages during login in the correct language, because at this point we don't have a Scout session and thus no user language. The parser replaces the message tag through `scout-text` tags. These tags will be read by  `scout.texts#readFromDOM`.
 
 Example:

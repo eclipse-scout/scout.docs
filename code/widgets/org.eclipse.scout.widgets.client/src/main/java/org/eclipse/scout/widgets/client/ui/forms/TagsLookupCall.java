@@ -49,5 +49,4 @@ public class TagsLookupCall extends LocalLookupCall<String> {
     return m_tags.stream()
         .map(tag -> new LookupRow<>(tag, tag)).collect(Collectors.toList());
   }
-
 }

@@ -68,7 +68,6 @@ public class ConfigurableColumnBenchLayoutNodePage extends AbstractBenchLayoutPa
       benchLayoutData.withWest(layoutData);
       getDesktop().setBenchLayoutData(benchLayoutData);
     }
-
   }
 
   @ClassId("803b6e0f-ee04-4be5-92f5-61e177e8895b")
@@ -110,5 +109,4 @@ public class ConfigurableColumnBenchLayoutNodePage extends AbstractBenchLayoutPa
       getDesktop().setBenchLayoutData(benchLayoutData);
     }
   }
-
 }

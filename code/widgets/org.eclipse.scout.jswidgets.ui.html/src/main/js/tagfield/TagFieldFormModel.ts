@@ -9,19 +9,8 @@
  */
 import {CheckBoxField, FormModel, GroupBox, TabBox, TabItem, TagField} from '@eclipse-scout/core';
 import {
-  EventsTab,
-  EventsTabWidgetMap,
-  FormFieldActionsBox,
-  FormFieldActionsBoxWidgetMap,
-  FormFieldPropertiesBox,
-  FormFieldPropertiesBoxWidgetMap,
-  GridDataBox,
-  GridDataBoxWidgetMap,
-  TagLookupCall,
-  ValueFieldPropertiesBox,
-  ValueFieldPropertiesBoxWidgetMap,
-  WidgetActionsBox,
-  WidgetActionsBoxWidgetMap
+  EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, TagLookupCall, ValueFieldPropertiesBox,
+  ValueFieldPropertiesBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap
 } from '../index';
 
 export default (): FormModel => ({

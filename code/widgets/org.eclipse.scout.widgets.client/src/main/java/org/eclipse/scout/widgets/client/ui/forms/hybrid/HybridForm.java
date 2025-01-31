@@ -122,8 +122,8 @@ public class HybridForm extends AbstractForm {
           @Override
           protected String getConfiguredValue() {
             return HTML.fragment("The page you see here is implemented in Scout JS but its detailForm is implemented in ",
-                HTML.bold("Scout Classic"), HTML.br(),
-                "This view demonstrates several hybrid abilities like opening a Scout JS form from Scout Classic.")
+                    HTML.bold("Scout Classic"), HTML.br(),
+                    "This view demonstrates several hybrid abilities like opening a Scout JS form from Scout Classic.")
                 .toHtml();
           }
 

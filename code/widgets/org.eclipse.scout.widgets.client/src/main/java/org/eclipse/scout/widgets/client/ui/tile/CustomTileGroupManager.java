@@ -40,5 +40,4 @@ public class CustomTileGroupManager extends AbstractTileAccordionGroupManager<IC
   public Object getId() {
     return ID;
   }
-
 }

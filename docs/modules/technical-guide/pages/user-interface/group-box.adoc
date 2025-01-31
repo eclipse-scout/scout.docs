@@ -1,4 +1,5 @@
 = Group Box
+
 include::common:partial$_header.adoc[]
 
 The purpose of a group box is to group multiple xref:user-interface/form-field.adoc[Form Fields].

@@ -131,6 +131,5 @@ public class DynamicTabItem extends AbstractGroupBox {
         return Integer.MAX_VALUE;
       }
     }
-
   }
 }

@@ -53,7 +53,6 @@ public class LabelFieldEncodingForm extends AbstractForm {
     @ClassId("5eca3b8d-6e46-425f-ab45-fcbb653af170")
     public class CloseButton extends AbstractCloseButton {
     }
-
   }
 
   public class PageFormHandler extends AbstractFormHandler {

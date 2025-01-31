@@ -1,4 +1,5 @@
 = Security
+
 include::common:partial$_header.adoc[]
 
 == Default HTTP Response Headers
@@ -45,17 +46,20 @@ If a resource is blocked because it violates the CSP a report is created and log
 This enables admins to monitor the application and to react if a CSP violation is detected.
 
 == Session Cookie (JSESSIONID Cookie) Configuration Validation
+
 The UiServlet checks if the session cookie is configured safely. The validation is only performed on first access to the `UiServlet`. There is no automatic validation on the backend server side or on any custom servlets!
 
 If the validation fails, a corresponding error message is logged to the server and an exception is thrown making the `UiServlet` inaccessible. Because of security reasons the exception shown to the user includes no details about the error. These can only be seen on the server side log.
 
 === HttpOnly
+
 First the existence of the `HttpOnly` flag is checked. The servlet container will then add this flag to the `Set-Cookie` HTTP response header. If the user agent supports this flag, the cookie cannot be accessed through a client side script. As a result even if a cross-site scripting (XSS) flaw exists and a user accidentally accesses a link that exploits this flaw, the user agent will not reveal the cookie to a third party.
 For a list of user agents supporting this feature please refer to https://www.owasp.org/index.php/HTTPOnly#Browsers_Supporting_HttpOnly[OWASP].
 
 This flag is enabled by default via `scout.app.sessionCookieConfigHttpOnly`.
 
 === Secure
+
 Second the existence of the `Secure` flag is checked. The servlet container will then add this flag to the `Set-Cookie` HTTP response header. The purpose of the secure flag is to prevent cookies from being observed by unauthorized parties due to the transmission of a cookie in clear text. Therefore, setting this flag will prevent the user agent from transmitting the session id over an unencrypted channel.
 
 This flag is enabled by default for non-development builds via `scout.app.sessionCookieConfigSecure`.
@@ -63,6 +67,7 @@ This flag is enabled by default for non-development builds via `scout.app.sessio
 This of course only makes sense if the application is exposed to the end user using an encrypted channel like https://en.wikipedia.org/wiki/HTTPS[HTTPS] (which is strongly recommended).
 
 == Secure Output
+
 This chapter describes how HTML Output can be handled in a secure way.
 
 Scout applications often display potentially dangerous data, e.g. user input or data from other systems.
@@ -156,6 +161,7 @@ To check access one can use `ACCESS`.
 ----
 include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/AccessSnippet.java[tags=ACCESS_A]
 ----
+
 <1> Checks permission against granted permissions of current user.
 <2> Checks permission and if this check fails, throw an `AccessForbiddenException` with a default message.
 

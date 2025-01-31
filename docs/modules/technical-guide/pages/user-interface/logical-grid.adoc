@@ -1,4 +1,5 @@
 = Logical Grid
+
 include::common:partial$_header.adoc[]
 
 The `logical grid layout` arranges the elements in an (invisible) grid, so they are nicely aligned.
@@ -10,6 +11,7 @@ This grid data object is computed automatically by the `logical grid` based on t
 So, to control how the fields should be arranged, you need to adjust the `grid data hints` and make sure the elements have the correct order.
 
 == Grid Data Hints
+
 With the grid data hints you can define the dimensions of a grid cell:
 
 * `x` / `y` +
@@ -43,10 +45,12 @@ Configures the maximum size of the element in pixel.
 If the value is less than or equal to 0 there is no maximum.
 
 === Example for WeightX
+
 * A group box with 3 columns contains 3 fields: every field has `w` = 1 and `weightX` = -1. This leads to 1 row and 3 grid cells which would grow and shrink proportionally because `weightX` is automatically set to > 0.
 * If the weight of these 3 fields were set to 0.1, 0.1 and 1, the first two fields would adjust the size very slowly and would mostly be as big as a logical grid column (because `w` is set to 1), whereas the third field would adjust its size very fast.
 
 === Example for WeightY
+
 * A group box with 1 column contains 3 fields: every field has `h` = 1 and `weightY` = -1. This leads to 3 rows with fixed height, no additional space is grabbed, because `weightY` will automatically be set to 0.
 * If the weight of these 3 fields were set to 1, the fields would grow and shrink proportionally.
 * If the weight of these 3 fields were set to 0.1, 0.1 and 1, the first two fields would adjust the size very slowly and would mostly be a as big as one logical grid row (because `h` is set to 1), whereas the third field would adjust its size very fast.

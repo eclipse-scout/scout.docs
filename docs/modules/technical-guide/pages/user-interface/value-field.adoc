@@ -1,9 +1,11 @@
 = Value Field
+
 include::common:partial$_header.adoc[]
 
 A value field extends the form field by the ability to store a value. Typical form fields are `StringField`, `NumberField`, `DateField` or `SmartField`. All these fields provide a value which is accessible using `field.value` and may be set using `field.setValue(value)`.
 
 == Parser, Validator, Formatter
+
 The value always has the target data type of the field. When using a `StringField` the type is `string`, when using a `NumberField` the type is `number`, when using a `DateField` the type is `date`. This means you don't have to care about how to parse the value from the user input, this will be done by the field for you. The field also validates the value, meaning if the user entered an invalid value, an error is shown. Furthermore, if you already have the value and want to show it in the field, you don't have to format the value by yourself.
 
 This process of parsing, validating and formatting is provided by every value field. The responsible functions are `parseValue`, `validateValue` and `formatValue`. If a user enters text, it will be parsed to get the value with the correct type. The value will then be validated to ensure it is allowed to enter that specific value. Afterwards it will be formatted again to make sure the input looks as expected (e.g. if the user enters 2 it may be formatted to 2.0). If you set the vaue programmatically using `setValue` it is expected that the value already has the correct type, this means parse won't be executed. But the value will be validated, formatted and eventually displayed in the field.
@@ -11,6 +13,7 @@ This process of parsing, validating and formatting is provided by every value fi
 Even though the fields already provide a default implementation of this functionality, you may want to extend or replace it. For that purpose you may set a custom parser and formatter or one or more validators.
 
 === Custom Parser and Formatter
+
 Typically, you don't have to add a custom parser or formatter for a `NumberField` or `DateField`. They work with a `DecimalFormat` or `DateFormat` which means you can specify a pattern how the number or date should be represented. By default, it uses the  pattern of the current locale, so you don't even have to specify anything.
 
 For a `StringField` on the other hand, adding a custom parser or formatter could make sense. Let's say you want to group the text into 4 digit blocks, so that if the user inputs 1111222233334444 it should be converted to 1111-2222-3333-4444. This could be done using the following formatter.
@@ -26,6 +29,7 @@ function formatter(value, defaultFormatter) {
   return displayText.match(/.{4}/g).join('-');
 };
 ----
+
 Keep in mind that you should call the default formatter first unless you want to replace it completely.
 
 To make your formatter active, just use the corresponding setter.
@@ -58,6 +62,7 @@ field.setParser(parser);
 ----
 
 === Custom Validator
+
 The purpose of a validator is to only allow valid values. This mostly depends on your business rules, this is why the default validators don't do a whole lot of things.
 
 See the following example of a validator used by a `DateField`.

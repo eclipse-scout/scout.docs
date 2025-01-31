@@ -41,5 +41,4 @@ public final class WidgetsSeleniumUtil {
     test.waitUntilElementClickable(byModelClass(viewButtonClass)).click();
     test.waitUntilElementClickable(By.xpath("//div[contains(@class, 'tree-node')]/span[text() = '" + formTitle + "']")).click();
   }
-
 }

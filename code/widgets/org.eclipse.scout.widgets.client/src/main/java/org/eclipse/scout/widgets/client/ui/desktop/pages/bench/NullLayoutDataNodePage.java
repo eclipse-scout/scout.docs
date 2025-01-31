@@ -68,7 +68,6 @@ public class NullLayoutDataNodePage extends AbstractBenchLayoutPageWithNodes {
     sef.setEnabledGranted(false);
     sef.start();
     formList.add(sef);
-
   }
 
   @ClassId("15cd2b6d-9d0d-4e31-ba32-665fd4ac09ef")
@@ -89,7 +88,6 @@ public class NullLayoutDataNodePage extends AbstractBenchLayoutPageWithNodes {
       benchLayoutData.getWest().withNorth(layoutData);
       getDesktop().setBenchLayoutData(benchLayoutData);
     }
-
   }
 
   @ClassId("5d18c9e7-4593-4226-8b59-17d103ca5001")
@@ -150,7 +148,6 @@ public class NullLayoutDataNodePage extends AbstractBenchLayoutPageWithNodes {
       benchLayoutData.getCenter().withNorth(layoutData);
       getDesktop().setBenchLayoutData(benchLayoutData);
     }
-
   }
 
   @ClassId("6e134c85-fd67-4d47-9245-d6307d4a3904")
@@ -211,7 +208,6 @@ public class NullLayoutDataNodePage extends AbstractBenchLayoutPageWithNodes {
       benchLayoutData.getEast().withNorth(layoutData);
       getDesktop().setBenchLayoutData(benchLayoutData);
     }
-
   }
 
   @ClassId("2cd785c2-ef91-4b58-afe4-55d2bd1d6236")
@@ -253,5 +249,4 @@ public class NullLayoutDataNodePage extends AbstractBenchLayoutPageWithNodes {
       getDesktop().setBenchLayoutData(benchLayoutData);
     }
   }
-
 }

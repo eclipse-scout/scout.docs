@@ -872,7 +872,6 @@ public class PersonForm extends AbstractForm {
     BEANS.get(ContactsHelper.class).handleReadOnly(getOkButton());
   }
 
-
   // tag::validate[]
   @Override // <1>
   protected boolean execValidate() {

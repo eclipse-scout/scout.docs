@@ -70,7 +70,6 @@ public class JsonHeatmapField extends JsonFormField<IHeatmapField> {
       public Object prepareValueForToJson(Object value) {
         return viewParameterToJson((HeatmapViewParameter) value);
       }
-
     });
     putJsonProperty(new JsonProperty<IHeatmapField>(IHeatmapField.PROP_HEAT_POINT_LIST, model) {
       @Override
@@ -83,7 +82,6 @@ public class JsonHeatmapField extends JsonFormField<IHeatmapField> {
       public Object prepareValueForToJson(Object value) {
         return heatPointsToJson((Collection<HeatPoint>) value);
       }
-
     });
   }
 

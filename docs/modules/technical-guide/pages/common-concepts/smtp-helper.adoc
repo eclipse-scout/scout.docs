@@ -1,4 +1,5 @@
 = SmtpHelper
+
 include::common:partial$_header.adoc[]
 
 //-----------------------------------------------------------------------------
@@ -10,6 +11,7 @@ The SMTP connection can either be provided as a `org.eclipse.scout.rt.mail.smtp.
 The `SmtpHelper` also supports pooling of SMTP connections as described in the section <<connection-pooling-chapter>>.
 
 == SmtpServerConfig
+
 The `org.eclipse.scout.rt.mail.smtp.SmtpServerConfig` class allows to specify details of an SMTP connection to be made. It supports the following properties:
 
 |===
@@ -38,6 +40,7 @@ include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclips
 ----
 
 == Sending messages
+
 Messages can be sent using the `sendMessage` Methods of the `SmtpHelper` class. In Order to prepare the message to be sent, Scout provides a number of classes and helpers:
 
 |===
@@ -51,6 +54,7 @@ Messages can be sent using the `sendMessage` Methods of the `SmtpHelper` class. 
 
 <<lst-SmtpHelper.prepareMimeMessage>> shows the usage of the mentioned classes Scout provides in order to create a MimeMessage object.
 [[lst-SmtpHelper.prepareMimeMessage]]
+
 [source,java,indent=0]
 .Create `org.eclipse.scout.rt.mail.CharsetSafeMimeMessage` object
 ----
@@ -66,7 +70,6 @@ In order to send the message you can either use a `org.eclipse.scout.rt.mail.smt
 include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/SmtpHelperSnippet.java[tags=SmtpHelper.sendWithSmtpServerConfig]
 ----
 
-
 [[lst-SmtpHelper.sendWithSession]]
 [source,java,indent=0]
 .Send email using an existing `jakarta.mail.Session` object.
@@ -75,6 +78,7 @@ include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclips
 ----
 
 == SmtpHelper Configuration
+
 The `SmtpHelper` provides some config properties that allow to modify certain behaviour.
 
 |===
@@ -87,6 +91,7 @@ The `SmtpHelper` provides some config properties that allow to modify certain be
 
 [[connection-pooling-chapter]]
 == Connection Pooling
+
 Normally, the `SmtpHelper` opens a new connection for every email which is then closed after the email has been sent.
 If you want to send a lot of emails, this behaviour is rather inefficient as opening a new SMTP connection takes a long time compared to sending the email especially when using encrypted connections.
 To mitigate this overhead, the `SmtpHelper` supports pooling of SMTP connections which is activated using the `poolSize` property of `SmtpServerConfig` objects.
@@ -103,6 +108,7 @@ This means, that connection pooling is not possible when you use the `sendMessag
 * As long as connections are open, a background job monitors their state and closes idle and old connections.
 
 == SmtpConnectionPool Configuration
+
 The following config properties allow to modify the behavior of the connection pool implementation at the global level:
 
 |===

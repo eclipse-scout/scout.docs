@@ -24,6 +24,7 @@ You can keep the other default values. Then click the btn:[Next] button.
 [[img-sdk_new_projectjs_location_ij]]
 .Specify name and location of the new project.
 image::common:sdk_new_projectjs_location_ij.png[]
+
 On the second page please specify project name and location and press btn:[Finish].
 The Scout plugin then creates the initial project content for you (you will see some Maven build output).
 Wait until all tasks have completed.

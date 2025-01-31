@@ -21,7 +21,6 @@ import org.eclipse.scout.rt.security.IPermission;
 
 public class AccessSnippet {
 
-
   //tag::ReadCompanyPermission[]
   public static class ReadCompanyPermission extends AbstractPermission {
     private static final long serialVersionUID = 1L;
@@ -138,6 +137,5 @@ public class AccessSnippet {
   protected interface ICompanyService {
 
     boolean isOwnCompany(UUID companyId);
-
   }
 }

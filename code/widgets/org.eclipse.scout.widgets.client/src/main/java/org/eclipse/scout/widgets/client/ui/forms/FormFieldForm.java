@@ -219,7 +219,6 @@ public class FormFieldForm extends AbstractForm implements IPageForm {
             protected void execAction() {
               MessageBoxes.createOk().withBody("Value is " + getValue()).show();
             }
-
           }
 
           @Order(2000)

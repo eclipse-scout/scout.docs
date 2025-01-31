@@ -741,5 +741,4 @@ public class PopupForm extends AbstractForm implements IAdvancedExampleForm {
           .collect(Collectors.toList());
     }
   }
-
 }

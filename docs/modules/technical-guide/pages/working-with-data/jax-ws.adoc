@@ -47,8 +47,8 @@ JAX-WS Scout integration is prepared to run with different implementors. Unfortu
 As of now, Scout ships with three such implementor specific classes, which are activated via _config.properties_ by setting the property _scout.jaxws.implementor_ with its fully qualified class name. By default, _JAX-WS METRO_ implementor is installed.
 
 For instance, support for _Apache CXF_ implementor is activated as following:
-[source,txt]
 
+[source,txt]
 ----
 scout.jaxws.implementor=org.eclipse.scout.rt.server.jaxws.implementor.JaxWsCxfSpecifics
 ----
@@ -383,8 +383,8 @@ See the WSDL file of ping webservice: <<PingWebService.wsdl>> +
 See the endpoint interface of ping webservice: <<PingWebServicePortType.java>>
 
 To generate an entry point for the webservice's endpoint interface, create an interface as following in your jaxws project.
-[source,java,indent=0]
 
+[source,java,indent=0]
 ----
 include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.entrypoint.definition]
 ----
@@ -460,6 +460,7 @@ The field 'authentication' on `WebServiceEntryPoint` configures what authenticat
 By default, authentication is _disabled_. If _enabled_, an `AuthenticationHandler` is generated and registered in the handler chain as very first handler. The position can be changed via _order_ field on `Authentication` annotation.
 
 The following properties can be set.
+
 [cols="30,70"]
 
 |===

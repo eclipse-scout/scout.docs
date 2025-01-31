@@ -58,7 +58,7 @@ public class PageWithTableRecTablePage extends PageWithTableTablePage {
     for (int i = 0; i < data.length; i++) {
       Object[] row = data[i];
       Object[] newRow = new Object[row.length + 1];
-      newRow[0] = createOutlineSummary((String)row[0]);
+      newRow[0] = createOutlineSummary((String) row[0]);
       for (int j = 0; j < row.length; j++) {
         newRow[j + 1] = row[j];
       }

@@ -1,5 +1,6 @@
 [#getting-started]
 == Getting Started
+
 include::partial$_initDoc.adoc[]
 
 To get started with Eclipse Scout, we propose that you first go through the "`Hello World`" tutorial and then follow the tutorial to import the existing Scout demo applications.

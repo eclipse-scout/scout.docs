@@ -1,4 +1,5 @@
 = Hello Scout JS
+
 include::common:partial$_header.adoc[]
 
 ifndef::source-highlighter[:source-highlighter: coderay]
@@ -123,6 +124,7 @@ see the official documentation on Node.js:
 {the-package-json-guide}[The package.json guide] and {the-package-lock-json-file}[The package-lock.json file].
 
 ==== tsconfig
+
 The tsconfig.json file configures the TypeScript compiler. It extends a default config from Scout and specifies output dir and the directories that contain TypeScript files. For more details on tsconfig see the https://www.typescriptlang.org/docs/handbook/tsconfig-json.html[TypeScript documentation].
 
 ==== webpack

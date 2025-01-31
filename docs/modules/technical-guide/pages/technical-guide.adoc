@@ -1,4 +1,5 @@
 = Technical Guide
+
 include::common:partial$_header.adoc[]
 
 Scout is a framework for creating modern business applications.
@@ -6,6 +7,7 @@ Such applications are typically separated into multiple tiers where each tier is
 Scout solves these requirements by providing a separation of such tiers out of the box.
 
 == Scout Classic
+
 image::common:big_picture.png[]
 
 A typical Scout Classic application consists of the following parts:
@@ -19,6 +21,7 @@ Callbacks, e.g. for validating a field or calling services when opening a form r
 Server and client both run in an embedded servlet container (Jetty).
 
 == Scout JS
+
 Scout JS is used to build the user interface of an Eclipse Scout application.
 It consists of a large widget library including simple widgets like buttons or menu items and more complex widgets like tables, tile grids or trees.
 Beside the widget library itself, Scout JS also helps to interact with the widgets, from accessing a widget, to configuring data binding or adding input validation.

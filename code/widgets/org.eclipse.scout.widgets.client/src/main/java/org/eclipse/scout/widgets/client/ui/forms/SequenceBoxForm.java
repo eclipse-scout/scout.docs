@@ -498,7 +498,6 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
             }
           }
         }
-
       }
 
       @Order(30)

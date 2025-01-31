@@ -112,7 +112,7 @@ public abstract class AbstractUrlImageField extends AbstractImageField {
   protected void updateImage() {
     setImageUrl(this.url);
   }
-// tag::menu[]
+  // tag::menu[]
 }
 // end::template[]
 // end::menu[]

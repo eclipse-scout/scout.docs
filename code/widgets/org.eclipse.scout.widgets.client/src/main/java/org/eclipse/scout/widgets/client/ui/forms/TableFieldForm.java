@@ -536,7 +536,6 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             protected int getConfiguredWidth() {
               return 120;
             }
-
           }
 
           @Order(30)
@@ -652,7 +651,6 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             protected int getConfiguredWidth() {
               return 80;
             }
-
           }
 
           @Order(60)
@@ -678,7 +676,6 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             protected Class<? extends ILookupCall<Locale>> getConfiguredLookupCall() {
               return LocaleLookupCall.class;
             }
-
           }
 
           @Order(70)
@@ -735,7 +732,6 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             protected int getConfiguredWidth() {
               return 120;
             }
-
           }
 
           @Order(90)
@@ -761,7 +757,6 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             protected int getConfiguredWidth() {
               return 120;
             }
-
           }
 
           @Order(92)
@@ -831,7 +826,6 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             protected int getConfiguredWidth() {
               return 60;
             }
-
           }
 
           @Order(105)
@@ -899,7 +893,6 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             protected String getConfiguredHeaderTooltipText() {
               return "Icon only";
             }
-
           }
 
           @Order(130)
@@ -976,7 +969,6 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
                 cell.setBackgroundColor("f99494");
               }
             }
-
           }
 
           @Order(138)
@@ -1209,7 +1201,6 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
                 ModelJobs.schedule(Table.this::newRow, ModelJobs.newInput(ClientRunContexts.copyCurrent())
                     .withExecutionTrigger(Jobs.newExecutionTrigger()
                         .withStartIn(2, TimeUnit.SECONDS)));
-
               }
             }
 
@@ -1453,7 +1444,6 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
               protected String getConfiguredText() {
                 return "SubSingle";
               }
-
             }
 
             @Order(20)
@@ -1469,7 +1459,6 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
               protected String getConfiguredText() {
                 return "SubMulti";
               }
-
             }
 
             @Order(30)
@@ -1485,7 +1474,6 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
               protected String getConfiguredText() {
                 return "SubEmpty";
               }
-
             }
 
             @Order(40)
@@ -1510,7 +1498,6 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
                 protected String getConfiguredText() {
                   return "SubSubSingle";
                 }
-
               }
 
               @Order(20)
@@ -1526,7 +1513,6 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
                 protected String getConfiguredText() {
                   return "SubSubMulti";
                 }
-
               }
 
               @Order(30)
@@ -1542,9 +1528,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
                 protected String getConfiguredText() {
                   return "SubSubEmpty";
                 }
-
               }
-
             }
           }
 
@@ -1774,7 +1758,6 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           protected void execInitField() {
             setValue(getTableField().getTable().isAutoResizeColumns());
           }
-
         }
 
         @Order(85)
@@ -1817,7 +1800,6 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           protected void execInitField() {
             setValue(false);
           }
-
         }
 
         @Order(90)
@@ -2150,7 +2132,6 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             setValue(getTableField().getTable().isRowIconVisible());
             getDefaultIconIdField().setVisible(getValue());
           }
-
         }
 
         @Order(150)
@@ -2181,7 +2162,6 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           protected void execInitField() {
             setValue(getTableField().getTable().getNameColumn().isTextWrap());
           }
-
         }
 
         @Order(160)

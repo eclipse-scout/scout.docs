@@ -18,9 +18,9 @@ import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 import org.eclipse.scout.widgets.client.ui.forms.IPageForm;
-import org.eclipse.scout.widgets.client.ui.forms.imagefield.ImageFieldForm;
 import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm;
 import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm;
+import org.eclipse.scout.widgets.client.ui.forms.imagefield.ImageFieldForm;
 
 @ClassId("37721775-c06d-4e42-b263-209f331ef907")
 public class FormLookupCall extends LocalLookupCall<Class<? extends IPageForm>> {

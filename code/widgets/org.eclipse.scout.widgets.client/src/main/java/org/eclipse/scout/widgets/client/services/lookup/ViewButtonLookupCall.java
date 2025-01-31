@@ -34,7 +34,5 @@ public class ViewButtonLookupCall extends LocalLookupCall<IViewButton> {
       }
       return new LookupRow<>(b, name);
     }).collect(Collectors.toList());
-
   }
-
 }

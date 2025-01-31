@@ -88,5 +88,4 @@ public class OrganizationServiceTest {
     assertEquals("testEmail", inputOrg.getEmail().getValue());
     assertEquals("000", inputOrg.getPhone().getValue());
   }
-
 }

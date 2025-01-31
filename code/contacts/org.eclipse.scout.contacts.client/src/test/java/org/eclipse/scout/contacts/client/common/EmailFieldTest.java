@@ -9,8 +9,7 @@
  */
 package org.eclipse.scout.contacts.client.common;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -25,7 +24,6 @@ public class EmailFieldTest {
   public void before() {
     testField = new AbstractEmailField() {
     };
-
   }
 
   @Test
@@ -51,5 +49,4 @@ public class EmailFieldTest {
     testField.setValue("a@b.ch");
     assertTrue(testField.isContentValid());
   }
-
 }

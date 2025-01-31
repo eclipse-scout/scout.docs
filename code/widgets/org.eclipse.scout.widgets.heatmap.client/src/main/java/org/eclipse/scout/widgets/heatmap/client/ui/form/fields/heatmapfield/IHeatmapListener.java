@@ -21,7 +21,7 @@ public interface IHeatmapListener extends EventListener {
    * Function is called when the user clicks somewhere on the map of the heatmap field.
    *
    * @param point
-   *          holds the coordinates of the user's click on the map.
+   *     holds the coordinates of the user's click on the map.
    */
   void mapClicked(MapPoint point);
 
@@ -29,8 +29,7 @@ public interface IHeatmapListener extends EventListener {
    * Function is called when heat points are added to the heatmap field
    *
    * @param points
-   *          list of points that have been added.
+   *     list of points that have been added.
    */
   void heatPointsAdded(Collection<HeatPoint> points);
-
 }

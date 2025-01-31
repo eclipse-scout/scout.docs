@@ -108,7 +108,6 @@ public class FixedFooterNodePage extends AbstractBenchLayoutPageWithNodes {
           form.start();
         }
       }
-
     }
   }
 
@@ -180,7 +179,6 @@ public class FixedFooterNodePage extends AbstractBenchLayoutPageWithNodes {
           setValue(content.toString());
         }
       }
-
     }
   }
 }

@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {Button, Event, GroupBox, GroupBoxModel, InitModelOf, LabelField, models, Widget} from '@eclipse-scout/core';
+import {Button, Event, GroupBox, GroupBoxModel, InitModelOf, models, Widget} from '@eclipse-scout/core';
 import WidgetActionsBoxModel from './WidgetActionsBoxModel';
 import {WidgetActionsBoxWidgetMap} from '../index';
 

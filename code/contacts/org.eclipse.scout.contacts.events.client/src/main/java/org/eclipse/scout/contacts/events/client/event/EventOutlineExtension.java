@@ -39,5 +39,4 @@ public class EventOutlineExtension extends AbstractOutlineExtension<ContactOutli
     super.execCreateChildPages(chain, pageList);
     pageList.add(new EventTablePage());
   }
-
 }

@@ -40,7 +40,6 @@ At the same time, the blog post warns of potential security issues.
 
 WARNING: This is not recommended!
 
-
 === Eclipse Scout
 
 The Eclipse Scout playbook builds the site for link:https://eclipsescout.github.io/[GitHub pages].

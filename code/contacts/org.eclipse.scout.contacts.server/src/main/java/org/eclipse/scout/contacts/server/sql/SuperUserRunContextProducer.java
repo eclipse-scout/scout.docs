@@ -9,8 +9,9 @@
  */
 package org.eclipse.scout.contacts.server.sql;
 
-import jakarta.annotation.PostConstruct;
 import javax.security.auth.Subject;
+
+import jakarta.annotation.PostConstruct;
 
 import org.eclipse.scout.contacts.server.sql.DatabaseProperties.SuperUserSubjectProperty;
 import org.eclipse.scout.rt.platform.BEANS;
@@ -50,7 +51,7 @@ public class SuperUserRunContextProducer extends ServerRunContextProducer {
    * This method delegates to {@link #produce()}, meaning that the subject specified is ignored.
    *
    * @param subject
-   *          is ignored, and {@link SuperUserRunContextProducer#getSubject()} used instead.
+   *     is ignored, and {@link SuperUserRunContextProducer#getSubject()} used instead.
    * @see #produce()
    */
   @Override

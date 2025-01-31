@@ -140,8 +140,8 @@ public class UserForm extends AbstractForm {
 
   private String createHtmlContent() {
     List<CharSequence> menus = CollectionUtility.arrayList(
-      HTML.div(HTML.appLink("application-info", TEXTS.get("ApplicationInformation"))).cssClass("contacts-user-form-link-row"),
-      HTML.div(HTML.appLink("logout", TEXTS.get("Logout"))).cssClass("contacts-user-form-link-row"));
+        HTML.div(HTML.appLink("application-info", TEXTS.get("ApplicationInformation"))).cssClass("contacts-user-form-link-row"),
+        HTML.div(HTML.appLink("logout", TEXTS.get("Logout"))).cssClass("contacts-user-form-link-row"));
     if (!CONFIG.getPropertyValue(ReadOnlyProperty.class)) {
       menus.add(1, HTML.div(HTML.appLink("reset-data", TEXTS.get("ResetData"))).cssClass("contacts-user-form-link-row"));
     }

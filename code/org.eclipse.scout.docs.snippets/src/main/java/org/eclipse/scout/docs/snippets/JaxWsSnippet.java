@@ -17,6 +17,8 @@ import java.util.UUID;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
+import javax.xml.namespace.QName;
+
 import jakarta.annotation.Generated;
 import jakarta.annotation.Resource;
 import jakarta.jws.HandlerChain;
@@ -26,7 +28,6 @@ import jakarta.jws.WebResult;
 import jakarta.jws.WebService;
 import jakarta.jws.soap.SOAPBinding;
 import jakarta.jws.soap.SOAPBinding.ParameterStyle;
-import javax.xml.namespace.QName;
 import jakarta.xml.ws.WebServiceContext;
 import jakarta.xml.ws.handler.MessageContext;
 import jakarta.xml.ws.handler.MessageContext.Scope;
@@ -155,9 +156,9 @@ public final class JaxWsSnippet {
     }
   }
 
-// end::jaxws.example.entrypoint[]
+  // end::jaxws.example.entrypoint[]
 
-// tag::jaxws.example.porttype.bean[]
+  // tag::jaxws.example.porttype.bean[]
   @ApplicationScoped
   public class PingWebServicePortTypeBean implements PingWebServicePortType {
 

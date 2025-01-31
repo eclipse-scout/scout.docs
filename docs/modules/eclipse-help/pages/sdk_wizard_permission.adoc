@@ -1,4 +1,5 @@
 ==== New Permission Wizard
+
 include::partial$_initDoc.adoc[]
 
 The _New Scout Permission_ wizard can be used to create a new permission classes.
@@ -15,6 +16,7 @@ The only wizard fields that then needs to be filled in manually is the *Name* fi
 By clicking on the btn:[Finish] button the wizard is started and the specified component is created.
 
 ===== Wizard Fields and Default Values
+
 Most of the fields of the <<img-sdk_wizard_permission>> will be filled with default values depending on the current context of the IDE.
 The context can be derived from a package selected in the Package Explorer or from the class in the active Java Editor.
 

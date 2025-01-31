@@ -1,9 +1,11 @@
 = Widget Reference
+
 include::common:partial$_header.adoc[]
 
 This chapter describes some of the widgets available in Scout. At the moment most of the widgets are not described yet, but they are already available at the https://scout.bsi-software.com/jswidgets[Scout JS Widgets Application]. With this application you can try the widgets out and get a feel of what they are capable of and how they are used.
 
 == Smart Field
+
 A `Smart Field` provides a list of proposals the user can choose from to pick one single value. In contrast to a common drop down list, the Smart Field provides search as you type which is especially useful for large lists. A very common case is to call a REST service and lookup the proposals while typing. This combination of a drop down list and a search field is the reason why it is called smart.
 
 [[img-smart_field]]

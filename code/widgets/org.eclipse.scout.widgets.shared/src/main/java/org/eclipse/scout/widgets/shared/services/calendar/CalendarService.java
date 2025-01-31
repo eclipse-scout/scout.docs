@@ -25,7 +25,6 @@ public class CalendarService implements ICalendarService {
   private LazyValue<CalendarResourceDo> m_lisaTurnerCalendar = new LazyValue<>(this::createLisaTurnerCalendar);
   private LazyValue<CalendarResourceDo> m_johnDoeCalendar = new LazyValue<>(this::createJohnDoeCalendar);
 
-
   @Override
   public List<CalendarResourceDo> getAllResources() {
     return List.of(getOwnCalendarGroup(),
@@ -73,7 +72,6 @@ public class CalendarService implements ICalendarService {
         .withSelectable(false)
         .withCssClass("calendar-color-blue");
   }
-
 
   public CalendarResourceDo getOwnCalendarGroup() {
     return m_ownCalendarGroup.get();

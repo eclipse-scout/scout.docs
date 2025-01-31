@@ -82,7 +82,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Table> {
    * Allows user of this template field to react to row selection events
    *
    * @param resource
-   *          the resource that is represented by the clicked row
+   *     the resource that is represented by the clicked row
    */
   protected void execResourceRowClick(BinaryResource resource) {
   }
@@ -365,7 +365,6 @@ public abstract class AbstractFileTableField extends AbstractTableField<Table> {
           addFile(file);
         }
       }
-
     }
 
     @Order(30)

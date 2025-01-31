@@ -759,7 +759,6 @@ public class FormForm extends AbstractForm implements IPageForm {
             protected void execAction() {
               MessageBoxes.createOk().withBody("Value is " + getValue()).show();
             }
-
           }
 
           @Order(2000)
@@ -959,7 +958,6 @@ public class FormForm extends AbstractForm implements IPageForm {
         form.start();
       }
     }
-
   }
 
   public class PageFormHandler extends AbstractFormHandler {
@@ -1016,31 +1014,24 @@ public class FormForm extends AbstractForm implements IPageForm {
 
     public enum DisplayParent {
       Desktop() {
-
         @Override
         public IDisplayParent getValue() {
           return IDesktop.CURRENT.get();
         }
-
       },
       Outline() {
-
         @Override
         public IDisplayParent getValue() {
           return ClientRunContexts.copyCurrent().getOutline();
         }
-
       },
       Form() {
-
         @Override
         public IDisplayParent getValue() {
           return ClientRunContexts.copyCurrent().getForm();
         }
-
       },
       Auto() {
-
         @Override
         public IDisplayParent getValue() {
           return null;

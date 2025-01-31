@@ -408,9 +408,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
             protected List<Integer> getConfiguredCodes() {
               return Arrays.asList(ISmartField.NO_RESULTS_ERROR_CODE);
             }
-
           }
-
         }
 
         @Order(40)
