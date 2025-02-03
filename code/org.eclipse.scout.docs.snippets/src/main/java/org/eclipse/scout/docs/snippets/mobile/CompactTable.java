@@ -64,5 +64,4 @@ public class CompactTable {
     }
   }
   //end::CustomBeanBuilder[]
-
 }

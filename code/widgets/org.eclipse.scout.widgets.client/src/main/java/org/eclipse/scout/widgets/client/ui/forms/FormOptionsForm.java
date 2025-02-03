@@ -316,6 +316,5 @@ public class FormOptionsForm extends AbstractForm {
     @ClassId("0422a472-935c-4a90-8599-c9b3cab12dfe")
     public class CloseButton extends AbstractCloseButton {
     }
-
   }
 }

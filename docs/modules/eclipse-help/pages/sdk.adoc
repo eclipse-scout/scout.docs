@@ -1,4 +1,5 @@
 == Scout Tooling
+
 include::partial$_initDoc.adoc[]
 
 The Eclipse Scout package also includes Scout specific tooling, the Scout SDK that is available for the Eclipse IDE.

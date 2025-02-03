@@ -78,5 +78,4 @@ public class LayoutWidgetsOutline extends AbstractWidgetsOutline {
       MessageBoxes.createOk().withBody(TEXTS.get("OutlineMenuDescription")).show();
     }
   }
-
 }

@@ -243,7 +243,8 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
               if (CONFIG.getPropertyValue(ReadOnlyProperty.class)) {
                 setValue(false);
                 setEnabled(false);
-              } else {
+              }
+              else {
                 setValue(getChooseAnImageField().isEnabled());
               }
             }

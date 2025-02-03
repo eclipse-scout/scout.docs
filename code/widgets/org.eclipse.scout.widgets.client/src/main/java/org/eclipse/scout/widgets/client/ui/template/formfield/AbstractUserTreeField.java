@@ -188,7 +188,6 @@ public abstract class AbstractUserTreeField extends AbstractStringField {
         public void execAction() {
           MessageBoxes.createOk().withHeader(TEXTS.get("TableMenuHeader")).withBody(getText()).show();
         }
-
       };
 
       menu.setText(node.getText());
@@ -227,10 +226,10 @@ public abstract class AbstractUserTreeField extends AbstractStringField {
     @Override
     public String toString() {
       return Node.class.getSimpleName() +
-        "[key=" + getKey() +
-        " parentKey=" + getParentKey() +
-        " text=" + getText() +
-        " iconId=" + getIconId() + "]";
+          "[key=" + getKey() +
+          " parentKey=" + getParentKey() +
+          " text=" + getText() +
+          " iconId=" + getIconId() + "]";
     }
 
     public void addChild(Node child) {
@@ -330,5 +329,4 @@ public abstract class AbstractUserTreeField extends AbstractStringField {
       m_icon = icon;
     }
   }
-
 }

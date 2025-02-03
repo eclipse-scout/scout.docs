@@ -221,7 +221,6 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
                 }, ModelJobs.newInput(ClientRunContexts.copyCurrent())
                     .withExecutionTrigger(Jobs.newExecutionTrigger()
                         .withStartIn(2, TimeUnit.SECONDS)));
-
               }
             }
 
@@ -325,12 +324,12 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
 
               @Override
               protected void execAction() {
-                final IntegerHolder number = new IntegerHolder(m_reverse ? 500: 0);
+                final IntegerHolder number = new IntegerHolder(m_reverse ? 500 : 0);
                 getTree().visitTree(new DepthFirstTreeVisitor<>() {
                   @Override
                   public TreeVisitResult preVisit(ITreeNode node, int level, int index) {
                     node.getCellForUpdate().setText("Dynamic Text " + number.getValue());
-                    number.setValue(m_reverse ? number.getValue() - 1: number.getValue() + 1);
+                    number.setValue(m_reverse ? number.getValue() - 1 : number.getValue() + 1);
                     return TreeVisitResult.CONTINUE;
                   }
                 });
@@ -650,7 +649,6 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
               Jobs.schedule(() -> {
 
                 ModelJobs.schedule(() -> getTree().selectNode(null), ModelJobs.newInput(ClientRunContexts.copyCurrent()).withName(String.format("execute job: '%s'", subjectName)));
-
               }, Jobs.newInput().withRunContext(ClientRunContexts.copyCurrent())
                   .withExecutionTrigger(new ExecutionTrigger().withStartIn(3, TimeUnit.SECONDS)));
             }
@@ -781,7 +779,6 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
           public class HierarchicalMenu extends AbstractHierarchicalTreeMenu {
           }
         }
-
       }
 
       @Order(20)
@@ -806,7 +803,6 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
           tree.removeAllChildNodes(tree.getRootNode());
           addNodesToTree(nodes, tree, tree.getRootNode());
         }
-
       }
 
       @Order(30)
@@ -931,7 +927,8 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
     private void addCodesToTree(List<? extends ICode<Long>> list, ITreeNode parent, AbstractTree tree) {
       // create a tree node for each code
       for (final ICode<Long> code : list) {
-        AbstractTreeNode node = new AbstractTreeNode() {};
+        AbstractTreeNode node = new AbstractTreeNode() {
+        };
         node.getCellForUpdate().setIconId(code.getIconId());
         node.getCellForUpdate().setText(code.getText());
         node.getCellForUpdate().setTooltipText(code.getTooltipText());
@@ -958,7 +955,6 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
         updateLeafNodes(child);
       }
     }
-
   }
 
   public class PageFormHandler extends AbstractFormHandler {

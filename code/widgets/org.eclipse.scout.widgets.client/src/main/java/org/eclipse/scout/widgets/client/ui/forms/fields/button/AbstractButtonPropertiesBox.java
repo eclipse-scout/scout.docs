@@ -69,5 +69,4 @@ public abstract class AbstractButtonPropertiesBox extends AbstractPropertiesBox<
       m_field.setPreventDoubleClick(getValue());
     }
   }
-
 }

@@ -364,12 +364,12 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
                 + StringUtility.lpad(Integer.toHexString(NumberUtility.randomInt(256)), "0", 2)
                 + StringUtility.lpad(Integer.toHexString(NumberUtility.randomInt(256)), "0", 2);
             getHtmlField().setValue(HTML.fragment(
-                HTML.icon(Icons.Clock)
-                    .style("font-size: 50px; padding-right: 10px; vertical-align: middle; color: " + randomColor),
-                HTML.span(
-                    "The current server time is: ",
-                    HTML.bold(DateUtility.formatTime(new Date())))
-                    .style("vertical-align: middle;"))
+                    HTML.icon(Icons.Clock)
+                        .style("font-size: 50px; padding-right: 10px; vertical-align: middle; color: " + randomColor),
+                    HTML.span(
+                            "The current server time is: ",
+                            HTML.bold(DateUtility.formatTime(new Date())))
+                        .style("vertical-align: middle;"))
                 .toHtml());
             getHtmlField().setAttachments(null);
           }

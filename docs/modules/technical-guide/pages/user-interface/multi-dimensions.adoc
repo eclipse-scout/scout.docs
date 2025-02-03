@@ -1,4 +1,5 @@
 = Multiple Dimensions Support
+
 include::common:partial$_header.adoc[]
 
 Several components support multidimensional properties.
@@ -8,6 +9,7 @@ This means, the widget will only be enabled if all dimensions are set to true.
 This gives developers the flexibility to e.g. use a dimension for authorization (`granted`) and one for the business logic and to be sure that if the widget was disabled using `widget.setEnabledGranted(false)` that it won't accidentally get enabled when using `widget.setEnabled(true)`.
 
 == Scout JS
+
 As long as only one dimension is used, multidimensional properties behave like normal properties.
 Let's have a look at the `visible` property of the `Widget`.
 
@@ -30,6 +32,7 @@ But since the default dimension is still set to false, the `widget.visible` stat
 Because every dimension needs to be true, we have to call `widget.setVisible(true)` (or `widget.setPropertyDimension('visible', 'default', true)`) to make the property `widget.visible` true again.
 
 === Default Value
+
 Every multidimensional property has a default value.
 This value is used if a dimension is not set.
 And it is used for the computation to compute the value.
@@ -38,12 +41,14 @@ If the default value is false, every dimension needs to be false to make the com
 The defaultValue `false` may be used to add dimensions to the property `FormField.mandatory`, which is false by default compared to `Widget.enabled`, which is true by default.
 
 To mark a property as multidimensional with the defaultValue `true`, use the following code in your widget:
+
 [source,javascript]
 ----
 this._addMultiDimensionalProperty('visible', true);
 ----
 
 === Alias
+
 A property dimension can have an alias that is used to simulate a regular property.
 For example if an alias is registered for `enabled` with the name `accepted`, it is possible to call `setProperty('accepted', true)` resp. `getProperty('accepted')`. It looks like a regular property and also triggers a propertyChange event for the name `accepted`, but actually it is a dimension, so it will influence the computation of the `enabled` property.
 
@@ -78,6 +83,7 @@ Refer to the implementation and JavaDoc of the component for details about how m
 ----
 include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/ClientModelSnippet.java[tags=DimensionSamples]
 ----
+
 <1> Disables the menu using the internal default dimension
 <2> Disables the menu using the internal granted dimension
 <3> Hides the menu with a third custom dimension

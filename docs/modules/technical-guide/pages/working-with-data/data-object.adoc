@@ -1,8 +1,8 @@
 = Data Objects
+
 include::common:partial$_header.adoc[]
 
 [[cha-data-objects]]
-
 Data objects are Scout beans, which are used as data transfer objects for synchronous REST and asynchronous MOM interfaces.
 Furthermore, they can be used as domain objects within business logic.
 
@@ -22,6 +22,7 @@ The return value of the accessor method defines the attribute type.
 ----
 include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/ExampleEntityDo.java[tags=class]
 ----
+
 <1> Example attribute of type `String`
 <2> Example attribute of type `List<Integer>`
 
@@ -73,7 +74,7 @@ Using the type property the data object marshaller is able to find and instantia
 It avoids a 1:1 dependency between the serialized JSON String and the fully classified class name.
 A stable type name is required in order to be able to change the data object structure without breaking the API.
 
-=== Type Version 
+=== Type Version
 
 A data object may be annotated with a type version using the `@TypeVersion` annotation.
 The type version represents the version of the structure of the data object and not the version of the data within the data object.
@@ -141,6 +142,7 @@ To use a custom attribute name within the serialized string, the attribute acces
 ----
 include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/CustomAttributeEntityDo.java[tags=customAttributeName]
 ----
+
 <1> Important: The annotation value must be equals to the string constant used for the `doValue()` or `doList()` attribute declaration.
 
 [source,JSON]
@@ -267,6 +269,7 @@ Additionally the overridden method must call the `doValue()` method providing th
 ----
 include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/ExampleEntityExDo.java[tags=class]
 ----
+
 <1> Rename `name` attribute of superclass to `nameEx`
 
 == Interfaces to Data Objects
@@ -300,6 +303,7 @@ If the serialized JSON document contains a `_type` and/or `_typeVersion` attribu
 ----
 include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=accessRaw]
 ----
+
 <1> Accessing value attribute, default type is `Object`
 <2> Accessing value attribute, specify the type as class object if known
 <3> Accessing value attribute, convenience method for a set of common types
@@ -345,6 +349,7 @@ include::common:example$org.eclipse.scout.docs.snippets/src/main/resources/org/e
 ----
 include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=accessMapAttributes]
 ----
+
 <1> Accessing attribute using `get` method returns the attribute of declared type `T`
 <2> Accessing all attributes using `all` method returns a map with all attributes of type `T`
 
@@ -369,6 +374,7 @@ The `DoEntityBuilder` may be used to build ad-hoc data objects without a concret
 ----
 include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=doEntityBuilder]
 ----
+
 <1> Builder for a DoEntity object
 <2> Builder for the string representation of a DoEntity objects
 
@@ -416,6 +422,7 @@ An optional static `resolve()` method handles the resolve of a given string valu
 ----
 include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=exampleEnum]
 ----
+
 <1> Optional resolve method
 
 == Typed IDs within Data Objects

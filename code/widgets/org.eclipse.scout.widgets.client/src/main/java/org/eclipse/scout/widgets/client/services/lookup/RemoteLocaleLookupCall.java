@@ -28,5 +28,4 @@ public class RemoteLocaleLookupCall extends LookupCall<Locale> {
   protected Class<? extends ILookupService<Locale>> getConfiguredService() {
     return RemoteLocaleLookupService.class;
   }
-
 }

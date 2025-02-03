@@ -1,4 +1,5 @@
 = Hello Scout JS with a CDN
+
 include::common:partial$_header.adoc[]
 
 == Introduction
@@ -51,6 +52,7 @@ Now let's create a new html file called `index.html` and paste the following con
 </body>
 </html>
 ----
+
 <1> As you can see, we include the Scout assets, namely `eclipse-scout-core-theme.css` and `eclipse-scout-core.js`.
 <2> Additionally, we need to include all dependencies, which are `jquery` and `sourcemapped-stacktrace.js`.
 These are the dependencies listed in the https://cdn.jsdelivr.net/npm/@eclipse-scout/core@{node-version}/package.json[package.json of @eclipse-scout/core].

@@ -1,4 +1,5 @@
 = Hello Scout Classic
+
 include::common:partial$_header.adoc[]
 
 == Introduction

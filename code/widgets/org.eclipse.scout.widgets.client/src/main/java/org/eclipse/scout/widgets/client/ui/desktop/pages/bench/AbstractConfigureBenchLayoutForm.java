@@ -274,6 +274,5 @@ public abstract class AbstractConfigureBenchLayoutForm<T extends FlexboxLayoutDa
         storeLayoutData(layoutDataForUpdate);
       }
     }
-
   }
 }

@@ -418,7 +418,6 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
                 MessageBoxes.createOk().withHeader(getText() + " activated").show();
               }
             }
-
           }
 
           @Order(4000)
@@ -471,7 +470,6 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
                 MessageBoxes.createOk().withHeader(getText() + " activated").show();
               }
             }
-
           }
 
           @ClassId("7728b4be-e5b9-4682-ac32-1fcde1c13bea")
@@ -523,7 +521,6 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
                 sortTiles(false);
               }
             }
-
           }
 
           @ClassId("ef2f2d9a-c0cf-4f52-b057-cb408a82b4d0")
@@ -581,7 +578,6 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
         protected int getConfiguredHorizontalAlignment() {
           return 1;
         }
-
       }
     }
 
@@ -887,5 +883,4 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
   @ClassId("a7c26df1-d941-44bf-8533-8b2855a97923")
   public static class SimpleTile extends AbstractCustomTile {
   }
-
 }

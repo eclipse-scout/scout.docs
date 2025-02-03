@@ -206,9 +206,9 @@ public final class JobManagerSnippet {
           .andMatchState(JobState.RUNNING)
           .andMatch(new SessionJobEventFilter(ISession.CURRENT.get()))
           .toFilter(), event -> {
-            IFuture<?> future = event.getData().getFuture(); // <2>
-            System.out.println("Job commences execution: " + future.getJobInput().getName());
-          });
+        IFuture<?> future = event.getData().getFuture(); // <2>
+        System.out.println("Job commences execution: " + future.getJobInput().getName());
+      });
       // end::jobManager.registerListener[]
     }
 

@@ -1,10 +1,12 @@
 = Widget
+
 include::common:partial$_header.adoc[]
 
 A widget is a component which may be rendered. It may be simple like a label, or more complex like a tree or table. A form is a widget and a form field, too.
 A widget contains the model, which represents the state of the widget. In a Scout Classic application, that model will be sent from the UI server to the browser and the Scout UI will use that model to create the widget. In a Scout JS app, the model may be provided using JSON or directly with JavaScript.
 
 == Lifecycle
+
 Every widget has a lifecycle. After a widget is instantiated, it has to be initialized using `init`. If you want to display it, you have to call the `render` method. If you want to remove it from the DOM, call the `remove` method. Removing a widget is not the same as destroying it. You can still use it, you can for example change some properties and then render it again. If it is really not needed anymore, the `destroy` method is called (typically by Scout itself).
 
 So you see the widget actually has 3 important states:
@@ -338,6 +340,7 @@ It is important to always use the setter to modify a property, because calling i
 It is worth to mention that the behavior of step 2 may be influenced by the widget. If the widget provides a method called `\_setPropertyName` (e.g. `_setLabelVisible`, notice the `_`), that method will be called instead of `_setProperty`. This may be useful if something other should be done beside setting the property. If that is the case, that new function is responsible to call `_setProperty` by itself in order to set the property and inform the listeners. That method may also be called by the `_init` method to make sure the additional code is also executed during initialization (calling the public setter in `_init` would not have any effect due to the equals check at the beginning).
 
 == Widget Properties
+
 A widget property is a special kind of a property which references another widget.
 
 Defining a property as widget property has the benefit that the widget is created automatically. Lets take the group box as an example. A group box has a widget property called fields. The fields are widgets, namely form fields. If you create a group box, you may specify its fields directly:
@@ -452,6 +455,7 @@ function(event) {
 ----
 
 === Property Change Event
+
 A special kind of event is the property change event. Whenever a property changes, such an event is triggered.
 
 The event has the following properties:
@@ -542,6 +546,7 @@ Example: `${iconId:ANGLE_UP}` uses `icons.ANGLE_UP`, icons predefined by Scout
 Example: `${iconId:foo.BAR}` uses `foo.icons.BAR`, use this for custom icon constant objects
 
 == Parent and Owner
+
 As seen in the previous chapters, the creation of a widget requires a parent. This establishes a link between the child and the parent widget which is necessary for several actions.
 
 . Rendering a widget into the container of the parent +

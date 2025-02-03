@@ -1,4 +1,5 @@
 = Object Factory
+
 include::common:partial$_header.adoc[]
 
 As seen in the xref:technical-guide:user-interface/widget.adoc#creating-a-widget[Creating a Widget], a widget may be created using `scout.create`.

@@ -155,9 +155,9 @@ public final class JaxWsSnippet {
     }
   }
 
-// end::jaxws.example.entrypoint[]
+  // end::jaxws.example.entrypoint[]
 
-// tag::jaxws.example.porttype.bean[]
+  // tag::jaxws.example.porttype.bean[]
   @ApplicationScoped
   public class PingWebServicePortTypeBean implements PingWebServicePortType {
 

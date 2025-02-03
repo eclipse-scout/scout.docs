@@ -1,4 +1,5 @@
 = Eclipse Scout User Guide
+
 include::partial$_initDoc.adoc[]
 
 This guide gets you through the "`Hello World`" Eclipse Scout application and shows you how to import the Scout demo application into your Eclipse IDE.

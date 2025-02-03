@@ -24,5 +24,4 @@ public class WidgetsUiTextContributor implements IUiTextContributor {
         "ExampleBeanFieldUiText",
         "ExampleBeanFieldAppLinkText"));
   }
-
 }

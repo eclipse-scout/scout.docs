@@ -8,11 +8,7 @@
  * SPDX-License-Identifier: EPL-2.0
  */
 import {CheckBoxField, GroupBox, GroupBoxModel, LookupCall, NumberField, SmartField, SmartFieldActiveFilter, SmartFieldDisplayStyle} from '@eclipse-scout/core';
-import {
-  LookupCallLookupCall,
-  SmartFieldActiveFilterLookupCall,
-  SmartFieldDisplayStyleLookupCall
-} from '../index';
+import {LookupCallLookupCall, SmartFieldActiveFilterLookupCall, SmartFieldDisplayStyleLookupCall} from '../index';
 
 export default (): GroupBoxModel => ({
   id: 'jswidgets.SmartFieldPropertiesBox',

@@ -174,7 +174,6 @@ public class Desktop extends AbstractDesktop {
     }
     //tag::quickAccessMenu[]
     //tag::DesktopInit[]
-
   }
   //end::quickAccessMenu[]
 
@@ -206,7 +205,6 @@ public class Desktop extends AbstractDesktop {
     protected Class<OptionsForm> getConfiguredForm() {
       return OptionsForm.class;
     }
-
   }
   //end::OptionsMenu[]
 
@@ -241,7 +239,6 @@ public class Desktop extends AbstractDesktop {
     protected Class<UserForm> getConfiguredForm() {
       return UserForm.class;
     }
-
   }
   //tag::quickAccessMenu[]
 }

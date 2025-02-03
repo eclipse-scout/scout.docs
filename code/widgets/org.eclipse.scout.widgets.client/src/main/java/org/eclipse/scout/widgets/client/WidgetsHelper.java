@@ -51,5 +51,4 @@ public class WidgetsHelper {
       return "read-only-info";
     }
   }
-
 }

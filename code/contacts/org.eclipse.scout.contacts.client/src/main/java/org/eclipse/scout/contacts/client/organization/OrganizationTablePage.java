@@ -36,7 +36,7 @@ import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 @PageData(OrganizationTablePageData.class)
 @ClassId("18f7a78e-0dd0-4e4e-9234-99892bb4459f")
 public class OrganizationTablePage extends AbstractPageWithTable<Table> {
-// end::childPage[]
+  // end::childPage[]
 
   @Override
   protected String getConfiguredTitle() {

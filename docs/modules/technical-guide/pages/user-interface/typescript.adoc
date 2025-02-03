@@ -1,4 +1,5 @@
 = TypeScript Support
+
 include::common:partial$_header.adoc[]
 
 Eclipse Scout is written in TypeScript and therefore comes with a fully typed TypeScript API.

@@ -1,4 +1,5 @@
 ==== New CodeType Wizard
+
 include::partial$_initDoc.adoc[]
 
 The _New Scout CodeType_ wizard can be used to create a new code type classes.
@@ -15,9 +16,9 @@ The wizard fields that then needs to be filled in manually are the *Name*, the *
 By clicking on the btn:[Finish] button the wizard is started and the specified component is created.
 
 ===== Wizard Fields and Default Values
+
 Most of the fields of the <<img-sdk_wizard_codetype>> will be filled with default values depending on the current context of the IDE.
 The context can be derived from a package selected in the Package Explorer or from the class in the active Java Editor.
-
 
 Source Folder:: The source folder of the Maven shared module used for the creation of the code type class. The default value is the `src/main/java` folder in the Maven shared module.
 Package:: The Java package that will contain the code type class. The Scout SDK will try to guess the package name from the current context.

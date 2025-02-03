@@ -15,5 +15,4 @@ import org.eclipse.scout.widgets.client.ui.forms.IPageForm;
 public interface IFormPage extends IPageWithNodes {
 
   Class<? extends IPageForm> getFormType();
-
 }

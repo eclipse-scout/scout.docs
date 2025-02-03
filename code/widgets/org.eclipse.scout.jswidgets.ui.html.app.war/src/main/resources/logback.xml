@@ -19,8 +19,8 @@
   </appender>
 
   <root level="INFO">
-    <appender-ref ref="FILE"/>
+    <appender-ref ref="FILE" />
   </root>
 
-  <logger name="org.quartz" level="WARN"/>
+  <logger name="org.quartz" level="WARN" />
 </configuration>

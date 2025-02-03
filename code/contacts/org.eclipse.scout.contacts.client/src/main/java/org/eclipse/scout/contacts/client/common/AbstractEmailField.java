@@ -38,5 +38,4 @@ public abstract class AbstractEmailField extends AbstractStringField {
 
     return rawValue;
   }
-
 }

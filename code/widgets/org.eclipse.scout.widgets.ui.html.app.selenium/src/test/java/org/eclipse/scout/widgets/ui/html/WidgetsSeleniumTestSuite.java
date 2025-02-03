@@ -35,5 +35,4 @@ public class WidgetsSeleniumTestSuite {
   public static void tearDownAfterClass() {
     SeleniumSuiteState.tearDownAfterClass();
   }
-
 }

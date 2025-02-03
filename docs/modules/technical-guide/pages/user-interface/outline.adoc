@@ -1,4 +1,5 @@
 = Outline
+
 include::common:partial$_header.adoc[]
 
 The outline is a special variant of the tree widget mainly used in the navigation area of the xref:user-interface/desktop.adoc[Desktop].

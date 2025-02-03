@@ -28,5 +28,4 @@ public class OutputLocale {
       System.out.println(s);
     }
   }
-
 }

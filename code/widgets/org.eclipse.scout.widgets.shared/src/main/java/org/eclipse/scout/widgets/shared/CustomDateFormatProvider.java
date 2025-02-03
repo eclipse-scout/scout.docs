@@ -68,7 +68,6 @@ public class CustomDateFormatProvider extends DateFormatProvider {
     availableLocales.addAll(m_customLocales);
     availableLocales.addAll(getJRE11AvailableLocales());
     m_availableLocales = availableLocales.toArray(new Locale[0]);
-
   }
 
   @Override

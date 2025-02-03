@@ -1,4 +1,5 @@
 = Scout SDK for IntelliJ
+
 include::common:partial$_header.adoc[]
 
 The Scout SDK plugin for IntelliJ is available at the JetBrains Marketplace.

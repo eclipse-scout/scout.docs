@@ -1,4 +1,5 @@
 === Additions to the Java Editor
+
 include::partial$_initDoc.adoc[]
 
 Scout uses the standard Java Editor of the Eclipse IDE.
@@ -13,6 +14,7 @@ include::sdk:partial$SdkEditorNlsContentAssist.adoc[]
 Selecting "New text..." then opens the <<sdk_wizard_nls-entry.adoc#nls-entry-wizard, NLS Entry Wizard>>.
 
 '''
+
 Go back to the <<sdk.adoc#, Scout Tooling>>.
 
 :_footer-link-path: build/eclipse_help/src/docs/{docname}.adoc

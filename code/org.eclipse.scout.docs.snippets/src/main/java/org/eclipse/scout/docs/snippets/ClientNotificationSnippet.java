@@ -45,7 +45,7 @@ public class ClientNotificationSnippet {
     // end::cn_reloadCodeType[]
   }
 
-//tag::cn_bookmarkCoalescer[]
+  //tag::cn_bookmarkCoalescer[]
   public class BookmarkNotificationCoalescer implements ICoalescer<BookmarkChangedClientNotification> {
 
     @Override
@@ -54,7 +54,7 @@ public class ClientNotificationSnippet {
       return CollectionUtility.arrayList(CollectionUtility.firstElement(notifications));
     }
   }
-// end::cn_bookmarkCoalescer[]
+  // end::cn_bookmarkCoalescer[]
 
   /**
    * Sample notification
@@ -88,7 +88,5 @@ public class ClientNotificationSnippet {
     public Long getId() {
       return ID;
     }
-
   }
-
 }

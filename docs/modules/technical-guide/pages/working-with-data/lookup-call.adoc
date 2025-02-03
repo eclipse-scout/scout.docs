@@ -1,4 +1,5 @@
 = Lookup Call
+
 include::common:partial$_header.adoc[]
 
 A `Lookup Call` is used to lookup a single or multiple `Lookup Rows`. Several widgets like `Smart Field`, `List Box` or `Tree Box` take advantage of that concept in order to provide their proposals.
@@ -21,6 +22,7 @@ You must implement these methods. Start with creating a sub class of `LookupCall
 Note that the lookup call works with _Deferreds_. This means the lookup call runs in the background and does not block the UI. When the lookup call is done eventually the Deferred is resolved and the Smart Field will process the result returned by the lookup call.
 
 == Scout Classic
+
 Lookup calls provide different method to compute the set of LookupRows :
 
 * *getDataByKey():* Retrieves a single lookup row for a specific key value. Used by SmartFields and SmartColumns to get the display text for a given key value.
@@ -29,6 +31,7 @@ Lookup calls provide different method to compute the set of LookupRows :
 * *getDataByRec():* This can only be used for hierarchical lookup calls. It retrieves all available sub-tree lookup rows for a given parent.
 
 === Members
+
 The Lookup call contains attributes (accessible with getter and setter) that can be used to compute the list of lookups rows. Out of the box you have:
 
 * key: contains the key value when the lookup is queried by key.

@@ -160,7 +160,5 @@ public class HierarchicalLookupCall extends LocalLookupCall<Long> {
     public int getDepth() {
       return (Integer) getCustomValue("depth");
     }
-
   }
-
 }

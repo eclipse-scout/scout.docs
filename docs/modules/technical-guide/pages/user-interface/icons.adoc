@@ -1,4 +1,5 @@
 = Icons
+
 include::common:partial$_header.adoc[]
 
 A lot of Scout widgets support icons. For instance a menu item can show an icon
@@ -107,6 +108,7 @@ always available in a Scout project. However, you must avoid naming conflicts,
 since at runtime all files exist on the same classpath.
 
 == How to create a custom icon font
+
 Here's what we do to create and maintain our own icon font _scoutIcons.woff_.
 There may be other methods to achieve the same.
 
@@ -124,32 +126,33 @@ To edit the icon font in IcoMoon follow these steps:
 
 * Import _selection.json_ in IcoMoon, click on the "Import Icons" button.
 * With the _Select_ tool (arrow) you select the icons you want to add to your
-  set. You can also add one or more characters from other icon fonts like
-  FontAwesome by choosing _Add Icons From Library..._
+set. You can also add one or more characters from other icon fonts like
+FontAwesome by choosing _Add Icons From Library..._
 * Your can import your custom SVG graphics with _Import to Set_, which you find
-  in the hamburger menu on the icon set. The SVG graphic should have the same
-  size as the other icons in the set and  must use only a single color,
-  black. The background must be transparent. Hint: the filename of the SVG
-  graphic should contain the unicode of the character in the font in order to
-  simplify maintencance. Only use unicodes from the _Private Use Area_ from
-  U+E000 to U+F8FF.
+in the hamburger menu on the icon set. The SVG graphic should have the same
+size as the other icons in the set and  must use only a single color,
+black. The background must be transparent. Hint: the filename of the SVG
+graphic should contain the unicode of the character in the font in order to
+simplify maintencance. Only use unicodes from the _Private Use Area_ from
+U+E000 to U+F8FF.
 * When you're happy with your icon set, you hit the _Generate Font_ button in
-  the footer in IcoMoon. On the following page you can set the unicode of
-  each icon/character. Click on the prefences button (cog icon), to set the
-  name of your icon font (e.g. scoutIcons). Finally click on _Download_ and
-  you receive a ZIP file which contains the new _selection.json_, and font files
-  like .ttf and .woff.
+the footer in IcoMoon. On the following page you can set the unicode of
+each icon/character. Click on the prefences button (cog icon), to set the
+name of your icon font (e.g. scoutIcons). Finally click on _Download_ and
+you receive a ZIP file which contains the new _selection.json_, and font files
+like .ttf and .woff.
 * When you've added new unicodes to the icon font, you should also update
-   _Icons.java_ and add constants for the new characters. When you're using
-   _Scout JS_ you should also update _icons.js_ and _icons.less_.
+_Icons.java_ and add constants for the new characters. When you're using
+_Scout JS_ you should also update _icons.js_ and _icons.less_.
 * *Important!* don't forget to check in the new _selection.js_ to your SCM.
 
 === Tools
+
 * Windows tool _Character Map_: first you must install your custom TrueType Font
-  .ttf in Windows. Simply double-click on the .ttf file and choose _Install_.
-  After that you can start _Character Map_ and browse through the font.
+.ttf in Windows. Simply double-click on the .ttf file and choose _Install_.
+After that you can start _Character Map_ and browse through the font.
 * The ZIP archive from IcoMoon contains a file _demo.html_. This file shows a
-  preview of your icon font. Works in Chrome, but we had trouble viewing the
-  font with Firefox.
+preview of your icon font. Works in Chrome, but we had trouble viewing the
+font with Firefox.
 * This tool from Wikipedia also creates a preview for an icon font: https://de.wikipedia.org/wiki/Vorlage:Private-Use-Area-Test[Vorlage:Private-Use-Area-Test].
-  Icon font must be installed first.
+Icon font must be installed first.

@@ -42,7 +42,6 @@ public class AbstractHierarchicalTreeMenu extends AbstractMenu {
     protected String getConfiguredText() {
       return "TreeSubSingle";
     }
-
   }
 
   @Order(20)
@@ -57,7 +56,6 @@ public class AbstractHierarchicalTreeMenu extends AbstractMenu {
     protected String getConfiguredText() {
       return "TreeSubMulti";
     }
-
   }
 
   @Order(30)
@@ -72,7 +70,6 @@ public class AbstractHierarchicalTreeMenu extends AbstractMenu {
     protected String getConfiguredText() {
       return "TreeSubEmpty";
     }
-
   }
 
   @Order(40)
@@ -96,7 +93,6 @@ public class AbstractHierarchicalTreeMenu extends AbstractMenu {
       protected String getConfiguredText() {
         return "TreeSubSubSingle";
       }
-
     }
 
     @Order(20)
@@ -111,7 +107,6 @@ public class AbstractHierarchicalTreeMenu extends AbstractMenu {
       protected String getConfiguredText() {
         return "TreeSubSubMulti";
       }
-
     }
 
     @Order(30)
@@ -126,9 +121,6 @@ public class AbstractHierarchicalTreeMenu extends AbstractMenu {
       protected String getConfiguredText() {
         return "TreeSubSubEmpty";
       }
-
     }
-
   }
-
 }

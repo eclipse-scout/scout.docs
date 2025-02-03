@@ -1,4 +1,5 @@
 = Overview
+
 include::common:partial$_header.adoc[]
 
 These pages document https://www.eclipse.org/scout/[Eclipse Scout].

@@ -1,4 +1,5 @@
 = RunContext
+
 include::common:partial$_header.adoc[]
 
 //-----------------------------------------------------------------------------
@@ -12,21 +13,25 @@ All a `RunContext` does is to provide some setter methods to construct the conte
 By default, a `RunContext` is associated with a `RunMonitor`, and the monitor's cancellation status can be queried via `RunMonitor.CURRENT.get().isCancelled()`. The monitor allows for hard cancellation, meaning that the executing thread is interrupted upon cancellation. For instance if waiting on an interruptible construct like `Object.wait()` or `IFuture.awaitDone()`, the waiting thread returns with an interruption exception.
 
 == Factory methods to create a RunContext
+
 Typically, a `RunContext` is created from a respective factory like `RunContexts` to create a `RunContext`, or `ServerRunContexts` to create a `ServerRunContext`, or `ClientRunContexts` to create a `ClientRunContext`. Internally, the `BeanManager` is asked to provide a new instance of the `RunContext`, which allows you to replace the default implementation of a `RunContext` in an easy way. The factories declare two factory methods: `empty()` and `copyCurrent()`. Whereas `empty()` provides you an empty `RunContext`, `copyCurrent()` takes a snapshot of the current calling context and initializes the `RunContext` accordingly. That is useful if only some few values are to be changed, or, if using `ServerRunContext`, to run the code on behalf of a new transaction.
 
 The following <<lst-RunContexts.empty>> illustrates the creation of an empty `RunContext` initialized with a particular `Subject` and `Locale`.
 [[lst-RunContexts.empty]]
+
 [source,java,indent=0]
 .Creation of an empty `RunContext`
 ----
 include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/RunContextSnippet.java[tags=RunContexts.empty]
 ----
+
 <1> create the `Subject` to do some work on behalf
 <2> Create and initialize the `RunContext`
 <3> This code is run on behalf of the `RunContext`
 
 The following <<lst-RunContexts.copyCurrent>> illustrates the creation of a 'snapshot' of the current calling `RunContext` with another `Locale` set.
 [[lst-RunContexts.copyCurrent]]
+
 [source,java,indent=0]
 .Create a copy of the current calling `RunContext`
 ----
@@ -36,9 +41,10 @@ include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclips
 An important difference is related to the `RunMonitor`. By using the `copyCurrent()` factory method, the context's monitor is additionally registered as child monitor of the monitor of the current calling context. That way, a cancellation request to the calling context is propagated down to this context as well. Of course, that behavior can be overwritten by providing another monitor yourself.
 
 == Properties of a RunContext
+
 The following properties are declared on a `RunContext` and are inherited by `ServerRunContext` and `ClientRunContext`.
 
-[cols="10%,80%,10%", options="header"]
+[cols="10%,80%,10%",options="header"]
 |===
 |property |description | accessibility
 
@@ -64,9 +70,10 @@ The following properties are declared on a `RunContext` and are inherited by `Se
 |===
 
 == Properties of a ServerRunContext
+
 A `ServerRunContext` controls propagation of server-side state and sets the transaction boundaries, and is a specialization of `RunContext`.
 
-[cols="10%,80%,10%", options="header"]
+[cols="10%,80%,10%",options="header"]
 |===
 |property |description | accessibility
 
@@ -77,9 +84,9 @@ A `ServerRunContext` controls propagation of server-side state and sets the tran
 |transactionScope
 |To control transaction boundaries. By default, a new transaction is started, and committed or rolled back upon completion.
 
- * Use `TransactionScope.REQUIRES_NEW` to run the code in a new transaction (by default).
- * Use `TransactionScope.REQUIRED` to only start a new transaction if not running in a transaction yet.
- * Use `TransactionScope.MANDATORY` to enforce that the caller is already running in a transaction. Otherwise, a `TransactionRequiredException` is thrown.
+* Use `TransactionScope.REQUIRES_NEW` to run the code in a new transaction (by default).
+* Use `TransactionScope.REQUIRED` to only start a new transaction if not running in a transaction yet.
+* Use `TransactionScope.MANDATORY` to enforce that the caller is already running in a transaction. Otherwise, a `TransactionRequiredException` is thrown.
 | ITransaction.CURRENT.get()
 
 |transaction
@@ -103,9 +110,10 @@ Typically, this node ID is set by ServiceTunnelServlet for the processing of a s
 |===
 
 == Properties of a ClientRunContext
+
 A `ClientRunContext` controls propagation of client-side state, and is a specialization of `RunContext`.
 
-[cols="10%,80%,10%", options="header"]
+[cols="10%,80%,10%",options="header"]
 |===
 |property |description | accessibility
 

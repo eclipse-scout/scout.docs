@@ -1,4 +1,5 @@
 = Composite Field
+
 include::common:partial$_header.adoc[]
 
 A composite field is a special type of xref:user-interface/form-field.adoc[Form Field] that contains other form fields.

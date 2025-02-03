@@ -135,7 +135,6 @@ public class PersonFormTabExtension extends AbstractTabBoxExtension<DetailsBox> 
           protected int getConfiguredWidth() {
             return 120;
           }
-
         }
 
         @Order(4)

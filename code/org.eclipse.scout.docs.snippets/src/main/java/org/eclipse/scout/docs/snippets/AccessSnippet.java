@@ -133,6 +133,5 @@ public class AccessSnippet {
   protected interface ICompanyService {
 
     boolean isOwnCompany(UUID companyId);
-
   }
 }

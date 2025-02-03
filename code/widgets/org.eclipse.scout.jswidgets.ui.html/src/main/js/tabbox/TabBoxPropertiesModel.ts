@@ -8,13 +8,7 @@
  * SPDX-License-Identifier: EPL-2.0
  */
 import {CheckBoxField, SmartField, TabAreaStyle, TabItem, TabItemModel} from '@eclipse-scout/core';
-import {
-  FormFieldPropertiesBox,
-  FormFieldPropertiesBoxWidgetMap,
-  GridDataBox,
-  GridDataBoxWidgetMap,
-  TabAreaStyleLookupCall
-} from '../index';
+import {FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, TabAreaStyleLookupCall} from '../index';
 
 export default (): TabItemModel => ({
   id: 'jswidgets.TabBoxProperties',

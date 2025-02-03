@@ -56,7 +56,6 @@ public class CustomNumberFormatProvider extends NumberFormatProvider {
     availableLocales.addAll(m_customLocales);
     availableLocales.addAll(Arrays.asList(super.getAvailableLocales()));
     m_availableLocales = availableLocales.toArray(new Locale[0]);
-
   }
 
   @Override
@@ -106,5 +105,4 @@ public class CustomNumberFormatProvider extends NumberFormatProvider {
     }
     return countryDefaultLocale;
   }
-
 }

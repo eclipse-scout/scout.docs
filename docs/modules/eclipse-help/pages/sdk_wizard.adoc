@@ -1,4 +1,5 @@
 === Scout Wizards
+
 include::partial$_initDoc.adoc[]
 
 The Scout SDK provides a set of wizards to create new Scout projects and various components for your Scout applications.
@@ -32,6 +33,7 @@ Content assistance for the String parameter in `TEXTS.get()` is added to the Jav
 Adding additional translated languages with the <<sdk_wizard_language.adoc#, Add a Language Wizard>> is handled in the <<sdk_editor_nls.adoc#nls-editor, NLS Editor>>.
 
 '''
+
 Go back to the <<sdk.adoc#scout-tooling, Scout Tooling>>.
 
 :_footer-link-path: build/eclipse_help/src/docs/{docname}.adoc

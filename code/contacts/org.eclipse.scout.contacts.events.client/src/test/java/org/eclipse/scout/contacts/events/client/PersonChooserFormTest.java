@@ -66,5 +66,4 @@ public class PersonChooserFormTest {
     List<? extends ILookupRow<String>> res = f.getPersonField().callBrowseLookup(100);
     assertEquals(0, res.size());
   }
-
 }

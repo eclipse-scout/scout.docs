@@ -1,18 +1,20 @@
 = Desktop
+
 include::common:partial$_header.adoc[]
 
 The desktop is the root widget of every Scout application.
 The default desktop consists of 3 areas:
 
 . Navigation +
-  Displays an xref:user-interface/outline.adoc[Outline] with xref:user-interface/page.adoc[Pages]
+Displays an xref:user-interface/outline.adoc[Outline] with xref:user-interface/page.adoc[Pages]
 . Header +
-  Shows the tabs of views and a toolbar with menus. +
-  A view is a display mode of a xref:user-interface/form.adoc[Form].
+Shows the tabs of views and a toolbar with menus. +
+A view is a display mode of a xref:user-interface/form.adoc[Form].
 . Bench +
-  Contains the content of the active view or active page.
+Contains the content of the active view or active page.
 
 == Desktop Bench Layout
+
 The layout of the desktop bench can be configured using the `IDesktop.setBenchLayoutData` method. This property is observed and might be changed during the application lifecycle.
 The desktop consists out of 9 view stacks (see <<img-benchLayout-overview>>). Each form can be assigned to a single view stack using the property DisplayViewId (`IForm.getConfiguredDisplayViewId`).
 If multiple forms are assigned to the same view stack the views will be displayed as tabs where the top form is visible and the corresponding tab selected.
@@ -29,10 +31,12 @@ Within a column the north, center and south parts can not differ in their width.
 The modifications (splitter movements) are cached  when a cache key (`BenchLayoutData.withCacheKey`) is set. In case the cache key is null the layout starts always with the initial values.
 
 An example of a bench layout data configuration with a fixed north (N) view stack and a south (S) view stack with a minimal size. See `org.eclipse.scout.rt.client.ui.desktop.bench.layout.FlexboxLayoutData` API for the documentation of the properties.
+
 [source,java,indent=0]
 ----
 include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/BenchLayoutSnippet.java[tags=BenchLayoutSample]
 ----
+
 <1> set the `BenchLayoutData` to the desktop.
 <2> set a cache key to store the layout modifications (dragging splitters) to the session store. Aware the settings are stored to the browsers session store they are not transferred over different browsers nor systems.
 <3> configure the center column (N, C, S).
