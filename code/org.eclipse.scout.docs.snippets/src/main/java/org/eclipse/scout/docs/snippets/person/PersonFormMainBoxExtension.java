@@ -18,6 +18,7 @@ import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 
 //tag::PersonFormMainBoxExtension[]
+
 /**
  * Extension for the MainBox of the PersonForm
  */

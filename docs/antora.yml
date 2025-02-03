@@ -8,10 +8,10 @@ asciidoc:
     sectanchors: true
     page-pagination: true
 nav:
-- modules/ROOT/nav.adoc
-- modules/getstarted/nav.adoc
-- modules/technical-guide/nav.adoc
-- modules/sdk/nav.adoc
-- modules/howtos/nav.adoc
-- modules/releasenotes/nav.adoc
-- modules/migration/nav.adoc
+  - modules/ROOT/nav.adoc
+  - modules/getstarted/nav.adoc
+  - modules/technical-guide/nav.adoc
+  - modules/sdk/nav.adoc
+  - modules/howtos/nav.adoc
+  - modules/releasenotes/nav.adoc
+  - modules/migration/nav.adoc

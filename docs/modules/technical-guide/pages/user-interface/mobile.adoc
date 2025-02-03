@@ -1,4 +1,5 @@
 = Mobile Support
+
 include::common:partial$_header.adoc[]
 
 [[img-mobile-support]]
@@ -11,6 +12,7 @@ Scout applications are mobile capable, meaning that they can be used on portable
 * Device Transformation
 
 == Responsive and Touch Capable Widgets
+
 Responsive design in context of a web application means that the design reacts to screen size changes.
 A Scout application does not use responsive design for the whole page, but many widgets itself may change the appearance when they don't fit into screen.
 
@@ -37,6 +39,7 @@ image::common:tooltip.png[]
 Another widget that will react to changing sizes is the group box. Once a group box becomes smaller than its preferred width it will transform its internal fields. Example: For all internal fields the labelPosition will be set to 'top' to give the field more horizontal space.
 [[img-responsive-groupbox]]
 .Responsive group box
+
 image::common:responsive_groupbox.png[]
 
 Those transformations are handled by `scout.GroupBoxResponsiveHandler` and managed by `scout.ResponsiveManager`. The manager decides when to switch to a responsive mode and back. If desired, the responsive transformations can be completely disabled by calling `scout.responsiveManager.setActive(false)`.
@@ -46,6 +49,7 @@ By default, all the main boxes will be responsive. In order to exclude a group b
 ----
 include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/mobile/ResponsiveSnippet.java[tags=DisableResponsive]
 ----
+
 The handler is called when the manager detects a changed responsive state to perform its transformations.
 There are three responsive modes, of which only the first two are supported in scout classic.
 

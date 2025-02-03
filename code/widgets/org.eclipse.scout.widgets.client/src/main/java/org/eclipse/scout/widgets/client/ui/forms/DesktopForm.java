@@ -254,7 +254,6 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
           return TEXTS.get("RemoveNotification");
         }
 
-
         @Override
         protected void execClickAction() {
           IDesktop desktop = IDesktop.CURRENT.get();

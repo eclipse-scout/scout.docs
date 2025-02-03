@@ -1,4 +1,5 @@
 = Client Notifications
+
 include::common:partial$_header.adoc[]
 
 //-----------------------------------------------------------------------------
@@ -41,7 +42,7 @@ In case of multiple server nodes, the client notifications are synchronized usin
 image::common:cn_long_polling.png[]
 
 Client notifications are implemented using `long polling` as described below, because long polling works reliably in most corporate networks with proxy servers between server and client
- as well as with security policies that do not allow server push.
+as well as with security policies that do not allow server push.
 
 With long polling, the client requests notifications from the server repeatedly. If no new notifications are available on the server, instead of sending an empty response,
 the server holds the request open and waits until new notifications are available or a timeout is reached.
@@ -49,6 +50,7 @@ the server holds the request open and waits until new notifications are availabl
 In addition to the long polling mechanism, pending client notifications are also transferred to the client along with the response of regular client requests.
 
 == Components
+
 A client notification can be published on the server using the `ClientNotificationRegistry`.
 Publishing can be done either in a non-transactional or transactional way (only processed, when the transaction is committed).
 
@@ -108,6 +110,7 @@ Generally, it makes sense to distribute the client notifications automatically t
 It is however also possible to publish client notifications without cluster distribution. E.g. in case of client notifications already received from other cluster nodes.
 
 === Coalescing Notifications
+
 It is possible that a service generates a lot of client notifications that are obsolete once a newer notification is created.
 In this case a coalescer can be created to reduce the notifications:
 
@@ -122,6 +125,7 @@ include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclips
 The `ClientNotificationDispatcher` is responsible for dispatching the client notifications to the correct handler.
 
 === Creating a Client Notification Handler
+
 To create a new client notification handler for a specific client notification, all you need to do is creating a class implementing
 `org.eclipse.scout.rt.shared.notification.INotificationHandler<T>`, where `T` is the type (or subtype) of the notification to handle.
 
@@ -139,6 +143,7 @@ Sometimes it is necessary to start and stop handling notification dynamically, (
 can be used to add and remove listeners.
 
 === Asynchronous Dispatching
+
 Dispatching is always done asynchronously. However, in case of transactional notifications,
 a service call blocks until all transactional notifications returned with the service response are handled.
 
@@ -153,6 +158,7 @@ include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclips
 In the example above, it is guaranteed, that the codetype is up-to-date as soon as reloadCodeType is finished.
 
 === Updating Scout Model
+
 Notification handlers are never called from a scout model thread.
 If the scout model needs to be updated when handling notifications, a model job needs to be created for that task.
 

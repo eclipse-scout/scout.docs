@@ -37,5 +37,4 @@ public class TableFormPage extends FormPage implements IAdvancedFormPage {
   protected void execCreateChildPages(List<IPage<?>> pageList) {
     pageList.add(new FormPage(HierarchicalTableFieldForm.class));
   }
-
 }

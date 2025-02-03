@@ -50,7 +50,7 @@ public class SuperUserRunContextProducer extends ServerRunContextProducer {
    * This method delegates to {@link #produce()}, meaning that the subject specified is ignored.
    *
    * @param subject
-   *          is ignored, and {@link SuperUserRunContextProducer#getSubject()} used instead.
+   *     is ignored, and {@link SuperUserRunContextProducer#getSubject()} used instead.
    * @see #produce()
    */
   @Override

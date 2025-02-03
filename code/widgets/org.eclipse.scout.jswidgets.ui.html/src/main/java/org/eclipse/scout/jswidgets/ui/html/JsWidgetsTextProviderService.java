@@ -19,5 +19,4 @@ public class JsWidgetsTextProviderService extends AbstractDynamicNlsTextProvider
   public String getDynamicNlsBaseName() {
     return "org.eclipse.scout.jswidgets.ui.html.texts.Texts";
   }
-
 }

@@ -132,7 +132,6 @@ public class AccordionFieldForm extends AbstractForm implements IAdvancedExample
             m_groupsAddedCount = 0;
           }
         }
-
       }
 
       @Order(1200)
@@ -188,7 +187,6 @@ public class AccordionFieldForm extends AbstractForm implements IAdvancedExample
 
         }
       }
-
     }
 
     @Order(200)
@@ -247,7 +245,6 @@ public class AccordionFieldForm extends AbstractForm implements IAdvancedExample
           setValue(getAccordionField().getAccordion().isScrollable());
         }
       }
-
     }
 
     @Order(300)
@@ -326,7 +323,5 @@ public class AccordionFieldForm extends AbstractForm implements IAdvancedExample
         return false;
       }
     }
-
   }
-
 }

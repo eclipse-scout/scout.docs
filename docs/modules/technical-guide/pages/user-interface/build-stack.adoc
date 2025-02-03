@@ -1,4 +1,5 @@
 = Build Stack
+
 include::common:partial$_header.adoc[]
 
 JavaScript and CSS assets of a typical Scout application are built by  https://webpack.js.org/[Webpack] using https://www.npmjs.com/[npm] and https://nodejs.org/[Node.js]. In order to make the building as easy as possible for you, there is a https://www.npmjs.com/package/@eclipse-scout/cli[CLI] module available. That module contains a default webpack and karma configuration and several build scripts you can use. The goal is to reduce the time you need to setup your build to a minimum. If you have created your Scout project using a Scout archetype, it should all be already setup for you. Nevertheless, you will get to a point where it is important to know how the building works in detail and how the several build tools are wired together. If you are there, this chapter should help you out.
@@ -12,6 +13,7 @@ This setup gives you the possibility to easier integrate and update 3rd party Ja
 Scout itself is also published to that registry and will therefore be downloaded automatically once you execute `npm install`, as long as your `package.json` contains a Scout dependency. You will recognize a Scout module based on its name: all official Scout modules are published using the scope `@eclipse-scout`. The most important one is https://www.npmjs.com/package/@eclipse-scout/core[@eclipse-scout/core] which contains the core runtime functionality. Other modules are https://www.npmjs.com/package/@eclipse-scout/cli[@eclipse-scout/cli] for the building support, https://www.npmjs.com/package/@eclipse-scout/eslint-config[@eclipse-scout/eslint-config] for our ESLint rules, or https://www.npmjs.com/package/@eclipse-scout/karma-jasmine-scout[@eclipse-scout/karma-jasmine-scout] for enhanced testing support.
 
 === ES6 Modules
+
 In addition to Node module dependencies, a Scout application uses ES6 imports to define dependencies between each JavaScript files. So if you want to use a class or utility from `@eclipse-scout/core`, you'll need to import that class or utility in your own JavaScript file.
 
 [source,javascript]
@@ -31,6 +33,7 @@ export class PersonForm extends Form {
 In the code above there are two imports defined: the first one imports the file `PersonFormModel` into the variable PersonFormModel. The second one imports the class `Form` and the utility `models` from the scout core module. Notice that the first import directly addresses a specific file while the second import addresses the node module itself. This is possible because Scout provides an `index` file specifying all available exports. That file is linked in the `package.json`. If your application contains more than one Node modules as well, you can do the same.
 
 == Webpack Configuration
+
 Scout provides a default Webpack configuration containing all the necessary settings for Webpack and the plugins needed for a typical Scout application setup. To make your application use the Scout defaults, you need to create a file called `webpack.config.js` in your Node module and reexport the Scout configuration.
 
 [source,javascript]
@@ -101,13 +104,15 @@ In the snippet above the `resDir` array contains a folder of your module and a f
 When the build runs all the folders specified by the `resDir` array are visited and the resources collected. These resources are then available under `/` (if you use the Scout backend). If you want to know how to start the build, have a look at the <<Command Line Interface (CLI)>>.
 
 === EcmaScript Transpiler
+
 In order to use the latest EcmaScript features like the <<ES6 Modules>> but still support older browsers, Scout uses https://babeljs.io/[Babel] to transpile ES6+ code into ES5. The transpiler is enabled by default if you use the Webpack configuration provided by Scout, so you don't have to configure it by yourself.
 
 === CSS Preprocessor
+
 The CSS preprocessor used by Scout is http://lesscss.org/[Less], so the default webpack configuration already supports it by using the `less-loader` plugin. In order to profit from Scout`s less variables (see xref:technical-guide:user-interface/styling.adoc[]) we recommend to use Less as well. Since it is already configured, you won't have to do anything but to write your CSS rules.
 
-
 == Karma Configuration
+
 Scout uses https://karma-runner.github.io/[Karma] as test runner for its unit tests. The tests itself are written with the test framework https://jasmine.github.io/[Jasmine]. We also use some plugins like https://www.npmjs.com/package/karma-jasmine-jquery[karma-jasmine-jquery], https://www.npmjs.com/package/karma-jasmine-ajax[karma-jasmine-ajax] or https://www.npmjs.com/package/@eclipse-scout/karma-jasmine-scout[karma-jasmine-scout] to make writing tests for a Scout application even easier.
 
 All this is configured in the file `karma-defaults.js`. If you want to use them too, you need to provide your own Karma file called `karma.conf.js` and import the defaults, similar to the <<Webpack Configuration>>. You can now adjust or override the defaults or just leave them as they are. To let Karma know about your tests, you need to define the entry point.
@@ -135,10 +140,12 @@ JasmineScout.runTestSuite(context);
 This code tells the https://www.npmjs.com/package/karma-webpack[karma-webpack] plugin to require all files ending in `Spec.js`. This will generate one big test bundle, but since source maps are enabled, you can debug the actual test files easily. The last line installs the given context and also runs a Scout app so that the Scout environment is properly set up.
 
 === Reporting
+
 After running the tests, all results are put in a folder called `test-results`. There is a sub folder for each browser that executed the tests containing a file called `test-results.xml`. Since the `karma-defaults.js` uses the `junit` reporter, the file can be interpreted by any tool supporting the `junit` format, e.g. Jenkins.
 
 [#command-line-interface-cli]
 == Command Line Interface (CLI)
+
 The Scout CLI is a bunch of npm-scripts that help you building and testing your application. In order to use them you need to add a devDependency to https://www.npmjs.com/package/@eclipse-scout/cli[@eclipse-scout/cli] to the `package.json` of your module. We also suggest to add some scripts to make the execution easier. If you use the Scout archetype, the following will be created for you.
 
 [source,JSON]
@@ -159,6 +166,7 @@ The Scout CLI is a bunch of npm-scripts that help you building and testing your 
 ----
 
 === Building
+
 Before you can open your application in the browser, you need to build it. The build takes all your source code and resources and creates the artifacts needed for the browser according to your <<Webpack Configuration>>. Once the build is complete all the produced artifacts are put in the `target/dist` folder.
 
 The `target/dist` folder contains three sub folders:
@@ -187,6 +195,7 @@ This will also build your application but additionally starts a watcher that wat
 
 [[webpack-arguments]]
 ==== Arguments
+
 The build commands accept some arguments you can use to adjust the build without modifying your webpack config file. The following arguments are available:
 
 . mode: `development` or `production`. This argument is set automatically when using build:dev or build:prod.
@@ -203,6 +212,7 @@ In order to set an argument make sure to separate the arguments using \-- from t
 All arguments are passed to the webpack config file as parameter `args` which is the second parameter. The first parameter called `env` is actually just a convenience accessor to `args.env` and does not contain system environment variables. If you want to access them just use the regular node syntax `process.env`.
 
 === Testing
+
 Before you can run your unit tests you need to properly setup the files as described in <<Karma Configuration>>.
 
 If all is setup correctly, you can run your tests using the following command:
@@ -220,6 +230,7 @@ This will start a real browser and enable the watch mode. This means every time 
 TIP: If you don't like the automatic browser reloading, you can press debug on the top right corner of the browser or manually navigate to http://localhost:9876/debug.html.
 
 ==== Arguments
+
 The test commands accept some arguments you can use to adjust the karma runner without modifying your karma config file.
 All passed arguments are merged with the karma config object, so all karma configuration options are available (see http://karma-runner.github.io/4.0/config/configuration-file.html).
 
@@ -350,6 +361,7 @@ During development, the `publishConfig` has no effect.
   <master_skip_copy_webpack_build_output>true</master_skip_copy_webpack_build_output>
 </properties>
 ----
+
 This prevents the Maven build to include the transpiled JavaScript code in the jar. It is not required there as it will be provided by the Node module instead.
 . Consult the https://webpack.js.org/guides/author-libraries/[Webpack Guide] if you want to learn more about authoring libraries in general.
 
@@ -430,8 +442,8 @@ const config = baseConfig(env, args);
 ----
 
 Then, make sure every library will be built by specifying the run argument in the `package.json`:
-[source,json]
 
+[source,json]
 ----
 {
   "scripts": {

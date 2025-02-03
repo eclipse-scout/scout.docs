@@ -1,4 +1,5 @@
 = Hello Scout JS Full Stack
+
 include::common:partial$_header.adoc[]
 
 == Introduction
@@ -29,6 +30,7 @@ include::common:partial$InstallIntelliJ.adoc[]
 include::common:partial$CreateNewJsProjectIntellij.adoc[]
 
 == What's Next?
+
 To learn more about Scout JS, we recommend having a look at the other Scout JS Hello World tutorials and the xref:technical-guide:technical-guide.adoc[Technical Guide].
 
 To see more example code of Scout JS, you should have a look at the {jswidgets}[Scout JS Widgets] application

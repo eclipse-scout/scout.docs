@@ -16,5 +16,4 @@ public interface IWidgetsOutline extends IOutline {
   String PROP_DESCRIPTION = "description";
 
   String getDescription();
-
 }

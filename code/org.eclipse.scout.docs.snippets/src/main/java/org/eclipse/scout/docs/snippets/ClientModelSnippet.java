@@ -42,5 +42,4 @@ public class ClientModelSnippet {
     formField3.isEnabledIncludingParents(); // <9>
     // end::DimensionSamples[]
   }
-
 }

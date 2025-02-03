@@ -1,4 +1,5 @@
 = How to Create a Chart
+
 include::common:partial$_header.adoc[]
 
 This cheat sheet shows how to create your own chart for a Scout application. In this example we will visualize the sold scoops of an ice cream shop.

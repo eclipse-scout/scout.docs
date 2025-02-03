@@ -60,7 +60,5 @@ public class FixedCenterColumnNodePage extends AbstractBenchLayoutPageWithNodes 
     e1.setDisplayParent(getOutline());
     e1.startPageForm();
     formList.add(e1);
-
   }
-
 }

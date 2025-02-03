@@ -27,5 +27,4 @@ public class JsonObjectFactory extends AbstractJsonObjectFactory {
     }
     return null;
   }
-
 }

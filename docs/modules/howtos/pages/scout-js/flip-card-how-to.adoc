@@ -1,9 +1,11 @@
 = How to Create a Custom Field
+
 include::common:partial$_header.adoc[]
 
 This cheat sheet shows how to implement your own custom field for a ScoutJS application. In this example we will write a FlipCard field that will show a playing card. Clicking on the card will flip it from one side to the other.
 
 == Setup
+
 For this example we use the helloscout git repository, but you can easily create the field in your own code base as well. In case you want to use the helloscout repo, clone and import it into your favourite IDE:
 
  git clone https://github.com/bsi-software/helloscout.git
@@ -40,6 +42,7 @@ export * from './flipcard/FlipCardField';
 == Minimal Code for a New FormField
 
 === Create a Minimal FormField
+
 The FlipCard will inherit from FormField. Every form field consists of a container, a label, the actual field, a mandatory-indicator and a status.
 
 .FlipCardField.ts
@@ -87,6 +90,7 @@ Don't forget to add the types as well because JQuery does not include them.
 ----
 
 === Add the FlipCard to the HelloForm
+
 Don't forget to add the `import` for your `FlipCardField`.
 
 .HelloFormModel.ts
@@ -127,6 +131,7 @@ export default (): FormModel => ({
   }
 });
 ----
+
 <1> The FlipCard field
 
 Now reload your browser and you should get the following result:
@@ -216,6 +221,7 @@ export class FlipCardField extends FormField {
   }
 }
 ----
+
 <1> Create the dom elements in the render function.
 <2> Add event handler which toggles the CSS class `flipped`.
 <3> Initial rendering of the properties. Applies the state to the DOM.
@@ -223,7 +229,6 @@ export class FlipCardField extends FormField {
 
 .HelloFormModel.ts
 [source,typescript]
-
 ----
 import {FlipCardField} from '../index';
 
@@ -263,6 +268,7 @@ export default {
   }
 }
 ----
+
 <1> FlipCard field is inserted after the name field.
 
 .FlipCardField.less
@@ -301,6 +307,7 @@ export default {
   }
 }
 ----
+
 <1> Animation of the card.
 <2> Ensure back side is not visible.
 <3> Rotation to back side.

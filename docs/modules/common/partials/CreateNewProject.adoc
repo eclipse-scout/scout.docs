@@ -1,4 +1,3 @@
-
 ifndef::finaldoc[]
 include::partial$_initDoc.adoc[]
 endif::finaldoc[]

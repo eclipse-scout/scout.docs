@@ -126,5 +126,4 @@ public class StringFieldForm2 extends AbstractForm implements IPageForm {
 
   public class PageFormHandler extends AbstractFormHandler {
   }
-
 }

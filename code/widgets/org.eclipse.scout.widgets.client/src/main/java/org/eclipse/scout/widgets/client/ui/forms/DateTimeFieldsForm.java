@@ -1375,7 +1375,6 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
             field.setValue(field.getValue()); // revalidate
           }
         }
-
       }
 
       @Order(40)
@@ -1591,7 +1590,6 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           updateDateTimeFields(d);
         }
       }
-
     }
 
     @Order(20)

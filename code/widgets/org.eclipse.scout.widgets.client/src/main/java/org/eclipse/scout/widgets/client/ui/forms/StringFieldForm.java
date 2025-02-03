@@ -872,7 +872,6 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         protected void execChangedValue() {
           getTextInputField().setEnabled(getValue(), true, true);
         }
-
       }
 
       @Order(130)

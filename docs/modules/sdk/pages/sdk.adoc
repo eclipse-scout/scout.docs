@@ -1,4 +1,5 @@
 = Scout SDK
+
 include::common:partial$_header.adoc[]
 
 Scout provides plugins for IntelliJ and Eclipse that support developing Eclipse Scout applications.

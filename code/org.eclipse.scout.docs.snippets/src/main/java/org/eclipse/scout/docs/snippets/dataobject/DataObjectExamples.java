@@ -230,7 +230,6 @@ public class DataObjectExamples {
           throw new AssertionException("unsupported status value '{}'", value);
       }
     }
-
   }
   //end::exampleEnum[]
 

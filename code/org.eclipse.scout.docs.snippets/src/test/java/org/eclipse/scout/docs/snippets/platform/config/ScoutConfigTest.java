@@ -58,5 +58,4 @@ public class ScoutConfigTest {
 
     BEANS.getBeanManager().unregisterClass(ApplicationNamePropertyRedirection.class);
   }
-
 }

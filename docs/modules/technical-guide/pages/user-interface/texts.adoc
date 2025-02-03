@@ -1,4 +1,5 @@
 = Texts
+
 include::common:partial$_header.adoc[]
 
 The `TEXTS` class is a convenience class to access the default Text Provider Service used for the localization of the texts in the user interface.

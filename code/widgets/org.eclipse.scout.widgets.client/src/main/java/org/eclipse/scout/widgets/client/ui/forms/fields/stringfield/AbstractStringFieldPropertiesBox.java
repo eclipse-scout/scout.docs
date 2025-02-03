@@ -69,5 +69,4 @@ public abstract class AbstractStringFieldPropertiesBox extends AbstractPropertie
       m_field.setInputMasked(getValue());
     }
   }
-
 }

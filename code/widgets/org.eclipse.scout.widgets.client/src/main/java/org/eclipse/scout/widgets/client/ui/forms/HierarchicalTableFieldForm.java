@@ -303,7 +303,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
             }
           }
           return result;
-
         }
 
         private int getRowLevel(ITableRow row, Map<ITableRow, ITableRow> childToParent) {
@@ -451,7 +450,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
                     }
                   }
                 });
-
           }
 
           @Order(10)
@@ -467,7 +465,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
             protected boolean getConfiguredPrimaryKey() {
               return true;
             }
-
           }
 
           @Order(15)
@@ -508,7 +505,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
             protected int getConfiguredWidth() {
               return 120;
             }
-
           }
 
           @Order(30)
@@ -529,7 +525,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
             protected int getConfiguredWidth() {
               return 150;
             }
-
           }
 
           @Order(40)
@@ -620,7 +615,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
             protected int getConfiguredWidth() {
               return 80;
             }
-
           }
 
           @Order(60)
@@ -646,7 +640,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
             protected Class<? extends ILookupCall<Locale>> getConfiguredLookupCall() {
               return LocaleLookupCall.class;
             }
-
           }
 
           @Order(70)
@@ -703,7 +696,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
             protected int getConfiguredWidth() {
               return 120;
             }
-
           }
 
           @Order(90)
@@ -729,7 +721,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
             protected int getConfiguredWidth() {
               return 120;
             }
-
           }
 
           @Order(92)
@@ -799,7 +790,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
             protected int getConfiguredWidth() {
               return 60;
             }
-
           }
 
           @Order(110)
@@ -835,7 +825,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
             protected String getConfiguredHeaderTooltipText() {
               return "Icon only";
             }
-
           }
 
           @Order(130)
@@ -912,7 +901,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
                 cell.setBackgroundColor("f99494");
               }
             }
-
           }
 
           @Order(140)
@@ -1135,7 +1123,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
                 ModelJobs.schedule(TableField.this::newRow, ModelJobs.newInput(ClientRunContexts.copyCurrent())
                     .withExecutionTrigger(Jobs.newExecutionTrigger()
                         .withStartIn(2, TimeUnit.SECONDS)));
-
               }
             }
 
@@ -1333,7 +1320,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
               return HORIZONTAL_ALIGNMENT_RIGHT;
             }
           }
-
         }
       }
     }
@@ -1515,7 +1501,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           protected void execInitField() {
             setValue(getTableField().getTable().isAutoResizeColumns());
           }
-
         }
 
         @Order(85)
@@ -1558,7 +1543,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           protected void execInitField() {
             setValue(false);
           }
-
         }
 
         @Order(90)
@@ -1789,7 +1773,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
               setValue(false);
             }
           }
-
         }
 
         @Order(135)
@@ -1862,7 +1845,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
             setValue(getTableField().getTable().isRowIconVisible());
             getDefaultIconIdField().setVisible(getValue());
           }
-
         }
 
         @Order(150)
@@ -1893,7 +1875,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           protected void execInitField() {
             setValue(getTableField().getTable().getNameColumn().isTextWrap());
           }
-
         }
 
         @Order(160)

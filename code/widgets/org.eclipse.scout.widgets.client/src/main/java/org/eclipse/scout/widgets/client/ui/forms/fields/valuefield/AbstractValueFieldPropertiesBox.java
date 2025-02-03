@@ -103,5 +103,4 @@ public abstract class AbstractValueFieldPropertiesBox<V> extends AbstractPropert
       m_field.setClearable(getValue());
     }
   }
-
 }

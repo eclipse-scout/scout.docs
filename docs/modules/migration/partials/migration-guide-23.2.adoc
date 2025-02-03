@@ -274,6 +274,7 @@ Even though it was already bad practise to set a value without using the setter,
 If you do so now, you will replace the computed value instead of setting the default dimension, which may result in unexpected behavior.
 
 Please check in your code, if you set the following properties directly and replace them with the corresponding setter.
+
 [source,javascript]
 ----
 Widget.visible = value -> Widget.setVisible(value)

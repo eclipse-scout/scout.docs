@@ -10,6 +10,7 @@
 package org.eclipse.scout.docs.snippets.platform.config;
 
 //tag::ConfigProperties[]
+
 import org.eclipse.scout.rt.platform.config.AbstractLongConfigProperty;
 
 /**

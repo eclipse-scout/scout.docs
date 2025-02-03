@@ -52,7 +52,6 @@ public class ConfigurableRowBenchLayoutNodePage extends AbstractBenchLayoutPageW
     SouthForm bottom = new SouthForm();
     bottom.start();
     formList.add(bottom);
-
   }
 
   @ClassId("b88bd47c-54b3-49cb-88e4-448b3c4dda12")
@@ -73,7 +72,6 @@ public class ConfigurableRowBenchLayoutNodePage extends AbstractBenchLayoutPageW
       benchLayoutData.getCenter().withNorth(layoutData);
       getDesktop().setBenchLayoutData(benchLayoutData);
     }
-
   }
 
   @ClassId("824b1cca-c378-4980-be7f-06fa7cf6dc34")
@@ -115,5 +113,4 @@ public class ConfigurableRowBenchLayoutNodePage extends AbstractBenchLayoutPageW
       getDesktop().setBenchLayoutData(benchLayoutData);
     }
   }
-
 }

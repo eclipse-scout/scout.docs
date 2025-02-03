@@ -423,77 +423,77 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
           return 1;
         }
 
-      @Order(120)
-      @ClassId("bb607192-82db-4507-a7a2-d7750f2a29c3")
-      public class BigIntegerField extends AbstractBigIntegerField {
+        @Order(120)
+        @ClassId("bb607192-82db-4507-a7a2-d7750f2a29c3")
+        public class BigIntegerField extends AbstractBigIntegerField {
 
-        @Override
-        protected String getConfiguredLabel() {
+          @Override
+          protected String getConfiguredLabel() {
             return TEXTS.get("Default");
-        }
-      }
-
-      @Order(130)
-      @ClassId("80ede0e8-7375-40c9-aaa9-cf3916ac162b")
-      public class BigIntMandatoryField extends AbstractBigIntegerField {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Mandatory");
-        }
-
-        @Override
-        protected boolean getConfiguredMandatory() {
-          return true;
-        }
-      }
-
-      @Order(140)
-      @ClassId("63f13466-e690-493a-9b50-48b5448b0321")
-      public class BigIntDisabledField extends AbstractBigIntegerField {
-
-        @Override
-        protected boolean getConfiguredEnabled() {
-          return false;
-        }
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Disabled");
-        }
-
-        @Override
-        protected void execInitField() {
-          setValue(BigInteger.valueOf(5));
-        }
-      }
-
-      @Order(150)
-      @ClassId("4d9715b3-c49f-4032-934e-26b3076dcd9d")
-      public class BigIntStyledField extends AbstractBigIntegerField {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Styled");
-        }
-
-        @Override
-        protected void execChangedValue() {
-          if (getValue().signum() < 0) {
-            setForegroundColor("FF0000");
-          }
-          else {
-            setForegroundColor("0000FF");
           }
         }
 
-        @Override
-        protected void execInitField() {
-          setValue(BigInteger.valueOf(-3));
-          interceptChangedValue();
+        @Order(130)
+        @ClassId("80ede0e8-7375-40c9-aaa9-cf3916ac162b")
+        public class BigIntMandatoryField extends AbstractBigIntegerField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Mandatory");
+          }
+
+          @Override
+          protected boolean getConfiguredMandatory() {
+            return true;
+          }
+        }
+
+        @Order(140)
+        @ClassId("63f13466-e690-493a-9b50-48b5448b0321")
+        public class BigIntDisabledField extends AbstractBigIntegerField {
+
+          @Override
+          protected boolean getConfiguredEnabled() {
+            return false;
+          }
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Disabled");
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(BigInteger.valueOf(5));
+          }
+        }
+
+        @Order(150)
+        @ClassId("4d9715b3-c49f-4032-934e-26b3076dcd9d")
+        public class BigIntStyledField extends AbstractBigIntegerField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Styled");
+          }
+
+          @Override
+          protected void execChangedValue() {
+            if (getValue().signum() < 0) {
+              setForegroundColor("FF0000");
+            }
+            else {
+              setForegroundColor("0000FF");
+            }
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(BigInteger.valueOf(-3));
+            interceptChangedValue();
+          }
         }
       }
-    }
     }
 
     @Order(20)

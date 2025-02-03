@@ -1,4 +1,5 @@
 = Scout SDK Testing Procedure
+
 include::common:partial$_header.adoc[]
 
 After installing the Eclipse Scout package you are ready for testing the SDK version

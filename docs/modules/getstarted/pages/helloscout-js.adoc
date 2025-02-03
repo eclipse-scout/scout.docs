@@ -1,4 +1,5 @@
 = Hello Scout JS
+
 include::common:partial$_header.adoc[]
 
 ifndef::source-highlighter[:source-highlighter: coderay]

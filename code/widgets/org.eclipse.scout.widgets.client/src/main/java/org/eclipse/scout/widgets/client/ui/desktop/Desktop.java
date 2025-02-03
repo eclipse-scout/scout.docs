@@ -209,7 +209,6 @@ public class Desktop extends AbstractDesktop {
         ClientSessionProvider.currentSession().stop();
       }
     }
-
   }
 
   @Order(10)

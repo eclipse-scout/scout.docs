@@ -1,4 +1,5 @@
 = Form
+
 include::common:partial$_header.adoc[]
 
 A form is typically used for two purposes:
@@ -26,6 +27,7 @@ To display the form, just set one of the above display hints and call `form.open
 Beside opening the form as separate dialog or view, you can also embed it into any other widget because it is actually a widget by itself. Just call `form.render()` for that purpose.
 
 == Form Lifecycle
+
 When working with forms, you likely want to load, validate and save data as well. The form uses a so called `FormLifecycle` to manage the state of that data. The lifecycle is installed by default, so you don't have to care about it. So whenever the user enters some data and presses the save button, the data is validated and if invalid, a message is shown. If it is valid the data will be saved. The following functions of a form may be used to control that behavior.
 
 * **open**: calls `load` and displays the form once the loading is complete.

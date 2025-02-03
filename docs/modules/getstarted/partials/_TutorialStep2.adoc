@@ -1,4 +1,3 @@
-
 //-----------------------------------------------------------------------------
 //WARNING: this file is a text module, it needs to be embedded in a master asciidoctor document.
 //-----------------------------------------------------------------------------
@@ -175,6 +174,7 @@ To configure this column as an invisible primary key we modify the newly created
 ----
 include::common:example$contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonTablePage.java[tags=PersonIdColumn]
 ----
+
 <1> Returning `false` here makes this column invisible. As this column will be excluded from the table control the user is not aware of the existence of this column.
 <2> Returning `true` marks this attibute as a primary key (or part of a primary key)
 

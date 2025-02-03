@@ -30,5 +30,4 @@ public class AbstractSeleniumTestMenu extends AbstractMenu {
   protected String getConfiguredText() {
     return TEXTS.get("Selenium");
   }
-
 }

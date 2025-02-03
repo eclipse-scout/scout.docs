@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {Button, LabelField, NumberField, SequenceBox, SequenceBoxModel} from '@eclipse-scout/core';
+import {Button, LabelField, SequenceBox, SequenceBoxModel} from '@eclipse-scout/core';
 
 export default (): SequenceBoxModel => ({
   objectType: SequenceBox,
