@@ -317,7 +317,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
           protected String execFormatValue(Locale value) {
             String displayText = super.execFormatValue(value);
             if (m_formatValue && StringUtility.hasText(displayText)) {
-              displayText = "[Formated] " + displayText;
+              displayText = "[Formatted] " + displayText;
             }
             return displayText;
           }
