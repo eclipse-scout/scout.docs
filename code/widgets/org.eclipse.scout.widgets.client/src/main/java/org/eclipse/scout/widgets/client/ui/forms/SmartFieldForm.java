@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -354,7 +354,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
           protected String execFormatValue(Locale value) {
             String displayText = super.execFormatValue(value);
             if (m_formatValue && StringUtility.hasText(displayText)) {
-              displayText = "[Formated] " + displayText;
+              displayText = "[Formatted] " + displayText;
             }
             return displayText;
           }
