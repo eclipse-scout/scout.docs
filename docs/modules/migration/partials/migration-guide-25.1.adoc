@@ -114,7 +114,7 @@ We also recommend to put `prefer-workspace-packages=true` to ensure workspace pa
 * The support for the outdated `org.apache.tomcat.maven:tomcat7-maven-plugin` has been dropped. If you still rely on this plugin, you have to specify the desired version in your own scripts.
 
 [[jakarta-activation-and-mail-update]]
-== New version for Jakarta Activation and Jakarta Mail
+== New Version for Jakarta Activation and Jakarta Mail
 
 For these dependencies the versions have been updated to the Jakarta EE 10 version:
 
@@ -127,20 +127,20 @@ Existing exclusions for _jakarta.activation:jakarta.activation-api_ and _org.ecl
 Modules including dependencies to _com.sun.activation:jakarta.activation_ should instead use _org.eclipse.angus:angus-activation_ (same for _mail_) as dependency (which includes the API and implementation).
 If your implementation references implementation classes the package name needs to be adjusted (implementation has been moved).
 
-== ClientCallback renamed to UiCallback
+== ClientCallback Renamed to UiCallback
 
 `org.eclipse.scout.rt.client.ui.desktop.ClientCallback` has been renamed to `org.eclipse.scout.rt.client.ui.desktop.hybrid.uicallback.UiCallback`.
 
 Furthermore, invoking TypeScript code from the client Java code has been simplified using `org.eclipse.scout.rt.client.ui.desktop.hybrid.uicallback.UiCallbacks`. See the xref:technical-guide:user-interface/ui-callback.adoc[UI Callback technical guide] for more details.
 
-== LESS constant renamed
+== LESS Constant Renamed
 
 The LESS constant `@icon-error` for the xref:technical-guide:user-interface/icons.adoc[font icon] with the code point U+E001 was renamed to `@icon-exclamation-mark-circle` to align it with its corresponding Java and JavaScript constants.
 
 _Migration:_
 Search for references to the constant `@icon-error` in your own *.less files and replace it with `@icon-exclamation-mark-circle` where appropriate.
 
-==  Deprecated meta tag "apple-mobile-web-app-capable" removed
+== Deprecated Meta Tag “Apple-Mobile-Web-App-Capable” Removed
 
 The <meta> tag "apple-mobile-web-app-capable" has been deprecated in iOS for several years.
 Chromium-based browsers recently started reporting this with a warning on the console.
@@ -152,7 +152,14 @@ The template in the Scout archetype was updated accordingly, so newly created pr
 
 TIP: Mobile browsers will still offer the possibility to add a home screen icon for the application (which will just be a bookmark, opened in the regular browser). To properly configure it as an "app", consider adding a https://developer.mozilla.org/en-US/docs/Web/Manifest[PWA manifest].
 
-== Use scout properties for selenium test module configuration
+== Removed Deprecated Code
+
+The following code was marked as deprecated for removal in previous releases and has now been removed:
+
+* (Java) `ActionUtility` -> use `MenuUtility` instead
+* (TS) `Page#pageForTableRow` -> use `TableRow#page` instead
+
+== Use Scout Properties for Selenium Test Module Configuration
 
 Test setup provided by module `org.eclipse.scout.rt.ui.html.selenium` now uses scout properties instead of system properties.
 The following table contains the mapping (see also class `SeleniumProperties`).
@@ -200,7 +207,7 @@ See also module `org.eclipse.scout.widgets.ui.html.app.selenium` for a sample pr
 
 == Scout JS
 
-=== FormField: use _computeEmpty instead of _updateEmpty
+=== FormField: Use _computeEmpty Instead of _updateEmpty
 
 If a widget implements `_updateEmpty` it should now implement `_computeEmpty` instead.
 This guarantees that a property change event is triggered and the render function called, if there is any.

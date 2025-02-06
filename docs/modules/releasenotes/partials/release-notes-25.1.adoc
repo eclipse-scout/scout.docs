@@ -133,7 +133,7 @@ public class FindSimilarRowsHybridAction extends AbstractHybridAction<IDoEntity>
 }
 ----
 
-== REST MetaResource version endpoint: IApiVersion removed, new support for build date provider
+== REST MetaResource Version Endpoint: IApiVersion Removed, New Support for Build Date Provider
 
 The `IApiVersion` interface which was references by `MetaResource` operation `/version` was removed.
 The API version was never used (e.g. increased) and did not provide any value.
@@ -152,7 +152,7 @@ The `MetaResource` endpoint `/version` (e.g. `https://<server-url>/api/meta/vers
 }
 ----
 
-== Change keystroke for search and reset button
+== Change Keystroke for Search and Reset Button
 Changed the shortcut keys for search and reset to a more common key
 combination.
 
@@ -169,16 +169,24 @@ combination.
 |Ctrl-Shift-Z
 |===
 
-== ListBox: New Default for MultiSelect
+== Tree: New Keystroke for Expand and Collapse
+
+Tree nodes can now be expanded and collapsed using the arrow keys → and ←.
+This is more intuitive than the current + and - keys.
+However, + and - are still supported and do the same as the new keys, as this is also quite common.
+
+== List Box: New Default for MultiSelect
 
 The default for the `multiSelect` property has been changed from `false` to `true`.
 If it is true, the user can select all rows at once and check or uncheck them.
 Also, when creating a list box with Scout JS, the default is already true, so this makes it more consistent.
 
-== LookupColumn
+== Lookup Column (Scout JS)
 
 The `LookupColumn` is a multivalued lookup call column. If editable it opens a popup containing a `LookupBox` in order to select multiple values.
 The column supports lookup calls and code types and has a `distinct` property to enforce that the same value is not selected in more than one row.
+
+Please note that this feature is only available for Scout JS based tables.
 
 .The `LookupColumn` with `distinct` set to `true`
 image::lookup_column_salutation.png[]
@@ -186,14 +194,7 @@ image::lookup_column_salutation.png[]
 .The `LookupColumn` with a hierarchical lookup call
 image::lookup_column_world.png[]
 
-== Removed deprecated code
-
-The following code has been marked as deprecated for removal in previous releases and was now  removed:
-
-* (Java) `ActionUtility`  -> use `MenuUtility` instead
-* (TS) `Page#pageForTableRow` -> use `TableRow#page` instead
-
-== Use scout properties for selenium test module configuration
+== Use Scout Properties for Selenium Test Module Configuration
 
 Configuration for selenium test setup is now done through scout properties instead of system properties.
 Refer to the migration guide for more details.
