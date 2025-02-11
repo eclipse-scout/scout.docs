@@ -6,14 +6,14 @@ The Scout HTML UI requires a web browser with modern built-in technologies: HTML
 Here is a non-exhaustive list of supported browsers:
 
 Desktop::
-* Mozilla Firefox >= 69
-* Chromium (like Google Chrome, Microsoft Edge, Brave or Opera) >= 71
-* Apple Safari >= 13
+* Mozilla Firefox >= 92
+* Chromium (like Google Chrome, Microsoft Edge, Brave or Opera) >= 93
+* Apple Safari >= 15.4
 
 Mobile::
 _(Due to the nature of mobile operating systems, it is hard to specify exact versions of supported browsers. Usually, the screen size and the device speed are the limiting factors.)_
-* iOS >= 13
-* Android >= 5
+* iOS >= 15
+* Android >= 9
 
 == HTTP/2
 Starting with Scout 24 https://en.wikipedia.org/wiki/HTTP/2[HTTP/2] is supported and highly recommended to be used!
