@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {AppLinkActionEvent, dataObjects, DesktopNotification, Form, FormModel, HybridManager, InitModelOf, Label, objects, scout, Status, StringField, strings, WrappedFormField} from '@eclipse-scout/core';
+import {AppLinkActionEvent, dataObjects, DesktopNotification, Form, FormModel, HybridManager, InitModelOf, Label, Menu, objects, scout, Status, StringField, strings, WrappedFormField} from '@eclipse-scout/core';
 import model, {HybridJsFormWidgetMap} from './HybridJsFormModel';
 import {PersonDo} from '../../index';
 
@@ -22,10 +22,7 @@ export class HybridJsForm extends Form {
   createPersonFormLabel: Label;
   createFormPersonDoField: StringField;
   createPersonFormWrappedFormField: WrappedFormField;
-
-  constructor() {
-    super();
-  }
+  createFormCloseMenu: Menu;
 
   protected override _jsonModel(): FormModel {
     return model();
@@ -56,7 +53,11 @@ export class HybridJsForm extends Form {
     this.createFormPersonDoField = this.widget('CreateFormBox.PersonDoField');
     this.createFormPersonDoField.addValidator(this._validatePersonDo.bind(this));
 
+    this.createFormCloseMenu = this.widget('CreateFormCloseMenu');
+    this.createFormCloseMenu.on('action', () => this.createPersonFormWrappedFormField.innerForm.close());
+
     this.createPersonFormWrappedFormField = this.widget('CreatePersonFormWrappedFormField');
+    this.createPersonFormWrappedFormField.on('propertyChange:innerForm', event => this.createFormCloseMenu.setVisible(!!event.newValue));
   }
 
   protected async _onPingLabelAppLinkAction(event: AppLinkActionEvent) {
@@ -102,7 +103,6 @@ export class HybridJsForm extends Form {
       const form = await HybridManager.get(this.session).createForm('widgets.Person', personDo);
       form.whenSave().then(() => this.createFormPersonDoField.setValue(dataObjects.stringify(form.data)));
       this.createPersonFormWrappedFormField.setInnerForm(form);
-      form.show();
     }
   }
 
