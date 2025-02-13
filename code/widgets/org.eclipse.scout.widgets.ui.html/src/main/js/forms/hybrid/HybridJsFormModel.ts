@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {FormModel, GroupBox, Label, StringField, WidgetField, WrappedFormField} from '@eclipse-scout/core';
+import {FormModel, GroupBox, Label, Menu, StringField, WidgetField, WrappedFormField} from '@eclipse-scout/core';
 
 export default (): FormModel => ({
   id: 'HybridJsForm',
@@ -141,6 +141,16 @@ export default (): FormModel => ({
             objectType: GroupBox,
             label: 'Create Form',
             gridColumnCount: 2,
+            menuBarPosition: GroupBox.MenuBarPosition.TITLE,
+            menus: [
+              {
+                id: 'CreateFormCloseMenu',
+                objectType: Menu,
+                text: 'Close form',
+                horizontalAlignment: -1,
+                visible: false
+              }
+            ],
             fields: [
               {
                 id: 'CreateFormDescriptionField',
@@ -221,6 +231,7 @@ export type HybridJsFormWidgetMap = {
   'OpenPersonFormLabel': Label;
   'OpenFormBox.PersonDoField': StringField;
   'CreateFormBox': GroupBox;
+  'CreateFormCloseMenu': Menu;
   'CreateFormDescriptionField': WidgetField;
   'CreateFormDescriptionLabel': Label;
   'CreatePersonFormField': WidgetField;
