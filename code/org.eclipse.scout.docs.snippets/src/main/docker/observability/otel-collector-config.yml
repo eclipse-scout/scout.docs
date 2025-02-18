@@ -3,13 +3,28 @@ receivers:
     protocols:
       http:
         endpoint: "0.0.0.0:4318"
+processors:
+  batch:
+  memory_limiter:
+    # 75% of maximum memory up to 2G
+    limit_mib: 1536
+    # 25% of limit up to 2G
+    spike_limit_mib: 512
+    check_interval: 5s
 exporters:
-  logging:
+  debug:
+  #    verbosity: detailed
   prometheusremotewrite:
     endpoint: "http://prometheus:9090/api/v1/write"
+  otlphttp:
+    endpoint: "http://tempo:4328"
 service:
   pipelines:
+    traces:
+      receivers: [ otlp ]
+      processors: [ memory_limiter, batch ]
+      exporters: [ debug, otlphttp ]
     metrics:
       receivers: [ otlp ]
       processors: [ ]
-      exporters: [ logging, prometheusremotewrite ]
+      exporters: [ debug, prometheusremotewrite ]
