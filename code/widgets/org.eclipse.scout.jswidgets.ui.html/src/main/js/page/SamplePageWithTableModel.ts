@@ -30,7 +30,6 @@ export default (): PageModel => ({
         objectType: Column,
         text: 'String Column',
         width: 200,
-        sortActive: true,
         sortIndex: 0
       },
       {

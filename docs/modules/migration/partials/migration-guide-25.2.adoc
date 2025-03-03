@@ -83,3 +83,27 @@ To install the Scout SDK into your existing Eclipse IDE, use this P2 update site
 {scout-sdk-update-site}
 
 // ----------------------------------------------------------------------------
+
+== Table: column.sortActive Can Be Removed if sortIndex Is Set (Scout JS)
+
+For Scout JS tables, `sortActive` is now automatically set to true if `sortIndex` is >= 0.
+This means you can remove `sortActive: true` from your model files if you set a valid `sortIndex`.
+
+[source,js]
+.Old
+----
+{
+  objectType: Column,
+  sortActive: true,
+  sortIndex: 0
+}
+----
+
+[source,js]
+.New
+----
+{
+  objectType: Column,
+  sortIndex: 0
+}
+----
