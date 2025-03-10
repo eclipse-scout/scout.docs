@@ -16,9 +16,10 @@ The goal is to establish link:https://opentelemetry.io/docs/what-is-opentelemetr
 |Signal |Support |Tested OpenTelemetry Support
 
 |Traces
-|Not supported, planned
-|❌
-
+|supported, based on OpenTelemetry
+disabled by default (see configuration property `scout.otel.tracing.enabled` and `scout.otel.initializerEnabled`)
+|(✅) +
+currently being tested
 |Metrics
 |supported, based on OpenTelemetry +
 disabled by default (see configuration property `scout.otel.initializerEnabled`)
@@ -39,14 +40,36 @@ The main focus is on manual instrumentation provided by the Scout framework.
 The OpenTelemetry SDK is initialized by the class `org.eclipse.scout.rt.opentelemetry.sdk.OpenTelemetryInitializer`.
 This initializer will set up the `io.opentelemetry.api.GlobalOpenTelemetry` instance and some defaults:
 
-* Exporters: `otlp` for metrics (`none` for traces and logs due to missing (tested) support) +
+* Exporters: `otlp` footnote:[OpenTelemetry Protocol - for more information see https://opentelemetry.io/docs/specs/otlp/] for metrics and traces (`none` for logs due to missing (tested) support) +
 Protocol: `http/protobuf`
 * Logical service name: Scout's `ApplicationName`
 * link:https://opentelemetry.io/docs/specs/otel/resource/semantic_conventions/#service[Service resource attributes]: e.g. `service.instance.id` (=Scout's `NodeIdentifier`)
 
 TIP: All these defaults can be changed by the corresponding system property or environment variable, see the README of OpenTelemetry SDK Autoconfigure.
 
-== How To Enable A Scout Application
+=== Traces: `Context` Propagation
+
+It is important to properly propagate the OpenTelemetry `Context` between threads in order to correctly relate spans and preserve the hierarchy of the calls.
+`Context` propagation is especially relevant in Scout Applications when calls are made between Scout UI and Scout backend server and within the Scout UI server when we
+go from Scout UI Thread to the Scout Model Thread.
+
+Overview of the `Context` propagation:
+
+[cols="1,1"]
+|===
+| Class
+| Notes
+| OpenTelemetryFilter
+| The parent `Context` is extracted from the incoming HttpRequest (header). Relevant for both UI and backend to capture incoming calls.
+| HttpServiceTunnel
+| The `Context` is injected into a header of the outgoing HttpRequest. This is a relevant instrumentation to capture calls from UI to backend.
+| ScoutOpenTelemetryContextStorage
+| Everytime a new `Context` is made current, that `Context` is stored on the RunContext. This ensures proper propagation between UI thread and Model thread.
+| OpenTelemetryContextProcessor
+| Ensures that the correct `Context` is propagated between RunContexts.
+|===
+
+== Setup OpenTelemetry in a Scout Application
 
 Add the SDK related maven dependencies to the maven module(s), e.g. the `.server` and `.ui.html`, according to <<lst-contacts_db_pom>>.
 
@@ -58,8 +81,14 @@ include::common:example$contacts/org.eclipse.scout.contacts.server/pom.xml[tags=
 ----
 
 The OpenTelemetry's link:https://opentelemetry.io/docs/instrumentation/java/automatic/[Automatic Instrumentation] can be used by disabling the Scout's `OpenTelemetryInitializer`.
-Therefore, the configuration property `scout.otel.initializerEnabled` must be set to `false`.
+by setting the configuration property `scout.otel.initializerEnabled` to `false`.
 Then you can follow the official setup guide.
+
+=== Tracing
+
+Activate tracing by setting the configuration properties `scout.otel.initializerEnabled` and `scout.otel.tracing.enabled` to `true`.
+Make sure to include the OpenTelemetryFilter in your setup (e.g by adding it as a IServletFilterContributor or including it in the web.xml).
+OpenTelemetryFilter should be placed first.
 
 == Running It All Together
 
@@ -70,15 +99,17 @@ image::common:observability_sample_setup.drawio.svg[]
 
 . Start up the observability infrastructure (for demonstration purposes). +
 `docker compose up` +
-To access `Prometheus` go to http://localhost:9090/ +
-To access `Grafana` go to http://localhost:3000/
+To access `Grafana` go to http://localhost:3000/ +
+(`Prometheus`: http://localhost:9090/)
 . Activate OpenTelemetry SDK & OTLP exporter in the application. +
 * Configuration property `scout.otel.initializerEnabled=true`
 * Maven dependencies, see <<lst-contacts_db_pom>>
 . Use OTLP exporter in `dev` mode. +
 Set configuration property: `scout.otel.defaultExporter=otlp` or use the system property/environment variables of the autoconfigure feature.
+. Activate OpenTelemetry Tracing support in the application +
+* Configuration property `scout.otel.tracing.enabled=true`
 
-TIP: Use the exporter `logging-otlp` to just print out the observability data.
+TIP: Use the link:https://opentelemetry.io/docs/languages/java/configuration/#properties-exporters[exporter `logging-otlp`] to just print out the observability data.
 But do not forget to add the required maven dependency `io.opentelemetry:opentelemetry-exporter-logging-otlp`.
 
 == Providing Custom Metrics
@@ -114,3 +145,36 @@ It can also be used for metrics whose source code is not under your control, e.g
 
 TIP: It is possible to define specific link:https://opentelemetry.io/docs/specs/otel/metrics/sdk/#explicit-bucket-histogram-aggregation[explicit bucket distribution] for histogram metrics,
 see `org.eclipse.scout.rt.platform.opentelemetry.IHistogramViewHintProvider`
+
+== Providing Custom Samplers
+
+The `ISamplerCustomizerProvider` interface allows you to define custom sampling logic based on span attributes. This can help reduce the number of traces sent to the collector by dropping traces that match specific rules.
+
+In the example below, two sampling rules are defined. If **either** rule matches (logical OR), the corresponding trace will be dropped. The **first** rule contains two conditions that must both be met (logical AND).
+
+[source,java]
+----
+public class MySamplerProvider implements ISamplerCustomizerProvider {
+
+  @Override
+  public Sampler createSamplerCustomizer(Sampler fallback, ConfigProperties config) {
+    return new RuleBasedSamplerBuilder(SpanKind.SERVER, fallback)
+        .drop(
+            EqualityCondition.of(UrlAttributes.URL_QUERY, "poll"),        // <1>
+            RegexCondition.of(UrlAttributes.URL_PATH, "^/json")           // <2>
+        )
+        .drop(
+            RegexCondition.of(UrlAttributes.URL_PATH, "^/status")         // <3>
+        )
+        .build();
+  }
+}
+----
+
+<1> `EqualityCondition`: The span attribute value is equals to a target value - in this case "poll"
+<2> `RegexCondition`: The span attribute value matches a given pattern - in this case "^/json"
+<3> A single condition forming the second rule, matching the pattern `^/status`.
+
+== Manual Instrumentation for Tracing
+
+To instrument your own Scout Application see examples for manual instrumentation link:https://github.com/open-telemetry/opentelemetry-java-examples?tab=readme-ov-file#java-opentelemetry-examples[here]
