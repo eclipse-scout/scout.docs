@@ -61,6 +61,10 @@ The following properties are declared on a `RunContext` and are inherited by `Se
 |propertyMap
 |Properties to be bound to the Property  `ThreadLocal`
 |PropertyMap.CURRENT.get()
+
+|openTelemetryContext
+|OpenTelemetry `Context` for tracing. For more information see the chapter on link:observability.adoc[observability]
+|Context.current()
 |===
 
 == Properties of a ServerRunContext
