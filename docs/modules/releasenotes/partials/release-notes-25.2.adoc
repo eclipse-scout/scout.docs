@@ -56,3 +56,9 @@ In order to support the new class-based Data Objects, these functions had to be 
 * `Set`: is deeply compared by its content (rather than the reference `===` as before) and deeply copied.
 * The function `objects.valueCopy` uses the function `clone` if existing to create deep clones (except for `Widgets`).
 * The function `objects.equalsRecursive` uses the same equals logic as `objects.equals` which includes equality for empty arrays and the use of the `equals` functions of the objects, if available.
+
+[[iid-signature-tunnel-to-server]]
+== IId signature
+
+The mechanism that adds signatures to `IId` is now available for the service tunnel.
+For more information see xref:technical-guide:common-concepts/security.adoc#id-signature-service-tunnel[IId signatures in service tunnel].
