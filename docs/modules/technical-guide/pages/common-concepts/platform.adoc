@@ -106,6 +106,7 @@ TIP: As the `@Bean` annotation is an `java.lang.annotation.@Inherited` annotatio
 
 TIP: If you inherit a `@Bean` annotation from one of you super types but don't want to be automatically registered into the bean manger you can use the `org.eclipse.scout.rt.platform.@IgnoreBean` annotation. Those classes will then be skipped.
 
+[[tunnel-to-server]]
 ==== @TunnelToServer
 
 There is a built-in annotation `org.eclipse.scout.rt.shared.@TunnelToServer`. Interfaces marked with this annotation are called on the server. The server itself ignores this annotation.
@@ -114,6 +115,9 @@ To achieve this a bean is registered on client side for each of those interfaces
 Please note that this annotation is not inherited. Therefore, if an interface extends a tunnel-to-server interface and the new methods of this interface should be called on the server as well the new child interface has to repeat the annotation!
 
 The proxy is created only once for a specific interface bean.
+
+The `idSignature` flag of the annotation can be used to enable id signatures for all data objects transferred over the service tunnel for a specific interface.
+For more information and examples when this is necessary see xref:technical-guide:common-concepts/security.adoc#id-signature-service-tunnel[IId signatures in service tunnel].
 
 === Bean Scopes
 

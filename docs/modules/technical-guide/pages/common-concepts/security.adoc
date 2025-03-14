@@ -415,6 +415,27 @@ The dependency added in xref:add-dependency-client[1.] will add the `IdSignature
 </dependency>
 ----
 
+[#id-signature-service-tunnel]
+The service tunnel supports id signatures as well, but they are not enabled by default.
+To enable id signatures in the service tunnel for a specific interface use the `idSignature` flag of the `TunnelToServer` annotation (see xref:technical-guide:common-concepts/platform.adoc#tunnel-to-server[@TunnelToServer]).
+This is necessary if e.g. an `IDataObject` which is known to the backend but not to the ui server is passed on to the browser where it is used for REST calls to endpoints hosted on the backend server.
+
+[source,java]
+.Enable id signatures for all calls to `ISignedService` using the `idSignature` flag of the `TunnelToServer` annotation
+----
+@TunnelToServer(idSignature = true)
+public interface ISignedService extends IService {
+}
+----
+
+If a method of an interface needs to be called with signatures or without signatures depending on the context, one can create its own proxy and pass the id signature flag in the `ServiceTunnelOptions`.
+
+[source,java]
+.Enable id signatures for a call to `IUnsignedService#someMethod()` using the `idSignature` flag of the `ServiceTunnelOptions` annotation
+----
+ServiceTunnelUtility.createProxy(IUnsignedService.class, ServiceTunnelOptions.create().withIdSignature(true)).someMethod();
+----
+
 `IId` that are not affected by key probing like e.g. `AbstractUuId` or `AbstractStringId` will not be signed by default, while e.g. all `Long` based `IId` will be signed.
 If there is a special `IId` that does not support signatures it can be excluded from the signature mechanism using the `IdSignature` annotation.
 
