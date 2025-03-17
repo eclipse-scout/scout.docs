@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -43,7 +43,7 @@ export class ReloadablePageWithNodes extends PageWithNodes {
     };
 
     let page1 = scout.create(PageWithNodes, {
-      parent: this.getOutline(),
+      parent: this.outline,
       text: 'Created @ ' + dates.format(dates.newDate(), this.session.locale, 'yyyy-MM-dd HH:mm:ss'),
       leaf: true,
       detailForm: dummyDetailFormModel
@@ -51,7 +51,7 @@ export class ReloadablePageWithNodes extends PageWithNodes {
     pages.push(page1);
 
     let page2 = scout.create(PageWithNodes, {
-      parent: this.getOutline(),
+      parent: this.outline,
       text: 'Lucky number: ' + (numbers.randomInt(60) + 1), // between 1 and 60
       detailForm: dummyDetailFormModel,
       childNodes: [
@@ -68,7 +68,7 @@ export class ReloadablePageWithNodes extends PageWithNodes {
     // Between 3 and 6 additional pages
     for (let i = 0; i < 3 + numbers.randomInt(4); i++) {
       let randomPage = scout.create(PageWithNodes, {
-        parent: this.getOutline(),
+        parent: this.outline,
         text: '#00' + (i + 1) + ' - ' + numbers.randomId(),
         leaf: true,
         detailForm: dummyDetailFormModel

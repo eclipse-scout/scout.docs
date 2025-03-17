@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -126,7 +126,7 @@ export class PageConfigForm extends Form implements PageConfigFormModel {
       page.leaf = data.leaf;
       page.drillDownOnRowClick = data.drillDownOnRowClick;
       page.lazyExpandingEnabled = data.lazyExpandingEnabled;
-      let outline = page.getOutline();
+      let outline = page.outline;
       outline.updateNode(page);
       outline.pageChanged(page);
       return $.resolvedPromise();
