@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -26,7 +26,7 @@ export class DynamicPageWithTable extends PageWithTable {
 
   protected override _createDetailForm(): Form {
     return scout.create(RandomEmojiForm, {
-      parent: this.getOutline()
+      parent: this.outline
     });
   }
 
@@ -110,7 +110,7 @@ export class DynamicPageWithTable extends PageWithTable {
   }
 
   protected _onEditPageMenuAction(event: Event<Action>) {
-    let outline = this.getOutline();
+    let outline = this.outline;
 
     let form = scout.create(PageConfigForm, {
       parent: outline,
@@ -120,7 +120,7 @@ export class DynamicPageWithTable extends PageWithTable {
   }
 
   protected _onDeletePageMenuAction(event: Event<Action>) {
-    let outline = this.getOutline();
+    let outline = this.outline;
 
     outline.selectNode(this.parentNode);
     outline.deleteNode(this, this.parentNode);
@@ -128,7 +128,7 @@ export class DynamicPageWithTable extends PageWithTable {
 
   protected _onAddRowMenuAction(event: Event<Action>) {
     let form = scout.create(DynamicPageWithTableAddRowForm, {
-      parent: this.getOutline()
+      parent: this.outline
     });
     let alphabet = [
       'Alpha', 'Bravo', 'Charlie', 'Delta', 'Echo', 'Foxtrot', 'Golf', 'Hotel', 'India',
@@ -155,7 +155,7 @@ export class DynamicPageWithTable extends PageWithTable {
 
   protected _onEditRowMenuAction(event: Event<Action>) {
     let form = scout.create(DynamicPageWithTableAddRowForm, {
-      parent: this.getOutline(),
+      parent: this.outline,
       title: 'Edit row'
     });
     let row = this.detailTable.selectedRow();
@@ -170,7 +170,7 @@ export class DynamicPageWithTable extends PageWithTable {
 
   protected _onDeleteRowMenuAction(event: Event<Action>) {
     // Ensure this node is selected, because the menu might be triggered from the child page (inheritMenusFromParentTablePage) .
-    this.getOutline().selectNode(this);
+    this.outline.selectNode(this);
 
     this.detailTable.deleteRows(this.detailTable.selectedRows);
   }
@@ -203,17 +203,17 @@ export class DynamicPageWithTable extends PageWithTable {
     });
   }
 
-  override createChildPage(row: TableRow): Page {
+  protected override _createChildPage(row: TableRow): Page {
     let pageType = this.detailTable.columnById('PageTypeColumn').cellValue(row);
     if (pageType === 'PageWithNodes') {
       return scout.create(DynamicPageWithNodes, {
-        parent: this.getOutline(),
+        parent: this.outline,
         detailFormVisible: true
       });
     }
     if (pageType === 'PageWithTable') {
       return scout.create(DynamicPageWithTable, {
-        parent: this.getOutline(),
+        parent: this.outline,
         inheritMenusFromParentTablePage: true
       });
     }
