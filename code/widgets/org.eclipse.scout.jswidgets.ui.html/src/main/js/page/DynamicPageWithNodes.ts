@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -25,7 +25,7 @@ export class DynamicPageWithNodes extends PageWithNodes {
 
   protected override _createDetailForm(): Form {
     return scout.create(RandomEmojiForm, {
-      parent: this.getOutline()
+      parent: this.outline
     });
   }
 
@@ -74,7 +74,7 @@ export class DynamicPageWithNodes extends PageWithNodes {
   }
 
   protected _onEditPageMenuAction(event: Event<Action>) {
-    let outline = this.getOutline();
+    let outline = this.outline;
 
     let form = scout.create(PageConfigForm, {
       parent: outline,
@@ -84,7 +84,7 @@ export class DynamicPageWithNodes extends PageWithNodes {
   }
 
   protected _onAddChildPageMenuAction(event: Event<Action>) {
-    let outline = this.getOutline();
+    let outline = this.outline;
 
     let formData: PageConfigFormData = {
       name: numbers.randomId(),
@@ -124,7 +124,7 @@ export class DynamicPageWithNodes extends PageWithNodes {
   }
 
   protected _onDeletePageMenuAction(event: Event<Action>) {
-    let outline = this.getOutline();
+    let outline = this.outline;
 
     outline.selectNode(this.parentNode);
     outline.deleteNode(this, this.parentNode);
