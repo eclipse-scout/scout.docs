@@ -73,7 +73,7 @@ Using the type property the data object marshaller is able to find and instantia
 It avoids a 1:1 dependency between the serialized JSON String and the fully classified class name.
 A stable type name is required in order to be able to change the data object structure without breaking the API.
 
-=== Type Version 
+=== Type Version
 
 A data object may be annotated with a type version using the `@TypeVersion` annotation.
 The type version represents the version of the structure of the data object and not the version of the data within the data object.
@@ -438,3 +438,79 @@ include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclips
 
 A set of utility methods for unit tests with data objects are provided within the `DataObjectTestHelper` class.
 Commonly used are a set of assert methods (e.g. `assertEquals(Object expected, Object actual)`) for testing data objects for (deep) equality.
+
+[[DO-scoutjs]]
+== Data Objects in Scout JS
+
+Scout JS supports Data Objects to be written as classes in TypeScript.
+It recursively supports (de)serializing such Data Objects in a way compatible with the Scout Java backend.
+It supports base types like `number`, `string`, `boolean`, but also more complex types like `Array`, `Date`, `Map`, `Set` or nested Data Objects.
+Also, TypeScript specific types like `Record` or https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#literal-types[string literal types] are supported.
+
+Similar to a Data Object in Java it extends a common base class named `BaseDoEntity` and holds an annotation (called https://www.typescriptlang.org/docs/handbook/decorators.html[Decorator] in TypeScript) providing the type name:
+[source,typescript]
+----
+@typeName('docu.DocumentationSample') // <1>
+export class DocumentationSampleDo extends BaseDoEntity { // <2>
+  size: number;
+  name: string;
+  active: boolean;
+  items: ItemDo[];
+  timestamp: Date;
+  descriptions: Map<string, DescriptionDo>;
+  texts: Record<string, string>;
+}
+----
+<1> Specifies the type name of the Data Object like in Java (note the difference that decorators in TypeScript are not capitalized!). The value must exactly match the one in the corresponding Data Object in Java so that the serialization works (see <<Type Name>>). This identifier connects the two implementations.
+<2> All Data Objects must extend (directly or indirectly) `BaseDoEntity`.
+
+=== Advantages
+Using such Data Object classes has several advantages over POJOs:
+
+. It can be (de)serialized automatically including the necessary data type conversions (like Date or nested Data Objects).
+. There is no need to always explicitly set the `_type` attribute which reduces noise and duplicated constants.
+. Data Objects are stronger typed.
+. It is possible to check for types of Data Objects using `instanceof` instead of comparing `_type` attributes which is more intuitive.
+. There are various other helper functions available on the Data Object itself like `clone`, `equals`, `toPojo`, or functions to access and modify Data Object contributions.
+. They work seamlessly with other utilities like `dataObjects` or `ajax`.
+
+An example implementation can be found in the xref:howtos:scout-js/rest-service-how-to.adoc[REST HowTo] which might be helpful to understand the concepts.
+
+=== Creating Data Object instances
+Data Objects are created using `scout.create` which allows to pass some initial values:
+
+[source,typescript]
+----
+let myDo = scout.create(DocumentationSampleDo, {
+  size: 4,
+  items: [{
+    itemNo: 57863,
+    ref: '1af7a8dd-cc57-4403-8ae4-b9f5a892518e'
+  }, {
+    itemNo: 97395,
+    ref: '92935890-6725-4d65-8042-f7737ebf68ce'
+  }],
+  timestamp: new Date(), // could also be a string: '2025-03-21 10:19:26.687'
+  descriptions: {
+    first: {id: 1, label: 'First Label'},
+    second: {id: 2, label: 'Second Label'}
+  }
+});
+----
+
+Please note that the nested Data Objects (`ItemDo` and `DescriptionDo` in this example) are automatically converted from the Pojo used in the given model to real instances of the corresponding Data Objects.
+
+=== (De)Serializing
+
+Typically, such Data Objects are sent to a REST backend or received from one.
+For this case use the functions provided by the `ajax` utility which automatically (de)serializes the Data Objects:
+
+. `getDataObject`
+. `postDataObject`
+. `putDataObject`
+. `removeDataObject`
+. `callDataObject`
+
+In case an existing Data Object instance should be converted to a Pojo the `toPojo` function can be called directly on the Data Object instance.
+
+For more control over the (de)serialization the functions provided by the `dataObjects` utility may be used.

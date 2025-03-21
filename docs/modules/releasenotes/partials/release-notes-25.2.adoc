@@ -36,6 +36,17 @@ WARNING: {NotReleasedWarning}
 //
 // * <<New Feature (since 25.2.xyz)>>
 
+== New Data Object API for Scout JS
+
+Scout JS now supports DataObjects to be written as classes in TypeScript.
+A new serialization mechanisms takes care of recursively (de)serializing such DataObjects in a way compatible with the Scout Java backends.
+It supports base types like `number`, `string`, `boolean`, but also more complex types like `Array`, `Date`, `Map`, `Set` or nested Data Objects.
+Also, TypeScript specific types like `Record` or https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#literal-types[string literal types] are supported.
+
+Please read the xref:technical-guide:working-with-data/data-object.adoc#DO-scoutjs[DO documentation for Scout JS] for more details and the advantages of the new API.
+It is recommended to switch to the new API where ever possible by following the steps from the xref:migration:migration-guide.adoc#new-DO-api[migration guide].
+An example implementation can be found in the xref:howtos:scout-js/rest-service-how-to.adoc[REST HowTo] which might be helpful to understand the new concepts.
+
 == Behavior Change of Scout JS Utilities objects.valueCopy, objects.equals And objects.equalsRecursive
 
 In order to support the new class-based Data Objects, these functions had to be improved as follows:
