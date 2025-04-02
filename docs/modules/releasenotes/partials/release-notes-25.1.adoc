@@ -197,3 +197,10 @@ image::lookup_column_world.png[]
 Configuration for selenium test setup is now done through scout properties instead of system properties.
 Refer to the migration guide for more details.
 
+== Migration Handler for data object deletion
+
+The new `AbstractDoDeletionMigrationHandler` can be used when a data objects class is completely deleted. +
+This migration handler will throw an exception, whenever it encounters a data object with a type name of a deleted `IDoEntity` class.
+When a data object with type version is deleted (i.e. a sub-class of `IDoEntity` with a @TypeVersion annotation) and was part of another data object, make sure to implement a `IDoStructureMigrationHandler` which migrates and removes the respective data objects.
+In addition, implement a sub-class of `AbstractDoDeletionMigrationHandler` to ensure that all occurrences of the deleted `IDoEntity` class have been removed.
+
