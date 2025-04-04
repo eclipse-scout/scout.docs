@@ -8,11 +8,9 @@
  * SPDX-License-Identifier: EPL-2.0
  */
 
-import {HybridManager, InitModelOf, models, pageParam, PageWithNodes} from '@eclipse-scout/core';
+import {HybridManager, InitModelOf, models, PageWithNodes} from '@eclipse-scout/core';
 import HybridJsPageModel from './HybridJsPageModel';
-import {HybridJsPageParamDo} from '../../index';
 
-@pageParam(HybridJsPageParamDo)
 export class HybridJsPage extends PageWithNodes {
 
   protected override _jsonModel(): Record<string, any> {
