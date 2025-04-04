@@ -27,7 +27,7 @@ export class HeatmapField extends FormField implements HeatmapFieldModel {
     this.addLabel();
     this.addStatus();
 
-    let heatmapId = ObjectUuidProvider.createUiId();
+    let heatmapId = ObjectUuidProvider.get().createUiSeqId();
     let $field = this.$container
       .makeDiv('heatmap')
       .attr('id', heatmapId);
