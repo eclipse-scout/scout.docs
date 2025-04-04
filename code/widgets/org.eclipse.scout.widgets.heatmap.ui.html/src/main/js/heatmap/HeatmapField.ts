@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {Dimension, FormField, graphics, HtmlComponent, ObjectUuidProvider} from '@eclipse-scout/core';
+import {Dimension, FormField, graphics, HtmlComponent, ObjectIdProvider} from '@eclipse-scout/core';
 import {HeatmapFieldEventMap, HeatmapFieldLayout, HeatmapFieldModel} from '../index';
 import * as L from 'leaflet';
 import {LeafletMouseEvent} from 'leaflet';
@@ -27,7 +27,7 @@ export class HeatmapField extends FormField implements HeatmapFieldModel {
     this.addLabel();
     this.addStatus();
 
-    let heatmapId = ObjectUuidProvider.createUiId();
+    let heatmapId = ObjectIdProvider.get().createUiSeqId();
     let $field = this.$container
       .makeDiv('heatmap')
       .attr('id', heatmapId);
