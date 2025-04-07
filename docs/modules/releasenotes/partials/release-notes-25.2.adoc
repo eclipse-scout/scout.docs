@@ -62,3 +62,8 @@ In order to support the new class-based Data Objects, these functions had to be 
 
 The mechanism that adds signatures to `IId` is now available for the service tunnel.
 For more information see xref:technical-guide:common-concepts/security.adoc#id-signature-service-tunnel[IId signatures in service tunnel].
+
+== Migration handler for deletion of data object contributions
+
+The new `AbstractRemoveDoEntityContributionValueMigrationHandler` can be used when a data object contribution class is completely deleted. +
+This migration handler will remove the contribution with the given type name and type version from the data objects.
