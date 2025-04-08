@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {App as ScoutApp, DesktopResponsiveHandler, ResponsiveManager, router, scout, Widget} from '@eclipse-scout/core';
+import {access, App as ScoutApp, AppBootstrapOptions, config, DesktopResponsiveHandler, ResponsiveManager, router, scout, Widget} from '@eclipse-scout/core';
 import {Desktop, WidgetsRoute} from './index';
 
 export class App extends ScoutApp {
@@ -21,6 +21,13 @@ export class App extends ScoutApp {
   // @ts-expect-error
   static get(): App {
     return ScoutApp.get() as App;
+  }
+
+  protected override _defaultBootstrappers(options: AppBootstrapOptions): (() => JQuery.Promise<void>)[] {
+    return [
+      ...super._defaultBootstrappers(options),
+      () => access.bootstrapSystem(),
+      () => config.bootstrapSystem()];
   }
 
   protected override _createDesktop(parent: Widget): Desktop {
