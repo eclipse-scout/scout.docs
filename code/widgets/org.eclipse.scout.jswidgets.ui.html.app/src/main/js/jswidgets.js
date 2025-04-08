@@ -8,9 +8,6 @@
  * SPDX-License-Identifier: EPL-2.0
  */
 import {App} from '@eclipse-scout/demo-jswidgets';
-import {access} from '@eclipse-scout/core';
-
-App.addBootstrapper(() => access.bootstrapSystem());
 
 new App().init({
   bootstrap: {
