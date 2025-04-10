@@ -7,6 +7,7 @@ asciidoc:
     experimental: true
     sectanchors: true
     page-pagination: true
+    page-feedback: scout@bsi-software.com
 nav:
   - modules/ROOT/nav.adoc
   - modules/getstarted/nav.adoc
