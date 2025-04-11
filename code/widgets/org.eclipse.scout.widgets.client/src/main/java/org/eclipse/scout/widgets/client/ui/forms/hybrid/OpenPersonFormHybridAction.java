@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,7 +15,7 @@ import org.eclipse.scout.rt.client.ui.desktop.hybrid.HybridActionType;
 @HybridActionType(OpenPersonFormHybridAction.TYPE)
 public class OpenPersonFormHybridAction extends AbstractFormHybridAction<PersonForm, PersonDo> {
 
-  protected static final String PERSON = "Person";
+  protected static final String PERSON = "widgets.Person";
   protected static final String TYPE = OPEN_FORM_PREFIX + PERSON;
 
   @Override

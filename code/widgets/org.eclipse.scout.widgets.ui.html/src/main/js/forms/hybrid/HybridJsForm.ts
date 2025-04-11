@@ -61,7 +61,7 @@ export class HybridJsForm extends Form {
 
   protected async _onPingLabelAppLinkAction(event: AppLinkActionEvent) {
     if (event.ref === 'ping') {
-      await HybridManager.get(this.session).callActionAndWait('Ping');
+      await HybridManager.get(this.session).callActionAndWait('widgets.Ping');
       this.session.desktop.addNotification(scout.create(DesktopNotification, {
         parent: this,
         duration: 2000,
@@ -74,14 +74,14 @@ export class HybridJsForm extends Form {
 
   protected _onSendDesktopNotificationLabelAppLinkAction(event: AppLinkActionEvent) {
     if (event.ref === 'sendDesktopNotification') {
-      HybridManager.get(this.session).callAction('SendDesktopNotification');
+      HybridManager.get(this.session).callAction('widgets.SendDesktopNotification');
     }
   }
 
   protected async _onOpenPersonFormLabelAppLinkAction(event: AppLinkActionEvent) {
     if (event.ref === 'openPersonForm') {
       const personDo = dataObjects.parse(this.openFormPersonDoField.value, PersonDo);
-      const form = await HybridManager.get(this.session).openForm('Person', personDo);
+      const form = await HybridManager.get(this.session).openForm('widgets.Person', personDo);
       form.whenSave().then(() => this.openFormPersonDoField.setValue(dataObjects.stringify(form.data)));
     }
   }
@@ -99,7 +99,7 @@ export class HybridJsForm extends Form {
         return;
       }
       const personDo = dataObjects.parse(this.createFormPersonDoField.value, PersonDo);
-      const form = await HybridManager.get(this.session).createForm('Person', personDo);
+      const form = await HybridManager.get(this.session).createForm('widgets.Person', personDo);
       form.whenSave().then(() => this.createFormPersonDoField.setValue(dataObjects.stringify(form.data)));
       this.createPersonFormWrappedFormField.setInnerForm(form);
       form.show();

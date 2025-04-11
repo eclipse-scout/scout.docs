@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -25,7 +25,7 @@ export class HybridJsPage extends PageWithNodes {
     super._init(model);
 
     HybridManager.get(this.session, true)
-      .then(hybridManager => hybridManager.createForm('Hybrid'))
+      .then(hybridManager => hybridManager.createForm('widgets.Hybrid'))
       .then(form => {
         this.setDetailForm(form);
         this.one('destroying', e => form.close());

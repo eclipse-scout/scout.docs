@@ -225,3 +225,27 @@ result.putIf("name", myName, StringUtility::hasText);
 ----
 
 **Migration:** Check usages in your code and remove now-redundant type casts.
+
+[[hybrid-actions]]
+== Hybrid actions
+
+All `IHybridAction` are now using a namespace and typed data objects instead of `IDoEntity`.
+If you are calling some of the provided `IHybridAction`, please check if you need to enhance the `actionType` or send typed data objects.
+
+[source,typescript]
+----
+disposeWidgets(widgetIds: string[]) {
+  HybridManager.get(this.session).callAction('scout.DisposeWidgets', scout.create(DisposeWidgetsHybridActionDo, {
+    ids: widgetIds
+  }));
+}
+----
+
+The `DisposeWidgetsHybridAction` in this example belongs to the namespace _scout_ and the data passed to it needs to be a `DisposeWidgetsHybridActionDo`.
+
+The changed `IHybridAction` are:
+
+* `DisposeWidgetsHybridAction`: namespace was added
+** action type was changed from `DisposeWidgets` to `scout.DisposeWidgets`
+* `AbstractFormHybridAction`: namespace was added
+** action types were changed from `openForm` and `createForm` to `scout.openForm` and `scout.createForm`
