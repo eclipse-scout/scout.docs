@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -24,7 +24,7 @@ import org.eclipse.scout.rt.platform.status.Status;
 @HybridActionType(SendDesktopNotificationHybridAction.TYPE)
 public class SendDesktopNotificationHybridAction extends AbstractHybridAction<IDoEntity> {
 
-  protected static final String TYPE = "SendDesktopNotification";
+  protected static final String TYPE = "widgets.SendDesktopNotification";
 
   @Override
   public void execute(IDoEntity data) {

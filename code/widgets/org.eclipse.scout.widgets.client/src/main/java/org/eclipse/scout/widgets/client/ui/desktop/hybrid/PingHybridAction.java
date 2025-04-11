@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -16,7 +16,7 @@ import org.eclipse.scout.rt.dataobject.IDoEntity;
 @HybridActionType(PingHybridAction.TYPE)
 public class PingHybridAction extends AbstractHybridAction<IDoEntity> {
 
-  protected static final String TYPE = "Ping";
+  protected static final String TYPE = "widgets.Ping";
 
   @Override
   public void execute(IDoEntity data) {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -16,7 +16,7 @@ import org.eclipse.scout.rt.dataobject.IDoEntity;
 @HybridActionType(CreateHybridFormHybridAction.TYPE)
 public class CreateHybridFormHybridAction extends AbstractFormHybridAction<HybridForm, IDoEntity> {
 
-  protected static final String HYBRID_FORM = "Hybrid";
+  protected static final String HYBRID_FORM = "widgets.Hybrid";
   protected static final String TYPE = CREATE_FORM_PREFIX + HYBRID_FORM;
 
   @Override
