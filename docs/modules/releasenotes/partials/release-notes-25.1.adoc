@@ -204,3 +204,13 @@ This migration handler will throw an exception, whenever it encounters a data ob
 When a data object with type version is deleted (i.e. a sub-class of `IDoEntity` with a @TypeVersion annotation) and was part of another data object, make sure to implement a `IDoStructureMigrationHandler` which migrates and removes the respective data objects.
 In addition, implement a sub-class of `AbstractDoDeletionMigrationHandler` to ensure that all occurrences of the deleted `IDoEntity` class have been removed.
 
+== Slider
+
+The `Slider` widget is now rendered using multiple `<div>` instead of the browser-native `<input type="range">`.
+This allows for a more precise adjustment of the appearance.
+
+The `SliderField` now also allows entering the desired value by hand.
+It has two new properties:
+
+* `valueEditable`: Whether there is a label or a number field to the right of the slider.
+* `tabbable`: Makes this slider tabbable.
