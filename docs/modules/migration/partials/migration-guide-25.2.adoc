@@ -295,3 +295,11 @@ menus: [{
 
 With the changes made for this feature the method `Table._triggerRowAction` was removed.
 Classes overriding this method in order to execute additional logic or prevent the `rowAction` events from being triggered can simply listen on `rowAction` and execute the logic in an event handler or prevent the default.
+
+== Slider (Scout JS)
+
+The DOM structure of the `Slider` widget has changed.
+Check your custom CSS styles and adjust them if necessary.
+
+By default, the `SliderField` now shows an input field with the current value.
+To show only the read-only label again, set `valueEditable: false`.

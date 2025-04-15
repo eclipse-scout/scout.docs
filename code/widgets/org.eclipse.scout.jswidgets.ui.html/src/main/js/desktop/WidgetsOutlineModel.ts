@@ -11,9 +11,9 @@ import {OutlineModel, PageWithNodes} from '@eclipse-scout/core';
 import {
   AccordionForm, BreadcrumbBarFieldForm, BrowserFieldForm, ButtonForm, CarouselForm, ChartFieldForm, CheckBoxFieldForm, DateFieldForm, DesktopForm, DesktopNotificationForm, DynamicPageWithNodes, EditableTableForm, FileChooserButtonForm,
   FileChooserFieldForm, FileChooserForm, FormForm, GroupBoxForm, HierarchicalTableForm, ImageFieldForm, ImageForm, IntegerFieldForm, LabelFieldForm, LabelForm, ListBoxForm, LogicalGridForm, MenuBarForm, MessageBoxForm, ModeSelectorForm,
-  MultilineSmartFieldForm, MultilineStringFieldForm, NumberFieldForm, PopupForm, ProposalFieldForm, RadioButtonGroupForm, ReloadablePageWithNodes, RestForm, SamplePageWithNodes, SamplePageWithTable, SequenceBoxForm, SmartFieldForm,
-  StringFieldForm, SwitchForm, TabBoxForm, TableForm, TableSmartFieldForm, TagFieldForm, TileAccordionForm, TileGridForm, TooltipForm, TreeBoxForm, TreeForm, TreeSmartFieldForm, UiNotificationForm, VirtualTileGridForm, WatchFieldForm,
-  WidgetsOutlineOverview, WrappedFormFieldForm
+  MultilineSmartFieldForm, MultilineStringFieldForm, NumberFieldForm, PopupForm, ProposalFieldForm, RadioButtonGroupForm, ReloadablePageWithNodes, RestForm, SamplePageWithNodes, SamplePageWithTable, SequenceBoxForm, SliderFieldForm,
+  SmartFieldForm, StringFieldForm, SwitchForm, TabBoxForm, TableForm, TableSmartFieldForm, TagFieldForm, TileAccordionForm, TileGridForm, TooltipForm, TreeBoxForm, TreeForm, TreeSmartFieldForm, UiNotificationForm, VirtualTileGridForm,
+  WatchFieldForm, WidgetsOutlineOverview, WrappedFormFieldForm
 } from '../index';
 
 export default (): OutlineModel => ({
@@ -276,6 +276,14 @@ export default (): OutlineModel => ({
           text: 'Integer Field',
           detailForm: {
             objectType: IntegerFieldForm
+          }
+        },
+        {
+          objectType: PageWithNodes,
+          leaf: true,
+          text: 'Slider Field',
+          detailForm: {
+            objectType: SliderFieldForm
           }
         }
       ]
