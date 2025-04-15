@@ -209,3 +209,11 @@ Normally, it is not necessary to set this value.
 * No migration is necessary if the `format()` function is called with a single `Date` argument.
 * If the second argument was set to `false`, it can simply be removed (that was the default, anyway).
 * If the second argument was set to `true`, replace it with an options object with the `analyzeInfo` property set.
+
+== Slider (Scout JS)
+
+The DOM structure of the `Slider` widget has changed.
+Check your custom CSS styles and adjust them if necessary.
+
+By default, the `SliderField` now shows an input field with the current value.
+To show only the read-only label again, set `valueEditable: false`.

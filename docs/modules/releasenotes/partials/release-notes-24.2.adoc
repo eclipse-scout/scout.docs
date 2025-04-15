@@ -168,3 +168,14 @@ The chart introduces two new properties:
 * `options.plugins.legend.pointsVisible` Whether the colored points in the legend are visible.
 
 For more information about the Chart widget see xref:technical-guide:user-interface/widget-reference.adoc#chart[Chart].
+
+== Slider
+
+The `Slider` widget is now rendered using multiple `<div>` instead of the browser-native `<input type="range">`.
+This allows for a more precise adjustment of the appearance.
+
+The `SliderField` now also allows entering the desired value by hand.
+It has two new properties:
+
+* `valueEditable`: Whether there is a label or a number field to the right of the slider.
+* `tabbable`: Makes this slider tabbable.
