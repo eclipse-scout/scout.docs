@@ -160,6 +160,7 @@ export class MyEntityDo extends BaseDoEntity { // <2>
   attachments: AttachmentDo[];
 }
 ----
+
 <1> Declare the `typeName` of the Data Object as decorator. Typically, this is the class name without the `Do` suffix and must match the `@TypeName` annotation of the matching Java Data Object class.
 <2> Convert to a class extending `BaseDoEntity`.
 . If sending or receiving Data Objects to/from the Scout backend migrate the ajax calls to the newly provided convenience methods for Data Objects:
@@ -194,6 +195,7 @@ const shallowCopy = scout.create(MyEntityDo, {
   additionalPropertyForTheCopy: 'ShallowCopyWillHaveThisAdditionalValue'
 });
 ----
+
 Important: If the spread operator is not the first statement, you need to convert the DO to a Pojo first (`.toPojo()`), otherwise undefined values from the DO may override actual values.
 Therefore, it is recommended to always use the original Data Object as the first spread statement.
 . To create a deep copy of a Data Object use the `clone` function:
@@ -204,6 +206,7 @@ const deepCopy = originalEntityDo.clone({
   additionalPropertyForTheCopy: 'DeepCopyWillHaveThisAdditionalValue'
 });
 ----
+
 Important: In the (optional) extra model passed to the `clone` function only primitives and pojos are copied deeply.
 Complex objects like `Date` or `Map` in this extra model are copied by value!
 . When using the `HybridManager` or the `JsForm`: It uses the Data Object class and deserializes to these classes (instead of a Pojo as before) as soon as a class having a matching `@typeName` decorator is found in TypeScript.
@@ -249,3 +252,27 @@ The changed `IHybridAction` are:
 ** action type was changed from `DisposeWidgets` to `scout.DisposeWidgets`
 * `AbstractFormHybridAction`: namespace was added
 ** action types were changed from `openForm` and `createForm` to `scout.openForm` and `scout.createForm`
+
+== Table default row action
+
+The `Table` now supports a `defaultRowAction` (see xref:releasenotes:release-notes.adoc#table-default-row-action[Release Notes]).
+Therefore, it is no longer necessary to listen on `rowAction` events in order to execute a `Menu`
+
+.old: listening for a `rowAction` event in order to execute `MyMenu`
+[source,typescript]
+----
+table.on('rowAction', e => table.widget('MyMenu').doAction());
+----
+
+.new: using the `defaultRowAction` property in the `TableModel`
+[source,typescript]
+----
+defaultRowAction: 'MyMenu',
+menus: [{
+  id: 'MyMenu',
+  objectType: Menu
+}]
+----
+
+With the changes made for this feature the method `Table._triggerRowAction` was removed.
+Classes overriding this method in order to execute additional logic or prevent the `rowAction` events from being triggered can simply listen on `rowAction` and execute the logic in an event handler or prevent the default.
