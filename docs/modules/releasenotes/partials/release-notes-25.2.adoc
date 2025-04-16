@@ -67,3 +67,22 @@ For more information see xref:technical-guide:common-concepts/security.adoc#id-s
 
 The new `AbstractRemoveDoEntityContributionValueMigrationHandler` can be used when a data object contribution class is completely deleted. +
 This migration handler will remove the contribution with the given type name and type version from the data objects.
+
+[[table-default-row-action]]
+== Table default row action
+
+The Scout JS `Table` has a new property `defaultRowAction` of type `Action`.
+If set, this action is executed when a row is double-clicked.
+Prior to the execution, a `rowAction` event is triggered.
+When default is prevented on this event, the `defaultRowAction` is not executed.
+The `defaultRowAction` can be used to execute a particular `Menu` of the `Table` on a row action.
+It can be specified in the `TableModel` by referencing the id of the `Menu`.
+
+[source,typescript]
+----
+defaultRowAction: 'MyMenu',
+menus: [{
+  id: 'MyMenu',
+  objectType: Menu
+}]
+----
