@@ -210,3 +210,18 @@ Complex objects like `Date` or `Map` in this extra model are copied by value!
 So to use the new API for `HybridManager` or `JsForm`, just create the necessary Data Object classes. But keep in mind that as soon it is converted, these instances will be returned instead of a Pojo.
 So this might require some more code migrations on your side (see above).
 
+== Generic Type Parameter for `putIf()` Method
+
+The `putIf` method on _IDoEntity_ and _DoEntityBuilder_ has been updated to use a generic type parameter for the `value` and `predicate` arguments.
+This ties the predicate to the type of the value, making it easier to use and reducing the need for type casting.
+
+[source,java]
+----
+// Before
+result.putIf("name", myName, o -> StringUtility.hasText((String) o));
+
+// After
+result.putIf("name", myName, StringUtility::hasText);
+----
+
+**Migration:** Check usages in your code and remove now-redundant type casts.
