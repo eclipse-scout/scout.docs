@@ -11,5 +11,7 @@ import {PageModel, PageWithNodes} from '@eclipse-scout/core';
 
 export default (): PageModel => ({
   objectType: PageWithNodes,
-  text: 'Reloadable Page'
+  text: 'Reloadable Page',
+  uuid: '0447f7a0-2d6c-4047-884c-ec860afd53f7',
+  reloadable: true
 });

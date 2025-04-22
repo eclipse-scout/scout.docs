@@ -14,11 +14,6 @@ import {SamplePageWithTable} from '../index';
 
 export class SamplePageWithNodes extends PageWithNodes {
 
-  constructor() {
-    super();
-    this.uuid = 'eead3ddc-1827-4cf3-9e53-076c9270635d';
-  }
-
   protected override _jsonModel(): PageModel {
     return models.get(SamplePageWithNodesModel);
   }

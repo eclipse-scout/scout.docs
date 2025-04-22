@@ -12,13 +12,6 @@ import model from './ReloadablePageWithNodesModel';
 
 export class ReloadablePageWithNodes extends PageWithNodes {
 
-  constructor() {
-    super();
-    this.uuid = '0447f7a0-2d6c-4047-884c-ec860afd53f7';
-    this.reloadable = true;
-    this.detailFormVisible = false; // hidden by default
-  }
-
   protected override _jsonModel(): PageModel {
     return model();
   }
