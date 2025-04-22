@@ -12,7 +12,7 @@ import {LocaleLookupCall, MiniForm, SamplePageWithTableSearchForm, SamplePageWit
 import {ChartTableControl} from '@eclipse-scout/chart';
 
 export default (): PageModel => ({
-  id: 'jswidgets.SamplePageWithTable',
+  uuid: 'a4d6dbb0-bfa5-4170-b828-26b307b585ed',
   objectType: PageWithTable,
   text: 'Page with Table',
   detailTable: {

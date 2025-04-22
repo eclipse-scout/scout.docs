@@ -15,11 +15,6 @@ import model from './DynamicPageWithTableModel';
 export class DynamicPageWithTable extends PageWithTable {
   declare detailTable: DynamicPageWithTableTable;
 
-  constructor() {
-    super();
-    this.detailFormVisible = false; // hidden by default
-  }
-
   protected override _jsonModel(): PageModel {
     return model();
   }
