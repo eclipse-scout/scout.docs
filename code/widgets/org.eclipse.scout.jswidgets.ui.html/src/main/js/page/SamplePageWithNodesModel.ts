@@ -10,7 +10,7 @@
 import {PageModel, PageWithNodes} from '@eclipse-scout/core';
 
 export default (): PageModel => ({
-  id: 'jswidgets.SamplePageWithNodes',
+  uuid: 'eead3ddc-1827-4cf3-9e53-076c9270635d',
   objectType: PageWithNodes,
   text: 'Page with Nodes'
 });

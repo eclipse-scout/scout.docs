@@ -11,6 +11,7 @@ import {Column, PageModel, PageWithTable, SmartColumn, Table} from '@eclipse-sco
 import {PageTypeLookupCall, PageTypeType} from '../index';
 
 export default (): PageModel => ({
+  uuid: '79748521-f924-49ca-bce8-8eccbbb63862',
   objectType: PageWithTable,
   text: 'Dynamic Page with Table',
   detailTable: {

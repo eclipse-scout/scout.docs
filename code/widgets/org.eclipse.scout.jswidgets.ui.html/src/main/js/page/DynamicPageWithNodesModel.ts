@@ -10,6 +10,8 @@
 import {PageModel, PageWithNodes} from '@eclipse-scout/core';
 
 export default (): PageModel => ({
+  uuid: 'cae39844-2d59-4467-a5c5-492e8f526a1d',
   objectType: PageWithNodes,
-  text: 'Dynamic Page with Nodes'
+  text: 'Dynamic Page with Nodes',
+  detailFormVisible: false // hidden by default
 });

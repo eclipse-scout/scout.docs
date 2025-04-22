@@ -15,11 +15,6 @@ export class SamplePageWithTable extends PageWithTable {
 
   declare detailTable: SamplePageWithTableTable;
 
-  constructor() {
-    super();
-    this.uuid = 'a4d6dbb0-bfa5-4170-b828-26b307b585ed';
-  }
-
   protected override _jsonModel(): PageModel {
     return models.get(SamplePageWithTableModel);
   }
