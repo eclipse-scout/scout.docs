@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -28,9 +28,10 @@ export default (): DesktopModel => ({
       objectType: Menu,
       iconId: icons.BOOK,
       text: 'Bookmarks',
+      keyStroke: 'f9',
       childActions: [
         {
-          id: 'StoreBookmarkMenu',
+          id: 'CreateBookmarkMenu',
           objectType: Menu,
           iconId: scoutIcons.STAR,
           text: 'Create bookmark'
@@ -39,7 +40,8 @@ export default (): DesktopModel => ({
           id: 'ManageBookmarksMenu',
           objectType: Menu,
           iconId: scoutIcons.GEAR,
-          text: 'Manage bookmarks'
+          text: 'Manage bookmarks',
+          cssClass: 'manage-bookmarks'
         }
       ]
     },
@@ -48,6 +50,7 @@ export default (): DesktopModel => ({
       objectType: Menu,
       iconId: icons.PAINT_BRUSH,
       text: '${textKey:Settings}',
+      keyStroke: 'f10',
       childActions: [
         {
           id: 'ThemeMenu',
@@ -84,7 +87,7 @@ export default (): DesktopModel => ({
 
 export type DesktopWidgetMap = {
   'BookmarksMenu': Menu;
-  'StoreBookmarkMenu': Menu;
+  'CreateBookmarkMenu': Menu;
   'ManageBookmarksMenu': Menu;
   'SettingsMenu': Menu;
   'ThemeMenu': Menu;

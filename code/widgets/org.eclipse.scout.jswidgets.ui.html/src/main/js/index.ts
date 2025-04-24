@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -20,6 +20,7 @@ export * from './action/ActionPropertiesBoxModel';
 export * from './action/ActionStyleLookupCall';
 export * from './action/ChildActionsLookupCall';
 export * from './action/TextPositionLookupCall';
+export * from './bookmark/bookmarks';
 export * from './button/ButtonForm';
 export * from './button/ButtonFormModel';
 export * from './button/ButtonDisplayStyleLookupCall';
