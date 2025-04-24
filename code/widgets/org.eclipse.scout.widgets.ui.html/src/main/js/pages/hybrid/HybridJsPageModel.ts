@@ -17,4 +17,3 @@ export default (): PageModel => ({
   uuid: 'b03fa823-7164-4e29-a176-cf0c0f5e241a',
   htmlEnabled: true
 });
-
