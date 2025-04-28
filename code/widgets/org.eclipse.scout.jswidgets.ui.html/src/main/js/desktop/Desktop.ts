@@ -10,8 +10,9 @@
 import {
   Action, BookmarkDo, BookmarkForm, BookmarkSupport, Desktop as ScoutDesktop, DesktopModel as DesktopModel, DesktopNotification, Event, Form, GroupBox, icons as scoutIcons, InitModelOf, LabelField, ManageBookmarksForm, Menu, scout
 } from '@eclipse-scout/core';
-import {App, bookmarks, DesktopWidgetMap, icons} from '../index';
+import {App, DesktopWidgetMap, icons} from '../index';
 import model from './DesktopModel';
+import {JsWidgetsBookmarkStore} from '../bookmark/JsWidgetsBookmarkStore';
 
 export class Desktop extends ScoutDesktop {
 
@@ -93,6 +94,10 @@ export class Desktop extends ScoutDesktop {
     });
   }
 
+  protected get bookmarkStore() {
+    return JsWidgetsBookmarkStore.get(this.session);
+  }
+
   protected _rebuildBookmarkMenus() {
     let bookmarksMenu = this.widget('BookmarksMenu');
     let createBookmarkMenu = this.widget('CreateBookmarkMenu');
@@ -100,7 +105,7 @@ export class Desktop extends ScoutDesktop {
 
     bookmarksMenu.setChildActions([createBookmarkMenu, manageBookmarksMenu]);
 
-    bookmarks.loadAllBookmarks()
+    this.bookmarkStore.loadAllBookmarks()
       .then(bookmarks => {
         let loadBookmarkMenus = bookmarks.map(bookmark => {
           let name = bookmark.title;
@@ -131,7 +136,7 @@ export class Desktop extends ScoutDesktop {
         form.whenSave().then(() => {
           this.setBusy(true);
           $.resolvedPromise()
-            .then(() => bookmarks.storeBookmark(form.bookmark))
+            .then(() => this.bookmarkStore.storeBookmark(form.bookmark))
             .then(bookmark => {
               scout.create(DesktopNotification, {
                 parent: this,
@@ -150,7 +155,7 @@ export class Desktop extends ScoutDesktop {
 
   protected _onManageBookmarksAction(event: Event<Action>) {
     this.setBusy(true);
-    bookmarks.loadAllBookmarks()
+    this.bookmarkStore.loadAllBookmarks()
       .then(allBookmarks => {
         let form = this.session.desktop.createFormExclusive(ManageBookmarksForm, {
           parent: this,
@@ -159,7 +164,7 @@ export class Desktop extends ScoutDesktop {
         form.whenSave().then(() => {
           this.setBusy(true);
           $.resolvedPromise()
-            .then(() => bookmarks.storeAllBookmarks(form.bookmarks))
+            .then(() => this.bookmarkStore.storeAllBookmarks(form.bookmarks))
             .then(() => this.findDesktop().trigger('bookmarksChanged'))
             .catch(error => App.get().errorHandler.handle(error))
             .then(() => this.setBusy(false));
@@ -174,7 +179,7 @@ export class Desktop extends ScoutDesktop {
   protected _onLoadBookmarkAction(id: string, event: Event<Action>) {
     this.setBusy(true);
     const bookmarkSupport = BookmarkSupport.get(this.session);
-    bookmarks.loadBookmark(id)
+    this.bookmarkStore.loadBookmark(id)
       .then(bookmark => bookmarkSupport.activateBookmark(bookmark))
       .always(() => this.setBusy(false));
   }
