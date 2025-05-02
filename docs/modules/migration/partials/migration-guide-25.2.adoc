@@ -213,6 +213,13 @@ Complex objects like `Date` or `Map` in this extra model are copied by value!
 So to use the new API for `HybridManager` or `JsForm`, just create the necessary Data Object classes. But keep in mind that as soon it is converted, these instances will be returned instead of a Pojo.
 So this might require some more code migrations on your side (see above).
 
+== Adjusted Content Security Policy (CSP)
+
+`base-uri`, `form-action`, `child-src` and `worker-src` are now set to 'self' to only accept resources from the same origin.
+Until now, they accepted ressources from every origin.
+
+If other origins need to be allowed, they have to be whitelisted explicitly, see also xref:technical-guide:common-concepts/security.adoc#csp[Content Security Policy].
+
 == Generic Type Parameter for `putIf()` Method
 
 The `putIf` method on _IDoEntity_ and _DoEntityBuilder_ has been updated to use a generic type parameter for the `value` and `predicate` arguments.
