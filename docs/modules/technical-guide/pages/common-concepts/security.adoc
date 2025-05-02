@@ -29,20 +29,22 @@ Scout does no longer set this header in `HttpServletControl`.
 
 See MDN: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection
 
+[#csp]
 === Content Security Policy
 
-Content Security Policy is an HTTP response header that helps you reduce XSS  risks on modern user agents by declaring what dynamic resources are allowed to load footnote:[http://content-security-policy.com/].
-The CSP header is described in http://www.w3.org/TR/CSP1/[Level 1] and http://www.w3.org/TR/CSP2/[Level 2]. There is also a working draft for a http://www.w3.org/TR/CSP3/[Level 3].
+Content Security Policy is an HTTP response header that helps you reduce XSS risks by declaring what dynamic resources are allowed to load footnote:[http://content-security-policy.com/].
 
-Scout makes use of Level 1 (and one directive from Level 2) and sets by default the following settings:
+Scout sets the following settings by default:
 
-* JavaScript footnote:[https://en.wikipedia.org/wiki/JavaScript]: Only accepts JavaScript resources from the same origin (same scheme, host and port). Inline JavaScript is allowed and unsafe dynamic code evaluation (like `eval(string)`, `setTimeout(string)`, `setInterval(string)`, `new Function(string)`) is allowed as well.
-* Stylesheets (CSS) footnote:[https://en.wikipedia.org/wiki/Cascading_Style_Sheets]: Only accepts Stylesheet resources from the same origin (same scheme, host and port). Inline style attributes are allowed.
-* Frames footnote:[https://en.wikipedia.org/wiki/Framing_(World_Wide_Web)]: All sources are allowed because the iframes created by the Scout BrowserField run in the sandbox mode and therefore handle the security policy on their own.
-* All other types (Image, `WebSocket` footnote:[https://en.wikipedia.org/wiki/WebSocket], `EventSource` footnote:[https://developer.mozilla.org/en-US/docs/Web/API/EventSource], AJAX calls footnote:[https://en.wikipedia.org/wiki/Ajax_%28programming%29], fonts, `<object>` footnote:[https://developer.mozilla.org/en-US/docs/Web/HTML/Element/object], `<embed>` footnote:[https://developer.mozilla.org/en-US/docs/Web/HTML/Element/embed], `<applet>` footnote:[https://developer.mozilla.org/en-US/docs/Web/HTML/Element/applet], `<audio>` footnote:[https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio] and `<video>` footnote:[https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video]) only allow resources from the same origin (same scheme, host and port).
+* default-src 'none': Disables fallback handling, directives should be set explicitly.
+* base-uri, child-src, font-src, form-action, manifest-src, media-src, object-src, script-src, worker-src 'self': Only accepts resources from the same origin (same scheme, host and port).
+* style-src 'self' 'unsafe-inline': Only accepts Stylesheet resources from the same origin (same scheme, host and port). Inline style attributes are allowed.
+* frame-src *: All sources are allowed because the iframes created by the Scout BrowserField run in the sandbox mode and therefore handle the security policy on their own.
 
-If a resource is blocked because it violates the CSP a report is created and logged on server side using level `warning`. This is done in the class `ContentSecurityPolicyReportHandler`.
+If a resource is blocked because it violates the CSP a report is created and logged on server side using level `info`. This is done in the class `ContentSecurityPolicyReportHandler`.
 This enables admins to monitor the application and to react if a CSP violation is detected.
+
+CSP rules can be customized with config properties (`CspDirectiveProperty`, `CspEnabledProperty`, `CspExclusionsProperty`) or by replacing `ContentSecurityPolicy`.
 
 == Session Cookie (JSESSIONID Cookie) Configuration Validation
 The UiServlet checks if the session cookie is configured safely. The validation is only performed on first access to the `UiServlet`. There is no automatic validation on the backend server side or on any custom servlets!
