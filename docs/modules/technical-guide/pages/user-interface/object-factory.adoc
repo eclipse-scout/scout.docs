@@ -8,11 +8,33 @@ The `ObjectFactory` is responsible to create and initialize a Scout object.
 A typical Scout object has an `objectType` and an `init` function.
 But actually any kind of object with a constructor function may be created.
 
-If you use a string based object type, objects are created using naming convention by default.
+To create and initialize a new object, the `objectType` needs to be passed.
+The `objectType` is either a class reference pointing to the object you want to create or the name of the object.
+When using a class reference, the return value will be typed, so the IDE can assist you with code completion, which makes it the recommended approach.
+When using the name of the object (string based object type), the object needs to be registered using `ObjectFactory.get().registerNamespace`.
+
+[source,javascript]
+.Creating an object by class reference
+----
+import {scout, Table} from '@eclipse-scout/core';
+
+let table = scout.create(Table, model);
+----
+
+[source,javascript]
+.Creating an object by name
+----
+import {scout} from '@eclipse-scout/core';
+
+let obj = scout.create('scout.Table', model);
+----
+
+If you use a string based object type, the object is created using naming convention by default.
 This means when calling `scout.create('scout.Table', model)`, the `scout` namespace is searched for a class called `Table`.
 Since `scout` is the default namespace, it may be omitted.
 So calling `scout.create('Table', model)` has the same effect.
-If there is such a class found, it will be instantiated and the `init` function called, if there is one.
+
+After creating the object, it will be instantiated and the `init` function called, if there is one.
 The `model` is passed to that `init` function.
 So instead of using `scout.create` you could also use the following code:
 
@@ -20,7 +42,7 @@ So instead of using `scout.create` you could also use the following code:
 .Creating an object without the ObjectFactory
 ----
 import {Table} from '@eclipse-scout/core';
-var table = new Table();
+let table = new Table();
 table.init(model);
 ----
 
@@ -31,7 +53,7 @@ To do that you have to register your class in the `ObjectFactory` with the `obje
 If `scout.create('Table')` is called the object factory will check if there is a class registered for the type `Table` and, if yes, that class is used.
 Only if there is no registration found, the default approach using the naming convention is performed.
 
-In order to register you class, you need a file called `objectFactories` and add that to your JavaScript module (e.g. index.js).
+In order to register your class, you need a file called `objectFactories` and add that to your JavaScript module (e.g. index.ts).
 The content of that file may look as following:
 
 [source,javascript]
@@ -45,8 +67,24 @@ scout.addObjectFactories({
 });
 ----
 
-This will simply add a new factory for the type `Table` the the list of existing factories.
-From now on `yourproject.CustomTable` will be instantiated every time a `Table` should be created.
+This will simply add a new factory for the type `Table` to the list of existing factories.
+From now on, `yourproject.CustomTable` will be instantiated every time a `Table` needs to be created.
 
 NOTE: This replacement also works if `scout.create` is used with class references (which is the recommended approach).
 So, `scout.create('Table')` as well as `scout.create(Table)` will return a new `CustomTable`.
+
+== Object Factory Hints
+
+When creating a new object using the `ObjectFactory`, the object can automatically be extended by the following properties:
+
+- `objectType`: the string based object type of the created object. This works only if the object has been registered using `ObjectFactory.get().registerNamespace`.
+- `id`: a generated ID based on the UI sequence (see `ObjectIdProvider.createUiSeqId`), if the `model` does not already contain an id.
+
+Whether these properties are added is controlled by the `objectFactoryHints` decorator.
+This decorator can be added to the class of the object that is supposed to be created by the object factory.
+It provides two options:
+
+- `ensureObjectType`: specifies whether the string based object type needs to be resolved and assigned. Default is true.
+- `ensureId`: specifies whether a unique id needs to be assigned if the object does not already have one. Default is false.
+
+The decorator is optional. If neither the class nor a super class is decorated, the default hints will be applied.
