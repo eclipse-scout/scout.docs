@@ -1,0 +1,82 @@
+= Object Identifiers
+
+include::common:partial$_header.adoc[]
+
+Various Scout objects like xref:technical-guide:user-interface/widget.adoc[widgets], xref:technical-guide:user-interface/page.adoc[pages] or table columns may have a unique identifier.
+
+- In Scout Classic it is called `classId`.
+- In Scout JS it is called `uuid`.
+
+== Use Cases
+
+The main purpose of such an identifier is to have a stable identifier that is refactoring-safe, meaning it won't change when the class or id of the object is renamed.
+This makes it possible to persist references to such Scout objects without having to migrate the persisted data when the objects are renamed.
+
+Another use case of these IDs is UI testing.
+If the url query parameter `inspector` is set to true, these ids are written to the DOM into the attribute `data-uuid`.
+
+NOTE: `inspector` is automatically set to true when the application runs in dev mode (property `scout.devMode` is true) or the url query parameter `debug` is set to true.
+
+Many Scout objects also have an id that is written to the DOM attribute `data-id`.
+These ids are not ideal for UI testing because they are eiter dynamic or not unique enough.
+The uuid on the other hand is static and universally unique.
+However, since there may be multiple instances of the same class displayed concurrently,
+the `data-uuid` attribute does not only contain the uuid of the object but the `uuidPath`.
+
+== UUID Path
+
+The uuid path is the concatenation of the element's uuid and the uuids of its relevant parents.
+This is necessary because there may be multiple instances of the same class displayed concurrently.
+
+To limit the size of the uuid path, not all parents are included.
+Layouting composites like a group box or tab box are excluded unless they are used as template fields.
+A group box becomes a template field if it is extracted into a separate, reusable widget.
+Not including every parent also makes it more refactoring safe.
+If an object is moved from one box into another, the uuid path most likely stays the same.
+
+== Assigning a UUID
+
+=== Scout Classic
+
+To assign a uuid in Java, use the annotation `@ClassId`.
+The Scout SDK helps you by automatically adding the `@ClassId` annotation when a widget is created and by providing an inspection for IntelliJ that informs you when the annotation is missing.
+The method `classId` of an object implementing `ITypeWithClassId` computes the uuid path and can be overridden if the path needs to be more unique.
+
+[source,java]
+.ClassId of a field
+----
+@Order(10)
+@ClassId("e1e2e679-a9a2-4d64-8321-2875fe1cea25")
+public class LabelField extends AbstractLabelField {
+}
+----
+
+=== Scout JS
+
+To assign a uuid in JavaScript, set the property `uuid` of the object, preferably in the static model.
+The method `buildUuid()` of a `ObjectWithUuid` returns this uuid while the method `buildUuidPath()` returns the uuid path.
+Compared to Scout Classic, the SDK does not encourage you to assign a uuid to every object.
+If you persist references to Scout objects and want to ensure these objects have uuids, you can write a unit test similar to `PageCompletenessSpec` used for bookmarks.
+For UI testing, the <<fallback-id>> should be unique enough so you don't have to assign uuids just for UI Testing.
+However, if you refactor your application a lot, and you want your tests to be more refactoring safe, you can consider assigning uuids because they are more stable than the fallback ids.
+
+[source,javascript]
+.UUID in a page model
+----
+export default (): PageModel => ({
+  uuid: 'a4d6dbb0-bfa5-4170-b828-26b307b585ed',
+  text: 'My Page'
+});
+----
+
+[#fallback-id]
+== Fallback ID
+
+If an object does not have a dedicated uuid assigned (`@ClassId` annotation in Java or `uuid` property in JavaScript is missing),
+a fallback id is generated and returned by the method `classId()` in Java and `buildUuid()` resp. `buildUuidPath()` in JavaScript.
+
+- The fallback id in Java consists of the class name.
+- The fallback id in JavaScript consists of the `id` if it is static. Or the `objectType` otherwise.
+
+IMPORTANT: Because the fallback id contains names of source code elements, it should not be persisted to avoid migrations.
+However, it should be unique enough for UI testing.
