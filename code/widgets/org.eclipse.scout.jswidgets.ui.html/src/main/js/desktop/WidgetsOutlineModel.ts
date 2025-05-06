@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -11,9 +11,9 @@ import {OutlineModel, PageWithNodes} from '@eclipse-scout/core';
 import {
   AccordionForm, BreadcrumbBarFieldForm, BrowserFieldForm, ButtonForm, CarouselForm, ChartFieldForm, CheckBoxFieldForm, DateFieldForm, DesktopForm, DesktopNotificationForm, DynamicPageWithNodes, EditableTableForm, FileChooserButtonForm,
   FileChooserFieldForm, FileChooserForm, FormForm, GroupBoxForm, HierarchicalTableForm, ImageFieldForm, ImageForm, IntegerFieldForm, LabelFieldForm, LabelForm, ListBoxForm, LogicalGridForm, MenuBarForm, MessageBoxForm, ModeSelectorForm,
-  MultilineSmartFieldForm, MultilineStringFieldForm, NumberFieldForm, PopupForm, ProposalFieldForm, RadioButtonGroupForm, ReloadablePageWithNodes, RestForm, SamplePageWithNodes, SamplePageWithTable, SequenceBoxForm, SmartFieldForm,
-  StringFieldForm, SwitchForm, TabBoxForm, TableForm, TableSmartFieldForm, TagFieldForm, TileAccordionForm, TileGridForm, TooltipForm, TreeBoxForm, TreeForm, TreeSmartFieldForm, UiNotificationForm, VirtualTileGridForm, WatchFieldForm,
-  WidgetsOutlineOverview, WrappedFormFieldForm
+  MultilineSmartFieldForm, MultilineStringFieldForm, NumberFieldForm, PopupForm, ProposalFieldForm, RadioButtonGroupForm, ReloadablePageWithNodes, RestForm, SamplePageWithNodes, SamplePageWithTable, SequenceBoxForm, SliderFieldForm,
+  SmartFieldForm, StringFieldForm, SwitchForm, TabBoxForm, TableForm, TableSmartFieldForm, TagFieldForm, TileAccordionForm, TileGridForm, TooltipForm, TreeBoxForm, TreeForm, TreeSmartFieldForm, UiNotificationForm, VirtualTileGridForm,
+  WatchFieldForm, WidgetsOutlineOverview, WrappedFormFieldForm
 } from '../index';
 
 export default (): OutlineModel => ({
@@ -316,6 +316,14 @@ export default (): OutlineModel => ({
       text: 'Sequence Box',
       detailForm: {
         objectType: SequenceBoxForm
+      }
+    },
+    {
+      objectType: PageWithNodes,
+      leaf: true,
+      text: 'Slider Field',
+      detailForm: {
+        objectType: SliderFieldForm
       }
     },
     {

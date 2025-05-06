@@ -184,6 +184,8 @@ export * from './rest/UiNotificationForm';
 export * from './rest/UiNotificationFormModel';
 export * from './sequencebox/SequenceBoxForm';
 export * from './sequencebox/SequenceBoxFormModel';
+export * from './sliderfield/SliderFieldForm';
+export * from './sliderfield/SliderFieldFormModel';
 export * from './stringfield/StringFieldForm';
 export * from './stringfield/StringFieldFormModel';
 export * from './stringfield/MultilineStringFieldForm';
