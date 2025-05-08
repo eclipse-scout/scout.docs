@@ -8,7 +8,7 @@
  * SPDX-License-Identifier: EPL-2.0
  */
 import {
-  Action, BookmarkForm, BookmarkStore, BookmarkSupport, Desktop as ScoutDesktop, DesktopModel as DesktopModel, DesktopNotification, Event, Form, GroupBox, icons as scoutIcons, InitModelOf, LabelField, ManageBookmarksForm, Menu, scout
+  Action, BookmarkForm, BookmarkStore, BookmarkSupport, Desktop as ScoutDesktop, DesktopModel, DesktopNotification, Event, Form, GroupBox, icons as scoutIcons, InitModelOf, LabelField, ManageBookmarksForm, Menu, scout
 } from '@eclipse-scout/core';
 import {App, DesktopWidgetMap, icons} from '../index';
 import model from './DesktopModel';
@@ -91,6 +91,7 @@ export class Desktop extends ScoutDesktop {
       }
     });
   }
+
   protected _rebuildBookmarkMenus() {
     let bookmarksMenu = this.widget('BookmarksMenu');
     let createBookmarkMenu = this.widget('CreateBookmarkMenu');
