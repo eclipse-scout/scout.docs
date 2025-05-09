@@ -37,4 +37,3 @@
 :jswidgets: https://scout.bsi-software.com/jswidgets
 :jswidgets-code: https://github.com/eclipse-scout/scout.docs/tree/releases/{scout-version}/code/widgets
 :docker-observability-setup: https://github.com/eclipse-scout/scout.docs/tree/releases/{scout-version}/code/org.eclipse.scout.docs.snippets/src/main/docker/observability
-:scout-forum: http://www.eclipse.org/forums/eclipse.scout
