@@ -136,7 +136,7 @@ It may be configured and also disabled using several new configuration propertie
 If the application is not run using the recommended main class `org.eclipse.scout.rt.app.Application`, e.g. for .war deployments the `GzipHandler` is not registered automatically.
 For example for a Jetty .war deployment it may be registered by activating the `gzip` Jetty module.
 
-=== ID handling of Scout JS objects
+== ID handling of Scout JS objects
 
 The following changed for Scout JS IDs:
 
