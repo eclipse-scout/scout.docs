@@ -1,0 +1,59 @@
+= URL Hints
+
+include::common:partial$_header.adoc[]
+
+URL hints are various query parameters mainly used to debug or test the application.
+
+.Activating the debug hint for the jswidgets application
+[source]
+----
+https://scout.bsiag.com/jswidgets/?debug=true
+----
+
+As the use of these hints can reveal internal information about the application, they must be explicitly enabled using the config property xref:technical-guide:common-concepts/platform.adoc#scout.urlHints.enabled[scout.urlHints.enabled].
+
+The state of the hints is stored as a cookie to make it available in subsequent requests without the need to create a HTTP session.
+
+NOTE: The default values for the hints change depending on whether the platform is running in xref:technical-guide:common-concepts/platform.adoc#scout.devMode[development mode].
+If it runs in development mode, you typically don't have to set any of these values for your regular development process.
+
+The following hints are available:
+
+== cache
+
+Enables (true) or disables (false) HTTP caching of resources.
+
+If caching is enabled, reasonable caching headers (Cache-Control, ETag, Last-Modified) are set for static resources.
+Additionally, the server caches these resources in memory to reduce file-system access to a minimum.
+
+If caching is disabled, the Cache-Control header is set with the appropriate values to instruct the caller (browser, proxies) that the resource must not be cached.
+Also, the server won't cache these resources in memory.
+
+Default value is true (false in development mode).
+
+== minify
+
+Enables (true) or disables (false) minification of JS / CSS files.
+
+If the value is true, the xref:user-interface/html-document-parser.adoc[] will augment the JavaScript and CSS file names with a fingerprint (content-hash) and the `.min.` suffix: `[name]-[contenthash].min.js/css`, e.g. `jswidgets-2d8843a6ef22419e10a2.min.js`.
+The returned html file will instruct the browser to load the minified versions of these resources.
+
+If the value is false, the unminified versions are loaded.
+
+Default value is true (false in development mode).
+
+[#inspector]
+== inspector
+
+Enables (true) or disables (false) inspector attributes in DOM (`modelClass`, `uuid`).
+See also xref:user-interface/object-identifiers.adoc[]
+
+NOTE: The inspector hint can be used without enabling xref:technical-guide:common-concepts/platform.adoc#scout.urlHints.enabled[scout.urlHints.enabled].
+In that case, the `modelClass` of Java objects won't be available, but the `classId` will, which does not expose names of source code elements.
+For JavaScript objects both `uuid` and `modelClass` will be added because they are available in the browser anyway.
+
+Default value is false (true in development mode).
+
+== debug
+
+True sets `cache=false`, `minify=false`, `inspector=true`. False sets the opposite.

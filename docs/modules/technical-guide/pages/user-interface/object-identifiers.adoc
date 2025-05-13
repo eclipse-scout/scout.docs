@@ -13,7 +13,7 @@ The main purpose of such an identifier is to have a stable identifier that is re
 This makes it possible to persist references to such Scout objects without having to migrate the persisted data when the objects are renamed.
 
 Another use case of these IDs is UI testing.
-If the url query parameter `inspector` is set to true, these ids are written to the DOM into the attribute `data-uuid`.
+If the url hint xref:user-interface/url-hints.adoc#inspector[inspector] is set to true, these ids are written to the DOM into the attribute `data-uuid`.
 
 NOTE: `inspector` is automatically set to true when the application runs in dev mode (property `scout.devMode` is true) or the url query parameter `debug` is set to true.
 

@@ -744,6 +744,7 @@ Specifies if the a file watcher should be installed for every nls resource bundl
 +
 Data type: Boolean
 
+[[scout.devMode]]
 `scout.devMode` ::
 Property to specify if the application is running in development mode. Default is false.
 +
@@ -1368,6 +1369,7 @@ The default is 30 requests per second.
 +
 Data type: Integer >= 0
 
+[[scout.urlHints.enabled]]
 `scout.urlHints.enabled` ::
 Enable or disable changing UrlHints using URL parameters in the browser address line.
 +
