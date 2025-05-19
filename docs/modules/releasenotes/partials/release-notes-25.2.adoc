@@ -69,7 +69,7 @@ The new `AbstractRemoveDoEntityContributionValueMigrationHandler` can be used wh
 This migration handler will remove the contribution with the given type name and type version from the data objects.
 
 [[table-default-row-action]]
-== Table default row action
+== Table: Default Row Action (Scout JS)
 
 The Scout JS `Table` has a new property `defaultRowAction` of type `Action`.
 If set, this action is executed when a row is double-clicked.
