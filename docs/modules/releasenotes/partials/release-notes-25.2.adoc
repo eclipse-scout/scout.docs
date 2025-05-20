@@ -78,7 +78,7 @@ When default is prevented on this event, the `defaultRowAction` is not executed.
 The `defaultRowAction` can be used to execute a particular `Menu` of the `Table` on a row action.
 It can be specified in the `TableModel` by referencing the id of the `Menu`.
 
-[source,typescript]
+[source,typescript,opts=novalidate]
 ----
 defaultRowAction: 'MyMenu',
 menus: [{
