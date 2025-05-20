@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -9,7 +9,7 @@
  */
 import {
   App, arrays, CancelMenu, CheckBoxField, colorSchemes, Column, DesktopNotification, Form, FormModel, GridData, GroupBox, InitModelOf, Menu, models, ModeSelectorField, NumberColumn, objects, OkMenu, scout, SmartField, Status, StringField,
-  strings, TableField
+  strings, TableField, TableRow
 } from '@eclipse-scout/core';
 import {Chart, ChartColorMode, ChartConfig, ChartData, ChartField, ChartPosition, ChartValueClickEvent, ChartValueGroup} from '@eclipse-scout/chart';
 import ChartFieldFormModel from './ChartFieldFormModel';
@@ -1542,59 +1542,56 @@ export class ChartFieldForm extends Form {
 
     this.dataLabels = chartData[0].splice(1) as string[];
 
-    this.chartDataTable.deleteAllRows();
-    this._updateColumnStructure();
+    const rows = [];
+    const rowDataMap = new Map();
 
-    this._setTableData(chartData.splice(1));
+    for (const rowData of chartData.splice(1)) {
+      // create new row with datalabel
+      const row = scout.create(TableRow, {parent: this.chartDataTable, cells: [rowData[0]]});
+      rowDataMap.set(row.id, rowData);
+      rows.push(row);
+    }
+
+    // replace rows and columns
+    this.chartDataTable.replaceRows(rows);
+    this.chartDataTable.setColumns(
+      [this.datasetLabelColumn, ...this.dataLabels.map(label => scout.create(NumberColumn, {
+        parent: this.chartDataTable,
+        editable: true,
+        width: 120,
+        fixedPosition: true,
+        text: label,
+        maxValue: this._getMaxValue(),
+        minValue: this._getMinValue()
+      }))],
+      (column, row) => rowDataMap.get(row.id)[column.index]
+    );
 
     this.removeDataMenu.setEnabled(this.dataLabels.length !== 0);
-  }
-
-  protected _setTableData(tableData: ChartDataRaw) {
-    this.chartDataTable.deleteAllRows();
-    this.chartDataTable.insertRows(tableData.map(row => ({
-      cells: row
-    })));
   }
 
   protected _addColumn(label: string) {
     this.dataLabels.push(label);
-    this._updateColumns(arr => arr.push(0));
-  }
-
-  protected _removeColumn() {
-    this.dataLabels.pop();
-    this._updateColumns(arr => arr.pop());
-  }
-
-  protected _updateColumns(modifyRow: (arr: ChartDataRowRaw) => void) {
-    let tableData = this._getTableData();
-
-    this.chartDataTable.deleteAllRows();
-    this._updateColumnStructure();
-
-    if (modifyRow) {
-      tableData.forEach(row => modifyRow(row));
-    }
-
-    this._setTableData(tableData);
-
-    this.removeDataMenu.setEnabled(this.dataLabels.length !== 0);
-    this._renewData();
-  }
-
-  protected _updateColumnStructure() {
-    let columns = [this.datasetLabelColumn, ...this.dataLabels.map(label => scout.create(NumberColumn, {
-      parent: this.chartDataTable,
+    this.chartDataTable.insertColumn({
+      objectType: NumberColumn,
       editable: true,
       width: 120,
       fixedPosition: true,
       text: label,
       maxValue: this._getMaxValue(),
       minValue: this._getMinValue()
-    }))];
+    }, null, 0);
 
-    this.chartDataTable.updateColumnStructure(columns);
+    this.removeDataMenu.setEnabled(this.dataLabels.length !== 0);
+    this._renewData();
+  }
+
+  protected _removeColumn() {
+    this.dataLabels.pop();
+    this.chartDataTable.deleteColumn(this.chartDataTable.columns[this.chartDataTable.columns.length - 1]);
+
+    this.removeDataMenu.setEnabled(this.dataLabels.length !== 0);
+    this._renewData();
   }
 
   protected _getMaxValue(): number {

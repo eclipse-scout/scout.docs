@@ -100,6 +100,19 @@ menus: [{
 Some new methods have been added to easier get the cells and their values:
 `cells()`, `cellValues()`, `selectedCells()`, `selectedCellValue()`, `selectedCellValues()`, `checkedCellValue()`, `checkedCellValues()`.
 
+=== New API to insert, delete or set columns
+
+The new methods `insertColumn`, `insertColumns`, `deleteColumn`, `deleteColumns` and `setColumns` can be used to modify the `columns` of the `Table`.
+The columns inserted using `insertColumn`, `insertColumns` or `setColumns` are initialized with an `initValue` that can be passed to the methods directly or in form of a callback.
+When the `columns` of the `Table` are modified using one of these methods the `Table` will automatically recalculate its checkable and table node column, re-apply filters and apply sorting, grouping and background effects.
+Therefore, method `setColumns` can also be used to change and apply e.g. sort properties of multiple columns at once.
+In order to do so, simply change the properties of the columns and call
+
+[source,typescript,opts=novalidate]
+----
+table.setColumns([...table.columns]);
+----
+
 === Move Table Row Menu Helper
 
 If you need menus that move rows of a table up or down, you can use the new `MoveTableRowMenuHelper`.
