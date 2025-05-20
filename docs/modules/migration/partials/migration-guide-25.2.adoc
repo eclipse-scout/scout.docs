@@ -89,7 +89,7 @@ To install the Scout SDK into your existing Eclipse IDE, use this P2 update site
 For Scout JS tables, `sortActive` is now automatically set to true if `sortIndex` is >= 0.
 This means you can remove `sortActive: true` from your model files if you set a valid `sortIndex`.
 
-[source,js]
+[source,js,opts=novalidate]
 .Old
 ----
 {
@@ -99,7 +99,7 @@ This means you can remove `sortActive: true` from your model files if you set a 
 }
 ----
 
-[source,js]
+[source,js,opts=novalidate]
 .New
 ----
 {
@@ -159,7 +159,7 @@ Follow these steps to switch to the new API:
 . Convert existing DOs (typically declared as TypeScript interfaces extending `DoEntity`) to classes.
 The `typeName` must be declared as https://www.typescriptlang.org/docs/handbook/decorators.html#class-decorators[Decorator] (like Java Annotations but first character lowercase):
 +
-[source,typescript]
+[source,typescript,opts=novalidate]
 ----
 import {BaseDoEntity, typeName} from '@eclipse-scout/core';
 
@@ -187,7 +187,7 @@ If custom data types need to be converted, try implementing a `DoNodeSerializer`
 . As Data Objects are classes now, they can no longer be created as object literals (Pojo).
 Instead, `scout.create` should be used:
 +
-[source,typescript]
+[source,typescript,opts=novalidate]
 ----
 import {scout} from '@eclipse-scout/core';
 
@@ -198,7 +198,7 @@ const entityDo = scout.create(MyEntityDo, {
 ----
 . To create a shallow copy of a Data Object a new instance must be created as well:
 +
-[source,typescript]
+[source,typescript,opts=novalidate]
 ----
 import {scout} from '@eclipse-scout/core';
 
@@ -212,7 +212,7 @@ Important: If the spread operator is not the first statement, you need to conver
 Therefore, it is recommended to always use the original Data Object as the first spread statement.
 . To create a deep copy of a Data Object use the `clone` function:
 +
-[source,typescript]
+[source,typescript,opts=novalidate]
 ----
 const deepCopy = originalEntityDo.clone({
   additionalPropertyForTheCopy: 'DeepCopyWillHaveThisAdditionalValue'
@@ -228,7 +228,7 @@ So this might require some more code migrations on your side (see above).
 == Adjusted Content Security Policy (CSP)
 
 `base-uri`, `form-action`, `child-src` and `worker-src` are now set to 'self' to only accept resources from the same origin.
-Until now, they accepted ressources from every origin.
+Until now, they accepted resources from every origin.
 
 If other origins need to be allowed, they have to be whitelisted explicitly, see also xref:technical-guide:common-concepts/security.adoc#csp[Content Security Policy].
 
@@ -237,7 +237,7 @@ If other origins need to be allowed, they have to be whitelisted explicitly, see
 The `putIf` method on _IDoEntity_ and _DoEntityBuilder_ has been updated to use a generic type parameter for the `value` and `predicate` arguments.
 This ties the predicate to the type of the value, making it easier to use and reducing the need for type casting.
 
-[source,java]
+[source,java,opts=novalidate]
 ----
 // Before
 result.putIf("name", myName, o -> StringUtility.hasText((String) o));
@@ -254,7 +254,7 @@ result.putIf("name", myName, StringUtility::hasText);
 All `IHybridAction` are now using a namespace and typed data objects instead of `IDoEntity`.
 If you are calling some of the provided `IHybridAction`, please check if you need to enhance the `actionType` or send typed data objects.
 
-[source,typescript]
+[source,typescript,opts=novalidate]
 ----
 disposeWidgets(widgetIds: string[]) {
   HybridManager.get(this.session).callAction('scout.DisposeWidgets', scout.create(DisposeWidgetsHybridActionDo, {
@@ -280,13 +280,13 @@ The `Table` now supports a `defaultRowAction` (see xref:releasenotes:release-not
 Therefore, it is no longer necessary to listen on `rowAction` events in order to execute a `Menu`
 
 .old: listening for a `rowAction` event in order to execute `MyMenu`
-[source,typescript]
+[source,typescript,opts=novalidate]
 ----
 table.on('rowAction', e => table.widget('MyMenu').doAction());
 ----
 
 .new: using the `defaultRowAction` property in the `TableModel`
-[source,typescript]
+[source,typescript,opts=novalidate]
 ----
 defaultRowAction: 'MyMenu',
 menus: [{
@@ -303,6 +303,10 @@ Classes overriding this method in order to execute additional logic or prevent t
 The event is not triggered for each animation step anymore but only once after the row order has been applied to the model.
 This means the property `event.animating` is now obsolete and has therefore been removed, so you don't have to check it anymore.
 If you really need to be informed during the animation, just listen for the new `rowOrderChangeAnimation` event.
+
+=== Simplified API of moveColumn()
+
+The parameters `visibleOldPos` and `dragged` have been removed, it is not necessary to pass them anymore.
 
 == Slider (Scout JS)
 
