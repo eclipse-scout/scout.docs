@@ -1585,7 +1585,7 @@ export class ChartFieldForm extends Form {
 
   protected _updateColumnStructure() {
     let columns = [this.datasetLabelColumn, ...this.dataLabels.map(label => scout.create(NumberColumn, {
-      session: this.session,
+      parent: this.chartDataTable,
       editable: true,
       width: 120,
       fixedPosition: true,
