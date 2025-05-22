@@ -68,8 +68,10 @@ For more information see xref:technical-guide:common-concepts/security.adoc#id-s
 The new `AbstractRemoveDoEntityContributionValueMigrationHandler` can be used when a data object contribution class is completely deleted. +
 This migration handler will remove the contribution with the given type name and type version from the data objects.
 
+== Table (Scout JS)
+
 [[table-default-row-action]]
-== Table: Default Row Action (Scout JS)
+=== Default Row Action
 
 The Scout JS `Table` has a new property `defaultRowAction` of type `Action`.
 If set, this action is executed when a row is double-clicked.
@@ -85,6 +87,24 @@ menus: [{
   id: 'MyMenu',
   objectType: Menu
 }]
+----
+
+=== Column: Improved API
+
+Some new methods have been added to easier get the cells and their values:
+`cells()`, `cellValues()`, `selectedCells()`, `selectedCellValue()`, `selectedCellValues()`, `checkedCellValue()`, `checkedCellValues()`.
+
+=== Move Table Row Menu Helper
+
+If you need menus that move rows of a table up or down, you can use the new `MoveTableRowMenuHelper`.
+The helper implements actions for the move menus and updates their states (enabled, visible) accordingly.
+
+To use it, just create the helper and install it for your menus:
+
+[source,typescript,opts=novalidate]
+----
+const moveRowHelper = scout.create(MoveTableRowMenuHelper);
+moveRowHelper.install({table, moveRowUpMenu, moveRowDownMenu});
 ----
 
 == Slider

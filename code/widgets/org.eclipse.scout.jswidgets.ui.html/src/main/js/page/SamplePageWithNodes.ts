@@ -30,7 +30,7 @@ export class SamplePageWithNodes extends PageWithNodes {
   }
 
   override computeTextForRow(row: TableRow): string {
-    let table = row.getTable();
+    let table = row.table;
     let columnsByIndex = objects.createMap();
     table.columns.forEach(column => {
       columnsByIndex[column.index] = column;
