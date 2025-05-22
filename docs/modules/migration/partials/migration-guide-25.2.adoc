@@ -308,6 +308,31 @@ If you really need to be informed during the animation, just listen for the new 
 
 The parameters `visibleOldPos` and `dragged` have been removed, it is not necessary to pass them anymore.
 
+=== Column Now Requires Parent
+
+When creating a `Column` using `scout.create`, the table now needs to be passed using the `parent` property.
+This replaces the `session` and `table` properties.
+
+To migrate search for the dynamic creation of columns and replace these two properties with the new `parent` property.
+This is also relevant for other column types like `BooleanColumn`, `DateColumn`, `IconColumn`, `NumberColumn`, `SmartColumn` and custom columns.
+
+.old: using the `session` and `table` properties
+[source,typescript,opts=novalidate]
+----
+return scout.create(Column, {
+  session: this.session,
+  table: table
+});
+----
+
+.new: using the `parent` property
+[source,typescript,opts=novalidate]
+----
+return scout.create(Column, {
+  parent: table
+});
+----
+
 == Slider (Scout JS)
 
 The DOM structure of the `Slider` widget has changed.
