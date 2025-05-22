@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -53,37 +53,26 @@ export class ColumnPropertiesBox extends GroupBox {
 
     let modifiableField = this.widget('ModifiableField');
     modifiableField.setValue(this.column.modifiable);
-    modifiableField.on('propertyChange:value', event => {
-      this.column.modifiable = event.newValue;
-    });
+    modifiableField.on('propertyChange:value', event => this.column.setModifiable(event.newValue));
 
     let removableField = this.widget('RemovableField');
     removableField.setValue(this.column.removable);
-    removableField.on('propertyChange:value', event => {
-      this.column.removable = event.newValue;
-    });
+    removableField.on('propertyChange:value', event => this.column.setRemovable(event.newValue));
 
     let fixedWidthField = this.widget('FixedWidthField');
     fixedWidthField.setValue(this.column.fixedWidth);
-    fixedWidthField.on('propertyChange:value', event => {
-      this.column.fixedWidth = event.newValue;
-      this.column.table.invalidateLayoutTree();
-    });
+    fixedWidthField.on('propertyChange:value', event => this.column.setFixedWidth(event.newValue));
 
     let fixedPositionField = this.widget('FixedPositionField');
     fixedPositionField.setValue(this.column.fixedPosition);
-    fixedPositionField.on('propertyChange:value', event => {
-      this.column.fixedPosition = event.newValue;
-    });
+    fixedPositionField.on('propertyChange:value', event => this.column.setFixedPosition(event.newValue));
 
     let groupedField = this.widget('GroupedField');
     groupedField.setValue(this.column.grouped);
 
     let headerMenuEnabledField = this.widget('HeaderMenuEnabledField');
     headerMenuEnabledField.setValue(this.column.headerMenuEnabled);
-    headerMenuEnabledField.on('propertyChange:value', event => {
-      this.column.headerMenuEnabled = event.newValue;
-    });
+    headerMenuEnabledField.on('propertyChange:value', event => this.column.setHeaderMenuEnabled(event.newValue));
 
     let headerHtmlEnabledField = this.widget('HeaderHtmlEnabledField');
     headerHtmlEnabledField.setValue(this.column.headerHtmlEnabled);
