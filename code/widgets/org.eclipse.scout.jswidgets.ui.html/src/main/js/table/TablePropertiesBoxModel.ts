@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -54,6 +54,12 @@ export default (): GroupBoxModel => ({
       labelVisible: false
     },
     {
+      id: 'FooterVisibleField',
+      objectType: CheckBoxField,
+      label: 'Footer Visible',
+      labelVisible: false
+    },
+    {
       id: 'HeaderEnabledField',
       objectType: CheckBoxField,
       label: 'Header Enabled',
@@ -96,16 +102,15 @@ export default (): GroupBoxModel => ({
       labelVisible: false
     },
     {
-      id: 'TruncatedCellTooltipEnabledField',
-      objectType: CheckBoxField,
-      label: 'Truncated Cell Tooltip Enabled',
-      labelVisible: false,
-      triStateEnabled: true
-    },
-    {
       id: 'ScrollToSelectionField',
       objectType: CheckBoxField,
       label: 'Scroll To Selection',
+      labelVisible: false
+    },
+    {
+      id: 'ShowOrganizerMenuField',
+      objectType: CheckBoxField,
+      label: 'Show Organizer Menu',
       labelVisible: false
     },
     {
@@ -115,16 +120,29 @@ export default (): GroupBoxModel => ({
       labelVisible: false
     },
     {
-      id: 'FooterVisibleField',
-      objectType: CheckBoxField,
-      label: 'Footer Visible',
-      labelVisible: false
-    },
-    {
       id: 'RowIconVisibleField',
       objectType: CheckBoxField,
       label: 'Row Icon Visible',
       labelVisible: false
+    },
+    {
+      id: 'TextFilterEnabledField',
+      objectType: CheckBoxField,
+      label: 'Text Filter Enabled',
+      labelVisible: false
+    },
+    {
+      id: 'TileModeField',
+      objectType: CheckBoxField,
+      label: 'Tile Mode',
+      labelVisible: false
+    },
+    {
+      id: 'TruncatedCellTooltipEnabledField',
+      objectType: CheckBoxField,
+      label: 'Truncated Cell Tooltip Enabled',
+      labelVisible: false,
+      triStateEnabled: true
     },
     {
       id: 'RowIconColumnWidthField',
@@ -142,18 +160,6 @@ export default (): GroupBoxModel => ({
       objectType: SmartField,
       label: 'Grouping Style',
       lookupCall: GroupingStyleLookupCall
-    },
-    {
-      id: 'TileModeField',
-      objectType: CheckBoxField,
-      label: 'Tile Mode',
-      labelVisible: false
-    },
-    {
-      id: 'TextFilterEnabledField',
-      objectType: CheckBoxField,
-      label: 'Text Filter Enabled',
-      labelVisible: false
     }
   ]
 });
@@ -168,6 +174,7 @@ export type TablePropertiesBoxWidgetMap = {
   'CheckableField': CheckBoxField;
   'ColumnAddableField': CheckBoxField;
   'CompactField': CheckBoxField;
+  'FooterVisibleField': CheckBoxField;
   'HeaderEnabledField': CheckBoxField;
   'HeaderVisibleField': CheckBoxField;
   'HeaderMenusEnabledField': CheckBoxField;
@@ -175,14 +182,14 @@ export type TablePropertiesBoxWidgetMap = {
   'MultiCheckField': CheckBoxField;
   'MultiSelectField': CheckBoxField;
   'MultilineTextField': CheckBoxField;
-  'TruncatedCellTooltipEnabledField': CheckBoxField;
   'ScrollToSelectionField': CheckBoxField;
+  'ShowOrganizerMenuField': CheckBoxField;
   'SortEnabledField': CheckBoxField;
-  'FooterVisibleField': CheckBoxField;
   'RowIconVisibleField': CheckBoxField;
+  'TextFilterEnabledField': CheckBoxField;
+  'TileModeField': CheckBoxField;
+  'TruncatedCellTooltipEnabledField': CheckBoxField;
   'RowIconColumnWidthField': NumberField;
   'CheckableStyleField': SmartField<any>;
   'GroupingStyleField': SmartField<any>;
-  'TileModeField': CheckBoxField;
-  'TextFilterEnabledField': CheckBoxField;
 };

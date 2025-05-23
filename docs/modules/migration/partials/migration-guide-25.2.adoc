@@ -333,6 +333,14 @@ return scout.create(Column, {
 });
 ----
 
+=== Table Organizer
+
+Some methods on the `TableOrganizer.ts` used by `table.organizer` have changed.
+Please adjust the usages accordingly.
+
+- `hideColumn` was renamed to `hideColumns` and now takes an array of columns.
+- `isColumnAddable` and `getInvisibleColumns` don't not have a parameter anymore.
+
 == Slider (Scout JS)
 
 The DOM structure of the `Slider` widget has changed.
