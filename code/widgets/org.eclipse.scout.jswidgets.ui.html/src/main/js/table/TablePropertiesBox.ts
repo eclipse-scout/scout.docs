@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {GroupBox, GroupBoxModel, InitModelOf, models, Table} from '@eclipse-scout/core';
+import {GroupBox, GroupBoxModel, InitModelOf, models, Table, TableOrganizerMenu} from '@eclipse-scout/core';
 import TablePropertiesBoxModel from './TablePropertiesBoxModel';
 import {TablePropertiesBoxWidgetMap} from '../index';
 
@@ -132,5 +132,15 @@ export class TablePropertiesBox extends GroupBox {
     let textFilterEnabledField = this.widget('TextFilterEnabledField');
     textFilterEnabledField.setValue(this.table.textFilterEnabled);
     textFilterEnabledField.on('propertyChange:value', event => this.table.setTextFilterEnabled(event.newValue));
+
+    let showOrganizerMenuField = this.widget('ShowOrganizerMenuField');
+    showOrganizerMenuField.setValue(false);
+    showOrganizerMenuField.on('propertyChange:value', event => {
+      if (event.newValue) {
+        table.insertMenus([{objectType: TableOrganizerMenu}]);
+      } else {
+        table.deleteMenus([table.menus.find(menu => menu instanceof TableOrganizerMenu)]);
+      }
+    });
   }
 }
