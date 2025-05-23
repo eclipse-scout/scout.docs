@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -33,7 +33,7 @@ public class ClientSession extends AbstractClientSession {
 
   @Override
   protected void execLoadSession() {
-    initializeSharedVariables();
+    loadInitialSharedVariables();
 
     // The locale needs to be set before the Desktop is created.
     String localeString = ClientUIPreferences.getClientPreferences(get()).get(PREF_USER_LOCALE, null);
