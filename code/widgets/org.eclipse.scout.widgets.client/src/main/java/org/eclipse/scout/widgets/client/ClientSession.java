@@ -12,13 +12,9 @@ package org.eclipse.scout.widgets.client;
 import java.util.Locale;
 
 import org.eclipse.scout.rt.client.AbstractClientSession;
-import org.eclipse.scout.rt.client.services.common.bookmark.IBookmarkService;
-import org.eclipse.scout.rt.client.servicetunnel.ServiceTunnelClientConfigProperties.CreateTunnelToServerBeansProperty;
 import org.eclipse.scout.rt.client.session.ClientSessionProvider;
 import org.eclipse.scout.rt.client.ui.ClientUIPreferences;
-import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.config.CONFIG;
-import org.eclipse.scout.rt.shared.services.common.ping.IPingService;
 import org.eclipse.scout.widgets.client.WidgetsClientConfigProperties.SeleniumProperty;
 import org.eclipse.scout.widgets.client.ui.desktop.Desktop;
 import org.slf4j.Logger;
@@ -37,19 +33,10 @@ public class ClientSession extends AbstractClientSession {
 
   @Override
   protected void execLoadSession() {
-    Boolean createTunnelToServerBeans = CONFIG.getPropertyValue(CreateTunnelToServerBeansProperty.class);
-    createTunnelToServerBeans = false;
-    if (!createTunnelToServerBeans) {
-      LOG.info("starting client without a server");
-    }
+    LOG.info("starting client");
 
     execInitLocale();
     setDesktop(new Desktop());
-
-    if (createTunnelToServerBeans) {
-      BEANS.get(IBookmarkService.class).loadBookmarks();
-      BEANS.get(IPingService.class).ping("ping");
-    }
 
     if (CONFIG.getPropertyValue(SeleniumProperty.class)) {
       // remove all UIPreferences when in selenium mode to avoid side effects between tests

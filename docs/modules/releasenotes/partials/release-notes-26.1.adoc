@@ -42,3 +42,7 @@ These methods are:
 * `cssClassAsArray`: splits a `cssClass`-string into an array of css classes
 
 In addition, similar methods have been added to the `Cell` class to easier query and modify the `cssClass` property: `addCssClass`, `removeCssClass`, `toggleCssClass`, `hasCssClass`.
+
+== Session API changes
+
+As part of the move toward a stateless backend server, the API of the session has been changed. More info can be found in the xref:migration:migration-guide.adoc[Migration Guide].

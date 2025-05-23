@@ -162,3 +162,23 @@ As the `DefaultAuthToken` was not used exclusively for the service-tunnel the fo
 |`org.eclipse.scout.rt.shared.servicetunnel.http.HttpServiceTunnel#TOKEN_AUTH_HTTP_HEADER`
 |`org.eclipse.scout.rt.shared.authentication.DefaultAuthToken#HTTP_HEADER_NAME`
 |===
+
+== Session API changes
+
+As part of the move toward a stateless backend server, the API of the session has been changed.
+
+`ISession`:
+
+* `getSharedVariableMap` moved to the `IClientSession`.
+
+`IClientSession`:
+
+* `replaceSharedVariableMapInternal` removed. To update variables on the client session use `setSharedVariables` or send a `SharedContextChangedNotification` from the backend.
+
+`AbstractServerSession`:
+
+* `m_sharedVariableMap` removed. No more data should be stored on the server session. The data should be stored in user-based caches or loaded from the database instead. To add additional variables during client session initialization, implement an `IInitialSharedVariableContributor`.
+
+`AbstractClientSession`:
+
+* `initializeSharedVariables` renamed to the `loadInitialSharedVariables`.
