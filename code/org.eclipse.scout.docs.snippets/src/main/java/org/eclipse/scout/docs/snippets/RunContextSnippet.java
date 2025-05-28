@@ -9,7 +9,6 @@
  */
 package org.eclipse.scout.docs.snippets;
 
-import java.security.AccessController;
 import java.util.Locale;
 
 import javax.security.auth.Subject;
@@ -34,7 +33,7 @@ public final class RunContextSnippet {
           .run(() -> {
             // run some code <3>
             System.out.println(NlsLocale.CURRENT.get()); // > Locale.US
-            System.out.println(Subject.getSubject(AccessController.getContext())); // > john
+            System.out.println(Subject.current()); // > john
           });
       // end::RunContexts.empty[]
     }

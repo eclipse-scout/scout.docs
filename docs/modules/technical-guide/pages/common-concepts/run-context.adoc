@@ -52,7 +52,7 @@ The following properties are declared on a `RunContext` and are inherited by `Se
 
 |subject
 |Subject to run the code on behalf
-|Subject.getSubject(AccessController.getContext())
+|Subject.current()
 
 |locale
 |Locale to be bound to the Locale `ThreadLocal`

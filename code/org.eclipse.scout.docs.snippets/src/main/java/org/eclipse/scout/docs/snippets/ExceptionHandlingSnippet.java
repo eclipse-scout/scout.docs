@@ -9,8 +9,6 @@
  */
 package org.eclipse.scout.docs.snippets;
 
-import java.security.AccessController;
-
 import javax.security.auth.Subject;
 
 import org.eclipse.scout.rt.platform.BEANS;
@@ -74,7 +72,7 @@ public final class ExceptionHandlingSnippet {
     catch (Exception e) {
       throw BEANS.get(PlatformExceptionTranslator.class).translate(e)
           .withContextInfo("cid", "12345")
-          .withContextInfo("user", Subject.getSubject(AccessController.getContext()))
+          .withContextInfo("user", Subject.current())
           .withContextInfo("job", IFuture.CURRENT.get());
     }
     // end::platformExceptionTranslator.example[]
