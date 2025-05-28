@@ -9,7 +9,6 @@
  */
 package org.eclipse.scout.widgets.client.ui.desktop;
 
-import java.security.AccessController;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -174,7 +173,7 @@ public class Desktop extends AbstractDesktop {
 
     @Override
     protected String getConfiguredText() {
-      Subject subject = Subject.getSubject(AccessController.getContext());
+      Subject subject = Subject.current();
       Principal firstPrincipal = CollectionUtility.firstElement(subject.getPrincipals());
       return StringUtility.uppercaseFirst(firstPrincipal.getName());
     }

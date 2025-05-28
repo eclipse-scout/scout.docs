@@ -11,7 +11,6 @@ package org.eclipse.scout.widgets.client.ui.forms;
 
 import static java.util.Calendar.*;
 
-import java.security.AccessController;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -334,7 +333,7 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
             start = cal.getTime();
             cal.add(HOUR_OF_DAY, 3);
             end = cal.getTime();
-            String userName = CollectionUtility.firstElement(Subject.getSubject(AccessController.getContext()).getPrincipals()).getName();
+            String userName = CollectionUtility.firstElement(Subject.current().getPrincipals()).getName();
             calendarAppointment = new CalendarAppointment(8L, 2L, start, end, false, null, "Dinner with " + userName, null, cssClass);
             calendarAppointment.setSubjectLabel("Private Appointment");
             calendarAppointment.setResourceId(BEANS.get(ICalendarService.class).getLisaTurnerCalendar().getResourceId());
