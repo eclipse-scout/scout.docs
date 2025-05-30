@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -279,6 +279,7 @@ export default (): OutlineModel => ({
           }
         },
         {
+          uuid: '8ab311a5-d304-4a1f-b7ea-8caa2c742219',
           objectType: PageWithNodes,
           leaf: true,
           text: 'Slider Field',

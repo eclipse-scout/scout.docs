@@ -150,9 +150,7 @@ export class Desktop extends ScoutDesktop {
   }
 
   protected _onActivateBookmarkAction(id: string, event: Event<Action>) {
-    this.setBusy(true);
     BookmarkStore.get(this.session).loadBookmark(id)
-      .then(bookmark => BookmarkSupport.get(this.session).activateBookmark(bookmark))
-      .always(() => this.setBusy(false));
+      .then(bookmark => BookmarkSupport.get(this.session).activateBookmark(bookmark));
   }
 }
