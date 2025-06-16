@@ -235,3 +235,90 @@ export class PizzaRestrictionDo extends BaseDoEntity {
 <6> The declaration of the PizzaResponse on client side. Attribute names and typeName must correspond the PizzaResponse class in Java.
 <7> The declaration of the PizzaDo on client side. Attribute names and typeName must correspond the PizzaDo class in Java.
 <8> The declaration of the PizzaRestrictionDo on client side. Attribute names and typeName must correspond the PizzaRestrictionDo class in Java.
+
+[#page-with-table-search-form]
+== Create a search form
+
+[source,typescript]
+.hellojs.ui/src/main/js/pizza/PizzaSearchForm.ts
+----
+import {Form, FormModel, GroupBox, NumberField, ResetMenu, scout, SearchMenu} from '@eclipse-scout/core';
+import {PizzaRestrictionDo} from './PizzaTablePage';
+
+export class PizzaSearchForm extends Form {
+  protected override _jsonModel(): FormModel {
+    return { // <1>
+      title: 'Search',
+      rootGroupBox: {
+        id: 'MainBox',
+        objectType: GroupBox,
+        fields: [
+          {
+            id: 'SizeField',
+            objectType: NumberField,
+            text: 'Size'
+          },
+          {
+            id: 'PriceField',
+            objectType: NumberField,
+            text: 'Price'
+          }
+        ],
+        menus: [ // <2>
+          {
+            id: 'SearchMenu',
+            objectType: SearchMenu
+          },
+          {
+            id: 'ResetMenu',
+            objectType: ResetMenu
+          }
+        ]
+      }
+    };
+  }
+
+  override importData() { // <3>
+    this.widget('SizeField').setValue(this.data?.size);
+    this.widget('PriceField').setValue(this.data?.price);
+  }
+
+  override exportData(): PizzaRestrictionDo { // <4>
+    return scout.create(PizzaRestrictionDo, {
+      size: this.widget('SizeField').value,
+      price: this.widget('PriceField').value
+    });
+  }
+}
+----
+
+<1> A small inline model for the `PizzaSearchForm` having a search field for the size and the price.
+<2> Adding a `SearchMenu` and `ResetMenu` automatically reloads the table when these menus are clicked.
+<3> Importing the data: sets the values of the `PizzaRestrictionDo` on the fields.
+<4> Exporting the data: creates a `PizzaRestrictionDo` using the values of the fields.
+
+[source,typescript]
+.hellojs.ui/src/main/js/pizza/PizzaTablePage.ts
+----
+protected override _jsonModel(): PageWithTableModel {
+  return {
+    // ...
+    detailTable: {
+      // ...
+      tableControls: [ // <1>
+        {
+          id: 'SearchFromTableControl',
+          objectType: SearchFormTableControl,
+          form: {
+            id: 'SearchForm',
+            objectType: PizzaSearchForm
+          }
+        }
+      ]
+    }
+  };
+}
+----
+
+<1> Adding the `PizzaSearchForm` to the inline model of the `PizzaTablePage`. It is set as the form of a `SearchFormTableControl`.
+Each time the table page loads its data it exports the data of the search form and uses it as search filter.

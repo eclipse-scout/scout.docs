@@ -113,6 +113,12 @@ const moveRowHelper = scout.create(MoveTableRowMenuHelper);
 moveRowHelper.install({table, moveRowUpMenu, moveRowDownMenu});
 ----
 
+=== Search Form Table Control
+
+The Scout JS table control `SearchFormTableControl` was added in order to add search forms to a `PageWithTable`.
+The `PageWithTable` uses the data of the search form as its search filter each time the data is loaded
+(see xref:howtos:scout-js/rest-service-how-to.adoc#page-with-table-search-form[Search Form] for more details).
+
 == Slider
 
 The `Slider` widget is now rendered using multiple `<div>` instead of the browser-native `<input type="range">`.
