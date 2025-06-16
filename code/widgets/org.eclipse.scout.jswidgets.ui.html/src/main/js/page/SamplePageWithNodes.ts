@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {arrays, models, objects, Page, PageModel, PageWithNodes, scout, TableRow} from '@eclipse-scout/core';
+import {models, Page, PageModel, PageWithNodes, scout} from '@eclipse-scout/core';
 import SamplePageWithNodesModel from './SamplePageWithNodesModel';
 import $ from 'jquery';
 import {SamplePageWithTable} from '../index';
@@ -27,22 +27,5 @@ export class SamplePageWithNodes extends PageWithNodes {
         parent: this.outline
       })
     ]);
-  }
-
-  override computeTextForRow(row: TableRow): string {
-    let table = row.table;
-    let columnsByIndex = objects.createMap();
-    table.columns.forEach(column => {
-      columnsByIndex[column.index] = column;
-    });
-    // Search the first visible cell considering the originally defined column order (ignoring the column order changes the user did)
-    let firstDefinedVisibleCell = arrays.find(row.cells, (cell, index) => {
-      let column = columnsByIndex[index];
-      return column.visible;
-    });
-    if (firstDefinedVisibleCell) {
-      return firstDefinedVisibleCell.text;
-    }
-    return super.computeTextForRow(row);
   }
 }

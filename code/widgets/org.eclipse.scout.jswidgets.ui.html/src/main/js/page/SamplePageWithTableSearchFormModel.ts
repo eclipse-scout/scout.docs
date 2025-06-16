@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {FormModel, GroupBox, Menu, ResetMenu, SearchMenu, StringField} from '@eclipse-scout/core';
+import {FormModel, GroupBox, ResetMenu, SearchMenu, StringField} from '@eclipse-scout/core';
 
 export default (): FormModel => ({
   id: 'jswidgets.SamplePageWithTableSearchForm',
@@ -31,7 +31,7 @@ export default (): FormModel => ({
     ],
     menus: [
       {
-        id: 'SearchButton',
+        id: 'SearchMenu',
         objectType: SearchMenu
       },
       {
@@ -50,6 +50,6 @@ export type SamplePageWithTableSearchFormWidgetMap = {
   'MainBox': GroupBox;
   'DetailBox': GroupBox;
   'StringField': StringField;
-  'SearchButton': SearchMenu;
+  'SearchMenu': SearchMenu;
   'ResetMenu': ResetMenu;
 };

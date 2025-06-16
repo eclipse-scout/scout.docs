@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {AggregateTableControl, BooleanColumn, Column, FormMenu, FormTableControl, icons, Menu, NumberColumn, PageModel, PageWithTable, SmartColumn, Table} from '@eclipse-scout/core';
+import {AggregateTableControl, BooleanColumn, Column, FormMenu, icons, Menu, NumberColumn, PageModel, PageWithTable, SearchFormTableControl, SmartColumn, Table} from '@eclipse-scout/core';
 import {LocaleLookupCall, MiniForm, SamplePageWithTableSearchForm, SamplePageWithTableSearchFormWidgetMap} from '../index';
 import {ChartTableControl} from '@eclipse-scout/chart';
 
@@ -87,9 +87,18 @@ export default (): PageModel => ({
         keyStroke: 'delete'
       },
       {
+        id: 'CompactToggleMenu',
+        objectType: Menu,
+        iconId: icons.COLLAPSE_ALL,
+        toggleAction: true,
+        stackable: false,
+        horizontalAlignment: 1
+      },
+      {
         id: 'TileToggleMenu',
         objectType: Menu,
         iconId: icons.SQUARE_BOLD,
+        toggleAction: true,
         stackable: false,
         horizontalAlignment: 1
       }
@@ -97,8 +106,7 @@ export default (): PageModel => ({
     tableControls: [
       {
         id: 'SearchFormTableControl',
-        objectType: FormTableControl,
-        iconId: icons.SEARCH,
+        objectType: SearchFormTableControl,
         form: {
           id: 'SearchForm',
           objectType: SamplePageWithTableSearchForm
@@ -130,8 +138,9 @@ export type SamplePageWithTableTableWidgetMap = {
   'AddRowMenu': Menu;
   'AddManyMenu': Menu;
   'DeleteRowMenu': Menu;
+  'CompactToggleMenu': Menu;
   'TileToggleMenu': Menu;
-  'SearchFormTableControl': FormTableControl;
+  'SearchFormTableControl': SearchFormTableControl;
   'SearchForm': SamplePageWithTableSearchForm;
   'ChartTableControl': ChartTableControl;
   'AggregateTableControl': AggregateTableControl;

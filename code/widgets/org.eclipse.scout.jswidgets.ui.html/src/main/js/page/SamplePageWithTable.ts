@@ -25,7 +25,13 @@ export class SamplePageWithTable extends PageWithTable {
     table.widget('AddRowMenu').on('action', this._onAddRowMenuAction.bind(this));
     table.widget('AddManyMenu').on('action', this._onAddManyMenuAction.bind(this));
     table.widget('DeleteRowMenu').on('action', this._onDeleteRowMenuAction.bind(this));
-    table.widget('TileToggleMenu').on('action', this._onTileToggleMenuAction.bind(this));
+
+    table.widget('CompactToggleMenu').setSelected(this.detailTable.compact);
+    table.widget('CompactToggleMenu').on('action', e => this.detailTable.setCompact(e.source.selected));
+
+    table.widget('TileToggleMenu').setSelected(this.detailTable.tileMode);
+    table.widget('TileToggleMenu').on('action', e => this.detailTable.setTileMode(e.source.selected));
+
     let formMenu = table.widget('FormMenu');
     formMenu.on('propertyChange:selected', event => {
       if (event.newValue && !formMenu.form) {
@@ -63,10 +69,6 @@ export class SamplePageWithTable extends PageWithTable {
 
   protected _onDeleteRowMenuAction() {
     this.detailTable.deleteRows(this.detailTable.selectedRows);
-  }
-
-  protected _onTileToggleMenuAction() {
-    this.detailTable.setTileMode(!this.detailTable.tileMode);
   }
 
   protected _createRow(rowNo?: number): TableRowModel {

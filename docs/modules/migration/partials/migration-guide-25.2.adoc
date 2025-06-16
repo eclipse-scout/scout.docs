@@ -360,3 +360,47 @@ To show only the read-only label again, set `valueEditable: false`.
 The admin diagnostics view which could be accessed by a HTTP GET request on the server service-tunnel servlet was removed (also in the past only accessible if allowed by a custom authentication filter).
 
 Also permissions which were only used by this view have been removed: `scout.diagnostics.read`, `scout.diagnostics.update`, `scout.services.config.update`
+
+== Search Form Table Control (Scout JS)
+
+The Scout JS `PageWithTable` will no longer filter its controls for the first `FormTableControl` holding a `Form` when looking for its search filter but for the first `SearchFormTableControl`
+(see xref:howtos:scout-js/rest-service-how-to.adoc#page-with-table-search-form[Search Form] for more details).
+Therefore, all existing search form table controls need to be migrated to the `SearchFormTableControl`.
+
+.old: A `FormTableControl` containing the search form.
+[source,typescript,opts=novalidate]
+----
+tableControls: [
+  {
+    id: 'SearchFromTableControl',
+    objectType: FormTableControl,
+    iconId: icons.SEARCH,
+    keyStroke: 'ctrl-shift-f',
+    form: {
+      id: 'SearchForm',
+      objectType: MySearchForm
+    }
+  }
+]
+----
+
+.new: A `SearchFormTableControl` containing the search form. `iconId` and `keyStroke` were removed as they are identical to the defaults of `SearchFormTableControl`.
+[source,typescript,opts=novalidate]
+----
+tableControls: [
+  {
+    id: 'SearchFromTableControl',
+    objectType: SearchFormTableControl,
+    form: {
+      id: 'SearchForm',
+      objectType: MySearchForm
+    }
+  }
+]
+----
+
+The `SearchFormTableControl` uses `icons.SEARCH` as its default icon and adds the keystroke 'ctrl-shift-f'.
+
+If the search form contains a `SearchMenu` or `ResetMenu` or any other `Menu` triggering a 'search' or 'reset' event on the search form,
+all listeners on these events that reload the table can be removed as this is now done by the `PageWithTable` itself.
+Not removing these listeners will result in the data being loaded twice.
