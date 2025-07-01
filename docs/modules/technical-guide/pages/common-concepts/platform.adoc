@@ -543,12 +543,12 @@ Specifies if the Scout application should use TLS. If true, the server must eith
 Data type: Boolean
 
 `scout.application.name` ::
-The display name of the application. Used e.g. in the info form and the diagnostic views. The default value is `unknown`.
+The display name of the application. Used e.g. in the info form. The default value is `unknown`.
 +
 Data type: String
 
 `scout.application.version` ::
-The application version as displayed to the user. Used e.g. in the info form and the diagnostic views. The default value is `0.0.0`.
+The application version as displayed to the user. Used e.g. in the info form. The default value is `0.0.0`.
 +
 Data type: String
 
@@ -1077,7 +1077,7 @@ Property to specify if the application is using the Scout OpenTelemetry initiali
 Data type: Boolean
 
 `scout.platform.version` ::
-Version of the scout platform. Used e.g. in the info form and the diagnostic views. The default value is bound to the implementation version in the manifest file.
+Version of the scout platform. Used e.g. in the info form. The default value is bound to the implementation version in the manifest file.
 +
 Data type: String
 
