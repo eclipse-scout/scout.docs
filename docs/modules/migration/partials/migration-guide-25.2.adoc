@@ -348,3 +348,9 @@ Check your custom CSS styles and adjust them if necessary.
 
 By default, the `SliderField` now shows an input field with the current value.
 To show only the read-only label again, set `valueEditable: false`.
+
+== Diagnostics view removed
+
+The admin diagnostics view which could be accessed by a HTTP GET request on the server service-tunnel servlet was removed (also in the past only accessible if allowed by a custom authentication filter).
+
+Also permissions which were only used by this view have been removed: `scout.diagnostics.read`, `scout.diagnostics.update`, `scout.services.config.update`
