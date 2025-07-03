@@ -132,6 +132,41 @@ The Scout JS table control `SearchFormTableControl` was added in order to add se
 The `PageWithTable` uses the data of the search form as its search filter each time the data is loaded
 (see xref:howtos:scout-js/rest-service-how-to.adoc#page-with-table-search-form[Search Form] for more details).
 
+== Table Organizer Menu
+
+In the top right corner of the table header is a menu with a gear icon that opens the table organizer form.
+This form has been simplified and now has a cleaner look.
+
+Also, the menu is now available for Scout JS tables.
+It is visible by default for the table of a `PageWithTable`.
+If it should be visible for other tables as well, just add the menu `TableOrganizerMenu` to the menus of your table.
+
+[source,typescript,opts=novalidate]
+----
+table: {
+  objectType: Table,
+  menus: [
+    {
+      objectType: TableOrganizerMenu
+    }
+  ]
+}
+----
+
+.Table Organizer Form
+image::table_organizer_form.png[]
+
+== New Group in Table Column Menu
+
+The column menu now has a group called `Width` containing the following actions:
+
+. Optimize width: makes the column as big as necessary to show its content
+. Optimize width of all columns: makes all columns as big as necessary to show their content
+. Adjust width: allows the user to set the width in pixels of that column
+
+.Column Header Menu
+image::column_header_menu.png[]
+
 == Slider
 
 The `Slider` widget is now rendered using multiple `<div>` instead of the browser-native `<input type="range">`.
