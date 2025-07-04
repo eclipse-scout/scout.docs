@@ -9,31 +9,45 @@
  */
 package org.eclipse.scout.jswidgets.rest.pageWithTable;
 
+import java.util.Map;
+
 import jakarta.annotation.Generated;
 
+import org.eclipse.scout.rt.dataobject.ContributesTo;
 import org.eclipse.scout.rt.dataobject.DoEntity;
 import org.eclipse.scout.rt.dataobject.DoValue;
+import org.eclipse.scout.rt.dataobject.IDoEntityContribution;
 import org.eclipse.scout.rt.dataobject.TypeName;
 
-@TypeName("jswidgets.SamplePageWithTableRestriction")
-public class SamplePageWithTableRestrictionDo extends DoEntity {
+@ContributesTo(SamplePageWithTableRestrictionDo.class)
+@TypeName("jswidgets.SampleCustomColumnRestrictionContribution")
+public class SampleCustomColumnRestrictionContributionDo extends DoEntity implements IDoEntityContribution {
 
-  public DoValue<String> stringField() {
-    return doValue("stringField");
+  /**
+   * column id -> column type
+   */
+  public DoValue<Map<String, String>> columnTypes() {
+    return doValue("columnTypes");
   }
 
   /* **************************************************************************
    * GENERATED CONVENIENCE METHODS
    * *************************************************************************/
 
+  /**
+   * See {@link #columnTypes()}.
+   */
   @Generated("DoConvenienceMethodsGenerator")
-  public SamplePageWithTableRestrictionDo withStringField(String stringField) {
-    stringField().set(stringField);
+  public SampleCustomColumnRestrictionContributionDo withColumnTypes(Map<String, String> columnTypes) {
+    columnTypes().set(columnTypes);
     return this;
   }
 
+  /**
+   * See {@link #columnTypes()}.
+   */
   @Generated("DoConvenienceMethodsGenerator")
-  public String getStringField() {
-    return stringField().get();
+  public Map<String, String> getColumnTypes() {
+    return columnTypes().get();
   }
 }

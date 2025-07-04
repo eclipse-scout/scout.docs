@@ -7,12 +7,11 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {ajax, BaseDoEntity, HtmlTile, models, ObjectOrModel, Page, PageModel, PageWithTable, scout, systems, TableRow, TableRowModel, Tile, typeName} from '@eclipse-scout/core';
+import {ajax, BaseDoEntity, dataObjects, HtmlTile, models, ObjectOrModel, Page, PageModel, PageWithTable, scout, strings, systems, TableRow, TableRowModel, Tile, typeName, ValueDo} from '@eclipse-scout/core';
 import SamplePageWithTableModel from './SamplePageWithTableModel';
-import {MiniForm, SamplePageWithNodes, SamplePageWithTableRestrictionDo, SamplePageWithTableTable} from '../index';
+import {MiniForm, SamplePageWithNodes, SamplePageWithTableRestrictionDo, SamplePageWithTableTable, SampleTableCustomizer, SampleTableCustomizerDo} from '../index';
 
 export class SamplePageWithTable extends PageWithTable {
-
   declare detailTable: SamplePageWithTableTable;
 
   protected override _jsonModel(): PageModel {
@@ -21,6 +20,10 @@ export class SamplePageWithTable extends PageWithTable {
 
   protected override _initDetailTable(table: SamplePageWithTableTable) {
     super._initDetailTable(table);
+
+    table.setCustomizer(scout.create(SampleTableCustomizer, {
+      parent: table
+    }));
 
     table.widget('AddRowMenu').on('action', this._onAddRowMenuAction.bind(this));
     table.widget('AddManyMenu').on('action', this._onAddManyMenuAction.bind(this));
@@ -40,19 +43,19 @@ export class SamplePageWithTable extends PageWithTable {
         }));
       }
     });
-    table.setTileProducer((row: TableRow & { data: Record<string, string> }) => this.createTileForRow(row));
+    table.setTileProducer(row => this._createTileForRow(row));
   }
 
-  createTileForRow(row: TableRow & { data: Record<string, string> }): Tile {
-    let model = {
+  protected _createTileForRow(row: TableRow): Tile {
+    let data = (row as TableRow & { data: Record<string, string> }).data; // see _transformTableDataToTableRows
+    let content = '<br><b>ID:</b> ' + strings.encode(data.id) +
+      '<br><b>String Column:</b> ' + strings.encode(data.string) +
+      '<br><b>Number Column:</b> ' + strings.encode(data.number) +
+      '<br><b>Boolean Column:</b> ' + strings.encode(data.bool);
+    return scout.create(HtmlTile, {
       parent: this.detailTable,
-      content: '<br><b>ID:</b> ' +
-        row.data.id + '<br><b>String Column:</b> ' +
-        row.data.string + '<br><b>Number Column:</b> ' +
-        row.data.number + '<br><b>Boolean Column:</b> ' +
-        row.data.bool
-    };
-    return scout.create(HtmlTile, model);
+      content: content
+    });
   }
 
   protected _onAddRowMenuAction() {
@@ -97,20 +100,42 @@ export class SamplePageWithTable extends PageWithTable {
   protected override _loadTableData(searchFilter: SamplePageWithTableRestrictionDo): JQuery.Promise<SamplePageWithTableResponse> {
     const resourceUrl = systems.getOrCreate().getEndpointUrl('samplePageWithTable', 'samplePageWithTable');
     const restriction = this._withMaxRowCountContribution(searchFilter);
+    if (this.detailTable.isCustomizable()) {
+      let customizerData = this.detailTable.customizer.getCustomizerData() as SampleTableCustomizerDo;
+      if (customizerData) {
+        let contribution = scout.create(SampleCustomColumnRestrictionContributionDo, {
+          columnTypes: new Map()
+        });
+        customizerData.columns.forEach(customColumn => {
+          contribution.columnTypes.set(customColumn.columnId, customColumn.columnType);
+        });
+        dataObjects.addContribution(contribution, restriction);
+      }
+    }
     return ajax.postDataObject(resourceUrl + '/list', restriction);
   }
 
   protected override _transformTableDataToTableRows(tableData: SamplePageWithTableResponse): ObjectOrModel<TableRow>[] {
-    return tableData?.items?.map(row => {
+    return tableData?.items?.map(item => {
+      let cells = [
+        item.id,
+        item.string,
+        item.smartValue,
+        item.number,
+        item.bool
+      ];
+      let rowContribution = dataObjects.getContribution(SampleCustomColumnTableRowContributionDo, item);
+      if (rowContribution) {
+        rowContribution.cells.forEach((value, columnId) => {
+          let column = this.detailTable.columnByUuid(columnId);
+          if (column) {
+            cells[column.index] = value.value;
+          }
+        });
+      }
       return {
-        data: row,
-        cells: [
-          row.id,
-          row.string,
-          row.smartValue,
-          row.number,
-          row.bool
-        ]
+        data: item,
+        cells: cells
       };
     });
   }
@@ -135,3 +160,14 @@ export class SamplePageWithTableRowDo extends BaseDoEntity {
   number: number;
   bool: boolean;
 }
+
+@typeName('jswidgets.SampleCustomColumnRestrictionContribution')
+export class SampleCustomColumnRestrictionContributionDo extends BaseDoEntity {
+  columnTypes: Map<string, string>;
+}
+
+@typeName('jswidgets.SampleCustomColumnTableRowContribution')
+export class SampleCustomColumnTableRowContributionDo extends BaseDoEntity {
+  cells: Map<string, ValueDo<any>>;
+}
+

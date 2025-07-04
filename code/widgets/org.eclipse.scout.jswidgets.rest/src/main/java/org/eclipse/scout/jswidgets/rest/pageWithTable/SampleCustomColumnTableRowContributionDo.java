@@ -9,17 +9,26 @@
  */
 package org.eclipse.scout.jswidgets.rest.pageWithTable;
 
+import java.util.Map;
+
 import jakarta.annotation.Generated;
 
+import org.eclipse.scout.rt.dataobject.ContributesTo;
 import org.eclipse.scout.rt.dataobject.DoEntity;
 import org.eclipse.scout.rt.dataobject.DoValue;
+import org.eclipse.scout.rt.dataobject.IDoEntityContribution;
 import org.eclipse.scout.rt.dataobject.TypeName;
+import org.eclipse.scout.rt.dataobject.value.IValueDo;
 
-@TypeName("jswidgets.SamplePageWithTableRestriction")
-public class SamplePageWithTableRestrictionDo extends DoEntity {
+@ContributesTo(SamplePageWithTableRowDo.class)
+@TypeName("jswidgets.SampleCustomColumnTableRowContribution")
+public class SampleCustomColumnTableRowContributionDo extends DoEntity implements IDoEntityContribution {
 
-  public DoValue<String> stringField() {
-    return doValue("stringField");
+  /**
+   * column id -> cell value
+   */
+  public DoValue<Map<String, IValueDo>> cells() {
+    return doValue("cells");
   }
 
   /* **************************************************************************
@@ -27,13 +36,13 @@ public class SamplePageWithTableRestrictionDo extends DoEntity {
    * *************************************************************************/
 
   @Generated("DoConvenienceMethodsGenerator")
-  public SamplePageWithTableRestrictionDo withStringField(String stringField) {
-    stringField().set(stringField);
+  public SampleCustomColumnTableRowContributionDo withCells(Map<String, IValueDo> cells) {
+    cells().set(cells);
     return this;
   }
 
   @Generated("DoConvenienceMethodsGenerator")
-  public String getStringField() {
-    return stringField().get();
+  public Map<String, IValueDo> getCells() {
+    return cells().get();
   }
 }
