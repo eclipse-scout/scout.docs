@@ -1,6 +1,6 @@
 
 ifndef::finaldoc[]
-include::partial$_initDoc.adoc[]
+include::common:partial$_initDoc.adoc[]
 endif::finaldoc[]
 
 //-----------------------------------------------------------------------------
@@ -12,8 +12,8 @@ Therefore, please follow the instructions in the corresponding section below.
 
 === IntelliJ
 
-include::CreateNewProjectIntelliJ.adoc[]
+include::common:partial$CreateNewProjectIntelliJ.adoc[]
 
 === Eclipse
 
-include::CreateNewProjectEclipse.adoc[]
+include::common:partial$CreateNewProjectEclipse.adoc[]

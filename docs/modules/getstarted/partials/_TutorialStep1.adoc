@@ -16,9 +16,12 @@ This first step of the "Contacts" tutorial ends with a review of the results of 
 [[sec-contacts_initial_codebase]]
 === Creating the initial Codebase
 
-If you are using Eclipse and your workspace contains modules from the "`Hello World`" tutorial, you may want to multi-select them and to either close them by invoking the context menu "`Close Projects`" or to delete them by invoking the context menu "`Delete`".
-The initial code for the "`Contacts`" application is then generated using the [wizard]_New Scout Project_ wizard.
-For the wizard fields you may use the values below and as shown in <<img-sdk_new_project_tutorial_Intellij>> (IntelliJ) and <<img-sdk_new_project_tutorial>> (Eclipse).
+To create the initial code for the "`Contacts`" application with IntelliJ, click `File | New | Project...` and then select `Scout` on the left side.
+Adjust the project name fields as shown in <<img-sdk_new_project_tutorial_Intellij>> and make sure the user interface language is set to Java.
+
+If you are using Eclipse, make sure your workspace is emtpy. Either create a new one or close or delete the existing projects using the context menu "`Close Projects`" or "`Delete`".
+Then use the [wizard]_New Scout Project_ wizard to create the initial code.
+Adjust the project name fields as shown in <<img-sdk_new_project_tutorial>> and make sure the programming language of the user interface is set to Java.
 
 * [field]_Group Id_: `org.eclipse.scout`
 * [field]_Artifact Id_: `contacts`
