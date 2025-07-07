@@ -14,12 +14,12 @@ This tutorial describes the setup for both IDEs. Please choose the one you prefe
 
 === Node.js
 
-include::InstallNode.adoc[]
+include::common:partial$InstallNode.adoc[]
 
 === IntelliJ
 
-include::InstallIntelliJ.adoc[]
+include::common:partial$InstallIntelliJ.adoc[]
 
 === Eclipse
 
-include::InstallEclipse.adoc[]
+include::common:partial$InstallEclipse.adoc[]
