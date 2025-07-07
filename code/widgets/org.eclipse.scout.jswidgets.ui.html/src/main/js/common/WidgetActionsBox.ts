@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {Button, Event, GroupBox, GroupBoxModel, InitModelOf, LabelField, models, Widget} from '@eclipse-scout/core';
+import {Button, Event, GroupBox, GroupBoxModel, InitModelOf, models, Widget} from '@eclipse-scout/core';
 import WidgetActionsBoxModel from './WidgetActionsBoxModel';
 import {WidgetActionsBoxWidgetMap} from '../index';
 

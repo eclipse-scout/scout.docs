@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -9,21 +9,8 @@
  */
 import {FormModel, GroupBox, Menu, SmartField, StatusMenuMapping, TabBox, TabItem} from '@eclipse-scout/core';
 import {
-  EventsTab,
-  EventsTabWidgetMap,
-  FormFieldActionsBox,
-  FormFieldActionsBoxWidgetMap,
-  FormFieldPropertiesBox,
-  FormFieldPropertiesBoxWidgetMap,
-  GridDataBox,
-  GridDataBoxWidgetMap,
-  LocaleLookupCall,
-  SmartFieldPropertiesBox,
-  SmartFieldPropertiesBoxWidgetMap,
-  ValueFieldPropertiesBox,
-  ValueFieldPropertiesBoxWidgetMap,
-  WidgetActionsBox,
-  WidgetActionsBoxWidgetMap
+  EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, LocaleLookupCall, SmartFieldPropertiesBox,
+  SmartFieldPropertiesBoxWidgetMap, ValueFieldPropertiesBox, ValueFieldPropertiesBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap
 } from '../index';
 
 export default (): FormModel => ({

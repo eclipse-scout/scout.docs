@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -9,7 +9,7 @@
  */
 import {arrays, Button, comparators, Event, Form, FormModel, Group, HtmlTile, HtmlTileModel, InitModelOf, Menu, models, scout, SmartField, TileAccordion, TileGrid} from '@eclipse-scout/core';
 import TileAccordionFormModel from './TileAccordionFormModel';
-import {CustomTile, CustomTileModel, GroupLookupCall, TileAccordionFormWidgetMap} from '../index';
+import {CustomTile, CustomTileModel, GroupLookupCall, TileAccordionFormWidgetMap, TileType} from '../index';
 import $ from 'jquery';
 
 export class TileAccordionForm extends Form {
@@ -19,7 +19,7 @@ export class TileAccordionForm extends Form {
   insertedGroupCount: number;
   insertedTilesCount: number;
   tileFilter: any;
-  tileTypeField: SmartField<'default' | 'simple'>;
+  tileTypeField: SmartField<TileType>;
 
   constructor() {
     super();

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -10,7 +10,7 @@
 import {AccordionField, Button, CheckBoxField, FormModel, Group, GroupBox, LabelField, Menu, NumberField, SequenceBox, SmartField, TabItem, TileAccordion, TileGrid} from '@eclipse-scout/core';
 import {
   ConfigurationBox, EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, TileGridLayoutConfigBox,
-  TileGridLayoutConfigBoxWidgetMap, TileTypeLookupCall, WidgetActionsBox, WidgetActionsBoxWidgetMap
+  TileGridLayoutConfigBoxWidgetMap, TileType, TileTypeLookupCall, WidgetActionsBox, WidgetActionsBoxWidgetMap
 } from '../index';
 
 export default (): FormModel => ({
@@ -233,7 +233,7 @@ export default (): FormModel => ({
                       },
                       {
                         id: 'InsertTileTypeField',
-                        objectType: SmartField<'default' | 'simple'>,
+                        objectType: SmartField<TileType>,
                         displayStyle: 'dropdown',
                         label: 'Tile Type',
                         labelVisible: false,
@@ -323,7 +323,7 @@ export type TileAccordionFormWidgetMap = {
   'TileAccordionActionsBox': GroupBox;
   'InsertTileField': SequenceBox;
   'InsertTileCountField': NumberField;
-  'InsertTileTypeField': SmartField<'default' | 'simple'>; // manually changed
+  'InsertTileTypeField': SmartField<TileType>;
   'InsertTileIntoField': SequenceBox;
   'InsertTileTargetField': SmartField<Group<TileGrid>>;
   'InsertTileButton': Button;

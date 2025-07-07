@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -9,7 +9,7 @@
  */
 import {StaticLookupCall} from '@eclipse-scout/core';
 
-export class TileTypeLookupCall extends StaticLookupCall<'default' | 'simple'> {
+export class TileTypeLookupCall extends StaticLookupCall<TileType> {
 
   constructor() {
     super();
@@ -24,3 +24,5 @@ export class TileTypeLookupCall extends StaticLookupCall<'default' | 'simple'> {
     ['simple', 'CustomTile with custom style']
   ];
 }
+
+export type TileType = 'default' | 'simple';
