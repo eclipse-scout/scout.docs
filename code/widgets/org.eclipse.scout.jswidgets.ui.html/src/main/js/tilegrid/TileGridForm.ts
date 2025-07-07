@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -10,13 +10,13 @@
 import {arrays, comparators, Event, Form, FormModel, HtmlTile, HtmlTileModel, InitModelOf, Menu, models, scout, SmartField, TileGrid} from '@eclipse-scout/core';
 import TileGridFormModel from './TileGridFormModel';
 import $ from 'jquery';
-import {CustomTile, CustomTileModel, TileGridFormWidgetMap} from '../index';
+import {CustomTile, CustomTileModel, TileGridFormWidgetMap, TileType} from '../index';
 
 export class TileGridForm extends Form {
   declare widgetMap: TileGridFormWidgetMap;
 
   insertedTileCount: number;
-  tileTypeField: SmartField<'default' | 'simple'>;
+  tileTypeField: SmartField<TileType>;
   tileGrid: TileGrid;
 
   constructor() {
