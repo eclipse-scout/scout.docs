@@ -75,7 +75,7 @@ public static class ApiServletContributor implements IServletContributor {
 
   @Override
   public void contribute(ServletContextHandler handler) {
-    ServletHolder servlet = handler.addServlet(ServletContainer.class, "/api/*");
+    ServletHolder servlet = handler.addServlet(ServletContainer.class, ServletConstants.API_PATH_WITH_WILDCARD);
     servlet.setInitParameter(ServerProperties.WADL_FEATURE_DISABLE, Boolean.TRUE.toString());
     servlet.setInitParameter(ServletProperties.JAXRS_APPLICATION_CLASS, RestApplication.class.getName());
     servlet.setInitOrder(1); // load-on-startup
@@ -138,7 +138,7 @@ public static class HttpServerRunContextFilterContributor implements IServletFil
 
   @Override
   public void contribute(ServletContextHandler handler) {
-    FilterHolder filter = handler.addFilter(HttpServerRunContextFilter.class, "/api/*", null);
+    FilterHolder filter = handler.addFilter(HttpServerRunContextFilter.class, ServletConstants.API_PATH_WITH_WILDCARD, null);
     filter.setInitParameter("session", "false");
   }
 }
@@ -258,33 +258,18 @@ transactions in the event of a cancellation. The following steps must be taken f
 
 === Cancellation Resource and Resource Client
 
-Scout does not impose nor provide a cancellation resource. It must be implemented by the project:
+Scout does provide a default implementation for a cancellation resource (see `org.eclipse.scout.rt.rest.cancellation.CancellationResource`).
 
-[source,java]
-.Example: REST cancellation Resource
-----
-include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/rest/CancellationResource.java[tags=class]
-----
-<1> Resolve the `userId` of the current user. This is optional and may depend on the current project.
-<2> Invoke the cancellation registry for the given `requestId` and `userId`.
+Also a default client for this resource is provided (see `org.eclipse.scout.rt.client.rest.CancellationResourceClient`).
 
-[source,java]
-.Example: REST cancellation Resource Client
-----
-include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/rest/CancellationResourceClient.java[tags=class]
-----
+Projects may however replace this resource or provide their own clients to add more functionality.
 
 === Install Cancellation Request Filter
 
-To assign an ID to each request, an appropriate client request filter must be registered:
+To assign an ID to each request, an appropriate client request filter must be registered.
 
-[source,java]
-.Example: Register Client Request Cancellation Filter in REST Client Helper
-----
-include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/rest/CancellationRestClientHelper.java[tags=class]
-----
-<1> Register the `RestRequestCancellationClientRequestFilter` that assigns a UUID to every request, which is sent as an HTTP header named `X-ScoutRequestId`.
-<2> Binds the actual cancel-operation to the `cancel` Method (in this case the cancellation rest resource client from above).
+A default filter is provided by `org.eclipse.scout.rt.rest.cancellation.RestRequestCancellationClientRequestFilter`.
+The `org.eclipse.scout.rt.client.rest.ScoutBackendRestClientHelper` does register this default filter for the process resource.
 
 === Implement Cancellation Servlet Filter
 
@@ -295,12 +280,7 @@ Scout is tied to an `ITransaction` that are managed by a `RunContext` and observ
 sub-RunContexts and their transaction isolation it might happen, that the transaction visible in a container filter is not controlled by the
 currently active `RunMonitor`. Therefore, a cancel request would not cancel the transaction.)
 
-[source,java]
-.Example: Register client request cancellation filter in Rest Client Helper
-----
-include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/rest/RestRequestCancellationServletFilter.java[tags=class]
-----
-<1> Implement the same `userId` Lookup as in the `CancellationResource`.
+A default implementation for such a filter is provided in `org.eclipse.scout.rt.rest.cancellation.RestRequestCancellationServletFilter`.
 
 Finally, register servlet filter via `IServletFilterContributor` (set `@Order` appropriately):
 
@@ -312,12 +292,17 @@ public static class CancellationFilterContributor implements IServletFilterContr
 
   @Override
   public void contribute(ServletContextHandler handler) {
-    handler.addFilter(RestRequestCancellationServletFilter.class, "/api/*", null);
+    handler.addFilter(RestRequestCancellationServletFilter.class, ServletConstants.API_PATH_WITH_WILDCARD, null);
   }
 }
 ----
 
 IMPORTANT: Make sure the cancellation filter is registered after the HttpServerRunContextFilter.
+
+For service tunnel calls this filter is already registered, see `org.eclipse.scout.rt.server.app.ServerServletContributors.ApiCancellationFilterContributor`.
+
+To ensure a user cancels only his own requests, the `CancellationResource` and the `RestRequestCancellationServletFilter` determine the current user identifier using `org.eclipse.scout.rt.security.IAccessControlService.getUserId(Subject)`.
+If a project does not this service to determine the user identifiers, the corresponding `resolveCurrentUserId()` should be overwritten (and either return null if no users are available or determine the user id using another method).
 
 [[cha-rest-multipart]]
 == REST Multipart Support

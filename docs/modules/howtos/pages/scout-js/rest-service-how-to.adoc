@@ -59,7 +59,7 @@ Ensure the API servlet is registered using `IServletContributor` (i.e. `AppServl
 public static class ApiServletContributor implements IServletContributor {
   @Override
   public void contribute(ServletContextHandler handler) {
-    ServletHolder servlet = handler.addServlet(ServletContainer.class, "/api/*");
+    ServletHolder servlet = handler.addServlet(ServletContainer.class, ServletConstants.API_PATH_WITH_WILDCARD);
     servlet.setInitParameter(ServerProperties.WADL_FEATURE_DISABLE, Boolean.TRUE.toString());
     servlet.setInitParameter(ServletProperties.JAXRS_APPLICATION_CLASS, RestApplication.class.getName());
     servlet.setInitOrder(1); // load-on-startup

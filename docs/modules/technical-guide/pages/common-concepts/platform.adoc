@@ -1134,7 +1134,7 @@ Server sessions that have not been accessed for the specified number of millisec
 Data type: Long >= 0
 
 `scout.servicetunnel.compress` ::
-Specifies if the service tunnel should compress the data. If null, the response decides which is default to true.
+Specifies if the service tunnel should use gzip compression for requests, default value: true
 +
 Data type: Boolean
 

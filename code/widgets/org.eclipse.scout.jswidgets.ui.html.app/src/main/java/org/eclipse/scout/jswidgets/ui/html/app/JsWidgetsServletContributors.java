@@ -15,6 +15,7 @@ import org.eclipse.scout.rt.jetty.IServletContributor;
 import org.eclipse.scout.rt.jetty.IServletFilterContributor;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.rest.RestApplication;
+import org.eclipse.scout.rt.rest.ServletConstants;
 import org.eclipse.scout.rt.server.commons.context.HttpRunContextFilter;
 import org.eclipse.scout.rt.ui.html.app.UiServletContributors.UiServletContributor;
 import org.glassfish.jersey.server.ServerProperties;
@@ -36,7 +37,7 @@ public final class JsWidgetsServletContributors {
 
     @Override
     public void contribute(ServletContextHandler handler) {
-      handler.addFilter(HttpRunContextFilter.class, "/api/*", null);
+      handler.addFilter(HttpRunContextFilter.class, ServletConstants.API_PATH_WITH_WILDCARD, null);
     }
   }
 
@@ -50,7 +51,7 @@ public final class JsWidgetsServletContributors {
 
     @Override
     public void contribute(ServletContextHandler handler) {
-      ServletHolder servlet = handler.addServlet(ServletContainer.class, "/api/*");
+      ServletHolder servlet = handler.addServlet(ServletContainer.class, ServletConstants.API_PATH_WITH_WILDCARD);
       servlet.setInitParameter(ServerProperties.WADL_FEATURE_DISABLE, Boolean.TRUE.toString());
       servlet.setInitParameter(ServletProperties.JAXRS_APPLICATION_CLASS, RestApplication.class.getName());
       servlet.setInitOrder(1); // load-on-startup

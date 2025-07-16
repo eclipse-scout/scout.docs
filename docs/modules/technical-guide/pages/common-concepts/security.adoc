@@ -389,7 +389,7 @@ public static class ApiIdSignatureFilterContributor implements IServletFilterCon
 
   @Override
   public void contribute(ServletContextHandler handler) {
-    handler.addFilter(IdSignatureFilter.class, "/api/*", null);
+    handler.addFilter(IdSignatureFilter.class, ServletConstants.API_PATH_WITH_WILDCARD, null);
   }
 }
 ----
