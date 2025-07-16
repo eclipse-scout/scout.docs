@@ -142,5 +142,9 @@ export class TablePropertiesBox extends GroupBox {
         table.deleteMenus([table.menus.find(menu => menu instanceof TableOrganizerMenu)]);
       }
     });
+
+    let uiPreferencesEnabledField = this.widget('UiPreferencesEnabledField');
+    uiPreferencesEnabledField.setValue(this.table.uiPreferencesEnabled);
+    uiPreferencesEnabledField.on('propertyChange:value', event => this.table.setUiPreferencesEnabled(event.newValue));
   }
 }

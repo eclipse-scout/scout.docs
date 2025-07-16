@@ -145,6 +145,12 @@ export default (): GroupBoxModel => ({
       triStateEnabled: true
     },
     {
+      id: 'UiPreferencesEnabledField',
+      objectType: CheckBoxField,
+      label: 'Ui Preferences Enabled',
+      labelVisible: false
+    },
+    {
       id: 'RowIconColumnWidthField',
       objectType: NumberField,
       label: 'Row Icon Column Width'
@@ -189,6 +195,7 @@ export type TablePropertiesBoxWidgetMap = {
   'TextFilterEnabledField': CheckBoxField;
   'TileModeField': CheckBoxField;
   'TruncatedCellTooltipEnabledField': CheckBoxField;
+  'UiPreferencesEnabledField': CheckBoxField;
   'RowIconColumnWidthField': NumberField;
   'CheckableStyleField': SmartField<any>;
   'GroupingStyleField': SmartField<any>;
