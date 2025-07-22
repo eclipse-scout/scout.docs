@@ -132,6 +132,7 @@ The Scout JS table control `SearchFormTableControl` was added in order to add se
 The `PageWithTable` uses the data of the search form as its search filter each time the data is loaded
 (see xref:howtos:scout-js/rest-service-how-to.adoc#page-with-table-search-form[Search Form] for more details).
 
+[[table-organizer-menu]]
 == Table Organizer Menu
 
 In the top right corner of the table header is a menu with a gear icon that opens the table organizer form.
@@ -156,9 +157,24 @@ table: {
 .Table Organizer Form
 image::table_organizer_form.png[]
 
-== New Group in Table Column Menu
+[[table-ui-preferences]]
+== Table UI Preferences
 
-The column menu now has a group called `Width` containing the following actions:
+Adjustments to a table made by the user (e.g. column visibility, column width, sort order) can now be stored and preserved between sessions.
+If the <<table-organizer-menu>> is enabled, users can create additional table profiles that they can apply later.
+
+This feature can be enabled manually by setting the property `uiPreferencesEnabled`.
+If enabled, the table should also have a unique `uuuid` to ensure that the preferences are assigned to the correct table.
+
+By default, uiPreferencesEnabled is set to `true` for all detail tables of all table pages.
+In this case, the table does not need a unique `uuid` as long as the page already has one.
+
+Preferences are stored in the browser's local storage by default.
+Refer to the xref:technical-guide:user-interface/ui-preferences.adoc#ui-preferences-storage[UI Preferences documentation] for more information about how to change this.
+
+== New Section in Table Column Menu
+
+The column menu now has a section called `Width` containing the following actions:
 
 . Optimize width: makes the column as big as necessary to show its content
 . Optimize width of all columns: makes all columns as big as necessary to show their content

@@ -1,0 +1,121 @@
+= UI Preferences
+
+Some widgets allow the user to change their appearance.
+UI preferences can store these adjustments and restore them automatically when the user starts a new session.
+
+NOTE: The information presented in this chapter applies to Scout JS only.
+In Scout Classic applications, preferences are handled similarly by the class `ClientUiPreferences`.
+
+[[ui-preferences-storage]]
+== Storage
+
+There is a global utility `scout.uiPreferences` that loads and stores all UI preferences for the current user.
+It is automatically initialized on application startup, so all widgets can access the preferences  synchronously.
+The data consists of a single data object `UiPreferencesDo` that is loaded from and stored to an implementation of the abstract `scout.UiPreferencesStore`.
+
+The default implementation uses the browser's local storage as means of persistence.
+To store the data somewhere else (e.g. on a central database), you can register your own implementation via the xref:user-interface/object-factory.adoc[object factory].
+
+== Table Preferences
+
+If enabled, tables store the following settings in the UI preferences:
+
+* Tile mode
+* For each column:
+** Position
+** Visibility
+** Width
+** Sort index and direction
+** Grouping
+** Aggregation and background color (`NumberColumn` only)
+* Custom columns (if a `TableCustomizer` is present on the table)
+
+In order to activate the feature for a table, set the property `uiPreferencesEnabled` to `true`.
+
+TIP: For the detail page of a table page, this feature is enabled automatically.
+
+To ensure that the settings are assigned to the correct table, make sure it has a unique `uuid`.
+In case the same table is used in different places in the application that should not share the same preferences, you can make the identifier even more specific by specifying the property `userPreferenceContext`.
+
+Tables support multiple sets of preferences called "profiles".
+The current preferences are stored in a special global profile.
+If the `TableOrganizerMenu` is added to the table, a small gear icon appears in the top right of the table that allows the user to create and activate additional profiles or reset the table to the initial preferences.
+
+[source,typescript,opts=novalidate]
+----
+{
+  objectType: Table,
+  uuid: '59164ac1-f19e-49eb-8d3d-14329424aae4',
+  uiPreferencesEnabled: true
+  menus: [
+    {
+      objectType: TableOrganizerMenu
+    }
+  ],
+  columns: [
+    ....
+  ]
+}
+----
+
+All functions to create, manage or apply table UI preferences are provided by the utility `scout.tableUiPreferences`.
+
+When creating a bookmark for a `PageWithTable`, the current UI preferences of the detail table are automatically stored as part of the bookmark.
+When the bookmark is activated later, the stored preferences are then also restored.
+In addition to the properties listed above, the bookmark also preserves the current user filters.
+
+== Creating a Custom Preference Handler
+
+To add preference support for a custom widget, you can provide your own handler by following these steps.
+
+* Create custom class that can import and export the preference data.
+* Because the class is stateful, provide a global singleton, so all widgets operate on the same instance.
+* Register a handler with the global `UiPreferences` class that extracts the relevant parts of the `UiPreferencesDo` object into your own class.
+
+[source,typescript,opts=novalidate]
+----
+export class MyUiPreferences {
+
+  protected _myPreferences: MyUiPreferencesContributionDo;
+
+  _importMyPreferences(myPreferences: MyUiPreferencesContributionDo) {
+    this._myPreferences = myPreferences || scout.create(MyUiPreferencesContributionDo);
+  }
+
+  _exportMyPreferences(): MyUiPreferencesContributionDo {
+    return this._myPreferences;
+  }
+
+  storeMyPreference(value: string) {
+    this._myPreferences.value = value;
+    uiPreferences.scheduleStore(MyUiPreferences);
+  }
+
+  applyMyPreference(myWidget: MyWidget) {
+    myWidget.setValue(this._myPreferences.value);
+  }
+}
+
+export const myUiPreferences = objects.createSingletonProxy(MyUiPreferences);
+
+UiPreferences.registerHandler(MyUiPreferences, {
+  importPreferences: preferences => {
+    myUiPreferences._importMyPreferences(preferences.getContribution(MyUiPreferencesContributionDo));
+  },
+  exportPreferences: preferences => {
+    preferences.addContribution(myUiPreferences._exportMyPreferences());
+  }
+});
+----
+
+[source,typescript,opts=novalidate]
+----
+export class MyWidget extends Widget {
+
+  _init(model: ModelOf<this>) {
+    ...
+    myUiPreferences.applyMyPreference(this);
+    this.on('valueUpdated', event => myUiPreferences.storeMyPreference(value));
+  }
+}
+----
