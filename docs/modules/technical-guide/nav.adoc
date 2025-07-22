@@ -21,6 +21,7 @@
 *** xref:user-interface/desktop.adoc[]
 *** xref:user-interface/outline.adoc[]
 *** xref:user-interface/page.adoc[]
+*** xref:user-interface/bookmarks.adoc[]
 *** xref:user-interface/styling.adoc[]
 *** xref:user-interface/mobile.adoc[]
 *** xref:user-interface/extensibility.adoc[]
