@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -9,8 +9,8 @@
  */
 import {CheckBoxField, FormModel, GroupBox, LabelField, TabBox, TabItem} from '@eclipse-scout/core';
 import {
-  EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, ValueFieldPropertiesBox, ValueFieldPropertiesBoxWidgetMap,
-  WidgetActionsBox, WidgetActionsBoxWidgetMap
+  EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, StatesBox, ValueFieldPropertiesBox,
+  ValueFieldPropertiesBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap
 } from '../index';
 
 export default (): FormModel => ({
@@ -30,6 +30,11 @@ export default (): FormModel => ({
             objectType: LabelField,
             label: 'Label Field',
             value: '${textKey:LabelFieldValue}'
+          },
+          {
+            id: 'StatesBox',
+            objectType: StatesBox,
+            fieldInitProperties: ['value']
           }
         ]
       },
@@ -119,6 +124,7 @@ export type LabelFieldFormWidgetMap = {
   'MainBox': GroupBox;
   'DetailBox': GroupBox;
   'LabelField': LabelField;
+  'StatesBox': StatesBox;
   'ConfigurationBox': TabBox;
   'PropertiesTab': TabItem;
   'PropertiesBox': GroupBox;

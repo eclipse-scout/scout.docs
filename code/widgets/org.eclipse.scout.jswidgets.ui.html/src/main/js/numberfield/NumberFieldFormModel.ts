@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -9,8 +9,8 @@
  */
 import {FormModel, GroupBox, NumberField, StringField, TabBox, TabItem} from '@eclipse-scout/core';
 import {
-  EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, ValueFieldPropertiesBox, ValueFieldPropertiesBoxWidgetMap,
-  WidgetActionsBox, WidgetActionsBoxWidgetMap
+  EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, StatesBox, ValueFieldPropertiesBox,
+  ValueFieldPropertiesBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap
 } from '../index';
 
 export default (): FormModel => ({
@@ -28,13 +28,12 @@ export default (): FormModel => ({
           {
             id: 'NumberField',
             objectType: NumberField,
-            label: '${textKey:NumberField}'
+            label: '${textKey:NumberField}',
+            tooltipText: '${textKey:NumberFieldCalculatorHint}'
           },
           {
-            id: 'CalculatorField',
-            objectType: NumberField,
-            label: '${textKey:Calculator}',
-            tooltipText: '${textKey:NumberFieldCalculatorHint}'
+            id: 'StatesBox',
+            objectType: StatesBox
           }
         ]
       },
@@ -131,7 +130,7 @@ export type NumberFieldFormWidgetMap = {
   'MainBox': GroupBox;
   'DetailBox': GroupBox;
   'NumberField': NumberField;
-  'CalculatorField': NumberField;
+  'StatesBox': StatesBox;
   'ConfigurationBox': TabBox;
   'PropertiesTab': TabItem;
   'PropertiesBox': GroupBox;

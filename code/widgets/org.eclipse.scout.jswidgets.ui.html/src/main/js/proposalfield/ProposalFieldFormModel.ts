@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -10,7 +10,7 @@
 import {FormModel, GroupBox, ProposalField, TabBox, TabItem} from '@eclipse-scout/core';
 import {
   EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, ProposalFieldPropertiesBox, ProposalFieldPropertiesBoxWidgetMap,
-  SalutationLookupCall, ValueFieldPropertiesBox, ValueFieldPropertiesBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap
+  SalutationLookupCall, StatesBox, ValueFieldPropertiesBox, ValueFieldPropertiesBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap
 } from '../index';
 
 export default (): FormModel => ({
@@ -30,6 +30,11 @@ export default (): FormModel => ({
             objectType: ProposalField,
             lookupCall: SalutationLookupCall,
             label: 'Proposal Field'
+          },
+          {
+            id: 'StatesBox',
+            objectType: StatesBox,
+            fieldInitProperties: ['lookupCall']
           }
         ]
       },
@@ -101,6 +106,7 @@ export type ProposalFieldFormWidgetMap = {
   'MainBox': GroupBox;
   'DetailBox': GroupBox;
   'ProposalField': ProposalField;
+  'StatesBox': StatesBox;
   'ConfigurationBox': TabBox;
   'PropertiesTab': TabItem;
   'ProposalFieldPropertiesBox': ProposalFieldPropertiesBox;
