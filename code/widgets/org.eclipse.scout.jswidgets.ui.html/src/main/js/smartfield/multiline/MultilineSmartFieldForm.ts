@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -38,5 +38,6 @@ export class MultilineSmartFieldForm extends Form {
     this.widget('WidgetActionsBox').setField(this.smartField);
     this.widget('FormFieldActionsBox').setField(this.smartField);
     this.widget('EventsTab').setField(this.smartField);
+    this.widget('StatesBox').setField(this.smartField);
   }
 }

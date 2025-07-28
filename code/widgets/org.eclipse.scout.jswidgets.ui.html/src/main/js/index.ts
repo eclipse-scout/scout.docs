@@ -41,6 +41,8 @@ export * from './common/EventsTabModel';
 export * from './common/ObjectTypeLookupCall';
 export * from './common/FormFieldLookupCall';
 export * from './common/IconIdLookupCall';
+export * from './common/StatesBox';
+export * from './common/StatesBoxModel';
 export * from './common/WidgetActionsBox';
 export * from './common/WidgetActionsBoxModel';
 export * from './common/MiniForm';

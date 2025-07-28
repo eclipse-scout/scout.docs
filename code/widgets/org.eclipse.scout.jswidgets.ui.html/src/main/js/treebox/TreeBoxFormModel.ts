@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -9,7 +9,7 @@
  */
 import {FormModel, GroupBox, LookupCall, SmartField, TabBox, TabItem, TreeBox} from '@eclipse-scout/core';
 import {
-  EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, LookupCallLookupCall, TreePropertiesBox,
+  EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, LookupCallLookupCall, StatesBox, TreePropertiesBox,
   TreePropertiesBoxWidgetMap, ValueFieldPropertiesBox, ValueFieldPropertiesBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap, WorldLookupCall
 } from '../index';
 
@@ -34,6 +34,11 @@ export default (): FormModel => ({
               h: 6,
               weightY: 0
             }
+          },
+          {
+            id: 'StatesBox',
+            objectType: StatesBox,
+            fieldInitProperties: ['lookupCall', 'gridDataHints']
           }
         ]
       },
@@ -116,6 +121,7 @@ export type TreeBoxFormWidgetMap = {
   'MainBox': GroupBox;
   'DetailBox': GroupBox;
   'TreeBox': TreeBox<any>;
+  'StatesBox': StatesBox;
   'ConfigurationBox': TabBox;
   'PropertiesTab': TabItem;
   'LookupCallField': SmartField<any>;

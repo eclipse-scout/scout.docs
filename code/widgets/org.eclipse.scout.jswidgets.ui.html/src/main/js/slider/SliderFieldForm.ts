@@ -42,7 +42,5 @@ export class SliderFieldForm extends NumberFieldForm {
       numberField.setSliderTabbable(event.newValue);
       focusButton.setVisible(event.newValue);
     });
-
-    this.widget('CalculatorField').setVisible(false);
   }
 }
