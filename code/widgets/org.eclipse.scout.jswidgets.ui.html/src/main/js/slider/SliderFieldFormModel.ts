@@ -23,13 +23,6 @@ export default (): ExtensionModel => ({
       }
     },
     {
-      operation: 'appendTo',
-      target: {id: 'CalculatorField'},
-      extension: {
-        objectType: SliderField
-      }
-    },
-    {
       operation: 'insert',
       target: {
         id: 'PropertiesBox',

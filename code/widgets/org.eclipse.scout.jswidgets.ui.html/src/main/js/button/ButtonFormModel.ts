@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -9,7 +9,7 @@
  */
 import {Button, ButtonDisplayStyle, CheckBoxField, FormModel, GroupBox, SmartField, StringField, TabBox, TabItem} from '@eclipse-scout/core';
 import {
-  ButtonDisplayStyleLookupCall, EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, IconIdLookupCall,
+  ButtonDisplayStyleLookupCall, EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, IconIdLookupCall, StatesBox,
   WidgetActionsBox, WidgetActionsBoxWidgetMap
 } from '../index';
 
@@ -33,6 +33,11 @@ export default (): FormModel => ({
             gridDataHints: {
               horizontalAlignment: 0
             }
+          },
+          {
+            id: 'StatesBox',
+            objectType: StatesBox,
+            fieldInitProperties: ['processButton', 'gridDataHints']
           }
         ]
       },
@@ -145,6 +150,7 @@ export type ButtonFormWidgetMap = {
   'MainBox': GroupBox;
   'DetailBox': GroupBox;
   'Button': Button;
+  'StatesBox': StatesBox;
   'ConfigurationBox': TabBox;
   'PropertiesTab': TabItem;
   'PropertiesBox': GroupBox;

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {ExtensionModel} from '@eclipse-scout/core';
+import {ExtensionModel, StringField} from '@eclipse-scout/core';
 
 export default (): ExtensionModel => ({
   type: 'extension',
@@ -22,6 +22,14 @@ export default (): ExtensionModel => ({
         gridDataHints: {
           h: 3
         }
+      }
+    }, {
+      operation: 'appendTo',
+      target: {
+        id: 'StatesBox'
+      },
+      extension: {
+        fieldInitProperties: ['multilineText', 'gridDataHints']
       }
     }
   ]

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -10,7 +10,7 @@
 import {FormModel, GroupBox, SmartFieldMultiline, TabBox, TabItem} from '@eclipse-scout/core';
 import {
   EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, MultilinePersonLookupCall, SmartFieldPropertiesBox,
-  SmartFieldPropertiesBoxWidgetMap, ValueFieldPropertiesBox, ValueFieldPropertiesBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap
+  SmartFieldPropertiesBoxWidgetMap, StatesBox, ValueFieldPropertiesBox, ValueFieldPropertiesBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap
 } from '../../index';
 
 export default (): FormModel => ({
@@ -34,6 +34,11 @@ export default (): FormModel => ({
               h: 2,
               weightY: 0
             }
+          },
+          {
+            id: 'StatesBox',
+            objectType: StatesBox,
+            fieldInitProperties: ['lookupCall', 'gridDataHints']
           }
         ]
       },
@@ -105,6 +110,7 @@ export type MultilineSmartFieldFormWidgetMap = {
   'MainBox': GroupBox;
   'DetailBox': GroupBox;
   'MultilineSmartField': SmartFieldMultiline<number>;
+  'StatesBox': StatesBox;
   'ConfigurationBox': TabBox;
   'PropertiesTab': TabItem;
   'SmartFieldPropertiesBox': SmartFieldPropertiesBox;

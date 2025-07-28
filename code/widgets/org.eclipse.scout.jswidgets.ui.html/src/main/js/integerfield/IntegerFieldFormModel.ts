@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -19,13 +19,6 @@ export default (): ExtensionModel => ({
       extension: {
         objectType: IntegerField,
         label: '${textKey:IntegerField}'
-      }
-    },
-    {
-      operation: 'appendTo',
-      target: {id: 'CalculatorField'},
-      extension: {
-        objectType: IntegerField
       }
     },
     {
