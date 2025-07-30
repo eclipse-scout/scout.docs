@@ -35,3 +35,17 @@ WARNING: {NotReleasedWarning}
 // WARNING: {NotReleasedWarning}
 //
 // * <<New Feature (since 26.1.xyz)>>
+
+[[styles-css-class]]
+== Utility to Modify CSS Classes (Scout JS)
+
+The `styles` utility was extended with new methods to modify the `cssClass`-string of objects or check whether a css class is set or not.
+These methods are:
+
+* `addCssClass`: adds one or more css classes
+* `removeCssClass`: removes one or more css classes
+* `toggleCssClass`: toggles, i.e. adds or removes, one or more css classes depending on a condition
+* `hasCssClass`: checks whether one or more css classes are set
+* `cssClassAsArray`: splits a `cssClass`-string into an array of css classes
+
+In addition, similar methods have been added to the `Cell` class to easier query and modify the `cssClass` property: `addCssClass`, `removeCssClass`, `toggleCssClass`, `hasCssClass`.

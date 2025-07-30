@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -45,7 +45,7 @@ export class HierarchicalTablePropertiesBox extends TablePropertiesBox {
     hierarchicalStyleField.on('propertyChange:value', event => this.table.setHierarchicalStyle(event.newValue));
 
     let extendedHierarchyPaddingField = this.widget('ExtendedHierarchyPaddingField');
-    extendedHierarchyPaddingField.setValue(this.table.cssClassAsArray().indexOf('extended-row-level-padding') > -1);
+    extendedHierarchyPaddingField.setValue(this.table.hasCssClass('extended-row-level-padding'));
     extendedHierarchyPaddingField.on('propertyChange:value', event => this.table.toggleCssClass('extended-row-level-padding', event.newValue));
   }
 }
