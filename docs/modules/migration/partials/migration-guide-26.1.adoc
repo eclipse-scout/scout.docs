@@ -89,3 +89,35 @@ To install the Scout SDK into your existing Eclipse IDE, use this P2 update site
 Scout 26.1 requires at least the following:
 
 * Build and runtime of Scout 26.1 require Java 24 (Java 21 support has been dropped). The compiler target level is set to Java 21. We plan to update to Java 25 LTS as soon as it is available.
+
+== Widget.cssClass: API Changes (Scout JS)
+
+The methods to modify the `cssClass` property of the `Widget` were moved to the `styles` utility (see xref:releasenotes:release-notes.adoc#styles-css-class[Release Notes]).
+The API of `setCssClass`, `addCssClass`, `removeCssClass`, `toggleCssClass` and `hasCssClass` remains the same but the method `cssClassAsArray` and the static method `cssClassAsArray` were removed.
+Code using these methods must be migrated as follows:
+
+.old: using the `cssClassAsArray` methods of the `Widget`.
+[source,typescript,opts=novalidate]
+----
+const widget = scout.create(Widget, {
+  // ...
+  cssClass: 'foo bar'
+});
+const widgetCssClassAsArray = widget.cssClassAsArray();
+
+const cssClass = 'foo bar';
+const cssClassAsArray = Widget.cssClassAsArray(cssClass);
+----
+
+.new: using the `cssClassAsArray` methods of the `styles` utility.
+[source,typescript,opts=novalidate]
+----
+const widget = scout.create(Widget, {
+  // ...
+  cssClass: 'foo bar'
+});
+const widgetCssClassAsArray = styles.cssClassAsArray(widget.cssClass);
+
+const cssClass = 'foo bar';
+const cssClassAsArray = styles.cssClassAsArray(cssClass);
+----
