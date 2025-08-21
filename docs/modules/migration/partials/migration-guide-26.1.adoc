@@ -90,6 +90,21 @@ Scout 26.1 requires at least the following:
 
 * Build and runtime of Scout 26.1 require Java 24 (Java 21 support has been dropped). The compiler target level is set to Java 21. We plan to update to Java 25 LTS as soon as it is available.
 
+== Code Cleanup
+
+=== JQuery-Scout (Scout JS)
+The following functions have been renamed:
+
+- select(boolean) -> setSelected(boolean) +
+  If you followed the naming convention, you can use the following regex to find the occurrences:
+  `\$\w+\.select\(` +
+  Note: `select()` also exists on an `HTMLInputElement`, so make sure you don't accidentally rename the wrong method (if you use TypeScript the compiler will help you).
+
+The following functions have been removed:
+
+- selectOne() +
+  Replace with `setSelected(true)` and `setSelected(false)` on the siblings.
+
 == Widget.cssClass: API Changes (Scout JS)
 
 The methods to modify the `cssClass` property of the `Widget` were moved to the `styles` utility (see xref:releasenotes:release-notes.adoc#styles-css-class[Release Notes]).
