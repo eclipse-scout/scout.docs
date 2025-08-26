@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -67,6 +67,12 @@ export default (): FormModel => ({
                     id: 'MultilineTextField',
                     objectType: CheckBoxField,
                     label: 'Multiline Text',
+                    labelVisible: false
+                  },
+                  {
+                    id: 'WrapTextField',
+                    objectType: CheckBoxField,
+                    label: 'Wrap Text',
                     labelVisible: false
                   },
                   {
@@ -221,6 +227,7 @@ export type StringFieldFormWidgetMap = {
   'HasActionField': CheckBoxField;
   'InputMaskedField': CheckBoxField;
   'MultilineTextField': CheckBoxField;
+  'WrapTextField': CheckBoxField;
   'SpellCheckEnabledField': CheckBoxField;
   'TrimTextField': CheckBoxField;
   'UpdateDisplayTextOnModifyField': CheckBoxField;
