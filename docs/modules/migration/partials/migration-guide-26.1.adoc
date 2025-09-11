@@ -133,3 +133,8 @@ const widgetCssClassAsArray = styles.cssClassAsArray(widget.cssClass);
 const cssClass = 'foo bar';
 const cssClassAsArray = styles.cssClassAsArray(cssClass);
 ----
+
+== widgets Util: Behavior Change of preserveAndSetProperty (Scout JS)
+
+If you use the function `widgets.preserveAndSetProperty` in your JavaScript code, please make sure that the variable that stores the preserved value is not initialized or initialized to `undefined`.
+If it is initialized to `null`, remove the initialization.
