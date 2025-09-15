@@ -92,6 +92,8 @@ Scout 25.1 requires at least the following:
 ** Node: >= 22.13.0
 ** Pnpm: >= 9.15.4
 
+include::common:partial$IntelliJUpdateEcjNote.adoc[]
+
 === Pnpm Settings Changes
 
 Pnpm 9 changed the default of `link-workspace-packages` from true to false, see

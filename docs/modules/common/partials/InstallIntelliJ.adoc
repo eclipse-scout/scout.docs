@@ -21,4 +21,6 @@ As soon as this is completed, press the `Restart IDE` button.
 
 The same can also be achieved by navigating to `File | Settings | Plugins` in case you already have an existing IntelliJ project running.
 
+include::common:partial$IntelliJUpdateEcjNote.adoc[]
+
 Congratulations! You have successfully set up IntelliJ IDEA for Scout development.

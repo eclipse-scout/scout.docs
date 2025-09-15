@@ -1,0 +1,20 @@
+ifndef::finaldoc[]
+include::partial$_initDoc.adoc[]
+endif::finaldoc[]
+
+//-----------------------------------------------------------------------------
+//WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
+//-----------------------------------------------------------------------------
+
+[NOTE]
+====
+IntelliJ currently ships with an outdated version of the Eclipse Compiler for Java (ECJ), which does *not* support Java 21 or later. Therefore, Scout {scout-version} requires *Eclipse Compiler 3.40.0*.
+
+To use ECJ 3.40.0 in IntelliJ:
+
+* https://repo1.maven.org/maven2/org/eclipse/jdt/ecj/3.40.0/ecj-3.40.0.jar[Download ECJ 3.40.0]
+* In IntelliJ, go to:
++
+`File | Settings | Build, Execution, Deployment | Compiler | Java Compiler`
+* Under *Eclipse Options*, set *Path to ECJ batch compiler tool* to the downloaded `ecj-3.40.0.jar` file.
+====
