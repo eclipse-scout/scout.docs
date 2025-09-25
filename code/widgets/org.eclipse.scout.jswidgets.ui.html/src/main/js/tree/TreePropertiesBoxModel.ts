@@ -37,6 +37,12 @@ export default (): GroupBoxModel => ({
       labelVisible: false
     },
     {
+      id: 'NodesFocusableField',
+      objectType: CheckBoxField,
+      label: 'Nodes Focusable',
+      labelVisible: false
+    },
+    {
       id: 'TextFilterEnabledField',
       objectType: CheckBoxField,
       label: 'Text Filter Enabled',
@@ -59,6 +65,7 @@ export type TreePropertiesBoxWidgetMap = {
   'AutoCheckChildrenField': CheckBoxField;
   'CheckableField': CheckBoxField;
   'MultiCheckField': CheckBoxField;
+  'NodesFocusableField': CheckBoxField;
   'TextFilterEnabledField': CheckBoxField;
   'CheckableStyleField': SmartField<any>;
 };

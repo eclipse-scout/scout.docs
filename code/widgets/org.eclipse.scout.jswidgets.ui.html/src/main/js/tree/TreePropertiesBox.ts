@@ -57,6 +57,10 @@ export class TreePropertiesBox extends GroupBox {
       this.tree.multiCheck = event.newValue;
     });
 
+    let nodesFocusableField = this.widget('NodesFocusableField');
+    nodesFocusableField.setValue(this.tree.nodesFocusable);
+    nodesFocusableField.on('propertyChange:value', event => this.tree.setNodesFocusable(event.newValue));
+
     let textFilterEnabledField = this.widget('TextFilterEnabledField');
     textFilterEnabledField.setValue(this.tree.textFilterEnabled);
     textFilterEnabledField.on('propertyChange:value', event => this.tree.setTextFilterEnabled(event.newValue));
