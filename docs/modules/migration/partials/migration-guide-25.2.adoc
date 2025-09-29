@@ -86,7 +86,9 @@ To install the Scout SDK into your existing Eclipse IDE, use this P2 update site
 
 Scout 25.2 requires at least the following:
 
-* Build and runtime of Scout 25.2 require Java 24 (Java 21 support has been dropped). The compiler target level is set to Java 21. We plan to update to Java 25 LTS as soon as it is available.
+* Build and runtime of Scout 25.2 require Java 25.
+* Earlier releases of Scout 25.2 (&le; 25.2.16) still require Java 24.
+* Java 21 and Java 24 support have been dropped. The compiler target level is set to Java 21.
 
 NOTE: When upgrading to Scout 25.2, remove the `<jdk.source.version>` property from the root `pom.xml` file of your Scout application.
 
