@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -7,9 +7,9 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {DesktopNotification, EllipsisMenu, Event, Form, FormFieldMenu, FormModel, InitModelOf, Menu, MenuBar, models, scout, Status} from '@eclipse-scout/core';
+import {EllipsisMenu, Event, Form, FormFieldMenu, FormModel, InitModelOf, Menu, MenuBar, models, scout} from '@eclipse-scout/core';
 import MenuBarFormModel from './MenuBarFormModel';
-import {MenuBarFormWidgetMap, MenuItemLookupCall, MiniForm} from '../index';
+import {MenuBarFormWidgetMap, MenuItemLookupCall, MiniForm, util} from '../index';
 
 export class MenuBarForm extends Form {
   declare widgetMap: MenuBarFormWidgetMap;
@@ -67,12 +67,11 @@ export class MenuBarForm extends Form {
 
     let detailBox = this.widget('DetailBox');
     let menus = detailBox.menus;
-
     menus.forEach(menu => {
-      menu.on('action', this._onMenuAction.bind(this));
+      menu.on('action', event => util.showMenuActionMessage(event.source));
       menu.on('propertyChange:text', event => this._fillSelectedMenuField());
       menu.visitChildMenus(menu => {
-        menu.on('action', this._onMenuAction.bind(this));
+        menu.on('action', event => util.showMenuActionMessage(event.source));
         menu.on('propertyChange:text', event => this._fillSelectedMenuField());
       });
     });
@@ -102,20 +101,6 @@ export class MenuBarForm extends Form {
       }
       menu.setChildActions(newMenus);
     }
-  }
-
-  protected _onMenuAction(event: Event<Menu>) {
-    if (event.source.isToggleAction()) {
-      // Don't show message box if it is a toggle action
-      return;
-    }
-    scout.create(DesktopNotification, {
-      parent: this,
-      status: {
-        severity: Status.Severity.OK,
-        message: this.session.text('MenuClickMessage', event.source.text)
-      }
-    }).show();
   }
 
   /**

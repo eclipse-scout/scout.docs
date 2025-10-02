@@ -12,7 +12,7 @@ import {
   AccordionForm, BreadcrumbBarFieldForm, BrowserFieldForm, ButtonForm, CarouselForm, ChartFieldForm, CheckBoxFieldForm, DateFieldForm, DesktopForm, DesktopNotificationForm, DynamicPageWithNodes, EditableTableForm, FileChooserButtonForm,
   FileChooserFieldForm, FileChooserForm, FormForm, GroupBoxForm, HierarchicalTableForm, ImageFieldForm, ImageForm, IntegerFieldForm, LabelFieldForm, LabelForm, ListBoxForm, LogicalGridForm, MenuBarForm, MessageBoxForm, ModeSelectorForm,
   MultilineSmartFieldForm, MultilineStringFieldForm, NumberFieldForm, PopupForm, ProposalFieldForm, RadioButtonGroupForm, ReloadablePageWithNodes, RestForm, SamplePageWithNodes, SamplePageWithTable, SequenceBoxForm, SimpleTabBoxForm,
-  SliderFieldForm, SmartFieldForm, StringFieldForm, SwitchForm, TabBoxForm, TableForm, TableSmartFieldForm, TagFieldForm, TileAccordionForm, TileGridForm, TooltipForm, TreeBoxForm, TreeForm, TreeSmartFieldForm, UiNotificationForm,
+  SliderFieldForm, SmartFieldForm, StringFieldForm, SwitchForm, TabBoxForm, TableForm, TableSmartFieldForm, TagFieldForm, TileAccordionForm, TileGridForm, TooltipForm, TooltipWithMenusForm, TreeBoxForm, TreeForm, TreeSmartFieldForm, UiNotificationForm,
   VirtualTileGridForm, WatchFieldForm, WidgetsOutlineOverview, WrappedFormFieldForm
 } from '../index';
 
@@ -526,11 +526,22 @@ export default (): OutlineModel => ({
     {
       uuid: 'cce2c89f-09e3-4305-9d30-7bfd0d22aee8',
       objectType: PageWithNodes,
-      leaf: true,
+      expanded: true,
       text: 'Tooltip',
       detailForm: {
         objectType: TooltipForm
-      }
+      },
+      childNodes: [
+        {
+          uuid: '84841ade-18a4-41c0-8294-98dae62f8ae6',
+          objectType: PageWithNodes,
+          leaf: true,
+          text: 'Tooltip With Menus',
+          detailForm: {
+            objectType: TooltipWithMenusForm
+          }
+        }
+      ]
     },
     {
       uuid: '7e1303c1-724e-4105-85ff-815059078ef3',

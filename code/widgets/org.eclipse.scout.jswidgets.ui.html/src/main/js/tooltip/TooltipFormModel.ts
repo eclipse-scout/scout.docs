@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -72,6 +72,12 @@ export default (): FormModel => ({
                     labelVisible: false
                   },
                   {
+                    id: 'WithFocusContextField',
+                    objectType: CheckBoxField,
+                    label: 'With Focus Context',
+                    labelVisible: false
+                  },
+                  {
                     id: 'TextField',
                     objectType: StringField,
                     label: 'Text',
@@ -121,6 +127,7 @@ export type TooltipFormWidgetMap = {
   'PropertiesBox': GroupBox;
   'AutoRemoveField': CheckBoxField;
   'HtmlEnabledField': CheckBoxField;
+  'WithFocusContextField': CheckBoxField;
   'TextField': StringField;
   'SeverityField': SmartField<StatusSeverity>;
   'ActionsTab': TabItem;

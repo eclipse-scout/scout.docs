@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -62,19 +62,24 @@ export class TooltipForm extends Form {
     if (this.tooltip) {
       this.tooltip.destroy();
     }
-    this.tooltip = scout.create(Tooltip, {
-      parent: this,
-      $anchor: $anchor,
-      autoRemove: this.widget('AutoRemoveField').value,
-      htmlEnabled: this.widget('HtmlEnabledField').value,
-      text: this.widget('TextField').value,
-      severity: this.widget('SeverityField').value
-    });
+    this.tooltip = scout.create(Tooltip, this._createModel($anchor));
     this.widget('EventsTab').setField(this.tooltip);
     this.widget('WidgetActionsBox').setField(this.tooltip);
     this.tooltip.render();
     this.tooltip.one('destroy', () => {
       this.tooltip = null;
     });
+  }
+
+  protected _createModel($anchor: JQuery): InitModelOf<Tooltip> {
+    return {
+      parent: this,
+      $anchor,
+      autoRemove: this.widget('AutoRemoveField').value,
+      htmlEnabled: this.widget('HtmlEnabledField').value,
+      withFocusContext: this.widget('WithFocusContextField').value,
+      text: this.widget('TextField').value,
+      severity: this.widget('SeverityField').value
+    };
   }
 }
