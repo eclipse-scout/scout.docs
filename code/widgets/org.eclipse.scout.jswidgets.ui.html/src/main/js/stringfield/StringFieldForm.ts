@@ -54,6 +54,10 @@ export class StringFieldForm extends Form {
     updateDisplayTextOnModifyField.setValue(stringField.updateDisplayTextOnModify);
     updateDisplayTextOnModifyField.on('propertyChange:value', event => this.widget('StringField').setUpdateDisplayTextOnModify(event.newValue));
 
+    let wrapTextField = this.widget('WrapTextField');
+    wrapTextField.setValue(stringField.wrapText);
+    wrapTextField.on('propertyChange:value', event => this.widget('StringField').setWrapText(event.newValue));
+
     let formatField = this.widget('FormatField');
     formatField.setValue(stringField.format);
     formatField.on('propertyChange:value', event => this.widget('StringField').setFormat(event.newValue));

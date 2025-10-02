@@ -96,6 +96,12 @@ export default (): FormModel => ({
                     labelVisible: false
                   },
                   {
+                    id: 'WrapTextField',
+                    objectType: CheckBoxField,
+                    label: 'Wrap Text',
+                    labelVisible: false
+                  },
+                  {
                     id: 'FormatField',
                     objectType: SmartField,
                     lookupCall: StringFormatLookupCall,
@@ -226,6 +232,7 @@ export type StringFieldFormWidgetMap = {
   'HasActionField': CheckBoxField;
   'InputMaskedField': CheckBoxField;
   'MultilineTextField': CheckBoxField;
+  'WrapTextField': CheckBoxField;
   'SpellCheckEnabledField': CheckBoxField;
   'TrimTextField': CheckBoxField;
   'UpdateDisplayTextOnModifyField': CheckBoxField;
