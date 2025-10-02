@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -92,6 +92,43 @@ export default (): FormModel => ({
                         text: 'Deep Menu'
                       }]
                     }]
+                  }
+                ]
+              },
+              {
+                id: 'ToggleMenu',
+                objectType: Menu,
+                text: 'Toggle Menu',
+                toggleAction: true,
+                iconId: icons.GEAR
+              },
+              {
+                id: 'DisabledMenu',
+                objectType: Menu,
+                text: 'Disabled Menu',
+                enabled: false,
+                iconId: icons.GEAR
+              },
+              {
+                id: 'DisabledSelectedMenu',
+                objectType: Menu,
+                text: 'Disabled Selected Menu',
+                toggleAction: true,
+                selected: true,
+                enabled: false,
+                iconId: icons.GEAR
+              },
+              {
+                id: 'DisabledHierarchicalMenu',
+                objectType: Menu,
+                text: 'Disabled Hierarchical Menu',
+                iconId: icons.GEAR,
+                enabled: false,
+                childActions: [
+                  {
+                    id: 'SubSubMenu1',
+                    objectType: Menu,
+                    text: 'Sub Sub Menu 1'
                   }
                 ]
               }

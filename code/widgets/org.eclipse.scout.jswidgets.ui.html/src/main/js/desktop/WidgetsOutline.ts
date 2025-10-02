@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -11,11 +11,6 @@ import {models, Outline, OutlineModel} from '@eclipse-scout/core';
 import WidgetsOutlineModel from './WidgetsOutlineModel';
 
 export class WidgetsOutline extends Outline {
-
-  constructor() {
-    super();
-  }
-
   protected override _jsonModel(): OutlineModel {
     return models.get(WidgetsOutlineModel);
   }
