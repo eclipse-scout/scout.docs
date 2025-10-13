@@ -91,6 +91,7 @@ Scout 26.1 requires at least the following:
 ** Pnpm: >= 10.26.1
 
 == Action / Menu: Tabbable Default Changed (Scout JS)
+
 An `Action` and a `Menu` is now tabbable and has a keystroke to execute it by default.
 This means if you used an action or a menu _outside_ a menu bar, it can now get the focus using the keyboard.
 This is important to improve the accessibility of your application.
@@ -99,6 +100,7 @@ However, there may be some actions or menus that should not be tabbable.
 In that case just set `tabbable` to false.
 
 == WidgetField: Scrollable Default Changed (Scout JS)
+
 A `WidgetField` has a property `scrollable` whose default value is `true`.
 This is often not desired as a `WidgetField` is supposed to be a wrapper for a widget without changing its behavior.
 This is why the default value has been changed to `false`.
@@ -107,6 +109,7 @@ So you need to check your widget fields if they really need to be scrollable and
 Normally, this should not be the case as a surrounding container like the main box is already scrollable.
 
 == Switch: Tabbable Default Changed (Scout JS)
+
 A `Switch` is now tabbable by default.
 This is important to improve the accessibility of your application.
 
@@ -116,17 +119,18 @@ In that case just set `tabbable` to false.
 == Code Cleanup
 
 === JQuery-Scout (Scout JS)
+
 The following functions have been renamed:
 
 - select(boolean) -> setSelected(boolean) +
-  If you followed the naming convention, you can use the following regex to find the occurrences:
-  `\$\w+\.select\(` +
-  Note: `select()` also exists on an `HTMLInputElement`, so make sure you don't accidentally rename the wrong method (if you use TypeScript the compiler will help you).
+If you followed the naming convention, you can use the following regex to find the occurrences:
+`\$\w+\.select\(` +
+Note: `select()` also exists on an `HTMLInputElement`, so make sure you don't accidentally rename the wrong method (if you use TypeScript the compiler will help you).
 
 The following functions have been removed:
 
 - selectOne() +
-  Replace with `setSelected(true)` and `setSelected(false)` on the siblings.
+Replace with `setSelected(true)` and `setSelected(false)` on the siblings.
 
 == Widget.cssClass: API Changes (Scout JS)
 
@@ -395,3 +399,78 @@ response.setHeader("Cache-Control", "no-cache");
 response.setHeader("Pragma", "no-cache");
 response.setDateHeader("Expires", 0);
 ----
+
+[[csp-hardening]]
+== Hardening the Content Security Policy
+
+The https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP[Content Security Policy] used by Scout applications has been hardened.
+It now makes use of nonces for JavaScript which may prevent cross-site scripting attacks. Nonces are only used for `script` tags. `style` or `link` tags used for CSS are not affected.
+
+=== API Changes
+
+* The bean `org.eclipse.scout.rt.server.commons.servlet.ContentSecurityPolicy` has been moved to `org.eclipse.scout.rt.security.csp.ContentSecurityPolicy` and is therefore more widely available.
++
+Furthermore, it changed its meaning: In the past it was a builder that was prefilled with the Scout defaults, adapted by your `config.properties` settings. This is no longer the case.
+This class represents only a builder now and starts empty on creation.
++
+Please note: an empty CSP does not mean everything is blocked. Instead, not configuring a directive means: all allowed!
+Therefore, it is recommended to replace the former `ContentSecurityPolicy` class with the new `ConfigurableContentSecurityPolicy` or `BlockAllContentSecurityPolicy` class (see below).
+* New bean `org.eclipse.scout.rt.security.csp.ConfigurableContentSecurityPolicy` which replaces the old `ContentSecurityPolicy` class.
+It is still preloaded with the same Scout default directives which still can be adapted in your `config.properties`.
+* New bean `org.eclipse.scout.rt.security.csp.BlockAllContentSecurityPolicy` which by default blocks all. It can be used as starting point to create a policy as restrictive as possible, by selectively opening directives.
+* The CSP `ConfigProperty` classes have been moved from `org.eclipse.scout.rt.server.commons.ServerCommonsConfigProperties` to `org.eclipse.scout.rt.security.csp.ContentSecurityPolicyConfigProperties`.
+* `org.eclipse.scout.rt.server.commons.servlet.HttpServletControl.HTTP_HEADER_CSP` has been moved to `org.eclipse.scout.rt.security.csp.ContentSecurityPolicy.HTTP_HEADER`.
+* `org.eclipse.scout.rt.server.commons.servlet.HttpServletControl.CSP_REPORT_URL` has been moved to `org.eclipse.scout.rt.security.csp.ContentSecurityPolicy.REPORT_URL`.
+* `org.eclipse.scout.rt.server.commons.servlet.HttpServletControl.HTTP_HEADER_CSP_LEGACY` has been removed as it was only used by legacy browsers no longer supported.
+
+=== Content Security Policy Migration
+
+* Responses to REST resources now include a `BlockAllContentSecurityPolicy` by default. This prevents possible attacks if the response is of type `text/html`, `image/svg` or `text/javascript` (which would be interpreted by a browser).
++
+If you need REST responses to be interpreted by the browser, you have to apply your own CSP header with your rules to the response. If the header is already present, the default header is not added.
+* If you manually (without using `$.injectScript`) load new JavaScript code: Consider migrating to `$.injectScript` or add the `nonce` attribute where necessary. The current value can be retrieved on the Scout App: `App.get().nonce`.
+* If you use an `AbstractHtmlField` or `AbstractHtmlTile` that contains inline JavaScript code, these `script` tags require the `nonce` attribute to be executed.
++
+The value can be obtained:
++
+** In Scout Classic by using `org.eclipse.scout.rt.shared.ui.webresource.SessionNonce.provide()`.
+** In Scout JS from the App: `App.get().nonce`.
+** In the JSON layer from the UiSession: `org.eclipse.scout.rt.ui.html.IUiSession.getNonce()`.
+* `'unsafe-inline'`: If you did use the CSP expression `'unsafe-inline'`: This expression is ignored by browsers if nonces are used.
+Therefore, this CSP expression can be removed. Instead, add the `nonce` attribute to your inline `script` tags as described above.
+* External `script` tags in your entrypoint html files: If you use hardcoded `script` tags in your entrypoint html files (instead of using `scout:scripts` e.g. to point to an external script), add the following attribute: `nonce="scout:nonce"`.
+This expression will then be replaced with the correct nonce automatically.
+
+=== New Features
+
+* If you load content to `AbstractBrowserField` by using a `BinaryResource`: Until now the CSP of the resources loaded into the `BrowserField` used the same CSP as the Scout application itself (this is still the case, but as the policy is more restrictive now, scripts from the Scout server are no longer automatically accepted).
++
+Now you have more control: The `AbstractBrowserField` now allows configuring the CSP for each instance and resource. It is recommended to use specific CSP rules for such fields which should be as restrictive as possible.
++
+As a starting policy the new `BlockAllContentSecurityPolicy` could be used and then opening directives as necessary. The created policies can be applied to a field in e.g. the `execInitField` method by using the following methods:
++
+** `setContentSecurityPolicy`: One CSP for the whole field (all resources of the field).
+** `putContentSecurityPolicy`: A CSP for a specific resource of the field.
+* The `ConfigurableContentSecurityPolicy` is more flexible now. It is recommended to harden your CSP with these new features:
++
+--
+** As in older releases it can still be configured using the config property `scout.cspDirective`. Directives added to this property completely replace the hard-coded directive coming from the Scout defaults and should be configured as minimal as possible (same as in older releases).
+** A second config property `scout.cspDirectiveAppend` was added. Its directives do not replace but append instead. It may append to the Scout defaults (if nothing is configured) or to the ones configured using `scout.cspDirective`.
++
+This allows to e.g. set some always-valid directives in the `scout.cspDirective` property within the `config.properties` file and then adding more expressions to a directive e.g. using an environment variable for specific installations.
+** For both properties it can be specified for which html entry point the directive is valid by using a suffix. Example:
++
+[source,properties]
+----
+# directive valid for all entry points
+scout.cspDirective[script-src]=https://my.cdn.org/
+
+# additional url only for login.html
+scout.cspDirective[script-src#login.html]=https://login.cdn.org/
+----
+
+To set this value as environment variable it is required to use the JSON synthax as explained in the xref:technical-guide:common-concepts/platform.adoc#property-resolution[Technical Guide].
+--
+* If you need to change the response of a resource (e.g. to finetune its CSP response header), the new interface `org.eclipse.scout.rt.ui.html.res.loader.WebResourceLoader.IWebResourceResponseInterceptorContributor` can be implemented.
+Such contributors are called for each web resource loaded and return a list of `org.eclipse.scout.rt.server.commons.servlet.cache.IHttpResponseInterceptor` for a request.
+These interceptors are then called before sending the response to the client. You can e.g. identify a request with `responseObject.getCacheKey().getResourcePath()`.

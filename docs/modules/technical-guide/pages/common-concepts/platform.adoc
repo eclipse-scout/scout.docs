@@ -347,6 +347,7 @@ const myCustomTimeout = config.get('my.custom.timeout')?.value;
 +
 The variable `myCustomTimeout` will then hold the value stored in the `config.properties` file of your UI backend.
 
+[[property-resolution]]
 === Property resolution
 
 The given property key is searched in the following environments:
@@ -696,7 +697,7 @@ Data type: Boolean
 `scout.cspDirective` ::
 Configures individual Content Security Policy (CSP) directives.
 +
-See https://www.w3.org/TR/CSP2/ and the Bean `org.eclipse.scout.rt.server.commons.servlet.ContentSecurityPolicy` for more details.
+See https://www.w3.org/TR/CSP2/ and the Bean `org.eclipse.scout.rt.security.csp.ContentSecurityPolicy` for more details.
 +
 The value must be provided as a Map.
 +
@@ -708,7 +709,7 @@ scout.cspDirective[img-src]=`self` data: https://media.example.com
 Data type: Map
 
 `scout.cspEnabled` ::
-Enable or disable Content Security Policy (CSP) headers. The headers can be modified by replacing the bean `org.eclipse.scout.rt.server.commons.servlet.ContentSecurityPolicy` or using the property `scout.cspDirective`.
+Enable or disable Content Security Policy (CSP) headers. The headers can be modified by replacing the bean `org.eclipse.scout.rt.security.csp.ContentSecurityPolicy` or using the property `scout.cspDirective`.
 +
 Data type: Boolean
 

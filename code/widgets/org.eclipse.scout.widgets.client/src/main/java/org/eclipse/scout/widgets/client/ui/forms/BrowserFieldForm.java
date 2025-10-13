@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -48,6 +48,7 @@ import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.platform.util.TriState;
 import org.eclipse.scout.rt.platform.util.collection.OrderedCollection;
 import org.eclipse.scout.rt.platform.util.date.DateUtility;
+import org.eclipse.scout.rt.security.csp.ConfigurableContentSecurityPolicy;
 import org.eclipse.scout.widgets.client.ResourceBase;
 import org.eclipse.scout.widgets.client.WidgetsClientConfigProperties.ReadOnlyProperty;
 import org.eclipse.scout.widgets.client.WidgetsHelper;
@@ -243,6 +244,11 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
         @Override
         protected boolean getConfiguredSandboxEnabled() {
           return false;
+        }
+
+        @Override
+        protected void execInitField() {
+          putContentSecurityPolicy("PostMessageDemo.html", BEANS.get(ConfigurableContentSecurityPolicy.class).appendScriptSrc("'sha256-/dposh7ihcKWVkwdAraaThP9sDzU6NB4xlPdtJnhpiY='"));
         }
 
         @Override
