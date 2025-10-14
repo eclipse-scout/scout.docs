@@ -138,3 +138,27 @@ const cssClassAsArray = styles.cssClassAsArray(cssClass);
 
 If you use the function `widgets.preserveAndSetProperty` in your JavaScript code, please make sure that the variable that stores the preserved value is not initialized or initialized to `undefined`.
 If it is initialized to `null`, remove the initialization.
+
+== DefaultAuthToken: Package changed, constant moved
+
+As the `DefaultAuthToken` was not used exclusively for the service-tunnel the following types and constants have been moved:
+
+[cols="1,1"]
+|===
+|Type/Constant|Target
+
+|`org.eclipse.scout.rt.shared.servicetunnel.http.DefaultAuthToken`
+|`org.eclipse.scout.rt.shared.authentication.DefaultAuthToken`
+
+|`org.eclipse.scout.rt.shared.servicetunnel.http.DefaultAuthTokenPrincipalProducer`
+|`org.eclipse.scout.rt.shared.authentication.DefaultAuthTokenPrincipalProducer`
+
+|`org.eclipse.scout.rt.shared.servicetunnel.http.DefaultAuthTokenSigner`
+|`org.eclipse.scout.rt.shared.authentication.DefaultAuthTokenSigner`
+
+|`org.eclipse.scout.rt.shared.servicetunnel.http.DefaultAuthTokenVerifier`
+|`org.eclipse.scout.rt.shared.authentication.DefaultAuthTokenVerifier`
+
+|`org.eclipse.scout.rt.shared.servicetunnel.http.HttpServiceTunnel#TOKEN_AUTH_HTTP_HEADER`
+|`org.eclipse.scout.rt.shared.authentication.DefaultAuthToken#HTTP_HEADER_NAME`
+|===
