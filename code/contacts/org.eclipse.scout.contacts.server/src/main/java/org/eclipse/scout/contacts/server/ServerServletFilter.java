@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -21,8 +21,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import org.eclipse.scout.rt.platform.BEANS;
+import org.eclipse.scout.rt.server.commons.authentication.AccessTokenAccessController;
 import org.eclipse.scout.rt.server.commons.authentication.DevelopmentAccessController;
-import org.eclipse.scout.rt.server.commons.authentication.ServiceTunnelAccessTokenAccessController;
 import org.eclipse.scout.rt.server.commons.authentication.TrivialAccessController;
 import org.eclipse.scout.rt.server.commons.authentication.TrivialAccessController.TrivialAuthConfig;
 
@@ -34,13 +34,13 @@ import org.eclipse.scout.rt.server.commons.authentication.TrivialAccessControlle
 public class ServerServletFilter implements Filter {
 
   private TrivialAccessController trivialAccessController;
-  private ServiceTunnelAccessTokenAccessController tunnelAccessController;
+  private AccessTokenAccessController tunnelAccessController;
   private DevelopmentAccessController developmentAccessController;
 
   @Override
   public void init(final FilterConfig filterConfig) throws ServletException {
     trivialAccessController = BEANS.get(TrivialAccessController.class).init(new TrivialAuthConfig().withExclusionFilter(filterConfig.getInitParameter("filter-exclude")));
-    tunnelAccessController = BEANS.get(ServiceTunnelAccessTokenAccessController.class).init();
+    tunnelAccessController = BEANS.get(AccessTokenAccessController.class).init();
     developmentAccessController = BEANS.get(DevelopmentAccessController.class).init();
   }
 
