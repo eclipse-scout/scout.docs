@@ -93,14 +93,14 @@ A `ServerRunContext` controls propagation of server-side state and sets the tran
 |clientNotificationCollector
 |To associate the context with the given ClientNotificationCollector, meaning that any code running on behalf of this context has that collector set in ClientNotificationCollector.CURRENT thread-local. +
 That collector is used to collect all transactional client notifications, which are to be published upon successful commit of the associated transaction, and which are addressed to the client node which triggered processing (see withClientNodeId(String)). That way, transactional client notifications are not published immediately upon successful commit, but included in the client's response instead (piggyback). +
-Typically, that collector is set by ServiceTunnelServlet for the processing of a service request.
+Typically, that collector is set by `ServiceTunnelService` for the processing of a service request.
 |ClientNotificationCollector.CURRENT.get()
 
 |clientNodeId
 |Associates this context with the given 'client node ID', meaning that any code running on behalf of this context has that id set in IClientNodeId.CURRENT thread-local. +
 Every client node (that is every UI server node) has its unique 'node ID' which is included with every 'client-server' request, and is mainly used to publish client notifications. If transactional client notifications are issued by code running on behalf of this context, those will not be published to that client node, but included in the request's response instead (piggyback). +
 However, transactional notifications are only sent to clients upon successful commit of the transaction. +
-Typically, this node ID is set by ServiceTunnelServlet for the processing of a service request.
+Typically, this node ID is set by `ServiceTunnelService` for the processing of a service request.
 |IClientNodeId.CURRENT.get()
 
 

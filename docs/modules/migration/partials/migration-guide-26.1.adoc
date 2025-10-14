@@ -139,6 +139,51 @@ const cssClassAsArray = styles.cssClassAsArray(cssClass);
 If you use the function `widgets.preserveAndSetProperty` in your JavaScript code, please make sure that the variable that stores the preserved value is not initialized or initialized to `undefined`.
 If it is initialized to `null`, remove the initialization.
 
+== Service tunnel: Servlet removed, REST resource added
+
+In the past the service tunnel used its own servlet/communication implementation to transfer data between client and server module.
+The own (proprietary) logic was removed and standard REST communication will be used for data transfer now.
+
+Most applications should not be affected by these changes as for the outside the service tunnel should still function the same way it did previously (most changes are under the hood).
+
+However for further understanding a few changes included in this change are described here:
+
+The service tunnel client (e.g. `HttpServiceTunnel`) has been moved from `org.eclipse.scout.rt.shared` to `org.eclipse scout.rt.client`; in the past it would have been possible to use the service tunnel for communication between backend servers, this is not possible anymore.
+As the class now resides in the client the `ClientHttpServiceTunnel` has been integrated into the `HttpServiceTunnel`.
+
+The `HttpServiceTunnel` does not send the outgoing HTTP request itself anymore, instead a newly created `ProcessResourceClient` (REST resource client) is used.
+This resource client uses the newly added `ScoutBackendRestClientHelper` for configuration.
+The `HttpServiceTunnelTransportManager` and its configuration properties `scout.servicetunnel.maxConnectionsPerRoute` and `scout.servicetunnel.maxConnectionsTotal` have been removed.
+
+On the server-side there is no `ServiceTunnelServlet` anymore to answer incoming HTTP requests, instead a `ProcessResource` (REST resource) has been created which delegates the request to the `ServiceTunnelService`.
+
+Arbitrary `IServiceTunnelContentHandler` support was removed (and also the `SoapServiceTunnelContentHandler` implementation), the service tunnel now always uses the `BinaryServiceTunnelContentHandler` bean (which may still be extended).
+
+The duplicate request detection `SequenceNumberDuplicateDetector` has been removed.
+
+By default, the service tunnel uses gzip compression for outgoing and incoming requests, this may be configured using the following configuration properties:
+
+* `scout.servicetunnel.compress`: Specifies if the service tunnel should use gzip compression for outgoing requests (default: true)
+* `scout.app.gzip.inflateBufferSize`: Set a positive number to enable incoming compressed requests (default: 2048), positive number must be set if previous property is set to `true`
+
+For outgoing request compression the `org.glassfish.jersey.message.GZipEncoder` is installed (by the `GzipEncoderContributor`, it handles content-encoding possibly set by `ProcessResourceClient`).
+Incoming request decompression is handled by the `org.eclipse.jetty.server.handler.gzip.GzipHandler`.
+Outgoing response compression is handled (and decided) by the `org.eclipse.jetty.server.handler.gzip.GzipHandler`.
+The response decompression (if applicable) is handled by the HTTP client `org.apache.hc.client5.http.entity.DecompressingEntity`.
+
+Applications which are deployed using a `web.xml` to a Jetty (legacy) may need to add the `gzip` module and set the `-Djetty.gzip.inflateBufferSize=2048` command line property (as the configuration property `scout.app.gzip.inflateBufferSize`) is not respected.
+Also the process servlet and its mapping must be removed from the `web.xml`.
+
+The following configuration properties have been changed:
+
+* `server.url` (legacy): Removed, use `scout.backendUrl` instead.
+* `scout.servicetunnel.targetUrl`: Removed, use `scout.backendUrl` instead.
+* `scout.backendUrl`: Moved from shared to client code (not applicable for server backend application anymore)
+* `scout.createTunnelToServerBeans`: Moved from shared to client code (not applicable for server backend application anymore)
+
+For all REST requests the cancellation behavior has been changed, previously a cancel request was sent and the client did wait (blocking) for the backend request to be cancelled.
+Now the same cancel request is sent to the backend which tries to cancel the possibly running request, but the client-side also aborts the running request itself without waiting for any cancellation response allowing the user to interact quicker with the application again (same behavior as previously in service tunnel).
+
 == DefaultAuthToken: Package changed, constant moved
 
 As the `DefaultAuthToken` was not used exclusively for the service-tunnel the following types and constants have been moved:
