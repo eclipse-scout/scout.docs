@@ -492,6 +492,11 @@ The session timeout in seconds to use if HTTP sessions are enabled. The default 
 +
 Data type: Integer >= 0
 
+`scout.app.gzip.inflateBufferSize` ::
+Set a positive number to enable incoming compressed requests (default: 2048), positive number must be set if `scout.servicetunnel.compress` property is set to `true`
++
+Data type: Integer
+
 `scout.app.jvmShutdownHookEnabled` ::
 Specifies if the JVM shutdown hook is registered. The default value is true.
 +
@@ -684,7 +689,7 @@ Data type: String
 `scout.createTunnelToServerBeans` ::
 Specifies if the Scout platform should create proxy beans for interfaces annotated with `TunnelToServer`. Calls to beans of such types are then tunneled to the Scout backend.
 +
-By default this property is enabled if the property `scout.servicetunnel.targetUrl` is set.
+By default this property is enabled if the property `scout.backendUrl` is set.
 +
 Data type: Boolean
 
@@ -1110,31 +1115,6 @@ Data type: Long >= 0
 Specifies if the service tunnel should use gzip compression for requests, default value: true
 +
 Data type: Boolean
-
-`scout.servicetunnel.maxConnectionsPerRoute` ::
-Specifies the default maximum connections per route property for the HTTP service tunnel.
-+
-Overrides the value from `scout.http.maxConnectionsPerRoute` for the service tunnel.
-+
-Default value is 2048.
-+
-Data type: Integer
-
-`scout.servicetunnel.maxConnectionsTotal` ::
-Specifies the default total maximum connections property for the HTTP service tunnel.
-+
-Overrides the value from `scout.http.maxConnectionsTotal` for the service tunnel.
-+
-The default value is 2048.
-+
-Data type: Integer
-
-`scout.servicetunnel.targetUrl` ::
-Specifies the URL to the ServiceTunnelServlet on the backend server.
-+
-By default this property points to the value of property `scout.backendUrl` with `/process` appended.
-+
-Data type: String
 
 `scout.smtp.connectionTimeout` ::
 Socket connection timeout value in milliseconds.
