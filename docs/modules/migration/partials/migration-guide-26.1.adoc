@@ -87,6 +87,14 @@ Scout 26.1 requires at least the following:
 
 * Build and runtime of Scout 26.1 require Java 25. The compiler target level is set to Java 21.
 
+== Action / Menu: Tabbable Default Changed (Scout JS)
+An `Action` and a `Menu` is now tabbable and has a keystroke to execute it by default.
+This means if you used an action or a menu _outside_ a menu bar, it can now get the focus using the keyboard.
+This is important to improve the accessibility of your application.
+
+However, there may be some actions or menus that should not be tabbable.
+In that case just set `tabbable` to false.
+
 == Code Cleanup
 
 === JQuery-Scout (Scout JS)
