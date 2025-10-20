@@ -41,7 +41,6 @@ export default (): FormModel => ({
             objectType: WidgetField,
             labelVisible: false,
             statusVisible: false,
-            scrollable: false,
             gridDataHints: {
               useUiHeight: true,
               fillHorizontal: false,
