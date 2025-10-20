@@ -95,6 +95,14 @@ This is important to improve the accessibility of your application.
 However, there may be some actions or menus that should not be tabbable.
 In that case just set `tabbable` to false.
 
+== WidgetField: Scrollable Default Changed (Scout JS)
+A `WidgetField` has a property `scrollable` whose default value is `true`.
+This is often not desired as a `WidgetField` is supposed to be a wrapper for a widget without changing its behavior.
+This is why the default value has been changed to `false`.
+
+So you need to check your widget fields if they really need to be scrollable and if yes set `scrollable` to true.
+Normally, this should not be the case as a surrounding container like the main box is already scrollable.
+
 == Code Cleanup
 
 === JQuery-Scout (Scout JS)
