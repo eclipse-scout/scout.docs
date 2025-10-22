@@ -39,4 +39,3 @@ target/
 node_modules/
 dist/
 test-results/
-pnpm-lock.yaml
