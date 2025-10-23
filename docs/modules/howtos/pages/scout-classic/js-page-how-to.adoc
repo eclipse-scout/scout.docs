@@ -1,0 +1,188 @@
+[[how-to-js-page]]
+= How to Add a Scout JS Page in a Scout Classic Outline
+
+include::common:partial$_header.adoc[]
+
+A Scout Classic outline is able to contain pages implemented in Scout JS. This works via the JsPage, a Java page wrapping a page implemented in Scout JS.
+The next few code snippets demonstrate how to use the JsPage.
+
+[source,java,opts=novalidate]
+.Example of a simple JsPage
+----
+package example.client;
+
+import org.eclipse.scout.rt.client.ui.desktop.outline.pages.js.AbstractJsPage;
+
+public class ExampleJsPage extends AbstractJsPage {
+
+  @Override
+  protected String getConfiguredJsFormObjectType() {
+    return "example.ExampleJsPage";
+  }
+}
+----
+
+The page can be added to the outline like any other page implemented in Scout Classic.
+
+[source,java,opts=novalidate]
+.Use of a JsPage as a child page of a node page
+----
+@Override
+protected void execCreateChildPages(List<IPage<?>> pageList) {
+  pageList.add(new ExampleJsPage());
+}
+----
+
+The complete page and its business logic is implemented in Scout JS in the same way a page is implemented in a Scout JS application.
+The only thing that needs to be implemented in Java is creating child pages.
+
+[source,typescript,opts=novalidate]
+.Implementation of the page in Scout JS
+----
+import {ajax, BaseDoEntity, ObjectOrModel, PageWithTable, PageWithTableModel, TableRow, typeName} from '@eclipse-scout/core';
+import model from './ExampleJsPageModel';
+
+export class ExampleJsPage extends PageWithTable {
+
+  protected override _jsonModel(): PageWithTableModel {
+    return model();
+  }
+
+  protected override _loadTableData(searchFilter: any): JQuery.Promise<ExampleTableDataDo> {
+    return ajax.postDataObject('api/examples/list', this._withMaxRowCountContribution(searchFilter));
+  }
+
+  protected override _transformTableDataToTableRows(tableData: ExampleTableDataDo): ObjectOrModel<TableRow>[] {
+    return tableData.examples.map(example => {
+      return {
+        cells: [
+          example.id,
+          example.subject
+        ]
+      };
+    });
+  }
+}
+
+@typeName('example.ExampleTableData')
+export class ExampleTableDataDo extends BaseDoEntity {
+  examples?: ExampleDo[];
+}
+
+@typeName('example.Example')
+export class ExampleDo extends BaseDoEntity {
+  id?: string;
+  subject?: string;
+}
+----
+
+== Creating Child Pages
+
+As the outline is implemented in Scout Classic the whole state of the outline needs to be present on the UI server. This includes all pages and information which pages are expanded, selected, etc.
+Therefore, the child pages of a JsPage need to be created in Scout Classic as well.
+This can be done by overriding `AbstractJsPage.createChildPage(IPageParamDo)` or `AbstractJsPage.createChildPage(IId)`.
+
+[source,java,opts=novalidate]
+.Creating child pages using an IPageParamDo
+----
+@Override
+protected IPage<?> createChildPage(IPageParamDo pageParam) {
+  if (!(pageParam instanceof SomePageParam somePageParam)) {
+    return null;
+  }
+
+  return new SomePage(somePageParam);
+}
+----
+
+[source,java,opts=novalidate]
+.Creating child pages using an IId
+----
+@Override
+protected IPage<?> createChildPage(IId id) {
+  if (!(id instanceof SomeId someId)) {
+    return null;
+  }
+
+  return new SomePage(someId);
+}
+----
+
+As Scout Classic can not know the page params or ids, the child page creation needs to be triggered by the JsPage in Scout JS.
+The `JsPageHelper` can be used to manage the child pages of a JsPage.
+
+[source,typescript,opts=novalidate]
+.Adding the `JsPageHelper` to a JsPage
+----
+import {InitModelOf, JsPageHelper, PageWithTable, scout} from '@eclipse-scout/core';
+
+export class ExampleJsPage extends PageWithTable {
+
+  protected _jsPageHelper: JsPageHelper;
+
+  protected override _init(model: InitModelOf<this>) {
+    super._init(model);
+
+    this._jsPageHelper = scout.create(JsPageHelper, {page: this});
+  }
+}
+----
+
+Table pages need to trigger and await the child page creation while their data is loaded. Afterward the child pages can be linked to each table row.
+
+[source,typescript,opts=novalidate]
+.Creating child pages by id for a table page using the `JsPageHelper`
+----
+import {ajax, JsPageHelper, PageWithTable} from '@eclipse-scout/core';
+
+export class ExampleJsPage extends PageWithTable {
+
+  protected _jsPageHelper: JsPageHelper;
+
+  protected override _loadTableData(searchFilter: any): JQuery.Promise<ExampleTableDataDo> {
+    return $.when(this._loadTableDataAndChildPages(searchFilter));
+  }
+
+  protected async _loadTableDataAndChildPages(searchFilter: any): Promise<ExampleTableDataDo> {
+    const tableData: ExampleTableDataDo = await ajax.postDataObject('api/examples/list', this._withMaxRowCountContribution(searchFilter));
+    await this._jsPageHelper.callLoadChildPages(tableData.examples.map(example => example.id));
+    return tableData;
+  }
+
+  protected override _createChildPage(row: TableRow): Page {
+    const id = this.detailTable.columnById('IdColumn').cellValue(row);
+    return this._jsPageHelper.findChildPage(id);
+  }
+}
+----
+
+Node pages can create their child pages and use them directly because the list of child pages does not depend on loaded data.
+
+[source,typescript,opts=novalidate]
+.Creating child pages by page params for a node page using the `JsPageHelper`
+----
+import {JsPageHelper, Page, PageParamDo, PageWithNodes, scout, typeName} from '@eclipse-scout/core';
+
+export class ExampleJsPage extends PageWithNodes {
+
+  protected _jsPageHelper: JsPageHelper;
+
+  protected override _createChildPages(): JQuery.Promise<Page[]> {
+    const pageParams = [
+      scout.create(FooPageParamDo, {fooId: 'foo'}),
+      scout.create(BarPageParamDo, {barId: 'bar'})
+    ];
+    return $.when(this._jsPageHelper.loadChildPages(pageParams));
+  }
+}
+
+@typeName('example.FooPageParam')
+export class FooPageParamDo extends PageParamDo {
+  fooId?: string;
+}
+
+@typeName('example.BarPageParam')
+export class BarPageParamDo extends PageParamDo {
+  barId?: string;
+}
+----
