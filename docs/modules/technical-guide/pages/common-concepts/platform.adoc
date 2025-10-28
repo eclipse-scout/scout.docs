@@ -557,31 +557,6 @@ Specifies if the `AnonymousAccessController` is enabled. Therefore, if a securit
 +
 Data type: Boolean
 
-`scout.auth.cookieEnabled` ::
-Specifies if the `CookieAccessController` is enabled.
-+
-Data type: Boolean
-
-`scout.auth.cookieMaxAge` ::
-If the `CookieAccessController` is enabled, specifies the maximum age in seconds for the cookie.
-+
-A positive value indicates that the cookie will expire after that many seconds have passed.
-+
-A negative value means that the cookie is not stored persistently and will be deleted when the Web browser exits. A zero value causes the cookie to be deleted.
-+
-The default value is 10 hours.
-+
-Data type: Long
-
-`scout.auth.cookieName` ::
-If the `CookieAccessController` is enabled, specifies the name for the cookie.
-+
-The name must conform to RFC 2109. However, vendors may provide a configuration option that allows cookie names conforming to the original Netscape Cookie Specification to be accepted.
-+
-By default `sso.user.id` is used as cookie name.
-+
-Data type: String
-
 `scout.auth.credentials` ::
 Specifies the known credentials (username & passwords) of the `org.eclipse.scout.rt.platform.security.ConfigFileCredentialVerifier`.
 +
@@ -607,8 +582,6 @@ Data type: Boolean
 
 `scout.auth.privateKey` ::
 Specifies the Base64 encoded private key for signing requests from the UI server to the backend server. By validating the signature the server can ensure the request is trustworthy.
-+
-Furthermore, the CookieAccessController uses this private key to sign the cookie.
 +
 New public-private-key-pairs can be created by invoking the class `org.eclipse.scout.rt.platform.security.SecurityUtility` on the command line.
 +
