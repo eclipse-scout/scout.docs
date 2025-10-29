@@ -28,7 +28,7 @@ public class MapHelper {
 
   public void showMapInNewWindow(String country, String city, String street) {
     String address = StringUtility.join(", ",
-        StringUtility.hasText(country) ? (new Locale("", country.trim())).getDisplayCountry() : null,
+        StringUtility.hasText(country) ? (Locale.of("", country.trim())).getDisplayCountry() : null,
         StringUtility.hasText(city) ? city.trim() : null,
         StringUtility.hasText(street) ? street.trim() : null);
 

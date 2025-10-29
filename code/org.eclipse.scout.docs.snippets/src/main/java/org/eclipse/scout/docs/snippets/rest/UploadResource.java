@@ -32,14 +32,15 @@ public class UploadResource implements IRestResource {
 
     IMultipartMessage multipartMessage = IMultipartMessage.of(mediaType, inputStream);
     while (multipartMessage.hasNext()) {
-      try (IMultipartPart part = multipartMessage.next()) {
+      try (IMultipartPart part = multipartMessage.next();
+           InputStream is = part.getInputStream()) {
         switch (part.getPartName()) {
           case "resource": // file field part
             String[] parts = FileUtility.getFilenameParts(part.getFilename());
-            file = IOUtility.createTempFile(part.getInputStream(), parts[0], parts[1]);
+            file = IOUtility.createTempFile(is, parts[0], parts[1]);
             break;
           case "displayText": // text field part
-            displayText = IOUtility.readStringUTF8(part.getInputStream());
+            displayText = IOUtility.readStringUTF8(is);
             break;
           default:
             throw new VetoException("Unexpected part {}", part.getPartName());
@@ -51,7 +52,7 @@ public class UploadResource implements IRestResource {
     }
 
     // do something
-    System.out.println(displayText + ": " + file.getAbsolutePath());
+    System.out.println(displayText + ": " + file);
 
     return Response.ok().build();
   }
