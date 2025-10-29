@@ -28,7 +28,7 @@ public class CountryLookupCall extends LocalLookupCall<String> { // <1>
     List<LookupRow<String>> rows = new ArrayList<>();
 
     for (String countryCode : Locale.getISOCountries()) {
-      Locale country = new Locale("", countryCode);
+      Locale country = Locale.of("", countryCode);
       rows.add(new LookupRow<>(countryCode, country.getDisplayCountry())); // <3>
     }
 

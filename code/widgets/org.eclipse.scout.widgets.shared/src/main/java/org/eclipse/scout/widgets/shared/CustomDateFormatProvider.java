@@ -43,25 +43,25 @@ public class CustomDateFormatProvider extends DateFormatProvider {
     m_localePatternMap = new HashMap<>();
 
     // add locale support for en_CH
-    init(new Locale("en", "CH"), "de");
+    init(Locale.of("en", "CH"), "de");
     // add locale support for en_DE
-    init(new Locale("en", "DE"), "de");
+    init(Locale.of("en", "DE"), "de");
     // add locale support for en_AT
-    init(new Locale("en", "AT"), "de");
+    init(Locale.of("en", "AT"), "de");
     // add locale support for en_FR
-    init(new Locale("en", "FR"), "fr");
+    init(Locale.of("en", "FR"), "fr");
     // add locale support for en_IT
-    init(new Locale("en", "IT"), "it");
+    init(Locale.of("en", "IT"), "it");
     // add locale support for en_DK
-    init(new Locale("en", "DK"), "da");
+    init(Locale.of("en", "DK"), "da");
     // add locale support for en_ES
     PatternBean patternBean = new PatternBean();
     patternBean.putDatePattern(DateFormat.LONG, "d' in 'MMMM' in 'yyyy");
     patternBean.putDatePattern(DateFormat.FULL, "EEEE d' in 'MMMM' in 'yyyy");
-    init(new Locale("en", "ES"), "es", patternBean);
+    init(Locale.of("en", "ES"), "es", patternBean);
     // add locale support for fr_CH and it_CH
-    init(new Locale("fr", "CH"), "de");
-    init(new Locale("it", "CH"), "de");
+    init(Locale.of("fr", "CH"), "de");
+    init(Locale.of("it", "CH"), "de");
 
     // available locales
     HashSet<Locale> availableLocales = new HashSet<>();
@@ -145,7 +145,7 @@ public class CustomDateFormatProvider extends DateFormatProvider {
 
   private void init(Locale locale, String primaryCountryLanguage, PatternBean patternBean) {
     m_customLocales.add(locale);
-    Locale primaryCountryLocale = new Locale(primaryCountryLanguage, locale.getCountry());
+    Locale primaryCountryLocale = Locale.of(primaryCountryLanguage, locale.getCountry());
     m_countryDefaultLocaleMap.put(primaryCountryLocale.getCountry(), primaryCountryLocale);
     if (patternBean != null) {
       m_localePatternMap.put(locale, patternBean);
@@ -175,7 +175,7 @@ public class CustomDateFormatProvider extends DateFormatProvider {
 
     // replace localized texts such as months and days
     SimpleDateFormat sdf = (SimpleDateFormat) df;
-    sdf.setDateFormatSymbols(new DateFormatSymbols(new Locale(locale.getLanguage())));
+    sdf.setDateFormatSymbols(new DateFormatSymbols(Locale.of(locale.getLanguage())));
 
     PatternBean patternBean = m_localePatternMap.get(locale);
     if (patternBean == null) {

@@ -10,6 +10,7 @@
 package org.eclipse.scout.widgets.client.ui.forms.imagefield;
 
 import java.io.InputStream;
+import java.net.URI;
 import java.net.URL;
 import java.util.List;
 
@@ -526,7 +527,7 @@ public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm
                 url = ResourceBase.class.getResource(BIRD_OFFLINE);
               }
               else {
-                url = new URL(urlString);
+                url = URI.create(urlString).toURL();
               }
               img = IOUtility.readFromUrl(url);
             }

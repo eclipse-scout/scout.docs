@@ -10,6 +10,8 @@
 package org.eclipse.scout.widgets.client.ui.forms;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
@@ -22,6 +24,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringFiel
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
+import org.eclipse.scout.rt.platform.exception.ProcessingException;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.svg.client.SVGUtility;
@@ -35,6 +38,8 @@ import org.eclipse.scout.widgets.client.ui.forms.SvgFieldForm.MainBox.Configurat
 import org.eclipse.scout.widgets.client.ui.forms.SvgFieldForm.MainBox.ExamplesBox;
 import org.eclipse.scout.widgets.client.ui.forms.SvgFieldForm.MainBox.ExamplesBox.DefaultField;
 import org.eclipse.scout.widgets.client.ui.forms.SvgFieldForm.MainBox.SampleContentButton;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.svg.SVGCircleElement;
 import org.w3c.dom.svg.SVGDocument;
 import org.w3c.dom.svg.SVGLength;
@@ -42,6 +47,8 @@ import org.w3c.dom.svg.SVGLength;
 @Order(8000.0)
 @ClassId("72f6e032-ce4e-4bf0-8851-e4fef40ea5a7")
 public class SvgFieldForm extends AbstractForm implements IAdvancedExampleForm {
+
+  private static final Logger LOG = LoggerFactory.getLogger(SvgFieldForm.class);
 
   @Override
   protected boolean getConfiguredAskIfNeedSave() {
@@ -197,7 +204,7 @@ public class SvgFieldForm extends AbstractForm implements IAdvancedExampleForm {
             getUserSvgField().setSvgDocument(parseDocument((String) newMasterValue));
           }
           catch (Exception e) {
-            e.printStackTrace();
+            LOG.error("Exception while parsing SVG document", e);
             getSvgSourceField().addErrorStatus(e.getMessage());
           }
         }
@@ -276,7 +283,12 @@ public class SvgFieldForm extends AbstractForm implements IAdvancedExampleForm {
       if (StringUtility.isNullOrEmpty(resourceName)) {
         return null;
       }
-      return SVGUtility.readSVGDocument(ResourceBase.class.getResourceAsStream(resourceName));
+      try (InputStream in = ResourceBase.class.getResourceAsStream(resourceName)) {
+        return SVGUtility.readSVGDocument(in);
+      }
+      catch (IOException e) {
+        throw new ProcessingException("Exception while reading SVG document", e);
+      }
     }
 
     private SVGDocument parseDocument(String svgData) {
