@@ -238,3 +238,12 @@ Default order for bean implementations without `@Order` annotation is 5000, whic
 Usually this is appropriate if your implementation just adds serializer or deserializers for additional classes.
 
 If you want to override any Scout serializer/deserializer use an order lower than 4500 for your implementation and become the first provider which is invoked.
+
+== Simple tab box (Scout JS)
+
+The `SimpleTabBox` has been improved and can now display the tabs on any side of the box.
+As part of these adjustments, the associated `SimpleTabAreaLayout` has been modified and attributes have been renamed.
+
+- `tabWidth` was renamed to `tabSize`
+- `tabMinWidth` was renamed to `tabMinSize`
+- `overflowTabItemWidth` was renamed to `overflowTabItemSize`

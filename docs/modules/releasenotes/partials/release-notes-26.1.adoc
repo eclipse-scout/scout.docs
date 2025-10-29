@@ -57,3 +57,20 @@ For more information see xref:howtos:scout-classic/js-page-how-to.adoc#how-to-js
 == User preferences moved from Shared to Client
 
 As part of the move toward a stateless server session, `IPreferences`, `IUserPreferencesService`, `IUserPreferencesStorageService`, `IPreferenceChangeListener` and their corresponding implementations have been moved from shared to client.
+
+== Simple tab box with vertical tabs
+
+The `SimpleTabBox` has been improved.
+The tabs can now be placed on all four sides of the box by adjusting the attribute `position` on the `SimpleTabArea` accordingly.
+In particular, this allows the tabs to be aligned vertically.
+
+[source,typescript,opts=novalidate]
+----
+scout.create(SimpleTabBox<SimpleTabView>, {
+  parent: this,
+  tabArea: {
+    objectType: SimpleTabArea,
+    position: SimpleTabArea.Position.LEFT
+  }
+});
+----
