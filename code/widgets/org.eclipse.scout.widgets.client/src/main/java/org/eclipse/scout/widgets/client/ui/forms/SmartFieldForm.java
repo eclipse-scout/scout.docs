@@ -109,7 +109,7 @@ import org.eclipse.scout.widgets.shared.services.code.IndustryICBCodeType.ICB900
 @ClassId("a9a153bf-8000-4977-bdb5-84c4673fda73")
 public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm {
 
-  private static final Locale ALBANIAN = new Locale("sq");
+  private static final Locale ALBANIAN = Locale.of("sq");
 
   @ClassId("06e88da7-1810-4c58-862e-ddcf6e7a1877")
   public static class CustomLocaleLookupCall extends LocaleLookupCall {
@@ -122,24 +122,24 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
 
     protected static class CustomLocaleTableRowData extends LocaleTableRowData {
       private static final long serialVersionUID = -3041359870377383920L;
-      private String iconId;
-      private boolean hasIso3Country;
+      private String m_iconId;
+      private boolean m_hasIso3Country;
 
       public String getIconId() {
-        return iconId;
+        return m_iconId;
       }
 
       public CustomLocaleTableRowData withIconId(String iconId) {
-        this.iconId = iconId;
+        m_iconId = iconId;
         return this;
       }
 
       public boolean getHasIso3Country() {
-        return hasIso3Country;
+        return m_hasIso3Country;
       }
 
       public CustomLocaleTableRowData withHasIso3Country(boolean hasIso3Country) {
-        this.hasIso3Country = hasIso3Country;
+        m_hasIso3Country = hasIso3Country;
         return this;
       }
     }
