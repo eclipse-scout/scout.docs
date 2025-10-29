@@ -316,7 +316,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           table.getPhoneColumn().setValue(r, "+41 (0)79 123 45 67");
           table.getImageColumn().setValue(r, "large");
           table.getTrendColumn().setValue(r, AbstractIcons.LongArrowUpBold);
-          table.getLanguageColumn().setValue(r, new Locale("en", "US"));
+          table.getLanguageColumn().setValue(r, Locale.of("en", "US"));
           table.getHtmlEnabledColumn().setValue(r, HTML.appLink("link", "App Link").toHtml());
 
           //Second Row:
@@ -335,7 +335,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           table.getPhoneColumn().setValue(r, null);
           table.getImageColumn().setValue(r, "small");
           table.getTrendColumn().setValue(r, AbstractIcons.LongArrowDownBold);
-          table.getLanguageColumn().setValue(r, new Locale("de", "DE"));
+          table.getLanguageColumn().setValue(r, Locale.of("de", "DE"));
           table.getHtmlEnabledColumn().setValue(r, HTML.appLink("link", "App Link").toHtml());
         }
 

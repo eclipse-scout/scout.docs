@@ -37,19 +37,19 @@ public class CustomNumberFormatProvider extends NumberFormatProvider {
     m_countryDefaultLocaleMap = new HashMap<>();
 
     // add locale support for en_CH
-    init(new Locale("en", "CH"), "de");
+    init(Locale.of("en", "CH"), "de");
     // add locale support for en_DE
-    init(new Locale("en", "DE"), "de");
+    init(Locale.of("en", "DE"), "de");
     // add locale support for en_AT
-    init(new Locale("en", "AT"), "de");
+    init(Locale.of("en", "AT"), "de");
     // add locale support for en_FR
-    init(new Locale("en", "FR"), "fr");
+    init(Locale.of("en", "FR"), "fr");
     // add locale support for en_IT
-    init(new Locale("en", "IT"), "it");
+    init(Locale.of("en", "IT"), "it");
     // add locale support for en_DK
-    init(new Locale("en", "DK"), "da");
+    init(Locale.of("en", "DK"), "da");
     // add locale support for en_ES
-    init(new Locale("en", "ES"), "es");
+    init(Locale.of("en", "ES"), "es");
 
     // available locales
     HashSet<Locale> availableLocales = new HashSet<>();
@@ -89,7 +89,7 @@ public class CustomNumberFormatProvider extends NumberFormatProvider {
 
   private void init(Locale locale, String primaryCountryLanguage) {
     m_customLocales.add(locale);
-    Locale primaryCountryLocale = new Locale(primaryCountryLanguage, locale.getCountry());
+    Locale primaryCountryLocale = Locale.of(primaryCountryLanguage, locale.getCountry());
     m_countryDefaultLocaleMap.put(primaryCountryLocale.getCountry(), primaryCountryLocale);
   }
 
