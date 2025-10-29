@@ -153,6 +153,8 @@ export * from './popup/PopupHorizontalAlignLookupCall';
 export * from './popup/PopupVerticalAlignLookupCall';
 export * from './popup/WidgetPopupPropertiesBox';
 export * from './popup/WidgetPopupPropertiesBoxModel';
+export * from './simpletabbox/SimpleTabBoxForm';
+export * from './simpletabbox/SimpleTabBoxFormModel';
 export * from './smartfield/SmartFieldForm';
 export * from './smartfield/SmartFieldFormModel';
 export * from './smartfield/SmartFieldPropertiesBox';

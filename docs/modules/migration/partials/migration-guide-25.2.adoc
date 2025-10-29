@@ -402,3 +402,14 @@ The `SearchFormTableControl` uses `icons.SEARCH` as its default icon and adds th
 If the search form contains a `SearchMenu` or `ResetMenu` or any other `Menu` triggering a 'search' or 'reset' event on the search form,
 all listeners on these events that reload the table can be removed as this is now done by the `PageWithTable` itself.
 Not removing these listeners will result in the data being loaded twice.
+
+== Simple tab box (Scout JS)
+
+The `SimpleTabBox` has been improved and can now display the tabs on any side of the box.
+As part of these adjustments, the associated `SimpleTabAreaLayout` has been modified and attributes have been renamed.
+
+- `tabWidth` was renamed to `tabSize`
+- `tabMinWidth` was renamed to `tabMinSize`
+- `overflowTabItemWidth` was renamed to `overflowTabItemSize`
+
+The old attributes are still available but deprecated and will be removed in a future release.
