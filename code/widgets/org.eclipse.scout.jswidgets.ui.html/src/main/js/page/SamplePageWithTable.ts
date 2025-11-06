@@ -106,7 +106,7 @@ export class SamplePageWithTable extends PageWithTable {
         let contribution = scout.create(SampleCustomColumnRestrictionContributionDo, {
           columnTypes: new Map()
         });
-        customizerData.columns.forEach(customColumn => {
+        customizerData.customColumns.forEach(customColumn => {
           contribution.columnTypes.set(customColumn.columnId, customColumn.columnType);
         });
         dataObjects.addContribution(contribution, restriction);

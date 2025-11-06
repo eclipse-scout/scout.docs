@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {BooleanColumn, Column, Constructor, DateColumn, NumberColumn, ObjectOrChildModel, scout} from '@eclipse-scout/core';
+import {BooleanColumn, Column, Constructor, DateColumn, NumberColumn, scout, Table} from '@eclipse-scout/core';
 import {SampleCustomColumnDo, SampleCustomColumnType} from '../index';
 
 export class SampleColumnFactory {
@@ -21,13 +21,15 @@ export class SampleColumnFactory {
     return SampleColumnFactory._INSTANCE;
   }
 
-  createColumn(columnData: SampleCustomColumnDo): ObjectOrChildModel<Column> {
-    return {
-      uuid: columnData.columnId,
-      objectType: this._columnTypeToObjectType(columnData.columnType),
-      text: columnData.name,
-      width: columnData.width
-    };
+  createColumn(param: SampleColumnFactoryParam): Column<any> {
+    let columnConfig = param.columnConfig;
+    let objectType = this._columnTypeToObjectType(columnConfig.columnType);
+    return scout.create(objectType, {
+      parent: param.parent,
+      uuid: columnConfig.columnId,
+      text: columnConfig.name,
+      width: columnConfig.width
+    });
   }
 
   protected _columnTypeToObjectType(columnType: SampleCustomColumnType): Constructor<Column<any>> {
@@ -42,4 +44,9 @@ export class SampleColumnFactory {
         return Column;
     }
   }
+}
+
+export class SampleColumnFactoryParam {
+  parent: Table;
+  columnConfig: SampleCustomColumnDo;
 }

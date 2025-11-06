@@ -7,114 +7,180 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {arrays, BaseDoEntity, Column, ITableCustomizerDo, scout, Table, TableCustomizer, typeName} from '@eclipse-scout/core';
+import {arrays, BaseDoEntity, Column, IColumnConfigDo, ITableCustomizerDo, scout, Table, TableCustomizer, TableCustomizerCreateColumnsOptions, tableUiPreferences, typeName} from '@eclipse-scout/core';
 import {SampleColumnFactory, SampleCustomColumnForm} from '../index';
 
 export class SampleTableCustomizer extends TableCustomizer {
 
-  columnDatas: SampleCustomColumnDo[] = [];
+  customColumnConfigs: SampleCustomColumnDo[] = [];
 
-  override setCustomizerData(customizerData: ITableCustomizerDo) {
-    let oldCustomColumnIds = new Set(this.columnDatas.map(columnData => columnData.columnId).filter(Boolean));
+  override async setCustomizerData(customizerData: SampleTableCustomizerDo): Promise<void> {
+    let oldCustomColumnIds = new Set(this.customColumnConfigs.map(columnConfig => columnConfig.columnId).filter(Boolean));
 
-    if (customizerData instanceof SampleTableCustomizerDo) {
-      this.columnDatas = [...arrays.ensure(customizerData.columns).filter(columnData => !!columnData.columnId)];
-    } else {
-      this.columnDatas = [];
-    }
+    this.customColumnConfigs = arrays.ensure(customizerData?.customColumns).filter(columnConfig => !!columnConfig.columnId);
 
-    let newCustomColumnIds = new Set(this.columnDatas.map(columnData => columnData.columnId).filter(Boolean));
-    let customColumnIdsToDelete = new Set([...oldCustomColumnIds].filter(columnId => !newCustomColumnIds.has(columnId)));
+    // Delete all custom columns that are no longer part of the customizer data
+    let preservedColumns = this.table.columns.filter(column => !oldCustomColumnIds.has(column.buildUuid()));
+    tableUiPreferences.withIgnoreTableEvents(() => {
+      this.table.setColumns(preservedColumns);
+    });
 
-    // Preserve non-custom columns and all custom columns that are still existing
-    let preservedColumns = this.table.columns
-      .filter(column => !customColumnIdsToDelete.has(column.buildUuid()));
-    // Create new column instances for all custom columns that don't yet exist
-    let newColumns = this.columnDatas
-      .filter(columnData => !oldCustomColumnIds.has(columnData.columnId))
-      .map(columnData => SampleColumnFactory.get().createColumn(columnData))
-      .filter(Boolean);
-
-    this.table.setColumns([
-      ...preservedColumns,
-      ...newColumns
-    ]);
-  }
-
-  override getCustomizerData(): ITableCustomizerDo {
-    if (arrays.empty(this.columnDatas)) {
-      return null;
-    }
-    return scout.create(SampleTableCustomizerDo, {
-      columns: [...this.columnDatas]
+    // Create and insert new columns
+    await this.createColumns(this.customColumnConfigs, {
+      insertIntoTable: true,
+      applyPreferences: true
     });
   }
 
-  override addColumn(insertAfterColumn?: Column<any>): JQuery.Promise<void> {
+  override getCustomizerData(): SampleTableCustomizerDo {
+    if (arrays.empty(this.customColumnConfigs)) {
+      return null;
+    }
+    return scout.create(SampleTableCustomizerDo, {
+      customColumns: [...this.customColumnConfigs]
+    });
+  }
+
+  override async createColumns(columnConfigs: SampleCustomColumnDo[], options?: TableCustomizerCreateColumnsOptions): Promise<Column<any>[]> {
+    columnConfigs = arrays.ensure(columnConfigs).filter(columnConfig => !!columnConfig.columnId);
+
+    if (arrays.empty(columnConfigs)) {
+      return []; // done
+    }
+
+    let newColumns = columnConfigs.map(columnConfig => this._createColumn(columnConfig));
+
+    if (options?.insertIntoTable) {
+      let newColumnIds = new Set(columnConfigs.map(columnConfig => columnConfig.columnId).filter(Boolean));
+      let preservedColumns = this.table.columns.filter(column => !newColumnIds.has(column.buildUuid()));
+      let columns = [...preservedColumns];
+
+      let insertPosition = columns.length;
+      if (options?.positionOrInsertAfterColumn instanceof Column) {
+        let index = preservedColumns.indexOf(options.positionOrInsertAfterColumn);
+        if (index !== -1) {
+          insertPosition = index + 1;
+        }
+      } else if (typeof options?.positionOrInsertAfterColumn === 'number') {
+        insertPosition = Math.max(0, options.positionOrInsertAfterColumn);
+      }
+      arrays.insertAll(columns, newColumns, insertPosition);
+
+      // Set new column structure synchronously (this will also save it to the ui preferences)
+      this.table.setColumns(columns);
+    }
+
+    return newColumns;
+  }
+
+  protected _createColumn(columnConfig: SampleCustomColumnDo): Column<any> {
+    return SampleColumnFactory.get().createColumn({
+      parent: this.table,
+      columnConfig: columnConfig
+    });
+  }
+
+  override async addCustomColumn(positionOrInsertAfterColumn?: number | Column<any>): Promise<Column<any>[]> {
     let form = scout.create(SampleCustomColumnForm, {
       parent: this.table,
       hiddenColumns: this.table.organizer.getInvisibleColumns()
     });
     form.open();
-    return form.whenSave().then(() => {
+    let newColumns: Column<any>[] = [];
+    form.whenSave().then(async () => {
       if (form.data) {
-        let columnData = form.data;
-        this.columnDatas.push(columnData);
-        this.table.insertColumn(SampleColumnFactory.get().createColumn(columnData), insertAfterColumn);
-        this.table.reload(Table.ReloadReason.ORGANIZE_COLUMNS);
+        let newColumnConfig = form.data;
+        let newColumn = await this.addCustomColumnConfig(newColumnConfig, positionOrInsertAfterColumn);
+        newColumns.push(newColumn);
       } else if (form.hiddenColumns) {
         form.hiddenColumns.forEach(column => {
           column.setVisible(true);
-          let position = this.table.visibleColumns().indexOf(insertAfterColumn);
+          let position = typeof positionOrInsertAfterColumn === 'number' ? positionOrInsertAfterColumn : this.table.visibleColumns().indexOf(positionOrInsertAfterColumn);
           if (position >= 0) {
             this.table.moveColumn(column, position);
           }
         });
+        arrays.pushAll(newColumns, form.hiddenColumns);
       }
     });
+    await form.whenClose();
+    return newColumns;
   }
 
-  override modifyColumn(column: Column<any>): JQuery.Promise<void> {
-    let oldColumnData = this.columnDatas.find(columnData => columnData.columnId === column.buildUuid());
+  override async addCustomColumnConfig(columnConfig: SampleCustomColumnDo, positionOrInsertAfterColumn?: number | Column<any>): Promise<Column<any>> {
+    this.customColumnConfigs.push(columnConfig);
+
+    let column = this._createColumn(columnConfig);
+    this.table.insertColumn(column, positionOrInsertAfterColumn);
+    this.table.reload(Table.ReloadReason.ORGANIZE_COLUMNS);
+
+    return this.table.columnByUuid(columnConfig.columnId);
+  }
+
+  override async modifyCustomColumn(column: Column<any>): Promise<Column<any>[]> {
+    let oldColumnConfigs = this.customColumnConfigs.find(columnConfig => columnConfig.columnId === column.buildUuid());
     let form = scout.create(SampleCustomColumnForm, {
       parent: this.table,
-      data: oldColumnData
+      data: oldColumnConfigs
     });
     form.open();
-    return form.whenSave().then(() => {
-      let newColumnData = form.data;
-      arrays.replace(this.columnDatas, oldColumnData, newColumnData);
-      this.table.setColumns(this.table.columns.map(col => col === column ? SampleColumnFactory.get().createColumn(newColumnData) : col));
-      this.table.reload(Table.ReloadReason.ORGANIZE_COLUMNS);
+    let newColumns: Column<any>[] = [];
+    form.whenSave().then(() => {
+      let newColumnConfig = form.data;
+      let newColumn = this._modifyColumnConfig(column, oldColumnConfigs, newColumnConfig);
+      newColumns.push(newColumn);
     });
+    await form.whenClose();
+    return newColumns;
   }
 
-  override removeColumns(columns: Column<any>[]) {
+  override async modifyCustomColumnConfig(newColumnConfig: SampleCustomColumnDo): Promise<Column<any>> {
+    let oldColumnConfig = this.customColumnConfigs.find(columnConfig => columnConfig.columnId === newColumnConfig.columnId);
+    if (!oldColumnConfig) {
+      return null;
+    }
+    let column = this.table.columnByUuid(newColumnConfig.columnId);
+    if (!column) {
+      return null;
+    }
+    return this._modifyColumnConfig(column, oldColumnConfig, newColumnConfig);
+  }
+
+  protected _modifyColumnConfig(column: Column<any>, oldColumnConfig: SampleCustomColumnDo, newColumnConfig: SampleCustomColumnDo): Column<any> {
+    arrays.replace(this.customColumnConfigs, oldColumnConfig, newColumnConfig);
+
+    this.table.setColumns(this.table.columns.map(col => col === column ? this._createColumn(newColumnConfig) : col));
+    this.table.reload(Table.ReloadReason.ORGANIZE_COLUMNS);
+
+    return this.table.columnByUuid(newColumnConfig.columnId);
+  }
+
+  override removeCustomColumns(columns: Column<any>[]) {
     columns.forEach(column => {
-      let oldColumnData = this.columnDatas.find(columnData => columnData.columnId === column.buildUuid());
-      arrays.remove(this.columnDatas, oldColumnData);
+      let oldColumnConfig = this.customColumnConfigs.find(columnConfig => columnConfig.columnId === column.buildUuid());
+      arrays.remove(this.customColumnConfigs, oldColumnConfig);
     });
     this.table.deleteColumns(columns);
   }
 
-  override removeAllColumns() {
-    let columnsToDelete = this.columnDatas.map(columnData => this.table.columnByUuid(columnData.columnId)).filter(Boolean);
-    arrays.clear(this.columnDatas);
+  override removeAllCustomColumns() {
+    let columnsToDelete = this.customColumnConfigs.map(columnConfig => this.table.columnByUuid(columnConfig.columnId)).filter(Boolean);
+    arrays.clear(this.customColumnConfigs);
     this.table.deleteColumns(columnsToDelete);
   }
 
   override isCustomizable(column: Column<any>): boolean {
-    return this.columnDatas.some(columnData => columnData.columnId === column.buildUuid());
+    return this.customColumnConfigs.some(columnConfig => columnConfig.columnId === column.buildUuid());
   }
 }
 
 @typeName('jswidgets.SampleTableCustomizer')
 export class SampleTableCustomizerDo extends BaseDoEntity implements ITableCustomizerDo {
-  columns: SampleCustomColumnDo[];
+  customColumns: SampleCustomColumnDo[];
 }
 
 @typeName('jswidgets.SampleCustomColumn')
-export class SampleCustomColumnDo extends BaseDoEntity {
+export class SampleCustomColumnDo extends BaseDoEntity implements IColumnConfigDo {
   columnId: string;
   columnType: SampleCustomColumnType;
   name?: string;
