@@ -396,8 +396,14 @@ Apart from attribute descriptions, the inventory provides access to type name an
 
 == Extending with custom serializer and deserializer
 
-The application scoped beans `DataObjectSerializers` resp. `DataObjectDeserializers` define the available serializer and deserializer classes used to marshal the data objects.
-Own custom serializer and deserializer implementations can be added by replacing  the corresponding base class and register its own custom serializer or deserializer.
+The application scoped bean `ScoutDataObjectSerializerProvider` defines the available serializer and deserializer classes used to marshal the data objects.
+Own custom serializer and deserializer implementations can be added by implementing an instance of `IDataObjectSerializerProvider`.
+
+Default order for bean implementations without `@Order` annotation is 5000, which means your `IDataObjectSerializerProvider` is invoked as last instance.
+Usually this is appropriate if your implementation just adds serializer or deserializers for additional classes.
+The Scout bean `ScoutDataObjectSerializerProvider` uses order 4500.
+
+If you want to override any Scout serializer/deserializer use an order lower than 4500 for your implementation and become the first provider which is invoked.
 
 == Enumerations within Data Objects
 
