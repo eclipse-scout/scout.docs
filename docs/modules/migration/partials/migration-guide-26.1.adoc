@@ -182,3 +182,14 @@ As part of the move toward a stateless backend server, the API of the session ha
 `AbstractClientSession`:
 
 * `initializeSharedVariables` renamed to the `loadInitialSharedVariables`.
+
+== Data Object Serializer Provider Implementations Supplemented with Order Annotation
+
+The Scout implementation `ScoutDataObjectSerializerProvider` of serializer/deserializer provider interface `IDataObjectSerializerProvider` was supplemented with an `@Order` annotation using value 4500
+to achieve a fixed order when looking up all instances by `BEANS.all(IDataObjectSerializerProvider.class)`.
+
+ACTION: Check custom implementations of `IDataObjectSerializerProvider` interface.
+Default order for bean implementations without `@Order` annotation is 5000, which means your `IDataObjectSerializerProvider` is invoked as last instance.
+Usually this is appropriate if your implementation just adds serializer or deserializers for additional classes.
+
+If you want to override any Scout serializer/deserializer use an order lower than 4500 for your implementation and become the first provider which is invoked.
