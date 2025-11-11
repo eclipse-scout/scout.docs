@@ -24,6 +24,7 @@ export class ColorSchemeLookupCall extends StaticLookupCall<string> {
     [colorSchemes.ColorSchemeId.DEFAULT + '-inverted', 'default-inverted'],
     [colorSchemes.ColorSchemeId.ALTERNATIVE, 'alternative'],
     [colorSchemes.ColorSchemeId.ALTERNATIVE + '-inverted', 'alternative-inverted'],
-    [colorSchemes.ColorSchemeId.RAINBOW, 'rainbow']
+    [colorSchemes.ColorSchemeId.RAINBOW, 'rainbow'],
+    [colorSchemes.ColorSchemeId.RAINBOW + '-inverted', 'rainbow-inverted']
   ];
 }
