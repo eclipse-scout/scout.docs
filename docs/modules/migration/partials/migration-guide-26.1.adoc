@@ -139,6 +139,22 @@ const cssClassAsArray = styles.cssClassAsArray(cssClass);
 If you use the function `widgets.preserveAndSetProperty` in your JavaScript code, please make sure that the variable that stores the preserved value is not initialized or initialized to `undefined`.
 If it is initialized to `null`, remove the initialization.
 
+== Use REST instead of proprietary service tunnel
+
+Under the hood the communication protocol for the client-backend communication (service-tunnel) has been changed.
+
+Instead of using its own HTTP client and own servlet implementation the service-tunnel communication is now established using a REST resource (`ProcessResource`) and corresponding client (`ProcessResourceClient`).
+
+Several special implementations for service-tunnel therefore have been removed (e.g. exception handling, timeouts etc.), now the default REST implementation is used.
+
+The following config properties have been changed:
+
+* The config property `scout.servicetunnel.targetUrl` has been removed, the target is now defined by the `scout.backendUrl` config property and the `org.eclipse.scout.rt.shared.servicetunnel.ServiceTunnelConstants.PROCESS_PATH` constant.
+
+* The (legacy) alias `server.url` for the config property `scout.backendUrl` has been removed (the config property itself remains).
+Already in the past this property was described to specify the base URL for the backend server (without any servlets).
+However, in the past if the URL was specified with a trailing `/process`, it was silently removed. This fallback has been removed.
+
 == DefaultAuthToken: Package changed, constant moved
 
 As the `DefaultAuthToken` was not used exclusively for the service-tunnel the following types and constants have been moved:
