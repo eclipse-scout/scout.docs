@@ -321,6 +321,22 @@ include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclips
 include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/rest/UploadResource.java[tags=method]
 ----
 
+== REST Chunked Support
+
+Due to missing support for responses using chunks of data (e.g. data objects) in official Jakarta RESTful Web Services API, Scout provides an own implementation allowing to use chunked responses without requiring other third party libraries.
+
+[source,java]
+.Example: Client
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/rest/ChunkedResourceClient.java[tags=method]
+----
+
+[source,java]
+.Example: Server
+----
+include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/rest/ChunkedResource.java[tags=method]
+----
+
 [[iid-signature]]
 == IId signature
 
