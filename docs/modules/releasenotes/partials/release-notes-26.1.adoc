@@ -53,3 +53,7 @@ The JsPage enables the use of pages implemented in Scout JS in a Scout Classic o
 It can now use Scout Classic pages as its child pages.
 The child pages are created by the Java implementation of the JsPage and triggered by its equivalent in Scout JS.
 For more information see xref:howtos:scout-classic/js-page-how-to.adoc#how-to-js-page[How-To].
+
+== User preferences moved from Shared to Client
+
+As part of the move toward a stateless server session, `IPreferences`, `IUserPreferencesService`, `IUserPreferencesStorageService`, `IPreferenceChangeListener` and their corresponding implementations have been moved from shared to client.
