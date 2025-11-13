@@ -42,7 +42,7 @@ import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.shared.data.colorscheme.ColorScheme;
 import org.eclipse.scout.rt.shared.data.colorscheme.IColorScheme;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
-import org.eclipse.scout.widgets.client.services.lookup.TileColorSchemeLookupCall;
+import org.eclipse.scout.widgets.client.services.lookup.ColorSchemeLookupCall;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.DetailBox;
@@ -653,7 +653,7 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
 
         @Override
         protected Class<? extends ILookupCall<IColorScheme>> getConfiguredLookupCall() {
-          return TileColorSchemeLookupCall.class;
+          return ColorSchemeLookupCall.class;
         }
 
         @Override

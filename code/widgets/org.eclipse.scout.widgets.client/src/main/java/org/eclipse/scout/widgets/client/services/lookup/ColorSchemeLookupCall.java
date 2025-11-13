@@ -20,7 +20,7 @@ import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 
 @ClassId("8302e181-9a58-4e92-8bad-0cc20c35d45d")
-public class TileColorSchemeLookupCall extends LocalLookupCall<IColorScheme> {
+public class ColorSchemeLookupCall extends LocalLookupCall<IColorScheme> {
 
   private static final long serialVersionUID = 1L;
 

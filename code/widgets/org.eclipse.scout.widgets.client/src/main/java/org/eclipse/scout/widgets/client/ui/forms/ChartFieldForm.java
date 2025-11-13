@@ -91,7 +91,7 @@ import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 import org.eclipse.scout.widgets.client.services.lookup.ChartTypeLookupCall;
-import org.eclipse.scout.widgets.client.services.lookup.TileColorSchemeLookupCall;
+import org.eclipse.scout.widgets.client.services.lookup.ColorSchemeLookupCall;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipse.scout.widgets.client.ui.forms.ChartFieldForm.MainBox.BottomBox.ChartDataBox.LeftBox.ChartDataTableField;
 import org.eclipse.scout.widgets.client.ui.forms.ChartFieldForm.MainBox.BottomBox.ChartDataBox.LeftBox.ChartDataTableField.Table;
@@ -2058,7 +2058,7 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
 
             @Override
             protected Class<? extends ILookupCall<IColorScheme>> getConfiguredLookupCall() {
-              return TileColorSchemeLookupCall.class;
+              return ColorSchemeLookupCall.class;
             }
 
             @Override
