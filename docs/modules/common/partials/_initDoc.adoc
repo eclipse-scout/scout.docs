@@ -18,8 +18,8 @@
 :sdk_editor_nls: Scout NLS Editor
 
 // Constants
-:maven-version: 25.2.12
-:node-version: 25.2.12
+:maven-version: 25.2.14
+:node-version: 25.2.14
 :scout-previous-version: 25.1
 :scout-version: 25.2
 :simrel-name: 2025-09
