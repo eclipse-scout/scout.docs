@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright (c) 2010, 2024 BSI Business Systems Integration AG
+  ~ Copyright (c) 2010, 2025 BSI Business Systems Integration AG
   ~
   ~ This program and the accompanying materials are made
   ~ available under the terms of the Eclipse Public License 2.0
@@ -27,10 +27,6 @@
       <artifactId>org.eclipse.scout.rt.api</artifactId>
     </dependency>
     <!-- Jakarta RESTful Web Services Jersey -->
-    <dependency>
-      <groupId>org.glassfish.jersey.containers</groupId>
-      <artifactId>jersey-container-servlet-core</artifactId>
-    </dependency>
     <dependency>
       <groupId>org.glassfish.jersey.inject</groupId>
       <artifactId>jersey-hk2</artifactId>
