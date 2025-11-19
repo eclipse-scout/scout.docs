@@ -160,7 +160,7 @@ This module adds a set of Jackson additions in order to use the Jackson library 
 <!-- Jakarta RESTful Web Services Jersey -->
 <dependency>
     <groupId>org.glassfish.jersey.containers</groupId>
-    <artifactId>jersey-container-servlet-core</artifactId>
+    <artifactId>jersey-container-servlet</artifactId>
 </dependency>
 <dependency>
     <groupId>org.glassfish.jersey.inject</groupId>
