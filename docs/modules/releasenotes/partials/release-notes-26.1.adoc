@@ -80,3 +80,11 @@ scout.create(SimpleTabBox<SimpleTabView>, {
   }
 });
 ----
+
+== Widget: New Properties to Control Focus Behavior (Scout JS)
+
+The following properties have been added to the Widget class and are therefore available for every widget.
+
+- tabbable: controls whether the widget should be focusable using keyboard.
+- preventClickFocus: set to true if the widget must not be focused when it is clicked.
+- preventInitialFocus: set to true if the widget must not be considered as initial focus candiate, e.g. when opening a form.
