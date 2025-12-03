@@ -88,6 +88,8 @@ Scout 25.2 requires at least the following:
 
 * Build and runtime of Scout 25.2 require Java 24 (Java 21 support has been dropped). The compiler target level is set to Java 21. We plan to update to Java 25 LTS as soon as it is available.
 
+NOTE: When upgrading to Scout 25.2, remove the `<jdk.source.version>` property from the root `pom.xml` file of your Scout application.
+
 == Table: column.sortActive Can Be Removed if sortIndex Is Set (Scout JS)
 
 For Scout JS tables, `sortActive` is now automatically set to true if `sortIndex` is >= 0.
