@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -34,7 +34,6 @@ import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.HexUtility;
 import org.eclipse.scout.rt.platform.util.StringUtility;
-import org.eclipse.scout.rt.shared.ISession;
 import org.eclipse.scout.rt.shared.http.DefaultHttpTransportManager;
 
 import com.google.api.client.http.GenericUrl;
@@ -140,8 +139,8 @@ public class UserForm extends AbstractForm {
 
   private String createHtmlContent() {
     List<CharSequence> menus = CollectionUtility.arrayList(
-      HTML.div(HTML.appLink("application-info", TEXTS.get("ApplicationInformation"))).cssClass("contacts-user-form-link-row"),
-      HTML.div(HTML.appLink("logout", TEXTS.get("Logout"))).cssClass("contacts-user-form-link-row"));
+        HTML.div(HTML.appLink("application-info", TEXTS.get("ApplicationInformation"))).cssClass("contacts-user-form-link-row"),
+        HTML.div(HTML.appLink("logout", TEXTS.get("Logout"))).cssClass("contacts-user-form-link-row"));
     if (!CONFIG.getPropertyValue(ReadOnlyProperty.class)) {
       menus.add(1, HTML.div(HTML.appLink("reset-data", TEXTS.get("ResetData"))).cssClass("contacts-user-form-link-row"));
     }
@@ -158,7 +157,7 @@ public class UserForm extends AbstractForm {
 
     try {
       // Get the email address of the user
-      String emailAddress = StringUtility.trim(String.format("%s@%s", ISession.CURRENT.get().getUserId(), userDomain)).toLowerCase();
+      String emailAddress = StringUtility.trim(String.format("%s@%s", ClientSessionProvider.currentSession().getUserId(), userDomain)).toLowerCase();
 
       // Calculate MD5 Hash of email address
       MessageDigest messageDigest = MessageDigest.getInstance("MD5");

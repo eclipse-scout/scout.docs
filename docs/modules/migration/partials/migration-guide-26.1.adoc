@@ -237,6 +237,7 @@ As part of the move toward a stateless backend server, the API of the session ha
 `ISession`:
 
 * `getSharedVariableMap` moved to the `IClientSession`.
+* `getUserId` moved to the `IClientSession`. On server, use the ThreadLocal `UserId.CURRENT` instead.
 
 `IClientSession`:
 
@@ -248,7 +249,7 @@ As part of the move toward a stateless backend server, the API of the session ha
 
 `AbstractClientSession`:
 
-* `initializeSharedVariables` renamed to the `loadInitialSharedVariables`.
+* `initializeSharedVariables` renamed to `loadInitialSharedVariables`.
 
 == Data Object Serializer Provider Implementations Supplemented with Order Annotation
 
@@ -287,3 +288,22 @@ If a test method exceeds a specific runtime duration it is still completed but f
 The default runtime limit is set to three minutes.
 The limit may be increased by setting a higher timeout on the `@Test` annotation.
 The limit is disabled completely when a negative timeout is set on the `@Test` annotation.
+
+== Removed automatic binding for session variables in SQL statements
+
+Previously, SQL queries could reference session variables as bind parameters without explicitly providing their values. For example:
+
+[source,sql]
+----
+SELECT :userId;
+----
+
+In this case, the `:userId` bind was automatically populated from the current session context.
+
+*What Changed:*
+Automatic binding of session variables to SQL bind parameters has been *removed*. Queries now require explicit binding of the session variables during execution.
+
+For compatibility reasons the `userId` bind is still automatically bound with the current user id. But all the other session variables are not automatically bound anymore.
+
+*Action Required:*
+Review and update your queries to explicitly bind the session variables when executing SQL statements.
