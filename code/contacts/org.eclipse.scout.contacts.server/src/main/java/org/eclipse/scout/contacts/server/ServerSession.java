@@ -9,7 +9,7 @@
  */
 package org.eclipse.scout.contacts.server;
 
-import org.eclipse.scout.rt.server.AbstractServerSession;
+import org.eclipse.scout.rt.server.session.AbstractServerSession;
 import org.eclipse.scout.rt.server.session.ServerSessionProvider;
 import org.eclipse.scout.rt.shared.user.UserId;
 import org.slf4j.Logger;
