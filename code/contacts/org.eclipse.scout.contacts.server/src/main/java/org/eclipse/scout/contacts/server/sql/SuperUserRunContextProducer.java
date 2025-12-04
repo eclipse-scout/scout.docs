@@ -9,8 +9,9 @@
  */
 package org.eclipse.scout.contacts.server.sql;
 
-import jakarta.annotation.PostConstruct;
 import javax.security.auth.Subject;
+
+import jakarta.annotation.PostConstruct;
 
 import org.eclipse.scout.contacts.server.sql.DatabaseProperties.SuperUserSubjectProperty;
 import org.eclipse.scout.rt.platform.BEANS;
@@ -22,11 +23,12 @@ import org.eclipse.scout.rt.platform.config.CONFIG;
 import org.eclipse.scout.rt.platform.context.RunMonitor;
 import org.eclipse.scout.rt.platform.exception.PlatformException;
 import org.eclipse.scout.rt.platform.util.FinalValue;
-import org.eclipse.scout.rt.server.IServerSession;
 import org.eclipse.scout.rt.server.context.ServerRunContext;
 import org.eclipse.scout.rt.server.context.ServerRunContextProducer;
-import org.eclipse.scout.rt.server.context.ServerRunContexts;
+import org.eclipse.scout.rt.server.session.IServerSession;
 import org.eclipse.scout.rt.server.session.ServerSessionProvider;
+import org.eclipse.scout.rt.server.session.context.ServerSessionRunContext;
+import org.eclipse.scout.rt.server.session.context.ServerSessionRunContexts;
 import org.eclipse.scout.rt.shared.ui.UserAgents;
 
 /**
@@ -64,8 +66,8 @@ public class SuperUserRunContextProducer extends ServerRunContextProducer {
    * This implies a new {@link ServerRunContext} initialized with the superuser's {@link Subject}, with a dedicated
    * {@link RunMonitor} set, and the superuser's shared {@link IServerSession} set.
    */
-  public ServerRunContext produce() {
-    final ServerRunContext superUserRunContext = ServerRunContexts.empty()
+  public ServerSessionRunContext produce() {
+    final ServerSessionRunContext superUserRunContext = ServerSessionRunContexts.empty()
         .withRunMonitor(BEANS.get(RunMonitor.class))
         .withUserAgent(UserAgents.createDefault())
         .withSubject(subject.get());
