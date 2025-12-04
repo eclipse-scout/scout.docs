@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -16,6 +16,7 @@ import org.eclipse.scout.contacts.client.common.SearchOutline;
 import org.eclipse.scout.contacts.client.contact.ContactOutline;
 import org.eclipse.scout.contacts.client.organization.OrganizationForm;
 import org.eclipse.scout.contacts.client.person.PersonForm;
+import org.eclipse.scout.rt.client.session.ClientSessionProvider;
 import org.eclipse.scout.rt.client.ui.action.keystroke.IKeyStroke;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
@@ -30,7 +31,6 @@ import org.eclipse.scout.rt.platform.config.PlatformConfigProperties.Application
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.shared.AbstractIcons;
-import org.eclipse.scout.rt.shared.ISession;
 
 //tag::DesktopInit[]
 //tag::quickAccessMenu[]
@@ -174,7 +174,6 @@ public class Desktop extends AbstractDesktop {
     }
     //tag::quickAccessMenu[]
     //tag::DesktopInit[]
-
   }
   //end::quickAccessMenu[]
 
@@ -206,7 +205,6 @@ public class Desktop extends AbstractDesktop {
     protected Class<OptionsForm> getConfiguredForm() {
       return OptionsForm.class;
     }
-
   }
   //end::OptionsMenu[]
 
@@ -233,7 +231,7 @@ public class Desktop extends AbstractDesktop {
 
     @Override
     protected void execInitAction() {
-      setText(ISession.CURRENT.get().getUserId());
+      setText(ClientSessionProvider.currentSession().getUserId());
     }
 
     //tag::DesktopInit[]
@@ -241,7 +239,6 @@ public class Desktop extends AbstractDesktop {
     protected Class<UserForm> getConfiguredForm() {
       return UserForm.class;
     }
-
   }
   //tag::quickAccessMenu[]
 }
