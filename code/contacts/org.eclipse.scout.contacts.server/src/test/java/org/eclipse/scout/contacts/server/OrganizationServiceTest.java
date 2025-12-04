@@ -17,8 +17,8 @@ import org.eclipse.scout.contacts.server.sql.DerbySqlService;
 import org.eclipse.scout.contacts.shared.organization.OrganizationFormData;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.testing.platform.runner.RunWithSubject;
-import org.eclipse.scout.rt.testing.server.runner.RunWithServerSession;
 import org.eclipse.scout.rt.testing.server.runner.ServerTestRunner;
+import org.eclipse.scout.rt.testing.server.session.runner.RunWithServerSession;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -88,5 +88,4 @@ public class OrganizationServiceTest {
     assertEquals("testEmail", inputOrg.getEmail().getValue());
     assertEquals("000", inputOrg.getPhone().getValue());
   }
-
 }

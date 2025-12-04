@@ -31,9 +31,9 @@ import org.eclipse.scout.rt.platform.job.Jobs;
 import org.eclipse.scout.rt.platform.job.listener.JobEvent;
 import org.eclipse.scout.rt.platform.job.listener.JobEventType;
 import org.eclipse.scout.rt.platform.util.concurrent.IRunnable;
-import org.eclipse.scout.rt.shared.ISession;
-import org.eclipse.scout.rt.shared.job.filter.event.SessionJobEventFilter;
-import org.eclipse.scout.rt.shared.job.filter.future.SessionFutureFilter;
+import org.eclipse.scout.rt.shared.session.ISession;
+import org.eclipse.scout.rt.shared.session.job.filter.event.SessionJobEventFilter;
+import org.eclipse.scout.rt.shared.session.job.filter.future.SessionFutureFilter;
 import org.quartz.CronScheduleBuilder;
 import org.quartz.SimpleScheduleBuilder;
 

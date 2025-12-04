@@ -28,12 +28,21 @@
       <artifactId>org.eclipse.scout.rt.server</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.eclipse.scout.rt</groupId>
+      <artifactId>org.eclipse.scout.rt.server.session</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.eclipse.scout.contacts</groupId>
       <artifactId>org.eclipse.scout.contacts.shared</artifactId>
     </dependency>
     <dependency>
       <groupId>org.eclipse.scout.rt</groupId>
       <artifactId>org.eclipse.scout.rt.server.test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.scout.rt</groupId>
+      <artifactId>org.eclipse.scout.rt.server.session.test</artifactId>
       <scope>test</scope>
     </dependency>
 

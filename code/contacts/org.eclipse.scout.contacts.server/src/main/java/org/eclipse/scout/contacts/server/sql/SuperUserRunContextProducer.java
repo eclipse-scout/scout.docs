@@ -9,10 +9,12 @@
  */
 package org.eclipse.scout.contacts.server.sql;
 
-import jakarta.annotation.PostConstruct;
 import javax.security.auth.Subject;
 
+import jakarta.annotation.PostConstruct;
+
 import org.eclipse.scout.contacts.server.sql.DatabaseProperties.SuperUserSubjectProperty;
+import org.eclipse.scout.rt.platform.ApplicationScoped;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.IPlatform.State;
 import org.eclipse.scout.rt.platform.IPlatformListener;
@@ -22,19 +24,20 @@ import org.eclipse.scout.rt.platform.config.CONFIG;
 import org.eclipse.scout.rt.platform.context.RunMonitor;
 import org.eclipse.scout.rt.platform.exception.PlatformException;
 import org.eclipse.scout.rt.platform.util.FinalValue;
-import org.eclipse.scout.rt.server.IServerSession;
 import org.eclipse.scout.rt.server.context.ServerRunContext;
-import org.eclipse.scout.rt.server.context.ServerRunContextProducer;
-import org.eclipse.scout.rt.server.context.ServerRunContexts;
+import org.eclipse.scout.rt.server.session.IServerSession;
 import org.eclipse.scout.rt.server.session.ServerSessionProvider;
+import org.eclipse.scout.rt.server.session.context.ServerSessionRunContext;
+import org.eclipse.scout.rt.server.session.context.ServerSessionRunContexts;
 import org.eclipse.scout.rt.shared.ui.UserAgents;
 
 /**
- * Central point to obtain run contexts with super user rights, and to get the super user subject and session.
+ * Central point to obtain run contexts with super-user rights, and to get the super-user subject and session.
  * <p>
- * A super user run context is a {@link ServerRunContext} with a user that has administrator privileges.
+ * A super-user run context is a {@link ServerRunContext} with a user that has administrator privileges.
  */
-public class SuperUserRunContextProducer extends ServerRunContextProducer {
+@ApplicationScoped
+public class SuperUserRunContextProducer {
 
   private final FinalValue<IServerSession> session = new FinalValue<>();
   private final FinalValue<Subject> subject = new FinalValue<>();
@@ -47,25 +50,11 @@ public class SuperUserRunContextProducer extends ServerRunContextProducer {
   /**
    * Produces a new {@link ServerRunContext} with super user rights.
    * <p>
-   * This method delegates to {@link #produce()}, meaning that the subject specified is ignored.
-   *
-   * @param subject
-   *          is ignored, and {@link SuperUserRunContextProducer#getSubject()} used instead.
-   * @see #produce()
-   */
-  @Override
-  public final ServerRunContext produce(final Subject inputSubject) {
-    return produce();
-  }
-
-  /**
-   * Produces a new {@link ServerRunContext} with super user rights.
-   * <p>
    * This implies a new {@link ServerRunContext} initialized with the superuser's {@link Subject}, with a dedicated
    * {@link RunMonitor} set, and the superuser's shared {@link IServerSession} set.
    */
-  public ServerRunContext produce() {
-    final ServerRunContext superUserRunContext = ServerRunContexts.empty()
+  public ServerSessionRunContext produce() {
+    final ServerSessionRunContext superUserRunContext = ServerSessionRunContexts.empty()
         .withRunMonitor(BEANS.get(RunMonitor.class))
         .withUserAgent(UserAgents.createDefault())
         .withSubject(subject.get());
