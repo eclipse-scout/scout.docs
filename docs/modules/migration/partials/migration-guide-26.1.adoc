@@ -281,6 +281,13 @@ Usually this is appropriate if your implementation just adds serializer or deser
 
 If you want to override any Scout serializer/deserializer use an order lower than 4500 for your implementation and become the first provider which is invoked.
 
+== REST Cancellation
+
+The former `RestRequestCancellationServletFilter` was migrated into a REST container filter (see `org.eclipse.scout.rt.rest.jersey.server.RequestCancellationRestContainerRequestResponseFilter`).
+REST container filter are Scout Beans and are automatically registered.
+
+Migration: Remove all servlet filter contributors registering `RestRequestCancellationServletFilter` as filter.
+
 == Simple tab box (Scout JS)
 
 The `SimpleTabBox` has been improved and can now display the tabs on any side of the box.
