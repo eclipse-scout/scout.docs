@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -21,8 +21,12 @@ export class WatchField extends FormField {
   protected override _render() {
     // create the field container
     this.addContainer(this.$parent, 'watch-field');
+
     // create a label
     this.addLabel();
+
+    // create mandatory indicator
+    this.addMandatoryIndicator();
 
     // create a field
     let $field = this.$parent.appendDiv('content');
@@ -36,7 +40,7 @@ export class WatchField extends FormField {
     // layout
     htmlField.setLayout(new WatchFieldLayout(this));
 
-    this.addMandatoryIndicator();
+    // create status
     this.addStatus();
 
     // start watch
