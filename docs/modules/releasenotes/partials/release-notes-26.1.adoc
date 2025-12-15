@@ -87,4 +87,123 @@ The following properties have been added to the Widget class and are therefore a
 
 - tabbable: controls whether the widget should be focusable using keyboard.
 - preventClickFocus: set to true if the widget must not be focused when it is clicked.
-- preventInitialFocus: set to true if the widget must not be considered as initial focus candiate, e.g. when opening a form.
+- preventInitialFocus: set to true if the widget must not be considered as initial focus candidate, e.g. when opening a form.
+
+[[search-outline]]
+== SearchOutline (Scout JS and Scout Classic)
+
+The `SearchOutline` now works for both Scout Classic and Scout JS pages.
+Executing a search in Scout Classic is still done by overwriting `execSearch(String)`. In addition `execResetSearch()` may be overwritten to perform an action when the search is reset.
+
+[source,java,opts=novalidate]
+.Implementation of an `ISearchOutline`
+----
+public class SearchOutline extends AbstractSearchOutline {
+
+  private MySearchPageWithTable m_mySearchPageWithTable;
+
+  @Override
+  protected void execCreateChildPages(List<IPage<?>> pageList) {
+    m_mySearchPageWithTable = new MySearchPageWithTable();
+    pageList.add(m_mySearchPageWithTable);
+  }
+
+  @Override
+  public void execSearch(String query) {
+    execResetSearch();
+    super.execSearch(query);
+    m_mySearchPageWithTable.search(query);
+  }
+
+  @Override
+  protected void execResetSearch() {
+    super.execResetSearch();
+    m_mySearchPageWithTable.resetSearch();
+  }
+}
+----
+
+In order to update the search status of the outline automatically, the page needs to implement the interface `ISearchPage` and update its `ISearchState` whenever the result changes.
+
+[source,java,opts=novalidate]
+.Implementation of `ISearchPage`.
+----
+public class MySearchPageWithTable extends MyPageWithTable implements ISearchPage<Table> {
+
+  private final LazyValue<ISearchState> m_searchState = new LazyValue<>(this::createSearchState);
+
+  @Override
+  public ISearchState getSearchState() {
+    return m_searchState.get();
+  }
+
+  public void search(String query) {
+    // execute search and update rows
+    // ...
+
+    getSearchState().setResultCount(getTable().getRowCount());
+    getSearchState().setLimited(isLimitedResult());
+    getSearchState().setPending(false);
+  }
+
+  public void resetSearch() {
+    getTable().deleteAllRows();
+
+    getSearchState().setResultCount(0);
+    getSearchState().setLimited(false);
+    getSearchState().setPending(false);
+  }
+}
+----
+
+Scout JS pages and xref:howtos:scout-classic/js-page-how-to.adoc#how-to-js-page[hybrid pages] simply create a `SearchState` and listen on the events `search` and `resetSearch` of the `SearchOutline`.
+
+[source,typescript,opts=novalidate]
+----
+export class MySearchPageWithTable extends MyPageWithTable implements SearchPage {
+
+  searchState: SearchState;
+
+  protected _outlineSearchHandler = this._onOutlineSearch.bind(this);
+  protected _outlineResetSearchHandler = this._onOutlineResetSearch.bind(this);
+
+  protected override _init(model: InitModelOf<this>) {
+    super._init(model);
+
+    this.searchState = scout.create(SearchState, {parent: this.outline});
+
+    this.outline.on('search', this._outlineSearchHandler);
+    this.outline.on('resetSearch', this._outlineResetSearchHandler);
+  }
+
+  protected override _destroy() {
+    this.outline.off('search', this._outlineSearchHandler);
+    this.outline.off('resetSearch', this._outlineResetSearchHandler);
+
+    this.searchState.destroy();
+    this.searchState = null;
+
+    super._destroy();
+  }
+
+  protected _onOutlineSearch(event: Event<SearchOutline>) {
+    // execute search and update rows
+    // ...
+
+    this.searchState.setResultCount(this.detailTable.rows.length);
+    this.searchState.setPending(false);
+  }
+
+  protected _onOutlineResetSearch(event: Event<SearchOutline>) {
+    this.detailTable?.deleteAllRows();
+
+    this.searchState.setResultCount(this.detailTable.rows.length);
+    this.searchState.setPending(false);
+  }
+
+  protected _updateResultCount() {
+    const resultCount = this.detailTable.rows.length;
+    this.searchState.setResultCount(this.detailTable.rows.length);
+  }
+}
+----

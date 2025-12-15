@@ -269,3 +269,11 @@ As part of these adjustments, the associated `SimpleTabAreaLayout` has been modi
 - `tabWidth` was renamed to `tabSize`
 - `tabMinWidth` was renamed to `tabMinSize`
 - `overflowTabItemWidth` was renamed to `overflowTabItemSize`
+
+[[search-outline]]
+== SearchOutline (Scout Classic)
+
+The `SearchOutline` now works for both Scout Classic and Scout JS pages (see xref:releasenotes:release-notes.adoc#search-outline[Release Notes]).
+With this the property `searchStatus` was removed as it may no longer be updated manually.
+Pages that need to add information to the `searchStatus` may simply implement `ISearchPage` and update their provided `ISearchState` with information about the result count, whether the result is limited or the search is still pending.
+The `SearchOutline` will collect all these information and build an aggregated `searchStatus`.
