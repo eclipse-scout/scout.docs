@@ -251,6 +251,11 @@ As part of the move toward a stateless backend server, the API of the session ha
 
 * `initializeSharedVariables` renamed to `loadInitialSharedVariables`.
 
+`ServiceTunnelRequest`:
+
+* `getSessionId` removed. Replaced by a custom HTTP Header `X-Scout-Client-Session-Id`.
+* `setSessionId` removed. Replaced by a custom HTTP Header `X-Scout-Client-Session-Id`.
+
 == Data Object Serializer Provider Implementations Supplemented with Order Annotation
 
 The Scout implementation `ScoutDataObjectSerializerProvider` of serializer/deserializer provider interface `IDataObjectSerializerProvider` was supplemented with an `@Order` annotation using value 4500
