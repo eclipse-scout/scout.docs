@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -21,6 +21,7 @@ export class DisabledStyleLookupCall extends StaticLookupCall<DisabledStyle> {
 
   static DATA = [
     [Widget.DisabledStyle.DEFAULT, 'default'],
-    [Widget.DisabledStyle.READ_ONLY, 'read only']
+    [Widget.DisabledStyle.READ_ONLY, 'read only'],
+    [Widget.DisabledStyle.MASKED, 'masked']
   ];
 }

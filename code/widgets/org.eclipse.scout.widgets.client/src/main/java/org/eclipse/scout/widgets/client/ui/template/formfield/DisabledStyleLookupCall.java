@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -28,6 +28,7 @@ public class DisabledStyleLookupCall extends LocalLookupCall<Integer> {
     List<ILookupRow<Integer>> rows = new ArrayList<>();
     rows.add(new LookupRow<>(IFormField.DISABLED_STYLE_DEFAULT, "default"));
     rows.add(new LookupRow<>(IFormField.DISABLED_STYLE_READ_ONLY, "read only"));
+    rows.add(new LookupRow<>(IFormField.DISABLED_STYLE_MASKED, "masked"));
     return rows;
   }
 }
