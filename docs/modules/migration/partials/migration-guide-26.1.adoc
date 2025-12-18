@@ -190,11 +190,10 @@ By default, the service tunnel uses gzip compression for outgoing and incoming r
 * `scout.app.gzip.inflateBufferSize`: Set a positive number to enable incoming compressed requests (default: 2048), positive number must be set if previous property is set to `true`
 
 For outgoing request compression the `org.glassfish.jersey.message.GZipEncoder` is installed (by the `GzipEncoderContributor`, it handles content-encoding possibly set by `ProcessResourceClient`).
-Incoming request decompression is handled by the `org.eclipse.jetty.server.handler.gzip.GzipHandler`.
-Outgoing response compression is handled (and decided) by the `org.eclipse.jetty.server.handler.gzip.GzipHandler`.
+Incoming request decompression and outgoing response compression is handled by the `org.eclipse.jetty.compression.server.CompressionHandler` with `org.eclipse.jetty.compression.gzip.GzipCompression`.
 The response decompression (if applicable) is handled by the HTTP client `org.apache.hc.client5.http.entity.DecompressingEntity`.
 
-Applications which are deployed using a `web.xml` to a Jetty (legacy) may need to add the `gzip` module and set the `-Djetty.gzip.inflateBufferSize=2048` command line property (as the configuration property `scout.app.gzip.inflateBufferSize`) is not respected.
+Applications which are deployed using a `web.xml` to a Jetty (legacy) may need to add the `compression-gzip` module.
 Also the process servlet and its mapping must be removed from the `web.xml`.
 
 The following configuration properties have been changed:
