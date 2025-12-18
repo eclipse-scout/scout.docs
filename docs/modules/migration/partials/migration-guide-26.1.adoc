@@ -312,3 +312,12 @@ For compatibility reasons the `userId` bind is still automatically bound with th
 
 *Action Required:*
 Review and update your queries to explicitly bind the session variables when executing SQL statements.
+
+== ApiRestApplication: Mark external accessible REST operations
+
+A new `ApiExposedFilter` has been created to distinguish between internal and external (proxied) requests, it is installed automatically by the `ApiApiExposedFeature` for the `ApiRestApplication` (feature is annotated with `@RestApplicationScope(RestApplicationScopes.API)` hence `ExtRestApplication` will ignore it).
+
+All REST operations (methods) available through `ApiRestApplication` (for all resources)
+
+* which are accessed externally using an `AbstractRestProxyRequestHandler` (accessed from scripts run by the browser) should be marked with `@ApiExposed` to keep them accessible (either the resource method or the whole class).
+* which are only used internally between applications (not accessed externally) may optionally be marked with `@ApiExposed(false)`.
