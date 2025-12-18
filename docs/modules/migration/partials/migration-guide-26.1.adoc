@@ -277,3 +277,13 @@ The `SearchOutline` now works for both Scout Classic and Scout JS pages (see xre
 With this the property `searchStatus` was removed as it may no longer be updated manually.
 Pages that need to add information to the `searchStatus` may simply implement `ISearchPage` and update their provided `ISearchState` with information about the result count, whether the result is limited or the search is still pending.
 The `SearchOutline` will collect all these information and build an aggregated `searchStatus`.
+
+== JUnit: Runtime assertion for `PlatformTestRunner`
+
+A new default runtime assertion has been added to the `PlatformTestRunner`.
+
+If a test method exceeds a specific runtime duration it is still completed but fails afterwards (allowing to easier identify unwanted long-running successful tests).
+
+The default runtime limit is set to three minutes.
+The limit may be increased by setting a higher timeout on the `@Test` annotation.
+The limit is disabled completely when a negative timeout is set on the `@Test` annotation.
