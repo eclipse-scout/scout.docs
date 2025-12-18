@@ -147,6 +147,26 @@ public static class HttpServerRunContextFilterContributor implements IServletFil
 Beside the `subject` and other attributes the `HttpServerRunContextFilter` and `HttpRunContextFilter` setup the Correlation ID, as well as the locale.
 Both values are read from the incoming request header, the caller must ensure that the headers `Accept-Language` and `X-Scout-Correlation-Id` are set accordingly.
 
+=== Public API protection
+
+Some API may be used between applications internally but it should not be made publicly available.
+
+To distinguish between exposed and internal API the `@ApiExposed` (short for `@ApiExposed(true)`) annotation should be added to all exposed resource operation methods (or even whole resource classes).
+These methods should handle input with care, e.g. ensure input is in the proper format and ensure caller is authorized and permitted to run the operation.
+
+With the `ApiExposedFilter` restricted operations are handled:
+
+* Request is rejected if it contains a `X-Scout-Proxied-Request` HTTP header (see `ApiExposedFilter#HTTP_HEADER_NAME`).
+* Otherwise: Request is allowed
+
+The previously mentioned HTTP header is added by:
+
+* All `AbstractRestProxyRequestHandler` which may be used to forward requests from one incoming server to another internal server.
+* It can optionally be added by a `Filter` wrapping incoming requests using an `AdditionalHeadersHttpServletRequestWrapper` on the same server.
+
+The `org.eclipse.scout.rt.rest.resource.AbstractApiExposedFeature.ApiApiExposedFeature` is automatically contributed using a `IRestApplicationClassesContributor` and registers the `ApiExposedFilter` for all resource operations with no or an `@ApiExposed(false)` annotation.
+This feature is marked with an `@RestApplicationScope(RestApplicationScopes.API)` annotation which may be used to filter it (e.g. `ApiRestApplication` includes this feature; `ExtRestApplication` filters it; regular `RestApplication` does no filtering at all)
+
 == Dependency Management
 
 Scout REST services based on Jakarta RESTful Web Services using the Jersey library and the Jackson JSON marshaller need a maven dependency to `jersey-media-json-jackson` in the application pom.xml.
