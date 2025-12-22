@@ -42,9 +42,9 @@
     "@eclipse-scout/cli": ">=26.1.0-snapshot <26.1.0",
     "@eclipse-scout/releng": "^25.1.0",
     "@eclipse-scout/tsconfig": ">=26.1.0-snapshot <26.1.0",
-    "@types/jquery": "3.5.32",
-    "jasmine-core": "5.5.0",
-    "@types/jasmine": "5.1.5",
+    "@types/jquery": "3.5.33",
+    "jasmine-core": "5.13.0",
+    "@types/jasmine": "5.1.13",
     "@types/jasmine-jquery": "1.5.37",
     "karma": "6.4.4"
   },
