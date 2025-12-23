@@ -324,3 +324,33 @@ All REST operations (methods) available through `ApiRestApplication` (for all re
 
 * which are accessed externally using an `AbstractRestProxyRequestHandler` (accessed from scripts run by the browser) should be marked with `@ApiExposed` to keep them accessible (either the resource method or the whole class).
 * which are only used internally between applications (not accessed externally) may optionally be marked with `@ApiExposed(false)`.
+
+== ESLint Update
+
+Scout updated to the latest version of https://eslint.org/[ESLint].
+Because ESLint changed their config file format, you need to adjust your ESLint files.
+
+. Rename `.eslintrc.js` to `eslint.config.mjs`
+. Rewrite the content according to the Scout archetype
+. Add the exclusions from `.eslintignore` and remove that file (`**/node_modules` is ignored by default and doesn't need to be added)
+
+.Example eslint.config.mjs
+[source,js]
+----
+import {defineConfig, globalIgnores} from 'eslint/config';
+import scoutConfig from '@eclipse-scout/eslint-config';
+
+export default defineConfig([
+  scoutConfig,
+  globalIgnores([
+    '.git',
+    '.idea',
+    '*/dist',
+    '*/target',
+    '*/src/main/resources',
+    '*/src/test/resources',
+    '*/src/main/java',
+    '*/src/test/java'
+  ])
+]);
+----
