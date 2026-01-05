@@ -354,3 +354,30 @@ export default defineConfig([
   ])
 ]);
 ----
+
+=== ESLint Rule Deprecation
+
+ESlint deprecated their formatting rules and moved them to a plugin called `@stylistic`.
+Scout now uses this plugin, so the existing rules still apply.
+
+This impacts you if you have a customized ruleset in `eslint.config.mjs` or if you have `eslint-disable` or `eslint-disable-next-line` directives in your code.
+In either case, just prefix the deprecated rule names with `@stylistic`.
+The easiest way to find these issues is to run `eslint .` in your workspace.
+
+Example migration:
+
+.Old
+[source,js]
+----
+/* eslint-disable brace-style */
+// eslint-disable-next-line max-len
+----
+
+.New
+[source,js]
+----
+/* eslint-disable @stylistic/brace-style */
+// eslint-disable-next-line @stylistic/max-len
+----
+
+For more details about the deprecation please consult the official https://eslint.org/blog/2023/10/deprecating-formatting-rules/[ESLint announcement].

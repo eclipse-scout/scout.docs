@@ -310,7 +310,7 @@ To do that, just add the following to your `eslint.config.mjs`:
 .Disabling the linebreak rule
 ----
   rules: {
-    'linebreak-style': 'off'
+    '@stylistic/linebreak-style': 'off'
   }
 ----
 
