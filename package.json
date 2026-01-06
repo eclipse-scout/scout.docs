@@ -1,11 +1,11 @@
 {
   "scripts": {
-    "build": "npx antora docs/playbooks/local-eclipse-scout-playbook.yml && start docs/playbooks/build/site/index.html",
+    "build": "pnpx antora docs/playbooks/local-eclipse-scout-playbook.yml && start docs/playbooks/build/site/index.html",
     "build-head": "npx antora docs/playbooks/head-eclipse-scout-playbook.yml && start docs/playbooks/build/site/index.html"
   },
   "dependencies": {
-    "@antora/cli": "3.1.10",
+    "@antora/cli": "3.1.14",
     "@antora/lunr-extension": "1.0.0-alpha.8",
-    "@antora/site-generator": "3.1.10"
+    "@antora/site-generator": "3.1.14"
   }
 }
