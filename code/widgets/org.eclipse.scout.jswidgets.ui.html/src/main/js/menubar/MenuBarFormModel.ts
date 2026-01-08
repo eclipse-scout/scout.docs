@@ -309,6 +309,10 @@ export type MenuBarFormWidgetMap = {
   'SubSubSubMenu1': Menu;
   'SubSubSubMenuMenu2': Menu;
   'SubSubSubSubMenu1': Menu;
+  'ToggleMenu': Menu;
+  'DisabledMenu': Menu;
+  'DisabledSelectedMenu': Menu;
+  'DisabledHierarchicalMenu': Menu;
   'FormMenu': FormMenu;
   'ComboMenu': ComboMenu;
   'ComboMenuChild1': Menu;

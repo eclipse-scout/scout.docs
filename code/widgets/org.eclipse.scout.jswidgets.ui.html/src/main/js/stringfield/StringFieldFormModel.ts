@@ -232,10 +232,10 @@ export type StringFieldFormWidgetMap = {
   'HasActionField': CheckBoxField;
   'InputMaskedField': CheckBoxField;
   'MultilineTextField': CheckBoxField;
-  'WrapTextField': CheckBoxField;
   'SpellCheckEnabledField': CheckBoxField;
   'TrimTextField': CheckBoxField;
   'UpdateDisplayTextOnModifyField': CheckBoxField;
+  'WrapTextField': CheckBoxField;
   'FormatField': SmartField<any>;
   'MaxLengthField': NumberField;
   'SelectionTrackingEnabledField': CheckBoxField;
