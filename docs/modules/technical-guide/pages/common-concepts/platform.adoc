@@ -451,6 +451,11 @@ Allows to override the username returned by the DevUsernameProvider.
 +
 Data type: String
 
+`org.eclipse.scout.rt.platform.management.EnableListenerListProfiling` ::
+Defines if all IListenerListWithManagement classes are monitored and exposed via JMX beans. Enable this feature to detect memory issues or possible leaks, this may result in a global performance decrease therefore this feature is disabled by default.
++
+Data type: Boolean
+
 `scout.app.autoCreateSelfSignedCertificate` ::
 Specifies the X-500 name to use in the self-signed certificate when starting Scout application in development mode with TLS enabled.
 +
@@ -473,13 +478,78 @@ Specifies whether the application uses a console input handler or not. The defau
 +
 Data type: Boolean
 
+`scout.app.contextHandlerExtendedResourceLookup` ::
+Specifies whether the application context handler should also lookup resources w/o base resource. The default value is false.
++
+Data type: Boolean
+
 `scout.app.contextPath` ::
 The context path under which the application can be reached. The default value is / (i.e. root path).
 +
 Data type: String
 
+`scout.app.gzip.enabled` ::
+Specifies whether org.eclipse.jetty.compression.server.CompressionHandler is used. Default value is true.
++
+Data type: Boolean
+
+`scout.app.gzip.excluded.inflate.paths` ::
+Excluded inflate paths for org.eclipse.jetty.compression.server.CompressionHandler (respected only if at least one is set otherwise Jetty default is used).
++
+Data type: List
+
+`scout.app.gzip.excluded.methods` ::
+Excluded methods for org.eclipse.jetty.compression.server.CompressionHandler (respected only if at least one is set otherwise Jetty default is used).
++
+Data type: List
+
+`scout.app.gzip.excluded.mimeTypes` ::
+Excluded MIME types for org.eclipse.jetty.compression.server.CompressionHandler (respected only if at least one is set otherwise Jetty default is used).
++
+Data type: List
+
+`scout.app.gzip.excluded.paths` ::
+Excluded paths for org.eclipse.jetty.compression.server.CompressionHandler (respected only if at least one is set otherwise Jetty default is used).
++
+Data type: List
+
+`scout.app.gzip.included.inflate.paths` ::
+Included inflate paths for org.eclipse.jetty.compression.server.CompressionHandler (respected only if at least one is set otherwise Jetty default is used).
++
+Data type: List
+
+`scout.app.gzip.included.methods` ::
+Included methods for org.eclipse.jetty.compression.server.CompressionHandler (respected only if at least one is set otherwise Jetty default is used).
++
+Data type: List
+
+`scout.app.gzip.included.mimeTypes` ::
+Included MIME types for org.eclipse.jetty.compression.server.CompressionHandler (respected only if at least one is set otherwise Jetty default is used).
++
+Data type: List
+
+`scout.app.gzip.included.paths` ::
+Included paths for org.eclipse.jetty.compression.server.CompressionHandler (respected only if at least one is set otherwise Jetty default is used).
++
+Data type: List
+
+`scout.app.gzip.inflateBufferSize` ::
+Inflater buffer size for org.eclipse.jetty.compression.server.CompressionHandler to enable compressed requests. Default value: 2048
++
+Data type: Integer >= 0
+
+`scout.app.gzip.minSize` ::
+Minimum size to trigger compression for org.eclipse.jetty.compression.server.CompressionHandler. If not set Jetty default value will be used.
++
+Data type: Integer >= 0
+
+`scout.app.gzip.syncFlush` ::
+Enables sync flush for org.eclipse.jetty.compression.server.CompressionHandler. Default value is true.
++
+Data type: Boolean
+
 `scout.app.http.request.maxHeaderSize` ::
-Specifies the maximum allowed size in bytes for a HTTP request header. The default value is 8 KB (see org.eclipse.jetty.server.HttpConfiguration).
+Specifies the maximum allowed size in bytes for a HTTP request header. The default value is 72 KB.
 +
 Data type: Integer
 
@@ -492,11 +562,6 @@ Data type: Boolean
 The session timeout in seconds to use if HTTP sessions are enabled. The default value is 300 seconds (5 minutes) for non-development mode, 3600 seconds (60 minutes) for development mode.
 +
 Data type: Integer >= 0
-
-`scout.app.gzip.inflateBufferSize` ::
-Set a positive number to enable incoming compressed requests (default: 2048), positive number must be set if `scout.servicetunnel.compress` property is set to `true`
-+
-Data type: Integer
 
 `scout.app.jvmShutdownHookEnabled` ::
 Specifies if the JVM shutdown hook is registered. The default value is true.
@@ -533,13 +598,18 @@ Specifies whether the HTTP session cookie is HTTP only or not. The default value
 +
 Data type: Boolean
 
+`scout.app.sessionCookieConfigPartitioned` ::
+Specifies whether the HTTP session cookie created by the web application will be marked as partitioned. The default value is false.
++
+Data type: Boolean
+
 `scout.app.sessionCookieConfigSameSite` ::
 Specifies the SameSite attribute of the HTTP session cookie. Valid values are: `None`, `Strict` or `Lax`. Default value is `Lax`.
 +
 Data type: SameSite
 
 `scout.app.sessionCookieConfigSecure` ::
-Specifies whether any session tracking cookies created by the web application will be marked as secure. If true, the session tracking cookie will be marked as secure even if the request initiated the corresponding session using plain HTTP instead of HTTPS (e.g. Scout application behind reverse proxy terminating SSL). If false, the session tracking cookie will only be marked as secure if the request initiated the corresponding session is secure (using HTTPS). The default value is true for non-development mode.
+Specifies whether the HTTP session cookie created by the web application will be marked as secure. If true, the HTTP session cookie will be marked as secure even if the request initiated the corresponding session uses plain HTTP instead of HTTPS (e.g. Scout application behind reverse proxy terminating TLS). If false, the HTTP session cookie will not be marked as secure even if the request initiated the corresponding session is secure (using HTTPS). By default the cookie is secure for non-development code (property `scout.devMode` is false) or if the value of the property `scout.app.useTls` is true.
 +
 Data type: Boolean
 
@@ -619,6 +689,13 @@ By default this property is null.
 +
 Data type: String
 
+`scout.client.defaultUiCallbackTimeoutMillis` ::
+Default maximum time in milliseconds to wait for the browser to respond to a UI callback request.
++
+The default value is 15 seconds.
++
+Data type: Long >= 0
+
 `scout.client.jobCompletionDelayOnSessionShutdown` ::
 Specifies the maximal time (in seconds) to wait until running jobs are cancelled on session shutdown.
 +
@@ -649,7 +726,7 @@ User data area (e.g. in the user home) to store user preferences. If nothing is 
 Data type: String
 
 `scout.clientnotification.chunkSize` ::
-The maximum number of client notifications that are consumed at once. The default is 30.
+The maximum number of client notifications that are consumed at once. The default is 100.
 +
 Data type: Integer >= 0
 
@@ -664,7 +741,7 @@ The maximum amount of time in milliseconds between two client notification polle
 Data type: Long >= 0
 
 `scout.clientnotification.nodeQueueCapacity` ::
-Capacity of the client notification queue. If maximum capacity is reached, notification messages are dropped. The default value is 200.
+Capacity of the client notification queue. If maximum capacity is reached, notification messages are dropped. The default value is 10000.
 +
 Data type: Integer >= 0
 
@@ -685,7 +762,7 @@ Data type: Integer >= 0
 `scout.clustersync.user` ::
 Technical subject under which received cluster sync notifications are executed. The default value is `system`.
 +
-Data type: String
+Data type: Subject name as String
 
 `scout.createTunnelToServerBeans` ::
 Specifies if the Scout platform should create proxy beans for interfaces annotated with `TunnelToServer`. Calls to beans of such types are then tunneled to the Scout backend.
@@ -695,16 +772,38 @@ By default this property is enabled if the property `scout.backendUrl` is set.
 Data type: Boolean
 
 `scout.cspDirective` ::
-Configures individual Content Security Policy (CSP) directives.
+Configures Content Security Policy (CSP Version 2) directives. The value must be provided as a Map.
 +
-See https://www.w3.org/TR/CSP2/ and the Bean `org.eclipse.scout.rt.security.csp.ContentSecurityPolicy` for more details.
+See https://www.w3.org/TR/CSP2/ or https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP for available directives and their meaning.
 +
-The value must be provided as a Map.
+The values of this property replace the Scout defaults which are configured in the bean `org.eclipse.scout.rt.security.csp.ConfigurableContentSecurityPolicy`.
++
+If the Scout application uses different html entry points, the CSP can configured individually: for a specific entry point using its name as suffix in the map key: scout.cspDirective[script-src#entrypoint.html]. Directives without entrypoint suffix are used for all entry points.
++
+To append to configured defaults use the config property `scout.cspDirectiveAppend` instead.
 +
 Example:
 +
 [listing]
-scout.cspDirective[img-src]=`self` data: https://media.example.com
+scout.cspDirective[img-src]=`self` https://media.example.com
++
+Data type: Map
+
+`scout.cspDirectiveAppend` ::
+Configures additional Content Security Policy (CSP Version 2) directive expressions. The value must be provided as a Map.
++
+See https://www.w3.org/TR/CSP2/ or https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP for available directives and their meaning.
++
+The values of this property are appended to the already existing defaults (e.g. as configured in the bean `org.eclipse.scout.rt.security.csp.ConfigurableContentSecurityPolicy` or in a config.properties file).
++
+If the Scout application uses different html entry points, the CSP can configured individually: for a specific entry point using its name as suffix in the map key: scout.cspDirectiveAppend[script-src#entrypoint.html]. Directives without entrypoint suffix are used for all entry points.
++
+This allows to e.g. specify your default properties in the config.properties file using property `scout.cspDirective` and afterward extending it depending on a specific environment with an environment variable using this property.
++
+Example:
++
+[listing]
+scout.cspDirectiveAppend[img-src]=https://additional.host.org
 +
 Data type: Map
 
@@ -717,6 +816,36 @@ Data type: Boolean
 A list of regex strings. If the pathInfo of the request matches one of these strings the csp headers won`t be set. This property only has an effect if csp is enabled, see `scout.cspEnabled`.
 +
 Data type: List
+
+`scout.dataobject.jackson.streamReadConstraints` ::
+Jackson constraints to use for JSON reading.
++
+Map property with the keys as follows:
++
+- maxNestingDepth: Sets the maximum nesting depth. The depth is a count of objects and arrays that have not been closed, `{` and `[` respectively. (default: 1000)
++
+- maxDocumentLength: Sets the maximum allowed document length (for positive values over 0) or indicate that any length is acceptable (0 or negative number). The length is in input units of the input source, that is, in bytes or chars. (default: -1)
++
+- maxNameLength: Sets the maximum name length (in chars or bytes, depending on input context). (default: 50000)
++
+- maxNumberLength: Sets the maximum number length (in chars or bytes, depending on input context). (default: 1000)
++
+- maxStringLength: Sets the maximum string length for a single attribute value of type text (in chars or bytes, depending on input context). (default: 100000000)
++
+
++
+Data type: StreamReadConstraints
+
+`scout.dataobject.jackson.streamWriteConstraints` ::
+Jackson constraints to use for JSON writing.
++
+Map property with the keys as follows:
++
+- maxNestingDepth: Sets the maximum nesting depth. The depth is a count of objects and arrays that have not been closed, `{` and `[` respectively. (default: 1000)
++
+
++
+Data type: StreamWriteConstraints
 
 `scout.dev.texts.fileWatcherEnabled` ::
 Specifies if the a file watcher should be installed for every nls resource bundle to invalidate the texts cache if a file changed. This property will only have an effect if platform runs in development mode.
@@ -768,10 +897,38 @@ By default no URLs are set.
 +
 Data type: List
 
+`scout.http.async.forceHttp2.maxConnectionsPerRoute` ::
+Specifies the default maximum connections per route property for the default async force-http2 HTTP client.
++
+Default value is 2048.
++
+Data type: Integer
+
+`scout.http.async.forceHttp2.maxConnectionsTotal` ::
+Specifies the default total maximum connections property for the default async force-http2 HTTP client.
++
+The default value is 2048.
++
+Data type: Integer
+
 `scout.http.connectionTtl` ::
 Specifies the maximum lifetime in milliseconds for kept alive connections of the Apache HTTP client. The default value is 1 hour.
 +
 Data type: Integer
+
+`scout.http.evictExpiredConnections` ::
+Enable eviction of expired connections.
++
+The default value is enabled (= true)
++
+Data type: Boolean
+
+`scout.http.evictIdleConnectionsTimeout` ::
+Enable eviction of idle connections with the specified number in seconds (use zero to disable).
++
+The default value is 1 minute
++
+Data type: Integer >= 0
 
 `scout.http.ignoreProxyPatterns` ::
 Configure the proxy ignore list for the ConfigurableProxySelector. If an URI matches the pattern no proxy connection is used.
@@ -803,19 +960,30 @@ Specifies the total maximum connections of the Apache HTTP client. The default v
 +
 Data type: Integer
 
+`scout.http.proxy.async.clientManager` ::
+Default client manager for HttpProxy bean; users of this bean may choose a different client manager.
++
+Data type: Fully qualified class name. The class must have `org.eclipse.scout.rt.shared.http.async.AbstractAsyncHttpClientManager` in its super hierarchy.
+
+`scout.http.proxy.async.timeout` ::
+Timeout for async servlet contexts.
++
+Data type: Long
+
 `scout.http.proxyPatterns` ::
 Configure proxies for the `ConfigurableProxySelector`. If an URI matches a pattern the corresponding proxy will be used.
 +
 By default no proxy is used.
 +
-The property value is of the format REGEXP_FOR_URI=PROXY_TYPE=PROXY_HOST:PROXY_PORT
+The property value is of the format REGEXP_FOR_URI=PROXY_HOST:PROXY_PORT
++
+Alternatively also a proxy type can be defined (must be a type of the enum java.net.Proxy$Type) using this format REGEXP_FOR_URI=PROXY_TYPE=PROXY_HOST:PROXY_PORT
 +
 Example:
 +
 [listing]
 scout.http.proxyPatterns[0]=.*\.example.com(:\d+)?=127.0.0.1:8888
-scout.http.proxyPatterns[1]=.*\.example.org(:\d+)?=proxy.example.com:8080
-scout.http.proxyPatterns[2]=.*\.example.net(:\d+)?=SOCKS=proxy.example.com:1080
+scout.http.proxyPatterns[1]=.*\.example.org(:\d+)?=proxy.example.com:8080scout.http.proxyPatterns[2]=.*\.example.net(:\d+)?=SOCKS=proxy.example.com:1080
 +
 Data type: List
 
@@ -1046,6 +1214,18 @@ Specifies the cluster node name. If not specified a default id is computed.
 +
 Data type: String
 
+`scout.otel.asyncObservableConcurrentJobCount` ::
+The number of concurrent jobs that are executing observations asynchronously. The default value is 5.
++
+Note: This value should be smaller than the number of max DB connections and there should be a fair amount of DB connections available for synchronous requests.
++
+Data type: Integer >= 0
+
+`scout.otel.asyncObservationInterval` ::
+Minimum interval (in seconds) at which the observations are executed asynchronously.
++
+Data type: Integer >= 0
+
 `scout.otel.defaultExporter` ::
 List of exporters to be used for traces, metrics and logs, separated by commas. Default is `otlp` or `none` in dev mode. Use this property to override the default.
 +
@@ -1055,6 +1235,21 @@ Data type: String
 Property to specify if the application is using the Scout OpenTelemetry initializer. Default is false. Set to false if you are using the OpenTelemetry Java Agent.
 +
 Data type: Boolean
+
+`scout.otel.span.attribute.processor.enabled` ::
+Property to specify if org.eclipse.scout.rt.shared.opentelemetry.OpenTelemetrySpanAttributeProcessor should add span attributes. Default is false.
++
+Data type: Boolean
+
+`scout.otel.tracing.enabled` ::
+Property to specify if the application is using the Scout OpenTelemetry Tracing. Default is false.
++
+Data type: Boolean
+
+`scout.passwordPolicy.minLength` ::
+Minimum length for passwords checked by org.eclipse.scout.rt.platform.security.PasswordPolicy
++
+Data type: Integer >= 0
 
 `scout.platform.version` ::
 Version of the scout platform. Used e.g. in the info form. The default value is bound to the implementation version in the manifest file.
@@ -1071,12 +1266,82 @@ Absolute path to the root directory of the `RemoteFileService`. The default valu
 +
 Data type: String
 
+`scout.rest.api.exposed.enforce` ::
+Set to true to reject non api-exposed operations with a not found error (404), no warning will be logged in this case (just for development mode); if set to false only a warning will be logged but requests are not rejected (default value: true)
++
+Data type: Boolean
+
+`scout.rest.client.http.connectionKeepAlive` ::
+Specifies the maximum life time in milliseconds for kept alive connections of the REST HTTP client. The default value is 30 minutes.
++
+Data type: Long
+
+`scout.rest.client.http.connectionTimeToLive` ::
+Specifies the maximum time to live of a HTTP connection within the HTTP connection pool. May be zero if the connection does not have an expiry deadline. The default value is 30 minutes.
++
+Data type: Long
+
+`scout.rest.client.http.forceEncodeUriForRequest` ::
+Specifies whether the URI should be re-encoded to force US-ASCII encoding (strict RFC 2396 compliance), default: true
++
+Data type: Boolean
+
+`scout.rest.client.http.maxConnectionsPerRoute` ::
+Configuration property to define the default maximum connections per route of the Apache HTTP client. The default value is 32
++
+Data type: Integer
+
+`scout.rest.client.http.maxConnectionsTotal` ::
+Specifies the total maximum connections of the Apache HTTP client. The default value is 128
++
+Data type: Integer
+
+`scout.rest.client.http.validateAfterInactivity` ::
+Defines period of inactivity in milliseconds after which persistent connections must be re-validated prior to being leased to the consumer. Non-positive value passed to this method disables connection validation. This check helps detect connections that have become stale (half-closed) while kept inactive in the pool. The default value is 1
++
+Data type: Integer
+
 `scout.rest.ensureHttpHeaderConnectionClose` ::
 Ensures that the header `Connection: close` is added to every REST HTTP requests unless the header `Connection` is already set. As a result, TCP Connections are not reused by consecutive REST calls.The default value is true
 +
 This solves several rather rare issues that occurred in the HTTP client implementation when a connection was closed by the server side while it was being used by the client side for the next request.
 +
 Data type: Boolean
+
+`scout.selenium.driver` ::
+Driver to use (`chrome`, `edge`, `firefox`)
++
+Data type: String
+
+`scout.selenium.driverConfig` ::
+Possibility to set arbitrary selenium driver properties
++
+Data type: Map
+
+`scout.selenium.driverRemoteServerUrl` ::
+If remote server URL is set, then the driver connects to selenium driver instance usually deployed with docker.
++
+Data type: String
+
+`scout.selenium.screenshotOnFailure` ::
+If set, then a screenshot is taken in case of a failed test
++
+Data type: Boolean
+
+`scout.selenium.simulateSlowNetwork` ::
+If set, unit tests simulate slow network
++
+Data type: Boolean
+
+`scout.selenium.webAppUrl` ::
+URL to web application under test
++
+Data type: String
+
+`scout.selenium.webQueryParams` ::
+Query params appended to web application under test
++
+Data type: String
 
 `scout.serial.blacklistAppend` ::
 Specifies a blacklist regex for fully qualified class names that are blocked in object serialization.
@@ -1148,7 +1413,7 @@ Socket read timeout value in milliseconds.
 Data type: Integer >= 0
 
 `scout.sql.directJdbcConnection` ::
-If true a direct JDBC connection is created. Otherwise a JNDI connection is used. The default value is true.
+If true a direct JDBC connection is created. Otherwise, a JNDI connection is used. The default value is true.
 +
 Data type: Boolean
 
@@ -1285,6 +1550,23 @@ By default this property is set to 1 hour.
 +
 Data type: Long >= 0
 
+`scout.ui.servletMultipartConfig` ::
+Multipart configuration for inbound servlet.
++
+Map property with the keys as follows:
++
+- location: the directory location where files will be stored temporarily (default: temp directory)
++
+- maxFileSize: the maximum size allowed in MB for uploaded files, -1 means unlimited (default: -1 MB)
++
+- maxRequestSize: the maximum size allowed in MB for multipart/form-data requests, -1 means unlimited (default: -1 MB)
++
+- fileSizeThreshold: the size threshold in MB after which files will written to disk (default: 20 MB)
++
+
++
+Data type: MultipartConfigElement
+
 `scout.ui.sessionstore.housekeepingDelay` ::
 Number of seconds before the housekeeping job starts after a UI session has been unregistered from the store.
 +
@@ -1307,13 +1589,9 @@ Configures in milliseconds how long the notification has to be kept in the regis
 +
 Data type: Long
 
-`scout.uinotification.waitTimeout` ::
-Configures in milliseconds how long the request should listen for a new notification it is interested in is put into the registry.If set to 0, the currently available list of notifications will be returned immediately.Default is 1 minute.
-+
-Data type: Long
-
 `scout.uinotification.handler.throughput` ::
 Specifies how many requests of browser side UI notification handlers can be processed per second.
++
 The value is used to delay requests from the UI notification handlers to the server.
 +
 Use a high value for fast servers. Then the refresh on the browser will be very soon, but peak load on the server is increased.
@@ -1324,6 +1602,11 @@ The default is 30 requests per second.
 +
 Data type: Integer >= 0
 
+`scout.uinotification.waitTimeout` ::
+Configures in milliseconds how long the request should listen for a new notification it is interested in is put into the registry.If set to 0, the currently available list of notifications will be returned immediately.Default is 1 minute.
++
+Data type: Long
+
 [[scout.urlHints.enabled]]
 `scout.urlHints.enabled` ::
 Enable or disable changing UrlHints using URL parameters in the browser address line.
@@ -1331,7 +1614,9 @@ Enable or disable changing UrlHints using URL parameters in the browser address 
 By default has the same value as the config property `scout.devMode` meaning it is by default only enabled in development mode.
 +
 Data type: Boolean
+
 `scout.util.defaultDecimalSupportProvider` ::
 Specifies the default DefaultDecimalSupportProvider to use. By default the `DefaultDecimalSupportProvider` is used.
 +
 Data type: Fully qualified class name. The class must have `org.eclipse.scout.rt.platform.util.DECIMAL$DefaultDecimalSupportProvider` in its super hierarchy.
+
