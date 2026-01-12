@@ -172,7 +172,7 @@ The own (proprietary) logic was removed and standard REST communication will be 
 
 Most applications should not be affected by these changes as for the outside the service tunnel should still function the same way it did previously (most changes are under the hood).
 
-However for further understanding a few changes included in this change are described here:
+However, for further understanding a few changes included in this change are described here:
 
 The service tunnel client (e.g. `HttpServiceTunnel`) has been moved from `org.eclipse.scout.rt.shared` to `org.eclipse scout.rt.client`; in the past it would have been possible to use the service tunnel for communication between backend servers, this is not possible anymore.
 As the class now resides in the client the `ClientHttpServiceTunnel` has been integrated into the `HttpServiceTunnel`.
@@ -197,7 +197,7 @@ Incoming request decompression and outgoing response compression is handled by t
 The response decompression (if applicable) is handled by the HTTP client `org.apache.hc.client5.http.entity.DecompressingEntity`.
 
 Applications which are deployed using a `web.xml` to a Jetty (legacy) may need to add the `compression-gzip` module.
-Also the process servlet and its mapping must be removed from the `web.xml`.
+Also, the process servlet and its mapping must be removed from the `web.xml`.
 
 The following configuration properties have been changed:
 
@@ -291,7 +291,7 @@ The `SearchOutline` will collect all these information and build an aggregated `
 
 A new default runtime assertion has been added to the `PlatformTestRunner`.
 
-If a test method exceeds a specific runtime duration it is still completed but fails afterwards (allowing to easier identify unwanted long-running successful tests).
+If a test method exceeds a specific runtime duration it is still completed but fails afterward (allowing to easier identify unwanted long-running successful tests).
 
 The default runtime limit is set to three minutes.
 The limit may be increased by setting a higher timeout on the `@Test` annotation.
@@ -381,3 +381,17 @@ Example migration:
 ----
 
 For more details about the deprecation please consult the official https://eslint.org/blog/2023/10/deprecating-formatting-rules/[ESLint announcement].
+
+== HTTP Cache Control
+
+In the past the following call was used to disable caching for an HTTP response: `HttpCacheControl.checkAndSetCacheHeaders(req, resp, null)`.
+This can now be changed to the more readable variant as the underlying method is public now: `HttpCacheControl.disableCaching(resp)`.
+
+The new function `BEANS.get(HttpCacheControl.class).disableCaching(response)` can also be used to replace the old pattern of manually setting the HTTP response headers:
+
+[source,java]
+----
+response.setHeader("Cache-Control", "no-cache");
+response.setHeader("Pragma", "no-cache");
+response.setDateHeader("Expires", 0);
+----
