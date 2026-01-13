@@ -29,12 +29,6 @@ Coming from an older Scout version? Check out the xref:migration:migration-guide
 //
 // * <<New Feature (since 26.1.xyz)>>
 
-== New Build & Runtime Requirements
-
-Scout 26.1 requires at least the following:
-
-* Build and runtime of Scout 26.1 require Java 25. The compiler target level is set to Java 21.
-
 [[styles-css-class]]
 == Utility to Modify CSS Classes (Scout JS)
 
