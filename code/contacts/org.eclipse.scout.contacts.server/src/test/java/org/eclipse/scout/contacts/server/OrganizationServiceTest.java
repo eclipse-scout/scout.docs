@@ -17,7 +17,6 @@ import org.eclipse.scout.contacts.server.sql.DerbySqlService;
 import org.eclipse.scout.contacts.shared.organization.OrganizationFormData;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.testing.platform.runner.RunWithSubject;
-import org.eclipse.scout.rt.testing.server.runner.RunWithServerSession;
 import org.eclipse.scout.rt.testing.server.runner.ServerTestRunner;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -29,7 +28,7 @@ import org.junit.runner.RunWith;
  * Tests for {@link OrganizationService}
  */
 @RunWith(ServerTestRunner.class)
-@RunWithServerSession(ServerSession.class)
+//@RunWithServerSession(ServerSession.class) // FIXME PBZ SESSION cleanup
 @RunWithSubject("default")
 public class OrganizationServiceTest {
 
