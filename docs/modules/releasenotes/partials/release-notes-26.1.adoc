@@ -208,4 +208,4 @@ The https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP[Content Securit
 It now makes use of nonces for JavaScript which may prevent cross-site scripting attacks.
 
 Furthermore, lots of CSP related features are more flexible now and provide new possibilities to harden your CSPs.
-Please see the xref:migration-guide.adoc#csp-hardening[Hardening the Content Security Policy] migration guide for migration instructions and a list of new features.
+Please see the xref:migration:migration-guide.adoc#csp-hardening[Hardening the Content Security Policy] migration guide for migration instructions and a list of new features.
