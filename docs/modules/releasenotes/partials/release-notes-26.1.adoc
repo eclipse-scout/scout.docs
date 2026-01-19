@@ -54,11 +54,11 @@ It can now use Scout Classic pages as its child pages.
 The child pages are created by the Java implementation of the JsPage and triggered by its equivalent in Scout JS.
 For more information see xref:howtos:scout-classic/js-page-how-to.adoc#how-to-js-page[How-To].
 
-== User preferences moved from Shared to Client
+== User Preferences Moved from Shared to Client
 
 As part of the move toward a stateless server session, `IPreferences`, `IUserPreferencesService`, `IUserPreferencesStorageService`, `IPreferenceChangeListener` and their corresponding implementations have been moved from shared to client.
 
-== Simple tab box with vertical tabs
+== Simple Tab Box with Vertical Tabs
 
 The `SimpleTabBox` has been improved.
 The tabs can now be placed on all four sides of the box by adjusting the attribute `position` on the `SimpleTabArea` accordingly.
@@ -84,7 +84,7 @@ The following properties have been added to the Widget class and are therefore a
 - preventInitialFocus: set to true if the widget must not be considered as initial focus candidate, e.g. when opening a form.
 
 [[search-outline]]
-== SearchOutline (Scout JS and Scout Classic)
+== Search Outline (Scout JS and Scout Classic)
 
 The `SearchOutline` now works for both Scout Classic and Scout JS pages.
 Executing a search in Scout Classic is still done by overwriting `execSearch(String)`. In addition `execResetSearch()` may be overwritten to perform an action when the search is reset.
