@@ -938,7 +938,7 @@ By default no proxy is configured.
 Example:
 +
 [listing]
-scout.http.ignoreProxyPatterns[0]=https?://localhost(?::\d+)?(?:/.*)?
+scout.http.ignoreProxyPatterns[0]=https?://localhost(?::\\d+)?(?:/.*)?
 scout.http.ignoreProxyPatterns[1]=...
 +
 Data type: List
@@ -982,8 +982,9 @@ Alternatively also a proxy type can be defined (must be a type of the enum java.
 Example:
 +
 [listing]
-scout.http.proxyPatterns[0]=.*\.example.com(:\d+)?=127.0.0.1:8888
-scout.http.proxyPatterns[1]=.*\.example.org(:\d+)?=proxy.example.com:8080scout.http.proxyPatterns[2]=.*\.example.net(:\d+)?=SOCKS=proxy.example.com:1080
+scout.http.proxyPatterns[0]=.*\\.example\\.com(:\\d+)?=127.0.0.1:8888
+scout.http.proxyPatterns[1]=.*\\.example\\.org(:\\d+)?=proxy.example.com:8080
+scout.http.proxyPatterns[2]=.*\\.example\\.net(:\\d+)?=SOCKS=proxy.example.com:1080
 +
 Data type: List
 
