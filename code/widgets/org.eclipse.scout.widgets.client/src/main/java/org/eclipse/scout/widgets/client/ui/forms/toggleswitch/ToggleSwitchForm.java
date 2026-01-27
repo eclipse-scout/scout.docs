@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -251,12 +251,8 @@ public class ToggleSwitchForm extends AbstractForm implements IPageForm {
               setChecked(getToggleSwitch().isActivated());
               getToggleSwitch().addPropertyChangeListener(IToggleSwitch.PROP_ACTIVATED, event -> {
                 boolean activated = BooleanUtility.nvl((Boolean) event.getNewValue());
-                try {
-                  setValueChangeTriggerEnabled(false);
+                if (activated != isChecked()) {
                   setChecked(activated);
-                }
-                finally {
-                  setValueChangeTriggerEnabled(true);
                 }
               });
             }
