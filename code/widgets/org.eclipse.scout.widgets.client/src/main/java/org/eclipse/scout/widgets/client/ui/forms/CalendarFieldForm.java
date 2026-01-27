@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -308,6 +308,7 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
           }
         }
 
+        @Order(30)
         public class ExternalItemProvider extends AbstractCalendarItemProvider {
 
           @Override
@@ -410,7 +411,7 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
         Collections.shuffle(CALENDAR_COLORS);
         calendars.add(BEANS.get(CalendarResourceDo.class)
             .withName("New calendar #" + calendars.size())
-            .withCssClass(CALENDAR_COLORS.get(0)));
+            .withCssClass(CALENDAR_COLORS.getFirst()));
         getCalendarField().getCalendar().setResources(calendars);
       }
     }
