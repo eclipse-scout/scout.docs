@@ -182,8 +182,8 @@ export class SampleTableCustomizerDo extends BaseDoEntity implements ITableCusto
 export class SampleCustomColumnDo extends BaseDoEntity implements IColumnConfigDo {
   columnId: string;
   columnType: SampleCustomColumnType;
-  name?: string;
-  width?: number;
+  name: string;
+  width: number;
 }
 
 export type SampleCustomColumnType = 'string' | 'number' | 'boolean' | 'date';
