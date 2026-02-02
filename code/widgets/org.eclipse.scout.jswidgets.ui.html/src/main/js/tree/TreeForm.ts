@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {Form, FormModel, icons, InitModelOf, models, Tree, TreeNodeModel} from '@eclipse-scout/core';
+import {ajax, Form, FormModel, icons, InitModelOf, models, Tree, TreeNodeModel} from '@eclipse-scout/core';
 import TreeFormModel from './TreeFormModel';
 import {TreeFormWidgetMap} from '../index';
 
@@ -34,6 +34,7 @@ export class TreeForm extends Form {
     this.tree = this.widget('Tree');
     this.widget('AddNodeMenu').on('action', this._onAddNodeMenuAction.bind(this));
     this.widget('AddChildNodeMenu').on('action', this._onAddChildNodeMenuAction.bind(this));
+    this.widget('AddManyNodes').on('action', this._addManyNodes.bind(this));
     this.widget('DeleteNodeMenu').on('action', this._onDeleteNodeMenuAction.bind(this));
     this.widget('DeleteAllNodesMenu').on('action', this._onDeleteAllNodesMenuAction.bind(this));
     this.widget('DeleteAllChildNodesMenu').on('action', this._onDeleteAllChildNodesMenuAction.bind(this));
@@ -75,6 +76,11 @@ export class TreeForm extends Form {
 
   protected _onAddChildNodeMenuAction() {
     this.tree.insertNode(this._createNode(), this.tree.selectedNodes[0]);
+  }
+
+  protected async _addManyNodes() {
+    let nodes = await ajax.get('misc/large-tree.json');
+    this.tree.insertNodes(nodes);
   }
 
   protected _onDeleteNodeMenuAction() {
