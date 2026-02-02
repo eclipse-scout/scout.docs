@@ -66,13 +66,13 @@ export class ExampleJsPage extends PageWithTable {
 
 @typeName('example.ExampleTableData')
 export class ExampleTableDataDo extends BaseDoEntity {
-  examples?: ExampleDo[];
+  examples: ExampleDo[];
 }
 
 @typeName('example.Example')
 export class ExampleDo extends BaseDoEntity {
-  id?: string;
-  subject?: string;
+  id: string;
+  subject: string;
 }
 ----
 
@@ -178,11 +178,11 @@ export class ExampleJsPage extends PageWithNodes {
 
 @typeName('example.FooPageParam')
 export class FooPageParamDo extends PageParamDo {
-  fooId?: string;
+  fooId: string;
 }
 
 @typeName('example.BarPageParam')
 export class BarPageParamDo extends PageParamDo {
-  barId?: string;
+  barId: string;
 }
 ----
