@@ -49,7 +49,7 @@ public final class WidgetsClientConfigProperties {
 
     @Override
     public String getDefaultValue() {
-      return "releases/26.1";
+      return "releases/26.2";
     }
   }
 
