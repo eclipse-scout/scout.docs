@@ -1,6 +1,6 @@
 name: scout-docs
 title: Eclipse Scout
-version: 26.1
+version: 26.2
 prerelease: true
 asciidoc:
   attributes:
