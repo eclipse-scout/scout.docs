@@ -1,0 +1,30 @@
+////
+Howto:
+- Write this document such that it helps people to discover new features and other important changes of this release.
+- Chronological order is not necessary.
+- Describe necessary migration steps in the MigrationGuide document.
+- Use "title case" in chapter titles (https://english.stackexchange.com/questions/14/)
+////
+== About This Release
+
+The latest version of this release is: {maven-version}.
+
+You can see the {github-changelog-link} on GitHub.
+
+Coming from an older Scout version? Check out the xref:migration:migration-guide.adoc[Migration Guide] for instructions on how to obtain the new version and upgrade existing applications.
+
+//The following enhancements were made after the initial {scout-version} release.
+//
+//==== 26.2.0
+//
+// The initial release of this version was *26.2.xyz*.
+//
+//(Section intentionally left blank for possible future release)
+//
+// * <<New Feature (since 26.2.xyz)>>
+//
+// ==== Upcoming -- No Planned Release Date
+//
+// The following changes were made after the latest official release build. No release date has been fixed yet.
+//
+// * <<New Feature (since 26.2.xyz)>>
