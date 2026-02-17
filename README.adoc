@@ -1,55 +1,38 @@
 = Eclipse Scout - Docs
 
 This repository is part of the link:https://github.com/eclipse-scout/scout.rt[Eclipse Scout] project.
-It contains the source of the documentation items and some demo applications created with the framework.
+It contains the source of the documentation and some demo applications created with the framework.
 The documentation is published on link:https://eclipsescout.github.io/[GitHub pages].
 
 == Organisation of this Repository
 
-* `docs/modules` folder: contains the documentation source.
-* `docs/playbooks` folder: contains the playbooks and user interface bundles for the Antora build, see below
-* `code` folder: contains demo applications (code snippets in the documentation items are extracted from this code base during the build)
+* `docs/modules`: contains the documentation source.
+* `docs/playbooks`: contains the playbooks and user interface bundles for the Antora build.
+* `code`: contains demo applications and code snippets for the documentation.
 
-== Build Demo Applications
+== Demo Applications
 
 The demo applications are built with maven.
 
-== Build Documentation
+== Documentation
 
 The documentation is built using https://antora.org/[Antora].
 
-There are two build targets:
+To build and open the documentation locally, do the following steps:
 
-- Eclipse Scout
-- Eclipse Help
+. On Windows, open the `cmd` shell _as administrator_ and run the script `docs\create_symlinks.cmd` (see <<Windows and Symbolic Links>>).
+. Open a terminal as regular user in the project root where the `package.json` is and run `npm run build`.
 
 === Windows and Symbolic Links
 
-By default, Windows does not enable the creation symbolic links.
-Because of that, git creates a little text file for the symbolic link `docs/modules/common/examples/` → `code/`.
-Before building the documentation, replace that file with a real symbolic link, overriding the Windows default.
+By default, Windows does not enable the creation of symbolic links.
+Because of that, git creates little text files for the symbolic links containing the path to the link target.
+So before building the documentation, these files need to be replaced with real symbolic links.
 
-Create the symbolic link manually using a `cmd` shell run _as administrator_, from the root of the working directory:
-
-[listing]
-del docs\modules\common\examples
-mklink /d docs\modules\common\examples ..\..\..\code
-
-https://security.stackexchange.com/questions/10194/why-do-you-have-to-be-an-admin-to-create-a-symlink-in-windows[On Stackoverflow] you'll find a link to https://blogs.windows.com/windowsdeveloper/2016/12/02/symlinks-windows-10/[a blog post from 2016] explaining that an administrator can enable https://learn.microsoft.com/en-us/windows/apps/get-started/enable-your-device-for-development[Developer Mode] for the local machine, allowing the creation of symbolic links.
-At the same time, the blog post warns of potential security issues.
-
-WARNING: This is not recommended!
-
-
-=== Eclipse Scout
+=== Playbooks
 
 The Eclipse Scout playbook builds the site for link:https://eclipsescout.github.io/[GitHub pages].
 It uses the https://gitlab.com/antora/antora-lunr-extension[Antora Lunr Extension] to provide a client-side search.
 
 `eclipse-scout-ui-bundle.zip` :: the special user interface bundle for the site
 `local-eclipse-scout-playbook.yml` :: the playbook that uses the files in the working directory
-
-To test your changes, run:
-
-[listing]
-npm run build
