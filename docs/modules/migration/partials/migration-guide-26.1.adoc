@@ -480,3 +480,27 @@ To set this value as environment variable it is required to use the JSON synthax
 * If you need to change the response of a resource (e.g. to finetune its CSP response header), the new interface `org.eclipse.scout.rt.ui.html.res.loader.WebResourceLoader.IWebResourceResponseInterceptorContributor` can be implemented.
 Such contributors are called for each web resource loaded and return a list of `org.eclipse.scout.rt.server.commons.servlet.cache.IHttpResponseInterceptor` for a request.
 These interceptors are then called before sending the response to the client. You can e.g. identify a request with `responseObject.getCacheKey().getResourcePath()`.
+
+== Calendar Widget Improvements
+
+When you have implemented the `org.eclipse.scout.rt.client.ui.basic.calendar.provider.AbstractCalendarItemProvider#execItemMoved`, this change affects you.
+
+The drag and drop of calendar components has been improved in this release.
+With that, it is possible to drag components from one resource to another when on day.
+
+This leads to the change of the method signature of `AbstractCalendarItemProvider#execItemMoved`.
+The parameter `String resourceId` indicates to which resource the component has been moved.
+
+.AbstractCalendarItemProvider.java
+[source,java]
+----
+// Old signature
+protected void execItemMoved(ICalendarItem item, Date fromDate, Date toDate) {
+  // ...
+}
+
+// New signature
+protected void execItemMoved(ICalendarItem item, Date fromDate, Date toDate, String resourceId) {
+  // ...
+}
+----
