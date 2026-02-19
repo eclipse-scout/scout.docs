@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -152,6 +152,11 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
         public class BusinessItemProvider extends AbstractCalendarItemProvider {
 
           @Override
+          protected boolean getConfiguredMoveItemEnabled() {
+            return true;
+          }
+
+          @Override
           protected void execLoadItemsInBackground(IClientSession session, Date minDate, Date maxDate, Set<ICalendarItem> result) {
             SleepUtil.sleepSafe(5, TimeUnit.SECONDS); // simulate delay (DB-read or call external interface)
 
@@ -257,6 +262,11 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
          */
         @Order(20)
         public class PrivateItemProvider extends AbstractCalendarItemProvider {
+
+          @Override
+          protected boolean getConfiguredMoveItemEnabled() {
+            return true;
+          }
 
           @Override
           protected void execLoadItems(Date minDate, Date maxDate, final Set<ICalendarItem> result) {
