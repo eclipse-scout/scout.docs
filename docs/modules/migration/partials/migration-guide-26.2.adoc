@@ -95,3 +95,13 @@ Scout 26.2 requires at least the following:
 It is recommended that all REST operations which consume a request entity body message have a `Consumes` annotation set to restrict invalid input.
 Therefore, a test has been added which fails if there are such operations which do not have a `Consumes` annotation.
 The `AbstractRestResourceAnnotationTest` has to be extended in your modules to run this test.
+
+== REST resources: Explicit `@Path` annotation required
+
+It is recommended that all REST resource classes explicitly declare a `@Path` annotation.
+
+According to the Jakarta RESTful Web Services specification, JAX-RS annotations — including `@Path` — are not inherited from superclasses or interfaces.
+While Jersey, the implementation we use, does attempt to locate a `@Path` annotation on parent classes, this behavior is not defined by the specification and should not be relied upon.
+
+To ensure compliance, a test has been introduced that fails if any REST resource is missing a `@Path` annotation.
+To activate this validation for your module, extend the `AbstractRestResourceAnnotationTest` class accordingly.
