@@ -217,3 +217,14 @@ Check your custom CSS styles and adjust them if necessary.
 
 By default, the `SliderField` now shows an input field with the current value.
 To show only the read-only label again, set `valueEditable: false`.
+
+== REST resources: Explicit `@Path` annotation required on subclasses of `AbstractCancellationResource`
+
+All REST resource classes should explicitly declare their own `@Path` annotation.
+
+According to the Jakarta RESTful Web Services specification, JAX-RS annotations — including `@Path` — are not inherited from superclasses or interfaces.
+While Jersey, the implementation we use, does attempt to locate a `@Path` annotation on parent classes, this behavior is not defined by the specification and should not be relied upon.
+
+To align with the specification and avoid relying on non-standard behavior, the `@Path` annotation has been removed from `AbstractCancellationResource`.
+
+If your resource class extends `AbstractCancellationResource`, ensure that you declare an explicit `@Path` annotation on the subclass.
