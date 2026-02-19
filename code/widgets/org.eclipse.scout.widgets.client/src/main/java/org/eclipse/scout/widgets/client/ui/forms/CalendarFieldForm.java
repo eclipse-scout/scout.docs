@@ -151,6 +151,11 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
         public class BusinessItemProvider extends AbstractCalendarItemProvider {
 
           @Override
+          protected boolean getConfiguredMoveItemEnabled() {
+            return true;
+          }
+
+          @Override
           protected void execLoadItemsInBackground(IClientSession session, Date minDate, Date maxDate, Set<ICalendarItem> result) {
             SleepUtil.sleepSafe(5, TimeUnit.SECONDS); // simulate delay (DB-read or call external interface)
 
@@ -256,6 +261,11 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
          */
         @Order(20)
         public class PrivateItemProvider extends AbstractCalendarItemProvider {
+
+          @Override
+          protected boolean getConfiguredMoveItemEnabled() {
+            return true;
+          }
 
           @Override
           protected void execLoadItems(Date minDate, Date maxDate, final Set<ICalendarItem> result) {
