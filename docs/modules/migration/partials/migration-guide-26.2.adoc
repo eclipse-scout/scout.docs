@@ -89,3 +89,9 @@ Scout 26.2 requires at least the following:
 * Furthermore, the build requires
 ** Node: >= 24.12.0
 ** Pnpm: >= 10.26.1
+
+== REST operations: Add Consumes annotation
+
+It is recommended that all REST operations which consume a request entity body message have a `Consumes` annotation set to restrict invalid input.
+Therefore, a test has been added which fails if there are such operations which do not have a `Consumes` annotation.
+The `AbstractRestResourceAnnotationTest` has to be extended in your modules to run this test.
