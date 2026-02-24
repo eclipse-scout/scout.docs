@@ -28,3 +28,16 @@ Coming from an older Scout version? Check out the xref:migration:migration-guide
 // The following changes were made after the latest official release build. No release date has been fixed yet.
 //
 // * <<New Feature (since 26.2.xyz)>>
+
+[#tree-scout-js-findnode-added-and-visitnodes-improved]
+== Tree (Scout JS): FindNode Added and VisitNodes Improved
+
+Finding tree nodes may be helpful especially for outlines to find a specific page.
+This can now be done using the new function `Tree.findNode()` that either takes a predicate or a subclass of `TreeNode` as argument.
+
+The function uses the existing `visitNodes` function to search for the tree node.
+Unfortunately, that function does not have the possibility to abort the traversal at any point.
+To support this, it now uses the `TreeVisitResult`, so you can now either skip visiting a subtree or stop visiting completely.
+To make it consistent with other visitor functions like `Widget.visitChildren`, returning `true` now stops visiting completely instead of just skipping the subtree.
+
+This means you need to check your visitors according to the xref:migration-guide.adoc#tree-scout-js-api-of-visitnodes-changed[Migration Guide].

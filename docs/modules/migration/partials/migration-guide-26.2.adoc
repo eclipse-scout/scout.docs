@@ -117,3 +117,28 @@ This check interval has been decreased from one minute to 20 seconds (default va
 Also the default idle timeout has been decreased from one minute to 20 seconds (existing config property `scout.smtp.pool.maxIdleTime`).
 
 Also the connection error handling has been changed, connection error codes 421 and 451 are now also treated as failed connection (according to RFC 5312 3.8 connection failures and at least error codes 451 should be treated the same way).
+
+[#tree-scout-js-api-of-visitnodes-changed]
+== Tree (Scout JS): API of VisitNodes Changed
+
+Returning `true` in a visitor used for `Tree.visitNodes` now stops visiting completely instead of just skipping the subtree, see also xref:release-notes.adoc#tree-scout-js-findnode-added-and-visitnodes-improved[Release Notes].
+
+Please check your JavaScript / TypeScript code for occurrences of `visitNodes` and if the visitor explicitly returns `true`, replace it with `TreeVisitResult.SKIP_SUBTREE`.
+
+[source,typescript,opts=novalidate]
+.Old
+----
+tree.visitNodes(node => {
+  return true;
+});
+----
+
+[source,typescript,opts=novalidate]
+.New
+----
+tree.visitNodes(node => {
+  return TreeVisitResult.SKIP_SUBTREE;
+});
+----
+
+
