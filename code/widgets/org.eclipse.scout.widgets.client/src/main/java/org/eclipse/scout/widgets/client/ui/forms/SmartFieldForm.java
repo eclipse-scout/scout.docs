@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -19,7 +19,6 @@ import java.util.concurrent.TimeUnit;
 
 import org.eclipse.scout.rt.client.context.ClientRunContexts;
 import org.eclipse.scout.rt.client.job.ModelJobs;
-import org.eclipse.scout.rt.client.session.ClientSessionProvider;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
@@ -1140,35 +1139,6 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
           @Override
           protected String getConfiguredText() {
             return TEXTS.get("Wildcard");
-          }
-
-          @Order(10)
-          @ClassId("b1a5915f-dabe-4ef7-9241-c541ff1ce6d8")
-          public class AutoPrefixWildcardMenu extends AbstractMenu {
-
-            private boolean m_active;
-
-            @Override
-            protected void execInitAction() {
-              m_active = ClientSessionProvider.currentSession().getDesktop().isAutoPrefixWildcardForTextSearch();
-              updateText();
-            }
-
-            @Override
-            protected String getConfiguredText() {
-              return TEXTS.get("EnableAutoPrefixWildcard");
-            }
-
-            @Override
-            protected void execAction() {
-              m_active = !m_active;
-              ClientSessionProvider.currentSession().getDesktop().setAutoPrefixWildcardForTextSearch(m_active);
-              updateText();
-            }
-
-            protected void updateText() {
-              setText(TEXTS.get(m_active ? "DisableAutoPrefixWildcard" : "EnableAutoPrefixWildcard"));
-            }
           }
 
           @Order(20)
