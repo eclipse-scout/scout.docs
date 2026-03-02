@@ -104,6 +104,66 @@ They have not been used since years and were never supported in Scout JS.
 
 If you need a prefix wildcard, add it to your search texts manually where required.
 
+== Removal of Deprecated Code
+
+The following Java code was deprecated since at least one release and has been removed:
+
+* `ITileGrid.PROP_ASYNC_LOAD_JOBNAME_PREFIX`: Use `ITileGrid.ASYNC_LOAD_JOBNAME_PREFIX` instead.
+* `ITileGrid.PROP_ASYNC_LOAD_IDENTIFIER_PREFIX`: Use `ITileGrid.ASYNC_LOAD_IDENTIFIER_PREFIX` instead.
+* `ITileGrid.PROP_WINDOW_IDENTIFIER_PREFIX`: Use `ITileGrid.WINDOW_IDENTIFIER_PREFIX` instead.
+* `BasicCache`: The constructors without `labelSupplier` have been removed. Use the ones including `labelSupplier`. A label supplier can be retrieved using `CacheBuilder.getLabelSupplier()`.
+* `EncryptionKey`: The constructor without `compatibilityHeader` has been removed.
+* `FileUtility.extractArchive` has been removed. It used a dangerous special handling for zip directories with the same name as the target directory. Use `FileUtility.extractZip` instead. If top-level directories exist, they should be removed manually as required.
+* Config property `scout.rest.api.exposed.enforce` has been removed without replacement. If the feature is not required, remove the `ApiExposedFilter` from your filter chain.
+* `TrivialAccessController.TrivialAuthConfig.getPathInfoFilter` has been removed. Use `TrivialAccessController.TrivialAuthConfig.getExclusionFilter` instead.
+* The package `org.eclipse.scout.rt.server.commons.servlet.filter.gzip` and all containing classes have been removed. The HTTP request compression is now automatically handled by Jetty instead of this custom implementation.
+* Accordingly, the compression flags on `UrlHints` and `UrlHintsHelper` have been removed. So compression can no longer be enabled or disabled on the fly. Old cookie values are still valid but the compression flag (`Z`) will be ignored now.
+
+The following TypeScript code was deprecated since at least one release and has been removed:
+
+* `CodeType.codes(rootOnly?: boolean)` was deleted. Use the more flexible `CodeType.codes(options?: CodeTypeCodesOptions)`. It provides an option `rootOnly` amongst others.
+* `Page.getOutline()` function was replaced with `Page.outline` property.
+* `Page._pageParam()` function was removed as it was never used.
+* `PageWithTable.createChildPage()` function was replaced with `PageWithTable._createChildPage()`.
+* `Form._withBusyHandling()` was renamed to `Form.withBusyHandling()`.
+* `Column.isVisible()` function was replaced with `Column.visible` property.
+* `Table.removeAllRows()` was deleted. Use `Table._removeAllRows()` to only remove DOM elements, otherwise use `Table.deleteAllRows()` (recommended).
+* `Table.groupColumn()` was deleted. Use `Table.group()` instead.
+* `Table.removeColumnGrouping()` was deleted. Use `Table.removeGroupColumn()` instead.
+* `Table.removeAllColumnGroupings()` was deleted. Use `Table.removeGroupColumn()` instead.
+* `Table.isHierarchical()` was deleted. Use `Table.hierarchical` property instead.
+* `Table.getVisibleRows()` was deleted. Use `Table.visibleRows` property instead.
+* `TableRow.getTable()` was deleted. Use `TableRow.table` property instead.
+* `TileGrid.tilesWithoutPlaceholders()` has been deleted. Use `TileGrid.tiles` instead.
+* `TreerNode.getTree()` has been deleted. Use `TreeNode.tree` property instead.
+* `objects.isPlainObject()` has been deleted. Use `objects.isObject()` or `objects.isPojo()` instead.
+* `Widget.isVisible()` has been deleted. Use `Widget.visible` property instead.
+* `Widget.getFocusableElement()` has been deleted. Use `Widget.get$Focusable()` instead.
+* `widgets.createUniqueId()` has been deleted. Use `ObjectIdProvider.get().createUiSeqId()` instead.
+* `ObjectFactory.createUniqueId` has been removed. Use `ObjectIdProvider.get().createUiSeqId()` decorator instead.
+* `ObjectFactoryOptions.ensureUniqueId` has been removed. Use `@objectFactoryHints({ensureId: true})` decorator on the affected class instead.
+
+The following Less mixins have been removed as they are no longer necessary:
+
+* `#scout.animation`: Use `animation` property directly. So instead of e.g. `#scout.animation(show-axis-select 0.5s ease-in-out 1);` use `animation: show-axis-select 0.5s ease-in-out 1;`.
+* `#scout.animation-duration`: Use `animation-duration` property directly. So instead of e.g. `#scout.animation-duration(0.5s);` use `animation-duration: 0.5s;`.
+* `#scout.animation-name`: Use `animation-name` property directly. So instead of e.g. `#scout.animation-name(slideout-right);` use `animation-name: slideout-right;`.
+* `#scout.animation-delay`: Use `animation-delay` property directly. So instead of e.g. `#scout.animation-delay(400ms);` use `animation-delay: 400ms;`.
+* `#scout.animation-fill-mode`: Use `animation-fill-mode` property directly. So instead of e.g. `#scout.animation-fill-mode(forwards);` use `animation-fill-mode: forwards;`.
+* `#scout.animation-timing-function`: Use `animation-timing-function` property directly. So instead of e.g. `#scout.animation-timing-function(linear);` use `animation-timing-function: linear;`.
+* `#scout.animation-iteration-count`: Use `animation-iteration-count` property directly. So instead of e.g. `#scout.animation-iteration-count(1);` use `animation-iteration-count: 1;`.
+* `#scout.transform`: Use `transform` property directly. So instead of e.g. `#scout.transform(rotatex(180deg));` use `transform: rotatex(180deg);`.
+* `#scout.transform-origin`: Use `transform-origin` property directly. So instead of e.g. `#scout.transform-origin(top);` use `transform-origin: top;`.
+* `#scout.cursor-grab`: Use `cursor` property directly. So instead of e.g. `#scout.cursor-grab();` use `cursor: grab;`.
+* `#scout.cursor-grabbing`: Use `cursor` property directly. So instead of e.g. `#scout.cursor-grabbing();` use `cursor: grabbing;`.
+* KeyFrames for the following animations have been deleted as they were no longer used. If the KeyFrames are still necessary, copy them to your own code from a previous release:
+** `fadeout-grow`
+** `fadein-grow-blur`
+** `rotation-reverse`
+** `pulse-opacity`
+** `rotate-x`
+
+
 == AbstractRestLookupCall moved to shared module
 
 `AbstractRestLookupCall` was moved from the client to the shared module:

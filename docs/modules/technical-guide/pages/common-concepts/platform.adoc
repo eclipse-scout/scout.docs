@@ -1267,11 +1267,6 @@ Absolute path to the root directory of the `RemoteFileService`. The default valu
 +
 Data type: String
 
-`scout.rest.api.exposed.enforce` ::
-Set to true to reject non api-exposed operations with a not found error (404), no warning will be logged in this case (just for development mode); if set to false only a warning will be logged but requests are not rejected (default value: true)
-+
-Data type: Boolean
-
 `scout.rest.client.http.connectionKeepAlive` ::
 Specifies the maximum life time in milliseconds for kept alive connections of the REST HTTP client. The default value is 30 minutes.
 +
