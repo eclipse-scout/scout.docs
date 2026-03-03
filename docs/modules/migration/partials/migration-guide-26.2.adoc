@@ -81,15 +81,6 @@ To install the Scout SDK into your existing Eclipse IDE, use this P2 update site
 
 // ----------------------------------------------------------------------------
 
-== New Build & Runtime Requirements
-
-Scout 26.2 requires at least the following:
-
-* Build and runtime of Scout 26.2 require Java 25. The compiler target level is set to Java 21.
-* Furthermore, the build requires
-** Node: >= 24.12.0
-** Pnpm: >= 10.26.1
-
 == REST operations: Add Consumes annotation
 
 It is recommended that all REST operations which consume a request entity body message have a `Consumes` annotation set to restrict invalid input.
@@ -105,3 +96,10 @@ While Jersey, the implementation we use, does attempt to locate a `@Path` annota
 
 To ensure compliance, a test has been introduced that fails if any REST resource is missing a `@Path` annotation.
 To activate this validation for your module, extend the `AbstractRestResourceAnnotationTest` class accordingly.
+
+== Removal of autoPrefixWildcardForTextSearch on Desktop
+
+The methods `isAutoPrefixWildcardForTextSearch` and `setAutoPrefixWildcardForTextSearch` on `IDesktop` have been removed.
+They have not been used since years and were never supported in Scout JS.
+
+If you need a prefix wildcard, add it to your search texts manually where required.
