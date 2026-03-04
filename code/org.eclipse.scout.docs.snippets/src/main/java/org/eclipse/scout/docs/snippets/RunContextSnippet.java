@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -13,9 +13,11 @@ import java.util.Locale;
 
 import javax.security.auth.Subject;
 
+import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.context.RunContexts;
 import org.eclipse.scout.rt.platform.nls.NlsLocale;
 import org.eclipse.scout.rt.platform.security.SimplePrincipal;
+import org.eclipse.scout.rt.security.IAccessControlService;
 
 public final class RunContextSnippet {
 
@@ -29,6 +31,7 @@ public final class RunContextSnippet {
       // <2>
       RunContexts.empty()
           .withSubject(subject)
+          .withUser(BEANS.get(IAccessControlService.class).getUser(subject))
           .withLocale(Locale.US)
           .run(() -> {
             // run some code <3>

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -23,7 +23,9 @@ import org.eclipse.scout.rt.platform.PlatformEvent;
 import org.eclipse.scout.rt.platform.config.CONFIG;
 import org.eclipse.scout.rt.platform.context.RunMonitor;
 import org.eclipse.scout.rt.platform.exception.PlatformException;
+import org.eclipse.scout.rt.platform.security.User;
 import org.eclipse.scout.rt.platform.util.FinalValue;
+import org.eclipse.scout.rt.security.IAccessControlService;
 import org.eclipse.scout.rt.server.context.ServerRunContext;
 import org.eclipse.scout.rt.server.session.IServerSession;
 import org.eclipse.scout.rt.server.session.ServerSessionProvider;
@@ -41,23 +43,26 @@ public class SuperUserRunContextProducer {
 
   private final FinalValue<IServerSession> session = new FinalValue<>();
   private final FinalValue<Subject> subject = new FinalValue<>();
+  private final FinalValue<User> m_user = new FinalValue<>();
 
   @PostConstruct
   protected void initSuperUserSubject() {
     subject.set(CONFIG.getPropertyValue(SuperUserSubjectProperty.class));
+    m_user.set(BEANS.get(IAccessControlService.class).getUser(subject.get()));
   }
 
   /**
    * Produces a new {@link ServerRunContext} with super user rights.
    * <p>
-   * This implies a new {@link ServerRunContext} initialized with the superuser's {@link Subject}, with a dedicated
+   * This implies a new {@link ServerRunContext} initialized with the superuser's {@link Subject} and {@link User}, with a dedicated
    * {@link RunMonitor} set, and the superuser's shared {@link IServerSession} set.
    */
   public ServerSessionRunContext produce() {
     final ServerSessionRunContext superUserRunContext = ServerSessionRunContexts.empty()
         .withRunMonitor(BEANS.get(RunMonitor.class))
         .withUserAgent(UserAgents.createDefault())
-        .withSubject(subject.get());
+        .withSubject(getSubject())
+        .withUser(getUser());
 
     return superUserRunContext
         .withSession(session.setIfAbsentAndGet(() -> createServerSession(superUserRunContext)));
@@ -68,6 +73,13 @@ public class SuperUserRunContextProducer {
    */
   public Subject getSubject() {
     return subject.get();
+  }
+
+  /**
+   * Returns the superuser's {@link User}.
+   */
+  public User getUser() {
+    return m_user.get();
   }
 
   /**

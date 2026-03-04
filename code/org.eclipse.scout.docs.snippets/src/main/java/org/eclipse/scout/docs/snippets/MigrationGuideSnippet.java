@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -21,6 +21,7 @@ import org.eclipse.scout.rt.platform.context.RunMonitor;
 import org.eclipse.scout.rt.platform.job.FixedDelayScheduleBuilder;
 import org.eclipse.scout.rt.platform.job.IFuture;
 import org.eclipse.scout.rt.platform.job.Jobs;
+import org.eclipse.scout.rt.security.IAccessControlService;
 import org.eclipse.scout.rt.server.clientnotification.ClientNotificationRegistry;
 import org.eclipse.scout.rt.server.context.ServerRunContexts;
 import org.eclipse.scout.rt.shared.notification.INotificationHandler;
@@ -222,7 +223,8 @@ public class MigrationGuideSnippet {
       }, Jobs.newInput()
           .withName("job-name")
           .withRunContext(ServerRunContexts.copyCurrent()
-              .withSubject(subject)));
+              .withSubject(subject)
+              .withUser(BEANS.get(IAccessControlService.class).getUser(subject))));
       // end::jobManager.serverJob.otherSubject.new[]
     }
 
@@ -374,7 +376,6 @@ public class MigrationGuideSnippet {
           .putForUser(userId, new UserChangedClientNotification(userId));
       // end::clientnotification.publish.new[]
     }
-
   }
 
   void snippetsClientNotificationHandle() {
