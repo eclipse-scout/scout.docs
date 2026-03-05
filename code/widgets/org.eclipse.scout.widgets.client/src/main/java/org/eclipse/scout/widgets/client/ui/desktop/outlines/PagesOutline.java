@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -16,6 +16,7 @@ import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.widgets.client.ui.desktop.pages.PageWithDetailFormTablePage;
 import org.eclipse.scout.widgets.client.ui.desktop.pages.PageWithEditableTableTablePage;
+import org.eclipse.scout.widgets.client.ui.desktop.pages.PageWithHierarchicalTableTablePage;
 import org.eclipse.scout.widgets.client.ui.desktop.pages.PageWithNodesNodePage;
 import org.eclipse.scout.widgets.client.ui.desktop.pages.PageWithSearchFormTablePage;
 import org.eclipse.scout.widgets.client.ui.desktop.pages.PageWithTableRecTablePage;
@@ -40,6 +41,7 @@ public class PagesOutline extends AbstractWidgetsOutline {
     pageList.add(new PageWithTableTablePage());
     pageList.add(new PageWithEditableTableTablePage());
     pageList.add(new PageWithTableRecTablePage());
+    pageList.add(new PageWithHierarchicalTableTablePage());
     pageList.add(new PageWithSearchFormTablePage());
     pageList.add(new PageWithNodesNodePage());
     pageList.add(new PageWithDetailFormTablePage());
