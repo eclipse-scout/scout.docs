@@ -11,9 +11,9 @@ import {OutlineModel, PageWithNodes} from '@eclipse-scout/core';
 import {
   AccordionForm, BreadcrumbBarFieldForm, BrowserFieldForm, ButtonForm, CarouselForm, ChartFieldForm, CheckBoxFieldForm, DateFieldForm, DesktopForm, DesktopNotificationForm, DynamicPageWithNodes, EditableTableForm, FileChooserButtonForm,
   FileChooserFieldForm, FileChooserForm, FormForm, GroupBoxForm, HierarchicalTableForm, ImageFieldForm, ImageForm, IntegerFieldForm, LabelFieldForm, LabelForm, ListBoxForm, LogicalGridForm, MenuBarForm, MessageBoxForm, ModeSelectorForm,
-  MultilineSmartFieldForm, MultilineStringFieldForm, NumberFieldForm, PopupForm, ProposalFieldForm, RadioButtonGroupForm, ReloadablePageWithNodes, RestForm, SamplePageWithNodes, SamplePageWithTable, SequenceBoxForm, SimpleTabBoxForm,
-  SliderFieldForm, SmartFieldForm, StringFieldForm, SwitchForm, TabBoxForm, TableForm, TableSmartFieldForm, TagFieldForm, TileAccordionForm, TileGridForm, TooltipForm, TooltipWithMenusForm, TreeBoxForm, TreeForm, TreeSmartFieldForm,
-  UiNotificationForm, VirtualTileGridForm, WatchFieldForm, WidgetsOutlineOverview, WrappedFormFieldForm
+  MultilineSmartFieldForm, MultilineStringFieldForm, NumberFieldForm, PageFieldForm, PopupForm, ProposalFieldForm, RadioButtonGroupForm, ReloadablePageWithNodes, RestForm, SamplePageWithNodes, SamplePageWithTable, SequenceBoxForm,
+  SimpleTabBoxForm, SliderFieldForm, SmartFieldForm, StringFieldForm, SwitchForm, TabBoxForm, TableForm, TableSmartFieldForm, TagFieldForm, TileAccordionForm, TileGridForm, TooltipForm, TooltipWithMenusForm, TreeBoxForm, TreeForm,
+  TreeSmartFieldForm, UiNotificationForm, VirtualTileGridForm, WatchFieldForm, WidgetsOutlineOverview, WrappedFormFieldForm
 } from '../index';
 
 export default (): OutlineModel => ({
@@ -314,6 +314,15 @@ export default (): OutlineModel => ({
           routeRef: 'reloadable-page'
         }
       ]
+    },
+    {
+      uuid: '6d16026d-529a-4691-ace3-dffa4e0b065d',
+      objectType: PageWithNodes,
+      leaf: true,
+      text: 'Page Field',
+      detailForm: {
+        objectType: PageFieldForm
+      }
     },
     {
       uuid: '3a120205-006a-4270-acfc-9cc89e257a07',
