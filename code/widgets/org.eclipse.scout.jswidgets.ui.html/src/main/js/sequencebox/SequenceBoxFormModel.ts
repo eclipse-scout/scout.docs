@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -21,7 +21,7 @@ export default (): FormModel => ({
     objectType: GroupBox,
     fields: [
       {
-        id: 'TopBox',
+        id: 'DetailBox',
         objectType: GroupBox,
         fields: [
           {
@@ -53,75 +53,75 @@ export default (): FormModel => ({
                 label: 'String Field 4'
               }
             ]
-          },
+          }
+        ]
+      },
+      {
+        id: 'ConfigurationBox',
+        objectType: TabBox,
+        cssClass: 'jswidgets-configuration',
+        selectedTab: 'PropertiesTab',
+        tabItems: [
           {
-            id: 'ConfigurationBox',
-            objectType: TabBox,
-            cssClass: 'jswidgets-configuration',
-            selectedTab: 'PropertiesTab',
-            tabItems: [
+            id: 'PropertiesTab',
+            objectType: TabItem,
+            label: 'Sequence Box Properties',
+            fields: [
               {
-                id: 'PropertiesTab',
-                objectType: TabItem,
-                label: 'Sequence Box Properties',
-                fields: [
-                  {
-                    id: 'FormFieldPropertiesBox',
-                    objectType: FormFieldPropertiesBox
-                  },
-                  {
-                    id: 'GridDataBox',
-                    objectType: GridDataBox,
-                    label: 'Grid Data Hints'
-                  },
-                  {
-                    id: 'LayoutConfigBox',
-                    objectType: LogicalGridLayoutConfigBox,
-                    expanded: false
-                  }
-                ]
+                id: 'FormFieldPropertiesBox',
+                objectType: FormFieldPropertiesBox
               },
               {
-                id: 'FieldPropertiesTab',
-                objectType: TabItem,
-                label: 'Field Properties',
-                fields: [
-                  {
-                    id: 'Field.TargetField',
-                    objectType: SmartField<FormField>,
-                    label: 'Target'
-                  },
-                  {
-                    id: 'Field.FormFieldPropertiesBox',
-                    objectType: FormFieldPropertiesBox
-                  },
-                  {
-                    id: 'Field.GridDataBox',
-                    objectType: GridDataBox,
-                    label: 'Grid Data Hints'
-                  }
-                ]
+                id: 'GridDataBox',
+                objectType: GridDataBox,
+                label: 'Grid Data Hints'
               },
               {
-                id: 'ActionsTab',
-                objectType: TabItem,
-                label: 'Actions',
-                fields: [
-                  {
-                    id: 'FormFieldActionsBox',
-                    objectType: FormFieldActionsBox
-                  },
-                  {
-                    id: 'WidgetActionsBox',
-                    objectType: WidgetActionsBox
-                  }
-                ]
-              },
-              {
-                id: 'EventsTab',
-                objectType: EventsTab
+                id: 'LayoutConfigBox',
+                objectType: LogicalGridLayoutConfigBox,
+                expanded: false
               }
             ]
+          },
+          {
+            id: 'FieldPropertiesTab',
+            objectType: TabItem,
+            label: 'Field Properties',
+            fields: [
+              {
+                id: 'Field.TargetField',
+                objectType: SmartField<FormField>,
+                label: 'Target'
+              },
+              {
+                id: 'Field.FormFieldPropertiesBox',
+                objectType: FormFieldPropertiesBox
+              },
+              {
+                id: 'Field.GridDataBox',
+                objectType: GridDataBox,
+                label: 'Grid Data Hints'
+              }
+            ]
+          },
+          {
+            id: 'ActionsTab',
+            objectType: TabItem,
+            label: 'Actions',
+            fields: [
+              {
+                id: 'FormFieldActionsBox',
+                objectType: FormFieldActionsBox
+              },
+              {
+                id: 'WidgetActionsBox',
+                objectType: WidgetActionsBox
+              }
+            ]
+          },
+          {
+            id: 'EventsTab',
+            objectType: EventsTab
           }
         ]
       }
@@ -135,7 +135,7 @@ export default (): FormModel => ({
 
 export type SequenceBoxFormWidgetMap = {
   'MainBox': GroupBox;
-  'TopBox': GroupBox;
+  'DetailBox': GroupBox;
   'SequenceBox': SequenceBox;
   'StringField1': StringField;
   'StringField2': StringField;

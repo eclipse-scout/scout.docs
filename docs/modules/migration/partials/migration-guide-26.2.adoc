@@ -460,3 +460,14 @@ this.events.registerSubTypeProvider('fancy', (event: FancyEvent) => event.subTyp
 * The default read timeout for a JAX-WS request (`scout.jaxws.consumer.readTimeout`) has been changed from infinite to 30 minutes.
 
 In case these timeouts are too low for your setup, update the corresponding config properties.
+
+== WrappedFormField (Scout JS)
+
+The defaults of the following properties have changed:
+
+* `labelVisible` to `false`
+* `statusVisible` to `false`
+* `gridDataHints.useUiHeight` to `true`
+* `gridDataHints.weightY` to `1`
+
+If you use the `WrappedFormField` in your Scout JS code, please verify the layout still looks and behaves as expected.
