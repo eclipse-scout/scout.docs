@@ -23,20 +23,20 @@ location to store icon files would be:
        person.png
        ...
 
-[source,java]
+[source,java,opts=novalidate]
 .Icons.java
 ----
 // Bitmap image (references icons/application_logo.png)
 public static final String ApplicationLogo = "application_logo";
 
 // Character from icon-font scoutIcons.woff (default)
-public static final String Calendar ="font:\uE003";
+public static final String Calendar = "font:\uE003";
 
 // Character from a custom icon-font
-public static final String Phone ="font:awesomeIcons \uF095";
+public static final String Phone = "font:awesomeIcons \uF095";
 ----
 
-[source,java]
+[source,java,opts=novalidate]
 .Usage of iconId in a Scout widget
 ----
 @Override
@@ -79,12 +79,13 @@ This makes it available for http requests on the URL
 Create a CSS/LESS definition to reference the icon font in stylesheets (e.g. in a file called `fonts.less`). Make
 sure the definition is added to the `index.less` of your project.
 
-[source,less]
+[source,less,opts=novalidate]
 .The CSS/LESS font definition should look like this:
 ----
 @font-face {
   font-family: awesomeIcons;
   font-weight: normal;
+  font-display: swap;
   src: url('fonts/awesomeIcons.woff') format('woff');
 }
 
@@ -102,7 +103,7 @@ directly via URL and check if the CSS file contains the required font definition
 Have a look at your `index.html` to find the path to your CSS (e.g. `http://[base]/yourapp-theme.css`).
 
 NOTE: When you request resources from the _WebContent_ folder via http, Scout will
-find resources from other modules on the classpath too. Thus the _scoutIcons.woff_ is
+find resources from other modules on the classpath too. Thus, the _scoutIcons.woff_ is
 always available in a Scout project. However, you must avoid naming conflicts,
 since at runtime all files exist on the same classpath.
 
@@ -115,7 +116,7 @@ IcoMoon allows you to assemble a set of icons from various sources (e.g.
 FontAwesome or custom SVG graphics) and create a font file from that set.
 
 You can export/import your icon set from and to IcoMoon, and you should store
-the files exported from IcoMoon in a SCM system like GIT. IcoMoon stores all
+the files exported from IcoMoon in an SCM system like GIT. IcoMoon stores all
 important data in the file _selection.json_. Make sure you also store the raw
 SVG graphics you've uploaded to IcoMoon in your SCM, in case you have to change
 a single icon later.
@@ -131,11 +132,11 @@ To edit the icon font in IcoMoon follow these steps:
   size as the other icons in the set and  must use only a single color,
   black. The background must be transparent. Hint: the filename of the SVG
   graphic should contain the unicode of the character in the font in order to
-  simplify maintencance. Only use unicodes from the _Private Use Area_ from
+simplify maintenance. Only use unicodes from the _Private Use Area_ from
   U+E000 to U+F8FF.
 * When you're happy with your icon set, you hit the _Generate Font_ button in
   the footer in IcoMoon. On the following page you can set the unicode of
-  each icon/character. Click on the prefences button (cog icon), to set the
+each icon/character. Click on the preferences button (cog icon), to set the
   name of your icon font (e.g. scoutIcons). Finally click on _Download_ and
   you receive a ZIP file which contains the new _selection.json_, and font files
   like .ttf and .woff.
