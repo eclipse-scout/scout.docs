@@ -103,3 +103,8 @@ The methods `isAutoPrefixWildcardForTextSearch` and `setAutoPrefixWildcardForTex
 They have not been used since years and were never supported in Scout JS.
 
 If you need a prefix wildcard, add it to your search texts manually where required.
+
+== AbstractRestLookupCall moved to shared module
+
+`AbstractRestLookupCall` was moved from the client to the shared module:
+`org.eclipse.scout.rt.client.services.lookup.AbstractRestLookupCall` -> `org.eclipse.scout.rt.shared.services.lookup.AbstractRestLookupCall`.
