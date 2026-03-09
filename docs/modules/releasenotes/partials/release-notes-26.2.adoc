@@ -41,3 +41,12 @@ To support this, it now uses the `TreeVisitResult`, so you can now either skip v
 To make it consistent with other visitor functions like `Widget.visitChildren`, returning `true` now stops visiting completely instead of just skipping the subtree.
 
 This means you need to check your visitors according to the xref:migration-guide.adoc#tree-scout-js-api-of-visitnodes-changed[Migration Guide].
+
+== HybridManager API improvements (Scout JS)
+
+The `HybridManager` provides API to dispose formerly created widgets. The widgets passed to `HybridManager.disposeWidgets` are collected and disposed in a single hybrid action.
+
+[source,typescript,opts=novalidate]
+----
+HybridManager.get().disposeWidgets(widgets);
+----

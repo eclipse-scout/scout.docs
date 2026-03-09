@@ -229,3 +229,31 @@ That is, one thread will only be counted once towards the limit.
 However, this is just one potential deadlock cause, deadlocks may still occur if the resolve operation also relies on external semaphores.
 
 To restore the previous behavior the `BoundedResolveCacheWrapper` may be added directly as custom wrapper with the second constructor allowing to disable this reentrant behavior.
+
+== HybridManager API improvements (Scout JS)
+
+The `HybridManager` provides API to dispose formerly created widgets. Former implementations calling the hybrid Action _scout.DisposeWidgets_ manually using the remote ids can be migrated.
+
+.Old: Disposing a `Widget` using the hybrid action _scout.DisposeWidgets_.
+[source,typescript,opts=novalidate]
+----
+// create widget
+const hybridManager = await HybridManager.get(this.session, true);
+const id = hybridManager.callAction('example.CreateMyFancyWidget');
+const myFancyWidget = (await hybridManager.when(`widgetAdd:${id}`)).widget;
+
+// dispose widget
+hybridManager.callAction('scout.DisposeWidgets', scout.create(DisposeWidgetsHybridActionDo, {ids: [id]}));
+----
+
+.New: Disposing a `Widget` using `HybridManager.disposeWidgets`.
+[source,typescript,opts=novalidate]
+----
+// create widget
+const hybridManager = await HybridManager.get(this.session, true);
+const id = hybridManager.callAction('example.CreateMyFancyWidget');
+const myFancyWidget = (await hybridManager.when(`widgetAdd:${id}`)).widget;
+
+// destroy widget
+myFancyWidget.destroy();
+----
