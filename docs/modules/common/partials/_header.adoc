@@ -7,5 +7,5 @@ ifdef::show-release-warnings[]
 // suppress inspection "AsciiDocUnresolvedAntoraModule"
 // suppress inspection "AsciiDocAttributeShouldBeDefined"
 // WARNING: This document is referring to a past Scout release. Please click xref:{page-component-latest-version}@{page-relative-src-path}[here] for the current version.
-WARNING: This document is referring to an upcoming Scout release. Please click xref:{page-component-latest-version}@{page-relative-src-path}[here] for the current version.
+// WARNING: This document is referring to an upcoming Scout release. Please click xref:{page-component-latest-version}@{page-relative-src-path}[here] for the current version.
 endif::[]
