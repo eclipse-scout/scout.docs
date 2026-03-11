@@ -108,3 +108,12 @@ If you need a prefix wildcard, add it to your search texts manually where requir
 
 `AbstractRestLookupCall` was moved from the client to the shared module:
 `org.eclipse.scout.rt.client.services.lookup.AbstractRestLookupCall` -> `org.eclipse.scout.rt.shared.services.lookup.AbstractRestLookupCall`.
+
+== SmtpConnectionPool: Connection error/idle handling
+
+For the `org.eclipse.scout.rt.mail.smtp.SmtpConnectionPool` in the past idle timeouts could be defined in seconds.
+However, connections were only checked once per minute, hence idle timeouts less than one minute were not respected.
+This check interval has been decreased from one minute to 20 seconds (default value), it is now configurable by config property `scout.smtp.pool.closeIdleConnectionsJobSchedule`.
+Also the default idle timeout has been decreased from one minute to 20 seconds (existing config property `scout.smtp.pool.maxIdleTime`).
+
+Also the connection error handling has been changed, connection error codes 421 and 451 are now also treated as failed connection (according to RFC 5312 3.8 connection failures and at least error codes 451 should be treated the same way).
