@@ -51,8 +51,7 @@ public class ColorsCodeType extends AbstractCodeType<Long, Color> {
   public static class ColorCodeTypeDoIdConverter implements ICodeTypeDoIdConverter {
     @Override
     public String apply(Object id) {
-      if (id instanceof Color) {
-        Color c = (Color) id;
+      if (id instanceof Color c) {
         return String.format("#%02x%02x%02x", c.getRed(), c.getGreen(), c.getBlue());
       }
       return null;

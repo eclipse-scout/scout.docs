@@ -586,8 +586,7 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
       // Old value needed to calculate animation start of fulfillment chart
       BigDecimal actualOldValue = BigDecimal.ZERO;
       for (IChartValueGroupBean valueGroup : chart.getData().getChartValueGroups()) {
-        if (valueGroup instanceof IMonupleChartValueGroupBean) {
-          IMonupleChartValueGroupBean monupleValueGroup = (IMonupleChartValueGroupBean) valueGroup;
+        if (valueGroup instanceof IMonupleChartValueGroupBean monupleValueGroup) {
           if ("Actual".equals(valueGroup.getGroupName()) && !monupleValueGroup.getValues().isEmpty()) {
             actualOldValue = monupleValueGroup.getValues().get(0);
           }

@@ -616,8 +616,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
             return;
           }
           for (IColumn<?> c : columns) {
-            if (c instanceof INumberColumn) {
-              INumberColumn column = (INumberColumn) c;
+            if (c instanceof INumberColumn column) {
               String oldAggr = column.getAggregationFunction();
               for (i = 0; i < aggrFunctions.size(); ++i) {
                 if (StringUtility.emptyIfNull(oldAggr).equals(StringUtility.emptyIfNull(aggrFunctions.get(i)))) {
@@ -658,8 +657,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
           effects.add(BackgroundEffect.BAR_CHART);
 
           for (IColumn<?> c : columns) {
-            if (c instanceof INumberColumn) {
-              INumberColumn column = (INumberColumn) c;
+            if (c instanceof INumberColumn column) {
               String oldEffect = column.getBackgroundEffect();
               for (int i = 0; i < effects.size(); ++i) {
                 if (StringUtility.emptyIfNull(oldEffect).equals(StringUtility.emptyIfNull(effects.get(i)))) {

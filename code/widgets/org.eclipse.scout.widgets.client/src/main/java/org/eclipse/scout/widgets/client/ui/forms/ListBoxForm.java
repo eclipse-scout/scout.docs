@@ -543,8 +543,7 @@ public class ListBoxForm extends AbstractForm implements IAdvancedExampleForm {
       protected void execClickAction() {
         m_toggleState = m_toggleState.next();
         for (IFormField field : getAllFields()) {
-          if (field instanceof IListBox<?>) {
-            IListBox<?> listBox = (IListBox<?>) field;
+          if (field instanceof IListBox<?> listBox) {
             listBox.setFilterActiveRows(m_toggleState.isActive());
             listBox.setFilterCheckedRows(m_toggleState.isChecked());
           }
