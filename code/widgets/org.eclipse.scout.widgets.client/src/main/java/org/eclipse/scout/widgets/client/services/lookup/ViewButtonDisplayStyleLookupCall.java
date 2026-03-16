@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -26,6 +26,6 @@ public class ViewButtonDisplayStyleLookupCall extends LocalLookupCall<IViewButto
 
   @Override
   protected List<? extends ILookupRow<IViewButton.DisplayStyle>> execCreateLookupRows() {
-    return Arrays.asList(IViewButton.DisplayStyle.values()).stream().sorted().map(s -> new LookupRow<>(s, s.toString())).collect(Collectors.toList());
+    return Arrays.stream(IViewButton.DisplayStyle.values()).sorted().map(s -> new LookupRow<>(s, s.toString())).collect(Collectors.toList());
   }
 }
