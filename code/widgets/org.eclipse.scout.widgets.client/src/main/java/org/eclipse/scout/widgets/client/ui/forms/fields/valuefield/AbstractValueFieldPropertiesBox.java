@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -39,12 +39,8 @@ public abstract class AbstractValueFieldPropertiesBox<V> extends AbstractPropert
     m_field = field;
     m_field.addPropertyChangeListener((event) -> {
       switch (event.getPropertyName()) {
-        case IValueField.PROP_VALUE:
-          getFieldByClass(ValueField.class).setValue(valueToString(field.getValue()));
-          break;
-        case IValueField.PROP_DISPLAY_TEXT:
-          getFieldByClass(DisplayTextField.class).setValue(field.getDisplayText());
-          break;
+        case IValueField.PROP_VALUE -> getFieldByClass(ValueField.class).setValue(valueToString(field.getValue()));
+        case IValueField.PROP_DISPLAY_TEXT -> getFieldByClass(DisplayTextField.class).setValue(field.getDisplayText());
       }
     });
   }

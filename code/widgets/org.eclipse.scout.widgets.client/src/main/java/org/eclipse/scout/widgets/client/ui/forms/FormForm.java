@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -587,9 +587,7 @@ public class FormForm extends AbstractForm implements IPageForm {
               DisplayHint displayHint = (getDisplayHintField().getValue() != null ? getDisplayHintField().getValue() : DisplayHint.Dialog);
 
               switch (displayHint) {
-                case Dialog:
-                case View:
-                case PopupWindow: {
+                case Dialog, View, PopupWindow -> {
                   FormForm form = new FormForm();
                   form.setTitle(getFormTitleField().getValue());
                   form.setSubTitle(getFormSubTitleField().getValue());
@@ -616,10 +614,8 @@ public class FormForm extends AbstractForm implements IPageForm {
                       }
                     });
                   }
-
-                  break;
                 }
-                case MessageBox: {
+                case MessageBox -> {
                   IMessageBox messageBox = MessageBoxes.createYesNoCancel().withHeader("Message box").withBody("I am a message box");
                   DisplayParent displayParent = (getDisplayParentField().getValue() != null ? getDisplayParentField().getValue() : DisplayParent.Auto);
                   if (displayParent != DisplayParent.Auto) {
@@ -627,19 +623,16 @@ public class FormForm extends AbstractForm implements IPageForm {
                   }
                   messageBox.withIconId(getIconIdField().getValue());
                   messageBox.show();
-                  break;
                 }
-                case FileChooser: {
+                case FileChooser -> {
                   FileChooser fileChooser = new FileChooser();
                   DisplayParent displayParent = (getDisplayParentField().getValue() != null ? getDisplayParentField().getValue() : DisplayParent.Auto);
                   if (displayParent != DisplayParent.Auto) {
                     fileChooser.setDisplayParent(displayParent.getValue());
                   }
                   fileChooser.startChooser();
-                  break;
                 }
-                default:
-                  throw new IllegalArgumentException();
+                default -> throw new IllegalArgumentException();
               }
             };
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -1219,15 +1219,10 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
               @Override
               protected void execAction() {
                 HierarchicalStyle style = getHierarchicalStyle();
-                switch (style) {
-                  case STRUCTURED:
-                    style = HierarchicalStyle.DEFAULT;
-                    break;
-
-                  default:
-                    style = HierarchicalStyle.STRUCTURED;
-                    break;
-                }
+                style = switch (style) {
+                  case STRUCTURED -> HierarchicalStyle.DEFAULT;
+                  default -> HierarchicalStyle.STRUCTURED;
+                };
                 getTable().setHierarchicalStyle(style);
               }
 
