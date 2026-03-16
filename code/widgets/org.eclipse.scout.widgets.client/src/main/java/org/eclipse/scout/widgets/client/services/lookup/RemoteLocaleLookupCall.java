@@ -9,6 +9,7 @@
  */
 package org.eclipse.scout.widgets.client.services.lookup;
 
+import java.io.Serial;
 import java.util.Locale;
 
 import org.eclipse.scout.rt.platform.classid.ClassId;
@@ -22,6 +23,7 @@ import org.eclipse.scout.rt.shared.services.lookup.LookupCall;
 @ClassId("d1b4f871-1367-40d1-8425-4b0d2716e55e")
 public class RemoteLocaleLookupCall extends LookupCall<Locale> {
 
+  @Serial
   private static final long serialVersionUID = 1L;
 
   @Override

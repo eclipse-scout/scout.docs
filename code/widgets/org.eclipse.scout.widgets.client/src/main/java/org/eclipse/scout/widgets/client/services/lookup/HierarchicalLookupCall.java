@@ -9,6 +9,7 @@
  */
 package org.eclipse.scout.widgets.client.services.lookup;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -26,6 +27,7 @@ import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 @ClassId("eef35b00-5331-4006-b261-ef353a1d4f75")
 public class HierarchicalLookupCall extends LocalLookupCall<Long> {
 
+  @Serial
   private static final long serialVersionUID = 1L;
 
   private static final int NODES_PER_LEVEL = 5;
@@ -146,6 +148,7 @@ public class HierarchicalLookupCall extends LocalLookupCall<Long> {
 
   static class P_Data extends AbstractTableRowData {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     P_Data(long key, int depth) {

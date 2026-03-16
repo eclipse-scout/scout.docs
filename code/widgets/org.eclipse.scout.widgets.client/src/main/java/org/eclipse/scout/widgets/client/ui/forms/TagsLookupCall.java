@@ -9,6 +9,7 @@
  */
 package org.eclipse.scout.widgets.client.ui.forms;
 
+import java.io.Serial;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -22,6 +23,7 @@ import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 @ClassId("8199a2f2-acea-4807-91de-8effa66b04d5")
 public class TagsLookupCall extends LocalLookupCall<String> {
 
+  @Serial
   private static final long serialVersionUID = 1L;
 
   private List<String> m_tags;

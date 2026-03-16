@@ -9,10 +9,13 @@
  */
 package org.eclipse.scout.contacts.client;
 
+import java.io.Serial;
+
 import org.eclipse.scout.rt.shared.AbstractIcons;
 
 public class Icons extends AbstractIcons {
 
+  @Serial
   private static final long serialVersionUID = 1L;
 
   public static final String EclipseScout = "eclipse_scout";

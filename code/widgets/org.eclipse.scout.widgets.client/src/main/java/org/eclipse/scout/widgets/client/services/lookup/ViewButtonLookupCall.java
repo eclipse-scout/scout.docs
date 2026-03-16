@@ -9,6 +9,7 @@
  */
 package org.eclipse.scout.widgets.client.services.lookup;
 
+import java.io.Serial;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,6 +24,7 @@ import org.eclipse.scout.widgets.client.ClientSession;
 @ClassId("0f99dbb7-fcd0-48b7-b967-e6961690ab09")
 public class ViewButtonLookupCall extends LocalLookupCall<IViewButton> {
 
+  @Serial
   private static final long serialVersionUID = 1L;
 
   @Override

@@ -9,6 +9,7 @@
  */
 package org.eclipse.scout.contacts.client.common;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -21,6 +22,7 @@ import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 @ClassId("37736ea5-e861-43d8-a6bc-144dad3c208f")
 public class CountryLookupCall extends LocalLookupCall<String> { // <1>
 
+  @Serial
   private static final long serialVersionUID = 1L;
 
   @Override

@@ -9,6 +9,7 @@
  */
 package org.eclipse.scout.widgets.client.ui.forms;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -2468,6 +2469,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
   @ClassId("6f90ab0e-3f3b-467a-83f2-bbf9396fad93")
   public static class LocationLookupCall extends LocalLookupCall<String> {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Override

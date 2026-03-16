@@ -9,6 +9,7 @@
  */
 package org.eclipse.scout.widgets.client.services.lookup;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +20,7 @@ import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 @ClassId("9d68e30d-9529-48f6-b6ca-707e45bef7a7")
 public class ImageLookupCall extends LocalLookupCall<String> {
 
+  @Serial
   private static final long serialVersionUID = 1L;
 
   @Override

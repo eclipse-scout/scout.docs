@@ -9,10 +9,13 @@
  */
 package org.eclipse.scout.widgets.shared;
 
+import java.io.Serial;
+
 import org.eclipse.scout.rt.shared.AbstractIcons;
 
 @SuppressWarnings("FieldNamingConvention")
 public class Icons extends AbstractIcons {
+  @Serial
   private static final long serialVersionUID = 1L;
 
   /**

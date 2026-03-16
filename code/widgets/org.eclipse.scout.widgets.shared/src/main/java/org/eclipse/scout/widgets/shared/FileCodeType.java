@@ -9,6 +9,8 @@
  */
 package org.eclipse.scout.widgets.shared;
 
+import java.io.Serial;
+
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
@@ -21,6 +23,7 @@ import org.eclipse.scout.rt.shared.services.common.code.AbstractCodeType;
 @ClassId("783aa07b-ef09-439c-af2d-82e091294c83")
 public class FileCodeType extends AbstractCodeType<String, String> {
 
+  @Serial
   private static final long serialVersionUID = 1L;
 
   public static final String ID = "File Types";
@@ -44,6 +47,7 @@ public class FileCodeType extends AbstractCodeType<String, String> {
   @ClassId("9254e7f8-f394-4a72-820e-8841d71f95bd")
   public static class HtmlCode extends AbstractCode<String> {
 
+    @Serial
     private static final long serialVersionUID = 1L;
     public static final String ID = "html";
 
@@ -62,6 +66,7 @@ public class FileCodeType extends AbstractCodeType<String, String> {
   @ClassId("e006acd4-d9a2-4364-b4dd-b83a27320cd6")
   public static class TextCode extends AbstractCode<String> {
 
+    @Serial
     private static final long serialVersionUID = 1L;
     public static final String ID = "txt";
 
@@ -80,6 +85,7 @@ public class FileCodeType extends AbstractCodeType<String, String> {
   @ClassId("c836bf15-d177-464d-aa23-dd08cb84a79a")
   public static class JpgCode extends AbstractCode<String> {
 
+    @Serial
     private static final long serialVersionUID = 1L;
     public static final String ID = "jpg";
 
@@ -98,6 +104,7 @@ public class FileCodeType extends AbstractCodeType<String, String> {
   @ClassId("f3c006ca-8dd6-4b7b-a92e-04b285e3d50e")
   public static class PngCode extends AbstractCode<String> {
 
+    @Serial
     private static final long serialVersionUID = 1L;
     public static final String ID = "png";
 
@@ -116,6 +123,7 @@ public class FileCodeType extends AbstractCodeType<String, String> {
   @ClassId("a640329d-f5b8-4ad8-b5cf-6f76a5744be6")
   public static class JavaCode extends AbstractCode<String> {
 
+    @Serial
     private static final long serialVersionUID = 1L;
     public static final String ID = "java";
 
@@ -134,6 +142,7 @@ public class FileCodeType extends AbstractCodeType<String, String> {
   @ClassId("01418936-e9e0-4f71-a74b-6d033cf534f1")
   public static class PdfCode extends AbstractCode<String> {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     public static final String ID = "pdf";
@@ -153,6 +162,7 @@ public class FileCodeType extends AbstractCodeType<String, String> {
   @ClassId("baecf52d-c371-435b-8c41-2943eb7ee0bb")
   public static class UknownCode extends AbstractCode<String> {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     public static final String ID = "__UNKNOWN__";
@@ -172,6 +182,7 @@ public class FileCodeType extends AbstractCodeType<String, String> {
   @ClassId("9474f6f1-68dc-4f88-bde9-b2771c04dfd0")
   public static class DirectoryCode extends AbstractCode<String> {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     public static final String ID = "__DIR__";

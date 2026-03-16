@@ -9,6 +9,7 @@
  */
 package org.eclipse.scout.widgets.client.services.lookup;
 
+import java.io.Serial;
 import java.util.Locale;
 
 import org.eclipse.scout.rt.platform.BEANS;
@@ -18,6 +19,7 @@ import org.eclipse.scout.rt.platform.util.NumberFormatProvider;
 @ClassId("2632a794-4ad9-472d-905a-8d77757c2db9")
 public class NumberFormatLocaleLookupCall extends AbstractLocaleLookupCall {
 
+  @Serial
   private static final long serialVersionUID = -2057181577149853634L;
 
   @Override

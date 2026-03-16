@@ -9,6 +9,7 @@
  */
 package org.eclipse.scout.widgets.client.services.lookup;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +24,7 @@ import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 @ClassId("d2353f8c-d3bb-439f-980f-f38e1044200a")
 public class FontStyleLookupCall extends LocalLookupCall<Integer> {
 
+  @Serial
   private static final long serialVersionUID = 1L;
 
   @Override

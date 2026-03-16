@@ -10,6 +10,7 @@
 package org.eclipse.scout.widgets.client.ui.forms;
 
 import java.awt.*;
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -112,6 +113,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
 
   @ClassId("06e88da7-1810-4c58-862e-ddcf6e7a1877")
   public static class CustomLocaleLookupCall extends LocaleLookupCall {
+    @Serial
     private static final long serialVersionUID = -4113831958135288489L;
 
     @Override
@@ -120,6 +122,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
     }
 
     protected static class CustomLocaleTableRowData extends LocaleTableRowData {
+      @Serial
       private static final long serialVersionUID = -3041359870377383920L;
       private String m_iconId;
       private boolean m_hasIso3Country;

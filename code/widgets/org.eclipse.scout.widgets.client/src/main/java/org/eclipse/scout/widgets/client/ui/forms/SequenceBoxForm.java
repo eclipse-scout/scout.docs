@@ -9,6 +9,7 @@
  */
 package org.eclipse.scout.widgets.client.ui.forms;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -1424,6 +1425,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
   @ClassId("0b6e3d5b-cc88-4dfa-b575-bdba83b81ff1")
   public static class YesNoLookupCall extends LocalLookupCall<Boolean> {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Override
@@ -1438,6 +1440,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
   @ClassId("3da5d9bb-b783-4c7f-a1a3-938f02ed6abf")
   public class WidgetLookupCall extends LocalLookupCall<IFormField> {
 
+    @Serial
     private static final long serialVersionUID = 1L;
     private final Class<? extends ISequenceBox> m_sequenceBox;
 

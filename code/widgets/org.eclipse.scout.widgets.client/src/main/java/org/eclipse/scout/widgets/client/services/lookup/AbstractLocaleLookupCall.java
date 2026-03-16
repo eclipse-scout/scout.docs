@@ -9,6 +9,7 @@
  */
 package org.eclipse.scout.widgets.client.services.lookup;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -27,6 +28,7 @@ import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 @ClassId("772ec00b-8e1f-4df0-bb45-6fedac7ce4a5")
 public abstract class AbstractLocaleLookupCall extends LocalLookupCall<Locale> {
 
+  @Serial
   private static final long serialVersionUID = 1L;
 
   private boolean m_throwVetoException;
@@ -74,6 +76,7 @@ public abstract class AbstractLocaleLookupCall extends LocalLookupCall<Locale> {
 
   public static class LocaleTableRowData extends AbstractTableRowData {
 
+    @Serial
     private static final long serialVersionUID = 1L;
     public static final String country = "country";
     public static final String language = "language";

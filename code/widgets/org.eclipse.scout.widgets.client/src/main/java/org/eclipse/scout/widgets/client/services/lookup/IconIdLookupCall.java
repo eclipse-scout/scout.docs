@@ -9,6 +9,7 @@
  */
 package org.eclipse.scout.widgets.client.services.lookup;
 
+import java.io.Serial;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ import org.eclipse.scout.widgets.shared.Icons;
 
 @ClassId("8886aab2-f0ba-4bd8-a73f-29d31a0e6f81")
 public class IconIdLookupCall extends LocalLookupCall<String> {
+  @Serial
   private static final long serialVersionUID = 1L;
 
   @Override

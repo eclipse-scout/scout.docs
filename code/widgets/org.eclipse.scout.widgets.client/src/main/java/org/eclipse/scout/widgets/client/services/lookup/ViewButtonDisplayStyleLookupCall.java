@@ -9,6 +9,7 @@
  */
 package org.eclipse.scout.widgets.client.services.lookup;
 
+import java.io.Serial;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,6 +23,7 @@ import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 @ClassId("ea322a27-b49b-40f0-a1d7-c90b3e02f0dd")
 public class ViewButtonDisplayStyleLookupCall extends LocalLookupCall<IViewButton.DisplayStyle> {
 
+  @Serial
   private static final long serialVersionUID = 1L;
 
   @Override

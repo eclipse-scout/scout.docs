@@ -9,6 +9,7 @@
  */
 package org.eclipse.scout.widgets.client.ui.template.formfield;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +22,7 @@ import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 @ClassId("87994332-f1fc-43bf-ac85-b6909b9da471")
 public class ClearableLookupCall extends LocalLookupCall<String> {
 
+  @Serial
   private static final long serialVersionUID = 1L;
 
   @Override

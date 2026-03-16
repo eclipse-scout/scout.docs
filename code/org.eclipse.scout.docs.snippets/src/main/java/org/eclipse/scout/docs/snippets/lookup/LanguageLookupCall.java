@@ -9,6 +9,7 @@
  */
 package org.eclipse.scout.docs.snippets.lookup;
 
+import java.io.Serial;
 import java.util.Date;
 
 import org.eclipse.scout.docs.snippets.ILanguageLookupService;
@@ -21,6 +22,7 @@ import org.eclipse.scout.rt.shared.services.lookup.LookupCall;
 public class LanguageLookupCall extends LookupCall<String> {
   // other stuff like serialVersionUID, Lookup Service definition...
 
+  @Serial
   private static final long serialVersionUID = 1L;
 
   private Date m_validityFrom;

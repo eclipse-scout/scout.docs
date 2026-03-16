@@ -9,6 +9,7 @@
  */
 package org.eclipse.scout.widgets.client.ui.forms;
 
+import java.io.Serial;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -690,6 +691,7 @@ public class PopupForm extends AbstractForm implements IAdvancedExampleForm {
 
   @ClassId("1c5e073f-d5a6-489e-b6da-bbc6d7533925")
   public static class PopupTypeLookupCall extends LocalLookupCall<PopupType> {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Override
@@ -704,6 +706,7 @@ public class PopupForm extends AbstractForm implements IAdvancedExampleForm {
   @ClassId("0a916a2e-b37c-428f-b570-66b1c417d306")
   public static class HorizontalAlignmentLookupCall extends LocalLookupCall<String> {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Override
@@ -718,6 +721,7 @@ public class PopupForm extends AbstractForm implements IAdvancedExampleForm {
   @ClassId("4d6bad4e-2ab6-4747-be6a-ced03317ad90")
   public static class VerticalAlignmentLookupCall extends LocalLookupCall<String> {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Override
@@ -731,6 +735,7 @@ public class PopupForm extends AbstractForm implements IAdvancedExampleForm {
 
   @ClassId("724db415-ce21-4ee3-aedd-27c679f9b561")
   public static class ScrollTypeLookupCall extends LocalLookupCall<String> {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Override

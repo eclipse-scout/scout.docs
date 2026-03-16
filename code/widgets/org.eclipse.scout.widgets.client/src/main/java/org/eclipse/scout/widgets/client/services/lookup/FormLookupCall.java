@@ -9,6 +9,7 @@
  */
 package org.eclipse.scout.widgets.client.services.lookup;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +25,7 @@ import org.eclipse.scout.widgets.client.ui.forms.imagefield.ImageFieldForm;
 
 @ClassId("37721775-c06d-4e42-b263-209f331ef907")
 public class FormLookupCall extends LocalLookupCall<Class<? extends IPageForm>> {
+  @Serial
   private static final long serialVersionUID = 1L;
 
   @Override

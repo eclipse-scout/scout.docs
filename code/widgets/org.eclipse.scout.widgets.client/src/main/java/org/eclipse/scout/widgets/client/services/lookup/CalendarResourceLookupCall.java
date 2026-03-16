@@ -9,6 +9,7 @@
  */
 package org.eclipse.scout.widgets.client.services.lookup;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -25,6 +26,7 @@ import org.eclipse.scout.widgets.shared.services.calendar.ICalendarService;
 @ClassId("c878f380-0a06-4893-9153-d2b7eeb05611")
 public class CalendarResourceLookupCall extends LocalLookupCall<CalendarResourceDo> {
 
+  @Serial
   private static final long serialVersionUID = 1L;
 
   private List<CalendarResourceDo> m_calendarResources;

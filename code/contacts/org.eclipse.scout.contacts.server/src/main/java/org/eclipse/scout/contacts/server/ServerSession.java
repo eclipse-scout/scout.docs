@@ -9,6 +9,8 @@
  */
 package org.eclipse.scout.contacts.server;
 
+import java.io.Serial;
+
 import org.eclipse.scout.rt.platform.security.User;
 import org.eclipse.scout.rt.server.session.AbstractServerSession;
 import org.eclipse.scout.rt.server.session.ServerSessionProvider;
@@ -17,6 +19,7 @@ import org.slf4j.LoggerFactory;
 
 public class ServerSession extends AbstractServerSession {
 
+  @Serial
   private static final long serialVersionUID = 1L;
   private static final Logger LOG = LoggerFactory.getLogger(ServerSession.class);
 

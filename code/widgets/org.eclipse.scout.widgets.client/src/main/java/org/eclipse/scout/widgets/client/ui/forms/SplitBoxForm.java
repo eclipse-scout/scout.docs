@@ -9,6 +9,7 @@
  */
 package org.eclipse.scout.widgets.client.ui.forms;
 
+import java.io.Serial;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -958,6 +959,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
 
   @ClassId("fbbd7dfe-18a4-40fb-ab3b-cca07777c92b")
   public static class P_SplitterPositionTypeLookupCall extends LocalLookupCall<String> {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Override

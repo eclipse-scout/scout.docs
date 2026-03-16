@@ -9,6 +9,7 @@
  */
 package org.eclipse.scout.widgets.client.ui.forms;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +22,7 @@ import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 @ClassId("01517465-c24a-4b02-b395-6961f9e19c5f")
 public class TreeCheckableStyleLookupCall extends LocalLookupCall<CheckableStyle> {
 
+  @Serial
   private static final long serialVersionUID = 1L;
 
   @Override
