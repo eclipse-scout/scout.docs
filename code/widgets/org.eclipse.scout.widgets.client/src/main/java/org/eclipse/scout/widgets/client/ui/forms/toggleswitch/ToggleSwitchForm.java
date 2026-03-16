@@ -9,6 +9,7 @@
  */
 package org.eclipse.scout.widgets.client.ui.forms.toggleswitch;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -491,6 +492,7 @@ public class ToggleSwitchForm extends AbstractForm implements IPageForm {
   @ClassId("f2db39e9-e644-4c10-87c2-fed58e781863")
   public static class P_ToggleSwitchDisplayStyleLookupCall extends LocalLookupCall<String> {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Override

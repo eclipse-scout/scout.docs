@@ -9,6 +9,7 @@
  */
 package org.eclipse.scout.widgets.client.ui.forms.groupbox;
 
+import java.io.Serial;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,6 +23,7 @@ import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 
 @ClassId("8edfb8c9-a461-4497-96f5-e585378f6d4c")
 public class SiblingFieldLookupCall extends LocalLookupCall<IFormField> {
+  @Serial
   private static final long serialVersionUID = 1L;
 
   private transient ICompositeField m_parent;

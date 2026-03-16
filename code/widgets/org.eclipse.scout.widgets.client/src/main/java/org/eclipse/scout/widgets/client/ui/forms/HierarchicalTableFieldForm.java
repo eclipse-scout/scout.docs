@@ -9,6 +9,7 @@
  */
 package org.eclipse.scout.widgets.client.ui.forms;
 
+import java.io.Serial;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
@@ -2130,6 +2131,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
 
   @ClassId("3f50e5dc-6f07-4312-9ced-7edf0954b999")
   public static class LocationLookupCall extends LocalLookupCall<String> {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Override

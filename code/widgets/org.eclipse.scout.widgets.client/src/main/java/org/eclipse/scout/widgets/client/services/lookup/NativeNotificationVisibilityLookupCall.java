@@ -9,6 +9,7 @@
  */
 package org.eclipse.scout.widgets.client.services.lookup;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,7 @@ import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 @ClassId("7fde3010-625c-46d6-b00e-b1bdc9c1db12")
 public class NativeNotificationVisibilityLookupCall extends LocalLookupCall<String> {
 
+  @Serial
   private static final long serialVersionUID = 137589495217391035L;
 
   @Override

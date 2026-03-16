@@ -9,6 +9,8 @@
  */
 package org.eclipse.scout.contacts.shared.person;
 
+import java.io.Serial;
+
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupService;
 import org.eclipse.scout.rt.shared.services.lookup.LookupCall;
@@ -16,6 +18,7 @@ import org.eclipse.scout.rt.shared.services.lookup.LookupCall;
 @ClassId("3d232e73-bd56-40ac-ae9a-7ccfa43550de")
 public class PersonLookupCall extends LookupCall<String> {
 
+  @Serial
   private static final long serialVersionUID = 1L;
 
   @Override

@@ -9,6 +9,7 @@
  */
 package org.eclipse.scout.widgets.client.ui.forms;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
@@ -216,6 +217,7 @@ public class BrowserFieldSandboxForm extends AbstractForm {
 
   @ClassId("2f8f115d-5d67-4cf8-aa47-3a852961c3d5")
   public static class SandboxPermissionsLookupCall extends LocalLookupCall<SandboxPermission> {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Override

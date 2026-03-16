@@ -9,6 +9,7 @@
  */
 package org.eclipse.scout.widgets.client.services.lookup;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +22,7 @@ import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 @ClassId("10f36728-ff9f-4695-a37a-50d6add6a687")
 public class ChartTypeLookupCall extends LocalLookupCall<String> {
 
+  @Serial
   private static final long serialVersionUID = 1L;
 
   @Override

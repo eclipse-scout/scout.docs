@@ -9,6 +9,7 @@
  */
 package org.eclipse.scout.widgets.client.ui.forms;
 
+import java.io.Serial;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -3437,6 +3438,7 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
 
   @ClassId("003ef2c0-4546-43b7-bba6-cf0e9a77322b")
   public static class LegendPositionLookupCall extends LocalLookupCall<String> {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Override
@@ -3452,6 +3454,7 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
 
   @ClassId("1c2d546c-6a86-47dd-b4e1-64941f9959b0")
   public static class ValuesProviderLookupCall extends LocalLookupCall<Integer> {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Override
@@ -3470,6 +3473,7 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
   @ClassId("31f82076-fe0b-43a7-a940-5a28b7abbb16")
   public static class P_SpeedoGreenAreaPositionLookupCall extends LocalLookupCall<String> {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Override
@@ -3485,6 +3489,7 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
   @ClassId("922b5a5f-920e-4d99-9802-55715f732134")
   public static class P_ColorModeLookupCall extends LocalLookupCall<ColorMode> {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Override

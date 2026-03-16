@@ -9,6 +9,7 @@
  */
 package org.eclipse.scout.docs.snippets;
 
+import java.io.Serial;
 import java.util.UUID;
 
 import org.eclipse.scout.rt.api.data.security.PermissionId;
@@ -24,6 +25,7 @@ public class AccessSnippet {
 
   //tag::ReadCompanyPermission[]
   public static class ReadCompanyPermission extends AbstractPermission {
+    @Serial
     private static final long serialVersionUID = 1L;
     public static final PermissionId ID = PermissionId.of("scoutdoc.ReadCompany");
 
@@ -35,6 +37,7 @@ public class AccessSnippet {
 
   //tag::CreateCompanyPermission[]
   public static class CreateCompanyPermission extends AbstractPermission {
+    @Serial
     private static final long serialVersionUID = 1L;
     public static final PermissionId ID = PermissionId.of("scoutdoc.CreateCompany");
 
@@ -73,6 +76,7 @@ public class AccessSnippet {
 
   //tag::UpdateCompanyPermission[]
   public static class UpdateCompanyPermission extends AbstractPermission {
+    @Serial
     private static final long serialVersionUID = 1L;
     public static final PermissionId ID = PermissionId.of("scoutdoc.UpdateCompany");
 

@@ -9,6 +9,7 @@
  */
 package org.eclipse.scout.docs.snippets;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
@@ -61,12 +62,14 @@ public class ClientNotificationSnippet {
    */
   static class PersonTableChangedNotification implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
   }
 
   @ClassId("9bf8088c-9701-4c3b-9b1f-41488ca048b9")
   static class UiThemeCodeType extends AbstractCodeType<Long, String> {
 
+    @Serial
     private static final long serialVersionUID = 1L;
     static final Long ID = 10000L;
 

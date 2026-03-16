@@ -9,6 +9,7 @@
  */
 package org.eclipse.scout.widgets.client.ui.forms;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -960,6 +961,7 @@ public class FormForm extends AbstractForm implements IPageForm {
   @ClassId("981e87fb-5680-45db-b6e9-53865b4ece31")
   public static class DisplayHintLookupCall extends LocalLookupCall<DisplayHint> {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Override
@@ -994,6 +996,7 @@ public class FormForm extends AbstractForm implements IPageForm {
   @ApplicationScoped
   @ClassId("ef83cba9-9f36-4ef3-8321-ad65aafa91f3")
   public static class DisplayParentLookupCall extends LocalLookupCall<DisplayParent> {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Override

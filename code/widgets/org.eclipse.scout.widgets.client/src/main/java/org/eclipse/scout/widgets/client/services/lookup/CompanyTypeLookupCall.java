@@ -9,6 +9,7 @@
  */
 package org.eclipse.scout.widgets.client.services.lookup;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,7 @@ import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 @ClassId("3e0f598a-c0c3-406d-ad52-8cbe4029cf7b")
 public class CompanyTypeLookupCall extends LocalLookupCall<Long> {
 
+  @Serial
   private static final long serialVersionUID = 1L;
 
   @Override

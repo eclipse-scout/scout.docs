@@ -9,6 +9,7 @@
  */
 package org.eclipse.scout.docs.snippets;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 
@@ -408,6 +409,7 @@ public class MigrationGuideSnippet {
   // end::clientnotification.handle.new[]
 
   class UserChangedClientNotification implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
     @SuppressWarnings("unused")
     private final String m_userId;

@@ -9,6 +9,8 @@
  */
 package org.eclipse.scout.contacts.shared;
 
+import java.io.Serial;
+
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
@@ -18,6 +20,7 @@ import org.eclipse.scout.rt.shared.services.common.code.AbstractCodeType;
 @ClassId("90ce6c8f-aeb0-4433-8891-87c340126fa7")
 public class UiThemeCodeType extends AbstractCodeType<Long, String> {
 
+  @Serial
   private static final long serialVersionUID = 1L;
   public static final Long ID = 10000L;
 
@@ -40,6 +43,7 @@ public class UiThemeCodeType extends AbstractCodeType<Long, String> {
   @ClassId("40ef44b8-dc5f-43e6-8640-bd8eccc84669")
   public static class DefaultCode extends AbstractCode<String> {
 
+    @Serial
     private static final long serialVersionUID = 1L;
     public static final String ID = "default";
 
@@ -58,6 +62,7 @@ public class UiThemeCodeType extends AbstractCodeType<Long, String> {
   @ClassId("2256f97b-4e76-48f0-85fb-0a0f981e231c")
   public static class DarkCode extends AbstractCode<String> {
 
+    @Serial
     private static final long serialVersionUID = 1L;
     public static final String ID = "dark";
 

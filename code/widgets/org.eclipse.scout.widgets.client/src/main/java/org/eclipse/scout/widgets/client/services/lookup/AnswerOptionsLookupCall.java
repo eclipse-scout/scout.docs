@@ -9,6 +9,7 @@
  */
 package org.eclipse.scout.widgets.client.services.lookup;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +24,7 @@ import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 @ClassId("aed2b172-c861-4025-9d7b-3cccd59670e1")
 public class AnswerOptionsLookupCall extends LocalLookupCall<Integer> {
 
+  @Serial
   private static final long serialVersionUID = 1L;
 
   @Override

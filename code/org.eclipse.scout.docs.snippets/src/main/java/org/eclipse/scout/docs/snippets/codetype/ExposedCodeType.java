@@ -9,6 +9,8 @@
  */
 package org.eclipse.scout.docs.snippets.codetype;
 
+import java.io.Serial;
+
 import org.eclipse.scout.rt.api.data.ApiExposed;
 import org.eclipse.scout.rt.api.data.ObjectType;
 import org.eclipse.scout.rt.platform.Order;
@@ -21,6 +23,7 @@ import org.eclipse.scout.rt.shared.services.common.code.AbstractCodeType;
 @ObjectType("sample.ExposedCodeType") // <2>
 @ClassId("00ee23a3-3a63-4c9e-80b9-25f0c0bf3c85")
 public class ExposedCodeType extends AbstractCodeType<String, String> { // <3>
+  @Serial
   private static final long serialVersionUID = 1L;
   public static final String ID = "10000";
 
@@ -32,6 +35,7 @@ public class ExposedCodeType extends AbstractCodeType<String, String> { // <3>
   @Order(1000)
   @ClassId("72cb3fd6-9fe6-4659-ab9b-96086b902c27")
   public static class FirstCode extends AbstractCode<String> {
+    @Serial
     private static final long serialVersionUID = 1L;
     public static final String ID = "1";
 
@@ -44,6 +48,7 @@ public class ExposedCodeType extends AbstractCodeType<String, String> { // <3>
   @Order(2000)
   @ClassId("5621b905-4dc0-4ffa-a764-f6372ed36768")
   public static class SecondCode extends AbstractCode<String> {
+    @Serial
     private static final long serialVersionUID = 1L;
     public static final String ID = "2";
 

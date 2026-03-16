@@ -9,6 +9,7 @@
  */
 package org.eclipse.scout.widgets.client.services.lookup;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +29,7 @@ import org.eclipse.scout.widgets.client.services.lookup.DisplayViewIdLookupCall.
 @ClassId("afbc1cc5-c1a7-488a-bd68-8dbe5bdf9c0e")
 public class DisplayViewIdLookupCall extends LocalLookupCall<DisplayViewId> {
 
+  @Serial
   private static final long serialVersionUID = 1L;
 
   public enum DisplayViewId {

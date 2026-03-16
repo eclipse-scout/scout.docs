@@ -9,6 +9,7 @@
  */
 package org.eclipse.scout.widgets.client.ui.forms;
 
+import java.io.Serial;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -1717,6 +1718,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
   }
 
   public class DateTimeErrorStatus extends Status {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     public DateTimeErrorStatus() {

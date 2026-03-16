@@ -9,6 +9,7 @@
  */
 package org.eclipse.scout.widgets.client.ui.template.formfield;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +22,7 @@ import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 @ClassId("1c303f17-674e-4f99-b94e-00ea4db42df8")
 public class DisabledStyleLookupCall extends LocalLookupCall<Integer> {
 
+  @Serial
   private static final long serialVersionUID = 1L;
 
   @Override

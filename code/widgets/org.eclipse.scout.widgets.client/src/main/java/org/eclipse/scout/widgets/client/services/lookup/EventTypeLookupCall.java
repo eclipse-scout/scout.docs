@@ -9,6 +9,8 @@
  */
 package org.eclipse.scout.widgets.client.services.lookup;
 
+import java.io.Serial;
+
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.shared.services.common.code.ICode;
 import org.eclipse.scout.rt.shared.services.lookup.CodeLookupCall;
@@ -21,6 +23,7 @@ import org.eclipse.scout.widgets.shared.services.code.EventTypeCodeType;
 @ClassId("599f17a5-d42a-4751-a390-229a960bee32")
 public class EventTypeLookupCall extends CodeLookupCall<Long> {
 
+  @Serial
   private static final long serialVersionUID = 1L;
 
   /**

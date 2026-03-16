@@ -9,6 +9,7 @@
  */
 package org.eclipse.scout.widgets.client.services.lookup;
 
+import java.io.Serial;
 import java.text.DateFormatSymbols;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -25,6 +26,7 @@ import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 @ClassId("7fa5640d-e4e3-46d0-a559-81341b3e45f8")
 public class YearsMonthsLookupCall extends LocalLookupCall<String> {
 
+  @Serial
   private static final long serialVersionUID = 1l;
 
   @Override

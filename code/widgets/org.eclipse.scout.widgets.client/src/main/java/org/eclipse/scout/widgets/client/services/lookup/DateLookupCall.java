@@ -9,6 +9,7 @@
  */
 package org.eclipse.scout.widgets.client.services.lookup;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +22,7 @@ import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 @ClassId("336f481d-c524-4d76-91dc-b57648920a6d")
 public class DateLookupCall extends LocalLookupCall<Long> {
 
+  @Serial
   private static final long serialVersionUID = 1L;
 
   @Override

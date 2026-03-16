@@ -9,6 +9,7 @@
  */
 package org.eclipse.scout.docs.snippets.dataobject;
 
+import java.io.Serial;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -230,6 +231,7 @@ public class DataObjectExamples {
   //tag::exampleId[]
   @IdTypeName("scout.ExampleId")
   public static final class ExampleId extends AbstractUuId {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     public static ExampleId create() {

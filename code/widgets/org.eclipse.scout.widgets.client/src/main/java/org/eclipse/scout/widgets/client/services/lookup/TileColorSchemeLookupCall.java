@@ -9,6 +9,7 @@
  */
 package org.eclipse.scout.widgets.client.services.lookup;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -22,6 +23,7 @@ import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 @ClassId("8302e181-9a58-4e92-8bad-0cc20c35d45d")
 public class TileColorSchemeLookupCall extends LocalLookupCall<IColorScheme> {
 
+  @Serial
   private static final long serialVersionUID = 1L;
 
   @Override
