@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -89,26 +89,16 @@ public class ExampleResource implements IRestResource {
   public Response error(@PathParam("id") int id) throws Exception {
     // the list of IDs is specified in RestExceptionLookupCall
     switch (id) {
-      case 1000:
-        throw new VetoException(new ProcessingStatus("VetoException", "This is a VetoException with severity 'warning'", new Exception("cause"), 123, IStatus.WARNING));
-      case 2000:
-        throw new AccessForbiddenException(TEXTS.get("YouAreNotAuthorizedToPerformThisAction"));
-      case 3000:
-        throw new ResourceNotFoundException(TEXTS.get("TheRequestedResourceCouldNotBeFound"));
-      case 4000:
-        throw new ThreadInterruptedError("Interrupted");
-      case 5000:
-        throw new JsonMappingException(null, "JSON Mapping failed");
-      case 6000:
-        throw new IllegalArgumentException("Invalid argument");
-      case 7000:
-        throw new RuntimeException("Custom runtime exception");
-      case 8000:
-        throw new ProcessingException();
-      case 9000:
-        throw new RemoteSystemUnavailableException("Server temporarily not available");
-      default:
-        throw new WebApplicationException(id); // other values are interpreted as HTTP status code
+      case 1000 -> throw new VetoException(new ProcessingStatus("VetoException", "This is a VetoException with severity 'warning'", new Exception("cause"), 123, IStatus.WARNING));
+      case 2000 -> throw new AccessForbiddenException(TEXTS.get("YouAreNotAuthorizedToPerformThisAction"));
+      case 3000 -> throw new ResourceNotFoundException(TEXTS.get("TheRequestedResourceCouldNotBeFound"));
+      case 4000 -> throw new ThreadInterruptedError("Interrupted");
+      case 5000 -> throw new JsonMappingException(null, "JSON Mapping failed");
+      case 6000 -> throw new IllegalArgumentException("Invalid argument");
+      case 7000 -> throw new RuntimeException("Custom runtime exception");
+      case 8000 -> throw new ProcessingException();
+      case 9000 -> throw new RemoteSystemUnavailableException("Server temporarily not available");
+      default -> throw new WebApplicationException(id); // other values are interpreted as HTTP status code
     }
   }
 }

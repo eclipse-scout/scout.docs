@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -822,23 +822,18 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
   }
 
   protected BigDecimal chartValue() {
-    switch (getValuesProviderField().getValue()) {
-      case VALUE_PROVIDER_RANDOM:
-        return new BigDecimal(NumberUtility.randomInt());
-      case VALUE_PROVIDER_RANDOM_POSITIVE:
-        return new BigDecimal(NumberUtility.randomInt(Integer.MAX_VALUE));
-      case VALUE_PROVIDER_RANDOM_500000:
+    return switch (getValuesProviderField().getValue()) {
+      case VALUE_PROVIDER_RANDOM -> new BigDecimal(NumberUtility.randomInt());
+      case VALUE_PROVIDER_RANDOM_POSITIVE -> new BigDecimal(NumberUtility.randomInt(Integer.MAX_VALUE));
+      case VALUE_PROVIDER_RANDOM_500000 -> {
         int range = 1000000;
-        return new BigDecimal(range / 2 - NumberUtility.randomInt(range));
-      case VALUE_PROVIDER_ALL_0:
-        return BigDecimal.ZERO;
-      case VALUE_PROVIDER_ALL_1:
-        return BigDecimal.ONE;
-      case VALUE_PROVIDER_ALL_50000:
-        return new BigDecimal(50000);
-      default:
-        throw new IllegalStateException();
-    }
+        yield new BigDecimal(range / 2 - NumberUtility.randomInt(range));
+      }
+      case VALUE_PROVIDER_ALL_0 -> BigDecimal.ZERO;
+      case VALUE_PROVIDER_ALL_1 -> BigDecimal.ONE;
+      case VALUE_PROVIDER_ALL_50000 -> new BigDecimal(50000);
+      default -> throw new IllegalStateException();
+    };
   }
 
   protected String randomHexColor() {
@@ -862,51 +857,44 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
     }
     IChart chart = getChart();
     Object[][] chartData = null;
-    ChartBean bean = null;
-    switch (chart.getConfig().getType()) {
-      case IChartType.FULFILLMENT:
+    ChartBean bean = switch (chart.getConfig().getType()) {
+      case IChartType.FULFILLMENT -> {
         chartData = getFulfillmentChartData();
-        bean = getFulfillmentChartBean(chartData);
-        break;
-      case IChartType.LINE:
-      case IChartType.BAR:
-      case IChartType.BAR_HORIZONTAL:
+        yield getFulfillmentChartBean(chartData);
+      }
+      case IChartType.LINE, IChartType.BAR, IChartType.BAR_HORIZONTAL -> {
         chartData = getBarLineChartData(false);
-        bean = getBarLineChartBean(chartData, false);
-        break;
-      case IChartType.COMBO_BAR_LINE:
+        yield getBarLineChartBean(chartData, false);
+      }
+      case IChartType.COMBO_BAR_LINE -> {
         chartData = getBarLineChartData(true);
-        bean = getBarLineChartBean(chartData, true);
-        break;
-      case IChartType.BUBBLE:
+        yield getBarLineChartBean(chartData, true);
+      }
+      case IChartType.BUBBLE -> {
         chartData = getBubbleChartData();
-        bean = getBubbleChartBean(chartData);
-        break;
-      case IChartType.SCATTER:
+        yield getBubbleChartBean(chartData);
+      }
+      case IChartType.SCATTER -> {
         chartData = getScatterChartData();
-        bean = getScatterChartBean(chartData);
-        break;
-      case IChartType.SPEEDO:
+        yield getScatterChartBean(chartData);
+      }
+      case IChartType.SPEEDO -> {
         chartData = getSpeedoChartData();
-        bean = getSpeedoChartBean(chartData);
-        break;
-      case IChartType.SALESFUNNEL:
+        yield getSpeedoChartBean(chartData);
+      }
+      case IChartType.SALESFUNNEL -> {
         chartData = getSalesfunnelChartData();
-        bean = getSalesfunnelChartBean(chartData);
-        break;
-      case IChartType.VENN:
+        yield getSalesfunnelChartBean(chartData);
+      }
+      case IChartType.VENN -> {
         chartData = getVennChartData();
-        bean = getVennChartBean(chartData);
-        break;
-      case IChartType.PIE:
-      case IChartType.DOUGHNUT:
-      case IChartType.POLAR_AREA:
-      case IChartType.RADAR:
-      default:
+        yield getVennChartBean(chartData);
+      }
+      default -> {
         chartData = getPieDoughnutChartData();
-        bean = getPieDoughnutChartBean(chartData);
-        break;
-    }
+        yield getPieDoughnutChartBean(chartData);
+      }
+    };
     if (bean != null) {
       chart.setData(bean.getData());
       chart.extendConfig(bean.getConfig(), true);
@@ -928,10 +916,8 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
     valueGroups = CollectionUtility.arrayListWithoutNullElements(valueGroups);
 
     switch (getCustomColorModeSelectorField().getValue()) {
-      case DATASET:
-        valueGroups.forEach(valueGroup -> valueGroup.setColorHexValue(randomHexColor()));
-        break;
-      case DATA:
+      case DATASET -> valueGroups.forEach(valueGroup -> valueGroup.setColorHexValue(randomHexColor()));
+      case DATA -> {
         int maxValueGroupSize = valueGroups.stream()
             .mapToInt(getValueGroupSize)
             .max()
@@ -940,58 +926,25 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
             .mapToObj(i -> randomHexColor())
             .collect(Collectors.toList());
         valueGroups.forEach(valueGroup -> valueGroup.setColorHexValue(colorHexValues));
-        break;
-      case ELEMENT:
-      default:
-        valueGroups.forEach(valueGroup -> valueGroup.setColorHexValue(IntStream.range(0, getValueGroupSize.applyAsInt(valueGroup))
-            .mapToObj(i -> randomHexColor())
-            .collect(Collectors.toList())));
-        break;
+      }
+      default -> valueGroups.forEach(valueGroup -> valueGroup.setColorHexValue(IntStream.range(0, getValueGroupSize.applyAsInt(valueGroup))
+          .mapToObj(i -> randomHexColor())
+          .collect(Collectors.toList())));
     }
   }
 
   private BigDecimal getMaxValue() {
-    switch (getChart().getConfig().getType()) {
-      case IChartType.FULFILLMENT:
-      case IChartType.VENN:
-        return BIG_DECIMAL_100;
-      case IChartType.LINE:
-      case IChartType.BAR:
-      case IChartType.BAR_HORIZONTAL:
-      case IChartType.COMBO_BAR_LINE:
-      case IChartType.BUBBLE:
-      case IChartType.SCATTER:
-      case IChartType.SPEEDO:
-      case IChartType.SALESFUNNEL:
-      case IChartType.PIE:
-      case IChartType.DOUGHNUT:
-      case IChartType.POLAR_AREA:
-      case IChartType.RADAR:
-      default:
-        return null;
-    }
+    return switch (getChart().getConfig().getType()) {
+      case IChartType.FULFILLMENT, IChartType.VENN -> BIG_DECIMAL_100;
+      default -> null;
+    };
   }
 
   protected BigDecimal getMinValue() {
-    switch (getChart().getConfig().getType()) {
-      case IChartType.FULFILLMENT:
-      case IChartType.SPEEDO:
-      case IChartType.PIE:
-      case IChartType.DOUGHNUT:
-      case IChartType.POLAR_AREA:
-      case IChartType.RADAR:
-      case IChartType.VENN:
-        return BigDecimal.ZERO;
-      case IChartType.LINE:
-      case IChartType.BAR:
-      case IChartType.BAR_HORIZONTAL:
-      case IChartType.COMBO_BAR_LINE:
-      case IChartType.SALESFUNNEL:
-      case IChartType.BUBBLE:
-      case IChartType.SCATTER:
-      default:
-        return null;
-    }
+    return switch (getChart().getConfig().getType()) {
+      case IChartType.FULFILLMENT, IChartType.SPEEDO, IChartType.PIE, IChartType.DOUGHNUT, IChartType.POLAR_AREA, IChartType.RADAR, IChartType.VENN -> BigDecimal.ZERO;
+      default -> null;
+    };
   }
 
   protected IColorScheme getColorScheme() {
@@ -1990,20 +1943,8 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
               IChart chart = getChart();
               String chartType = StringUtility.emptyIfNull(getValue());
               switch (chartType) {
-                case IChartType.PIE:
-                case IChartType.LINE:
-                case IChartType.BAR:
-                case IChartType.BAR_HORIZONTAL:
-                case IChartType.COMBO_BAR_LINE:
-                case IChartType.FULFILLMENT:
-                case IChartType.SPEEDO:
-                case IChartType.SALESFUNNEL:
-                case IChartType.VENN:
-                case IChartType.DOUGHNUT:
-                case IChartType.POLAR_AREA:
-                case IChartType.RADAR:
-                case IChartType.BUBBLE:
-                case IChartType.SCATTER:
+                case IChartType.PIE, IChartType.LINE, IChartType.BAR, IChartType.BAR_HORIZONTAL, IChartType.COMBO_BAR_LINE, IChartType.FULFILLMENT, IChartType.SPEEDO, IChartType.SALESFUNNEL, IChartType.VENN, IChartType.DOUGHNUT,
+                     IChartType.POLAR_AREA, IChartType.RADAR, IChartType.BUBBLE, IChartType.SCATTER -> {
                   IChartConfig config = chart.getConfig();
                   config.withType(chartType);
                   if (!getXAxisStackedCheckBox().isEnabled() && !getYAxisStackedCheckBox().isEnabled()) {
@@ -2030,9 +1971,8 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
                     config.removeTransparent();
                   }
                   chart.setConfig(config);
-                  break;
-                default:
-                  throw new VetoException("Unknown chart type: " + chartType);
+                }
+                default -> throw new VetoException("Unknown chart type: " + chartType);
               }
               renewData();
             }

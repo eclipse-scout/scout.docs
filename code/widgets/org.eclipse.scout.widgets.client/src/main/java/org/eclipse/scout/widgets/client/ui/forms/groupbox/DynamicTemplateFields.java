@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -26,19 +26,13 @@ public class DynamicTemplateFields {
   }
 
   public static IFormField createField(FIELD_TYPE fieldType) {
-    switch (fieldType) {
-      case DateField:
-        return new DateField();
-      case IntegerField:
-        return new IntegerField();
-      case SmartField:
-        return new SmartField();
-      case StringField:
-        return new StringField();
-
-      default:
-        return null;
-    }
+    return switch (fieldType) {
+      case DateField -> new DateField();
+      case IntegerField -> new IntegerField();
+      case SmartField -> new SmartField();
+      case StringField -> new StringField();
+      default -> null;
+    };
   }
 
   @ClassId("b76cbef7-731b-4009-aef3-70a9990729b9")

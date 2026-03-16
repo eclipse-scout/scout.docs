@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -443,21 +443,12 @@ public abstract class AbstractFormFieldPropertiesBox extends AbstractPropertiesB
   }
 
   protected String getSeverityName(int severity) {
-    switch (severity) {
-      case Status.OK: {
-        return "OK";
-      }
-      case Status.INFO: {
-        return "INFO";
-      }
-      case Status.WARNING: {
-        return "WARNING";
-      }
-      case Status.ERROR: {
-        return "ERROR";
-      }
-      default:
-        return "undefined";
-    }
+    return switch (severity) {
+      case Status.OK -> "OK";
+      case Status.INFO -> "INFO";
+      case Status.WARNING -> "WARNING";
+      case Status.ERROR -> "ERROR";
+      default -> "undefined";
+    };
   }
 }

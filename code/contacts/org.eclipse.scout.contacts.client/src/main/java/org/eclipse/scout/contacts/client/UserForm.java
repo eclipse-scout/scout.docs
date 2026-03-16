@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -121,16 +121,12 @@ public class UserForm extends AbstractForm {
         @Override
         protected void execAppLinkAction(String ref) {
           switch (ref) {
-            case "application-info":
+            case "application-info" -> {
               ScoutInfoForm form = new ScoutInfoForm();
               form.startModify();
-              break;
-            case "reset-data":
-              BEANS.get(IResetDataStoreService.class).resetDataStore();
-              break;
-            case "logout":
-              ClientSessionProvider.currentSession(ClientSession.class).stop();
-              break;
+            }
+            case "reset-data" -> BEANS.get(IResetDataStoreService.class).resetDataStore();
+            case "logout" -> ClientSessionProvider.currentSession(ClientSession.class).stop();
           }
         }
       }

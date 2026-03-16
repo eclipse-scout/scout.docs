@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -215,22 +215,15 @@ public class DataObjectExamples {
       if (value == null) {
         return null;
       }
-      switch (value) {
+      return switch (value) {
         // custom handling of old values (assuming 'old' was used in earlier revisions)
-        case "one":
-          return ONE;
-        case "two":
-          return TWO;
-        case "three":
-          return THREE;
-        case "four":
-          return THREE;
-        default:
-          // custom handling of unknown values
-          throw new AssertionException("unsupported status value '{}'", value);
-      }
+        case "one" -> ONE;
+        case "two" -> TWO;
+        case "three" -> THREE;
+        case "four" -> THREE;
+        default -> throw new AssertionException("unsupported status value '{}'", value); // custom handling of unknown values
+      };
     }
-
   }
   //end::exampleEnum[]
 
