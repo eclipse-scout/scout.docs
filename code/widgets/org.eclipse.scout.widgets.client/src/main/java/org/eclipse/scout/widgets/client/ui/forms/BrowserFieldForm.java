@@ -599,8 +599,10 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
 
             @Override
             protected String getConfiguredTooltipText() {
-              return "If checked, the content will be displayed in a separate window.\n\n"
-                  + "For this setting to have an effect, the page must be reloaded.";
+              return """
+                  If checked, the content will be displayed in a separate window.
+
+                  For this setting to have an effect, the page must be reloaded.""";
             }
 
             @Override
