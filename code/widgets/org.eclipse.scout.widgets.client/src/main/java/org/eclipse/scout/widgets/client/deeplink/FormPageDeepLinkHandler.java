@@ -92,8 +92,7 @@ public class FormPageDeepLinkHandler extends AbstractDeepLinkHandler {
           if (element.isVisible() && element.getClass().getAnnotation(FormPageParent.class) != null) {
             element.ensureChildrenLoaded();
           }
-          if (element.isVisible() && element instanceof IFormPage) {
-            IFormPage formPage = (IFormPage) element;
+          if (element.isVisible() && element instanceof IFormPage formPage) {
             Class<? extends IPageForm> formType = formPage.getFormType();
             if (formType == null) {
               return TreeVisitResult.CONTINUE;

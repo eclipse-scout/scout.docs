@@ -678,8 +678,7 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
       protected void execClickAction() {
         m_toggleState = m_toggleState.next();
         for (IFormField field : getAllFields()) {
-          if (field instanceof ITreeBox<?>) {
-            ITreeBox<?> treeBox = (ITreeBox<?>) field;
+          if (field instanceof ITreeBox<?> treeBox) {
             treeBox.setFilterActiveNodes(m_toggleState.isActive());
             treeBox.setFilterCheckedNodes(m_toggleState.isChecked());
           }

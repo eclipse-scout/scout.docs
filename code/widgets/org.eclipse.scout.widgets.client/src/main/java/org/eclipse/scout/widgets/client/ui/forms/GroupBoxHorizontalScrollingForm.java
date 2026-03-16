@@ -89,8 +89,7 @@ public class GroupBoxHorizontalScrollingForm extends AbstractForm implements IPa
   protected void execInitForm() {
     if (m_disableHorizontalScrolling) {
       for (IFormField field : getAllFields()) {
-        if (field instanceof IGroupBox) {
-          IGroupBox box = ((IGroupBox) field);
+        if (field instanceof IGroupBox box) {
           box.setBodyLayoutConfig(box.getBodyLayoutConfig().copy().withMinWidth(0));
         }
       }

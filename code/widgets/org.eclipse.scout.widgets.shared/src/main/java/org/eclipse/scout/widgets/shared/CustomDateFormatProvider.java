@@ -169,12 +169,11 @@ public class CustomDateFormatProvider extends DateFormatProvider {
     if (df == null) {
       return null;
     }
-    if (!(df instanceof SimpleDateFormat)) {
+    if (!(df instanceof SimpleDateFormat sdf)) {
       return df;
     }
 
     // replace localized texts such as months and days
-    SimpleDateFormat sdf = (SimpleDateFormat) df;
     sdf.setDateFormatSymbols(new DateFormatSymbols(Locale.of(locale.getLanguage())));
 
     PatternBean patternBean = m_localePatternMap.get(locale);
