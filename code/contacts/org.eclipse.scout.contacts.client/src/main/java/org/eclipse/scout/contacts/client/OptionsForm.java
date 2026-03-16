@@ -42,14 +42,9 @@ public class OptionsForm extends AbstractForm {
 
   @Override
   protected void execInitForm() {
-    String theme = ObjectUtility.nvl(getDesktop().getTheme(), DefaultCode.ID);
-    getUiThemeField().setValue(theme);
+    getUiThemeField().setValue(ObjectUtility.nvl(getDesktop().getTheme(), DefaultCode.ID));
     getDenseRadioButtonGroup().setValue(getDesktop().isDense());
-
-    String localeString = ClientUIPreferences.getClientPreferences(ClientSession.get()).get(ClientSession.PREF_USER_LOCALE, null);
-    if (localeString != null) {
-      getLocaleField().setValue(Locale.forLanguageTag(localeString));
-    }
+    getLocaleField().setValue(ObjectUtility.nvl(ClientSession.get().getLocale(), Locale.getDefault()));
   }
 
   public MainBox getMainBox() {
@@ -70,15 +65,22 @@ public class OptionsForm extends AbstractForm {
 
   protected void storeOptions() {
     // Not inside form handler, because the form is used in a FormToolButton without a handler
-    getDesktop().setTheme(getUiThemeField().getValue());
-    getDesktop().setDense(getDenseRadioButtonGroup().getValue());
+    boolean denseLayout = ObjectUtility.nvl(getDenseRadioButtonGroup().getValue(), false);
     Locale locale = ObjectUtility.nvl(getLocaleField().getValue(), Locale.getDefault());
+
+    boolean layoutChanged = ClientUIPreferences.getClientPreferences(ClientSession.get()).put(ClientSession.PREF_USER_LAYOUT, String.valueOf(denseLayout));
     boolean localeChanged = ClientUIPreferences.getClientPreferences(ClientSession.get()).put(ClientSession.PREF_USER_LOCALE, locale.toLanguageTag());
-    if (localeChanged) {
+
+    getDesktop().setTheme(getUiThemeField().getValue());
+    getDesktop().setDense(denseLayout);
+
+    if (layoutChanged || localeChanged) {
       ClientUIPreferences.getClientPreferences(ClientSession.get()).flush();
-      MessageBoxes.createOk()
-          .withBody(TEXTS.get("ChangeOfLanguageAppliedOnNextLogin"))
-          .show();
+      if(localeChanged) {
+        MessageBoxes.createOk()
+            .withBody(TEXTS.get("ChangeOfLanguageAppliedOnNextLogin"))
+            .show();
+      }
     }
   }
 
@@ -186,7 +188,7 @@ public class OptionsForm extends AbstractForm {
 
         @Override
         protected Class<? extends ILookupCall<Locale>> getConfiguredLookupCall() {
-          return (Class<? extends ILookupCall<Locale>>) AvailableLocaleLookupCall.class;
+          return AvailableLocaleLookupCall.class;
         }
       }
     }
