@@ -104,6 +104,14 @@ They have not been used since years and were never supported in Scout JS.
 
 If you need a prefix wildcard, add it to your search texts manually where required.
 
+== Removal of old Maven-Master properties
+
+The Maven Build no longer uses npm to run scripts. Npm is now only used to install pnpm and @eclipse-scout/releng. Then, pnpm is used to run build and test scripts.
+Accordingly, the following Maven-Master properties have been removed and can be deleted without replacement:
+
+* `master_npm_version`
+* `master_webpack_options`
+
 == Removal of Deprecated Code
 
 The following Java code was deprecated since at least one release and has been removed:
