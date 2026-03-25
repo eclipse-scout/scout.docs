@@ -171,7 +171,6 @@ The following Less mixins have been removed as they are no longer necessary:
 ** `pulse-opacity`
 ** `rotate-x`
 
-
 == AbstractRestLookupCall moved to shared module
 
 `AbstractRestLookupCall` was moved from the client to the shared module:
@@ -209,4 +208,12 @@ tree.visitNodes(node => {
 });
 ----
 
+== Trust manager and remote files
 
+`org.eclipse.scout.rt.server.commons.GlobalTrustManager.getTrustedCertificatesInRemoteFiles()` has been removed. As a result, all trusted certificates now have to be provided locally.
+
+The following service operations have also been removed:
+
+* `org.eclipse.scout.rt.client.services.common.file.IFileService.syncRemoteFiles(String, FilenameFilter)`
+* `org.eclipse.scout.rt.client.services.common.file.IFileService.syncRemoteFilesToPath(String, String, FilenameFilter)`
+* `org.eclipse.scout.rt.shared.services.common.file.IRemoteFileService.getRemoteFiles(String, FilenameFilter, RemoteFile[])`
