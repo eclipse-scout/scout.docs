@@ -151,6 +151,9 @@ The following TypeScript code was deprecated since at least one release and has 
 * `ObjectFactory.createUniqueId` has been removed. Use `ObjectIdProvider.get().createUiSeqId()` decorator instead.
 * `ObjectFactoryOptions.ensureUniqueId` has been removed. Use `@objectFactoryHints({ensureId: true})` decorator on the affected class instead.
 
+NOTE: In case you still use JavaScript code (instead of TypeScript), these API changes will not be verified using the TypeScript compiler!
+Then you have to go through your JavaScript code manually to find all usages.
+
 The following Less mixins have been removed as they are no longer necessary:
 
 * `#scout.animation`: Use `animation` property directly. So instead of e.g. `#scout.animation(show-axis-select 0.5s ease-in-out 1);` use `animation: show-axis-select 0.5s ease-in-out 1;`.
