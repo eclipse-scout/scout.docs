@@ -257,3 +257,24 @@ const myFancyWidget = (await hybridManager.when(`widgetAdd:${id}`)).widget;
 // destroy widget
 myFancyWidget.destroy();
 ----
+
+== EventSupport API changes for subtypes (Scout JS)
+
+The `EventSupport` provides API to register callback functions in order to handle events with subtypes.
+Consider e.g. a `FancyEvent` that is always triggered with the type _fancy_ but has a property `subType` which can hold the values _foo_ or _bar_.
+In order to support listeners for _fancy:foo_ or _fancy:bar_ such a callback needs to be registered.
+Earlier this was done using a subtype predicate, that was handed over the event and the subtype and returned a boolean flag whether the subtype matches.
+This was changed to a subtype provider, that is handed over the event and returns the subtype.
+All places using these subtype callbacks need to be migrated.
+
+.Old: Registering a predicate that checks if the `subType` of the `FancyEvent` matches.
+[source,typescript,opts=novalidate]
+----
+this.events.registerSubTypePredicate('fancy', (event: FancyEvent, subType: string) => event.subType === subType);
+----
+
+.New: Registering a provider that returns the `subType` of the `FancyEvent`.
+[source,typescript,opts=novalidate]
+----
+this.events.registerSubTypeProvider('fancy', (event: FancyEvent) => event.subType);
+----
