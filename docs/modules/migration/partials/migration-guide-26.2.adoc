@@ -220,3 +220,12 @@ The following service operations have also been removed:
 * `org.eclipse.scout.rt.client.services.common.file.IFileService.syncRemoteFiles(String, FilenameFilter)`
 * `org.eclipse.scout.rt.client.services.common.file.IFileService.syncRemoteFilesToPath(String, String, FilenameFilter)`
 * `org.eclipse.scout.rt.shared.services.common.file.IRemoteFileService.getRemoteFiles(String, FilenameFilter, RemoteFile[])`
+
+== ICacheBuilder.withMaxConcurrentResolve: Allow multiple resolve operations for one thread
+
+The `BoundedResolveCacheWrapper` (used implicitly by `ICacheBuilder.withMaxConcurrentResolve`) has been changed to allow multiple resolve operations for one thread (default is now reentrant) to avoid a potential deadlock cause.
+That is, one thread will only be counted once towards the limit.
+
+However, this is just one potential deadlock cause, deadlocks may still occur if the resolve operation also relies on external semaphores.
+
+To restore the previous behavior the `BoundedResolveCacheWrapper` may be added directly as custom wrapper with the second constructor allowing to disable this reentrant behavior.
