@@ -230,6 +230,181 @@ However, this is just one potential deadlock cause, deadlocks may still occur if
 
 To restore the previous behavior the `BoundedResolveCacheWrapper` may be added directly as custom wrapper with the second constructor allowing to disable this reentrant behavior.
 
+== Stateless Backend Server
+
+As part of the move toward a stateless backend server, the server session support was extracted into separate modules for legacy support.
+
+- Shared session code was moved into new module `org.eclipse.scout.rt.shared.session` and `org.eclipse.scout.rt.shared.session.test`
+- Server session code was moved into new module `org.eclipse.scout.rt.server.session` and `org.eclipse.scout.rt.server.session.test`
+
+The new default setup is to use the Scout backend without session-support.
+
+Several shared classes were moved into a `.session` package, adapt the imports in your UI-server modules.
+
+[cols="1,1" options="header"]
+|===
+|Old
+|New
+
+|`org.eclipse.scout.rt.shared.ISession`
+|`org.eclipse.scout.rt.shared.session.ISession`
+
+
+|`org.eclipse.scout.rt.shared.job.filter.event.SessionJobEventFilter`
+|`org.eclipse.scout.rt.shared.session.job.filter.event.SessionJobEventFilter`
+
+|`org.eclipse.scout.rt.shared.job.filter.future.SessionFutureFilter`
+|`org.eclipse.scout.rt.shared.session.job.filter.future.SessionFutureFilter`
+
+|`org.eclipse.scout.rt.shared.session.Sessions.randomSessionId()`
+|`org.eclipse.scout.rt.shared.session.SessionId.randomSessionId()`
+|===
+
+The unit test annotation `@RunWithServerSession` has become obsolete if you do not use backend sessions any longer.
+Remove the annotation and make sure your test is annotated with `@RunWithSubject`.
+
+=== API for current user
+
+A new thread local `org.eclipse.scout.rt.platform.security.User.CURRENT` provides access to the user which is associated with the current thread.
+This object replaces the `org.eclipse.scout.rt.shared.user.UserId.CURRENT` thread local that has been introduced in Scout 26.1.
+
+[cols="1,1" options="header"]
+|===
+|Old
+|New
+
+|`org.eclipse.scout.rt.shared.user.UserId.CURRENT.get()`
+|`org.eclipse.scout.rt.shared.user.User.currentUserId()`
+|===
+
+The user associated to the current thread can be accessed via `org.eclipse.scout.rt.platform.security.User.current()`.
+
+Creation and initialization of the `User` is centralized in `IAccessControlService`.
+
+[cols="1,1" options="header"]
+|===
+|Old
+|New
+
+|`org.eclipse.scout.rt.security.IAccessControlService.getUserIdOfCurrentSubject()`
+|`org.eclipse.scout.rt.shared.user.User.currentUserId()`
+
+|`org.eclipse.scout.rt.security.IAccessControlService.getUserId(Subject)`
+|`org.eclipse.scout.rt.security.IAccessControlService.getUser(Subject).getUserId()`
+
+or `org.eclipse.scout.rt.security.IAccessControlService.extractUserId(Subject)` in case only the id should be extracted from the `Subject`.
+|===
+
+A `User` can be assigned to a `RunContext`. It can be assigned via `RunContext.withUser(User)` and accessed via `RunContext.getUser()`.
+
+NOTE: Make sure when assigning a different `Subject` to a run context to also update the `User` if necessary.
+
+[source,java,opts=novalidate]
+----
+RunContexts.empty()
+    .withSubject(subject)
+    .withUser(BEANS.get(IAccessControlService.class).getUser(subject))
+----
+
+=== API replacing backend server session
+
+The following APIs were introduced as replacement for the former backend server session:
+
+- New thread local `org.eclipse.scout.rt.shared.session.SessionId.CURRENT` provides access to the id of the client session which is associated with the current thread.
+- Implementations of `org.eclipse.scout.rt.server.session.IInitialSharedVariableContributor` allow to load user/session-specific data in backend and return to UI server when a client session is initialized.
+
+[source,java,opts=novalidate]
+----
+public class UserDataSharedVariableContributor implements IInitialSharedVariableContributor {
+
+  @Override
+  public void contribute(Map<String, Object> variables) {
+    // load data
+    variables.put("mykey", "myvalue");
+  }
+}
+----
+
+NOTE: Make sure to invoke method `loadInitialSharedVariables` when loading your client session in order to load shared variables from backend server.
+
+[source,java,opts=novalidate]
+----
+  @Override
+  protected void execLoadSession() {
+    loadInitialSharedVariables();
+    // ...
+----
+
+=== Legacy server session support
+
+If your application requires session support in Scout backend, add a dependency to `org.eclipse.scout.rt.server.session` in your server module and a dependency to `org.eclipse.scout.rt.shared.session` in your shared module.
+
+NOTE: The Scout backend server session support is considered _deprecated_ and will be removed in a future release.
+
+As part of extracting the session code into separate modules several classes were moved into a `.session` package. Adapt your imports in your server modules.
+
+[cols="1,1" options="header"]
+|===
+|Old
+|New
+
+|`org.eclipse.scout.rt.server.IServerSession`
+|`org.eclipse.scout.rt.server.session.IServerSession`
+
+|`org.eclipse.scout.rt.server.AbstractServerSession`
+|`org.eclipse.scout.rt.server.session.AbstractServerSession`
+
+|`org.eclipse.scout.rt.server.context.HttpServerRunContextProducer`
+|`org.eclipse.scout.rt.server.session.context.HttpServerSessionRunContextProducer`
+
+|`org.eclipse.scout.rt.server.context.ServerRunContextProducer`
+|`org.eclipse.scout.rt.server.session.context.ServerSessionRunContextProducer`
+
+|`org.eclipse.scout.rt.server.context.ServerRunContext`
+|`org.eclipse.scout.rt.server.session.context.ServerSessionRunContext`
+
+|`org.eclipse.scout.rt.server.context.ServerRunContextFilter`
+|`org.eclipse.scout.rt.server.session.context.ServerSessionRunContextFilter`
+
+|`org.eclipse.scout.rt.server.context.ServerRunContexts`
+|`org.eclipse.scout.rt.server.session.context.ServerSessionRunContexts`
+
+|`org.eclipse.scout.rt.testing.server.runner.RunWithServerSession`
+|`org.eclipse.scout.rt.testing.server.session.runner.RunWithServerSession`
+|===
+
+=== API changes for JAX-WS modules
+
+As part of extracting the session code into separate modules several classes for providing a RunContext were moved to `org.eclipse.scout.rt.server.jaxws` because they were used solely in a JAX-WS context.
+
+[cols="1,1" options="header"]
+|===
+|Old
+|New
+
+|`org.eclipse.scout.rt.platform.context.RunWithRunContext`
+|`org.eclipse.scout.rt.server.jaxws.context.RunWithRunContext`
+
+|`org.eclipse.scout.rt.platform.context.RunContextProducer`
+|`org.eclipse.scout.rt.server.jaxws.context.RunContextProducer`
+
+|`org.eclipse.scout.rt.server.context.ServerRunContextProducer`
+|`org.eclipse.scout.rt.server.jaxws.context.ServerRunContextProducer`
+|===
+
+NOTE: If you use JAX-WS together with legacy backend server session support you need to override and replace the `org.eclipse.scout.rt.server.jaxws.context.ServerRunContextProducer` and delegate to `org.eclipse.scout.rt.server.session.context.ServerSessionRunContextProducer`.
+
+[source,java,opts=novalidate]
+----
+@Replace
+public class JaxWsServerSessionRunContextProducer extends ServerRunContextProducer {
+  @Override
+  public ServerRunContext produce(final Subject subject) {
+    return BEANS.get(ServerSessionRunContextProducer.class).produce(subject);
+  }
+}
+----
+
 == HybridManager API improvements (Scout JS)
 
 The `HybridManager` provides API to dispose formerly created widgets. Former implementations calling the hybrid Action _scout.DisposeWidgets_ manually using the remote ids can be migrated.

@@ -29,6 +29,14 @@ Coming from an older Scout version? Check out the xref:migration:migration-guide
 //
 // * <<New Feature (since 26.2.xyz)>>
 
+== Stateless Backend Server
+
+The Scout backend server was migrated into a stateless architecture without requiring an HTTP- and Scout server session any longer.
+In a cloud environment a backend server now supports dynamic horizontal scaling which increases fault tolerance, improves overall
+reliability and adds flexibility for updates and deployments in a high availability setup.
+
+During a transition period, session support will be provided in separate modules for legacy purposes, see migration guide for details.
+
 [#tree-scout-js-findnode-added-and-visitnodes-improved]
 == Tree (Scout JS): FindNode Added and VisitNodes Improved
 
