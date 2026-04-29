@@ -453,3 +453,10 @@ this.events.registerSubTypePredicate('fancy', (event: FancyEvent, subType: strin
 ----
 this.events.registerSubTypeProvider('fancy', (event: FancyEvent) => event.subType);
 ----
+
+== Default timeout for JAX-WS requests
+
+* The default connect timeout for a JAX-WS request (`scout.jaxws.consumer.connectTimeout`) has been changed from infinite to 5 minutes.
+* The default read timeout for a JAX-WS request (`scout.jaxws.consumer.readTimeout`) has been changed from infinite to 30 minutes.
+
+In case these timeouts are too low for your setup, update the corresponding config properties.
