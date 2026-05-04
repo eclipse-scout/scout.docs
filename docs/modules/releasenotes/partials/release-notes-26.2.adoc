@@ -61,7 +61,7 @@ This makes it possible to change the format function without having to subclass 
 A validator can now be asynchronous by returning a promise.
 This can for example be used to call a rest resource that validates the user input.
 
-Please see the xref:technical-guide:user-interface/value-field.adoc#async-validator[technical guide] for details.
+Please see the xref:technical-guide:user-interface/value-field.adoc#async-validator[Technical Guide] for details.
 
 == HybridManager API improvements (Scout JS)
 
@@ -79,11 +79,11 @@ A marked tab item has a slightly darker line below its tab.
 
 You can choose between two strategies:
 
-. NOT_EMPTY: Marks a tab item if it is not empty.
-. SAVE_NEEDED: Marks a tab item if it needs to be saved.
+. `NOT_EMPTY`: Marks a tab item if it is not empty.
+. `SAVE_NEEDED`: Marks a tab item if it needs to be saved.
 
-The default strategy is NOT_EMPTY.
-For tab boxes inside a Search Form it is SAVE_NEEDED.
+The default strategy is `NOT_EMPTY`.
+For tab boxes inside a Search Form it is `SAVE_NEEDED`.
 
 == FormField: Empty Property now Reflects the State of its Children (Scout JS)
 
@@ -94,3 +94,9 @@ This is useful for composite fields that don't have its own empty state like `Gr
 
 To influence or disable the computation of the `empty` property, you can set the property `checkEmpty` or override the method `_computeEmpty()`.
 Please see the JsDoc of the `FormFieldModel.checkEmpty` for details.
+
+== Locking of Transitive Node Dependencies
+
+To mitigate supply chain attacks and ensure reproducible builds, Scout now provides support to lock the Node.js dependencies.
+
+See the xref:technical-guide:user-interface/build-stack.adoc#node-dependency-resolution[Technical Guide] for details and the xref:migration-guide.adoc#locking-of-transitive-node-dependencies[Migration Guide] for instructions how to enable the feature.

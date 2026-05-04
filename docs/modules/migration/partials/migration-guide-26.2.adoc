@@ -50,7 +50,7 @@ Usage example in your package.json:
   "version": "1.0.0",
   "devDependencies": {
     "@eclipse-scout/cli": "{node-version}",
-    "@eclipse-scout/releng": "^26.2.0"
+    "@eclipse-scout/releng": "~26.2.0"
   },
   "dependencies": {
     "@eclipse-scout/core": "{node-version}",
@@ -599,3 +599,22 @@ The first one has been removed and only the second argument (default URL) is use
 Migrate from `System.getEndpointUrl('name', 'default/url')` to `System.getEndpointUrl('default/url')`.
 
 In case an existing named URL has been replaced using `System.setEndpointUrl('name', 'new/url')` it must be migrated to `System.setEndpointUrl('default/url', 'new/url')`.
+
+[#locking-of-transitive-node-dependencies]
+== Locking of Transitive Node Dependencies
+
+Scout includes support to lock the Node dependencies.
+See the xref:technical-guide:user-interface/build-stack.adoc#node-dependency-resolution[Technical Guide] for details.
+
+To enable the feature perform the following:
+
+. Replace all occurrences of `pnpm install --ignore-scripts` with `pnpx @eclipse-scout/releng@~26.2.0 install`.
++
+Some places that might change:
++
+* The `pnpm-install` script in the `package.json` files.
+* In Eclipse: The run configuration shell scripts: `js build.sh` or `js build.cmd`.
+. Replace the version specifier of the `@eclipse-scout/releng` dependency in all `package.json` files with `~26.2.0`.
+. Delete the `pnpm-lock.yaml` and add `pnpm-lock.yaml` to your `.gitignore` file to ensure it is not commited as it will not be used anyway.
+. Ensure all `package.json` files include values for the `name` and `version` attributes, otherwise generating the overrides will fail.
+. Ensure your `pnpm-workspace.yaml` file only lists `packages` for which the path exists and contains a `package.json` file.
