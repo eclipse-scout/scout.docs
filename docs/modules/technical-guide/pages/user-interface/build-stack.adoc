@@ -1,17 +1,82 @@
 = Build Stack
+
 include::common:partial$_header.adoc[]
 
-JavaScript and CSS assets of a typical Scout application are built by  https://webpack.js.org/[Webpack] using https://www.npmjs.com/[npm] and https://nodejs.org/[Node.js]. In order to make the building as easy as possible for you, there is a https://www.npmjs.com/package/@eclipse-scout/cli[CLI] module available. That module contains a default webpack and karma configuration and several build scripts you can use. The goal is to reduce the time you need to set up your build to a minimum. If you have created your Scout project using a Scout archetype, it should all be already setup for you. Nevertheless, you will get to a point where it is important to know how the building works in detail and how the several build tools are wired together. If you are there, this chapter should help you out.
+JavaScript and CSS assets of a typical Scout application are built by  https://webpack.js.org/[Webpack] using https://pnpm.io/[pnpm] and https://nodejs.org/[Node.js]. In order to make the building as easy as possible for you, there is a https://www.npmjs.com/package/@eclipse-scout/cli[CLI] module available. That module contains a default webpack and karma configuration and several build scripts you can use. The goal is to reduce the time you need to set up your build to a minimum. If you have created your Scout project using a Scout archetype, it should all be already setup for you. Nevertheless, you will get to a point where it is important to know how the building works in detail and how the several build tools are wired together. If you are there, this chapter should help you out.
 
 == Dependency Management
 
-In every modern application you will have dependencies to other modules, either modules you created to separate your code, or third party modules like Scout. Such dependencies to other JavaScript modules are managed by the Node Package Manager (https://www.npmjs.com/[npm]). So every module containing JavaScript or Less code needs to be a Node module with a `package.json` file that defines its dependencies.
+In every modern application you will have dependencies to other modules, either modules you created to separate your code, or third party modules like Scout. Such dependencies to other JavaScript modules are managed by https://pnpm.io/[pnpm]. So every module containing JavaScript or Less code needs to be a Node module with a `package.json` file that defines its dependencies.
 
-This setup gives you the possibility to easier integrate and update 3rd party JavaScript frameworks available in the huge https://www.npmjs.com/[npm registry].
+This setup gives you the possibility to easier integrate and update 3rd party JavaScript frameworks available in the huge https://www.npmjs.com/[npmjs registry].
 
-Scout itself is also published to that registry and will therefore be downloaded automatically once you execute `npm install`, as long as your `package.json` contains a Scout dependency. You will recognize a Scout module based on its name: all official Scout modules are published using the scope `@eclipse-scout`. The most important one is https://www.npmjs.com/package/@eclipse-scout/core[@eclipse-scout/core] which contains the core runtime functionality. Other modules are https://www.npmjs.com/package/@eclipse-scout/cli[@eclipse-scout/cli] for the building support, https://www.npmjs.com/package/@eclipse-scout/eslint-config[@eclipse-scout/eslint-config] for our ESLint rules, or https://www.npmjs.com/package/@eclipse-scout/karma-jasmine-scout[@eclipse-scout/karma-jasmine-scout] for enhanced testing support.
+Scout itself is also published to that registry and will therefore be downloaded automatically once you execute `pnpm install`, as long as your `package.json` contains a Scout dependency. You will recognize a Scout module based on its name: all official Scout modules are published using the scope `@eclipse-scout`. The most important one is https://www.npmjs.com/package/@eclipse-scout/core[@eclipse-scout/core] which contains the core runtime functionality. Other modules are https://www.npmjs.com/package/@eclipse-scout/cli[@eclipse-scout/cli] for the building support, https://www.npmjs.com/package/@eclipse-scout/eslint-config[@eclipse-scout/eslint-config] for our ESLint rules, or https://www.npmjs.com/package/@eclipse-scout/karma-jasmine-scout[@eclipse-scout/karma-jasmine-scout] for enhanced testing support.
+
+[#node-dependency-resolution]
+=== Dependency Resolution
+
+https://pnpm.io/[Pnpm] takes care to link all dependencies declared in a `package.json` file to a `node_modules` directory next to it. If it is a 3rd party dependency, it is downloaded to a local store before.
+
+The dependency version to use is part of the dependency declaration in the `package.json` and follows the https://semver.org/[SemVer] specification.
+This specification allows to declare range dependencies which might match several versions (even versions in the future which have not yet been published).
+When a dependency is installed, pnpm decides which version to use based on the declared SemVer constraint.
+
+Using ranged versions has the benefit that you automatically get newer versions e.g. including bugfixes without changing anything in your dependency declarations.
+On the other hand you also get regressions automatically, and it may prevent reproducible build outputs.
+Furthermore, it increases the risk of supply chain attacks, where an attacker compromises an npm account and publishes a malicious package that will be downloaded automatically.
+
+To address these issues, Scout 26.2 or newer locks most of the ranged dependencies to a fixed version by default.
+Excluded are `snapshot` dependencies which should always point to the newest available snapshot version.
+These `snapshot` dependencies are the reason Scout cannot use pnpm's default locking mechanism based on a `pnpm-lock.yaml` file. The lock file always pins the entire dependency tree, whereas snapshot dependencies must not be locked.
+
+Instead, the locked versions are written to the https://pnpm.io/settings#overrides[pnpm overrides] in the `pnpm-workspace.yaml` file.
+The new `install` command of the `@eclipse-scout/releng` module generates these overrides when dependencies are installed locally during development.
+The Maven build scripts only use the available overrides and therefore exactly use the specified versions.
+The generated overrides contain all dependencies and transitive dependencies that are declared using a ranged non-snapshot version.
+
+While the exact version in the overrides depends on the available versions at the time you execute the install script, the following examples give an idea how the overrides are generated:
+
+* Declaring a dependency `"@eclipse-scout/core": "26.1.16"` will result in no override as the version is already fixed.
+* Declaring a dependency using a ranged version like `"@eclipse-scout/core": "~26.1.0"` will result in an override like `"@eclipse-scout/core": 26.1.16`.
+* Declaring the same dependency in different packages using different ranges like `"@eclipse-scout/core": "~26.1.0"` in `pck-a` and `"@eclipse-scout/core": ">=25.2.0 <26.1.0"` in `pck-b` will result in overrides like `"@eclipse-scout/core": 26.1.16` and `pck-b>@eclipse-scout/core: 25.2.20`.
+* Declaring a dependency using a snapshot version like `"@eclipse-scout/core": ">=26.2.0-snapshot <26.2.0"` will result in no override as snapshot versions will not be fixed.
+
+The `install` command of the `@eclipse-scout/releng` module has the following parameters:
+
+* `updateMode`: Specifies which dependencies should be updated during install. Default is `required`. Must be one of the following:
+** `required`: Update dependencies that do not fulfill the version declaration in the `package.json`.
+This should be used during development so that the overrides are adapted as required in case you modify the dependencies in the `package.json`.
+Running install using this mode is more or less the same as performing `pnpm install` without the previously generated overrides and re-generating new overrides afterward.
+Therefore, only those overrides are updated that do no longer satisfy changed version constraints in your `package.json`.
+** `all`: Update all dependencies to the newest possible version that currently exists and matches the version specifiers of the `package.json`.
+This can be used if you want to perform a manual full update of the whole dependency tree.
+The update mode `all` is nearly the same as running `pnpm update` without the previously generated overrides and re-generating new overrides afterward.
+So running install using this mode leads to all overrides being updated to the newest version satisfying the version constraints from the `package.json`.
+** `snapshots`: Only `snapshot` dependencies are updated.
+All other dependencies use the version declared in the overrides.
+As only `snapshots` can be updated, and they are never part of the overrides, the overrides will not be touched in this mode.
+This mode is typically used by CI builds.
+Running install using this mode will not change the overrides as it is more or less a `pnpm update` with the previously generated overrides.
+Therefore, only non overridden dependencies (i.e. snapshot dependencies) are updated to their newest version satisfying the version constraints from the `package.json`.
+* `convergenceLogLevel`: Specifies which non-convergent dependencies should be logged. Default is `own`. Must be one of the following:
+** `all`: Log all dependencies for which several versions are in use (non-unique versions).
+** `single-external`: Log dependencies for which a single pnpm-workspace-external dependency exists.
+If a dependency is used in different versions but all of your transitive dependencies are using the same version,
+this level may be handy to eliminate these duplicate dependency versions by adapting the dependency versions in your workspace to the single external one.
+** `own`: Log only mixed dependency versions in the own pnpm-workspace.
+These may be misconfigured (old) packages.
+** `none`: Nothing is logged.
+
+If you want to disable dependency locking using overrides and restore the old (and riskier) behavior do the following:
+
+. Remove the overrides from the `pnpm-workspace.yaml` if existing.
+. Replace the `pnpx @eclipse-scout/releng install` command in the `pnpm-install` script of your `package.json` files with the following: `pnpm install --ignore-scripts`.
+. This will generate the `pnpm-lock.yaml` file again when executed.
+.. If you want to lock the whole tree (including snapshot): commit it to your VCS.
+.. If you want no locking at all: delete the file and add it to your VCS ignore list or add the https://pnpm.io/cli/install#--no-lockfile[--no-lockfile] argument to the script.
 
 === ES6 Modules
+
 In addition to Node module dependencies, a Scout application uses ES6 imports to define dependencies between each JavaScript files. So if you want to use a class or utility from `@eclipse-scout/core`, you'll need to import that class or utility in your own JavaScript file.
 
 [source,javascript,opts=novalidate]
@@ -31,6 +96,7 @@ export class PersonForm extends Form {
 In the code above there are two imports defined: the first one imports the file `PersonFormModel` into the variable PersonFormModel. The second one imports the class `Form` and the utility `models` from the scout core module. Notice that the first import directly addresses a specific file while the second import addresses the node module itself. This is possible because Scout provides an `index` file specifying all available exports. That file is linked in the `package.json`. If your application contains more than one Node modules as well, you can do the same.
 
 == Webpack Configuration
+
 Scout provides a default Webpack configuration containing all the necessary settings for Webpack and the plugins needed for a typical Scout application setup. To make your application use the Scout defaults, you need to create a file called `webpack.config.js` in your Node module and reexport the Scout configuration.
 
 [source,javascript]
@@ -101,14 +167,15 @@ In the snippet above the `resDir` array contains a folder of your module and a f
 When the build runs all the folders specified by the `resDir` array are visited and the resources collected. These resources are then available under `/` (if you use the Scout backend). If you want to know how to start the build, have a look at the <<Command Line Interface (CLI)>>.
 
 === EcmaScript Transpiler
+
 In order to use the latest EcmaScript features like the <<ES6 Modules>> but still support older browsers, Scout uses https://babeljs.io/[Babel] to transpile ES6+ code into ES5. The transpiler is enabled by default if you use the Webpack configuration provided by Scout, so you don't have to configure it by yourself.
 
 === CSS Preprocessor
 
 The CSS preprocessor used by Scout is http://lesscss.org/[Less], so the default webpack configuration already supports it by using the `less-loader` plugin. In order to profit from Scout`s Less variables (see xref:technical-guide:user-interface/styling.adoc[]) we recommend to use Less as well. Since it is already configured, you won't have to do anything but to write your CSS rules.
 
-
 == Karma Configuration
+
 Scout uses https://karma-runner.github.io/[Karma] as test runner for its unit tests. The tests itself are written with the test framework https://jasmine.github.io/[Jasmine]. We also use some plugins like https://www.npmjs.com/package/karma-jasmine-jquery[karma-jasmine-jquery], https://www.npmjs.com/package/karma-jasmine-ajax[karma-jasmine-ajax] or https://www.npmjs.com/package/@eclipse-scout/karma-jasmine-scout[karma-jasmine-scout] to make writing tests for a Scout application even easier.
 
 All this is configured in the file `karma-defaults.js`. If you want to use them too, you need to provide your own Karma file called `karma.conf.js` and import the defaults, similar to the <<Webpack Configuration>>. You can now adjust or override the defaults or just leave them as they are. To let Karma know about your tests, you need to define the entry point.
@@ -136,6 +203,7 @@ JasmineScout.runTestSuite(context);
 This code tells the https://www.npmjs.com/package/karma-webpack[karma-webpack] plugin to require all files ending in `Spec.js`. This will generate one big test bundle, but since source maps are enabled, you can debug the actual test files easily. The last line installs the given context and also runs a Scout app so that the Scout environment is properly set up.
 
 === Reporting
+
 After running the tests, all results are put in a folder called `test-results`. There is a sub folder for each browser that executed the tests containing a file called `test-results.xml`. Since the `karma-defaults.js` uses the `junit` reporter, the file can be interpreted by any tool supporting the `junit` format, e.g. Jenkins.
 
 [#command-line-interface-cli]
@@ -161,6 +229,7 @@ The Scout CLI is a bunch of npm-scripts that help you build and test your applic
 ----
 
 === Building
+
 Before you can open your application in the browser, you need to build it. The build takes all your source code and resources and creates the artifacts needed for the browser according to your <<Webpack Configuration>>. Once the build is complete all the produced artifacts are put in the `target/dist` folder.
 
 The `target/dist` folder contains three sub folders:
@@ -189,6 +258,7 @@ This will also build your application but additionally starts a watcher that wat
 
 [[webpack-arguments]]
 ==== Arguments
+
 The build commands accept some arguments you can use to adjust the build without modifying your webpack config file. The following arguments are available:
 
 . mode: `development` or `production`. This argument is set automatically when using build:dev or build:prod.
@@ -223,6 +293,7 @@ This will start a real browser and enable the watch mode. This means every time 
 TIP: If you don't like the automatic browser reloading, you can press debug in the top right corner of the browser or manually navigate to http://localhost:9876/debug.html.
 
 ==== Arguments
+
 The test commands accept some arguments you can use to adjust the karma runner without modifying your karma config file.
 All passed arguments are merged with the karma config object, so all karma configuration options are available (see http://karma-runner.github.io/4.0/config/configuration-file.html).
 
@@ -356,6 +427,7 @@ During development, the `publishConfig` has no effect.
   <master_skip_copy_webpack_build_output>true</master_skip_copy_webpack_build_output>
 </properties>
 ----
+
 This prevents the Maven build to include the transpiled JavaScript code in the jar. It is not required there as it will be provided by the Node module instead.
 . Consult the https://webpack.js.org/guides/author-libraries/[Webpack Guide] if you want to learn more about authoring libraries in general.
 
@@ -436,8 +508,8 @@ const config = baseConfig(env, args);
 ----
 
 Then, make sure every library will be built by specifying the run argument in the `package.json`:
-[source,json]
 
+[source,json]
 ----
 {
   "scripts": {

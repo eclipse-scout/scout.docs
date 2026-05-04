@@ -25,7 +25,7 @@ command -v pnpm >/dev/null 2>&1 || { echo >&2 "pnpm cannot be found. Make sure p
 # Install all JavaScript dependencies defined in the package.json => creates the node_modules folder
 cd ../..
 echo Running 'pnpm install' in "$(pwd)"
-pnpm install --ignore-scripts || exit $?
+pnpx @eclipse-scout/releng@~26.2.0 install || exit $?
 echo pnpm install finished successfully!
 echo
 
