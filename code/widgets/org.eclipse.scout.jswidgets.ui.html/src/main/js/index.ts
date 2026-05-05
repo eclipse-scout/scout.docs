@@ -225,6 +225,7 @@ export * from './table/NumberColumnPropertiesBox';
 export * from './table/NumberColumnPropertiesBoxModel';
 export * from './table/DateColumnPropertiesBox';
 export * from './table/DateColumnPropertiesBoxModel';
+export * from './table/DateGroupTypeLookupCall';
 export * from './table/BackgroundEffectLookupCall';
 export * from './table/editable/EditableTableForm';
 export * from './table/hierarchical/HierarchicalTableForm';

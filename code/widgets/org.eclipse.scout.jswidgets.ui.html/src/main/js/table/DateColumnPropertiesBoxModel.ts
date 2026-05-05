@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -7,7 +7,8 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {CheckBoxField, GroupBox, GroupBoxModel, StringField} from '@eclipse-scout/core';
+import {CheckBoxField, DateGroupType, GroupBox, GroupBoxModel, SmartField, StringField} from '@eclipse-scout/core';
+import {DateGroupTypeLookupCall} from '../index';
 
 export default (): GroupBoxModel => ({
   id: 'jswidgets.DateColumnPropertiesBox',
@@ -25,6 +26,12 @@ export default (): GroupBoxModel => ({
       id: 'GroupFormatField',
       objectType: StringField,
       label: 'Group Format'
+    },
+    {
+      id: 'GroupTypeField',
+      objectType: SmartField<DateGroupType>,
+      label: 'Group Type',
+      lookupCall: DateGroupTypeLookupCall
     },
     {
       id: 'HasDateField',
@@ -48,6 +55,7 @@ export default (): GroupBoxModel => ({
 export type DateColumnPropertiesBoxWidgetMap = {
   'FormatField': StringField;
   'GroupFormatField': StringField;
+  'GroupTypeField': SmartField<DateGroupType>;
   'HasDateField': CheckBoxField;
   'HasTimeField': CheckBoxField;
 };
