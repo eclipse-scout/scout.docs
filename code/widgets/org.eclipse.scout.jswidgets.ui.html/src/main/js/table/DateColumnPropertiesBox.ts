@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -48,6 +48,11 @@ export class DateColumnPropertiesBox extends GroupBox {
     let groupFormatField = this.widget('GroupFormatField');
     groupFormatField.setValue(this.column.groupFormat.pattern);
     groupFormatField.on('propertyChange:value', event => this.column.setGroupFormat(event.newValue));
+
+    let groupTypeField = this.widget('GroupTypeField');
+    groupTypeField.setValue(this.column.groupType);
+    groupTypeField.on('propertyChange:value', event => this.column.setGroupType(event.newValue));
+    this.column.on('propertyChange:groupType', event => groupTypeField.setValue(event.newValue));
 
     let hasDateField = this.widget('HasDateField');
     hasDateField.setValue(this.column.hasDate);

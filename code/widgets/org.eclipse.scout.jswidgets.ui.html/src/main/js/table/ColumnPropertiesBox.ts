@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -69,6 +69,14 @@ export class ColumnPropertiesBox extends GroupBox {
 
     let groupedField = this.widget('GroupedField');
     groupedField.setValue(this.column.grouped);
+    groupedField.on('propertyChange:value', event => {
+      if (event.newValue && !this.column.grouped) {
+        this.column.table.addGroupColumn(this.column);
+      } else if (!event.newValue && this.column.grouped) {
+        this.column.table.removeGroupColumn(this.column);
+      }
+    });
+    this.column.table.on('group', event => groupedField.setValue(this.column.grouped));
 
     let headerMenuEnabledField = this.widget('HeaderMenuEnabledField');
     headerMenuEnabledField.setValue(this.column.headerMenuEnabled);
