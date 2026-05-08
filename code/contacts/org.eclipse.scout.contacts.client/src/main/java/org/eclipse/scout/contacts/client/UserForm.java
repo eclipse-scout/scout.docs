@@ -15,9 +15,9 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
-import org.eclipse.scout.contacts.client.ConfigProperties.ReadOnlyProperty;
-import org.eclipse.scout.contacts.client.ConfigProperties.UserDomainProperty;
+import org.eclipse.scout.contacts.client.ContactsClientConfigProperties.UserDomainProperty;
 import org.eclipse.scout.contacts.client.UserForm.MainBox.GroupBox.HtmlField;
+import org.eclipse.scout.contacts.shared.ContactsSharedConfigProperties.ReadOnlyProperty;
 import org.eclipse.scout.contacts.shared.common.IResetDataStoreService;
 import org.eclipse.scout.rt.client.session.ClientSessionProvider;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;

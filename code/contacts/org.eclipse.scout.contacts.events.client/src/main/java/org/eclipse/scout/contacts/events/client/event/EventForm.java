@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -38,7 +38,6 @@ import org.eclipse.scout.contacts.events.client.event.EventForm.MainBox.OkButton
 import org.eclipse.scout.contacts.events.client.person.PersonChooserForm;
 import org.eclipse.scout.contacts.events.shared.event.EventFormData;
 import org.eclipse.scout.contacts.events.shared.event.IEventService;
-import org.eclipse.scout.contacts.events.shared.event.UpdateEventPermission;
 import org.eclipse.scout.contacts.shared.organization.OrganizationLookupCall;
 import org.eclipse.scout.contacts.shared.person.IPersonService;
 import org.eclipse.scout.contacts.shared.person.PersonFormData;
@@ -180,11 +179,6 @@ public class EventForm extends AbstractForm {
   @Override
   public Object computeExclusiveKey() {
     return getEventId();
-  }
-
-  @Override
-  protected void execInitForm() {
-    BEANS.get(ContactsHelper.class).handleReadOnly(getOkButton());
   }
 
   @Order(1)
@@ -332,11 +326,6 @@ public class EventForm extends AbstractForm {
         @Order(10)
         @ClassId("627f6a0e-349f-4846-8449-1ec41156657d")
         public class ParticipantTableFieldField extends AbstractTableField<Table> {
-
-          @Override
-          protected int getConfiguredGridH() {
-            return 3;
-          }
 
           @Override
           protected boolean getConfiguredLabelVisible() {
@@ -555,7 +544,6 @@ public class EventForm extends AbstractForm {
       exportFormData(formData);
       formData = BEANS.get(IEventService.class).load(formData);
       importFormData(formData);
-      setEnabledPermission(new UpdateEventPermission());
 
       getForm().setSubTitle(getTitleField().getValue());
     }

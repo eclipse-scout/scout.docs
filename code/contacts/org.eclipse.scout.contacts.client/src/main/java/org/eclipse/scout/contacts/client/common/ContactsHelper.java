@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -9,11 +9,9 @@
  */
 package org.eclipse.scout.contacts.client.common;
 
-import org.eclipse.scout.contacts.client.ConfigProperties.ReadOnlyProperty;
+import org.eclipse.scout.contacts.shared.ContactsSharedConfigProperties.ReadOnlyProperty;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
-import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;
-import org.eclipse.scout.rt.client.ui.form.fields.button.IButton;
 import org.eclipse.scout.rt.platform.ApplicationScoped;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
@@ -23,13 +21,6 @@ import org.eclipse.scout.rt.platform.util.collection.OrderedCollection;
 
 @ApplicationScoped
 public class ContactsHelper {
-
-  public void handleReadOnly(AbstractOkButton okButton) {
-    if (CONFIG.getPropertyValue(ReadOnlyProperty.class)) {
-      okButton.setLabel(TEXTS.get("CloseButton"));
-      okButton.setSystemType(IButton.SYSTEM_TYPE_CLOSE);
-    }
-  }
 
   public void injectReadOnlyMenu(OrderedCollection<IMenu> menus) {
     if (CONFIG.getPropertyValue(ReadOnlyProperty.class)) {

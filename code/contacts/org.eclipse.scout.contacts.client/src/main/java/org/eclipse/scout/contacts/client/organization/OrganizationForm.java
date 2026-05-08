@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -32,7 +32,6 @@ import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.G
 import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.OkButton;
 import org.eclipse.scout.contacts.shared.organization.IOrganizationService;
 import org.eclipse.scout.contacts.shared.organization.OrganizationFormData;
-import org.eclipse.scout.contacts.shared.organization.UpdateOrganizationPermission;
 import org.eclipse.scout.rt.client.dto.FormData;
 import org.eclipse.scout.rt.client.dto.FormData.SdkCommand;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
@@ -152,11 +151,6 @@ public class OrganizationForm extends AbstractForm {
 
   public PhoneField getPhoneField() {
     return getFieldByClass(PhoneField.class);
-  }
-
-  @Override
-  protected void execInitForm() {
-    BEANS.get(ContactsHelper.class).handleReadOnly(getOkButton());
   }
 
   // tag::layout[]
@@ -341,7 +335,6 @@ public class OrganizationForm extends AbstractForm {
       exportFormData(formData);
       formData = BEANS.get(IOrganizationService.class).load(formData);
       importFormData(formData);
-      setEnabledPermission(new UpdateOrganizationPermission());
 
       getForm().setSubTitle(calculateSubTitle());
     }
