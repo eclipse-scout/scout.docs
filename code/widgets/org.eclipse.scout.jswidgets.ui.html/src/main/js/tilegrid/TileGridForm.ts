@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {arrays, comparators, Event, Form, FormModel, HtmlTile, HtmlTileModel, InitModelOf, Menu, models, scout, SmartField, TileGrid} from '@eclipse-scout/core';
+import {arrays, CheckBoxField, comparators, Event, Form, FormModel, HtmlTile, HtmlTileModel, InitModelOf, Menu, models, scout, SmartField, TileGrid} from '@eclipse-scout/core';
 import TileGridFormModel from './TileGridFormModel';
 import $ from 'jquery';
 import {CustomTile, CustomTileModel, TileGridFormWidgetMap, TileType} from '../index';
@@ -18,6 +18,9 @@ export class TileGridForm extends Form {
   insertedTileCount: number;
   tileTypeField: SmartField<TileType>;
   tileGrid: TileGrid;
+
+  protected _movableField: CheckBoxField;
+  protected _resizableField: CheckBoxField;
 
   constructor() {
     super();
@@ -75,10 +78,12 @@ export class TileGridForm extends Form {
     let movableField = this.widget('MovableField');
     movableField.setValue(this.tileGrid.tiles[0]?.movable);
     movableField.on('propertyChange:value', event => this.tileGrid.tiles.forEach(tile => tile.setMovable(event.newValue)));
+    this._movableField = movableField;
 
     let resizableField = this.widget('ResizableField');
     resizableField.setValue(this.tileGrid.tiles[0]?.resizable);
     resizableField.on('propertyChange:value', event => this.tileGrid.tiles.forEach(tile => tile.setResizable(event.newValue)));
+    this._resizableField = resizableField;
 
     let scrollableField = this.widget('ScrollableField');
     scrollableField.setValue(this.tileGrid.scrollable);
@@ -123,8 +128,8 @@ export class TileGridForm extends Form {
   }
 
   protected _createTile(model?: HtmlTileModel | CustomTileModel): HtmlTile | CustomTile {
-    let movable = this.widget('MovableField').value;
-    let resizable = this.widget('ResizableField').value;
+    let movable = this._movableField.value; // Field is cached because this.widget() is expensive when creating many tiles
+    let resizable = this._resizableField.value;
     let defaults = {
       parent: this.tileGrid,
       content: 'New <i>Html Tile</i> ' + this.insertedTileCount++,
