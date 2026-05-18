@@ -56,6 +56,13 @@ The `Column` now has a formatter property similar to the one of the `ValueField`
 
 This makes it possible to change the format function without having to subclass the column.
 
+== Value Field (Scout JS): Async Validator Support Added
+
+A validator can now be asynchronous by returning a promise.
+This can for example be used to call a rest resource that validates the user input.
+
+Please see the xref:technical-guide:user-interface/value-field.adoc#async-validator[technical guide] for details.
+
 == HybridManager API improvements (Scout JS)
 
 The `HybridManager` provides API to dispose formerly created widgets. The widgets passed to `HybridManager.disposeWidgets` are collected and disposed in a single hybrid action.
