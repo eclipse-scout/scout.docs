@@ -471,3 +471,12 @@ The defaults of the following properties have changed:
 * `gridDataHints.weightY` to `1`
 
 If you use the `WrappedFormField` in your Scout JS code, please verify the layout still looks and behaves as expected.
+
+== ITreeUIFacade.setNodeSelectedAndExpandedFromUI Moved
+
+The method has been moved to `IOutline` and renamed to `drillDown`.
+
+It is called when double-clicking a table row in the detail table of a page to select and expand the corresponding child page.
+But, expanding is actually not desired for table pages, so now only node pages are expanded.
+
+If you need a specific table page or `IJsPage` to be expanded on this operation, you can override the method `IPage.computeExpandOnDrillDown`.
