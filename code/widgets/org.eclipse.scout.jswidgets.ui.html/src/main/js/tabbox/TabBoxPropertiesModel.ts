@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -7,8 +7,8 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {CheckBoxField, SmartField, TabAreaStyle, TabItem, TabItemModel} from '@eclipse-scout/core';
-import {FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, TabAreaStyleLookupCall} from '../index';
+import {CheckBoxField, SmartField, TabAreaStyle, TabBoxMarkStrategy, TabItem, TabItemModel} from '@eclipse-scout/core';
+import {FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox, GridDataBoxWidgetMap, TabAreaStyleLookupCall, TabBoxMarkStrategyLookupCall} from '../index';
 
 export default (): TabItemModel => ({
   id: 'jswidgets.TabBoxProperties',
@@ -19,6 +19,12 @@ export default (): TabItemModel => ({
       id: 'TabBoxProperties.SelectedTabField',
       objectType: SmartField<TabItem>,
       label: 'Selected Tab Item'
+    },
+    {
+      id: 'TabBoxProperties.MarkStrategy',
+      objectType: SmartField<TabBoxMarkStrategy>,
+      lookupCall: TabBoxMarkStrategyLookupCall,
+      label: 'Mark Strategy'
     },
     {
       id: 'TabBoxProperties.TabAreaStyleField',
@@ -49,6 +55,7 @@ export default (): TabItemModel => ({
 
 export type TabBoxPropertiesWidgetMap = {
   'TabBoxProperties.SelectedTabField': SmartField<TabItem>;
+  'TabBoxProperties.MarkStrategy': SmartField<TabBoxMarkStrategy>;
   'TabBoxProperties.TabAreaStyleField': SmartField<TabAreaStyle>;
   'TabBoxProperties.ShowMenus': CheckBoxField;
   'TabBoxProperties.FormFieldPropertiesBox': FormFieldPropertiesBox;
