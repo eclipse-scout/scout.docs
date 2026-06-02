@@ -205,6 +205,7 @@ export * from './tabbox/TabBoxDeleteTabItemBox';
 export * from './tabbox/TabBoxDeleteTabItemBoxModel';
 export * from './tabbox/TabBoxForm';
 export * from './tabbox/TabBoxFormModel';
+export * from './tabbox/TabBoxMarkStrategyLookupCall';
 export * from './tabbox/TabBoxProperties';
 export * from './tabbox/TabBoxPropertiesModel';
 export * from './tabbox/TabItemLookupCall';

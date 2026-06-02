@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -85,6 +85,10 @@ export class FormFieldPropertiesBox extends GroupBox {
     let inheritAccessibilityField = this.widget('InheritAccessibilityField');
     inheritAccessibilityField.setValue(this.field.inheritAccessibility);
     inheritAccessibilityField.on('propertyChange:value', event => this.field.setInheritAccessibility(event.newValue));
+
+    let emptyField = this.widget('EmptyField');
+    emptyField.setValue(this.field.empty);
+    this.field.on('propertyChange:empty', event => emptyField.setValue(event.newValue));
 
     let fieldStyleField = this.widget('FieldStyleField');
     fieldStyleField.setValue(this.field.fieldStyle);

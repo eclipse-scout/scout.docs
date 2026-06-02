@@ -38,7 +38,7 @@ reliability and adds flexibility for updates and deployments in a high availabil
 During a transition period, session support will be provided in separate modules for legacy purposes, see migration guide for details.
 
 [#tree-scout-js-findnode-added-and-visitnodes-improved]
-== Tree (Scout JS): FindNode Added and VisitNodes Improved
+== Tree: FindNode Added and VisitNodes Improved (Scout JS)
 
 Finding tree nodes may be helpful especially for outlines to find a specific page.
 This can now be done using the new function `Tree.findNode()` that either takes a predicate or a subclass of `TreeNode` as argument.
@@ -50,13 +50,13 @@ To make it consistent with other visitor functions like `Widget.visitChildren`, 
 
 This means you need to check your visitors according to the xref:migration-guide.adoc#tree-scout-js-api-of-visitnodes-changed[Migration Guide].
 
-== Table (Scout JS): Column Formatter Added
+== Table: Column Formatter Added (Scout JS)
 
 The `Column` now has a formatter property similar to the one of the `ValueField`.
 
 This makes it possible to change the format function without having to subclass the column.
 
-== Value Field (Scout JS): Async Validator Support Added
+== Value Field: Async Validator Support Added (Scout JS)
 
 A validator can now be asynchronous by returning a promise.
 This can for example be used to call a rest resource that validates the user input.
@@ -71,3 +71,26 @@ The `HybridManager` provides API to dispose formerly created widgets. The widget
 ----
 HybridManager.get().disposeWidgets(widgets);
 ----
+
+== Tab Box: Mark Strategy Added (Scout JS)
+
+The Scout JS `TabBox` now supports marking the tab items that have content or need to be saved, like the Scout Classic `TabBox` already does.
+A marked tab item has a slightly darker line below its tab.
+
+You can choose between two strategies:
+
+. NOT_EMPTY: Marks a tab item if it is not empty.
+. SAVE_NEEDED: Marks a tab item if it needs to be saved.
+
+The default strategy is NOT_EMPTY.
+For tab boxes inside a Search Form it is SAVE_NEEDED.
+
+== FormField: Empty Property now Reflects the State of its Children (Scout JS)
+
+`FormField.empty` is now computed based on the empty state of its child fields and not only considers the empty state of the field itself.
+This is useful for composite fields that don't have its own empty state like `GroupBox`.
+
+`ValueField` s are not affected because they still only consider their own empty state, so they are empty if they don't have a value.
+
+To influence or disable the computation of the `empty` property, you can set the property `checkEmpty` or override the method `_computeEmpty()`.
+Please see the JsDoc of the `FormFieldModel.checkEmpty` for details.

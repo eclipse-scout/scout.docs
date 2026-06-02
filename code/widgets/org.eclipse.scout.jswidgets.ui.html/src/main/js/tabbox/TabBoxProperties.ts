@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {CheckBoxField, InitModelOf, models, SmartField, TabAreaStyle, TabBox, TabItem, TabItemModel} from '@eclipse-scout/core';
+import {InitModelOf, models, SmartField, TabBox, TabItem, TabItemModel} from '@eclipse-scout/core';
 import TabBoxPropertiesModel from './TabBoxPropertiesModel';
 import {TabBoxPropertiesWidgetMap, TabItemLookupCall} from '../index';
 
@@ -17,8 +17,6 @@ export class TabBoxProperties extends TabItem {
   tabBox: TabBox;
   showMenus: boolean;
   selectedTabField: SmartField<TabItem>;
-  tabAreaStyleField: SmartField<TabAreaStyle>;
-  showMenusField: CheckBoxField;
 
   constructor() {
     super();
@@ -48,17 +46,22 @@ export class TabBoxProperties extends TabItem {
     this.tabBox.on('propertyChange:selectedTab', event => this._updateSelectedTab());
 
     this.selectedTabField = this.widget('TabBoxProperties.SelectedTabField');
-    this.selectedTabField.lookupCall = new TabItemLookupCall(this.tabBox);
+    this.selectedTabField.setLookupCall(new TabItemLookupCall(this.tabBox));
     this.selectedTabField.on('propertyChange:value', event => this.tabBox.setSelectedTab(event.newValue));
 
-    this.tabAreaStyleField = this.widget('TabBoxProperties.TabAreaStyleField');
-    this.tabAreaStyleField.on('propertyChange:value', event => this.tabBox.setTabAreaStyle(event.newValue));
+    let markStrategy = this.widget('TabBoxProperties.MarkStrategy');
+    markStrategy.setValue(this.tabBox.markStrategy);
+    markStrategy.on('propertyChange:value', event => this.tabBox.setMarkStrategy(event.newValue));
 
-    this.showMenusField = this.widget('TabBoxProperties.ShowMenus');
-    this.showMenusField.on('propertyChange:value', event => this.tabBox.menus.forEach(menu => {
-      menu.setVisible(this.showMenusField.value);
+    let tabAreaStyleField = this.widget('TabBoxProperties.TabAreaStyleField');
+    tabAreaStyleField.setValue(this.tabBox.tabAreaStyle);
+    tabAreaStyleField.on('propertyChange:value', event => this.tabBox.setTabAreaStyle(event.newValue));
+
+    let showMenusField = this.widget('TabBoxProperties.ShowMenus');
+    showMenusField.on('propertyChange:value', event => this.tabBox.menus.forEach(menu => {
+      menu.setVisible(showMenusField.value);
     }));
-    this.showMenusField.setValue(this.showMenus);
+    showMenusField.setValue(this.showMenus);
 
     this.widget('TabBoxProperties.FormFieldPropertiesBox').setField(this.tabBox);
     this.widget('TabBoxProperties.GridDataBox').setField(this.tabBox);

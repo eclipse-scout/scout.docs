@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -77,6 +77,16 @@ export default (): GroupBoxModel => ({
       label: 'Inherit Accessibility',
       labelVisible: false,
       tooltipText: '${textKey:InheritAccessibilityTooltip}',
+      gridDataHints: {
+        fillHorizontal: false
+      }
+    },
+    {
+      id: 'EmptyField',
+      objectType: CheckBoxField,
+      label: 'Empty',
+      labelVisible: false,
+      enabled: false,
       gridDataHints: {
         fillHorizontal: false
       }
@@ -175,6 +185,7 @@ export type FormFieldPropertiesBoxWidgetMap = {
   'LoadingField': CheckBoxField;
   'LabelHtmlEnabledField': CheckBoxField;
   'InheritAccessibilityField': CheckBoxField;
+  'EmptyField': CheckBoxField;
   'FieldStyleField': SmartField<any>;
   'DisabledStyleField': SmartField<any>;
   'DropTypeField': SmartField<any>;

@@ -480,3 +480,35 @@ It is called when double-clicking a table row in the detail table of a page to s
 But, expanding is actually not desired for table pages, so now only node pages are expanded.
 
 If you need a specific table page or `IJsPage` to be expanded on this operation, you can override the method `IPage.computeExpandOnDrillDown`.
+
+== Tab Box: Mark Strategy renamed
+
+`ITabBox.MARK_STRATEGY_EMPTY` has been renamed to `ITabBox.MARK_STRATEGY_NOT_EMPTY` because the tab is marked if it is _not_ empty.
+
+== Tab Box: Mark Strategy Added (Scout JS)
+
+A tab item is now marked if it has content or if it needs to be saved (if used in a search form).
+
+In most cases, this should work as expected without a code migration.
+However, it may happen that a tab item will be marked even it looks empty at first glance, for example if it has a hidden field with a value.
+In that case you can set `checkEmpty` on the field to false, or provide a function to implement a custom empty computation.
+When providing a function, it may be necessary to call `updateEmpty` whenever a condition changes that you use in your empty computation.
+
+IMPORTANT: Disabling the empty check also affects the mandatory handling: if `checkEmpty` is set to false on a mandatory field, the form cannot be saved anymore because the field would always be invalid. However, this mainly affects `ValueFields`, it can safely be disabled for composite fields like a `GroupBox`.
+
+To disable the marking completely without affecting the mandatory handling, you can set `TabBox.markStrategy` to null.
+
+== Tab Box: Stricter Handling of Tab Items (Scout JS)
+
+The tab items of a tab box (`TabBox.tabItems`) need to have the type `TabItem`.
+This is nothing new, but until now it kind of worked with a regular `GroupBox` as well.
+This was never intended.
+
+To ensure the tab items have the correct type, the tab box now throws an error if a tab item doesn't have the type `TabItem`.
+
+To make sure you won't get the error, you should check your tab boxes and extensions for tab boxes.
+You should find most of them by searching for `objectType: TabBox` and `property: 'tabItems'`.
+
+== Form Field: Renamed _updateEmpty (Scout JS)
+
+The protected method `FormFeld._updateEmpty()` has been made public and renamed to `FormFeld.updateEmpty()`.
