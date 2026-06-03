@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -643,7 +643,7 @@ public class PersonForm extends AbstractForm {
           // http://www.mkyong.com/regular-expressions/how-to-validate-email-address-with-regular-expression/
           // tag::email[]
           private static final String EMAIL_PATTERN = // <1>
-              "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" +
+              "^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-]+)*@" +
                   "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
           @Override
@@ -816,7 +816,7 @@ public class PersonForm extends AbstractForm {
   }
   // end::handler[]
 
-  //This modify handler is used in the application:
+  //This modify-handler is used in the application:
   public class ModifyDirtyHandler extends AbstractDirtyFormHandler {
 
     @Override
@@ -865,11 +865,6 @@ public class PersonForm extends AbstractForm {
     protected void execDirtyStatusChanged(boolean dirty) {
       getForm().setSubTitle(calculateSubTitle());
     }
-  }
-
-  @Override
-  protected void execInitForm() {
-    BEANS.get(ContactsHelper.class).handleReadOnly(getOkButton());
   }
 
 
