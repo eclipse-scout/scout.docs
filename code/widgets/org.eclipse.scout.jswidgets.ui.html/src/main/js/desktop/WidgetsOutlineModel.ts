@@ -10,10 +10,10 @@
 import {OutlineModel, PageWithNodes} from '@eclipse-scout/core';
 import {
   AccordionForm, BreadcrumbBarFieldForm, BrowserFieldForm, ButtonForm, CarouselForm, ChartFieldForm, CheckBoxFieldForm, DateFieldForm, DesktopForm, DesktopNotificationForm, DynamicPageWithNodes, EditableTableForm, FileChooserButtonForm,
-  FileChooserFieldForm, FileChooserForm, FormForm, GroupBoxForm, HierarchicalTableForm, ImageFieldForm, ImageForm, IntegerFieldForm, LabelFieldForm, LabelForm, ListBoxForm, LogicalGridForm, MenuBarForm, MessageBoxForm, ModeSelectorForm,
-  MultilineSmartFieldForm, MultilineStringFieldForm, NumberFieldForm, PageFieldForm, PopupForm, ProposalFieldForm, RadioButtonGroupForm, ReloadablePageWithNodes, RestForm, SamplePageWithNodes, SamplePageWithTable, SequenceBoxForm,
-  SimpleTabBoxForm, SliderFieldForm, SmartFieldForm, StringFieldForm, SwitchForm, TabBoxForm, TableForm, TableSmartFieldForm, TagFieldForm, TileAccordionForm, TileGridForm, TooltipForm, TooltipWithMenusForm, TreeBoxForm, TreeForm,
-  TreeSmartFieldForm, UiNotificationForm, VirtualTileGridForm, WatchFieldForm, WidgetsOutlineOverview, WrappedFormFieldForm
+  FileChooserFieldForm, FileChooserForm, FormForm, GroupBoxForm, HierarchicalTableForm, HtmlFieldForm, ImageFieldForm, ImageForm, IntegerFieldForm, LabelFieldForm, LabelForm, ListBoxForm, LogicalGridForm, MenuBarForm, MessageBoxForm,
+  ModeSelectorForm, MultilineSmartFieldForm, MultilineStringFieldForm, NumberFieldForm, PageFieldForm, PopupForm, ProposalFieldForm, RadioButtonGroupForm, ReloadablePageWithNodes, RestForm, SamplePageWithNodes, SamplePageWithTable,
+  SequenceBoxForm, SimpleTabBoxForm, SliderFieldForm, SmartFieldForm, StringFieldForm, SwitchForm, TabBoxForm, TableForm, TableSmartFieldForm, TagFieldForm, TileAccordionForm, TileGridForm, TooltipForm, TooltipWithMenusForm, TreeBoxForm,
+  TreeForm, TreeSmartFieldForm, UiNotificationForm, VirtualTileGridForm, WatchFieldForm, WidgetsOutlineOverview, WrappedFormFieldForm
 } from '../index';
 
 export default (): OutlineModel => ({
@@ -177,6 +177,15 @@ export default (): OutlineModel => ({
       text: 'Group Box',
       detailForm: {
         objectType: GroupBoxForm
+      }
+    },
+    {
+      uuid: '19096edb-46a6-40f9-af92-51d8c79909c9',
+      objectType: PageWithNodes,
+      leaf: true,
+      text: 'Html Field',
+      detailForm: {
+        objectType: HtmlFieldForm
       }
     },
     {

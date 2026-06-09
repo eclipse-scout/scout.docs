@@ -109,6 +109,8 @@ export * from './groupbox/GroupBoxForm';
 export * from './groupbox/GroupBoxFormModel';
 export * from './groupbox/GroupBoxPropertiesBox';
 export * from './groupbox/GroupBoxPropertiesBoxModel';
+export * from './htmlfield/HtmlFieldForm';
+export * from './htmlfield/HtmlFieldFormModel';
 export * from './image/ImageForm';
 export * from './image/ImageFormModel';
 export * from './image/ImageLookupCall';
