@@ -560,3 +560,33 @@ You should find most of them by searching for `objectType: TabBox` and `property
 == Form Field: Renamed _updateEmpty (Scout JS)
 
 The protected method `FormFeld._updateEmpty()` has been made public and renamed to `FormFeld.updateEmpty()`.
+
+== Permission checks
+
+* A new method `ACCESS.checkAndThrow(permission, accessCheckFailedMessage)` has been added that allows to set a custom error message if the permission check fails.
++
+.Previous code
+[source,java,opts=novalidate]
+----
+if (!ACCESS.check(new ReadBakeryOutlinePermission())) {
+  throw new AccessForbiddenException("My special error message");
+}
+----
++
+.New code
+[source,java,opts=novalidate]
+----
+ACCESS.checkAndThrow(new ReadBakeryOutlinePermission(), "My special error message");
+----
+* The `AccessForbiddenException` now includes a permission code – use `.withPermission(p)` when manually throwing an `AccessForbiddenException` caused by a permission check.
++
+.Example of a manually thrown `AccessForbiddenException`
+[source,java,opts=novalidate]
+----
+ReadBakeryOutlinePermission permission = new ReadBakeryOutlinePermission();
+if (!ACCESS.check(permission)) {
+  throw new AccessForbiddenException(TEXTS.get("YouAreNotAllowedToReadThisData"))
+    .withTitle("My special title")
+    .withPermission(permission);
+}
+----

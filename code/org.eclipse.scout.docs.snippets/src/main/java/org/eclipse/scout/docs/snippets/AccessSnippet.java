@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -21,7 +21,6 @@ import org.eclipse.scout.rt.security.AbstractPermission;
 import org.eclipse.scout.rt.security.IPermission;
 
 public class AccessSnippet {
-
 
   //tag::ReadCompanyPermission[]
   public static class ReadCompanyPermission extends AbstractPermission {
@@ -55,11 +54,15 @@ public class AccessSnippet {
   protected void snippets() {
 
     //tag::ACCESS_A[]
-    if (ACCESS.check(new ReadCompanyPermission())) { // <1>
-      throw new AccessForbiddenException(TEXTS.get("YouAreNotAllowedToReadThisData"));
+    ReadCompanyPermission permission = new ReadCompanyPermission();
+    if (!ACCESS.check(permission)) { // <1>
+      throw new AccessForbiddenException(TEXTS.get("YouAreNotAllowedToReadThisData"))
+          .withPermission(permission);
     }
 
     ACCESS.checkAndThrow(new ReadCompanyPermission()); // <2>
+
+    ACCESS.checkAndThrow(new ReadCompanyPermission(), TEXTS.get("YouAreNotAllowedToReadThisData")); // <3>
     //end::ACCESS_A[]
 
     //tag::ACCESS_B[]
@@ -142,6 +145,5 @@ public class AccessSnippet {
   protected interface ICompanyService {
 
     boolean isOwnCompany(UUID companyId);
-
   }
 }
