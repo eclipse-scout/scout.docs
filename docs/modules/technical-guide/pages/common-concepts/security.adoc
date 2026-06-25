@@ -189,6 +189,7 @@ include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclips
 ----
 <1> Checks permission against granted permissions of current user.
 <2> Checks permission and if this check fails, throw an `AccessForbiddenException` with a default message.
+<3> Checks permission and if this check fails, throw an `AccessForbiddenException` with a custom message.
 
 We can define a default access check failed message for a permission.
 
