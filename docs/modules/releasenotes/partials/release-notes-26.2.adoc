@@ -100,3 +100,90 @@ Please see the JsDoc of the `FormFieldModel.checkEmpty` for details.
 To mitigate supply chain attacks and ensure reproducible builds, Scout now provides support to lock the Node.js dependencies.
 
 See the xref:technical-guide:user-interface/build-stack.adoc#node-dependency-resolution[Technical Guide] for details and the xref:migration-guide.adoc#locking-of-transitive-node-dependencies[Migration Guide] for instructions how to enable the feature.
+
+== abortableContext (Scout JS)
+
+When working with rest requests often there is the need to abort previously created requests again.
+As typically all requests made using Scout JS are created using `ajax` the developer does not have access to the abortable call and therefore, is unable to use e.g. an `AbortController` to abort these calls.
+To address this issue the abortableContext was introduced. It allows code to be executed within the scope of an `AbortController`.
+All abortable elements that are registered while this context is present may than be aborted using the `AbortController`.
+In addition, all calls created using the `ajax` utility auto register themselves in the current context if there is one.
+
+[source,typescript,opts=novalidate]
+----
+protected async _loadFooAndBarAbortable(id: string | number, abortController: AbortController): Promise<{ foo: object, bar: object }> {
+  return await abortableContext.runInContext(
+    () => this._loadFooAndBar(id),
+    abortController
+  );
+}
+
+protected async _loadFooAndBar(id: string | number): Promise<{ foo: object, bar: object }> {
+  // if run inside an abortableContext the ajax calls are auto registered
+  const fooPromise = ajax.getDataObject(`api/foo/${id}`);
+  const barPromise = ajax.getDataObject(`api/bar/${id}`);
+
+  return {
+    foo: await fooPromise,
+    bar: await barPromise
+  };
+}
+----
+
+Other abortables can be registered in the current context using `abortableContext.registerAbortableInCurrentContext(abortable)`.
+If one creates a new abortable context while running inside another abortable context, the inner context is registered in the outer one to ensure that the inner context is aborted when the outer context is aborted.
+
+[source,typescript,opts=novalidate]
+----
+const outerController = new AbortController();
+abortableContext.runInContext(
+  () => {
+    const innerController = new AbortController();
+    abortableContext.runInContext(
+      () => {
+        const innerAbortable = new MyAbortable();
+        abortableContext.registerAbortableInCurrentContext(innerAbortable);
+      },
+      innerController
+    );
+  },
+  outerController
+);
+
+// aborts the innerController and therefore the innerAbortable as well
+outerController.abort();
+----
+
+== PageWithTable: abortable loading (Scout JS)
+
+The `PageWithTable` now supports abortable loading. To support this, `PageWithTable` runs `_loadTableData(searchFilter)` within an abortable context.
+For a typical implementation where data is loaded via rest, the call is registered automatically.
+
+[source,typescript,opts=novalidate]
+----
+protected override _loadTableData(searchFilter: any): JQuery.Promise<any> {
+  return ajax.postDataObject('api/foo/list', this._withMaxRowCountContribution(searchFilter));
+}
+----
+
+As only synchronously created calls are registered automatically, implementations that make several calls subsequently must create new abortable contexts for each asynchronously created rest call to ensure all calls are aborted correctly.
+If this is not done, the `PageWithTable` will still behave correctly, i.e. will not show resulting data when loading was aborted.
+So creating a new abortable context for a subsequent call is not necessary for the user experience but prevents unnecessary calls being made.
+To create such a new abortable context all implementations of `PageWithTable` can use the protected member `_abortController`.
+
+[source,typescript,opts=novalidate]
+----
+protected override _loadTableData(searchFilter: any): JQuery.Promise<any> {
+  return $.when(this._loadTableDataAsync(searchFilter));
+}
+
+protected async _loadTableDataAsync(searchFilter: any): Promise<any> {
+  const abortController = this._abortController;
+  const searchRestrictions = await ajax.postDataObject('search-api/util/build-search-restrictions', this._withMaxRowCountContribution(searchFilter));
+  const foos = await abortableContext.runInContext(
+    () => ajax.postDataObject('api/foo/list', {searchRestrictions}),
+    abortController
+  );
+  return foos;
+}
+----
