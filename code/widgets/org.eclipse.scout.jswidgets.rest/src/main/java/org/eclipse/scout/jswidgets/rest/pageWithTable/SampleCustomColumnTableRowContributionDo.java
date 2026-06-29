@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -35,12 +35,18 @@ public class SampleCustomColumnTableRowContributionDo extends DoEntity implement
    * GENERATED CONVENIENCE METHODS
    * *************************************************************************/
 
+  /**
+   * See {@link #cells()}.
+   */
   @Generated("DoConvenienceMethodsGenerator")
   public SampleCustomColumnTableRowContributionDo withCells(Map<String, IValueDo> cells) {
     cells().set(cells);
     return this;
   }
 
+  /**
+   * See {@link #cells()}.
+   */
   @Generated("DoConvenienceMethodsGenerator")
   public Map<String, IValueDo> getCells() {
     return cells().get();
