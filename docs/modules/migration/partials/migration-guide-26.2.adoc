@@ -405,6 +405,54 @@ public class JaxWsServerSessionRunContextProducer extends ServerRunContextProduc
 }
 ----
 
+== ClientNotificationRegistry API changes
+
+The client notification dispatching was refactored as preparation step for a stateless Scout backend.
+The API of `org.eclipse.scout.rt.server.clientnotification.ClientNotificationRegistry` changed.
+
+The central change is the removal of the `boolean distributeOverCluster` overloads: notifications are now always distributed within the cluster and published to all UI server nodes.
+The only exception is the new (but deprecated, legacy) `putTransactionalForAllNodesWithoutClusterNotification(Serializable)` method which allows to publish a notification only for UI nodes attached to the current backend node.
+
+=== Non-transactional put / publish methods
+
+The `boolean distributeOverCluster` overloads have been removed. Use the single-argument variant; cluster distribution is now always performed.
+
+[cols="1,1" options="header"]
+|====
+|Old method|New method
+
+|`void putForUser(String userId, Serializable notification, boolean distributeOverCluster)`|removed - use `putForUser(String, Serializable)`
+|`void putForUsers(Set<String> userIds, Serializable notification, boolean distributeOverCluster)`|removed - use `putForUsers(Set<String>, Serializable)`
+|`void putForSession(String sessionId, Serializable notification, boolean distributeOverCluster)`|removed - use `putForSession(String, Serializable)`
+|`void putForAllSessions(Serializable notification, boolean distributeOverCluster)`|removed - use `putForAllSessions(Serializable)`
+|`void putForAllNodes(Serializable notification, boolean distributeOverCluster)`|removed - use `putForAllNodes(Serializable)`
+|`void publish(ClientNotificationAddress address, Serializable notification, boolean distributeOverCluster)`|removed - use `publish(ClientNotificationAddress, Serializable)`
+|`void publishWithoutClusterNotification(Collection<? extends ClientNotificationMessage> messages)`|removed - Adapt invoking code in order to allow publishing this notification for all UI nodes. In the future, we'll have a stateless Scout backend without knowing which UI node is attached to a specific backend.
+|`void publishWithoutClusterNotification(Collection<? extends ClientNotificationMessage> messages, NodeId excludedUiNodeId)`|removed - Adapt invoking code in order to allow publishing this notification for all UI nodes. In the future, we'll have a stateless Scout backend without knowing which UI node is attached to a specific backend.)
+|====
+
+=== Transactional put methods
+
+The `boolean distributeOverCluster` overloads have been removed. Use the single-argument variant; cluster distribution is now always performed.
+
+[cols="1,1" options="header"]
+|====
+|Old method|New method
+
+|`void putTransactionalForUser(String userId, Serializable notification, boolean distributeOverCluster)`|removed - use `putTransactionalForUser(String, Serializable)`
+|`void putTransactionalForUsers(Set<String> userIds, Serializable notification, boolean distributeOverCluster)`|removed - use `putTransactionalForUsers(Set<String>, Serializable)`
+|`void putTransactionalForSession(String sessionId, Serializable notification, boolean distributeOverCluster)`|removed - use `putTransactionalForSession(String, Serializable)`
+|`void putTransactionalForAllSessions(Serializable notification, boolean distributeOverCluster)`|removed - use `putTransactionalForAllSessions(Serializable)`
+|`void putTransactionalForAllNodes(Serializable notification, boolean distributeOverCluster)`|removed - use `putTransactionalForAllNodes(Serializable)` or  `putTransactionalForAllNodesWithoutClusterNotification(Serializable)` (new, legacy - publishes only to client nodes known to this backend, no cluster notification; will be removed in a future release)
+|`void putTransactional(ClientNotificationAddress address, Serializable notification, boolean distributeOverCluster)`|removed - use `putTransactional(ClientNotificationAddress, Serializable)`
+|====
+
+=== `ClientNotificationMessage`
+
+`org.eclipse.scout.rt.shared.clientnotification.ClientNotificationMessage`
+
+The `distributeOverCluster` flag is deprecated. A new constructor without the flag (defaulting to `true`) has been added.
+
 == HybridManager API improvements (Scout JS)
 
 The `HybridManager` provides API to dispose formerly created widgets. Former implementations calling the hybrid Action _scout.DisposeWidgets_ manually using the remote ids can be migrated.
