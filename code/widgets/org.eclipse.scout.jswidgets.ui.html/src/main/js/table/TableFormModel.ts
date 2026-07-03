@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -10,7 +10,7 @@
 import {AggregateTableControl, BooleanColumn, Column, DateColumn, FormModel, GroupBox, IconColumn, LookupColumn, Menu, NumberColumn, SmartColumn, SmartField, TabItem, Table, TableField} from '@eclipse-scout/core';
 import {
   ColumnPropertiesBox, ColumnPropertiesBoxWidgetMap, ConfigurationBox, EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox,
-  GridDataBoxWidgetMap, LocaleLookupCall, SalutationLookupCall, TablePropertiesBox, TablePropertiesBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap
+  GridDataBoxWidgetMap, LocaleLookupCall, RowPropertiesBox, RowPropertiesBoxWidgetMap, SalutationLookupCall, TablePropertiesBox, TablePropertiesBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap
 } from '../index';
 
 export default (): FormModel => ({
@@ -230,6 +230,18 @@ export default (): FormModel => ({
             ]
           },
           {
+            id: 'RowProperties',
+            objectType: TabItem,
+            label: 'Row Properties',
+            fields: [
+              {
+                id: 'RowPropertiesBox',
+                objectType: RowPropertiesBox,
+                borderVisible: false
+              }
+            ]
+          },
+          {
             id: 'ActionsTab',
             objectType: TabItem,
             label: 'Actions',
@@ -258,24 +270,36 @@ export default (): FormModel => ({
 * GENERATED WIDGET MAPS
 * **************************************************************************/
 
-export type TableFormWidgetMap = {
-  'MainBox': GroupBox;
-  'DetailBox': GroupBox;
-  'TableField': TableField;
-  'Table': TableFieldTable;
-  'ConfigurationBox': ConfigurationBox;
-  'PropertiesTab': TabItem;
-  'PropertiesBox': TablePropertiesBox;
-  'FormFieldPropertiesBox': FormFieldPropertiesBox;
-  'GridDataBox': GridDataBox;
-  'ColumnProperties': TabItem;
-  'Column.TargetField': SmartField<Column>;
-  'Column.PropertiesBox': ColumnPropertiesBox;
-  'ActionsTab': TabItem;
-  'FormFieldActionsBox': FormFieldActionsBox;
-  'WidgetActionsBox': WidgetActionsBox;
-  'EventsTab': EventsTab;
-} & TableFieldTableWidgetMap & TablePropertiesBoxWidgetMap & FormFieldPropertiesBoxWidgetMap & GridDataBoxWidgetMap & ColumnPropertiesBoxWidgetMap & FormFieldActionsBoxWidgetMap & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;
+export type TableFormWidgetMap =
+  {
+    'MainBox': GroupBox;
+    'DetailBox': GroupBox;
+    'TableField': TableField;
+    'Table': TableFieldTable;
+    'ConfigurationBox': ConfigurationBox;
+    'PropertiesTab': TabItem;
+    'PropertiesBox': TablePropertiesBox;
+    'FormFieldPropertiesBox': FormFieldPropertiesBox;
+    'GridDataBox': GridDataBox;
+    'ColumnProperties': TabItem;
+    'Column.TargetField': SmartField<Column>;
+    'Column.PropertiesBox': ColumnPropertiesBox;
+    'RowProperties': TabItem;
+    'RowPropertiesBox': RowPropertiesBox;
+    'ActionsTab': TabItem;
+    'FormFieldActionsBox': FormFieldActionsBox;
+    'WidgetActionsBox': WidgetActionsBox;
+    'EventsTab': EventsTab;
+  }
+  & TableFieldTableWidgetMap
+  & TablePropertiesBoxWidgetMap
+  & FormFieldPropertiesBoxWidgetMap
+  & GridDataBoxWidgetMap
+  & ColumnPropertiesBoxWidgetMap
+  & RowPropertiesBoxWidgetMap
+  & FormFieldActionsBoxWidgetMap
+  & WidgetActionsBoxWidgetMap
+  & EventsTabWidgetMap;
 
 export class TableFieldTable extends Table {
   declare widgetMap: TableFieldTableWidgetMap;

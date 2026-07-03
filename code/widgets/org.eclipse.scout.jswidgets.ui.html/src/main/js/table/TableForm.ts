@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -46,6 +46,8 @@ export class TableForm extends Form {
     this.table.on('appLinkAction', this._onAppLinkAction.bind(this));
 
     this.widget('PropertiesBox').setTable(this.table);
+    this.widget('RowPropertiesBox').setTable(this.table);
+
     let tableField = this.widget('TableField');
     this.widget('FormFieldPropertiesBox').setField(tableField);
     this.widget('GridDataBox').setField(tableField);
