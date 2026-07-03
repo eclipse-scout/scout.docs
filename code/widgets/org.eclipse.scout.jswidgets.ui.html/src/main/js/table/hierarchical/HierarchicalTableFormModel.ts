@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -7,10 +7,10 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {AggregateTableControl, BooleanColumn, Column, FormModel, GroupBox, Menu, SmartField, TabItem, Table, TableField} from '@eclipse-scout/core';
+import {AggregateTableControl, BooleanColumn, Column, DateColumn, FormModel, GroupBox, Menu, SmartField, TabItem, Table, TableField} from '@eclipse-scout/core';
 import {
   ColumnPropertiesBox, ColumnPropertiesBoxWidgetMap, ConfigurationBox, EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox,
-  GridDataBoxWidgetMap, HierarchicalTablePropertiesBox, HierarchicalTablePropertiesBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap
+  GridDataBoxWidgetMap, HierarchicalTablePropertiesBox, HierarchicalTablePropertiesBoxWidgetMap, RowPropertiesBox, RowPropertiesBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap
 } from '../../index';
 
 export default (): FormModel => ({
@@ -40,7 +40,8 @@ export default (): FormModel => ({
                   text: '${textKey:Name}',
                   id: 'Name',
                   width: 200,
-                  objectType: Column
+                  objectType: Column,
+                  summary: true
                 },
                 {
                   text: '${textKey:Detail}',
@@ -52,7 +53,7 @@ export default (): FormModel => ({
                   text: 'Date',
                   id: 'Date',
                   width: 200,
-                  objectType: Column
+                  objectType: DateColumn
                 },
                 {
                   text: 'Active',
@@ -79,14 +80,19 @@ export default (): FormModel => ({
                       text: 'Remove all rows'
                     },
                     {
+                      id: 'InsertFewFlat',
+                      objectType: Menu,
+                      text: 'Insert few (flat)'
+                    },
+                    {
                       id: 'InsertFew',
                       objectType: Menu,
-                      text: 'Insert few'
+                      text: 'Insert few (hierarchical)'
                     },
                     {
                       id: 'InsertMany',
                       objectType: Menu,
-                      text: 'Insert many'
+                      text: 'Insert many (hierarchical)'
                     }
                   ]
                 },
@@ -156,6 +162,18 @@ export default (): FormModel => ({
             ]
           },
           {
+            id: 'RowProperties',
+            objectType: TabItem,
+            label: 'Row Properties',
+            fields: [
+              {
+                id: 'RowPropertiesBox',
+                objectType: RowPropertiesBox,
+                borderVisible: false
+              }
+            ]
+          },
+          {
             id: 'ActionsTab',
             objectType: TabItem,
             label: 'Actions',
@@ -184,24 +202,36 @@ export default (): FormModel => ({
 * GENERATED WIDGET MAPS
 * **************************************************************************/
 
-export type HierarchicalTableFormWidgetMap = {
-  'MainBox': GroupBox;
-  'DetailBox': GroupBox;
-  'TableField': TableField;
-  'Table': TableFieldTable0;
-  'ConfigurationBox': ConfigurationBox;
-  'PropertiesTab': TabItem;
-  'PropertiesBox': HierarchicalTablePropertiesBox;
-  'FormFieldPropertiesBox': FormFieldPropertiesBox;
-  'GridDataBox': GridDataBox;
-  'ColumnProperties': TabItem;
-  'Column.TargetField': SmartField<Column>;
-  'Column.PropertiesBox': ColumnPropertiesBox;
-  'ActionsTab': TabItem;
-  'FormFieldActionsBox': FormFieldActionsBox;
-  'WidgetActionsBox': WidgetActionsBox;
-  'EventsTab': EventsTab;
-} & TableFieldTable0WidgetMap & HierarchicalTablePropertiesBoxWidgetMap & FormFieldPropertiesBoxWidgetMap & GridDataBoxWidgetMap & ColumnPropertiesBoxWidgetMap & FormFieldActionsBoxWidgetMap & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;
+export type HierarchicalTableFormWidgetMap =
+  {
+    'MainBox': GroupBox;
+    'DetailBox': GroupBox;
+    'TableField': TableField;
+    'Table': TableFieldTable0;
+    'ConfigurationBox': ConfigurationBox;
+    'PropertiesTab': TabItem;
+    'PropertiesBox': HierarchicalTablePropertiesBox;
+    'FormFieldPropertiesBox': FormFieldPropertiesBox;
+    'GridDataBox': GridDataBox;
+    'ColumnProperties': TabItem;
+    'Column.TargetField': SmartField<Column>;
+    'Column.PropertiesBox': ColumnPropertiesBox;
+    'RowProperties': TabItem;
+    'RowPropertiesBox': RowPropertiesBox;
+    'ActionsTab': TabItem;
+    'FormFieldActionsBox': FormFieldActionsBox;
+    'WidgetActionsBox': WidgetActionsBox;
+    'EventsTab': EventsTab;
+  }
+  & TableFieldTable0WidgetMap
+  & HierarchicalTablePropertiesBoxWidgetMap
+  & FormFieldPropertiesBoxWidgetMap
+  & GridDataBoxWidgetMap
+  & ColumnPropertiesBoxWidgetMap
+  & RowPropertiesBoxWidgetMap
+  & FormFieldActionsBoxWidgetMap
+  & WidgetActionsBoxWidgetMap
+  & EventsTabWidgetMap;
 
 export class TableFieldTable0 extends Table {
   declare widgetMap: TableFieldTable0WidgetMap;
@@ -212,15 +242,17 @@ export type TableFieldTable0WidgetMap = {
   'AggregateTableControl': AggregateTableControl;
   'ContentMenu': Menu;
   'RemoveAll': Menu;
+  'InsertFewFlat': Menu;
   'InsertFew': Menu;
   'InsertMany': Menu;
   'AddRowMenu': Menu;
   'DeleteRowMenu': Menu;
+  'RowPropertiesMenu': Menu;
 };
 
 export type TableFieldTable0ColumnMap = {
   'Name': Column;
   'Detail': Column;
-  'Date': Column;
+  'Date': DateColumn;
   'Active': BooleanColumn;
 };

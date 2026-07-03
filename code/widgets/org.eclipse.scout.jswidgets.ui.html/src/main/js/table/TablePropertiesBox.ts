@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -116,6 +116,10 @@ export class TablePropertiesBox extends GroupBox {
     let rowIconColumnWidthField = this.widget('RowIconColumnWidthField');
     rowIconColumnWidthField.setValue(this.table.rowIconColumnWidth);
     rowIconColumnWidthField.on('propertyChange:value', event => this.table.setRowIconColumnWidth(event.newValue));
+
+    let rowsDraggableField = this.widget('RowsDraggableField');
+    rowsDraggableField.setValue(this.table.rowsDraggable);
+    rowsDraggableField.on('propertyChange:value', event => this.table.setRowsDraggable(event.newValue));
 
     let checkableStyleField = this.widget('CheckableStyleField');
     checkableStyleField.setValue(this.table.checkableStyle);
