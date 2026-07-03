@@ -9,11 +9,11 @@
  */
 import {OutlineModel, PageWithNodes} from '@eclipse-scout/core';
 import {
-  AccordionForm, BreadcrumbBarFieldForm, BrowserFieldForm, ButtonForm, CarouselForm, ChartFieldForm, CheckBoxFieldForm, DateFieldForm, DesktopForm, DesktopNotificationForm, DynamicPageWithNodes, EditableTableForm, FileChooserButtonForm,
-  FileChooserFieldForm, FileChooserForm, FormForm, GroupBoxForm, HierarchicalTableForm, HtmlFieldForm, ImageFieldForm, ImageForm, IntegerFieldForm, LabelFieldForm, LabelForm, ListBoxForm, LogicalGridForm, MenuBarForm, MessageBoxForm,
-  ModeSelectorForm, MultilineSmartFieldForm, MultilineStringFieldForm, NumberFieldForm, PageFieldForm, PopupForm, ProposalFieldForm, RadioButtonGroupForm, ReloadablePageWithNodes, RestForm, SamplePageWithNodes, SamplePageWithTable,
-  SequenceBoxForm, SimpleTabBoxForm, SliderFieldForm, SmartFieldForm, StringFieldForm, SwitchForm, TabBoxForm, TableForm, TableSmartFieldForm, TagFieldForm, TileAccordionForm, TileGridForm, TooltipForm, TooltipWithMenusForm, TreeBoxForm,
-  TreeForm, TreeSmartFieldForm, UiNotificationForm, VirtualTileGridForm, WatchFieldForm, WidgetsOutlineOverview, WrappedFormFieldForm
+  AccordionForm, BreadcrumbBarFieldForm, BrowserFieldForm, ButtonForm, CarouselForm, ChartFieldForm, CheckBoxFieldForm, DateFieldForm, DesktopForm, DesktopNotificationForm, DndTableForm, DynamicPageWithNodes, EditableTableForm,
+  FileChooserButtonForm, FileChooserFieldForm, FileChooserForm, FormForm, GroupBoxForm, HierarchicalTableForm, HtmlFieldForm, ImageFieldForm, ImageForm, IntegerFieldForm, LabelFieldForm, LabelForm, ListBoxForm, LogicalGridForm, MenuBarForm,
+  MessageBoxForm, ModeSelectorForm, MultilineSmartFieldForm, MultilineStringFieldForm, NumberFieldForm, PageFieldForm, PopupForm, ProposalFieldForm, RadioButtonGroupForm, ReloadablePageWithNodes, RestForm, SamplePageWithNodes,
+  SamplePageWithTable, SequenceBoxForm, SimpleTabBoxForm, SliderFieldForm, SmartFieldForm, StringFieldForm, SwitchForm, TabBoxForm, TableForm, TableSmartFieldForm, TagFieldForm, TileAccordionForm, TileGridForm, TooltipForm,
+  TooltipWithMenusForm, TreeBoxForm, TreeForm, TreeSmartFieldForm, UiNotificationForm, VirtualTileGridForm, WatchFieldForm, WidgetsOutlineOverview, WrappedFormFieldForm
 } from '../index';
 
 export default (): OutlineModel => ({
@@ -499,6 +499,15 @@ export default (): OutlineModel => ({
           text: 'Hierarchical Table',
           detailForm: {
             objectType: HierarchicalTableForm
+          }
+        },
+        {
+          uuid: '359da1ba-0ac3-4904-a7b9-c5870dbbb5f2',
+          objectType: PageWithNodes,
+          leaf: true,
+          text: 'DND Table',
+          detailForm: {
+            objectType: DndTableForm
           }
         }
       ]
