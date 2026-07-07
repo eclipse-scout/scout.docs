@@ -188,7 +188,7 @@ export class PizzaTablePage extends PageWithTable {
   }
 
   protected override _loadTableData(searchFilter: PizzaRestrictionDo): JQuery.Promise<PizzaResponse> {
-    const resourceUrl = systems.getOrCreate().getEndpointUrl('pizza', 'pizza'); // <2>
+    const resourceUrl = systems.getOrCreate().getEndpointUrl('pizza'); // <2>
     const restriction = this._withMaxRowCountContribution(searchFilter); // <3>
     return ajax.postDataObject(resourceUrl + '/list', restriction); // <4>
   }
@@ -228,7 +228,7 @@ export class PizzaRestrictionDo extends BaseDoEntity {
 ----
 
 <1> A small inline model for the PizzaTablePage having two columns. The Table is configured to only load the first 10 Pizzas.
-<2> Gets the URL to the PizzaResource. The second argument is the default value which corresponds to the `@Path` on the `PizzaResource` class.
+<2> Gets the URL to the PizzaResource. The argument is the default url which corresponds to the `@Path` on the `PizzaResource` class.
 <3> Attaches the `MaxRowCountContributionDo` (contains the `maxRowCount` of the table) to the restrictions.
 <4> Send the `POST` to the given URL having the restriction in the body encoded as `JSON`.
 <5> Map a single `PizzaDo` from the response to the column of the table. The mapping is done by index here.

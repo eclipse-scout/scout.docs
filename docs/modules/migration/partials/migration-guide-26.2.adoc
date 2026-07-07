@@ -590,3 +590,12 @@ if (!ACCESS.check(permission)) {
     .withPermission(permission);
 }
 ----
+
+== Simplify System.getEndpointUrl (Scout JS)
+
+The function `System.getEndpointUrl` only takes one argument now.
+The first one has been removed and only the second argument (default URL) is used for both the endpoint identifier and default URL.
+
+Migrate from `System.getEndpointUrl('name', 'default/url')` to `System.getEndpointUrl('default/url')`.
+
+In case an existing named URL has been replaced using `System.setEndpointUrl('name', 'new/url')` it must be migrated to `System.setEndpointUrl('default/url', 'new/url')`.
