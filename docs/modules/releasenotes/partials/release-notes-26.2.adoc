@@ -187,3 +187,17 @@ protected async _loadTableDataAsync(searchFilter: any): Promise<any> {
   return foos;
 }
 ----
+
+== dataObjectVisitors (Scout JS)
+
+A utility to visit data objects in Scout JS was added. `dataObjectVisitors` can be used to recursively visit any object and e.g. execute a callback for all occurrences of an explicit `BaseDoEntity`.
+
+.Finds and logs all occurrences of `BarDo` in the given `FooDo`.
+[source,typescript,opts=novalidate]
+----
+dataObjectVisitors.forEachRec(
+  fooDo,
+  c => c instanceof BarDo,
+  barDo => console.log(dataObjects.stringify(barDo))
+);
+----
