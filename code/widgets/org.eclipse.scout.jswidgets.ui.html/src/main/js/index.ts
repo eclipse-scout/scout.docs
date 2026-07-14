@@ -236,8 +236,6 @@ export * from './table/hierarchical/HierarchicalTableFormModel';
 export * from './table/hierarchical/HierarchicalTablePropertiesBox';
 export * from './table/hierarchical/HierarchicalTablePropertiesBoxModel';
 export * from './table/hierarchical/HierarchicalStyleLookupCall';
-export * from './table/dnd/DndTableForm';
-export * from './table/dnd/DndTableFormModel';
 export * from './tagfield/TagFieldForm';
 export * from './tagfield/TagFieldFormModel';
 export * from './tagfield/TagLookupCall';

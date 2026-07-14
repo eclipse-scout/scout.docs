@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2025 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -126,6 +126,12 @@ export default (): GroupBoxModel => ({
       labelVisible: false
     },
     {
+      id: 'RowsDraggableField',
+      objectType: CheckBoxField,
+      label: 'Rows Draggable',
+      labelVisible: false
+    },
+    {
       id: 'TextFilterEnabledField',
       objectType: CheckBoxField,
       label: 'Text Filter Enabled',
@@ -192,6 +198,7 @@ export type TablePropertiesBoxWidgetMap = {
   'ShowOrganizerMenuField': CheckBoxField;
   'SortEnabledField': CheckBoxField;
   'RowIconVisibleField': CheckBoxField;
+  'RowsDraggableField': CheckBoxField;
   'TextFilterEnabledField': CheckBoxField;
   'TileModeField': CheckBoxField;
   'TruncatedCellTooltipEnabledField': CheckBoxField;

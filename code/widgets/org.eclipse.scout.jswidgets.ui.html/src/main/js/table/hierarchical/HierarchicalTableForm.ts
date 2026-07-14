@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -7,28 +7,19 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {Form, FormModel, icons, InitModelOf, models, Table, TableRowModel} from '@eclipse-scout/core';
-import HierarchicalTableFormModel from './HierarchicalTableFormModel';
+import {dates, Form, FormModel, icons, InitModelOf, numbers, Table, TableRowModel} from '@eclipse-scout/core';
 import {ColumnLookupCall, HierarchicalTableFormWidgetMap} from '../../index';
+import model from './HierarchicalTableFormModel';
 
 export class HierarchicalTableForm extends Form {
   declare widgetMap: HierarchicalTableFormWidgetMap;
 
   table: Table;
-  rowNo: number;
-  groupNo: number;
-
-  constructor() {
-    super();
-
-    this.rowNo = 1;
-    this.groupNo = 1;
-  }
-
-  static GROUP_SIZE = 2;
+  rowNo = 1;
+  groupNo = 1;
 
   protected override _jsonModel(): FormModel {
-    return models.get(HierarchicalTableFormModel);
+    return model();
   }
 
   // noinspection DuplicatedCode
@@ -46,6 +37,7 @@ export class HierarchicalTableForm extends Form {
     this.widget('EventsTab').setField(this.table);
 
     this.widget('RemoveAll').on('action', this._onRemoveAllRows.bind(this));
+    this.widget('InsertFewFlat').on('action', this._onInsertFewFlat.bind(this));
     this.widget('InsertFew').on('action', this._onInsertFew.bind(this));
     this.widget('InsertMany').on('action', this._onInsertMany.bind(this));
     this.widget('DeleteRowMenu').on('action', this._onDeleteRowMenuAction.bind(this));
@@ -70,6 +62,10 @@ export class HierarchicalTableForm extends Form {
     this.table.deleteAllRows();
   }
 
+  protected _onInsertFewFlat() {
+    this._insertFewRowsFlat();
+  }
+
   protected _onInsertFew() {
     this._insertFewRows();
   }
@@ -78,10 +74,24 @@ export class HierarchicalTableForm extends Form {
     this._insertManyRows();
   }
 
+  protected _insertFewRowsFlat() {
+    let rows: TableRowModel[] = [];
+    for (let i = 0; i < 10; i++) {
+      let rowId = this._nextRowId();
+      rows.push({
+        id: rowId,
+        cells: [
+          `Row_${rowId}`, null, null, Boolean(i % 2)
+        ]
+      });
+    }
+    this.table.insertRows(rows);
+  }
+
   protected _insertFewRows() {
-    let daltonId = this._nextRowId(),
-      simpsonsId = this._nextRowId();
-    this.table.insertRows(this._scrumbleOrder([{
+    let daltonId = this._nextRowId();
+    let simpsonsId = this._nextRowId();
+    this.table.insertRows([{
       id: daltonId,
       iconId: icons.WORLD,
       cells: [
@@ -92,21 +102,21 @@ export class HierarchicalTableForm extends Form {
       parentRow: daltonId,
       iconId: icons.PERSON_SOLID,
       cells: [
-        'Joe Dalton', 'the smartest', '20.10.1940', true
+        'Joe Dalton', 'the smartest', dates.parseJsonDate('1940-10-20'), true
       ]
     }, {
       id: this._nextRowId(),
       parentRow: daltonId,
       iconId: icons.PERSON_SOLID,
       cells: [
-        'Wiliam Dalton', 'smarter', '03.05.1942', true
+        'William Dalton', 'smarter', dates.parseJsonDate('1945-15-03'), true
       ]
     }, {
       id: this._nextRowId(),
       parentRow: daltonId,
       iconId: icons.PERSON_SOLID,
       cells: [
-        'Jack Dalton', 'smart', '15.09.1944', true
+        'Jack Dalton', 'smart', dates.parseJsonDate('1944-09-15'), true
       ]
     }, {
       id: this._nextRowId(),
@@ -114,7 +124,7 @@ export class HierarchicalTableForm extends Form {
       iconId: icons.PERSON_SOLID,
       enabled: false,
       cells: [
-        'Averell Dalton', 'not so smart', '23.11.1945', true
+        'Averell Dalton', 'not so smart', dates.parseJsonDate('1945-11-23'), true
       ]
     }, {
       id: simpsonsId,
@@ -127,111 +137,91 @@ export class HierarchicalTableForm extends Form {
       parentRow: simpsonsId,
       iconId: icons.PERSON_SOLID,
       cells: [
-        'Homer Simpson', 'Daddy', '23.12.1960', true
+        'Homer Simpson', 'Daddy', dates.parseJsonDate('1960-12-23'), true
       ]
     }, {
       id: this._nextRowId(),
       parentRow: simpsonsId,
       iconId: icons.PERSON_SOLID,
       cells: [
-        'Marge Simpson', 'Mom', '02.05.1964', true
+        'Marge Simpson', 'Mom', dates.parseJsonDate('1964-05-02'), true
       ]
     }, {
       id: this._nextRowId(),
       parentRow: simpsonsId,
       iconId: icons.PERSON_SOLID,
       cells: [
-        'Bart Simpson', 'Boy', '08.10.1985', true
+        'Bart Simpson', 'Boy', dates.parseJsonDate('1985-10-08'), true
       ]
     }, {
       id: this._nextRowId(),
       parentRow: simpsonsId,
       iconId: icons.PERSON_SOLID,
       cells: [
-        'Lisa Simpson', 'Girl', '17.03.1987', true
+        'Lisa Simpson', 'Girl', dates.parseJsonDate('1987-03-17'), true
       ]
     }, {
       id: this._nextRowId(),
       parentRow: simpsonsId,
       iconId: icons.PERSON_SOLID,
       cells: [
-        'Maggie Simpson', 'Baby', '14.08.1988', true
+        'Maggie Simpson', 'Baby', dates.parseJsonDate('1988-08-14'), true
       ]
-    }]));
+    }]);
   }
 
   protected _insertManyRows() {
-    let i = 0,
-      allRows = [],
-      createParentWithManyChildren = function(id: string, name: string, childCount: number) {
-        let rows = [],
-          i,
-          rowId;
-        rows.push(createRow(id, null, null, [name + '_parent' + ' (' + childCount + ')', null, null]));
+    let baseDate = dates.parseJsonDate('2015-10-20');
 
-        for (i = 0; i < childCount; i++) {
-          rowId = this._nextRowId();
-          rows.push(createRow(rowId, id, null, [
-            name + rowId,
-            'Any title',
-            '20.10.2015'
-          ]));
-        }
-        return rows;
-      }.bind(this);
+    let rows: TableRowModel[] = [];
+    for (let i = 0; i < 100; i++) {
+      let parentRowId = this._nextRowId();
+      let childCount = Math.floor(Math.random() * 100);
+      rows.push({
+        id: parentRowId,
+        cells: [
+          `Parent_${parentRowId} (${childCount})`
+        ]
+      });
 
-    for (i = 0; i < 100; i++) {
-      allRows = allRows.concat(createParentWithManyChildren(this._nextRowId(), 'Abc', Math.floor(Math.random() * 100)));
+      for (let j = 0; j < childCount; j++) {
+        let rowId = this._nextRowId();
+        rows.push({
+          id: rowId,
+          parentRow: parentRowId,
+          cells: [
+            `Child_${rowId}`,
+            numbers.randomId(),
+            dates.shift(baseDate, null, null, j)
+          ]
+        });
+      }
     }
-
-    this.table.insertRows(allRows);
-
-    function createRow(id: string, parentId: string, iconId: string, cells: string[]): TableRowModel {
-      return {
-        id: id,
-        parentRow: parentId,
-        iconId: iconId,
-        cells: cells
-      };
-    }
+    this.table.insertRows(rows);
   }
 
   protected _nextRowId(): string {
     return '' + this.rowNo++;
   }
 
-  protected _scrumbleOrder(rows: TableRowModel[]): TableRowModel[] {
-    return rows.sort((a, b) => {
-      return 0.5 - Math.random();
-    });
-  }
-
   protected _onAddRowMenuAction() {
-    let id = this._nextRowId(),
-      parentId = null,
-      selectedRow = this.table.selectedRow();
-    if (selectedRow) {
-      parentId = selectedRow.id;
-    }
+    let rowId = this._nextRowId();
+    let selectedRow = this.table.selectedRow();
+    let parentId = selectedRow ? selectedRow.id : null;
 
     this.table.insertRow({
-      id: id,
+      id: rowId,
       parentRow: parentId,
       iconId: null,
       cells: [
-        'New Row ' + id,
-        'Any title',
-        '20.10.2015'
+        `Row_${rowId}`,
+        numbers.randomId(),
+        dates.shift(dates.parseJsonDate('2015-10-20'), null, null, numbers.randomInt(1000))
       ]
     });
   }
 
   protected _onDeleteRowMenuAction() {
     this.table.deleteRows(this.table.selectedRows);
-  }
-
-  protected _onToggleGroupNoColumnMenuAction() {
-    let column = this.table.columnById('GroupNo');
-    column.setVisible(!column.visible);
   }
 }
