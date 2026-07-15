@@ -29,6 +29,8 @@ export class HierarchicalTableForm extends Form {
     this.table = this.widget('Table');
 
     this.widget('PropertiesBox').setTable(this.table);
+    this.widget('RowPropertiesBox').setTable(this.table);
+
     let tableField = this.widget('TableField');
     this.widget('FormFieldPropertiesBox').setField(tableField);
     this.widget('GridDataBox').setField(tableField);

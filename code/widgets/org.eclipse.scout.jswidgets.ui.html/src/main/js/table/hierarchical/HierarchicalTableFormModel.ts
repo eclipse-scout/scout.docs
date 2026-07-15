@@ -10,7 +10,7 @@
 import {AggregateTableControl, BooleanColumn, Column, DateColumn, FormModel, GroupBox, Menu, SmartField, TabItem, Table, TableField} from '@eclipse-scout/core';
 import {
   ColumnPropertiesBox, ColumnPropertiesBoxWidgetMap, ConfigurationBox, EventsTab, EventsTabWidgetMap, FormFieldActionsBox, FormFieldActionsBoxWidgetMap, FormFieldPropertiesBox, FormFieldPropertiesBoxWidgetMap, GridDataBox,
-  GridDataBoxWidgetMap, HierarchicalTablePropertiesBox, HierarchicalTablePropertiesBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap
+  GridDataBoxWidgetMap, HierarchicalTablePropertiesBox, HierarchicalTablePropertiesBoxWidgetMap, RowPropertiesBox, RowPropertiesBoxWidgetMap, WidgetActionsBox, WidgetActionsBoxWidgetMap
 } from '../../index';
 
 export default (): FormModel => ({
@@ -162,6 +162,18 @@ export default (): FormModel => ({
             ]
           },
           {
+            id: 'RowProperties',
+            objectType: TabItem,
+            label: 'Row Properties',
+            fields: [
+              {
+                id: 'RowPropertiesBox',
+                objectType: RowPropertiesBox,
+                borderVisible: false
+              }
+            ]
+          },
+          {
             id: 'ActionsTab',
             objectType: TabItem,
             label: 'Actions',
@@ -190,24 +202,36 @@ export default (): FormModel => ({
 * GENERATED WIDGET MAPS
 * **************************************************************************/
 
-export type HierarchicalTableFormWidgetMap = {
-  'MainBox': GroupBox;
-  'DetailBox': GroupBox;
-  'TableField': TableField;
-  'Table': TableFieldTable0;
-  'ConfigurationBox': ConfigurationBox;
-  'PropertiesTab': TabItem;
-  'PropertiesBox': HierarchicalTablePropertiesBox;
-  'FormFieldPropertiesBox': FormFieldPropertiesBox;
-  'GridDataBox': GridDataBox;
-  'ColumnProperties': TabItem;
-  'Column.TargetField': SmartField<Column>;
-  'Column.PropertiesBox': ColumnPropertiesBox;
-  'ActionsTab': TabItem;
-  'FormFieldActionsBox': FormFieldActionsBox;
-  'WidgetActionsBox': WidgetActionsBox;
-  'EventsTab': EventsTab;
-} & TableFieldTable0WidgetMap & HierarchicalTablePropertiesBoxWidgetMap & FormFieldPropertiesBoxWidgetMap & GridDataBoxWidgetMap & ColumnPropertiesBoxWidgetMap & FormFieldActionsBoxWidgetMap & WidgetActionsBoxWidgetMap & EventsTabWidgetMap;
+export type HierarchicalTableFormWidgetMap =
+  {
+    'MainBox': GroupBox;
+    'DetailBox': GroupBox;
+    'TableField': TableField;
+    'Table': TableFieldTable0;
+    'ConfigurationBox': ConfigurationBox;
+    'PropertiesTab': TabItem;
+    'PropertiesBox': HierarchicalTablePropertiesBox;
+    'FormFieldPropertiesBox': FormFieldPropertiesBox;
+    'GridDataBox': GridDataBox;
+    'ColumnProperties': TabItem;
+    'Column.TargetField': SmartField<Column>;
+    'Column.PropertiesBox': ColumnPropertiesBox;
+    'RowProperties': TabItem;
+    'RowPropertiesBox': RowPropertiesBox;
+    'ActionsTab': TabItem;
+    'FormFieldActionsBox': FormFieldActionsBox;
+    'WidgetActionsBox': WidgetActionsBox;
+    'EventsTab': EventsTab;
+  }
+  & TableFieldTable0WidgetMap
+  & HierarchicalTablePropertiesBoxWidgetMap
+  & FormFieldPropertiesBoxWidgetMap
+  & GridDataBoxWidgetMap
+  & ColumnPropertiesBoxWidgetMap
+  & RowPropertiesBoxWidgetMap
+  & FormFieldActionsBoxWidgetMap
+  & WidgetActionsBoxWidgetMap
+  & EventsTabWidgetMap;
 
 export class TableFieldTable0 extends Table {
   declare widgetMap: TableFieldTable0WidgetMap;
@@ -223,6 +247,7 @@ export type TableFieldTable0WidgetMap = {
   'InsertMany': Menu;
   'AddRowMenu': Menu;
   'DeleteRowMenu': Menu;
+  'RowPropertiesMenu': Menu;
 };
 
 export type TableFieldTable0ColumnMap = {
