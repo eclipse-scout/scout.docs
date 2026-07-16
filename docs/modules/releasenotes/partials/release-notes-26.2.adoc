@@ -201,3 +201,11 @@ dataObjectVisitors.forEachRec(
   barDo => console.log(dataObjects.stringify(barDo))
 );
 ----
+
+== Drag & Drop for Table Rows
+
+The `Table` widget can now let users move a row to a different position by simply dragging it with the mouse.
+
+image::common:table_row_dnd_animation.gif[]
+
+Detailed information on how to use this in your own application can be found in the xref:technical-guide:user-interface/widget-reference.adoc#table-dnd[Technical Guide].
