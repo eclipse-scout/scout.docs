@@ -377,3 +377,114 @@ import {Menu, ValueField} from '@eclipse-scout/core';
 === ImageField
 
 The `ImageField` supports the menu types `ImageField.MenuType.ImageUrl` and `ImageField.MenuType.Null`.
+
+[#table]
+== Table
+
+The `Table` widget is a feature‑rich grid for displaying and editing tabular data in a Scout application.
+By default, it allows the user to freely sort, group and filter the data and to adjust or reorder columns.
+It also supports in‑place editing, letting users modify cell values directly within the grid.
+When dealing with large data sets, the widget employs virtual scrolling, rendering only the rows that are currently visible.
+
+[#table-dnd]
+=== Drag and Drop for Table Rows
+
+In a normal table, the rows have no fixed order.
+Users can sort the data by one or more columns as needed (ascending or descending).
+To allow them to rearrange the rows individually, drag and drop support can be activated.
+Users can then grab a row (by clicking and holding) and drop it at the desired location (by moving the cursor and releasing the mouse button).
+
+.Moving row 4 between row 1 and row 2.
+image::common:table_row_dnd.png[]
+
+[NOTE]
+====
+This feature is currently considered to be experimental.
+For now, it only works for single rows and only within the same table.
+However, we plan and improve the feature in future releases.
+====
+
+==== Dragging Rows
+
+To enable the drag and drop support for a table, set the property `rowsDraggable` to true.
+It is recommended to disable the normal column sorting to avoid confusion.
+For non-hierarchical tables that allow every row at every position, this is the only configuration required.
+
+[source,javascript,,opts=novalidate]
+----
+  ...
+  {
+    id: 'MyTable',
+    objectType: Table,
+    sortEnabled: false,    // <--
+    rowsDraggable: true,   // <--
+    columns: [ ... ]
+  },
+  ...
+----
+
+NOTE: Drag and drop support is automatically turned off for disabled tables.
+
+By default, all enabled rows can be dragged.
+To prevent a certain row from being dragged, set its `draggable` property to false.
+To explicitly allow dragging of disabled rows, set `draggable` to true.
+
+==== Dropping Rows
+
+To specify if a row is a valid drop target, use the property `dropTypes`.
+Its value is a data object of type `scout.TableRowDropTypesDo`.
+
+.Properties of TableRowDropTypesDo
+[%autowidth,options="header",cols="s,"]
+|===
+|Position|Description
+|above|Specifies the drop type when trying to insert the dragged row directly above this row, at the same level.
+|below|Specifies the drop type when trying to insert the dragged row directly below this row, at the same level.
+|inside|Only relevant for hierarchical tables. Specifies the drop type when trying to insert the dragged row as a child row of this row.
+|===
+
+.List of drop types
+[%autowidth,options="header",cols="s,,"]
+|===
+|Drop Type|Description|Visualization
+|ALLOWED|Valid drop position|Blue indicator line
+|FORBIDDEN|Invalid drop position|Red indicator line
+|NONE|Unavailable drop position|No indicator line
+|===
+
+The drop types can also be computed dynamically by listening for the `acceptRowDrop` event.
+Other event types allow listeners to further customize the drop operation.
+
+.Table events related to drag and drop of rows
+[%autowidth,options="header",cols="s,"]
+|===
+|Event|Description
+
+|acceptRowDrop|
+Allows the dynamic computation of drop types for a given source and target row.
+Use this, when the static `dropTypes` property does not provide enough flexibility.
+
+|dropRow|
+The user released the mouse at a valid position and the row is about to be moved to the new location.
+By default, the row order is updated and the surrounding `TableField` (if present) is marked as touched.
+Listeners can prevent this by calling `event.preventDefault()`.
+They can then provide a custom logic.
+
+|afterRowDrop|
+The move operation is complete.
+Use this event to update other widgets or invoke additional code with the new row order.
+However, it is rarely needed because you can typically just listen for the `rowOrderChanged` event on the table.
+|===
+
+[NOTE]
+====
+For Scout Classic (Java) tables, there are some minor limitations:
+
+* To avoid an unnecessary memory overhead for tables that don't use drag and drop, the row properties `draggable` and `dropTypes` are not directly available on `ITableRow`.
+Instead, use `setCustomValue()` with these constants:
+** `AbstractTableRowData.CUSTOM_VALUES_ID_DRAGGABLE`
+** `AbstractTableRowData.CUSTOM_VALUES_ID_DROP_TYPES`
+* The events `acceptRowDrop` and `afterRowDrop` are not available in Java.
+If the static drop types are not sufficient, the suggested workaround is to validate the target in the drop operation and throw a VetoException if invalid.
+* `execRowDrop()` has no default implementation, you must provide your own logic.
+====
