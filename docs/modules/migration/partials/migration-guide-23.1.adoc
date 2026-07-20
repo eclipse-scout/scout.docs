@@ -470,4 +470,6 @@ Removals (see deprecation warning in 22.0 for further information):
 
 The property `scout.rest.useScoutApacheConnector` was removed in  release 23.1.
 The `ScoutApacheConnector` implementation is the new default handler to connect the Apache HTTP client for Jersey REST calls.
+
 Remove config property `scout.rest.useScoutApacheConnector=...` from all your config files.
+Check your REST client implementations, if any properties out of `org.glassfish.jersey.client.ClientProperties` were used, migrate your code to use `org.eclipse.scout.rt.rest.client.RestClientProperties` properties.
