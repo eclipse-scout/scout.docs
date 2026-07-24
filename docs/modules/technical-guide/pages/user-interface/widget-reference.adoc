@@ -481,10 +481,9 @@ However, it is rarely needed because you can typically just listen for the `rowO
 For Scout Classic (Java) tables, there are some minor limitations:
 
 * To avoid an unnecessary memory overhead for tables that don't use drag and drop, the row properties `draggable` and `dropTypes` are not directly available on `ITableRow`.
-Instead, use `setCustomValue()` with these constants:
+Instead, they are represented as "custom values". Use `getCustomValue()` and `setCustomValue()` with these constants:
 ** `AbstractTableRowData.CUSTOM_VALUES_ID_DRAGGABLE`
 ** `AbstractTableRowData.CUSTOM_VALUES_ID_DROP_TYPES`
 * The events `acceptRowDrop` and `afterRowDrop` are not available in Java.
 If the static drop types are not sufficient, the suggested workaround is to validate the target in the drop operation and throw a VetoException if invalid.
-* `execRowDrop()` has no default implementation, you must provide your own logic.
 ====
