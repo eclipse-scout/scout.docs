@@ -79,15 +79,16 @@ import org.eclipse.scout.widgets.client.services.lookup.LocaleLookupCall;
 import org.eclipse.scout.widgets.client.ui.forms.BooleanFieldForm.MainBox.ExamplesBox.DefaultField;
 import org.eclipse.scout.widgets.client.ui.forms.HierarchicalTableFieldForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.HierarchicalTableFieldForm.MainBox.ConfigurationBox;
+import org.eclipse.scout.widgets.client.ui.forms.HierarchicalTableFieldForm.MainBox.ConfigurationBox.CheckedRowsField;
 import org.eclipse.scout.widgets.client.ui.forms.HierarchicalTableFieldForm.MainBox.ConfigurationBox.ContextColumnField;
 import org.eclipse.scout.widgets.client.ui.forms.HierarchicalTableFieldForm.MainBox.ConfigurationBox.DefaultIconIdField;
 import org.eclipse.scout.widgets.client.ui.forms.HierarchicalTableFieldForm.MainBox.ConfigurationBox.DeletedRowsField;
 import org.eclipse.scout.widgets.client.ui.forms.HierarchicalTableFieldForm.MainBox.ConfigurationBox.InsertedRowsField;
+import org.eclipse.scout.widgets.client.ui.forms.HierarchicalTableFieldForm.MainBox.ConfigurationBox.IsColumnFixedWidthField;
+import org.eclipse.scout.widgets.client.ui.forms.HierarchicalTableFieldForm.MainBox.ConfigurationBox.IsColumnMandatoryField;
 import org.eclipse.scout.widgets.client.ui.forms.HierarchicalTableFieldForm.MainBox.ConfigurationBox.PropertiesGroupBox;
 import org.eclipse.scout.widgets.client.ui.forms.HierarchicalTableFieldForm.MainBox.ConfigurationBox.PropertiesGroupBox.AutoResizeColumnsField;
 import org.eclipse.scout.widgets.client.ui.forms.HierarchicalTableFieldForm.MainBox.ConfigurationBox.PropertiesGroupBox.IsCheckableField;
-import org.eclipse.scout.widgets.client.ui.forms.HierarchicalTableFieldForm.MainBox.ConfigurationBox.PropertiesGroupBox.IsColumnFixedWidthField;
-import org.eclipse.scout.widgets.client.ui.forms.HierarchicalTableFieldForm.MainBox.ConfigurationBox.PropertiesGroupBox.IsColumnMandatoryField;
 import org.eclipse.scout.widgets.client.ui.forms.HierarchicalTableFieldForm.MainBox.ConfigurationBox.PropertiesGroupBox.IsEditableField;
 import org.eclipse.scout.widgets.client.ui.forms.HierarchicalTableFieldForm.MainBox.ConfigurationBox.PropertiesGroupBox.MultiSelectField;
 import org.eclipse.scout.widgets.client.ui.forms.HierarchicalTableFieldForm.MainBox.ConfigurationBox.PropertiesGroupBox.TableHeaderVisibleField;
@@ -214,6 +215,10 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
     return getFieldByClass(DeletedRowsField.class);
   }
 
+  public CheckedRowsField getCheckedRowsField() {
+    return getFieldByClass(CheckedRowsField.class);
+  }
+
   public ContextColumnField getContextColumnField() {
     return getFieldByClass(ContextColumnField.class);
   }
@@ -225,11 +230,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
     @Order(10)
     @ClassId("2900411b-27ca-47b0-9039-cd6d9753cf02")
     public class ExamplesBox extends AbstractGroupBox {
-
-      @Override
-      protected String getConfiguredLabel() {
-        return TEXTS.get("Examples");
-      }
 
       @Order(10)
       @ClassId("96ce0861-6a2b-4637-859c-f7a5ab52b42e")
@@ -314,17 +314,17 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           return 0;
         }
 
-        private ITableRow createRow(ITableRow parentRow, String name, String location, Date date, Date startTime, Date endDateTime, Long industery) {
+        private ITableRow createRow(ITableRow parentRow, String name, String location, Date date, Date startTime, Date endDateTime, Long industry) {
           Table table = getTable();
           ITableRow row = table.createRow();
           table.getIdColumn().setValue(row, m_nextRowId.getAndIncrement());
-          table.getParentIdColumn().setValue(row, Optional.ofNullable(parentRow).map(r -> table.getIdColumn().getValue(parentRow)).orElse(null));
+          table.getParentIdColumn().setValue(row, Optional.ofNullable(parentRow).map(_ -> table.getIdColumn().getValue(parentRow)).orElse(null));
           table.getNameColumn().setValue(row, name);
           table.getLocationColumn().setValue(row, location);
           table.getDateColumn().setValue(row, date);
           table.getStartColumn().setValue(row, startTime);
           table.getEndDateTimeColumn().setValue(row, endDateTime);
-          table.getIndustryColumn().setValue(row, industery);
+          table.getIndustryColumn().setValue(row, industry);
           return row;
         }
 
@@ -338,7 +338,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           ITableRow row = new TableRow(cols);
 
           row.getCellForUpdate(table.getIdColumn()).setValue(m_nextRowId.getAndIncrement());
-          row.getCellForUpdate(table.getParentIdColumn()).setValue(Optional.ofNullable(table.getIdColumn().getValue(parent)).orElse(null));
+          row.getCellForUpdate(table.getParentIdColumn()).setValue(table.getIdColumn().getValue(parent));
           row.getCellForUpdate(table.getNameColumn()).setValue("New Row");
           row.getCellForUpdate(table.getTrendColumn()).setValue(AbstractIcons.LongArrowUp);
           ExampleBean bean = new ExampleBean();
@@ -346,6 +346,19 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           row.getCellForUpdate(table.getCustomColumn()).setValue(bean);
 
           table.addRow(row, true);
+        }
+
+        private String rowsToKeyString(List<ITableRow> list) {
+          if (list == null || list.isEmpty()) {
+            return "";
+          }
+
+          StringBuilder buf = new StringBuilder(Long.toString((Long) list.get(0).getCellValue(0)));
+          for (int i = 1; i < list.size(); i++) {
+            buf.append(";").append(list.get(i).getCellValue(0));
+          }
+
+          return buf.toString();
         }
 
         @Order(1000)
@@ -451,6 +464,16 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
                     }
                   }
                 });
+
+            addTableListener(e -> {
+              if (getRootGroupBox() != null) {
+                getSelectedRowsField().setValue(rowsToKeyString(Table.this.getSelectedRows()));
+                getInsertedRowsField().setValue(rowsToKeyString(Table.this.getInsertedRows()));
+                getUpdatedRowsField().setValue(rowsToKeyString(Table.this.getUpdatedRows()));
+                getDeletedRowsField().setValue(rowsToKeyString(Table.this.getDeletedRows()));
+                getCheckedRowsField().setValue(rowsToKeyString(Table.this.getCheckedRows()));
+              }
+            });
           }
 
           @Order(10)
@@ -504,7 +527,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
 
             @Override
             protected int getConfiguredWidth() {
-              return 120;
+              return 180;
             }
           }
 
@@ -1389,6 +1412,21 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
         }
       }
 
+      @Order(51)
+      @ClassId("3461ca8c-237a-43d8-a1ca-36497e985f1a")
+      public class CheckedRowsField extends AbstractStringField {
+
+        @Override
+        protected boolean getConfiguredEnabled() {
+          return false;
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return "Checked Rows";
+        }
+      }
+
       @Order(55)
       @ClassId("b124784e-8f64-47bc-bd1e-ec17b67ee469")
       public class DefaultIconIdField extends AbstractSmartField<String> {
@@ -1435,6 +1473,92 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
         }
       }
 
+      @Order(61)
+      @ClassId("f9bb6014-2e36-4ace-84b9-5bb6ee056edf")
+      public class IsColumnMandatoryField extends AbstractBooleanField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("ColumnIsMandatory");
+        }
+
+        @Override
+        protected void execChangedValue() {
+          IColumn<?> contextColumn = getTableField().getTable().getContextColumn();
+          if (contextColumn != null) {
+            contextColumn.setMandatory(getValue());
+          }
+        }
+
+        @Override
+        protected void execInitField() {
+          if (getTableField().getTable().getContextColumn() != null) {
+            setEnabled(true);
+            setValue(getTableField().getTable().getContextColumn().isMandatory());
+          }
+          else {
+            setEnabled(false);
+            setValue(false);
+          }
+        }
+      }
+
+      @Order(62)
+      @ClassId("df7d782a-628f-43a1-97dd-a1a9d1ba326c")
+      public class IsColumnFixedWidthField extends AbstractBooleanField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("ColumnIsFixedWidth");
+        }
+
+        @Override
+        protected void execChangedValue() {
+          IColumn<?> contextColumn = getTableField().getTable().getContextColumn();
+          if (contextColumn != null) {
+            contextColumn.setFixedWidth(getValue());
+          }
+        }
+
+        @Override
+        protected void execInitField() {
+          if (getTableField().getTable().getContextColumn() != null) {
+            setEnabled(true);
+            setValue(getTableField().getTable().getContextColumn().isFixedWidth());
+          }
+          else {
+            setEnabled(false);
+            setValue(false);
+          }
+        }
+      }
+
+      @Order(65)
+      @ClassId("42675dee-0c27-4848-8577-693c7494385c")
+      public class ToggleHorizontalAlignmentField extends AbstractLinkButton {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("ToggleHorizontalAlignment");
+        }
+
+        @Override
+        protected boolean getConfiguredProcessButton() {
+          return false;
+        }
+
+        @Override
+        protected void execClickAction() {
+          for (IColumn column : getTableField().getTable().getColumns()) {
+            int newAlignment = column.getHorizontalAlignment() + 1;
+            if (newAlignment > 1) {
+              newAlignment = -1;
+            }
+            column.setHorizontalAlignment(newAlignment);
+          }
+        }
+      }
+
       @Order(70)
       @ClassId("deec15bb-0df4-4c1a-a755-dd535ea7b8b3")
       public class PropertiesGroupBox extends AbstractGroupBox {
@@ -1446,7 +1570,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
 
         @Override
         protected int getConfiguredGridH() {
-          return 8;
+          return 9;
         }
 
         @Override
@@ -1484,11 +1608,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           }
 
           @Override
-          protected String getConfiguredFont() {
-            return "ITALIC";
-          }
-
-          @Override
           protected void execChangedValue() {
             getTableField().getTable().setAutoResizeColumns(getValue());
           }
@@ -1521,11 +1640,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           @Override
           protected boolean getConfiguredLabelVisible() {
             return false;
-          }
-
-          @Override
-          protected String getConfiguredFont() {
-            return "ITALIC";
           }
 
           @Override
@@ -1565,11 +1679,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
             setValue(getLocationColumn().isVisible());
           }
 
-          @Override
-          protected String getConfiguredFont() {
-            return "ITALIC";
-          }
-
           private IColumn<String> getLocationColumn() {
             ITable table = getTableField().getTable();
             return table.getColumnSet().getColumnByClass(LocationColumn.class);
@@ -1588,11 +1697,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           @Override
           protected boolean getConfiguredLabelVisible() {
             return false;
-          }
-
-          @Override
-          protected String getConfiguredFont() {
-            return "ITALIC";
           }
 
           @Override
@@ -1618,11 +1722,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           @Override
           protected boolean getConfiguredLabelVisible() {
             return false;
-          }
-
-          @Override
-          protected String getConfiguredFont() {
-            return "ITALIC";
           }
 
           @Override
@@ -1656,11 +1755,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           }
 
           @Override
-          protected String getConfiguredFont() {
-            return "ITALIC";
-          }
-
-          @Override
           protected void execChangedValue() {
             getTableField().getTable().setMultiSelect(getValue());
           }
@@ -1683,11 +1777,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           @Override
           protected boolean getConfiguredLabelVisible() {
             return false;
-          }
-
-          @Override
-          protected String getConfiguredFont() {
-            return "ITALIC";
           }
 
           @Override
@@ -1716,11 +1805,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           }
 
           @Override
-          protected String getConfiguredFont() {
-            return "ITALIC";
-          }
-
-          @Override
           protected void execChangedValue() {
             getTableField().getTable().setCompact(getValue());
           }
@@ -1728,86 +1812,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           @Override
           protected void execInitField() {
             setValue(getTableField().getTable().isCompact());
-          }
-        }
-
-        @Order(130)
-        @ClassId("f9bb6014-2e36-4ace-84b9-5bb6ee056edf")
-        public class IsColumnMandatoryField extends AbstractBooleanField {
-
-          @Override
-          protected String getConfiguredLabel() {
-            return TEXTS.get("ColumnIsMandatory");
-          }
-
-          @Override
-          protected boolean getConfiguredLabelVisible() {
-            return false;
-          }
-
-          @Override
-          protected String getConfiguredFont() {
-            return "ITALIC";
-          }
-
-          @Override
-          protected void execChangedValue() {
-            IColumn<?> contextColumn = getTableField().getTable().getContextColumn();
-            if (contextColumn != null) {
-              contextColumn.setMandatory(getValue());
-            }
-          }
-
-          @Override
-          protected void execInitField() {
-            if (getTableField().getTable().getContextColumn() != null) {
-              setEnabled(true);
-              setValue(getTableField().getTable().getContextColumn().isMandatory());
-            }
-            else {
-              setEnabled(false);
-              setValue(false);
-            }
-          }
-        }
-
-        @Order(135)
-        @ClassId("df7d782a-628f-43a1-97dd-a1a9d1ba326c")
-        public class IsColumnFixedWidthField extends AbstractBooleanField {
-
-          @Override
-          protected String getConfiguredLabel() {
-            return TEXTS.get("ColumnIsFixedWidth");
-          }
-
-          @Override
-          protected boolean getConfiguredLabelVisible() {
-            return false;
-          }
-
-          @Override
-          protected String getConfiguredFont() {
-            return "ITALIC";
-          }
-
-          @Override
-          protected void execChangedValue() {
-            IColumn<?> contextColumn = getTableField().getTable().getContextColumn();
-            if (contextColumn != null) {
-              contextColumn.setFixedWidth(getValue());
-            }
-          }
-
-          @Override
-          protected void execInitField() {
-            if (getTableField().getTable().getContextColumn() != null) {
-              setEnabled(true);
-              setValue(getTableField().getTable().getContextColumn().isFixedWidth());
-            }
-            else {
-              setEnabled(false);
-              setValue(false);
-            }
           }
         }
 
@@ -1826,11 +1830,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           }
 
           @Override
-          protected String getConfiguredFont() {
-            return "ITALIC";
-          }
-
-          @Override
           protected void execChangedValue() {
             getTableField().getTable().setRowIconVisible(getValue());
             getDefaultIconIdField().setVisible(getValue());
@@ -1840,6 +1839,31 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           protected void execInitField() {
             setValue(getTableField().getTable().isRowIconVisible());
             getDefaultIconIdField().setVisible(getValue());
+          }
+        }
+
+        @Order(145)
+        @ClassId("974a4d00-f563-4b62-b794-3e394c68f4aa")
+        public class RowsDraggableField extends AbstractBooleanField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "Rows Draggable";
+          }
+
+          @Override
+          protected boolean getConfiguredLabelVisible() {
+            return false;
+          }
+
+          @Override
+          protected void execChangedValue() {
+            getTableField().getTable().setRowsDraggable(getValue());
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(getTableField().getTable().isRowsDraggable());
           }
         }
 
@@ -1855,11 +1879,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           @Override
           protected boolean getConfiguredLabelVisible() {
             return false;
-          }
-
-          @Override
-          protected String getConfiguredFont() {
-            return "ITALIC";
           }
 
           @Override
@@ -1885,11 +1904,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           @Override
           protected boolean getConfiguredLabelVisible() {
             return false;
-          }
-
-          @Override
-          protected String getConfiguredFont() {
-            return "ITALIC";
           }
 
           @Override
@@ -1920,11 +1934,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           }
 
           @Override
-          protected String getConfiguredFont() {
-            return "ITALIC";
-          }
-
-          @Override
           protected void execChangedValue() {
             getTableField().getTable().setHeaderVisible(getValue());
           }
@@ -1947,11 +1956,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           @Override
           protected boolean getConfiguredLabelVisible() {
             return false;
-          }
-
-          @Override
-          protected String getConfiguredFont() {
-            return "ITALIC";
           }
 
           @Override
@@ -1980,11 +1984,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           }
 
           @Override
-          protected String getConfiguredFont() {
-            return "ITALIC";
-          }
-
-          @Override
           protected void execChangedValue() {
             getTableField().getTable().setSortEnabled(getValue());
           }
@@ -2006,11 +2005,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           @Override
           protected boolean getConfiguredLabelVisible() {
             return false;
-          }
-
-          @Override
-          protected String getConfiguredFont() {
-            return "ITALIC";
           }
 
           @Override
@@ -2043,11 +2037,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           }
 
           @Override
-          protected String getConfiguredFont() {
-            return "ITALIC";
-          }
-
-          @Override
           protected void execChangedValue() {
             getTableField().getTable().setScrollToSelection(getValue());
           }
@@ -2072,11 +2061,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           }
 
           @Override
-          protected String getConfiguredFont() {
-            return "ITALIC";
-          }
-
-          @Override
           protected void execChangedValue() {
             getTableField().getTable().setTextFilterEnabled(getValue());
           }
@@ -2084,37 +2068,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           @Override
           protected void execInitField() {
             setValue(getTableField().getTable().isTextFilterEnabled());
-          }
-        }
-
-        @Order(210)
-        @ClassId("42675dee-0c27-4848-8577-693c7494385c")
-        public class ToggleHorizontalAlignmentField extends AbstractLinkButton {
-
-          @Override
-          protected String getConfiguredLabel() {
-            return TEXTS.get("ToggleHorizontalAlignment");
-          }
-
-          @Override
-          protected boolean getConfiguredProcessButton() {
-            return false;
-          }
-
-          @Override
-          protected String getConfiguredFont() {
-            return "ITALIC";
-          }
-
-          @Override
-          protected void execClickAction() {
-            for (IColumn column : getTableField().getTable().getColumns()) {
-              int newAlignment = column.getHorizontalAlignment() + 1;
-              if (newAlignment > 1) {
-                newAlignment = -1;
-              }
-              column.setHorizontalAlignment(newAlignment);
-            }
           }
         }
       }
