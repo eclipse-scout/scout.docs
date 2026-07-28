@@ -214,3 +214,12 @@ Detailed information on how to use this in your own application can be found in 
 
 For local lookup calls (`LocalLookupCall.java` and `StaticLookupCall.ts`), wildcards ar inserted at the beginning and end of the lookup text so that the whole text is searched instead of only the beginning.
 This way, they are unified with the implementation in `LookupHelper.createTextSearchPattern`.
+
+== REST HTTP Client: Increased Connection Limits
+
+The default connection pool limits of the REST HTTP client were increased to support applications with higher number of concurrent outbound requests.
+
+* Maximum total connections (`scout.rest.client.http.maxConnectionsTotal`): `128` -> `512`
+* Maximum connections per route (`scout.rest.client.http.maxConnectionsPerRoute`): `32` -> `128`
+
+This change improves throughput and reduces the likelihood of requests being queued or delayed when many REST calls are executed concurrently.
