@@ -37,6 +37,53 @@ reliability and adds flexibility for updates and deployments in a high availabil
 
 During a transition period, session support will be provided in separate modules for legacy purposes, see migration guide for details.
 
+== Drag & Drop for Table Rows
+
+The `Table` widget can now let users move a row to a different position by simply dragging it with the mouse.
+
+image::common:table_row_dnd_animation.gif[]
+
+Detailed information on how to use this in your own application can be found in the xref:technical-guide:user-interface/widget-reference.adoc#table-dnd[Technical Guide].
+
+== Enhanced Grouping of Date Columns
+
+So far, date columns in tables have always been grouped by year.
+Now the user can adjust the grouping type, similar to what is already possible with table charts.
+The chosen grouping type is saved in the column settings and bookmarks.
+The same configuration option is now also available in the associated column filter.
+
+image::common:date_column.png[]
+
+== Reload Key Stroke for Outline
+
+If a user wishes to recreate a page (e.g. because its content has changed but the page has not been refreshed), they can usually just reload the detail table of the parent page, e.g. by pressing F5.
+
+However, an outline typically does not have a root page, so this is not possible for top-level pages.
+To support this case, F5 can now be pressed even if no page is selected.
+When it is pressed, the top-level nodes are reloaded which in-fact reloads the whole outline.
+To deselect a page, just click on the outline title.
+
+The keystroke is active only for remote outlines (Scout Classic).
+
+== Locking of Transitive Node Dependencies
+
+To mitigate supply chain attacks and ensure reproducible builds, Scout now provides support to lock the Node.js dependencies.
+
+See the xref:technical-guide:user-interface/build-stack.adoc#node-dependency-resolution[Technical Guide] for details and the xref:migration:migration-guide.adoc#locking-of-transitive-node-dependencies[Migration Guide] for instructions how to enable the feature.
+
+== Value Field: Async Validator Support Added (Scout JS)
+
+A validator can now be asynchronous by returning a promise.
+This can for example be used to call a rest resource that validates the user input.
+
+Please see the xref:technical-guide:user-interface/value-field.adoc#async-validator[Technical Guide] for details.
+
+== Table: Column Formatter Added (Scout JS)
+
+The `Column` now has a formatter property similar to the one of the `ValueField`.
+
+This makes it possible to change the format function without having to subclass the column.
+
 [#tree-scout-js-findnode-added-and-visitnodes-improved]
 == Tree: FindNode Added and VisitNodes Improved (Scout JS)
 
@@ -48,29 +95,19 @@ Unfortunately, that function does not have the possibility to abort the traversa
 To support this, it now uses the `TreeVisitResult`, so you can now either skip visiting a subtree or stop visiting completely.
 To make it consistent with other visitor functions like `Widget.visitChildren`, returning `true` now stops visiting completely instead of just skipping the subtree.
 
-This means you need to check your visitors according to the xref:migration-guide.adoc#tree-scout-js-api-of-visitnodes-changed[Migration Guide].
+This means you need to check your visitors according to the xref:migration:migration-guide.adoc#tree-scout-js-api-of-visitnodes-changed[Migration Guide].
 
-== Table: Column Formatter Added (Scout JS)
+== HybridManager API Improvements (Scout JS)
 
-The `Column` now has a formatter property similar to the one of the `ValueField`.
-
-This makes it possible to change the format function without having to subclass the column.
-
-== Value Field: Async Validator Support Added (Scout JS)
-
-A validator can now be asynchronous by returning a promise.
-This can for example be used to call a rest resource that validates the user input.
-
-Please see the xref:technical-guide:user-interface/value-field.adoc#async-validator[Technical Guide] for details.
-
-== HybridManager API improvements (Scout JS)
-
-The `HybridManager` provides API to dispose formerly created widgets. The widgets passed to `HybridManager.disposeWidgets` are collected and disposed in a single hybrid action.
+Widgets that have been created by the `HybridManager` are now disposed automatically on the UI server when the widget is destroyed using `widget.destroy()`.
+Internally, it uses the new API method `HybridManager.disposeWidgets` which collects and disposes multiple widgets in a single hybrid action.
 
 [source,typescript,opts=novalidate]
 ----
 HybridManager.get().disposeWidgets(widgets);
 ----
+
+Please see the xref:migration:migration-guide.adoc#hybridmanager-api-improvements-scout-js[Migration Guide] for update instructions.
 
 == Tab Box: Mark Strategy Added (Scout JS)
 
@@ -95,19 +132,17 @@ This is useful for composite fields that don't have its own empty state like `Gr
 To influence or disable the computation of the `empty` property, you can set the property `checkEmpty` or override the method `_computeEmpty()`.
 Please see the JsDoc of the `FormFieldModel.checkEmpty` for details.
 
-== Locking of Transitive Node Dependencies
+== AbortableContext (Scout JS)
 
-To mitigate supply chain attacks and ensure reproducible builds, Scout now provides support to lock the Node.js dependencies.
+When working with rest requests, it is often necessary to abort previously created requests again.
+Since requests made with Scout JS are typically created using `ajax`, the developer does not have access to the abortable call.
+As a result, standard mechanisms such as an `AbortController` cannot be used to abort these calls.
 
-See the xref:technical-guide:user-interface/build-stack.adoc#node-dependency-resolution[Technical Guide] for details and the xref:migration-guide.adoc#locking-of-transitive-node-dependencies[Migration Guide] for instructions how to enable the feature.
+To address this issue, the `abortableContext` was introduced.
+It allows code to be executed within the scope of an `AbortController`.
+All abortable elements that are registered while this context is present may then be aborted using the `AbortController`.
 
-== abortableContext (Scout JS)
-
-When working with rest requests often there is the need to abort previously created requests again.
-As typically all requests made using Scout JS are created using `ajax` the developer does not have access to the abortable call and therefore, is unable to use e.g. an `AbortController` to abort these calls.
-To address this issue the abortableContext was introduced. It allows code to be executed within the scope of an `AbortController`.
-All abortable elements that are registered while this context is present may than be aborted using the `AbortController`.
-In addition, all calls created using the `ajax` utility auto register themselves in the current context if there is one.
+In addition, all calls created using the `ajax` utility automatically register themselves in the current context, if there is one.
 
 [source,typescript,opts=novalidate]
 ----
@@ -154,7 +189,7 @@ abortableContext.runInContext(
 outerController.abort();
 ----
 
-== PageWithTable: abortable loading (Scout JS)
+== PageWithTable: Abortable Loading (Scout JS)
 
 The `PageWithTable` now supports abortable loading. To support this, `PageWithTable` runs `_loadTableData(searchFilter)` within an abortable context.
 For a typical implementation where data is loaded via rest, the call is registered automatically.
@@ -188,7 +223,7 @@ protected async _loadTableDataAsync(searchFilter: any): Promise<any> {
 }
 ----
 
-== dataObjectVisitors (Scout JS)
+== DataObjectVisitors (Scout JS)
 
 A utility to visit data objects in Scout JS was added. `dataObjectVisitors` can be used to recursively visit any object and e.g. execute a callback for all occurrences of an explicit `BaseDoEntity`.
 
@@ -202,15 +237,7 @@ dataObjectVisitors.forEachRec(
 );
 ----
 
-== Drag & Drop for Table Rows
-
-The `Table` widget can now let users move a row to a different position by simply dragging it with the mouse.
-
-image::common:table_row_dnd_animation.gif[]
-
-Detailed information on how to use this in your own application can be found in the xref:technical-guide:user-interface/widget-reference.adoc#table-dnd[Technical Guide].
-
-== Local lookup calls: Search the whole text
+== Local Lookup Calls: Search the Whole Text
 
 For local lookup calls (`LocalLookupCall.java` and `StaticLookupCall.ts`), wildcards ar inserted at the beginning and end of the lookup text so that the whole text is searched instead of only the beginning.
 This way, they are unified with the implementation in `LookupHelper.createTextSearchPattern`.
