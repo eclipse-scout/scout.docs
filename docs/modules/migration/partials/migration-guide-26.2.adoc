@@ -81,13 +81,13 @@ To install the Scout SDK into your existing Eclipse IDE, use this P2 update site
 
 // ----------------------------------------------------------------------------
 
-== REST operations: Add Consumes annotation
+== REST operations: Add Consumes Annotation
 
 It is recommended that all REST operations which consume a request entity body message have a `Consumes` annotation set to restrict invalid input.
 Therefore, a test has been added which fails if there are such operations which do not have a `Consumes` annotation.
 The `AbstractRestResourceAnnotationTest` has to be extended in your modules to run this test.
 
-== REST resources: Explicit `@Path` annotation required
+== REST resources: Explicit `@Path` Annotation Required
 
 It is recommended that all REST resource classes explicitly declare a `@Path` annotation.
 
@@ -104,7 +104,7 @@ They have not been used since years and were never supported in Scout JS.
 
 If you need a prefix wildcard, add it to your search texts manually where required.
 
-== Removal of old Maven-Master properties
+== Removal of Old Maven-Master Properties
 
 The Maven Build no longer uses npm to run scripts. Npm is now only used to install pnpm and @eclipse-scout/releng. Then, pnpm is used to run build and test scripts.
 Accordingly, the following Maven-Master properties have been removed and can be deleted without replacement:
@@ -174,12 +174,12 @@ The following Less mixins have been removed as they are no longer necessary:
 ** `pulse-opacity`
 ** `rotate-x`
 
-== AbstractRestLookupCall moved to shared module
+== AbstractRestLookupCall Moved to Shared Module
 
 `AbstractRestLookupCall` was moved from the client to the shared module:
 `org.eclipse.scout.rt.client.services.lookup.AbstractRestLookupCall` -> `org.eclipse.scout.rt.shared.services.lookup.AbstractRestLookupCall`.
 
-== SmtpConnectionPool: Connection error/idle handling
+== SmtpConnectionPool: Connection Error / Idle Handling
 
 For the `org.eclipse.scout.rt.mail.smtp.SmtpConnectionPool` in the past idle timeouts could be defined in seconds.
 However, connections were only checked once per minute, hence idle timeouts less than one minute were not respected.
@@ -211,7 +211,7 @@ tree.visitNodes(node => {
 });
 ----
 
-== Trust manager and remote files
+== Trust Manager and Remote Files
 
 `org.eclipse.scout.rt.server.commons.GlobalTrustManager.getTrustedCertificatesInRemoteFiles()` has been removed. As a result, all trusted certificates now have to be provided locally.
 
@@ -221,7 +221,7 @@ The following service operations have also been removed:
 * `org.eclipse.scout.rt.client.services.common.file.IFileService.syncRemoteFilesToPath(String, String, FilenameFilter)`
 * `org.eclipse.scout.rt.shared.services.common.file.IRemoteFileService.getRemoteFiles(String, FilenameFilter, RemoteFile[])`
 
-== ICacheBuilder.withMaxConcurrentResolve: Allow multiple resolve operations for one thread
+== ICacheBuilder.withMaxConcurrentResolve: Allow Multiple Resolve Operations for One Thread
 
 The `BoundedResolveCacheWrapper` (used implicitly by `ICacheBuilder.withMaxConcurrentResolve`) has been changed to allow multiple resolve operations for one thread (default is now reentrant) to avoid a potential deadlock cause.
 That is, one thread will only be counted once towards the limit.
@@ -263,7 +263,7 @@ Several shared classes were moved into a `.session` package, adapt the imports i
 The unit test annotation `@RunWithServerSession` has become obsolete if you do not use backend sessions any longer.
 Remove the annotation and make sure your test is annotated with `@RunWithSubject`.
 
-=== API for current user
+=== API for Current User
 
 A new thread local `org.eclipse.scout.rt.platform.security.User.CURRENT` provides access to the user which is associated with the current thread.
 This object replaces the `org.eclipse.scout.rt.shared.user.UserId.CURRENT` thread local that has been introduced in Scout 26.1.
@@ -306,7 +306,7 @@ RunContexts.empty()
     .withUser(BEANS.get(IAccessControlService.class).getUser(subject))
 ----
 
-=== API replacing backend server session
+=== API Replacing Backend Server Session
 
 The following APIs were introduced as replacement for the former backend server session:
 
@@ -335,7 +335,7 @@ NOTE: Make sure to invoke method `loadInitialSharedVariables` when loading your 
     // ...
 ----
 
-=== Legacy server session support
+=== Legacy Server Session Support
 
 If your application requires session support in Scout backend, add a dependency to `org.eclipse.scout.rt.server.session` in your server module and a dependency to `org.eclipse.scout.rt.shared.session` in your shared module.
 
@@ -373,7 +373,7 @@ As part of extracting the session code into separate modules several classes wer
 |`org.eclipse.scout.rt.testing.server.session.runner.RunWithServerSession`
 |===
 
-=== API changes for JAX-WS modules
+=== API Changes for JAX-WS Modules
 
 As part of extracting the session code into separate modules several classes for providing a RunContext were moved to `org.eclipse.scout.rt.server.jaxws` because they were used solely in a JAX-WS context.
 
@@ -405,7 +405,7 @@ public class JaxWsServerSessionRunContextProducer extends ServerRunContextProduc
 }
 ----
 
-== ClientNotificationRegistry API changes
+== ClientNotificationRegistry API Changes
 
 The client notification dispatching was refactored as preparation step for a stateless Scout backend.
 The API of `org.eclipse.scout.rt.server.clientnotification.ClientNotificationRegistry` changed.
@@ -413,7 +413,7 @@ The API of `org.eclipse.scout.rt.server.clientnotification.ClientNotificationReg
 The central change is the removal of the `boolean distributeOverCluster` overloads: notifications are now always distributed within the cluster and published to all UI server nodes.
 The only exception is the new (but deprecated, legacy) `putTransactionalForAllNodesWithoutClusterNotification(Serializable)` method which allows to publish a notification only for UI nodes attached to the current backend node.
 
-=== Non-transactional put / publish methods
+=== Non-transactional Put / Publish methods
 
 The `boolean distributeOverCluster` overloads have been removed. Use the single-argument variant; cluster distribution is now always performed.
 
@@ -431,7 +431,7 @@ The `boolean distributeOverCluster` overloads have been removed. Use the single-
 |`void publishWithoutClusterNotification(Collection<? extends ClientNotificationMessage> messages, NodeId excludedUiNodeId)`|removed - Adapt invoking code in order to allow publishing this notification for all UI nodes. In the future, we'll have a stateless Scout backend without knowing which UI node is attached to a specific backend.)
 |====
 
-=== Transactional put methods
+=== Transactional Put Methods
 
 The `boolean distributeOverCluster` overloads have been removed. Use the single-argument variant; cluster distribution is now always performed.
 
@@ -453,7 +453,8 @@ The `boolean distributeOverCluster` overloads have been removed. Use the single-
 
 The `distributeOverCluster` flag is deprecated. A new constructor without the flag (defaulting to `true`) has been added.
 
-== HybridManager API improvements (Scout JS)
+[#hybridmanager-api-improvements-scout-js]
+== HybridManager API Improvements (Scout JS)
 
 The `HybridManager` provides API to dispose formerly created widgets. Former implementations calling the hybrid Action _scout.DisposeWidgets_ manually using the remote ids can be migrated.
 
@@ -481,7 +482,7 @@ const myFancyWidget = (await hybridManager.when(`widgetAdd:${id}`)).widget;
 myFancyWidget.destroy();
 ----
 
-== EventSupport API changes for subtypes (Scout JS)
+== EventSupport API Changes for Subtypes (Scout JS)
 
 The `EventSupport` provides API to register callback functions in order to handle events with subtypes.
 Consider e.g. a `FancyEvent` that is always triggered with the type _fancy_ but has a property `subType` which can hold the values _foo_ or _bar_.
@@ -502,7 +503,7 @@ this.events.registerSubTypePredicate('fancy', (event: FancyEvent, subType: strin
 this.events.registerSubTypeProvider('fancy', (event: FancyEvent) => event.subType);
 ----
 
-== Default timeout for JAX-WS requests
+== Default Timeout for JAX-WS Requests
 
 * The default connect timeout for a JAX-WS request (`scout.jaxws.consumer.connectTimeout`) has been changed from infinite to 5 minutes.
 * The default read timeout for a JAX-WS request (`scout.jaxws.consumer.readTimeout`) has been changed from infinite to 30 minutes.
@@ -529,7 +530,7 @@ But, expanding is actually not desired for table pages, so now only node pages a
 
 If you need a specific table page or `IJsPage` to be expanded on this operation, you can override the method `IPage.computeExpandOnDrillDown`.
 
-== Tab Box: Mark Strategy renamed
+== Tab Box: Mark Strategy Renamed
 
 `ITabBox.MARK_STRATEGY_EMPTY` has been renamed to `ITabBox.MARK_STRATEGY_NOT_EMPTY` because the tab is marked if it is _not_ empty.
 
@@ -561,7 +562,7 @@ You should find most of them by searching for `objectType: TabBox` and `property
 
 The protected method `FormFeld._updateEmpty()` has been made public and renamed to `FormFeld.updateEmpty()`.
 
-== Permission checks
+== Permission Checks
 
 * A new method `ACCESS.checkAndThrow(permission, accessCheckFailedMessage)` has been added that allows to set a custom error message if the permission check fails.
 +
