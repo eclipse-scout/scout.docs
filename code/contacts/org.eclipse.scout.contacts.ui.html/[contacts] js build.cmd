@@ -26,7 +26,7 @@ if %errorlevel% neq 0 (
 )
 
 :: Install all JavaScript dependencies defined in the package.json => creates the node_modules folder
-call cd ..\..
+call cd ..\..\..
 echo Running 'pnpm install' in %cd%
 call pnpx @eclipse-scout/releng@~26.2.0 install
 if %errorlevel% neq 0 exit /b %errorlevel%
@@ -34,7 +34,7 @@ echo pnpm install finished successfully!
 echo.
 
 :: Build the JavaScript and CSS bundles and start the watcher => creates the dist folder
-cd contacts/org.eclipse.scout.contacts.ui.html
+cd code/contacts/org.eclipse.scout.contacts.ui.html
 echo Running 'npm build:dev:watch' in %cd%
 call npm run build:dev:watch
 if %errorlevel% neq 0 exit /b %errorlevel%
