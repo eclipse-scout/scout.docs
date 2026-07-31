@@ -23,13 +23,13 @@ command -v node >/dev/null 2>&1 || { echo >&2 "npm cannot be found. Make sure No
 command -v pnpm >/dev/null 2>&1 || { echo >&2 "pnpm cannot be found. Make sure pnpm is installed. See the content of this script for details."; exit 1; }
 
 # Install all JavaScript dependencies defined in the package.json => creates the node_modules folder
-cd ../..
+cd ../../..
 echo Running 'pnpm install' in "$(pwd)"
 pnpx @eclipse-scout/releng@~26.2.0 install || exit $?
 echo pnpm install finished successfully!
 echo
 
 # Build the JavaScript and CSS bundles and start the watcher => creates the dist folder
-cd widgets/org.eclipse.scout.widgets.ui.html.app || exit 1
+cd code/widgets/org.eclipse.scout.widgets.ui.html.app || exit 1
 echo Running 'npm build:dev:watch' in "$(pwd)"
 npm run build:dev:watch || exit $?
