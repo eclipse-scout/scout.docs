@@ -52,7 +52,7 @@ Now the user can adjust the grouping type, similar to what is already possible w
 The chosen grouping type is saved in the column settings and bookmarks.
 The same configuration option is now also available in the associated column filter.
 
-image::common:date_column.png[]
+image::common:date_column.png[width=500]
 
 == Reload Key Stroke for Outline
 
