@@ -1333,11 +1333,11 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
                 }
               }
             }
+          }
 
-            @Override
-            protected byte getConfiguredHorizontalAlignment() {
-              return HORIZONTAL_ALIGNMENT_RIGHT;
-            }
+          @Order(50)
+          @ClassId("5f6b77ef-89bd-46a3-a7f9-302e6b4a6488")
+          public class ToggleTableInspectorMenu extends AbstractTableInspectorMenu {
           }
         }
       }

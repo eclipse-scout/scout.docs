@@ -1539,6 +1539,11 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             }
           }
 
+          @Order(55)
+          @ClassId("5dd79a8f-8654-4719-8702-8b866f7a234f")
+          public class ToggleTableInspectorMenu extends AbstractTableInspectorMenu {
+          }
+
           @Order(60)
           @ClassId("6c2ccfbb-21a5-4dc8-9967-d2292d60f1f8")
           public class KeyStroke extends AbstractKeyStroke {
