@@ -619,3 +619,29 @@ Some places that might change:
 . Delete the `pnpm-lock.yaml` and add `pnpm-lock.yaml` to your `.gitignore` file to ensure it is not commited as it will not be used anyway.
 . Ensure all `package.json` files include values for the `name` and `version` attributes, otherwise generating the overrides will fail.
 . Ensure your `pnpm-workspace.yaml` file only lists `packages` for which the path exists and contains a `package.json` file.
+
+== Error Handling Adjusted for propertyChange:value
+
+Until now, if a value change handler threw an error, it was displayed as field error, but only if the value had been changed through `parseAndSetValue()`.
+If `setValue()` was called directly, the same exception resulted in an application error.
+
+This behavior was inconsistent and unexpected.
+From now on, exceptions thrown by value change handlers always result in an application error.
+
+If you want to validate a value and display the validation result as a field error, use a `ValueFieldValidator` (registered with `ValueField.addValidator`) instead of throwing an exception from a value change handler.
+
+To migrate existing code, check whether any value change handlers contain validation logic.
+If they do, move that logic into a `ValueFieldValidator`.
+
+The following regular expressions can help identify value change handlers that contain a `throw` statement:
+
+.Best-effort search for throw in a value change handler
+[source,java,opts=novalidate]
+----
+propertyChange\:value[\s\S]*?\{[\s\S]*?\bthrow\b[\s\S]*?\}
+propertyName === 'value'[\s\S]*?\{[\s\S]*?\bthrow\b[\s\S]*?\}
+----
+
+These expressions are intended as a best-effort search and may not find every occurrence.
+
+We do not expect many affected cases, as using a `ValueFieldValidator` has always been the recommended approach.
