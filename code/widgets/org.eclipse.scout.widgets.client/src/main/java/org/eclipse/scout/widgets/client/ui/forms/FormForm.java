@@ -22,7 +22,8 @@ import org.eclipse.scout.rt.client.ui.IDisplayParent;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.ValueFieldMenuType;
-import org.eclipse.scout.rt.client.ui.basic.filechooser.FileChooser;
+import org.eclipse.scout.rt.client.ui.basic.filechooser.FileChooserFactory;
+import org.eclipse.scout.rt.client.ui.basic.filechooser.IFileChooser;
 import org.eclipse.scout.rt.client.ui.desktop.IDesktop;
 import org.eclipse.scout.rt.client.ui.desktop.OpenUriAction;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
@@ -626,7 +627,7 @@ public class FormForm extends AbstractForm implements IPageForm {
                   messageBox.show();
                 }
                 case FileChooser -> {
-                  FileChooser fileChooser = new FileChooser();
+                  IFileChooser fileChooser = BEANS.get(FileChooserFactory.class).createFileChooser();
                   DisplayParent displayParent = (getDisplayParentField().getValue() != null ? getDisplayParentField().getValue() : DisplayParent.Auto);
                   if (displayParent != DisplayParent.Auto) {
                     fileChooser.setDisplayParent(displayParent.getValue());

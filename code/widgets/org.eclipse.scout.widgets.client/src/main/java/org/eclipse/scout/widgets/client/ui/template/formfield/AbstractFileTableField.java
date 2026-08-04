@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -24,7 +24,8 @@ import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
 import org.eclipse.scout.rt.client.ui.basic.cell.Cell;
-import org.eclipse.scout.rt.client.ui.basic.filechooser.FileChooser;
+import org.eclipse.scout.rt.client.ui.basic.filechooser.FileChooserFactory;
+import org.eclipse.scout.rt.client.ui.basic.filechooser.IFileChooser;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
 import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractBeanColumn;
@@ -359,7 +360,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Table> {
 
       @Override
       protected void execAction() {
-        FileChooser fc = new FileChooser(true);
+        IFileChooser fc = BEANS.get(FileChooserFactory.class).createFileChooser(true);
         List<BinaryResource> files = fc.startChooser();
         for (BinaryResource file : files) {
           addFile(file);
