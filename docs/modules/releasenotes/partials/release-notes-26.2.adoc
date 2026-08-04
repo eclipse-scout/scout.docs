@@ -250,3 +250,16 @@ The default connection pool limits of the REST HTTP client were increased to sup
 * Maximum connections per route (`scout.rest.client.http.maxConnectionsPerRoute`): `32` -> `128`
 
 This change improves throughput and reduces the likelihood of requests being queued or delayed when many REST calls are executed concurrently.
+
+== FileChooserFactory
+
+Creation of `FileChooser` instances is now centralized through the new `FileChooserFactory`.
+
+Instead of instantiating a `FileChooser` directly using `new FileChooser(...)`, applications can obtain a file chooser via:
+
+[source,java,opts=novalidate]
+----
+BEANS.get(FileChooserFactory.class).createFileChooser();
+----
+
+This provides a single extension point for customizing and replacing file chooser creation.
