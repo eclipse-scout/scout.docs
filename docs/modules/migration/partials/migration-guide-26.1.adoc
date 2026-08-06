@@ -187,6 +187,9 @@ The `HttpServiceTunnelTransportManager` and its configuration properties `scout.
 
 On the server-side there is no `ServiceTunnelServlet` anymore to answer incoming HTTP requests, instead a `ProcessResource` (REST resource) has been created which delegates the request to the `ServiceTunnelService`.
 
+IMPORTANT: The new `ProcessResource` is exposed as `/api/process` REST endpoint instead of the former `/process` endpoint.
+Make sure that `/api` is not generally exposed without further authorization filter (see `org.eclipse.scout.rt.server.app.ServerServletContributors.AuthFilterContributor` and its `filterExcludes` implementation) because this would include and expose the new `/api/process` endpoint.
+
 Arbitrary `IServiceTunnelContentHandler` support was removed (and also the `SoapServiceTunnelContentHandler` implementation), the service tunnel now always uses the `BinaryServiceTunnelContentHandler` bean (which may still be extended).
 
 The duplicate request detection `SequenceNumberDuplicateDetector` has been removed.
