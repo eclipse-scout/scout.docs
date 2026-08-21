@@ -15,7 +15,7 @@ export class App extends ScoutApp {
 
   constructor() {
     super();
-    this.scoutVersion = '26.2';
+    this.scoutVersion = '27.1';
   }
 
   // @ts-expect-error

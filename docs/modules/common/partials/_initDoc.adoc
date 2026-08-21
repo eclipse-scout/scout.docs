@@ -19,7 +19,7 @@
 :maven-version: 26.2.0-beta.3
 :node-version: 26.2.0-beta.3
 :scout-previous-version: 26.1
-:scout-version: 26.2
+:scout-version: 27.1
 :simrel-name: 2026-06
 :simrel-date: June, 2026
 
