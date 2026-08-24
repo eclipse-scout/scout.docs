@@ -259,7 +259,7 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
         @Override
         protected void execInitField() {
           setValue(getHtmlField().getScrollToAnchor());
-          getHtmlField().addPropertyChangeListener(IHtmlField.PROP_SCROLL_TO_ANCHOR, event -> setValue(getHtmlField().getScrollToAnchor()));
+          getHtmlField().addPropertyChangeListener(IHtmlField.PROP_SCROLL_TO_ANCHOR, _ -> setValue(getHtmlField().getScrollToAnchor()));
         }
       }
 

@@ -16,6 +16,7 @@ public class ChunkedResourceClient implements IRestResourceClient {
     return BEANS.get(ExampleRestClientHelper.class);
   }
 
+  @SuppressWarnings("resource")
   //tag::method[]
   public void loadData() {
     Response response = helper()
