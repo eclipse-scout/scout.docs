@@ -28,3 +28,9 @@ Coming from an older Scout version? Check out the xref:migration:migration-guide
 // The following changes were made after the latest official release build. No release date has been fixed yet.
 //
 // * <<New Feature (since 27.1.xyz)>>
+
+== Application-Scoped REST Resources
+
+REST resources implementing `IRestResource` are now registered as application-scoped singletons and reused by Jersey/HK2 across requests instead of creating a new resource instance for every request.
+
+This reduces object creation overhead and aligns the lifecycle of REST resources with other application-scoped Scout components. As resource instances are shared, REST resources should be implemented as stateless components.
