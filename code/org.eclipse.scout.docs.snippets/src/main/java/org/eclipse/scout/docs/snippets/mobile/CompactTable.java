@@ -55,7 +55,7 @@ public class CompactTable {
     @Override
     protected ITableCompactHandler createCompactHandler() {
       return super.createCompactHandler()
-          .withBeanBuilder((columns, row) -> {
+          .withBeanBuilder((_, _) -> {
             CompactBean bean = new CompactBean();
             bean.setTitle("custom title");
             bean.addContentLine(new CompactLine("label", "text"));

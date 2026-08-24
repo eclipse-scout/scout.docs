@@ -923,12 +923,12 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
             .max()
             .orElse(0);
         List<String> colorHexValues = IntStream.range(0, maxValueGroupSize)
-            .mapToObj(i -> randomHexColor())
+            .mapToObj(_ -> randomHexColor())
             .collect(Collectors.toList());
         valueGroups.forEach(valueGroup -> valueGroup.setColorHexValue(colorHexValues));
       }
       default -> valueGroups.forEach(valueGroup -> valueGroup.setColorHexValue(IntStream.range(0, getValueGroupSize.applyAsInt(valueGroup))
-          .mapToObj(i -> randomHexColor())
+          .mapToObj(_ -> randomHexColor())
           .collect(Collectors.toList())));
     }
   }
@@ -1054,7 +1054,7 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
         @Override
         protected void execInitField() {
           super.execInitField();
-          getTileChart().addPropertyChangeListener(IChart.PROP_CONFIG, evt -> getChartTile().setColorScheme(getChart().getConfig().getColorScheme()));
+          getTileChart().addPropertyChangeListener(IChart.PROP_CONFIG, _ -> getChartTile().setColorScheme(getChart().getConfig().getColorScheme()));
         }
 
         @Order(10)

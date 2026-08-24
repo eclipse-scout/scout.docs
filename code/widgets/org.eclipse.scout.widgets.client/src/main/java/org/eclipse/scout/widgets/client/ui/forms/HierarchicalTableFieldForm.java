@@ -465,7 +465,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
                   }
                 });
 
-            addTableListener(e -> {
+            addTableListener(_ -> {
               if (getRootGroupBox() != null) {
                 getSelectedRowsField().setValue(rowsToKeyString(Table.this.getSelectedRows()));
                 getInsertedRowsField().setValue(rowsToKeyString(Table.this.getInsertedRows()));

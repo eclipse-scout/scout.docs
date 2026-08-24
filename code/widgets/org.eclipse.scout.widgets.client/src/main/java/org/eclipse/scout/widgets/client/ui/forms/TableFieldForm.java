@@ -470,7 +470,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
                   }
                 });
 
-            addTableListener(e -> {
+            addTableListener(_ -> {
               if (getRootGroupBox() != null) {
                 getSelectedRowsField().setValue(rowsToKeyString(Table.this.getSelectedRows()));
                 getInsertedRowsField().setValue(rowsToKeyString(Table.this.getInsertedRows()));
