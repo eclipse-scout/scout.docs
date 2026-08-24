@@ -78,7 +78,7 @@ public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
       form = createNewFormInstance(formClass);
     }
     else {
-      form = m_formInstances.computeIfAbsent(formClass, k -> createNewFormInstance(formClass));
+      form = m_formInstances.computeIfAbsent(formClass, _ -> createNewFormInstance(formClass));
     }
     return form;
   }

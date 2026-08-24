@@ -173,7 +173,7 @@ public class LabelFieldForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execInitField() {
-          getLabelField().addPropertyChangeListener(ILabelField.PROP_VALUE, event -> setValueWithoutValueChangeTriggers(this, getLabelField().getValue()));
+          getLabelField().addPropertyChangeListener(ILabelField.PROP_VALUE, _ -> setValueWithoutValueChangeTriggers(this, getLabelField().getValue()));
           setValueWithoutValueChangeTriggers(this, getLabelField().getValue());
         }
 
@@ -199,7 +199,7 @@ public class LabelFieldForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execInitField() {
-          getLabelField().addPropertyChangeListener(ILabelField.PROP_HTML_ENABLED, event -> setValueWithoutValueChangeTriggers(this, getLabelField().isHtmlEnabled()));
+          getLabelField().addPropertyChangeListener(ILabelField.PROP_HTML_ENABLED, _ -> setValueWithoutValueChangeTriggers(this, getLabelField().isHtmlEnabled()));
           setValueWithoutValueChangeTriggers(this, getLabelField().isHtmlEnabled());
         }
 
@@ -225,7 +225,7 @@ public class LabelFieldForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execInitField() {
-          getLabelField().addPropertyChangeListener(ILabelField.PROP_WRAP_TEXT, event -> setValueWithoutValueChangeTriggers(this, getLabelField().isWrapText()));
+          getLabelField().addPropertyChangeListener(ILabelField.PROP_WRAP_TEXT, _ -> setValueWithoutValueChangeTriggers(this, getLabelField().isWrapText()));
           setValueWithoutValueChangeTriggers(this, getLabelField().isWrapText());
         }
 
@@ -251,7 +251,7 @@ public class LabelFieldForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execInitField() {
-          getLabelField().addPropertyChangeListener(ILabelField.PROP_SELECTABLE, event -> setValueWithoutValueChangeTriggers(this, getLabelField().isSelectable()));
+          getLabelField().addPropertyChangeListener(ILabelField.PROP_SELECTABLE, _ -> setValueWithoutValueChangeTriggers(this, getLabelField().isSelectable()));
           setValueWithoutValueChangeTriggers(this, getLabelField().isSelectable());
         }
 
