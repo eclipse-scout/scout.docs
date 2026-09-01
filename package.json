@@ -1,6 +1,6 @@
 {
   "name": "@eclipse-scout/demo-root",
-  "version": "26.2.0-snapshot",
+  "version": "26.2.2",
   "private": true,
   "scripts": {
     "build": "pnpx antora docs/playbooks/local-eclipse-scout-playbook.yml && start docs/playbooks/build/site/index.html",
