@@ -50,6 +50,10 @@ public abstract class AbstractFormFieldPropertiesBox extends AbstractPropertiesB
     return getFieldByClass(FieldStyleField.class);
   }
 
+  public PlaceholderField getPlaceholderField() {
+    return getFieldByClass(PlaceholderField.class);
+  }
+
   @Order(1000)
   @ClassId("c136fb40-c06e-4c76-8020-68e5d21b5f90")
   public class EnabledField extends AbstractBooleanField {
@@ -394,6 +398,25 @@ public abstract class AbstractFormFieldPropertiesBox extends AbstractPropertiesB
     @Override
     protected void execInitField() {
       setValue(m_field.getTooltipText());
+    }
+  }
+
+  @Order(10500)
+  @ClassId("8b79e63a-f3bc-4e53-ad18-638a59ae4b48")
+  public class PlaceholderField extends AbstractStringField {
+    @Override
+    protected String getConfiguredLabel() {
+      return "Placeholder";
+    }
+
+    @Override
+    protected void execChangedValue() {
+      m_field.setPlaceholder(getValue());
+    }
+
+    @Override
+    protected void execInitField() {
+      setValue(m_field.getPlaceholder());
     }
   }
 
