@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -8,6 +8,10 @@
  * SPDX-License-Identifier: EPL-2.0
  */
 package org.eclipse.scout.widgets.client.ui.forms;
+
+import java.io.Serial;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
@@ -22,7 +26,14 @@ import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.ObjectUtility;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
+import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
+import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
+import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
+import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
+import org.eclipse.scout.rt.shared.ui.IUiDeviceType;
+import org.eclipse.scout.rt.shared.ui.UiDeviceType;
 import org.eclipse.scout.widgets.client.ui.forms.OptionsForm.MainBox.GroupBox.DenseRadioButtonGroup;
+import org.eclipse.scout.widgets.client.ui.forms.OptionsForm.MainBox.GroupBox.DeviceTypeField;
 import org.eclipse.scout.widgets.client.ui.forms.OptionsForm.MainBox.GroupBox.UiThemeField;
 import org.eclipse.scout.widgets.shared.services.code.UiThemeCodeType;
 import org.eclipse.scout.widgets.shared.services.code.UiThemeCodeType.DefaultCode;
@@ -40,6 +51,7 @@ public class OptionsForm extends AbstractForm {
     String theme = ObjectUtility.nvl(getDesktop().getTheme(), DefaultCode.ID);
     getUiThemeField().setValue(theme);
     getDenseRadioButtonGroup().setValue(getDesktop().isDense());
+    getDeviceTypeField().setValue(ObjectUtility.nvl(getDesktop().getEnforcedDeviceType(), UiDeviceType.AUTOMATIC));
   }
 
   public void startNew() {
@@ -52,6 +64,10 @@ public class OptionsForm extends AbstractForm {
 
   public DenseRadioButtonGroup getDenseRadioButtonGroup() {
     return getFieldByClass(DenseRadioButtonGroup.class);
+  }
+
+  public DeviceTypeField getDeviceTypeField() {
+    return getFieldByClass(DeviceTypeField.class);
   }
 
   public UiThemeField getUiThemeField() {
@@ -130,6 +146,20 @@ public class OptionsForm extends AbstractForm {
           }
         }
       }
+
+      @Order(30)
+      @ClassId("a4afe8a7-6e78-4486-8ac7-f9933337341a")
+      public class DeviceTypeField extends AbstractSmartField<IUiDeviceType> {
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("DeviceType");
+        }
+
+        @Override
+        protected Class<? extends ILookupCall<IUiDeviceType>> getConfiguredLookupCall() {
+          return P_DeviceTypeLookupCall.class;
+        }
+      }
     }
 
     @Order(10)
@@ -153,6 +183,26 @@ public class OptionsForm extends AbstractForm {
       if (getDenseRadioButtonGroup().isSaveNeeded()) {
         getDesktop().setDense(getDenseRadioButtonGroup().getValue());
       }
+      if (getDeviceTypeField().isSaveNeeded()) {
+        getDesktop().setEnforcedDeviceType(getDeviceTypeField().getValue());
+      }
+    }
+  }
+
+  @ClassId("0ecb7123-7dcd-4e60-8e16-449451f99722")
+  public static class P_DeviceTypeLookupCall extends LocalLookupCall<IUiDeviceType> {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    protected List<? extends ILookupRow<IUiDeviceType>> execCreateLookupRows() {
+      var rows = new ArrayList<ILookupRow<IUiDeviceType>>();
+      rows.add(new LookupRow<>(UiDeviceType.AUTOMATIC, TEXTS.get("AutomaticRecognition")));
+      rows.add(new LookupRow<>(UiDeviceType.DESKTOP, TEXTS.get("Desktop")));
+      rows.add(new LookupRow<>(UiDeviceType.TABLET, TEXTS.get("Tablet")));
+      rows.add(new LookupRow<>(UiDeviceType.MOBILE, TEXTS.get("Mobile")));
+      return rows;
     }
   }
 }
