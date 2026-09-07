@@ -8,7 +8,7 @@
  * SPDX-License-Identifier: EPL-2.0
  */
 import {
-  Action, BookmarkForm, BookmarkStore, BookmarkSupport, Desktop as ScoutDesktop, DesktopModel, DesktopNotification, Event, Form, GroupBox, icons as scoutIcons, InitModelOf, LabelField, ManageBookmarksForm, Menu, scout
+  Action, BookmarkForm, BookmarkStore, BookmarkSupport, Desktop as ScoutDesktop, DesktopModel, DesktopNotification, Device, Event, Form, GroupBox, icons as scoutIcons, InitModelOf, LabelField, ManageBookmarksForm, Menu, scout
 } from '@eclipse-scout/core';
 import {App, DesktopWidgetMap, icons} from '../index';
 import model from './DesktopModel';
@@ -48,6 +48,15 @@ export class Desktop extends ScoutDesktop {
     if (this.dense) {
       denseModeMenu.setIconId(scoutIcons.CHECKED_BOLD);
     }
+
+    this.widget('DeviceTypeAutomaticRecognitionMenu').on('action', e => this.setDeviceType(null));
+    this.widget('DeviceTypeDesktopMenu').on('action', e => this.setDeviceType(Device.Type.DESKTOP));
+    this.widget('DeviceTypeTabletMenu').on('action', e => this.setDeviceType(Device.Type.TABLET));
+    this.widget('DeviceTypeMobileMenu').on('action', e => this.setDeviceType(Device.Type.MOBILE));
+
+    this.on('propertyChange:deviceType', e => this._updateDeviceTypeIcons());
+    this._updateDeviceTypeIcons();
+
     this.on('propertyChange:dense', event => this.dense ? denseModeMenu.setIconId(scoutIcons.CHECKED_BOLD) : denseModeMenu.setIconId(null));
   }
 
@@ -61,6 +70,13 @@ export class Desktop extends ScoutDesktop {
 
   protected _onDenseMenuAction(event: Event<Menu>) {
     this.setDense(!this.dense);
+  }
+
+  protected _updateDeviceTypeIcons() {
+    this.widget('DeviceTypeAutomaticRecognitionMenu').setIconId(!this.deviceType ? scoutIcons.CHECKED_BOLD : null);
+    this.widget('DeviceTypeDesktopMenu').setIconId(this.deviceType === Device.Type.DESKTOP ? scoutIcons.CHECKED_BOLD : null);
+    this.widget('DeviceTypeTabletMenu').setIconId(this.deviceType === Device.Type.TABLET ? scoutIcons.CHECKED_BOLD : null);
+    this.widget('DeviceTypeMobileMenu').setIconId(this.deviceType === Device.Type.MOBILE ? scoutIcons.CHECKED_BOLD : null);
   }
 
   protected _onLogoAction(event: Event<Desktop>) {
