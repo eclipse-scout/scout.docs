@@ -52,7 +52,6 @@ Scout uses the following CSP settings:
 .. `manifest-src`: `'self'`
 .. `manifest-src`: `'self'`
 .. `media-src`: `'self'`
-.. `object-src`: `'self'`
 .. `worker-src`: `'self'`
 --
 +
