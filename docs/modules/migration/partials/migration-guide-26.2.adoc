@@ -645,3 +645,11 @@ propertyName === 'value'[\s\S]*?\{[\s\S]*?\bthrow\b[\s\S]*?\}
 These expressions are intended as a best-effort search and may not find every occurrence.
 
 We do not expect many affected cases, as using a `ValueFieldValidator` has always been the recommended approach.
+
+== Content Security Policy
+
+Following the https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/object-src[MDN recommendation], the content security policy directive `object-src` has been changed from `self` to `none` by default.
+
+If still using `object-src`, consider moving to more modern alternatives like `<video>`, `<audio>`, `<img>` for e.g. SVG or `<iframe>` using a sandbox.
+
+If you really need `object-src`, add the corresponding directive to the `scout.cspDirectiveAppend` config property (in your `config.properties` file or the environment variable).
