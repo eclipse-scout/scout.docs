@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
+ *
+ * This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License 2.0
+ * which is available at https://www.eclipse.org/legal/epl-2.0/
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ */
 package org.eclipse.scout.docs.snippets.rest;
 
 import java.util.Iterator;
@@ -24,8 +33,7 @@ public class ChunkedResource implements IRestResource {
   @Produces(MediaType.APPLICATION_JSON)
   public Response loadData() {
     IChunkedDataWriter<ExampleEntityDo> writer = IChunkedDataWriter.create(ExampleEntityDo.class, "\r\n", 100);
-    Iterator<ExampleEntityDo> iterator = fetchData();
-    return writer.toResponse(iterator);
+    return writer.toResponse(this::fetchData);
   }
 
   /**
