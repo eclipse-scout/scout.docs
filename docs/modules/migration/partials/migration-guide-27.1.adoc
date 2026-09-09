@@ -89,3 +89,21 @@ Scout 27.1 requires at least the following:
 * Furthermore, the build requires
 ** Node: >= 24.12.0
 ** Pnpm: >= 10.26.1
+
+== Batch Support for Scout JS Columns
+
+The batch support for `Columns` has been improved (see the xref:release-notes.adoc#batch-support[release notes] for details).
+
+The signature for the following functions changed:
+
+* `Column.formatValue`, `Column.formatter` and `Column._formatValue`: Now returns `string | JQuery.Promise<BatchCallResult<TValue, unknown>>` returning all key-value-mappings in the batched async case.
+* `Column.setCellTextDeferred` now expects this `JQuery.Promise<BatchCallResult<TValue, unknown>>` as argument for the async case. The `row` and `cell` arguments have been deleted as such a call is no longer executed for each row, but once for all rows.
++
+To access or modify the new value by cell or row use `_batchFormatResultToCellText` which will be called for each row in the batch result.
+
+The `StaticLookupCall` and `LookupColumn` have batching enabled now by default.
+This means all `StaticLookupCalls` and all `LookupColumns` using a batch-enabled `LookupCall` (like `StaticLookupCall` now) do no longer get the `row` argument in the `prepareLookupCall` event (as they are batched now for several rows).
+So if you make use of the `row` property in a `prepareLookupCall` event listener, you have to do one of the following:
+
+* If possible: Change the listener implementation so that the row is no longer required.
+* Set the `batch` property of the `LookupCall` to `false`. Then the old behavior without batching is applied in which the row is passed to the listener again. Please note that this is not recommended for large tables as it is much slower!

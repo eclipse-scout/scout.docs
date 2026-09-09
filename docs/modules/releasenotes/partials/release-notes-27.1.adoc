@@ -34,3 +34,16 @@ Coming from an older Scout version? Check out the xref:migration:migration-guide
 REST resources implementing `IRestResource` are now registered as application-scoped singletons and reused by Jersey/HK2 across requests instead of creating a new resource instance for every request.
 
 This reduces object creation overhead and aligns the lifecycle of REST resources with other application-scoped Scout components. As resource instances are shared, REST resources should be implemented as stateless components.
+
+[[batch-support]]
+== Batch Support for Scout JS Columns
+
+The support for batched value formatting for Columns has been improved.
+Each subclass of `Column` can assign the new `_batchFormat` property to format values in a single batch call.
+This improves performance on large tables.
+
+For this a new `BatchCall` helper class has been added to collect the keys of the batch en perform the asynchronous calls.
+Refer to the JsDoc of the class for details and a usage example.
+
+The new batch support is used by default by the `SmartColumn` and the `LookupColumn`.
+Furthermore, `StaticLookupCall` is batched now.
