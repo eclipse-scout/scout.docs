@@ -89,3 +89,15 @@ Scout 27.1 requires at least the following:
 * Furthermore, the build requires
 ** Node: >= 24.12.0
 ** Pnpm: >= 10.26.1
+
+== Move ResultInfo from PageWithTable to Table
+
+In Scout Classic the following methods have been moved:
+
+* `IPageWithTable.setResultInfo` -> `ITable.setResultInfo`
+* `AbstractPageWithTable.isLimitedResult` -> `ITable.isLimitedResult`
+* `AbstractPageWithTable.setLimitedResult` -> `ITable.setLimitedResult`
+
+So intead calling these methods on the page, call them on the corresponding Table. E.g. `myPage.getTable().setResultInfo()`.
+
+In Scout JS the function `Table.setLimitedResultTableStatus` was renamed to `Table.updateLimitedResultTableStatus` and requires no argument anymore as the table now directly holds the `limitedResult` property. Furthermore, the function `TableMaxResultsHelper.isLoadMoreDataPossible` now requires the whole table as argument for maximum flexiblity.
