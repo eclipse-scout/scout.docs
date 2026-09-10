@@ -645,3 +645,16 @@ propertyName === 'value'[\s\S]*?\{[\s\S]*?\bthrow\b[\s\S]*?\}
 These expressions are intended as a best-effort search and may not find every occurrence.
 
 We do not expect many affected cases, as using a `ValueFieldValidator` has always been the recommended approach.
+
+== Default Minimum Password Length Increased
+
+The default value of `scout.passwordPolicy.minLength` has changed from `12` to `14`.
+
+If your application relies on the previous default value, configure it explicitly:
+
+[source,properties,opts=novalidate]
+----
+scout.passwordPolicy.minLength=12
+----
+
+Review your password policy configuration and adjust the value if a different minimum password length is required.
