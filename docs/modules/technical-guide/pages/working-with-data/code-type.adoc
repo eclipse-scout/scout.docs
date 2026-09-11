@@ -111,12 +111,49 @@ include::common:example$org.eclipse.scout.docs.snippets/src/main/java/org/eclips
 ----
 
 <1> Marks the CodeType to be exposed by the Scout API. Such CodeTypes may then be accessed using the REST API. For more control over the exposed CodeTypes create an implementation of `IApiExposedCodeTypeContributor`.
-<2> Specifies the TypeScript `objectType` for the CodeType. Only necessary if there is a dedicated TypeScript class for this CodeType.
+<2> Specifies the TypeScript `objectType` for the CodeType. Only necessary if there is a dedicated TypeScript class for this CodeType. In most cases the `objectType` should be specified using the `@ObjectType` annotation directly on the CodeType. As an alternative, applications may provide the object type using an `IObjectTypeProvider`, which is useful for existing CodeTypes that cannot be annotated without replacing them.
 <3> The IDs must be serialized to Strings to expose them in the REST API. This works most straight forward, if String IDs are used in Java too. If this is not possible, the Ids will be converted using `toString`. If this is not sufficient you can implement an `ICodeTypeDoIdConverter` and manually convert your IDs.
+
+===== Expose an existing CodeType without replacing it
+
+Sometimes an application wants to expose a CodeType that is provided by the framework or another module. In such cases it may be undesirable to replace the existing CodeType solely to add `@ApiExposed` and `@ObjectType` annotations.
+
+Instead, the CodeType can be exposed using an `IApiExposedCodeTypeContributor` and an `IObjectTypeProvider`.
+
+Expose the existing CodeType:
+
+[source,java]
+----
+public class MyApiExposedCodeTypeContributor implements IApiExposedCodeTypeContributor {
+
+  @Override
+  public void contribute(Set<ICodeType> codeTypes) {
+    codeTypes.add(BEANS.get(MyCodeType.class));
+  }
+}
+----
+
+Provide the TypeScript object type:
+
+[source,java]
+----
+public class MyObjectTypeProvider implements IObjectTypeProvider {
+
+  @Override
+  public String objectTypeOf(Class<?> type) {
+    if (MyCodeType.class.equals(type)) {
+      return "project.MyCodeType";
+    }
+    return null;
+  }
+}
+----
+
+This makes `MyCodeType` available through the Scout API without requiring the original CodeType class to be replaced.
 
 On the TypeScript side you have to specify the URL to the API that exposes the marked CodeType so that they can be fetched. For this the URL to codes is added to the init config of your TypeScript App:
 
-[source,typescript]
+[source,typescript,opts=novalidate]
 ----
 new App().init({
   bootstrap: {
@@ -137,10 +174,9 @@ include::common:example$org.eclipse.scout.docs.snippets/src/main/js/codetype/Exp
 <1> Optional: A field that matches the simple classname of the Java Code (lowercase first letter, no 'Code' suffix) can be added to the TypeScript CodeType. If such a field is available, the corresponding Code is automatically stored in that field. This makes accessing specific Codes easier (see examples below). If the automatic name matching should not be used the Java Code can be annotated with `@FieldName` to explicitly specify the name of the TypeScript field.
 
 NOTE: All attributes from the Java CodeType are automatically applied to the TypeScript CodeType. So there is no need to repeat any ID values, texts or other configuration of the Java code!
-
 It is then possible to access the CodeType in TypeScript. Some examples:
 
-[source,typescript]
+[source,typescript,opts=novalidate]
 ----
 import {codes} from '@eclipse-scout/core';
 import {ExposedCodeType} from '../index';
