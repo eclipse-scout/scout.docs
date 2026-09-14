@@ -191,7 +191,7 @@ Also the connection error handling has been changed, connection error codes 421 
 [#tree-scout-js-api-of-visitnodes-changed]
 == Tree (Scout JS): API of VisitNodes Changed
 
-Returning `true` in a visitor used for `Tree.visitNodes` now stops visiting completely instead of just skipping the subtree, see also xref:release-notes.adoc#tree-scout-js-findnode-added-and-visitnodes-improved[Release Notes].
+Returning `true` in a visitor used for `Tree.visitNodes` now stops visiting completely instead of just skipping the subtree, see also xref:releasenotes:release-notes.adoc#tree-scout-js-findnode-added-and-visitnodes-improved[Release Notes].
 
 Please check your JavaScript / TypeScript code for occurrences of `visitNodes` and if the visitor explicitly returns `true`, replace it with `TreeVisitResult.SKIP_SUBTREE`.
 
