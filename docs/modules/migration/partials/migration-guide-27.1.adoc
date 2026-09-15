@@ -119,3 +119,20 @@ In Scout Classic the following methods have been moved:
 So intead calling these methods on the page, call them on the corresponding Table. E.g. `myPage.getTable().setResultInfo()`.
 
 In Scout JS the function `Table.setLimitedResultTableStatus` was renamed to `Table.updateLimitedResultTableStatus` and requires no argument anymore as the table now directly holds the `limitedResult` property. Furthermore, the function `TableMaxResultsHelper.isLoadMoreDataPossible` now requires the whole table as argument for maximum flexiblity.
+
+== Support for placeholders
+
+Placeholder support has been added at the `AbstractFormField` level and is therefore available throughout the form field hierarchy.
+As a consequence, this change may affect existing customizations in your project.
+
+New API methods:
+
+* `org.eclipse.scout.rt.client.ui.form.fields.IFormField.getPlaceholder()`
+* `org.eclipse.scout.rt.client.ui.form.fields.IFormField.setPlaceholder(String)`
+* `org.eclipse.scout.rt.client.ui.form.fields.AbstractFormField.getConfiguredPlaceholder()`
+
+Please review your project for potential conflicts:
+
+* If you have implemented custom placeholder functionality, consider removing or migrating those customizations to the new built-in API.
+* If you have introduced custom methods named `getPlaceholder()`, `setPlaceholder()`, or similar on form fields, rename them to avoid naming conflicts and unintended behavior.
+
