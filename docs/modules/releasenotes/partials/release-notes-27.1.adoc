@@ -50,5 +50,5 @@ Furthermore, `StaticLookupCall` is now batched.
 
 == Support for placeholders
 
-`AbstractFormFields` can now be configured with placeholder text by overwriting `AbstractFormField.getConfiguredPlaceholder`.
+Form fields can now be configured with placeholder text.
 If supported by the field type, the configured text is displayed when the field is empty.
