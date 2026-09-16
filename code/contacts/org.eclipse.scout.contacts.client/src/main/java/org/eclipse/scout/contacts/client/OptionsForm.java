@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -9,9 +9,13 @@
  */
 package org.eclipse.scout.contacts.client;
 
+import java.io.Serial;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import org.eclipse.scout.contacts.client.OptionsForm.MainBox.GroupBox.DenseRadioButtonGroup;
+import org.eclipse.scout.contacts.client.OptionsForm.MainBox.GroupBox.DeviceTypeField;
 import org.eclipse.scout.contacts.client.OptionsForm.MainBox.GroupBox.LocaleField;
 import org.eclipse.scout.contacts.client.OptionsForm.MainBox.GroupBox.UiThemeField;
 import org.eclipse.scout.contacts.client.common.AvailableLocaleLookupCall;
@@ -31,6 +35,11 @@ import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.ObjectUtility;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
+import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
+import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
+import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
+import org.eclipse.scout.rt.shared.ui.IUiDeviceType;
+import org.eclipse.scout.rt.shared.ui.UiDeviceType;
 
 @ClassId("002c674c-1e3e-42ca-9fcb-6831fb50fdb6")
 public class OptionsForm extends AbstractForm {
@@ -50,6 +59,7 @@ public class OptionsForm extends AbstractForm {
     if (localeString != null) {
       getLocaleField().setValue(Locale.forLanguageTag(localeString));
     }
+    getDeviceTypeField().setValue(ObjectUtility.nvl(getDesktop().getEnforcedDeviceType(), UiDeviceType.AUTOMATIC));
   }
 
   public MainBox getMainBox() {
@@ -64,6 +74,10 @@ public class OptionsForm extends AbstractForm {
     return getFieldByClass(DenseRadioButtonGroup.class);
   }
 
+  public DeviceTypeField getDeviceTypeField() {
+    return getFieldByClass(DeviceTypeField.class);
+  }
+
   public LocaleField getLocaleField() {
     return getFieldByClass(LocaleField.class);
   }
@@ -72,6 +86,7 @@ public class OptionsForm extends AbstractForm {
     // Not inside form handler, because the form is used in a FormToolButton without a handler
     getDesktop().setTheme(getUiThemeField().getValue());
     getDesktop().setDense(getDenseRadioButtonGroup().getValue());
+    getDesktop().setEnforcedDeviceType(getDeviceTypeField().getValue());
     Locale locale = ObjectUtility.nvl(getLocaleField().getValue(), Locale.getDefault());
     boolean localeChanged = ClientUIPreferences.getClientPreferences(ClientSession.get()).put(ClientSession.PREF_USER_LOCALE, locale.toLanguageTag());
     if (localeChanged) {
@@ -189,6 +204,20 @@ public class OptionsForm extends AbstractForm {
           return (Class<? extends ILookupCall<Locale>>) AvailableLocaleLookupCall.class;
         }
       }
+
+      @Order(40)
+      @ClassId("88cdb6fe-8658-44ea-9247-8371ae2cd82c")
+      public class DeviceTypeField extends AbstractSmartField<IUiDeviceType> {
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("DeviceType");
+        }
+
+        @Override
+        protected Class<? extends ILookupCall<IUiDeviceType>> getConfiguredLookupCall() {
+          return P_DeviceTypeLookupCall.class;
+        }
+      }
     }
 
     @Order(10)
@@ -204,6 +233,23 @@ public class OptionsForm extends AbstractForm {
       protected void execClickAction() {
         storeOptions();
       }
+    }
+  }
+
+  @ClassId("d03c6e96-c65e-49a2-8d92-2011b7350d3e")
+  public static class P_DeviceTypeLookupCall extends LocalLookupCall<IUiDeviceType> {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    protected List<? extends ILookupRow<IUiDeviceType>> execCreateLookupRows() {
+      var rows = new ArrayList<ILookupRow<IUiDeviceType>>();
+      rows.add(new LookupRow<>(UiDeviceType.AUTOMATIC, TEXTS.get("AutomaticRecognition")));
+      rows.add(new LookupRow<>(UiDeviceType.DESKTOP, TEXTS.get("Desktop")));
+      rows.add(new LookupRow<>(UiDeviceType.TABLET, TEXTS.get("Tablet")));
+      rows.add(new LookupRow<>(UiDeviceType.MOBILE, TEXTS.get("Mobile")));
+      return rows;
     }
   }
 }
