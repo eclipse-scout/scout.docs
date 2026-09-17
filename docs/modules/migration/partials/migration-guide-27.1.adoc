@@ -134,7 +134,7 @@ Scout Classic
 Scout JS
 
 - `FormField.placeholder`
-- `FormFieldModel.placeholder`
+- `FormField.setPlaceholder(string)`
 
 Please review your project for potential conflicts:
 
