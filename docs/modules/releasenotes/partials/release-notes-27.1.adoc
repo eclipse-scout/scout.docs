@@ -47,3 +47,8 @@ Refer to the JsDoc of the class for details and a usage example.
 
 The new batch support is used by default by the `SmartColumn` and the `LookupColumn`.
 Furthermore, `StaticLookupCall` is now batched.
+
+== Support for placeholders
+
+Form fields can now be configured with placeholder text.
+If supported by the field type, the configured text is displayed when the field is empty.
