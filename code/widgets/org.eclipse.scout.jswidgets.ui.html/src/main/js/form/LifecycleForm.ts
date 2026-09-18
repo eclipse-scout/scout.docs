@@ -83,14 +83,14 @@ export class LifecycleForm extends Form {
     };
   }
 
-  protected override _load(): JQuery.Promise<object> {
+  protected override _load(): Promise<object> {
     if (this.withSlowBackendCall) {
       return ajax.get('api/example/slowGet');
     }
     return super._load();
   }
 
-  protected override _save(data: LifecycleFormData): JQuery.Promise<void> {
+  protected override _save(data: LifecycleFormData): Promise<void> {
     if (!this.widget('ExceptionField').value) {
       if (this.withSlowBackendCall) {
         return ajax.get('api/example/slowGet');
