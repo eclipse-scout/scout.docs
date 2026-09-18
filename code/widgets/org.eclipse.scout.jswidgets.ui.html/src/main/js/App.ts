@@ -23,7 +23,7 @@ export class App extends ScoutApp {
     return ScoutApp.get() as App;
   }
 
-  protected override _defaultBootstrappers(options: AppBootstrapOptions): (() => JQuery.Promise<void>)[] {
+  protected override _defaultBootstrappers(options: AppBootstrapOptions): (() => Promise<void>)[] {
     return [
       ...super._defaultBootstrappers(options),
       () => access.bootstrapSystem(),

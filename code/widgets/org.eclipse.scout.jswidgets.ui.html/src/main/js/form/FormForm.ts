@@ -118,7 +118,7 @@ export class FormForm extends Form {
     form.open();
   }
 
-  protected override _load(): JQuery.Promise<object> {
+  protected override _load(): Promise<object> {
     if (this.withSlowBackendCall) {
       return ajax.get('api/example/slowGet');
     }

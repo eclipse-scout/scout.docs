@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {ajax, AjaxError, App, Button, Event, Form, FormModel, InitModelOf, models, numbers} from '@eclipse-scout/core';
+import {ajax, AjaxCall, AjaxError, App, Button, Event, Form, FormModel, InitModelOf, models, numbers} from '@eclipse-scout/core';
 import RestFormModel from './RestFormModel';
 import {RestFormWidgetMap} from '../index';
 
@@ -48,40 +48,44 @@ export class RestForm extends Form {
   }
 
   protected _onGetButtonClick(event: Event<Button>) {
-    ajax.getJson('api/example')
-      .then(this._onSuccess.bind(this))
+    // Use createCallJson (instead of the getJson shorthand) to get access to the AjaxCall and thus to the HTTP status of the response.
+    let call = ajax.createCallJson({url: 'api/example', method: 'GET'});
+    call.call()
+      .then(result => this._onSuccess(result, call))
       .catch(this._onFail.bind(this));
   }
 
   protected _onPostButtonClick(event: Event<Button>) {
-    ajax.postJson('api/example', {
-      hello: 'server'
-    }).then(this._onSuccess.bind(this))
+    let call = ajax.createCallJson({url: 'api/example', method: 'POST', data: JSON.stringify({hello: 'server'})});
+    call.call()
+      .then(result => this._onSuccess(result, call))
       .catch(this._onFail.bind(this));
   }
 
   protected _onPutButtonClick(event: Event<Button>) {
-    ajax.putJson('api/example', {
-      hello: 'server'
-    }).then(this._onSuccess.bind(this))
+    let call = ajax.createCallJson({url: 'api/example', method: 'PUT', data: JSON.stringify({hello: 'server'})});
+    call.call()
+      .then(result => this._onSuccess(result, call))
       .catch(this._onFail.bind(this));
   }
 
   protected _onDeleteButtonClick(event: Event<Button>) {
-    ajax.removeJson('api/example')
-      .then(this._onSuccess.bind(this))
+    let call = ajax.createCallJson({url: 'api/example', method: 'DELETE'});
+    call.call()
+      .then(result => this._onSuccess(result, call))
       .catch(this._onFail.bind(this));
   }
 
   protected _onFailButtonClick(event: Event<Button>) {
     let exceptionId = numbers.ensure(this.widget('ExceptionTypeField').value) || 0;
-    ajax.get('api/example/error/' + exceptionId)
-      .then(this._onSuccess.bind(this))
+    let call = ajax.createCall({url: 'api/example/error/' + exceptionId, method: 'GET'});
+    call.call()
+      .then(result => this._onSuccess(result, call))
       .catch(this._onFail.bind(this));
   }
 
-  protected _onSuccess(result: Response, textStatus: string, jqXHR: JQuery.jqXHR) {
-    this._addLogEntry('Request successful. HTTP-Status: ' + jqXHR.status + '. Response: ' + JSON.stringify(result));
+  protected _onSuccess(result: Response, call: AjaxCall) {
+    this._addLogEntry('Request successful. HTTP-Status: ' + call.lastXhr?.status + '. Response: ' + JSON.stringify(result));
   }
 
   protected _onFail(ajaxError: AjaxError) {

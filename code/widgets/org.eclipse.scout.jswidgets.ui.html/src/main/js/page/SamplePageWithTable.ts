@@ -97,7 +97,7 @@ export class SamplePageWithTable extends PageWithTable {
     };
   }
 
-  protected override _loadTableData(searchFilter: SamplePageWithTableRestrictionDo): JQuery.Promise<SamplePageWithTableResponse> {
+  protected override _loadTableData(searchFilter: SamplePageWithTableRestrictionDo): Promise<SamplePageWithTableResponse> {
     const resourceUrl = systems.getOrCreate().getEndpointUrl('samplePageWithTable');
     const restriction = this._withMaxRowCountContribution(searchFilter);
     if (this.detailTable.isCustomizable()) {
