@@ -16,7 +16,7 @@ export class ReloadablePageWithNodes extends PageWithNodes {
     return model();
   }
 
-  protected override _createChildPages(): JQuery.Promise<Page[]> {
+  protected override _createChildPages(): Promise<Page[]> {
     let pages: Page[] = [];
 
     let dummyDetailFormModel: ChildModelOf<Form> = {

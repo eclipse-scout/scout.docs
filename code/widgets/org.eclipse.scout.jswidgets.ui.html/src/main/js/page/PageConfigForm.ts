@@ -101,7 +101,7 @@ export class PageConfigForm extends Form implements PageConfigFormModel {
     };
   }
 
-  protected override _load(): JQuery.Promise<PageConfigFormData> {
+  protected override _load(): Promise<PageConfigFormData> {
     if (this.page) {
       let data: PageConfigFormData = {
         name: this.page.text,
@@ -117,7 +117,7 @@ export class PageConfigForm extends Form implements PageConfigFormModel {
     return super._load();
   }
 
-  protected override _save(data: PageConfigFormData): JQuery.Promise<void> {
+  protected override _save(data: PageConfigFormData): Promise<void> {
     if (this.page) {
       let page = this.page;
       page.text = data.name;

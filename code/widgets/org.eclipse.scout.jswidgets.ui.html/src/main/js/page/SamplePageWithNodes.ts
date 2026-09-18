@@ -18,7 +18,7 @@ export class SamplePageWithNodes extends PageWithNodes {
     return models.get(SamplePageWithNodesModel);
   }
 
-  protected override _createChildPages(): JQuery.Promise<Page[]> {
+  protected override _createChildPages(): Promise<Page[]> {
     return $.resolvedPromise([
       scout.create(SamplePageWithTable, {
         parent: this.outline
