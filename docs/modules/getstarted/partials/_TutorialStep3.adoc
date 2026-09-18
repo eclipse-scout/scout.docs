@@ -1,4 +1,3 @@
-
 //-----------------------------------------------------------------------------
 //WARNING: this file is a text module, it needs to be embedded in a master asciidoctor document.
 //-----------------------------------------------------------------------------
@@ -86,6 +85,88 @@ image::common:contacts_tutorial_copied_db_classes_intellij.png[]
 [[img-contacts_tutorial_copied_db_classes]]
 .The copied database classes in the tutorial workspace in Eclipse.
 image::common:contacts_tutorial_copied_db_classes.png[]
+
+After copying these classes, replace the contents of
+`SuperUserRunContextProducer`
+with the implementation shown in
+<<lst-contacts_tutorial_super_user_run_context_producer>>.
+
+The implementation from the Contacts demo application still uses APIs related
+to the backend server session. These APIs have changed in Scout 26.2, therefore
+the class must be updated as shown below.
+
+[[lst-contacts_tutorial_super_user_run_context_producer]]
+[source,java,opts=novalidate]
+.Replacement implementation of `SuperUserRunContextProducer`
+----
+package org.eclipse.scout.contacts.server.sql;
+
+import javax.security.auth.Subject;
+
+import jakarta.annotation.PostConstruct;
+
+import org.eclipse.scout.contacts.server.sql.DatabaseProperties.SuperUserSubjectProperty;
+import org.eclipse.scout.rt.platform.ApplicationScoped;
+import org.eclipse.scout.rt.platform.BEANS;
+import org.eclipse.scout.rt.platform.config.CONFIG;
+import org.eclipse.scout.rt.platform.context.RunMonitor;
+import org.eclipse.scout.rt.platform.security.User;
+import org.eclipse.scout.rt.platform.util.FinalValue;
+import org.eclipse.scout.rt.security.IAccessControlService;
+import org.eclipse.scout.rt.server.context.ServerRunContext;
+import org.eclipse.scout.rt.server.context.ServerRunContexts;
+import org.eclipse.scout.rt.shared.session.SessionId;
+import org.eclipse.scout.rt.shared.ui.UserAgents;
+
+/**
+ * Central point to obtain run contexts with super-user rights, and to get the super-user subject and session.
+ * <p>
+ * A super-user run context is a {@link ServerRunContext} with a user that has administrator privileges.
+ */
+@ApplicationScoped
+public class SuperUserRunContextProducer {
+
+  private final FinalValue<Subject> m_subject = new FinalValue<>();
+  private final FinalValue<User> m_user = new FinalValue<>();
+  private final FinalValue<String> m_sessionId = new FinalValue<>();
+
+  @PostConstruct
+  protected void initSuperUserSubject() {
+    m_subject.set(CONFIG.getPropertyValue(SuperUserSubjectProperty.class));
+    m_user.set(BEANS.get(IAccessControlService.class).getUser(m_subject.get()));
+    m_sessionId.set(SessionId.randomSessionId());
+  }
+
+  /**
+   * Produces a new {@link ServerRunContext} with superuser rights.
+   * <p>
+   * This implies a new {@link ServerRunContext} initialized with the superuser's {@link Subject} and {@link User},
+   * with a dedicated {@link RunMonitor} set, and the superuser's shared {@link SessionId}.
+   */
+  public ServerRunContext produce() {
+    return ServerRunContexts.empty()
+        .withRunMonitor(BEANS.get(RunMonitor.class))
+        .withUserAgent(UserAgents.createDefault())
+        .withSubject(getSubject())
+        .withUser(getUser())
+        .withThreadLocal(SessionId.CURRENT, m_sessionId.get());
+  }
+
+  /**
+   * Returns the superuser's {@link Subject}; is not <code>null</code>.
+   */
+  public Subject getSubject() {
+    return m_subject.get();
+  }
+
+  /**
+   * Returns the superuser's {@link User}.
+   */
+  public User getUser() {
+    return m_user.get();
+  }
+}
+----
 
 The imported classes are described in the following sections.
 Additional information is provided where these classes are relying on Scout concepts that have not previously been introduced.
