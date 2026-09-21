@@ -8,7 +8,7 @@
  * SPDX-License-Identifier: EPL-2.0
  */
 import {
-  Action, BookmarkForm, BookmarkStore, BookmarkSupport, Desktop as ScoutDesktop, DesktopModel, DesktopNotification, Event, Form, GroupBox, icons as scoutIcons, InitModelOf, LabelField, ManageBookmarksForm, Menu, scout
+  Action, BookmarkForm, BookmarkStore, BookmarkSupport, Desktop as ScoutDesktop, DesktopModel, DesktopNotification, Device, Event, Form, GroupBox, icons as scoutIcons, InitModelOf, LabelField, ManageBookmarksForm, Menu, scout
 } from '@eclipse-scout/core';
 import {App, DesktopWidgetMap, icons} from '../index';
 import model from './DesktopModel';
@@ -39,6 +39,14 @@ export class Desktop extends ScoutDesktop {
     darkThemeMenu.on('action', this._onDarkThemeMenuAction.bind(this));
     let denseModeMenu = this.widget('DenseMenu');
     denseModeMenu.on('action', this._onDenseMenuAction.bind(this));
+    let deviceTypeAutomaticRecognitionMenu = this.widget('DeviceTypeAutomaticRecognitionMenu');
+    deviceTypeAutomaticRecognitionMenu.on('action', this._onDeviceTypeAutomaticRecognitionMenuAction.bind(this));
+    let deviceTypeDesktopMenu = this.widget('DeviceTypeDesktopMenu');
+    deviceTypeDesktopMenu.on('action', this._onDeviceTypeDesktopMenuAction.bind(this));
+    let deviceTypeTabletMenu = this.widget('DeviceTypeTabletMenu');
+    deviceTypeTabletMenu.on('action', this._onDeviceTypeTabletMenuAction.bind(this));
+    let deviceTypeMobileMenu = this.widget('DeviceTypeMobileMenu');
+    deviceTypeMobileMenu.on('action', this._onDeviceTypeMobileMenuAction.bind(this));
 
     if (this.theme === 'dark') {
       darkThemeMenu.setIconId(scoutIcons.CHECKED_BOLD);
@@ -48,6 +56,16 @@ export class Desktop extends ScoutDesktop {
     if (this.dense) {
       denseModeMenu.setIconId(scoutIcons.CHECKED_BOLD);
     }
+    if (this.deviceType === Device.Type.DESKTOP) {
+      deviceTypeDesktopMenu.setIconId(scoutIcons.CHECKED_BOLD);
+    } else if (this.deviceType === Device.Type.TABLET) {
+      deviceTypeTabletMenu.setIconId(scoutIcons.CHECKED_BOLD);
+    } else if (this.deviceType === Device.Type.MOBILE) {
+      deviceTypeMobileMenu.setIconId(scoutIcons.CHECKED_BOLD);
+    } else {
+      deviceTypeAutomaticRecognitionMenu.setIconId(scoutIcons.CHECKED_BOLD);
+    }
+
     this.on('propertyChange:dense', event => this.dense ? denseModeMenu.setIconId(scoutIcons.CHECKED_BOLD) : denseModeMenu.setIconId(null));
   }
 
@@ -61,6 +79,22 @@ export class Desktop extends ScoutDesktop {
 
   protected _onDenseMenuAction(event: Event<Menu>) {
     this.setDense(!this.dense);
+  }
+
+  protected _onDeviceTypeAutomaticRecognitionMenuAction(event: Event<Menu>) {
+    this.setDeviceType('AUTOMATIC');
+  }
+
+  protected _onDeviceTypeDesktopMenuAction(event: Event<Menu>) {
+    this.setDeviceType(Device.Type.DESKTOP);
+  }
+
+  protected _onDeviceTypeTabletMenuAction(event: Event<Menu>) {
+    this.setDeviceType(Device.Type.TABLET);
+  }
+
+  protected _onDeviceTypeMobileMenuAction(event: Event<Menu>) {
+    this.setDeviceType(Device.Type.MOBILE);
   }
 
   protected _onLogoAction(event: Event<Desktop>) {
