@@ -350,3 +350,17 @@ Replace manual calls to `dataObjects.deserialize` and `dataObjects.serialize` in
 Return a `DoMapEntity` instead. It can be created from a map using `DoMapEntity.of(map)` (keys must be converted to Strings first).
 
 Override `acceptResourceForMapReturnValueCheck` or `acceptMethodForMapReturnValueCheck` to exclude resources or methods from the check.
+
+== Ensure Correct Jasmine Version is Used
+
+If you have JavaScript tests, you likely have a dependency to Jasmine 5.x.
+Unfortunately, the version 4.6.1 is still used because `karma-jasmine` has a dependency to jasmine 4.6.1.
+Because karma is deprecated there is no newer version with a dependency to Jasmine 5.
+To ensure the correct version is used, add an override in your `pnpm-workspace.yaml` to force pnpm to use Jasmine 5.x.
+
+[source,yaml,opts=novalidate]
+----
+overrides:
+  <<: *scout-overrides
+  jasmine-core: "5.13.0"
+----
