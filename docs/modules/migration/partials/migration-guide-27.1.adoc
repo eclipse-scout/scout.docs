@@ -127,3 +127,25 @@ The following classes have been moved from the REST module to the security modul
 * `org.eclipse.scout.rt.rest.csrf.AntiCsrfHelper` → `org.eclipse.scout.rt.security.csrf.AntiCsrfHelper`
 * `org.eclipse.scout.rt.rest.csrf.IAntiCsrfFilterExclusion` → `org.eclipse.scout.rt.security.csrf.IAntiCsrfFilterExclusion`
 * `org.eclipse.scout.rt.rest.csrf.HttpMethodAntiCsrfFilterExclusion` → `org.eclipse.scout.rt.security.csrf.HttpMethodAntiCsrfFilterExclusion`
+
+== API Changes regarding Table Tiles
+
+The following method signatures have changed:
+
+* `ITable.createTiles`
+** old: `List<ITableRowTileMapping> createTiles(List<? extends ITableRow> rows)`
+** new: `List<? extends ITableRowTileMapping> createTiles(List<? extends ITableRow> rows)`
+* `ITableTileGridMediator.getTileMappings`
+** old: `List<ITableRowTileMapping> getTileMappings()`
+** new: `List<? extends ITableRowTileMapping> getTileMappings()`
+* `ITableTileGridMediator.setTileMappings`
+** old: `void setTileMappings(List<ITableRowTileMapping> tileMappings)`
+** new: `void setTileMappings(List<? extends ITableRowTileMapping> tileMappings)`
+* `ITableRowTileMapping.withTableRow`
+** old: `TableRowTileMapping withTableRow(ITableRow tableRow)`
+** new: `ITableRowTileMapping withTableRow(ITableRow tableRow)`
+* `ITableRowTileMapping.withTile`
+** old: `TableRowTileMapping withTile(ITile tile)`
+** new: `ITableRowTileMapping withTile(ITile tile)`
+
+All implementations and usages may need to be adjusted.
