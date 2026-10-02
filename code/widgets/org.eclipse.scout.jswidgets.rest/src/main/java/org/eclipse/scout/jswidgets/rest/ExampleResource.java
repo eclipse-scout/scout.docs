@@ -35,7 +35,8 @@ import org.eclipse.scout.rt.platform.util.concurrent.ThreadInterruptedError;
 import org.eclipse.scout.rt.rest.IRestResource;
 import org.eclipse.scout.rt.rest.RestApplication;
 
-import com.fasterxml.jackson.databind.JsonMappingException;
+import tools.jackson.core.JsonParser;
+import tools.jackson.databind.DatabindException;
 
 /**
  * This is an example of a rest service provider. Implementing {@link IRestResource} makes sure the resource is
@@ -93,7 +94,7 @@ public class ExampleResource implements IRestResource {
       case 2000 -> throw new AccessForbiddenException(TEXTS.get("YouAreNotAuthorizedToPerformThisAction"));
       case 3000 -> throw new ResourceNotFoundException(TEXTS.get("TheRequestedResourceCouldNotBeFound"));
       case 4000 -> throw new ThreadInterruptedError("Interrupted");
-      case 5000 -> throw new JsonMappingException(null, "JSON Mapping failed");
+      case 5000 -> throw DatabindException.from((JsonParser) null, "JSON Mapping failed");
       case 6000 -> throw new IllegalArgumentException("Invalid argument");
       case 7000 -> throw new RuntimeException("Custom runtime exception");
       case 8000 -> throw new ProcessingException();
