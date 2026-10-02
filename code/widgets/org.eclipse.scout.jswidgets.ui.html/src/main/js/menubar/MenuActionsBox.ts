@@ -34,7 +34,7 @@ export class MenuActionsBox extends GroupBox {
     deleteMenuButton.on('click', this._onDeleteMenuClick.bind(this));
 
     let menuToDeleteField = this.widget('MenuToDeleteField');
-    menuToDeleteField.setLookupCall(new ChildActionsLookupCall(this.menu));
+    menuToDeleteField.setLookupCall({objectType: ChildActionsLookupCall, action: this.menu});
     this._setMenu((this.menu));
   }
 
