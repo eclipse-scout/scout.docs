@@ -56,7 +56,7 @@ export class TableForm extends Form {
     this.widget('EventsTab').setField(this.table);
 
     let targetField = this.widget('Column.TargetField');
-    targetField.setLookupCall(new ColumnLookupCall(this.table));
+    targetField.setLookupCall({objectType: ColumnLookupCall, table: this.table});
     targetField.on('propertyChange:value', event => {
       let newColumn = event.newValue;
 

@@ -46,7 +46,7 @@ export class TabBoxProperties extends TabItem {
     this.tabBox.on('propertyChange:selectedTab', event => this._updateSelectedTab());
 
     this.selectedTabField = this.widget('TabBoxProperties.SelectedTabField');
-    this.selectedTabField.setLookupCall(new TabItemLookupCall(this.tabBox));
+    this.selectedTabField.setLookupCall({objectType: TabItemLookupCall, tabBox: this.tabBox});
     this.selectedTabField.on('propertyChange:value', event => this.tabBox.setSelectedTab(event.newValue));
 
     let markStrategy = this.widget('TabBoxProperties.MarkStrategy');
