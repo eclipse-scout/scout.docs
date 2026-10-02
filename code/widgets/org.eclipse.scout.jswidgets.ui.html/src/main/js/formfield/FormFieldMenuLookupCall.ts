@@ -7,35 +7,31 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {FormField, Menu, StaticLookupCall} from '@eclipse-scout/core';
+import {FormField, InitModelOf, Menu, StaticLookupCall, StaticLookupCallModel} from '@eclipse-scout/core';
 
 export class FormFieldMenuLookupCall extends StaticLookupCall<Menu> {
+  declare model: FormFieldMenuLookupCall;
   formField: FormField;
   protected _rebuildDataHandler: () => void;
 
   constructor(formField: FormField) {
     super();
     this._rebuildDataHandler = this._rebuildData.bind(this);
-    this.data = [];
-    this.setFormField(formField);
   }
 
-  protected override _data(): any[] {
-    return this.data;
+  protected override _init(model: InitModelOf<this>) {
+    super._init(model);
+    this.setFormField(this.formField);
   }
 
   setFormField(formField: FormField) {
     if (this.formField) {
       this.formField.off('propertyChange:menus', this._rebuildDataHandler);
-      this.formField.menus.forEach(function(menu) {
-        menu.off('propertyChange:text', this._rebuildDataHandler);
-      }, this);
+      this.formField.menus.forEach(menu => menu.off('propertyChange:text', this._rebuildDataHandler));
     }
     this.formField = formField;
     this.formField.on('propertyChange:menus', this._rebuildDataHandler);
-    this.formField.menus.forEach(function(menu) {
-      menu.on('propertyChange:text', this._rebuildDataHandler);
-    }, this);
+    this.formField.menus.forEach(menu => menu.on('propertyChange:text', this._rebuildDataHandler));
     this._rebuildData();
   }
 
@@ -44,4 +40,8 @@ export class FormFieldMenuLookupCall extends StaticLookupCall<Menu> {
       return [menu, menu.text];
     });
   }
+}
+
+export interface FormFieldMenuLookupCallModel extends StaticLookupCallModel<Menu> {
+  formField?: FormField;
 }

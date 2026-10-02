@@ -7,35 +7,31 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {StaticLookupCall, TabBox, TabItem} from '@eclipse-scout/core';
+import {InitModelOf, StaticLookupCall, StaticLookupCallModel, TabBox, TabItem} from '@eclipse-scout/core';
 
-export class TabItemLookupCall extends StaticLookupCall<TabItem> {
+export class TabItemLookupCall extends StaticLookupCall<TabItem> implements TabItemLookupCallModel {
+  declare model: TabItemLookupCallModel;
   tabBox: TabBox;
   protected _rebuildDataHandler: () => void;
 
-  constructor(tabBox: TabBox) {
+  constructor() {
     super();
     this._rebuildDataHandler = this._rebuildData.bind(this);
-    this.data = [];
-    this.setTabBox(tabBox);
   }
 
-  protected override _data(): any[] {
-    return this.data;
+  protected override _init(model: InitModelOf<this>) {
+    super._init(model);
+    this.setTabBox(this.tabBox);
   }
 
   setTabBox(tabBox: TabBox) {
     if (this.tabBox) {
       this.tabBox.off('propertyChange:tabItems', this._rebuildDataHandler);
-      this.tabBox.tabItems.forEach(function(tabItem) {
-        tabItem.off('propertyChange:label', this._rebuildDataHandler);
-      }, this);
+      this.tabBox.tabItems.forEach(tabItem => tabItem.off('propertyChange:label', this._rebuildDataHandler));
     }
     this.tabBox = tabBox;
     this.tabBox.on('propertyChange:tabItems', this._rebuildDataHandler);
-    this.tabBox.tabItems.forEach(function(tabItem) {
-      tabItem.on('propertyChange:label', this._rebuildDataHandler);
-    }, this);
+    this.tabBox.tabItems.forEach(tabItem => tabItem.on('propertyChange:label', this._rebuildDataHandler));
     this._rebuildData();
   }
 
@@ -44,4 +40,8 @@ export class TabItemLookupCall extends StaticLookupCall<TabItem> {
       return [tabItem, tabItem.label];
     });
   }
+}
+
+export interface TabItemLookupCallModel extends StaticLookupCallModel<TabItem> {
+  tabBox?: TabBox;
 }

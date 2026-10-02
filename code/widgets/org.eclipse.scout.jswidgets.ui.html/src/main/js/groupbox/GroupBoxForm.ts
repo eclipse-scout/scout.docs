@@ -72,7 +72,7 @@ export class GroupBoxForm extends Form {
 
     // Field tab
     let targetField = this.widget('Field.TargetField');
-    targetField.setLookupCall(new FormFieldLookupCall(groupBox));
+    targetField.setLookupCall({objectType: FormFieldLookupCall, field: groupBox});
     targetField.on('propertyChange:value', event => {
       let oldField = event.oldValue;
       let newField = event.newValue;

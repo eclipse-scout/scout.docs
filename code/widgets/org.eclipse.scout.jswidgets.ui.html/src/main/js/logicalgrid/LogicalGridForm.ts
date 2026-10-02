@@ -35,7 +35,7 @@ export class LogicalGridForm extends Form {
     this._initFields(groupBox.fields);
 
     let targetField = this.widget('TargetField');
-    targetField.lookupCall = new FormFieldLookupCall(groupBox);
+    targetField.setLookupCall({objectType: FormFieldLookupCall, field: groupBox});
     targetField.on('propertyChange:value', this._onTargetFieldValueChange.bind(this));
 
     let logicalGridField = this.widget('LogicalGridField');

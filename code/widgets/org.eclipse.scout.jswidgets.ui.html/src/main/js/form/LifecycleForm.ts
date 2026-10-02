@@ -47,7 +47,7 @@ export class LifecycleForm extends Form {
     this.statusSeverityField = this.widget('StatusSeverityField');
 
     this.targetField = this.widget('TargetField');
-    this.targetField.setLookupCall(new FormFieldLookupCall(this.detailBox));
+    this.targetField.setLookupCall({objectType: FormFieldLookupCall, field: this.detailBox});
   }
 
   protected _onAddErrorStatusWithSeverityFieldAppLinkAction(event: AppLinkActionEvent) {

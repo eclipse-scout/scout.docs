@@ -44,7 +44,7 @@ export class TabBoxDeleteTabItemBox extends GroupBox {
     }
 
     this.tabItemField = this.widget('DeleteTabItem.TabItem');
-    this.tabItemField.lookupCall = new TabItemLookupCall(this.tabBox);
+    this.tabItemField.setLookupCall({objectType: TabItemLookupCall, tabBox: this.tabBox});
     this.tabItemField.on('propertyChange:value', event => this.deleteButton.setEnabled(!!event.newValue));
 
     this.deleteButton = this.widget('DeleteTabItem.DeleteButton');

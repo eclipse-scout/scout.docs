@@ -45,7 +45,7 @@ export class GroupBoxDeleteFieldBox extends GroupBox {
     }
 
     this.targetField = this.widget('ToDeleteField');
-    this.targetField.setLookupCall(new FormFieldLookupCall(this.field));
+    this.targetField.setLookupCall({objectType: FormFieldLookupCall, field: this.field});
     this.targetField.on('propertyChange:value', event => this.deleteFieldButton.setEnabled(!!event.newValue));
 
     this.deleteFieldButton = this.widget('DeleteButton');

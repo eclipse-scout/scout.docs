@@ -7,35 +7,31 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {Group, StaticLookupCall, TileAccordion, TileGrid} from '@eclipse-scout/core';
+import {Group, InitModelOf, StaticLookupCall, StaticLookupCallModel, TileAccordion, TileGrid} from '@eclipse-scout/core';
 
-export class GroupLookupCall extends StaticLookupCall<Group<TileGrid>> {
+export class GroupLookupCall extends StaticLookupCall<Group<TileGrid>> implements GroupLookupCallModel {
+  declare model: GroupLookupCallModel;
   accordion: TileAccordion;
   protected _rebuildDataHandler: () => void;
 
-  constructor(accordion: TileAccordion) {
+  constructor() {
     super();
     this._rebuildDataHandler = this._rebuildData.bind(this);
-    this.data = [];
-    this.setAccordion(accordion);
   }
 
-  protected override _data(): any[] {
-    return this.data;
+  protected override _init(model: InitModelOf<this>) {
+    super._init(model);
+    this.setAccordion(this.accordion);
   }
 
   setAccordion(accordion: TileAccordion) {
     if (this.accordion) {
       this.accordion.off('propertyChange:groups', this._rebuildDataHandler);
-      this.accordion.groups.forEach(function(group) {
-        group.off('propertyChange:title', this._rebuildDataHandler);
-      }, this);
+      this.accordion.groups.forEach(group => group.off('propertyChange:title', this._rebuildDataHandler));
     }
     this.accordion = accordion;
     this.accordion.on('propertyChange:groups', this._rebuildDataHandler);
-    this.accordion.groups.forEach(function(group) {
-      group.on('propertyChange:title', this._rebuildDataHandler);
-    }, this);
+    this.accordion.groups.forEach(group => group.on('propertyChange:title', this._rebuildDataHandler));
     this._rebuildData();
   }
 
@@ -44,4 +40,8 @@ export class GroupLookupCall extends StaticLookupCall<Group<TileGrid>> {
       return [group, group.title];
     });
   }
+}
+
+export interface GroupLookupCallModel extends StaticLookupCallModel<Group<TileGrid>> {
+  accordion?: TileAccordion;
 }

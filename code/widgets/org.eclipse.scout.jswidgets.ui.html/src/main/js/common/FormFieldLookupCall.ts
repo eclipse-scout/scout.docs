@@ -7,21 +7,21 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {FormField, GroupBox, RadioButtonGroup, SequenceBox, StaticLookupCall} from '@eclipse-scout/core';
+import {FormField, GroupBox, InitModelOf, RadioButtonGroup, SequenceBox, StaticLookupCall, StaticLookupCallModel} from '@eclipse-scout/core';
 
-export class FormFieldLookupCall extends StaticLookupCall<FormField> {
+export class FormFieldLookupCall extends StaticLookupCall<FormField> implements FormFieldLookupCallModel {
+  declare model: FormFieldLookupCallModel;
   compositeField: GroupBox | SequenceBox | RadioButtonGroup<any>;
   protected _rebuildDataHandler: () => void;
 
-  constructor(compositeField: GroupBox | SequenceBox | RadioButtonGroup<any>) {
+  constructor() {
     super();
     this._rebuildDataHandler = this._rebuildData.bind(this);
-    this.data = [];
-    this.setCompositeField(compositeField);
   }
 
-  protected override _data(): any[] {
-    return this.data;
+  protected override _init(model: InitModelOf<this>) {
+    super._init(model);
+    this.setCompositeField(this.compositeField);
   }
 
   setCompositeField(compositeField: GroupBox | SequenceBox | RadioButtonGroup<any>) {
@@ -40,4 +40,8 @@ export class FormFieldLookupCall extends StaticLookupCall<FormField> {
       return [formField, formField.label];
     });
   }
+}
+
+export interface FormFieldLookupCallModel extends StaticLookupCallModel<FormField> {
+  compositeField?: GroupBox | SequenceBox | RadioButtonGroup<any>;
 }

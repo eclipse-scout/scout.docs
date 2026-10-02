@@ -45,7 +45,7 @@ export class TabItemProperties extends TabItem {
     }
 
     this.targetField = this.widget('TabItemProperties.TargetField');
-    this.targetField.lookupCall = new TabItemLookupCall(this.tabBox);
+    this.targetField.setLookupCall({objectType: TabItemLookupCall, tabBox: this.tabBox});
     this.targetField.on('propertyChange:value', event => this.setTabItem(event.newValue));
 
     this.markedField = this.widget('TabItemProperties.MarkedField');

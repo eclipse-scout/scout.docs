@@ -46,7 +46,7 @@ export class HierarchicalTableForm extends Form {
     this.widget('AddRowMenu').on('action', this._onAddRowMenuAction.bind(this));
 
     let targetField = this.widget('Column.TargetField');
-    targetField.setLookupCall(new ColumnLookupCall(this.table));
+    targetField.setLookupCall({objectType: ColumnLookupCall, table: this.table});
     targetField.on('propertyChange:value', event => {
       let newColumn = event.newValue;
 

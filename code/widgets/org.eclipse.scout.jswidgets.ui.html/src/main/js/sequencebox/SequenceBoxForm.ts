@@ -38,7 +38,7 @@ export class SequenceBoxForm extends Form {
 
     // FieldProperties tab
     let targetField = this.widget('Field.TargetField');
-    targetField.setLookupCall(new FormFieldLookupCall(sequenceBox));
+    targetField.setLookupCall({objectType: FormFieldLookupCall, field: sequenceBox});
     targetField.on('propertyChange:value', event => {
       let targetField = event.newValue;
 

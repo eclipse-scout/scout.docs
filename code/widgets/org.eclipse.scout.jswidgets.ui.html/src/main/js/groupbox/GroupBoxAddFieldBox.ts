@@ -48,7 +48,7 @@ export class GroupBoxAddFieldBox extends GroupBox {
     }
 
     this.beforeField = this.widget('BeforeField');
-    this.beforeField.setLookupCall(new FormFieldLookupCall(this.field));
+    this.beforeField.setLookupCall({objectType: FormFieldLookupCall, field: this.field});
 
     this.labelField = this.widget('LabelField');
 
