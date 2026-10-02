@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -85,7 +85,7 @@ export class RestForm extends Form {
   }
 
   protected _onSuccess(result: Response, call: AjaxCall) {
-    this._addLogEntry('Request successful. HTTP-Status: ' + call.lastXhr?.status + '. Response: ' + JSON.stringify(result));
+    this._addLogEntry('Request successful. HTTP-Status: ' + call.xhr?.status + '. Response: ' + JSON.stringify(result));
   }
 
   protected _onFail(ajaxError: AjaxError) {
