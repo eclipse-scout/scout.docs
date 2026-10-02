@@ -7,21 +7,21 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {Menu, StaticLookupCall} from '@eclipse-scout/core';
+import {InitModelOf, Menu, StaticLookupCall, StaticLookupCallModel} from '@eclipse-scout/core';
 
-export class ChildActionsLookupCall extends StaticLookupCall<Menu> {
+export class ChildActionsLookupCall extends StaticLookupCall<Menu> implements ChildActionsLookupCallModel {
+  declare model: ChildActionsLookupCallModel;
   action: Menu;
   protected _rebuildDataHandler: () => void;
 
-  constructor(action: Menu) {
+  constructor() {
     super();
     this._rebuildDataHandler = this._rebuildData.bind(this);
-    this.data = [];
-    this.setAction(action);
   }
 
-  protected override _data(): any[] {
-    return this.data;
+  protected override _init(model: InitModelOf<this>) {
+    super._init(model);
+    this.setAction(this.action);
   }
 
   setAction(action: Menu) {
@@ -46,4 +46,8 @@ export class ChildActionsLookupCall extends StaticLookupCall<Menu> {
       return [menu, menu.text];
     });
   }
+}
+
+export interface ChildActionsLookupCallModel extends StaticLookupCallModel<Menu> {
+  action?: Menu;
 }

@@ -114,7 +114,7 @@ export class TileAccordionForm extends Form {
     sortDescMenu.on('action', this._onSortDescMenuAction.bind(this));
 
     let insertTileTargetField = this.widget('InsertTileTargetField');
-    insertTileTargetField.setLookupCall(new GroupLookupCall(this.accordion));
+    insertTileTargetField.setLookupCall({objectType: GroupLookupCall, accordion: this.accordion});
     insertTileTargetField.setValue(this.accordion.groups[0]);
 
     let insertTileButton = this.widget('InsertTileButton');

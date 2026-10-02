@@ -50,7 +50,7 @@ export class TabBoxAddTabItemBox extends GroupBox {
     this.subLabelField = this.widget('AddTabItem.SubLabel');
 
     this.beforeField = this.widget('AddTabItem.TabItemSmartField');
-    this.beforeField.lookupCall = new TabItemLookupCall(this.tabBox);
+    this.beforeField.setLookupCall({objectType: TabItemLookupCall, tabBox: this.tabBox});
 
     this.addTabItemButton = this.widget('AddTabItem.CreateButton');
     this.addTabItemButton.on('click', this._onAddTabItemButtonClick.bind(this));
