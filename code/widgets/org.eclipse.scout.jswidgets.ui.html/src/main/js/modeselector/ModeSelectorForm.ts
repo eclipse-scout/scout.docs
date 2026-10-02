@@ -39,7 +39,7 @@ export class ModeSelectorForm extends Form {
     mode3.on('propertyChange:selected', this._onModeChange.bind(this, mode3));
 
     let targetField = this.widget('TargetField');
-    targetField.setLookupCall(new ModeLookupCall(modeSelector));
+    targetField.setLookupCall({objectType: ModeLookupCall, modeSelector});
     targetField.setValue(modeSelector.modes[0]);
     targetField.on('propertyChange:value', event => {
       let mode = event.newValue;

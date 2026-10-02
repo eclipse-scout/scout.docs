@@ -7,20 +7,15 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {Column, StaticLookupCall, Table} from '@eclipse-scout/core';
+import {Column, InitModelOf, StaticLookupCall, StaticLookupCallModel, Table} from '@eclipse-scout/core';
 
-export class ColumnLookupCall extends StaticLookupCall<Column> {
+export class ColumnLookupCall extends StaticLookupCall<Column> implements ColumnLookupCallModel {
+  declare model: ColumnLookupCallModel;
   table: Table;
 
-  constructor(table: Table) {
-    super();
-
-    this.data = [];
-    this.setTable(table);
-  }
-
-  protected override _data(): any[] {
-    return this.data;
+  protected override _init(model: InitModelOf<this>) {
+    super._init(model);
+    this.setTable(this.table);
   }
 
   setTable(table: Table) {
@@ -33,4 +28,8 @@ export class ColumnLookupCall extends StaticLookupCall<Column> {
       return [column, column.text];
     });
   }
+}
+
+export interface ColumnLookupCallModel extends StaticLookupCallModel<Column> {
+  table?: Table;
 }
