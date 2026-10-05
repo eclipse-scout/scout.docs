@@ -136,6 +136,10 @@ export class FormFieldPropertiesBox extends GroupBox {
       }
     });
 
+    let placeholderTextField = this.widget('PlaceholderField');
+    placeholderTextField.setValue(this.field.placeholder);
+    placeholderTextField.on('propertyChange:value', event => this.field.setPlaceholder(event.newValue));
+
     let tooltipTextField = this.widget('TooltipTextField');
     tooltipTextField.setValue(this.field.tooltipText);
     tooltipTextField.on('propertyChange:value', event => this.field.setTooltipText(event.newValue));

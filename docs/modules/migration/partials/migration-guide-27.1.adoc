@@ -127,3 +127,25 @@ The following classes have been moved from the REST module to the security modul
 * `org.eclipse.scout.rt.rest.csrf.AntiCsrfHelper` → `org.eclipse.scout.rt.security.csrf.AntiCsrfHelper`
 * `org.eclipse.scout.rt.rest.csrf.IAntiCsrfFilterExclusion` → `org.eclipse.scout.rt.security.csrf.IAntiCsrfFilterExclusion`
 * `org.eclipse.scout.rt.rest.csrf.HttpMethodAntiCsrfFilterExclusion` → `org.eclipse.scout.rt.security.csrf.HttpMethodAntiCsrfFilterExclusion`
+
+== Support for placeholders
+
+Placeholder support has been added at top level and is therefore available throughout the form field hierarchy.
+As a consequence, this change may affect existing customizations in your project.
+
+Scout Classic
+
+- `org.eclipse.scout.rt.client.ui.form.fields.IFormField.getPlaceholder()`
+- `org.eclipse.scout.rt.client.ui.form.fields.IFormField.setPlaceholder(String)`
+- `org.eclipse.scout.rt.client.ui.form.fields.AbstractFormField.getConfiguredPlaceholder()`
+
+Scout JS
+
+- `FormField.placeholder`
+- `FormField.setPlaceholder(string)`
+
+Please review your project for potential conflicts:
+
+- If you have implemented custom placeholder functionality, consider removing or migrating those customizations to the new built-in API.
+- If you have introduced custom methods named `getPlaceholder()`, `setPlaceholder()`, or similar on form fields, consider renaming them to avoid naming conflicts and unintended behavior.
+

@@ -58,3 +58,9 @@ The filter is registered by default through `UiServletContributors` for the path
 Paths can be excluded from Anti-CSRF validation by providing an implementation of `IAntiCsrfFilterExclusion`.
 
 Implementations of `IAntiCsrfFilterExclusion` are now managed as application-scoped singletons and reused across requests.
+
+== Support for placeholders
+
+Form fields can now be configured with placeholder text.
+If supported by the field type, the configured text is displayed when the field is empty.
+
