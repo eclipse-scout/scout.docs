@@ -47,3 +47,14 @@ Refer to the JsDoc of the class for details and a usage example.
 
 The new batch support is used by default by the `SmartColumn` and the `LookupColumn`.
 Furthermore, `StaticLookupCall` is now batched.
+
+== Expanded Anti-CSRF Support
+
+Anti-CSRF protection has been extended to Jetty-based applications.
+
+While REST applications were already protected using `AntiCsrfContainerFilter`, Jetty applications can now use the new `AntiCsrfFilter`.
+The filter is registered by default through `UiServletContributors` for the path `/*`.
+
+Paths can be excluded from Anti-CSRF validation by providing an implementation of `IAntiCsrfFilterExclusion`.
+
+Implementations of `IAntiCsrfFilterExclusion` are now managed as application-scoped singletons and reused across requests.
