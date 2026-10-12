@@ -127,3 +127,11 @@ The following classes have been moved from the REST module to the security modul
 * `org.eclipse.scout.rt.rest.csrf.AntiCsrfHelper` → `org.eclipse.scout.rt.security.csrf.AntiCsrfHelper`
 * `org.eclipse.scout.rt.rest.csrf.IAntiCsrfFilterExclusion` → `org.eclipse.scout.rt.security.csrf.IAntiCsrfFilterExclusion`
 * `org.eclipse.scout.rt.rest.csrf.HttpMethodAntiCsrfFilterExclusion` → `org.eclipse.scout.rt.security.csrf.HttpMethodAntiCsrfFilterExclusion`
+
+== Changed Method Signature for ITileDataLoader#loadData
+
+The method signature of `org.eclipse.scout.rt.client.ui.tile.AbstractTile.ITileDataLoader.loadData` changed from `loadData()` to `loadData(boolean autoReloadMode)`.
+The new Parameter `autoReloadMode` specifies if the load of the Tile shall be done in an automatic reload mode.
+That means the loading indicator will not be shown.
+
+To get the same behavior as before, set the parameter to `false`.
