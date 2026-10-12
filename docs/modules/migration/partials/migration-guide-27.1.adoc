@@ -135,3 +135,29 @@ The new Parameter `autoReloadMode` specifies if the load of the Tile shall be do
 That means the loading indicator will not be shown.
 
 To get the same behavior as before, set the parameter to `false`.
+
+== DataObject Improvements for TypeScript
+
+=== TypeVersion Attribute
+
+When deserializing a dataobject, the `_typeVersion` attribute is now always retained by default.
+In former releases the default was to only retain if the target object is a `BaseDoEntity`.
+This changes makes it more consistent and ensures the dataobject can be sent back to the Java backend without difference.
+
+It might require some adaptions in your code in rare cases if you rely on the absence of this property.
+Either migrate your code or explicitly set the `retainTypeVersion` property of the deserializer to `false`.
+
+=== Equality behavior when comparing DataObjects
+
+The `equals` function of `BaseDoEntity` ignores the `_typeVersion` property if only existing in one of the compared objects.
+This ensures a deserialized object from the Java server es equals to a object directly created in TypeScript using `scout.create` when having the same attributes.
+
+Furthermore an property having the value `undefined` is considered to be equal to not having the property at all.
+This makes the `equals` function less strict but better aligns with the usually expected behavior.
+
+=== RestLookupCall uses BaseDoEntity
+
+The `RestLookupCall` has been migrated to use `BaseDoEntity`. Therefore, `restriction` can now also be a `BaseDoEntity` including automatic serialization and the `LookupRowDo` included in the response is a `BaseDoEntity` as well instead of plain JavaScript PoJos.
+
+This allows you to create specific `LookupRowDo` classes if required.
+The corresponding functions `_acceptLookupRow` and `_createLookupRowFromDo` can then directly use your named classes if the `_type` attribute included in the response matches the one declared in your TS class.
