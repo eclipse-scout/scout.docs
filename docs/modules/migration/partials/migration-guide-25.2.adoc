@@ -215,7 +215,7 @@ const shallowCopy = scout.create(MyEntityDo, {
   additionalPropertyForTheCopy: 'ShallowCopyWillHaveThisAdditionalValue'
 });
 ----
-
++
 Important: If the spread operator is not the first statement, you need to convert the DO to a Pojo first (`.toPojo()`), otherwise undefined values from the DO may override actual values.
 Therefore, it is recommended to always use the original Data Object as the first spread statement.
 . To create a deep copy of a Data Object use the `clone` function:
@@ -226,7 +226,7 @@ const deepCopy = originalEntityDo.clone({
   additionalPropertyForTheCopy: 'DeepCopyWillHaveThisAdditionalValue'
 });
 ----
-
++
 Important: In the (optional) extra model passed to the `clone` function only primitives and pojos are copied deeply.
 Complex objects like `Date` or `Map` in this extra model are copied by value!
 . When using the `HybridManager` or the `JsForm`: It uses the Data Object class and deserializes to these classes (instead of a Pojo as before) as soon as a class having a matching `@typeName` decorator is found in TypeScript.
