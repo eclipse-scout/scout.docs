@@ -143,6 +143,11 @@ export default (): GroupBoxModel => ({
       label: 'Label Width in Pixel'
     },
     {
+      id: 'PlaceholderField',
+      objectType: StringField,
+      label: 'Placeholder'
+    },
+    {
       id: 'TooltipTextField',
       objectType: StringField,
       label: 'Tooltip Text'
@@ -193,6 +198,7 @@ export type FormFieldPropertiesBoxWidgetMap = {
   'LabelField': StringField;
   'LabelPositionField': SmartField<any>;
   'LabelWidthInPixelField': ProposalField;
+  'PlaceholderField': StringField;
   'TooltipTextField': StringField;
   'TooltipAnchorField': SmartField<any>;
   'ErrorStatusField': SmartField<any>;
