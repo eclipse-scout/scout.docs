@@ -42,7 +42,7 @@ export class RadioButtonGroupForm extends Form {
     });
 
     let selectedButtonField = this.widget('SelectedButtonField');
-    selectedButtonField.setLookupCall({objectType: FormFieldLookupCall, field: group});
+    selectedButtonField.setLookupCall({objectType: FormFieldLookupCall, compositeField: group});
     selectedButtonField.setValue(group.selectedButton);
     selectedButtonField.on('propertyChange:value', event => this.widget('RadioButtonGroup').selectButton(event.newValue as RadioButton<number>));
 
@@ -72,7 +72,7 @@ export class RadioButtonGroupForm extends Form {
 
     // Button tab
     let targetField = this.widget('Button.TargetField');
-    targetField.setLookupCall({objectType: FormFieldLookupCall, field: group});
+    targetField.setLookupCall({objectType: FormFieldLookupCall, compositeField: group});
     targetField.setValue(group.radioButtons[0]);
     targetField.on('propertyChange:value', event => {
       let button = event.newValue as RadioButton<number>;

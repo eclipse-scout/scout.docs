@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -47,7 +47,7 @@ export class LifecycleForm extends Form {
     this.statusSeverityField = this.widget('StatusSeverityField');
 
     this.targetField = this.widget('TargetField');
-    this.targetField.setLookupCall({objectType: FormFieldLookupCall, field: this.detailBox});
+    this.targetField.setLookupCall({objectType: FormFieldLookupCall, compositeField: this.detailBox});
   }
 
   protected _onAddErrorStatusWithSeverityFieldAppLinkAction(event: AppLinkActionEvent) {
