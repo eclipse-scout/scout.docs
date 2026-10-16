@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {Column, dates, Form, FormModel, GroupBox, HtmlTile, icons, InitModelOf, MessageBoxes, models, numbers, scout, StaticLookupCall, TabItem, TableAppLinkActionEvent, TableRowModel} from '@eclipse-scout/core';
+import {arrays, Column, dates, Form, FormModel, GroupBox, HtmlTile, icons, InitModelOf, MessageBoxes, models, numbers, scout, StaticLookupCall, TabItem, TableAppLinkActionEvent, TableRowModel} from '@eclipse-scout/core';
 import {BooleanColumnPropertiesBox, ColumnLookupCall, DateColumnPropertiesBox, LocaleLookupCall, LookupCallColumnPropertiesBox, LookupColumnPropertiesBox, NumberColumnPropertiesBox, TableFieldTable, TableFormWidgetMap} from '../index';
 import TableFormModel from './TableFormModel';
 
@@ -37,6 +37,7 @@ export class TableForm extends Form {
 
     this.table = this.widget('Table');
     this.widget('AddRowMenu').on('action', this._onAddRowMenuAction.bind(this));
+    this.widget('SelectLastRowMenu').on('action', this._onSelectLastRowAction.bind(this));
     this.widget('MoveToTopMenu').on('action', this._onMoveToTopMenuAction.bind(this));
     this.widget('MoveUpMenu').on('action', this._onMoveUpMenuAction.bind(this));
     this.widget('MoveDownMenu').on('action', this._onMoveDownMenuAction.bind(this));
@@ -191,6 +192,13 @@ export class TableForm extends Form {
 
   protected _onAddRowMenuAction() {
     this.table.insertRow(this._createRow());
+  }
+
+  protected _onSelectLastRowAction() {
+    if (arrays.hasElements(this.table.rows)) {
+      let lastRow = arrays.last(this.table.rows);
+      this.table.selectRow(lastRow);
+    }
   }
 
   protected _onMoveToTopMenuAction() {
