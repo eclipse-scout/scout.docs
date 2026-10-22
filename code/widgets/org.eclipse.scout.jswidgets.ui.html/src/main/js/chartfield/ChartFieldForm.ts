@@ -604,10 +604,10 @@ export class ChartFieldForm extends Form {
         }
       });
       inputForm.open()
-        .catch((...args) => App.get().errorHandler.handle(...args));
+        .catch(error => App.get().errorHandler.handle(error));
       inputForm.whenSave()
         .then(() => this._addColumn(inputForm.widget('InputField', StringField).value))
-        .catch((...args) => App.get().errorHandler.handle(...args));
+        .catch(error => App.get().errorHandler.handle(error));
     });
 
     this.removeDataMenu = this.widget('RemoveDataMenu');
