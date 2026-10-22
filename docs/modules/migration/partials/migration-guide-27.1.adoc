@@ -133,3 +133,10 @@ The following classes have been moved from the REST module to the security modul
 `Close()` never did real asynchronous work but only returned a resolved promise which is unnecessary.
 
 If you chained the returned promise you have to remove the chain and make it synchronous to prevent null pointer exceptions.
+
+== jquery-scout: oneAnimationEnd Changed
+
+`oneAnimationEnd` has been improved so the callback is now executed even when debugging or if the `animation-duration` is set to 0s.
+
+This also comes with a behavior change: the function now must be called after the animation has been started, e.g. after a class that starts the animation has been added.
+If `oneAnimationEnd` is called before adding the animation class, the callback won't be executed anymore.
