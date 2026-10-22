@@ -347,3 +347,13 @@ Replace manual calls to `dataObjects.deserialize` and `dataObjects.serialize` in
 Return a `DoMapEntity` instead. It can be created from a map using `DoMapEntity.of(map)` (keys must be converted to Strings first).
 
 Override `acceptResourceForMapReturnValueCheck` or `acceptMethodForMapReturnValueCheck` to exclude resources or methods from the check.
+
+== jquery-scout: oneAnimationEnd Changed
+
+`oneAnimationEnd` has been improved so the callback is now executed even when debugging or if the `animation-duration` is set to 0s.
+
+This also comes with behavior changes:
+
+. The function now must be called _after_ the animation has been started, e.g. after a class that starts the animation has been added.
+If `oneAnimationEnd` is called before adding the animation class, the callback won't be executed anymore.
+. Animations on pseudo-elements (`::before` and `::after`) are now ignored. If you need to react to animations on such elements, add a `nop` animation with the same duration on the actual element.
