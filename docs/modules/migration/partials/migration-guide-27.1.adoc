@@ -120,7 +120,7 @@ So intead calling these methods on the page, call them on the corresponding Tabl
 
 In Scout JS the function `Table.setLimitedResultTableStatus` was renamed to `Table.updateLimitedResultTableStatus` and requires no argument anymore as the table now directly holds the `limitedResult` property. Furthermore, the function `TableMaxResultsHelper.isLoadMoreDataPossible` now requires the whole table as argument for maximum flexiblity.
 
-== Moved classes for Expanded Anti-CSRF Support
+== Moved Classes for Expanded Anti-CSRF Support
 
 The following classes have been moved from the REST module to the security module:
 
@@ -179,3 +179,9 @@ Please review your project for potential conflicts:
 - If you have implemented custom placeholder functionality, consider removing or migrating those customizations to the new built-in API.
 - If you have introduced custom methods named `getPlaceholder()`, `setPlaceholder()`, or similar on form fields, consider renaming them to avoid naming conflicts and unintended behavior.
 
+
+== Form: Close() Does Not Return a Promise Anymore (Scout JS)
+
+`Close()` never did real asynchronous work but only returned a resolved promise which is unnecessary.
+
+If you chained the returned promise you have to remove the chain and make it synchronous to prevent null pointer exceptions.
