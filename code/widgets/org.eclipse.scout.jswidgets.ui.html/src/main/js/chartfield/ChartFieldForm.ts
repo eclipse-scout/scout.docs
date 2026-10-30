@@ -8,7 +8,7 @@
  * SPDX-License-Identifier: EPL-2.0
  */
 import {
-  App, arrays, CancelMenu, CheckBoxField, colorSchemes, Column, DesktopNotification, Form, FormModel, GridData, GroupBox, InitModelOf, Menu, models, ModeSelectorField, NumberColumn, objects, OkMenu, scout, SmartField, Status, StringField,
+  arrays, CancelMenu, CheckBoxField, colorSchemes, Column, DesktopNotification, Form, FormModel, GridData, GroupBox, InitModelOf, Menu, models, ModeSelectorField, NumberColumn, objects, OkMenu, scout, SmartField, Status, StringField,
   strings, TableField, TableRow
 } from '@eclipse-scout/core';
 import {Chart, ChartColorMode, ChartConfig, ChartData, ChartField, ChartPosition, ChartValueClickEvent, ChartValueGroup} from '@eclipse-scout/chart';
@@ -603,11 +603,9 @@ export class ChartFieldForm extends Form {
           }]
         }
       });
-      inputForm.open()
-        .catch(error => App.get().errorHandler.handle(error));
+      inputForm.open();
       inputForm.whenSave()
-        .then(() => this._addColumn(inputForm.widget('InputField', StringField).value))
-        .catch(error => App.get().errorHandler.handle(error));
+        .then(() => this._addColumn(inputForm.widget('InputField', StringField).value));
     });
 
     this.removeDataMenu = this.widget('RemoveDataMenu');
