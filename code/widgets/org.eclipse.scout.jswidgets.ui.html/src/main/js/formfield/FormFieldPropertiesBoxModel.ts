@@ -148,6 +148,11 @@ export default (): GroupBoxModel => ({
       label: 'Tooltip Text'
     },
     {
+      id: 'TooltipHtmlEnabledField',
+      objectType: CheckBoxField,
+      label: 'Tooltip Html Enabled'
+    },
+    {
       id: 'TooltipAnchorField',
       objectType: SmartField,
       lookupCall: TooltipAnchorLookupCall,
@@ -194,6 +199,7 @@ export type FormFieldPropertiesBoxWidgetMap = {
   'LabelPositionField': SmartField<any>;
   'LabelWidthInPixelField': ProposalField;
   'TooltipTextField': StringField;
+  'TooltipHtmlEnabledField': CheckBoxField;
   'TooltipAnchorField': SmartField<any>;
   'ErrorStatusField': SmartField<any>;
   'StatusPositionField': SmartField<any>;

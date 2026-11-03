@@ -140,6 +140,10 @@ export class FormFieldPropertiesBox extends GroupBox {
     tooltipTextField.setValue(this.field.tooltipText);
     tooltipTextField.on('propertyChange:value', event => this.field.setTooltipText(event.newValue));
 
+    let tooltipHtmlEnabledField = this.widget('TooltipHtmlEnabledField');
+    tooltipHtmlEnabledField.setValue(this.field.tooltipHtmlEnabled);
+    tooltipHtmlEnabledField.on('propertyChange:value', event => this.field.setTooltipHtmlEnabled(event.newValue));
+
     let tooltipAnchorField = this.widget('TooltipAnchorField');
     tooltipAnchorField.setValue(this.field.tooltipAnchor);
     tooltipAnchorField.on('propertyChange:value', event => this.field.setTooltipAnchor(event.newValue));
