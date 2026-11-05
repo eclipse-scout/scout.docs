@@ -179,3 +179,10 @@ Please review your project for potential conflicts:
 - If you have implemented custom placeholder functionality, consider removing or migrating those customizations to the new built-in API.
 - If you have introduced custom methods named `getPlaceholder()`, `setPlaceholder()`, or similar on form fields, consider renaming them to avoid naming conflicts and unintended behavior.
 
+== Widget: Destroy Optimization
+
+These following changes have been made as part of a performance optimization.
+However, these are actually internal methods, and it is very unlikely that your code uses them.
+
+- `Widget._destroyChildren` and `Widget._destroyChild` have been removed without replacement.
+- Widget.children is now readonly and can only be changed by the existing `Widget._addChild` and `Widget._removeChild_` methods.
