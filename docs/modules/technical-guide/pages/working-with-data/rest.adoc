@@ -280,7 +280,7 @@ transactions in the event of a cancellation. The following steps must be taken f
 
 Scout does provide a default implementation for a cancellation resource (see `org.eclipse.scout.rt.rest.cancellation.CancellationResource`).
 
-Also a default client for this resource is provided (see `org.eclipse.scout.rt.client.rest.CancellationResourceClient`).
+Also a default client for this resource is provided (see `org.eclipse.scout.rt.rest.client.cancellation.CancellationResourceClient`).
 
 Projects may however replace this resource or provide their own clients to add more functionality.
 
