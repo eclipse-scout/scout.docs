@@ -432,3 +432,11 @@ Use the xref:promise-migration-guide.adoc[] as prompt for the agent.
 It is written as instructions for an agent and contains the complete list of changed APIs, the translation rules and the pitfalls found in the migration of Scout and other projects.
 
 After the migration review and test the changes thoroughly.
+
+== Widget: Destroy Optimization (Scout JS)
+
+The following changes have been made as part of a performance optimization.
+However, these are actually internal methods, and it is very unlikely that your code uses them.
+
+- `Widget._destroyChildren` and `Widget._destroyChild` have been removed without replacement.
+- Widget.children is now readonly and can only be changed by the existing `Widget._addChild` and `Widget._removeChild_` methods.
