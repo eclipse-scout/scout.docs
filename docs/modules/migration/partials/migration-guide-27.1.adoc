@@ -92,12 +92,12 @@ Scout 27.1 requires at least the following:
 
 == Batch Support for Scout JS Columns
 
-The batch support for `Columns` has been improved (see the xref:release-notes.adoc#batch-support[release notes] for details).
+The batch support for `Columns` has been improved (see the xref:releasenotes:release-notes.adoc#batch-support[release notes] for details).
 
 The signature for the following functions changed:
 
-* `Column.formatValue`, `Column.formatter` and `Column._formatValue`: Now returns `string | JQuery.Promise<BatchCallResult<TValue, unknown>>` returning all key-value-mappings in the batched async case.
-* `Column.setCellTextDeferred` now expects this `JQuery.Promise<BatchCallResult<TValue, unknown>>` as argument for the async case. The `row` and `cell` arguments have been deleted as such a call is no longer executed for each row, but once for all rows.
+* `Column.formatValue`, `Column.formatter` and `Column._formatValue`: Now returns `string | Promise<BatchCallResult<TValue, unknown>>` returning all key-value-mappings in the batched async case.
+* `Column.setCellTextDeferred` now expects this `Promise<BatchCallResult<TValue, unknown>>` as argument for the async case. The `row` and `cell` arguments have been deleted as such a call is no longer executed for each row, but once for all rows.
 +
 To access or modify the new value by cell or row use `_batchFormatResultToCellText` which will be called for each row in the batch result.
 
@@ -220,3 +220,37 @@ Now `false` or any falsy value including `null` (but not `undefined`) that is pa
 
 This also comes with a behavior change: the function now must be called after the animation has been started, e.g. after a class that starts the animation has been added.
 If `oneAnimationEnd` is called before adding the animation class, the callback won't be executed anymore.
+
+[#native-promises]
+== jQuery Promises Replaced by Native Promises (Scout JS)
+
+Scout JS no longer uses jQuery `Deferred`/`Promise`.
+Every API that returned a `JQuery.Promise<T>` now returns a native `Promise<T>`, the Scout `Deferred` class is based on native promises, and `.done()`, `.fail()` and `.always()` are no longer available on the returned promises.
+Project code that overrides or calls these APIs, including specs, has to be migrated.
+
+=== Most Important Changes
+
+* *Types*: replace `+JQuery.Promise<T>+` with `Promise<T>` and `+$.Deferred()+` with `+new Deferred<T>()+` of `@eclipse-scout/core`.
+The TypeScript compiler reports almost all places that need a change.
+* *Semantics*: `.done()`, `.fail()` and `.always()` can't be replaced one-to-one by `.then()`, `.catch()` and `.finally()`.
+All `.done()` handlers receive the original value, `.finally()` receives no value, a `.catch()` without rethrow resolves the chain, and native promises resolve and reject with exactly one value (e.g. `$.promiseAll()` and `$.when()` callbacks receive one array).
+Review each of these places individually.
+* *Timing*: native promises continue as microtasks, jQuery `.then()` handlers ran in a `setTimeout`.
+`jasmine.clock().tick()` no longer drives promise chains: specs have to await the returned promise or an event (`+widget.when(...)+`) instead.
+Asynchronous work started while opening a form without awaiting its promise (e.g. a lookup in `Form.importData()`) is now overtaken the form itself and may lead to a wrong `saveNeeded` state. Try to return the promise, e.g. in `Form.importData()` which may now return a promise.
+* *Errors*: unhandled rejections are no longer silently ignored.
+A global handler passes them to the `ErrorHandler`, which logs them and shows the error message box, and specs fail on them.
+Expected cancellations (`AbortError`, aborted ajax and lookup calls, rejections without a reason) are ignored.
+Local `+.catch(error => errorHandler.handle(error))+` at the end of a promise chain are obsolete and can be removed. `ErrorHandler.handle()` does not accept multiple arguments anymore.
+* *Forms*: `Form.load()`, `save()`, `ok()` and `validate()` no longer show the error message box themselves, they only reject.
+`Form.close()` no longer returns a promise.
+
+=== Recommended Approach: Migrate with an AI Agent
+
+The migration consists of many small changes that are not purely mechanical.
+We therefore recommend migrating with an AI coding agent like https://claude.com/claude-code[Claude Code] and reviewing the result.
+
+Use the xref:promise-migration-guide.adoc[] as prompt for the agent.
+It is written as instructions for an agent and contains the complete list of changed APIs, the translation rules and the pitfalls found in the migration of Scout and other projects.
+
+After the migration review and test the changes thoroughly.
