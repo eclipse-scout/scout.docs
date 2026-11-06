@@ -64,3 +64,31 @@ Implementations of `IAntiCsrfFilterExclusion` are now managed as application-sco
 Form fields can now be configured with placeholder text.
 If supported by the field type, the configured text is displayed when the field is empty.
 
+== Switch to Native Promises (Scout JS)
+
+We migrated the whole codebase of Scout JS from jQuery promises to native promises.
+
+This gives the following advantages:
+
+* *Modern language integration*: `async/await` can be used everywhere, as well as built-in features like `Promise.all()`, `Promise.race()`, `Promise.allSettled()` and `Promise.any()`.
+* *Improved readability*: No conversion between jQuery and native promises is necessary anymore.
+The type is more compact (`Promise` instead of `JQuery.Promise`), and the pattern is consistent throughout the codebase (no `done/fail/always`).
+* *Better interoperability*: Native promises work seamlessly with modern JavaScript APIs (like `fetch`) and third-party libraries.
+* *Simpler error handling*: Rejections propagate consistently through promise chains and unhandled rejections are handled globally.
+Rejections always carry a single reason, e.g. an `AjaxError`, instead of an argument list.
+* *Improved efficiency*: Native promises use the microtask queue instead of timer-based scheduling, reducing scheduling overhead and allowing asynchronous operations to complete sooner.
+Promise chains also execute before the next rendering opportunity, potentially reducing unnecessary intermediate UI updates.
+* *Standard JavaScript API*: Eliminates the dependency on jQuery for asynchronous operations.
+
+To migrate existing code, see the xref:migration:migration-guide.adoc#native-promises[Migration Guide].
+
+== Improved Error Handling (Scout JS)
+
+* Unhandled rejections are now passed to the `ErrorHandler`, like uncaught errors in synchronous code.
+You no longer need to add `App.get().errorHandler.handle(error)` to report errors.
+`Form.load()`, `save()` and `validate()` no longer show a message box themselves, they reject and leave the error to the global handler.
+* Expected cancellations are ignored and don't need to be caught: rejections without a reason, `AbortError` and aborted ajax calls.
+* Every error is reported only once: the `ErrorHandler` marks handled errors as consumed and ignores them afterward.
+To show a custom message instead of the default one, call `ErrorHandler.consume(error)` and rethrow the error.
+
+For details, see xref:technical-guide:user-interface/error-handling.adoc[Error Handling].
