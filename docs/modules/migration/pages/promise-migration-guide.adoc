@@ -58,7 +58,7 @@ Workflow:
 . Also, type-check downstream modules.
 Errors often surface in a module that consumes an unmigrated API rather than in the module that defines it.
 
-Besides `tsc`, lint with `@eclipse-scout/no-floating-promises` (enabled as a warning in `@eclipse-scout/eslint-config`).
+Besides `tsc`, lint with the rule `@typescript-eslint/no-floating-promises` (see <<sec-7b,§7b>> for the command).
 It finds asynchronous work nobody waits for, a class of bug the migration can expose in code that itself needs no change (<<sec-7b,§7b>>).
 
 The compiler cannot see everything.
@@ -604,23 +604,27 @@ Nothing in the migrated code looks wrong; the bug is in the code that was never 
 *How to find these cases:*
 
 * *Lint for floating promises.*
-`@eclipse-scout/eslint-config` enables the rule `@eclipse-scout/no-floating-promises` as a warning (with type information via `projectService`).
-It is `@typescript-eslint/no-floating-promises`, which reports every promise that is neither returned, awaited nor handled, with all its options, but it ignores
-** promises in event handlers (methods named `+_onXyz+`, callbacks passed to `on()`/`one()`): nobody waits for them anyway;
-** calls of known safe methods, whose promise rarely needs to be awaited: `ValueField.setValue()`, `ErrorHandler.handle()` and `Form.open()`, including subclasses.
-A project can add its own with the option `allowForKnownSafeMethods`; the entries are added to the defaults:
+The rule `@typescript-eslint/no-floating-promises` reports every promise that is neither returned, awaited nor handled.
+It needs type information and is not enabled by `@eclipse-scout/eslint-config`, so enable it on the command line, run in the module folder (or a folder above it):
 +
-[source,js,opts=novalidate]
+[source,sh]
 ----
-'@eclipse-scout/no-floating-promises': ['warn', {allowForKnownSafeMethods: [{className: 'MyForm', methods: ['reload']}]}]
+npx eslint --parser-options projectService:true --rule '{"@typescript-eslint/no-floating-promises": "warn"}' 'src/main/js/**/*.ts'
 ----
 +
-(The original option `allowForKnownSafeCalls` only matches the method name, regardless of the class.)
+Lint only `.ts` files: the `@typescript-eslint` plugin is only configured for TypeScript, and JavaScript files have no type information anyway (check the lifecycle hooks of `.js` files by reading them).
+The run is slow, because a TypeScript program including the `@eclipse-scout/core` sources is built.
+Lint one module at a time, and write the output to a file (e.g. `-f json -o lint.json`) instead of linting again.
+* *Ignore the noise.*
+The rule reports many promises nobody needs to wait for. Ignore findings
+** in event handlers (methods named `+_onXyz+`, callbacks passed to `on()`/`one()`/`when()`): nobody waits for them anyway;
+** for calls of methods whose promise rarely needs to be awaited: `ValueField.setValue()` (including subclasses, e.g. `+smartField.setValue(...)+`), `ErrorHandler.handle()` and `Form.open()`.
+
++
+Don't add `void` or a `.catch()` to these call sites just to silence the rule.
 * *Triage the remaining findings* by the method they are in:
 ** inside a lifecycle hook, or a method called from one -> the lifecycle can't wait for it: fix it (see below);
-** other intended fire-and-forget code -> mark it as intended with `+void this._doSomethingAsync();+`.
-Errors still reach the global handler (<<sec-7a,§7a>>).
-If a project method's promise rarely needs to be awaited, add it to `allowForKnownSafeMethods` instead of marking every call site.
+** other intended fire-and-forget code -> leave it. Errors still reach the global handler (<<sec-7a,§7a>>).
 * *Make deferred work slower in specs.*
 Ordering bugs stay hidden as long as the deferred work happens to finish first.
 Raise `StaticLookupCall.delay` (e.g. to 50 ms) and slow down stubbed ajax responses in a test setup hook.
@@ -734,7 +738,7 @@ A single root cause often explains a dozen failing specs.
 . For each file: bulk-swap pure type annotations, then hand-review every `+$.Deferred()+`/`+$.when+`/`+$.promiseAll+`/`.done/.fail/.always`/`.state()` site using the rules in <<sec-3,§3>>–<<sec-5,§5>>.
 Remove obsolete `errorHandler.handle()` calls in promise chains (<<sec-7,§7>>).
 . Grep again after each module with the same full pattern to catch anything missed (do this even for modules you think are "done" -- re-run the wider pattern, not just what caught your eye), and diff the tsc output against the baseline, including downstream modules.
-. Lint every module with `@eclipse-scout/no-floating-promises` (<<sec-7b,§7b>>) and triage the findings.
+. Lint every module with `@typescript-eslint/no-floating-promises` (<<sec-7b,§7b>>) and triage the findings, ignoring the noise.
 Floating promises in lifecycle hooks are bugs even if the code itself didn't need a migration change.
 . Modules reported as "already migrated" are not necessarily done.
 Re-check them with tsc and the full pattern.
