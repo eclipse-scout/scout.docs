@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {ajax, AjaxCall, AjaxError, App, Button, Event, Form, FormModel, InitModelOf, models, numbers} from '@eclipse-scout/core';
+import {ajax, AjaxCall, AjaxError, Button, Event, Form, FormModel, InitModelOf, models, numbers} from '@eclipse-scout/core';
 import RestFormModel from './RestFormModel';
 import {RestFormWidgetMap} from '../index';
 
@@ -89,8 +89,8 @@ export class RestForm extends Form {
   }
 
   protected _onFail(ajaxError: AjaxError) {
-    App.get().errorHandler.handle(ajaxError);
     this._addLogEntry('Request failed! HTTP-Status: ' + ajaxError.jqXHR.status + '. TextStatus: ' + ajaxError.textStatus + '. ErrorThrown: ' + ajaxError.errorThrown + '. RequestOptions: ' + JSON.stringify(ajaxError.requestOptions));
+    throw ajaxError;
   }
 }
 
