@@ -1,0 +1,155 @@
+= Error Handling
+
+include::common:partial$_header.adoc[]
+
+Scout JS handles errors globally.
+An error that is not caught, whether it is thrown by synchronous code or is the reason of a rejected promise, is passed to the `ErrorHandler` of the app.
+The `ErrorHandler` logs the error and informs the user.
+In most cases, application code therefore doesn't need to handle errors itself.
+Catch an error only if you can react to it in a meaningful way.
+
+== Global Error Handling
+
+On startup, the `App` creates an `ErrorHandler` (`App.get().errorHandler`) and installs two global listeners:
+
+`window.onerror`::
+Called for errors thrown by synchronous code that are not caught, e.g. in an event listener or a `setTimeout` callback.
+The error is always shown as a fatal error.
+
+`unhandledrejection`::
+Called for rejected promises that nobody handles, i.e. no `.catch()`, `+.then(_, onRejected)+` or `try/catch` around an `await`.
+The listener calls `event.preventDefault()`, so the browser doesn't log the rejection a second time, and passes the rejection reason to `ErrorHandler.handle()`.
+
+Because of the `unhandledrejection` listener, errors in promise chains are reported the same way as errors in synchronous code.
+Don't add a terminal `+.catch(error => App.get().errorHandler.handle(error))+` to a chain just to report the error, the global handler does it anyway.
+
+[source,ts]
+.No explicit error handling is required
+----
+async onSaveClick() {
+  await this.form.save(); // if save fails, the global handler shows the error
+  this.doSomethingAfterSave();
+}
+----
+
+[#ignorable-rejections]
+=== Ignorable Rejections
+
+Some rejections are expected cancellations and are not reported.
+`ErrorHandler.isIgnorableRejection(reason)` returns `true` for:
+
+* no reason (`undefined` or `null`), used for control flow, e.g. the user cancelled an action
+* an `AbortError`, used to cancel a chain, e.g. by an aborted `AbortController` (see `abortableContext`)
+* an `AjaxError` of an aborted request (`+textStatus === 'abort'+`), e.g. a superseded `AjaxCall`
+* `+{abort: true}+`, used by aborted lookup calls
+
+Don't add local `.catch()` filters for these reasons.
+To cancel a chain on purpose, reject or throw an `AbortError`.
+
+== The ErrorHandler
+
+`ErrorHandler.handle(error)` consists of two steps:
+
+. `analyzeError(error)` creates an `ErrorInfo` with the message, an error code, the log message, the log level and further details.
+. `handleErrorInfo(errorInfo)` logs and displays the error.
+
+`handle()` returns a promise that resolves with the `ErrorInfo` once the error is handled, e.g. after the user closed the message box.
+
+=== Consumed Errors
+
+`handleErrorInfo()` marks the error as _consumed_ (`ErrorHandler.consume(error)`) and ignores errors that are already consumed.
+As a result, an error is reported only once, even if it is handled and then rethrown.
+Only objects can be marked as consumed, primitives like a thrown string are always handled.
+
+== Explicit Error Handling
+
+Catch an error if the code can recover from it, or if the user should see a specific message instead of the default one.
+
+=== Recovering from an Error
+
+If the code handles the error completely, catch it and don't rethrow it.
+The error never reaches the global handler.
+
+[source,ts]
+----
+try {
+  data = await this._loadOptionalData();
+} catch (error) {
+  data = this._defaultData(); // optional data -> continue with defaults
+}
+----
+
+Only do this for errors you expect.
+An empty `catch` that swallows every error hides bugs.
+
+=== Custom Error Message
+
+To show a custom message instead of the default message box, mark the error as consumed and rethrow it.
+The global handler then ignores the error, but callers still see the rejection and can react to it (e.g. a form stays open).
+
+[source,ts]
+----
+try {
+  await this._loadPerson(personId);
+} catch (error) {
+  if (error instanceof AjaxError && error.jqXHR?.status === 404) {
+    ErrorHandler.consume(error); // the message box below replaces the default error message box
+    MessageBoxes.createOk(this).withBody(this.session.text('RecordNotFound')).buildAndOpen();
+  }
+  throw error;
+}
+----
+
+Rethrow the _same_ error.
+A new error is not consumed and would be reported again.
+
+=== Reporting an Error Explicitly
+
+If an error must be reported but the chain needs to continue, e.g. if one item of a batch fails, pass it to the `ErrorHandler`:
+
+[source,ts]
+----
+for (const item of items) {
+  try {
+    await this._process(item);
+  } catch (error) {
+    await App.get().errorHandler.handle(error); // show the error, then continue with the next item
+  }
+}
+----
+
+To change how an error is displayed, analyze it first and adjust the `ErrorInfo` before handling it:
+
+[source,ts]
+----
+const errorHandler = App.get().errorHandler;
+const errorInfo = await errorHandler.analyzeError(error);
+await errorHandler.handleErrorInfo({...errorInfo, showAsFatalError: true});
+----
+
+`errorHandler.errorInfoToStatus(session, errorInfo)` converts an `ErrorInfo` into a `Status`, e.g. to show the error in a field instead of a message box.
+
+=== Forms
+
+`Form.load()`, `save()`, `ok()` and `validate()` reject if an error occurs, and the global handler reports the error if nobody handles it.
+By default, the form is closed if loading fails.
+
+To handle such errors in a form, either listen for the `error` event, which provides the `phase` (`load`, `postLoad`, `save` or `validate`) and the `error`, or override `+_handleLoadError()+`, `+_handlePostLoadError()+`, `+_handleSaveError()+` or `+_handleValidateError()+`.
+If a listener calls `event.preventDefault()`, the error is not rethrown, the promise resolves and the form is not closed.
+
+== Customizing the ErrorHandler
+
+Like any Scout object, the `ErrorHandler` can be replaced using the xref:user-interface/object-factory.adoc[]:
+
+[source,ts]
+----
+export class CustomErrorHandler extends ErrorHandler {
+  override isIgnorableRejection(reason: any): boolean {
+    return super.isIgnorableRejection(reason) || reason instanceof MyCancellation;
+  }
+}
+
+scout.addObjectFactories({
+  'ErrorHandler': () => new CustomErrorHandler()
+});
+----
