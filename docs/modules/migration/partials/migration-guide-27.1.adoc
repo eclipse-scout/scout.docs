@@ -277,6 +277,14 @@ Value data objects are (de)serialized by the new `ValueDoSerializer`, e.g. the `
 Value types of your own project must be registered: `ValueDoSerializer.get().addTypeName('my.CustomValue', doValueMetaData.createSimple(String))`.
 `ValueDoSerializer` always creates `ValueDo` instances, subclasses of `ValueDo` are not supported. If this is required, create a specific DO class subclassing `ValueDo` instead of registering it on `ValueDoSerializer`.
 
+=== Empty @typeName Decorator No Longer Required
+
+The build now collects the attribute data types required for the (de)serialization for all classes extending `BaseDoEntity` directly or indirectly.
+Before, only classes having a `@typeName` decorator were considered.
+
+Migration: remove empty `@typeName()` decorators, e.g. on abstract data object classes.
+They are still required if the superclass differs from `BaseDoEntity` (which is not recommended!).
+
 === Removed and Renamed APIs
 
 [cols="1,1"]
