@@ -75,6 +75,33 @@ export default (): DesktopModel => ({
           id: 'DenseMenu',
           objectType: Menu,
           text: 'Dense'
+        },
+        {
+          id: 'DeviceTypeMenu',
+          objectType: Menu,
+          text: '${textKey:DeviceType}',
+          childActions: [
+            {
+              id: 'DeviceTypeAutomaticRecognitionMenu',
+              objectType: Menu,
+              text: '${textKey:AutomatiRecognition}'
+            },
+            {
+              id: 'DeviceTypeDesktopMenu',
+              objectType: Menu,
+              text: '${textKey:Desktop}'
+            },
+            {
+              id: 'DeviceTypeTabletMenu',
+              objectType: Menu,
+              text: '${textKey:Tablet}'
+            },
+            {
+              id: 'DeviceTypeMobileMenu',
+              objectType: Menu,
+              text: '${textKey:Mobile}'
+            }
+          ]
         }
       ]
     }
@@ -94,4 +121,9 @@ export type DesktopWidgetMap = {
   'DefaultThemeMenu': Menu;
   'DarkThemeMenu': Menu;
   'DenseMenu': Menu;
+  'DeviceTypeMenu': Menu;
+  'DeviceTypeAutomaticRecognitionMenu': Menu;
+  'DeviceTypeDesktopMenu': Menu;
+  'DeviceTypeTabletMenu': Menu;
+  'DeviceTypeMobileMenu': Menu;
 };
