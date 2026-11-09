@@ -179,3 +179,37 @@ Please review your project for potential conflicts:
 - If you have implemented custom placeholder functionality, consider removing or migrating those customizations to the new built-in API.
 - If you have introduced custom methods named `getPlaceholder()`, `setPlaceholder()`, or similar on form fields, consider renaming them to avoid naming conflicts and unintended behavior.
 
+== Changes in scout#cloneShallow
+
+The signature of `scout.cloneShallow` has changed:
+
+* old: `cloneShallow(template: object, properties?: object, createUniqueId?: boolean): object`
+* new: `cloneShallow<T extends object>(template: T, properties?: object, createUniqueId = true): T`
+
+With this, casting the result is no longer necessary. Code like
+
+[source,typescript,opts=novalidate]
+.Old
+----
+class Foo {
+  clone(properties?: object): Foo {
+    return scout.cloneShallow(this, properties, true) as Foo;
+  }
+}
+----
+
+can be migrated to
+
+[source,typescript,opts=novalidate]
+.New
+----
+class Foo {
+  clone(properties?: object): Foo {
+    return scout.cloneShallow(this, properties);
+  }
+}
+----
+
+The default value of the parameter `createUniqueId` is still `true` but its handling was slightly changed.
+Explicitly using the value `null` or `undefined` was handled the same way as not using the parameter at all resulting in a unique id being created.
+Now `false` or any falsy value including `null` (but not `undefined`) that is passed to the function is interpreted as `false` while `true`, any truthy value, `undefined` or not passing the value is interpreted as `true`.
