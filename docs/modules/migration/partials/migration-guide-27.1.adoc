@@ -90,6 +90,12 @@ Scout 27.1 requires at least the following:
 ** Node: >= 24.12.0
 ** Pnpm: >= 10.26.1
 
+== Jackson Behavior Changes
+
+When serializing an object without serializable properties, `IDataObjectMapper.writeValue` now returns an empty JSON object (`{}`) instead of throwing a `PlatformException`.
+
+The default maximum nesting depth for JSON reading and writing has changed from 1000 to 500. Documents or data objects nested deeper than this limit may now fail to deserialize or serialize. To change the limits, configure `maxNestingDepth` in `scout.dataobject.jackson.streamReadConstraints` and/or `scout.dataobject.jackson.streamWriteConstraints`.
+
 == Batch Support for Scout JS Columns
 
 The batch support for `Columns` has been improved (see the xref:release-notes.adoc#batch-support[release notes] for details).
