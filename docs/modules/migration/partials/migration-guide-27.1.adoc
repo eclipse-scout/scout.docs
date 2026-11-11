@@ -96,6 +96,8 @@ When serializing an object without serializable properties, `IDataObjectMapper.w
 
 The default maximum nesting depth for JSON reading and writing has changed from 1000 to 500. Documents or data objects nested deeper than this limit may now fail to deserialize or serialize. To change the limits, configure `maxNestingDepth` in `scout.dataobject.jackson.streamReadConstraints` and/or `scout.dataobject.jackson.streamWriteConstraints`.
 
+The `IDataObjectSerializerProvider` API has changed signatures and new hooks, including `findCollectionLike*` and `findEnumSerializer`. Handling of `DoList`, `DoSet` and `DoCollection` has moved from `findSerializer` and `findDeserializer` to the collection-like hooks. Custom providers that override these methods must be updated to the new API.
+
 == Batch Support for Scout JS Columns
 
 The batch support for `Columns` has been improved (see the xref:release-notes.adoc#batch-support[release notes] for details).
