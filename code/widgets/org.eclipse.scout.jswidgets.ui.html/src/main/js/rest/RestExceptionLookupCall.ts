@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -19,7 +19,7 @@ export class RestExceptionLookupCall extends StaticLookupCall<number> {
     [2000, 'AccessForbiddenException'],
     [3000, 'ResourceNotFoundException'],
     [4000, 'InterruptionError'],
-    [5000, 'JsonMappingException'],
+    [5000, 'DatabindException'],
     [6000, 'IllegalArgumentException'],
     [7000, 'RuntimeException'],
     [8000, 'ProcessingException'],
