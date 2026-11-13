@@ -7,35 +7,31 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-import {Mode, ModeSelector, StaticLookupCall} from '@eclipse-scout/core';
+import {InitModelOf, Mode, ModeSelector, StaticLookupCall, StaticLookupCallModel} from '@eclipse-scout/core';
 
-export class ModeLookupCall extends StaticLookupCall<Mode> {
+export class ModeLookupCall extends StaticLookupCall<Mode> implements ModeLookupCallModel {
+  declare model: ModeLookupCallModel;
   modeSelector: ModeSelector;
   protected _rebuildDataHandler: () => void;
 
-  constructor(modeSelector: ModeSelector) {
+  constructor() {
     super();
     this._rebuildDataHandler = this._rebuildData.bind(this);
-    this.data = [];
-    this.setModeSelector(modeSelector);
   }
 
-  protected override _data(): any[] {
-    return this.data;
+  protected override _init(model: InitModelOf<this>) {
+    super._init(model);
+    this.setModeSelector(this.modeSelector);
   }
 
   setModeSelector(modeSelector: ModeSelector) {
     if (this.modeSelector) {
       this.modeSelector.off('propertyChange:modes', this._rebuildDataHandler);
-      this.modeSelector.modes.forEach(function(mode) {
-        mode.off('propertyChange:text', this._rebuildDataHandler);
-      }, this);
+      this.modeSelector.modes.forEach(mode => mode.off('propertyChange:text', this._rebuildDataHandler));
     }
     this.modeSelector = modeSelector;
     this.modeSelector.on('propertyChange:modes', this._rebuildDataHandler);
-    this.modeSelector.modes.forEach(function(mode) {
-      mode.on('propertyChange:text', this._rebuildDataHandler);
-    }, this);
+    this.modeSelector.modes.forEach(mode => mode.on('propertyChange:text', this._rebuildDataHandler));
     this._rebuildData();
   }
 
@@ -44,4 +40,8 @@ export class ModeLookupCall extends StaticLookupCall<Mode> {
       return [mode, mode.text];
     });
   }
+}
+
+export interface ModeLookupCallModel extends StaticLookupCallModel<Mode> {
+  modeSelector?: ModeSelector;
 }

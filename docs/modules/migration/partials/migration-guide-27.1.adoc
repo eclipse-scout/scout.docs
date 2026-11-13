@@ -92,12 +92,12 @@ Scout 27.1 requires at least the following:
 
 == Batch Support for Scout JS Columns
 
-The batch support for `Columns` has been improved (see the xref:release-notes.adoc#batch-support[release notes] for details).
+The batch support for `Columns` has been improved (see the xref:releasenotes:release-notes.adoc#batch-support[release notes] for details).
 
 The signature for the following functions changed:
 
-* `Column.formatValue`, `Column.formatter` and `Column._formatValue`: Now returns `string | JQuery.Promise<BatchCallResult<TValue, unknown>>` returning all key-value-mappings in the batched async case.
-* `Column.setCellTextDeferred` now expects this `JQuery.Promise<BatchCallResult<TValue, unknown>>` as argument for the async case. The `row` and `cell` arguments have been deleted as such a call is no longer executed for each row, but once for all rows.
+* `Column.formatValue`, `Column.formatter` and `Column._formatValue`: Now returns `string | Promise<BatchCallResult<TValue, unknown>>` returning all key-value-mappings in the batched async case.
+* `Column.setCellTextDeferred` now expects this `Promise<BatchCallResult<TValue, unknown>>` as argument for the async case. The `row` and `cell` arguments have been deleted as such a call is no longer executed for each row, but once for all rows.
 +
 To access or modify the new value by cell or row use `_batchFormatResultToCellText` which will be called for each row in the batch result.
 
@@ -213,3 +213,189 @@ class Foo {
 The default value of the parameter `createUniqueId` is still `true` but its handling was slightly changed.
 Explicitly using the value `null` or `undefined` was handled the same way as not using the parameter at all resulting in a unique id being created.
 Now `false` or any falsy value including `null` (but not `undefined`) that is passed to the function is interpreted as `false` while `true`, any truthy value, `undefined` or not passing the value is interpreted as `true`.
+
+[#dataobject-improvements-for-typescript]
+== DataObject Improvements for TypeScript
+
+=== TypeVersion Attribute
+
+When deserializing a dataobject, the `_typeVersion` attribute is now always retained by default.
+In former releases the default was to only retain it if the target object is not a `BaseDoEntity`.
+This change makes it more consistent and ensures the dataobject can be sent back to the Java backend without difference.
+
+It might require some adaptations in your code in rare cases if you rely on the absence of this property.
+Either migrate your code or explicitly set the `retainTypeVersion` property of the deserializer to `false`.
+
+=== Equality Behavior when Comparing DataObjects
+
+The `equals` function of `BaseDoEntity` ignores the `_typeVersion` property if only existing in one of the compared objects.
+This ensures a deserialized object from the Java server is equal to an object directly created in TypeScript using `scout.create` when having the same attributes.
+
+Furthermore, a property having the value `undefined` is considered to be equal to not having the property at all.
+This makes the `equals` function less strict but better aligns with the usually expected behavior.
+
+=== RestLookupCall Uses BaseDoEntity
+
+The `RestLookupCall` has been migrated to use `BaseDoEntity`.
+
+This means that `LookupRowDos` having data objects as keys now deserialize to BaseDoEntity classes instead of POJOs.
+Furthermore, `restriction` can now also be a `BaseDoEntity` including automatic serialization.
+This allows you to create specific `LookupRowDo` or `AbstractLookupRestrictionDo` classes if required.
+The corresponding functions `_acceptLookupRow` and `_createLookupRowFromDo` can then directly use your named classes if the `_type` attribute included in the response matches the one declared in your TS class.
+
+=== Other Data Objects Migrated from Interfaces to Classes
+
+The following data objects have been migrated from interfaces extending `DoEntity` to classes extending `BaseDoEntity`:
+
+[cols="1,1"]
+|===
+|Class |Type Name
+
+|`ErrorDo` |`scout.Error`
+|`CalendarResourceDo` |`scout.CalendarResource`
+|`LookupRowDo` |none (base class for lookup rows)
+|`LookupResponse` |`scout.LookupResponse`
+|`LimitedResultInfoContributionDo` |`scout.LimitedResultInfoContribution`
+|`ValueDo` |set per instance (see below)
+|`AbstractLookupRestrictionDo` (new) |none (abstract base for lookup restrictions)
+|===
+
+Migration:
+
+* Replace object literals typed with one of these types by instances: `scout.create(CalendarResourceDo, {resourceId: ..., visible: true})`.
+* Replace `interface MyLookupRowDo extends LookupRowDo<string>` by `@typeName('my.LookupRow') class MyLookupRowDo extends LookupRowDo<string>`. The type name must match the `@TypeName` of the Java class.
+* The type parameter of `LookupResponse` must now extend `LookupRowDo`.
+* `AjaxError.errorDo` is now always an `ErrorDo` instance. `AjaxError.isErrorDo` is now a type guard for `ModelOf<ErrorDo>`.
+* `Calendar.setResources` and `CalendarModel.resources` accept models as well. Use `CalendarResourceDo.ensure` to convert a model to an instance.
+
+=== ValueDo
+
+`ValueDo` is now a class. Its `_type` (e.g. `scout.StringValue`) is set per instance and is available as constants (`ValueDo.STRING`, `ValueDo.LONG`, `ValueDo.DATE`, ...).
+Create instances using the factory methods `ValueDo.ofString`, `ofLong`, `ofBoolean`, `ofDate`, `ofDateTime` or `ValueDo.of(typeName, value)` instead of object literals.
+
+Value data objects are (de)serialized by the new `ValueDoSerializer`, e.g. the `value` of a `scout.DateValue` is converted to a `Date`.
+Value types of your own project must be registered: `ValueDoSerializer.get().addTypeName('my.CustomValue', doValueMetaData.createSimple(String))`.
+`ValueDoSerializer` always creates `ValueDo` instances, subclasses of `ValueDo` are not supported. If this is required, create a specific DO class subclassing `ValueDo` instead of registering it on `ValueDoSerializer`.
+
+=== Empty @typeName Decorator No Longer Required
+
+The build now collects the attribute data types required for the (de)serialization for all classes extending `BaseDoEntity` directly or indirectly.
+Before, only classes having a `@typeName` decorator were considered.
+
+Migration: remove empty `@typeName()` decorators, e.g. on abstract data object classes.
+They are still required if the superclass differs from `BaseDoEntity` (which is not recommended!).
+
+=== Removed and Renamed APIs
+
+[cols="1,1"]
+|===
+|Old |New
+
+|`AnyDoEntity` |`BaseDoEntity` (or `DoEntity` for plain objects)
+|`CodeDo.text` |Removed. Use `texts`.
+|`DataObjectDeserializer._TYPE_VERSION_ATTRIBUTE_NAME` |`dataObjects._TYPE_VERSION_ATTRIBUTE_NAME`
+|`doValueMetaData.getArrayValueType` |`doValueMetaData.getFirstTypeArg`
+|`doValueMetaData.getObjectTypeInfo()` result property `typeName` |`objectType`
+|`DoValueMetaData.typeName` |`DoValueMetaData.objectType`
+|===
+
+New constants: `dataObjects._TYPE_ATTRIBUTE_NAME` and `dataObjects._CONTRIBUTIONS_ATTRIBUTE_NAME`.
+
+New utility functions: `dataObjects.isEmpty`, `dataObjects.keys`, `dataObjects.values` and `dataObjects.entries`.
+They ignore `_type`, `_typeVersion` and `_contributions`.
+`objects.isEmpty` delegates to `dataObjects.isEmpty` for `BaseDoEntity` instances. A `BaseDoEntity` is therefore empty if all its properties except the ones mentioned above are `undefined`.
+
+=== HybridManager Requires BaseDoEntity
+
+The `data` parameter of `HybridManager.callAction`, `callActionAndWait`, `callActionAndWaitWithContext`, `openForm` and `createForm` is now of type `BaseDoEntity`.
+The `data` of `HybridActionEvent` and `HybridActionEndEvent` and the result of `callActionAndWait` are `BaseDoEntity` instances as well.
+
+Migration: replace object literals by data object classes with a `@typeName` matching the Java data object.
+
+=== Unknown Data Objects
+
+The following data is now deserialized without the `createPojoIfDoIsUnknown` option:
+
+* data of hybrid actions and hybrid widget events (`HybridManagerAdapter`)
+* `inputData` and `jsFormModel` of JS forms (`JsFormAdapter`)
+* `jsPageModel` of JS pages (`OutlineAdapter`)
+
+Objects whose `_type` cannot be resolved to a class and objects not having `_type` are now deserialized to plain `BaseDoEntity` instances instead of POJOs.
+
+Migration:
+
+* Declare a class with a matching `@typeName` for each data object you access.
+* Use `dataObjects.stringify` instead of `JSON.stringify` and `dataObjects.parse` instead of `JSON.parse` where necessary.
+* Do not compare such objects to object literals as `objects.equals` and `objects.equalsRecursive` consider objects with different prototypes as not equal.
+
+=== Data Object Visitors
+
+`dataObjectVisitors` now visits all properties of a `BaseDoEntity` except `_type`, `_typeVersion` and `_contributions`. Before, all properties starting with `_` were skipped.
+
+=== Data Object Properties in ModelAdapter
+
+A `ModelAdapter` can now declare properties containing data objects using `_addDataObjectProperties`.
+These properties are deserialized when the model is initialized, on property change and model events, and serialized when sent to the server.
+Replace manual calls to `dataObjects.deserialize` and `dataObjects.serialize` in your adapters by this declaration.
+
+`ModelAdapter._remoteProperties` is now a `Set` instead of an array. `_addProperties` and `_removeProperties` only support `Set` containers now.
+
+[#rest-resources-must-not-return-maps]
+== REST Resources Must Not Return Maps
+
+`AbstractRestResourceAnnotationTest` contains the new test `testMapReturnValue`, which fails for REST resource methods returning a `java.util.Map`.
+Return a `DoMapEntity` instead. It can be created from a map using `DoMapEntity.of(map)` (keys must be converted to Strings first).
+
+Override `acceptResourceForMapReturnValueCheck` or `acceptMethodForMapReturnValueCheck` to exclude resources or methods from the check.
+
+== jquery-scout: oneAnimationEnd Changed
+
+`oneAnimationEnd` has been improved so the callback is now executed even when debugging or if the `animation-duration` is set to 0s.
+
+This also comes with behavior changes:
+
+. The function now must be called _after_ the animation has been started, e.g. after a class that starts the animation has been added.
+If `oneAnimationEnd` is called before adding the animation class, the callback won't be executed anymore.
+. Animations on pseudo-elements (`::before` and `::after`) are now ignored. If you need to react to animations on such elements, add a `nop` animation with the same duration on the actual element.
+
+[#native-promises]
+== jQuery Promises Replaced by Native Promises (Scout JS)
+
+Scout JS no longer uses jQuery `Deferred`/`Promise`.
+Every API that returned a `JQuery.Promise<T>` now returns a native `Promise<T>`, the Scout `Deferred` class is based on native promises, and `.done()`, `.fail()` and `.always()` are no longer available on the returned promises.
+Project code that overrides or calls these APIs, including specs, has to be migrated.
+
+=== Most Important Changes
+
+* *Types*
+** Replace `+JQuery.Promise<T>+` with `Promise<T>` and `+$.Deferred()+` with `+new Deferred<T>()+` of `@eclipse-scout/core`.
+The TypeScript compiler reports almost all places that need a change.
+* *Semantics*
+** `.done()`, `.fail()` and `.always()` can't be replaced one-to-one by `.then()`, `.catch()` and `.finally()`.
+All `.done()` handlers receive the original value, `.finally()` receives no value, a `.catch()` without rethrow resolves the chain, and native promises resolve and reject with exactly one value (e.g. `$.promiseAll()` and `$.when()` callbacks receive one array).
+Review each of these places individually.
+* *Timing*
+** Native promises continue as microtasks, jQuery `.then()` handlers used `setTimeout`.
+** `jasmine.clock().tick()` no longer drives promise chains: specs have to await the returned promise or an event (`+widget.when(...)+`) instead.
+** Asynchronous work started while opening a form without awaiting its promise (e.g. a lookup in `Form.importData()`) is now overtaken the form itself and may lead to a wrong `saveNeeded` state. Try to return the promise, e.g. in `Form.importData()` which may now return a promise.
+* *Errors*
+** Unhandled rejections are no longer silently ignored.
+A global handler passes them to the `ErrorHandler`, which logs them and shows the error message box.
+You may want to catch them, throw an `AbortError` or consume them using `ErrorHandler.consume(error)`.
+** Local `+.catch(error => errorHandler.handle(error))+` at the end of a promise chain are obsolete and can be removed.
+** `ErrorHandler.handle()` does not accept multiple arguments anymore.
+** SmartFields now check for `AbortError` instead of `error.abort`, so LookupCalls are now expected to throw an `AbortError` on abort.
+** `ErrorHandler.formatAjaxStatus` and `formatAjaxRequest` have been replaced by `AjaxError.formatStatus` and `formatRequest`.
+* *Forms*
+** `Form.load()`, `save()`, `ok()` and `validate()` no longer show the error message box themselves, they only reject.
+** `Form.close()` no longer returns a promise.
+
+=== Recommended Approach: Migrate with an AI Agent
+
+The migration consists of many small changes that are not purely mechanical.
+We therefore recommend migrating with an AI coding agent like https://claude.com/claude-code[Claude Code] and reviewing the result.
+
+Use the xref:promise-migration-guide.adoc[] as prompt for the agent.
+It is written as instructions for an agent and contains the complete list of changed APIs, the translation rules and the pitfalls found in the migration of Scout and other projects.
+
+After the migration review and test the changes thoroughly.

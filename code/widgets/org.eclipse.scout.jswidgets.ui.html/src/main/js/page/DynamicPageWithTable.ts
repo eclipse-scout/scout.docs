@@ -170,7 +170,7 @@ export class DynamicPageWithTable extends PageWithTable {
     this.detailTable.deleteRows(this.detailTable.selectedRows);
   }
 
-  protected override _loadTableData(searchFilter: any): JQuery.Promise<any> {
+  protected override _loadTableData(searchFilter: any): Promise<any> {
     let data: { name: string; type: PageTypeType }[] = [{
       name: 'Alpha',
       type: 'PageWithNodes'
