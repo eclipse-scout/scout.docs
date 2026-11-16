@@ -15,7 +15,7 @@ import org.eclipse.scout.rt.dataobject.DoValue;
 import org.eclipse.scout.rt.dataobject.TypeName;
 
 //tag::class[]
-@TypeName("ExampleEntity1")
+@TypeName("lorem.ExampleEntity1")
 public class ExampleEntity1Do extends AbstractExampleEntityDo {
   public DoValue<String> name1Ex() {
     return doValue("name1Ex");

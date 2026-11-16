@@ -1,16 +1,16 @@
 {
   "_type" : "ExampleDoEntityListDo",
   "listAttribute" : [ {
-    "_type" : "ExampleEntity1",
+    "_type" : "lorem.ExampleEntity1",
     "name" : "one",
     "name1Ex" : "one-ex"
   }, {
-    "_type" : "ExampleEntity2",
+    "_type" : "lorem.ExampleEntity2",
     "name" : "two",
     "name2Ex" : "two-ex"
   } ],
   "singleAttribute" : {
-    "_type" : "ExampleEntity1",
+    "_type" : "lorem.ExampleEntity1",
     "name" : "single-one",
     "name1Ex" : "single-one-ex"
   }
