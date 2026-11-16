@@ -18,7 +18,7 @@ import org.eclipse.scout.rt.dataobject.DoValue;
 import org.eclipse.scout.rt.dataobject.TypeName;
 
 //tag::class[]
-@TypeName("ExampleEntityEx")
+@TypeName("lorem..ExampleEntityEx")
 public class ExampleEntityExDo extends ExampleEntityDo {
 
   @Override
