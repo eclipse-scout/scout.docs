@@ -1,5 +1,5 @@
 {
-  "_type" : "ExampleMapEntity",
+  "_type" : "lorem.ExampleMapEntity",
   "mapAttribute1" : {
     "_type" : "ExampleEntity",
     "name" : "example-1",
