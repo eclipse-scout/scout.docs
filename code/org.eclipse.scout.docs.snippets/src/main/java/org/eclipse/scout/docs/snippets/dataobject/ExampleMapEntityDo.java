@@ -13,7 +13,7 @@ import org.eclipse.scout.rt.dataobject.DoMapEntity;
 import org.eclipse.scout.rt.dataobject.TypeName;
 
 //tag::class[]
-@TypeName("lorem..ExampleMapEntity")
+@TypeName("lorem.ExampleMapEntity")
 public class ExampleMapEntityDo extends DoMapEntity<ExampleEntityDo> {
 }
 //end::class[]
