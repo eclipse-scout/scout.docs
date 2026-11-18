@@ -60,6 +60,18 @@ export default (): GroupBoxModel => ({
       labelVisible: false
     },
     {
+      id: 'HtmlEnabledField',
+      objectType: CheckBoxField,
+      label: 'Html Enabled',
+      labelVisible: false
+    },
+    {
+      id: 'TooltipHtmlEnabledField',
+      objectType: CheckBoxField,
+      label: 'Tooltip Html Enabled',
+      labelVisible: false
+    },
+    {
       id: 'IconIdField',
       objectType: SmartField,
       lookupCall: IconIdLookupCall,
@@ -114,6 +126,8 @@ export type ActionPropertiesBoxWidgetMap = {
   'PreventDoubleClickField': CheckBoxField;
   'InheritAccessibilityField': CheckBoxField;
   'LoadingField': CheckBoxField;
+  'HtmlEnabledField': CheckBoxField;
+  'TooltipHtmlEnabledField': CheckBoxField;
   'IconIdField': SmartField<any>;
   'KeyStrokeField': StringField;
   'TextField': StringField;
