@@ -362,14 +362,14 @@ If the registered `ICredentialVerifier` requests a second factor by returning `A
 To verify this token a second-factor verifier `ICredentialVerifier` needs to be registered.
 
 [[iid-signature]]
-== IId signature
+== IId Signature
 
 Scout provides a mechanism to add signatures to instances of `IId` when they are serialized into a string value.
 This feature was added to prevent key probing of sequential generated ids to sensitive transactional data.
 To use this feature simply pass the `IdCodecFlag.SIGNATURE` to the `IdCodec` while serializing or deserializing the id.
 
 .serialize an `IId` using signatures
-[source,java]
+[source,java,opts=novalidate]
 ----
 BEANS.get(IdCodec.class).toQualified(id, IdCodecFlag.SIGNATURE)
 ----
@@ -378,7 +378,7 @@ The default implementation will use the unqualified part of the serialized id an
 The validity of this signature is checked again when the id is deserialized.
 
 .deserialize a `String` using signatures
-[source,java]
+[source,java,opts=novalidate]
 ----
 BEANS.get(IdCodec.class).fromQualified(idString, IdCodecFlag.SIGNATURE)
 ----
@@ -461,7 +461,7 @@ public interface ISignedService extends IService {
 
 If a method of an interface needs to be called with signatures or without signatures depending on the context, one can create its own proxy and pass the id signature flag in the `ServiceTunnelOptions`.
 
-[source,java]
+[source,java,opts=novalidate]
 .Enable id signatures for a call to `IUnsignedService#someMethod()` using the `idSignature` flag of the `ServiceTunnelOptions` annotation
 ----
 ServiceTunnelUtility.createProxy(IUnsignedService.class, ServiceTunnelOptions.create().withIdSignature(true)).someMethod();
@@ -470,7 +470,7 @@ ServiceTunnelUtility.createProxy(IUnsignedService.class, ServiceTunnelOptions.cr
 `IId` that are not affected by key probing like e.g. `AbstractUuId` or `AbstractStringId` will not be signed by default, while e.g. all `Long` based `IId` will be signed.
 If there is a special `IId` that does not support signatures it can be excluded from the signature mechanism using the `IdSignature` annotation.
 
-[source,java]
+[source,java,opts=novalidate]
 .Exclude the `UnsignedId` using the `IdSignature` annotation.
 ----
 @IdSignature(false)
@@ -482,3 +482,8 @@ public final class UnsignedId extends AbstractStringId {
   }
 }
 ----
+
+== Penetration Testing
+
+For semi-automated penetration testing of Scout Classic applications a https://portswigger.net/burp[Burp Suite] extension has been developed by https://www.compass-security.com/en/[Compass Security].
+Binary releases and source code can be found on https://github.com/CompassSecurity/EclipseScoutExtension[GitHub].
