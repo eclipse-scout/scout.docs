@@ -70,6 +70,14 @@ export class ActionPropertiesBox extends GroupBox {
     loadingField.setValue(this.field.loading);
     loadingField.on('propertyChange:value', event => this.field.setLoading(event.newValue));
 
+    let htmlEnabledField = this.widget('HtmlEnabledField');
+    htmlEnabledField.setValue(this.field.htmlEnabled);
+    htmlEnabledField.on('propertyChange:value', event => this.field.setHtmlEnabled(event.newValue));
+
+    let tooltipHtmlEnabledField = this.widget('TooltipHtmlEnabledField');
+    tooltipHtmlEnabledField.setValue(this.field.tooltipHtmlEnabled);
+    tooltipHtmlEnabledField.on('propertyChange:value', event => this.field.setTooltipHtmlEnabled(event.newValue));
+
     let iconIdField = this.widget('IconIdField');
     iconIdField.setValue(this.field.iconId);
     iconIdField.on('propertyChange:value', event => this.field.setIconId(event.newValue));
