@@ -72,6 +72,12 @@ export default (): GroupBoxModel => ({
       labelVisible: false
     },
     {
+      id: 'TooltipHtmlEnabledField',
+      objectType: CheckBoxField,
+      label: 'Tooltip Html Enabled',
+      labelVisible: false
+    },
+    {
       id: 'InheritAccessibilityField',
       objectType: CheckBoxField,
       label: 'Inherit Accessibility',
@@ -189,6 +195,7 @@ export type FormFieldPropertiesBoxWidgetMap = {
   'MandatoryField': CheckBoxField;
   'LoadingField': CheckBoxField;
   'LabelHtmlEnabledField': CheckBoxField;
+  'TooltipHtmlEnabledField': CheckBoxField;
   'InheritAccessibilityField': CheckBoxField;
   'EmptyField': CheckBoxField;
   'FieldStyleField': SmartField<any>;
