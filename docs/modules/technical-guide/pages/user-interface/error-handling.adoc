@@ -35,15 +35,17 @@ async onSaveClick() {
 [#ignorable-rejections]
 === Ignorable Rejections
 
-Some rejections are expected cancellations and are not reported.
-`ErrorHandler.isIgnorableRejection(reason)` returns `true` for:
+Some errors are expected cancellations and are not reported.
+`ErrorHandler.isIgnorableError(error)` returns `true` for an `AbortError`, used to cancel a chain, e.g. by an aborted `AbortController` (see `abortableContext`), an aborted `AjaxCall` or an aborted lookup call.
 
-* no reason (`undefined` or `null`), used for control flow, e.g. the user cancelled an action
-* an `AbortError`, used to cancel a chain, e.g. by an aborted `AbortController` (see `abortableContext`), an aborted `AjaxCall` or an aborted lookup call
-* an `AjaxError` of an aborted request (`+textStatus === 'abort'+`), e.g. of a raw jqXHR
+These errors are ignored by `ErrorHandler.handle()` and by the global handlers, for rejections as well as for errors thrown in synchronous code.
+`ErrorHandler.handleOrAbort(error)` handles the error like `handle()`, but returns a promise rejected with the error if it is an `AbortError`.
+Use it in a `.catch()` in the middle of a chain, so the following `.then()` steps are skipped if the chain has been aborted.
+`ErrorHandler.isIgnorableRejection(reason)` additionally returns `true` for a rejection without a reason (`undefined` or `null`), used for control flow, e.g. the user cancelled an action.
 
 Don't add local `.catch()` filters for these reasons.
 To cancel a chain on purpose, reject or throw an `AbortError`.
+To stop a chain if a widget has been destroyed in the meantime, call `widget.throwAbortIfDestroyed()` at the start of a `.then()` step.
 
 == The ErrorHandler
 
@@ -143,8 +145,8 @@ Like any Scout object, the `ErrorHandler` can be replaced using the xref:user-in
 [source,ts]
 ----
 export class CustomErrorHandler extends ErrorHandler {
-  override isIgnorableRejection(reason: any): boolean {
-    return super.isIgnorableRejection(reason) || reason instanceof MyCancellation;
+  override isIgnorableError(error: any): boolean {
+    return super.isIgnorableError(error) || error instanceof MyCancellation;
   }
 }
 

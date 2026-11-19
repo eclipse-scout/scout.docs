@@ -142,6 +142,10 @@ Replace checks for `+error.textStatus === 'abort'+` with `error instanceof Abort
 |--
 |new `when(type)`, like `Widget.when()`
 
+|`Widget`
+|--
+|new `throwAbortIfDestroyed()`: throws an `AbortError` if the widget is destroyed or being destroyed (<<sec-7,§7>>)
+
 |`Form.close()`, `Lifecycle.close()`
 |returned a promise (always resolved, the form is closed synchronously)
 |return nothing (`void`): don't `await`, chain or `return` the result; overrides of `+Lifecycle._close()+` return `void` too
@@ -573,7 +577,8 @@ When an error surfaces "in `afterAll`", first look for an unreturned chain in th
 * *Asynchronous code accessing a widget that has been destroyed in the meantime.*
 E.g. a form starts a request in an event handler, the user closes the form, and the `.then()` step calls `+this.widget('MyField')+`, which now returns `null`.
 Under jQuery the resulting `TypeError` was swallowed, now the global handler shows it.
-Check `+if (this.destroyed) { throw new AbortError(); }+` before accessing the widget in each `.then()` step that follows an asynchronous step.
+Call `this.throwAbortIfDestroyed()` before accessing the widget in each `.then()` step that follows an asynchronous step.
+It throws an `AbortError` if the widget is destroyed or being destroyed, which the global handler ignores.
 `Form.load()` already ignores the result if the form has been destroyed during `+_load()+`, but not between the steps of a `+_load()+` override.
 * *Timers that used to die with the fake clock.*
 Pending fake timers are discarded by `jasmine.clock().uninstall()`.
@@ -635,7 +640,7 @@ To replace the default handling for a form, listen to its `error` event and call
 
 Much Scout code rejects _on purpose_ to cancel the remainder of a chain:
 
-* `throw new AbortError()` when a widget was destroyed in the meantime (e.g. a `cancelIfDestroyed(widget)` utility called at the start of each `.then()` step), or error helpers that pass an `AbortError` on as a rejection to skip later `.then()`s;
+* `Widget.throwAbortIfDestroyed()` throws an `AbortError` when a widget was destroyed in the meantime (called at the start of each `.then()` step), or error helpers pass an `AbortError` on as a rejection to skip later `.then()`s;
 * `LookupCall.abort()` implementations reject with an `AbortError` (`RestLookupCall`, `StaticLookupCall`, ...).
 * `AjaxCall.abort()` (e.g. when a newer request supersedes a running one) rejects with an `AbortError`.
 
@@ -644,7 +649,10 @@ Natively each one becomes an unhandled rejection, which in a real test run means
 *Don't add a per-site abort filter to every chain end.*
 The framework handles this centrally:
 
-* `ErrorHandler.isIgnorableRejection(reason)` returns `true` for a missing reason (`undefined`/`null`, used for control flow, e.g. the user clicked "No"), `AbortError` and an `AjaxError` with `+textStatus === 'abort'+` (e.g. of a raw jqXHR).
+* `ErrorHandler.isIgnorableError(error)` returns `true` for an `AbortError`.
+`ErrorHandler.handle()` and the global handler for errors thrown in synchronous code (`window.onerror`) ignore these errors, so a `+try { … } catch (error) { errorHandler.handle(error); }+` doesn't need an abort filter either.
+In a `.catch()` in the middle of a chain, use `ErrorHandler.handleOrAbort(error)`: it rejects with an `AbortError`, so the following `.then()` steps are skipped.
+* `ErrorHandler.isIgnorableRejection(reason)` additionally returns `true` for a missing reason (`undefined`/`null`, used for control flow, e.g. the user clicked "No").
 * `+App._installErrorHandler()+` registers `errorHandler.unhandledRejectionHandler` for `unhandledrejection`.
 It calls `preventDefault()`, ignores ignorable rejections and passes all others to `ErrorHandler.handle()` (log and message box, consumed errors are skipped).
 * In Karma/Jasmine the app's handlers are not installed (`TestingApp` overrides `+_installErrorHandler()+`), and Jasmine fails the spec on any unhandled rejection.
