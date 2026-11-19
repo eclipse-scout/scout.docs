@@ -336,7 +336,7 @@ protected override _evalPermissionQuick(permission: Permission): boolean {
 protected override _evalPermission(permission: Permission): JQuery.Promise<boolean> {
   // call server to evaluate foo and bar
   return ajax.getJson(`api/permissions/checkFooBar/${permission.foo}/${permission.bar}`)
-    .catch((error: AjaxError) => {
+    .catch((error) => {
       // handle error and return false
       return false;
     });
