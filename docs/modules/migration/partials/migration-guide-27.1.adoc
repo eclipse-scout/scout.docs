@@ -408,13 +408,16 @@ You may want to catch them, throw an `AbortError` or consume them using `ErrorHa
 ** Local `+.catch(error => errorHandler.handle(error))+` at the end of a promise chain are obsolete and can be removed.
 ** `ErrorHandler.handle()` does not accept multiple arguments anymore.
 ** SmartFields now check for `AbortError` instead of `error.abort`, so LookupCalls are now expected to throw an `AbortError` on abort.
+** `ErrorHandler.handle()` ignores an `AbortError` (see `ErrorHandler.isIgnorableError()`), also for errors thrown in synchronous code.
+Abort filters in front of `handle()` can be removed.
+To skip the following `.then()` steps of an aborted chain, use `ErrorHandler.handleOrAbort()` instead: it rejects with an `AbortError`.
 ** An aborted `Call` (e.g. `AjaxCall`) now always rejects with an `AbortError`, also if the abort happens while a retry is scheduled or after the response has arrived.
 Before, it rejected with an `AjaxError` with `+textStatus === 'abort'+` (or with the error of the last try) and resolved if the response arrived before the abort.
 Replace checks for `+error.textStatus === 'abort'+` with `error instanceof AbortError`.
 ** Don't type the parameter of a `.catch()` handler as `AjaxError`: it receives every error of the chain (e.g. a `TypeError` thrown by a `.then()` step) and an `AbortError` if the call was aborted.
 Check the type with `instanceof` instead.
 ** Errors in asynchronous code that runs after a widget has been destroyed are now visible, e.g. `+this.widget('MyField')+` returns `null` when a form has been closed while a request was running.
-Check `+if (this.destroyed) { throw new AbortError(); }+` before accessing the widget in such code.
+Call `this.throwAbortIfDestroyed()` before accessing the widget in such code: it throws an `AbortError` if the widget is destroyed or being destroyed.
 ** `ErrorHandler.formatAjaxStatus` and `formatAjaxRequest` have been replaced by `AjaxError.formatStatus` and `formatRequest`.
 * *Forms*
 ** `Form.load()`, `save()`, `ok()` and `validate()` no longer show the error message box themselves, they only reject.
