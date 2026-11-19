@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -47,7 +47,7 @@ export class LifecycleForm extends Form {
     this.statusSeverityField = this.widget('StatusSeverityField');
 
     this.targetField = this.widget('TargetField');
-    this.targetField.setLookupCall(new FormFieldLookupCall(this.detailBox));
+    this.targetField.setLookupCall({objectType: FormFieldLookupCall, compositeField: this.detailBox});
   }
 
   protected _onAddErrorStatusWithSeverityFieldAppLinkAction(event: AppLinkActionEvent) {
@@ -83,14 +83,14 @@ export class LifecycleForm extends Form {
     };
   }
 
-  protected override _load(): JQuery.Promise<object> {
+  protected override _load(): Promise<object> {
     if (this.withSlowBackendCall) {
       return ajax.get('api/example/slowGet');
     }
     return super._load();
   }
 
-  protected override _save(data: LifecycleFormData): JQuery.Promise<void> {
+  protected override _save(data: LifecycleFormData): Promise<void> {
     if (!this.widget('ExceptionField').value) {
       if (this.withSlowBackendCall) {
         return ajax.get('api/example/slowGet');
