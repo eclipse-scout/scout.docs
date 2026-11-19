@@ -117,6 +117,11 @@ Besides `+JQuery.Promise<T>+` -> `+Promise<T>+`, these `@eclipse-scout/core` API
 |rejected with `(jqXHR, textStatus, errorThrown)`; `pendingCall` was the jqXHR
 |rejected with a single `AjaxError` (created in `+_callImpl()+`); `pendingCall` is a native promise; the jqXHR of the current or most recent request is available as `xhr` (e.g. for the HTTP status of a successful request)
 
+|`Call.abort()` (e.g. `AjaxCall`)
+|rejected with an `AjaxError` with `+textStatus === 'abort'+`, with the error of the last try if aborted while a retry was scheduled, or resolved if the response arrived before the abort
+|always rejects with an `AbortError`.
+Replace checks for `+error.textStatus === 'abort'+` with `error instanceof AbortError`
+
 |`AjaxCall.isOfflineError()`
 |`isOfflineError(jqXHR, textStatus, errorThrown)`
 |`isOfflineError(error: AjaxError)`
@@ -377,7 +382,9 @@ When a jqXHR went through `+$.when+`/`+$.promiseAll+`, its three resolve values 
 That must now be `response.items`.
 * *Rejections are single-valued too.*
 Replace `+.fail((error, ...args) => this._handleError(error, ...args))+` / `+.catch((...args) => errorHandler.handle(...args))+` with `+.catch(error => ...)+`.
-The ajax helpers reject with a single `AjaxError` (with `jqXHR`, `textStatus`, `errorThrown`, `requestOptions`).
+The ajax helpers reject with a single `AjaxError` (with `jqXHR`, `textStatus`, `errorThrown`, `requestOptions`), or with an `AbortError` if the call was aborted.
+Don't type the parameter of a `.catch()` handler as `AjaxError`: it also receives every other error of the chain, e.g. a `TypeError` thrown by a `.then()` step.
+Check the type with `instanceof` instead.
 If a *public* callback receives the argument list (e.g. `+onError(args: any[])+`), keep its signature stable and pass `+[error]+`, and check the downstream implementations.
 Don't silently change a public API's argument shape.
 
@@ -549,7 +556,7 @@ This is not a new bug you're introducing -- it's a pre-existing gap the migratio
 Concrete places this shows up:
 
 * *Expected cancellations don't need local handling.*
-Aborting an in-flight lookup call rejects with an `AbortError`, an aborted `AjaxCall` with an `AjaxError` (`+textStatus === 'abort'+`), and widgets cancel chains with `AbortError`.
+Aborting an in-flight lookup call or `AjaxCall` rejects with an `AbortError`, and widgets cancel chains with `AbortError`.
 All of them are ignored by the global handler (<<sec-7a,§7a>>), so don't add local `.catch()` filters for them.
 * *Stray timers firing after a test (or the object) is gone.*
 A `setTimeout` scheduled by, say, a debounced "send" method can fire after the test ends and hit a partially torn-down mock, producing an unhandled rejection in an unrelated later test's `afterAll`.
@@ -563,6 +570,11 @@ Natively the spec finishes first, and `afterEach` tears down state the rest of t
 The chain then fails with a _misleading_ error, reported as an unhandled rejection "in `afterAll`" of an unrelated spec.
 In the reference migration an `assertValue()` failed with `Missing value`, because the permission that made a UI element available had already been uninstalled by the spec's `afterEach`.
 When an error surfaces "in `afterAll`", first look for an unreturned chain in the specs that ran just before.
+* *Asynchronous code accessing a widget that has been destroyed in the meantime.*
+E.g. a form starts a request in an event handler, the user closes the form, and the `.then()` step calls `+this.widget('MyField')+`, which now returns `null`.
+Under jQuery the resulting `TypeError` was swallowed, now the global handler shows it.
+Check `+if (this.destroyed) { throw new AbortError(); }+` before accessing the widget in each `.then()` step that follows an asynchronous step.
+`Form.load()` already ignores the result if the form has been destroyed during `+_load()+`, but not between the steps of a `+_load()+` override.
 * *Timers that used to die with the fake clock.*
 Pending fake timers are discarded by `jasmine.clock().uninstall()`.
 Specs that used to run under the clock therefore never executed deferred work, such as a `BatchCall` (batched cell-text lookups), a debounced update, or a `StaticLookupCall`.
@@ -619,20 +631,20 @@ A `.catch()` there hides the error completely.
 To replace the default handling for a form, listen to its `error` event and call `event.preventDefault()`.
 
 [#sec-7a]
-=== 7a. Expected Cancellations (`AbortError`, Aborted `AjaxError`) Are Ignored Globally
+=== 7a. Expected Cancellations (`AbortError`) Are Ignored Globally
 
 Much Scout code rejects _on purpose_ to cancel the remainder of a chain:
 
 * `throw new AbortError()` when a widget was destroyed in the meantime (e.g. a `cancelIfDestroyed(widget)` utility called at the start of each `.then()` step), or error helpers that pass an `AbortError` on as a rejection to skip later `.then()`s;
 * `LookupCall.abort()` implementations reject with an `AbortError` (`RestLookupCall`, `StaticLookupCall`, ...).
-* `AjaxCall.abort()` (e.g. when a newer request supersedes a running one) rejects with an `AjaxError` with `+textStatus === 'abort'+`.
+* `AjaxCall.abort()` (e.g. when a newer request supersedes a running one) rejects with an `AbortError`.
 
 jQuery silently dropped these at the end of every chain.
 Natively each one becomes an unhandled rejection, which in a real test run means hundreds of `+Unhandled promise rejection: [object Object] thrown ... in afterAll+` errors.
 *Don't add a per-site abort filter to every chain end.*
 The framework handles this centrally:
 
-* `ErrorHandler.isIgnorableRejection(reason)` returns `true` for a missing reason (`undefined`/`null`, used for control flow, e.g. the user clicked "No"), `AbortError` and an `AjaxError` with `+textStatus === 'abort'+`.
+* `ErrorHandler.isIgnorableRejection(reason)` returns `true` for a missing reason (`undefined`/`null`, used for control flow, e.g. the user clicked "No"), `AbortError` and an `AjaxError` with `+textStatus === 'abort'+` (e.g. of a raw jqXHR).
 * `+App._installErrorHandler()+` registers `errorHandler.unhandledRejectionHandler` for `unhandledrejection`.
 It calls `preventDefault()`, ignores ignorable rejections and passes all others to `ErrorHandler.handle()` (log and message box, consumed errors are skipped).
 * In Karma/Jasmine the app's handlers are not installed (`TestingApp` overrides `+_installErrorHandler()+`), and Jasmine fails the spec on any unhandled rejection.

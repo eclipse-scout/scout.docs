@@ -39,9 +39,8 @@ Some rejections are expected cancellations and are not reported.
 `ErrorHandler.isIgnorableRejection(reason)` returns `true` for:
 
 * no reason (`undefined` or `null`), used for control flow, e.g. the user cancelled an action
-* an `AbortError`, used to cancel a chain, e.g. by an aborted `AbortController` (see `abortableContext`)
-* an `AjaxError` of an aborted request (`+textStatus === 'abort'+`), e.g. a superseded `AjaxCall`
-* `+{abort: true}+`, used by aborted lookup calls
+* an `AbortError`, used to cancel a chain, e.g. by an aborted `AbortController` (see `abortableContext`), an aborted `AjaxCall` or an aborted lookup call
+* an `AjaxError` of an aborted request (`+textStatus === 'abort'+`), e.g. of a raw jqXHR
 
 Don't add local `.catch()` filters for these reasons.
 To cancel a chain on purpose, reject or throw an `AbortError`.
