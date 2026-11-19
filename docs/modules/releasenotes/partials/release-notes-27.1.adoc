@@ -87,8 +87,17 @@ To migrate existing code, see the xref:migration:migration-guide.adoc#native-pro
 * Unhandled rejections are now passed to the `ErrorHandler`, like uncaught errors in synchronous code.
 You no longer need to add `App.get().errorHandler.handle(error)` to report errors.
 `Form.load()`, `save()` and `validate()` no longer show a message box themselves, they reject and leave the error to the global handler.
-* Expected cancellations are ignored and don't need to be caught: rejections without a reason, `AbortError` and aborted ajax calls.
 * Every error is reported only once: the `ErrorHandler` marks handled errors as consumed and ignores them afterward.
 To show a custom message instead of the default one, call `ErrorHandler.consume(error)` and rethrow the error.
+* `ErrorHandler.handle()` has been simplified and now has only one argument.
+* If the error has a `cause` it is now logged by the `ErrorHandler`.
+* Abort handling has been improved:
+** The `AbortError` is ignored by the `ErrorHandler` and doesn't need to be caught.
+** The global rejection handler also ignores rejections without a reason.
+** Ajax calls now throw `AbortError` instead of `AjaxError` with status `aborted`.
+** `ErrorHandler.handleOrAbort()` rejects with an `AbortError` instead, to skip the following `.then()` steps of an aborted chain.
+** `Widget.throwAbortIfDestroyed()` throws an `AbortError` if the widget is destroyed or being destroyed.
+Use it in asynchronous code to stop a promise chain before accessing a widget that has been destroyed in the meantime, e.g. when a form is closed while a request is running.
+
 
 For details, see xref:technical-guide:user-interface/error-handling.adoc[Error Handling].
