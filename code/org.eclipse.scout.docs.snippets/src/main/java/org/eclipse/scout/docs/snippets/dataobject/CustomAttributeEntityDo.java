@@ -22,7 +22,7 @@ import org.eclipse.scout.rt.dataobject.TypeName;
 import org.eclipse.scout.rt.dataobject.ValueFormat;
 
 @IgnoreConvenienceMethodGeneration
-@TypeName("CustomAttributeEntity")
+@TypeName("lorem..CustomAttributeEntity")
 public class CustomAttributeEntityDo extends DoEntity {
 
   //tag::customAttributeName[]
