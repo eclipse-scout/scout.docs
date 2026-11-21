@@ -1257,6 +1257,25 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
               }
             }
 
+            @Order(17)
+            @ClassId("31d37347-2c4a-46f6-bec1-7f9de9b24478")
+            public class SelectLastRowMenu extends AbstractMenu {
+              @Override
+              protected String getConfiguredText() {
+                return TEXTS.get("SelectLastRow");
+              }
+
+              @Override
+              protected void execAction() {
+                selectLastRow();
+              }
+
+              @Override
+              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+                return CollectionUtility.<IMenuType> hashSet(TableMenuType.EmptySpace);
+              }
+            }
+
             @Order(20)
             @ClassId("09b54c41-321e-404c-aba9-543db48d2fd0")
             public class ToggleGroupingStyle extends AbstractMenu {

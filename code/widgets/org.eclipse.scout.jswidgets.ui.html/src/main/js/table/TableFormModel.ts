@@ -116,6 +116,11 @@ export default (): FormModel => ({
                   keyStroke: 'insert'
                 },
                 {
+                  id: 'SelectLastRowMenu',
+                  objectType: Menu,
+                  text: '${textKey:SelectLastRow}'
+                },
+                {
                   id: 'MoveMenu',
                   objectType: Menu,
                   text: '${textKey:Move}',
@@ -309,6 +314,7 @@ export class TableFieldTable extends Table {
 export type TableFieldTableWidgetMap = {
   'AggregateTableControl': AggregateTableControl;
   'AddRowMenu': Menu;
+  'SelectLastRowMenu': Menu;
   'MoveMenu': Menu;
   'MoveToTopMenu': Menu;
   'MoveUpMenu': Menu;
