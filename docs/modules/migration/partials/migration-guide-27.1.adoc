@@ -359,19 +359,94 @@ Return a `DoMapEntity` instead. It can be created from a map using `DoMapEntity.
 
 Override `acceptResourceForMapReturnValueCheck` or `acceptMethodForMapReturnValueCheck` to exclude resources or methods from the check.
 
-== Ensure Correct Jasmine Version is Used
+[#karma-replaced]
+== Karma Replaced by jasmine-browser-runner (Scout JS)
 
-If you have JavaScript tests, you likely have a dependency to Jasmine 5.x.
-Unfortunately, the version 4.6.1 is still used because `karma-jasmine` has a dependency to jasmine 4.6.1.
-Because karma is deprecated there is no newer version with a dependency to Jasmine 5.
-To ensure the correct version is used, add an override in your `pnpm-workspace.yaml` to force pnpm to use Jasmine 5.x.
+Karma has reached its end of life and has been replaced by https://github.com/jasmine/jasmine-browser-runner[jasmine-browser-runner].
+At the same time Jasmine has been updated to version 7.
+The commands `test-server:start`, `test-server:stop` and `test:ci` of `scout-scripts` (`@eclipse-scout/cli`) stay the same, only their configuration and arguments change.
 
-[source,yaml,opts=novalidate]
+=== Dependencies
+
+* Remove the dependencies `karma`, `karma-*`, `@metahub/karma-jasmine-jquery` and `@eclipse-scout/karma-jasmine-scout` from your `package.json` files.
+* Update `jasmine-core` to `7.0.2`, `@types/jasmine` to `7.0.0` and `jasmine-ajax` to `5.0.0`.
+* Remove the `jasmine-core` override from your `pnpm-workspace.yaml` if you added it in a previous release.
+
+=== Test Configuration
+
+Rename the file `karma.conf.js` of each module to `test.config.js` and use the new base configuration `@eclipse-scout/cli/scripts/test-defaults`.
+Static resources are no longer added using `config.files` and `config.proxies`, map the URL path to the directory in `config.resources` instead.
+
+Before:
+
+[source,js]
 ----
-overrides:
-  <<: *scout-overrides
-  jasmine-core: "5.13.0"
+const baseConfig = require('@eclipse-scout/cli/scripts/karma-defaults');
+const path = require('path');
+
+module.exports = (config, specEntryPoint) => {
+  baseConfig(config, specEntryPoint);
+
+  const resDir = path.resolve('test/_res').replace(/\\/g, '/') + '/';
+  config.files.push({pattern: resDir + '**/*.*', watched: false, included: false});
+  config.proxies['/_res/'] = '/absolute' + resDir;
+};
 ----
+
+After:
+
+[source,js]
+----
+const baseConfig = require('@eclipse-scout/cli/scripts/test-defaults');
+const path = require('path');
+
+module.exports = (config, specEntryPoint) => {
+  baseConfig(config, specEntryPoint);
+
+  config.resources['/_res/'] = path.resolve('test/_res');
+};
+----
+
+Other Karma settings (e.g. `config.browsers`, `config.reporters`) have no equivalent, remove them.
+See xref:technical-guide:user-interface/build-stack.adoc#test-configuration[Test Configuration] for the available properties and command line arguments (e.g. `--filter`, `--headless=false`, `--junitReportDir`).
+
+=== Browser
+
+The specs are executed in Chrome or another Chromium based browser (Chromium, Edge, Brave), which is started directly without a WebDriver.
+If the browser is not installed at its default location, set the environment variable `CHROME_BIN` to the browser executable, as before with Karma.
+
+=== Maven Build
+
+* The tests are executed if the module contains a `test.config.js` file (instead of `karma.conf.js`).
+* The property `master_skip_karma_test` has been renamed to `master_skip_npm_test`.
+* The JUnit report is written to `target/npm-test-reports/test-results.xml` (instead of `target/karma-reports`).
+Update the report path in your CI configuration.
+
+=== Jasmine 7
+
+Jasmine 6 and 7 contain breaking changes, see the release notes of https://github.com/jasmine/jasmine/blob/main/release_notes/6.0.0.md[Jasmine 6.0] and https://github.com/jasmine/jasmine/blob/main/release_notes/7.0.0.md[Jasmine 7.0].
+The most relevant ones for Scout specs:
+
+* Specs and suites with the same name in the same parent suite are not allowed anymore. This also applies to top level suites of different spec files in the same module. Rename the duplicates.
+* Private APIs are not available anymore, e.g. `new jasmine.MatchersUtil()`. Use the `matchersUtil` passed to custom matchers instead.
+* Existing properties of the `jasmine` namespace can't be overwritten anymore.
+
+The library `jasmine-jquery` is not compatible with Jasmine 7 and has been replaced, see <<jasmine-jquery-replaced>>.
+
+[#jasmine-jquery-replaced]
+== jasmine-jquery Replaced (Scout JS)
+
+The unmaintained library `jasmine-jquery` is not compatible with Jasmine 6 and newer and has been removed.
+`@eclipse-scout/core/testing` now provides the replacements, which are registered automatically by `JasmineScout.runTestSuite`:
+
+* The functions `setFixtures` and `sandbox`.
+* The matchers `toHaveClass`, `toHaveAttr`, `toHaveProp`, `toHaveData`, `toHaveId`, `toHaveCss`, `toBeFocused`, `toBeVisible`, `toBeHidden`, `toBeEmpty`, `toBeChecked`, `toBeSelected`, `toBeDisabled`, `toBeInDOM`, `toExist`, `toHaveLength`, `toBeMatchedBy`, `toContainElement`, `toHaveText`, `toContainText`, `toHaveHtml`, `toContainHtml` and `toHaveValue`.
+* The equality check of jQuery objects and DOM elements in `toEqual`.
+
+Remove the dependencies `jasmine-jquery` and `@types/jasmine-jquery` from your `package.json` files.
+
+The following features of `jasmine-jquery` are not available anymore: `spyOnEvent` and the matchers `toHaveBeenTriggered`, `toHaveBeenTriggeredOn`, `toHaveBeenTriggeredOnAndWith`, `toHaveBeenPrevented`, `toHaveBeenPreventedOn`, `toHaveBeenStopped`, `toHaveBeenStoppedOn`, `toHandle` and `toHandleWith`, as well as loading fixtures from files (`loadFixtures`, `readFixtures`, `getJSONFixture`, style fixtures).
+Replace them with Jasmine spies on the event handlers or with `setFixtures`.
 
 == jquery-scout: oneAnimationEnd Changed
 

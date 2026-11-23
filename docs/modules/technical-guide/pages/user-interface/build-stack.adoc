@@ -182,11 +182,13 @@ In order to use the latest EcmaScript features like the <<ES6 Modules>> but stil
 
 The CSS preprocessor used by Scout is http://lesscss.org/[Less], so the default webpack configuration already supports it by using the `less-loader` plugin. In order to profit from Scout`s Less variables (see xref:technical-guide:user-interface/styling.adoc[]) we recommend to use Less as well. Since it is already configured, you won't have to do anything but to write your CSS rules.
 
+[#test-configuration]
 == Test Configuration
 
 Scout uses https://github.com/jasmine/jasmine-browser-runner[jasmine-browser-runner] to run its unit tests in Chrome.
 The tests itself are written with the test framework https://jasmine.github.io/[Jasmine].
-The helpers https://www.npmjs.com/package/jasmine-jquery[jasmine-jquery] and https://www.npmjs.com/package/jasmine-ajax[jasmine-ajax] are available as well to make writing tests for a Scout application even easier.
+The helper https://www.npmjs.com/package/jasmine-ajax[jasmine-ajax] is available as well to make writing tests for a Scout application even easier.
+In addition, `@eclipse-scout/core/testing` provides matchers for jQuery objects and DOM elements (e.g. `toHaveClass`, `toHaveAttr`, `toBeVisible`, `toBeFocused`) and the functions `setFixtures` and `sandbox` to create the DOM fixtures of a spec.
 
 All this is configured in the file `test-defaults.js`.
 If you want to use them too, you need to provide your own test configuration file called `test.config.js` and import the defaults, similar to the <<Webpack Configuration>>.

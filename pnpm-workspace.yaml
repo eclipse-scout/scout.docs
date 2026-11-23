@@ -145,8 +145,6 @@ overrides:
   "@types/istanbul-lib-coverage@2.0.6": 2.0.6
   "@types/istanbul-lib-report@3.0.3": 3.0.3
   "@types/istanbul-reports@3.0.4": 3.0.4
-  "@types/jasmine@7.0.0": 7.0.0
-  "@types/jquery@3.5.33": 3.5.33
   "@types/json-schema@7.0.15": 7.0.15
   "@types/node@26.6.6": 26.6.6
   "@types/sizzle@2.3.10": 2.3.10
