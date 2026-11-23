@@ -2,7 +2,12 @@
 
 include::common:partial$_header.adoc[]
 
-JavaScript and CSS assets of a typical Scout application are built by  https://webpack.js.org/[Webpack] using https://pnpm.io/[pnpm] and https://nodejs.org/[Node.js]. In order to make the building as easy as possible for you, there is a https://www.npmjs.com/package/@eclipse-scout/cli[CLI] module available. That module contains a default webpack and karma configuration and several build scripts you can use. The goal is to reduce the time you need to set up your build to a minimum. If you have created your Scout project using a Scout archetype, it should all be already setup for you. Nevertheless, you will get to a point where it is important to know how the building works in detail and how the several build tools are wired together. If you are there, this chapter should help you out.
+JavaScript and CSS assets of a typical Scout application are built by https://webpack.js.org/[Webpack] using https://pnpm.io/[pnpm] and https://nodejs.org/[Node.js].
+In order to make the building as easy as possible for you, there is a https://www.npmjs.com/package/@eclipse-scout/cli[CLI] module available.
+That module contains a default webpack and test configuration and several build scripts you can use.
+The goal is to reduce the time you need to set up your build to a minimum.
+If you have created your Scout project using a Scout archetype, it should all be already setup for you.
+Nevertheless, you will get to a point where it is important to know how the building works in detail and how the several build tools are wired together. If you are there, this chapter should help you out.
 
 == Dependency Management
 
@@ -10,7 +15,10 @@ In every modern application you will have dependencies to other modules, either 
 
 This setup gives you the possibility to easier integrate and update 3rd party JavaScript frameworks available in the huge https://www.npmjs.com/[npmjs registry].
 
-Scout itself is also published to that registry and will therefore be downloaded automatically once you execute `pnpm install`, as long as your `package.json` contains a Scout dependency. You will recognize a Scout module based on its name: all official Scout modules are published using the scope `@eclipse-scout`. The most important one is https://www.npmjs.com/package/@eclipse-scout/core[@eclipse-scout/core] which contains the core runtime functionality. Other modules are https://www.npmjs.com/package/@eclipse-scout/cli[@eclipse-scout/cli] for the building support, https://www.npmjs.com/package/@eclipse-scout/eslint-config[@eclipse-scout/eslint-config] for our ESLint rules, or https://www.npmjs.com/package/@eclipse-scout/karma-jasmine-scout[@eclipse-scout/karma-jasmine-scout] for enhanced testing support.
+Scout itself is also published to that registry and will therefore be downloaded automatically once you execute `pnpm install`, as long as your `package.json` contains a Scout dependency.
+You will recognize a Scout module based on its name: all official Scout modules are published using the scope `@eclipse-scout`.
+The most important one is https://www.npmjs.com/package/@eclipse-scout/core[@eclipse-scout/core] which contains the core runtime functionality.
+Other modules are https://www.npmjs.com/package/@eclipse-scout/cli[@eclipse-scout/cli] for the building and testing support, or https://www.npmjs.com/package/@eclipse-scout/eslint-config[@eclipse-scout/eslint-config] for our ESLint rules.
 
 [#node-dependency-resolution]
 === Dependency Resolution
@@ -174,25 +182,42 @@ In order to use the latest EcmaScript features like the <<ES6 Modules>> but stil
 
 The CSS preprocessor used by Scout is http://lesscss.org/[Less], so the default webpack configuration already supports it by using the `less-loader` plugin. In order to profit from Scout`s Less variables (see xref:technical-guide:user-interface/styling.adoc[]) we recommend to use Less as well. Since it is already configured, you won't have to do anything but to write your CSS rules.
 
-== Karma Configuration
+== Test Configuration
 
-Scout uses https://karma-runner.github.io/[Karma] as test runner for its unit tests. The tests itself are written with the test framework https://jasmine.github.io/[Jasmine]. We also use some plugins like https://www.npmjs.com/package/karma-jasmine-jquery[karma-jasmine-jquery], https://www.npmjs.com/package/karma-jasmine-ajax[karma-jasmine-ajax] or https://www.npmjs.com/package/@eclipse-scout/karma-jasmine-scout[karma-jasmine-scout] to make writing tests for a Scout application even easier.
+Scout uses https://github.com/jasmine/jasmine-browser-runner[jasmine-browser-runner] to run its unit tests in Chrome.
+The tests itself are written with the test framework https://jasmine.github.io/[Jasmine].
+The helpers https://www.npmjs.com/package/jasmine-jquery[jasmine-jquery] and https://www.npmjs.com/package/jasmine-ajax[jasmine-ajax] are available as well to make writing tests for a Scout application even easier.
 
-All this is configured in the file `karma-defaults.js`. If you want to use them too, you need to provide your own Karma file called `karma.conf.js` and import the defaults, similar to the <<Webpack Configuration>>. You can now adjust or override the defaults or just leave them as they are. To let Karma know about your tests, you need to define the entry point.
+All this is configured in the file `test-defaults.js`.
+If you want to use them too, you need to provide your own test configuration file called `test.config.js` and import the defaults, similar to the <<Webpack Configuration>>.
+You can now adjust or override the defaults or just leave them as they are. To let the test runner know about your tests, you need to define the entry point.
 
 [source,javascript]
-.karma.conf.js
+.test.config.js
 ----
-const baseConfig = require('@eclipse-scout/cli/scripts/karma-defaults');
+const baseConfig = require('@eclipse-scout/cli/scripts/test-defaults');
 module.exports = config => baseConfig(config, './src/test/js/test-index.js');
 ----
 
 In the snippet above you see two things: The Scout defaults are imported and the entry point `test-index.js` is defined. This is all you need to do in this file if you are fine with the defaults.
 
+If your tests need to load static resources (e.g. HTML or JSON files) from the test server, map a URL path to a directory:
+
+[source,javascript]
+.test.config.js
+----
+const baseConfig = require('@eclipse-scout/cli/scripts/test-defaults');
+const path = require('path');
+module.exports = config => {
+  baseConfig(config, './src/test/js/test-index.js');
+  config.resources['/_res/'] = path.resolve('src/test/resources/_res');
+};
+----
+
 The file `test-index.js` defines where your unit tests are and what the context is for the Webpack build. Because a unit test is called a `spec` when using `Jasmine`, a typical `test-index.js` looks like this:
 
 [source,javascript,opts=novalidate]
-.karma.conf.js
+.test-index.js
 ----
 import {JasmineScout} from '@eclipse-scout/core/testing';
 
@@ -200,11 +225,13 @@ let context = require.context('./', true, /[sS]pec\.js$/);
 JasmineScout.runTestSuite(context);
 ----
 
-This code tells the https://www.npmjs.com/package/karma-webpack[karma-webpack] plugin to require all files ending in `Spec.js`. This will generate one big test bundle, but since source maps are enabled, you can debug the actual test files easily. The last line installs the given context and also runs a Scout app so that the Scout environment is properly set up.
+This code tells Webpack to require all files ending in `Spec.js`. This will generate one big test bundle, but since source maps are enabled, you can debug the actual test files easily.
+The last line installs the given context and also runs a Scout app so that the Scout environment is properly set up.
 
 === Reporting
 
-After running the tests, all results are put in a folder called `test-results`. There is a sub folder for each browser that executed the tests containing a file called `test-results.xml`. Since the `karma-defaults.js` uses the `junit` reporter, the file can be interpreted by any tool supporting the `junit` format, e.g. Jenkins.
+After running the tests, the results are put in the file `test-results/test-results.xml`.
+The file uses the `junit` format, so it can be interpreted by any tool supporting it, e.g. Jenkins.
 
 [#command-line-interface-cli]
 == Command Line Interface (CLI)
@@ -276,36 +303,44 @@ All arguments are passed to the webpack config file as parameter `args` which is
 
 === Testing
 
-Before you can run your unit tests you need to properly set up the files as described in <<Karma Configuration>>.
+Before you can run your unit tests you need to properly set up the files as described in <<Test Configuration>>.
 
 If all is set up correctly, you can run your tests using the following command:
 
 `npm run test:ci`
 
-This will execute all unit tests with the headless browser. The default headless browser is Chrome, so you need to make sure Chrome is installed. This includes your Continuous Integration Environment, if you plan to automatically run the tests on a regular basis (e.g. with Jenkins).
+This will execute all unit tests with the headless browser.
+The specs are executed in Chrome or another Chromium based browser (Chromium, Edge, Brave), so you need to make sure one of them is installed.
+This includes your Continuous Integration Environment, if you plan to automatically run the tests on a regular basis (e.g. with Jenkins).
+If the browser is not installed at its default location, set the environment variable `CHROME_BIN` to the browser executable.
 
 The above command will execute the tests once and does not watch for changes. This is typically not desired during development. When you are actively developing a component and want to run your tests while you are developing, you can use the following command:
 
 `npm run testserver:start`
 
-This will start a real browser and enable the watch mode. This means every time you adjust your code and save it, the web pack build is started, the browser reloaded and your tests executed.
+This will start a real browser and enable the watch mode. This means every time you adjust your code and save it, the webpack build is started and your tests are executed again in the browser. The results are shown in the browser and in the console.
 
-TIP: If you don't like the automatic browser reloading, you can press debug in the top right corner of the browser or manually navigate to http://localhost:9876/debug.html.
+TIP: The test server runs on http://localhost:9876/. You can also open this URL in any other browser. Append `?spec=<text>` to the URL to run only the specs whose name contains the given text.
+
+To stop the test server, use the following command:
+
+`npm run testserver:stop`
 
 ==== Arguments
 
-The test commands accept some arguments you can use to adjust the karma runner without modifying your karma config file.
-All passed arguments are merged with the karma config object, so all karma configuration options are available (see http://karma-runner.github.io/4.0/config/configuration-file.html).
+The test commands accept the following arguments you can use to adjust the test run without modifying your test config file:
+
+. filter: runs only the specs whose full name contains the given text.
+. headless: `false` to show the browser window while running test:ci.
+. openBrowser: `false` to start the test server of testserver:start without opening Chrome.
+. port: port of the test server for testserver:start and testserver:stop. Default is `9876`.
+. junitReportDir: directory of the file `test-results.xml`. Default is `test-results`.
 
 Example usage:
 
-`npm run test:ci \-- --junitReporter.outputDir=custom-out-dir`
+`npm run test:ci \-- --filter=Table --junitReportDir=custom-out-dir`
 
-NOTE: Please note that no type conversion happens which is especially relevant for boolean arguments.
-If you for example want to disable the watcher, you cannot use `--auto-watch false`.
-Instead, you would have to use `--no-auto-watch`.
-
-In addition to the karma configuration options you can also pass the webpack arguments (checkout <<webpack-arguments>> for a list of available arguments).
+In addition to the test arguments you can also pass the webpack arguments (checkout <<webpack-arguments>> for a list of available arguments).
 To do that, you need to use the argument called `webpackArgs`.
 Example:
 
@@ -380,8 +415,8 @@ To do that, just add the following to your `eslint.config.mjs`:
 [source,JavaScript,opts=novalidate]
 .Disabling the linebreak rule
 ----
-  rules: {
-    '@stylistic/linebreak-style': 'off'
+  {
+    '@stylistic/linebreak-style';: 'off';
   }
 ----
 
