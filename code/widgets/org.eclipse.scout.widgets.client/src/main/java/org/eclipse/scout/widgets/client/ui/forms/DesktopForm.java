@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2023 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -40,7 +40,7 @@ import org.eclipse.scout.rt.platform.util.concurrent.IRunnable;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.widgets.client.services.lookup.IconIdLookupCall;
-import org.eclipse.scout.widgets.client.services.lookup.ImageLookupCall;
+import org.eclipse.scout.widgets.client.services.lookup.ImageIdLookupCall;
 import org.eclipse.scout.widgets.client.services.lookup.NativeNotificationVisibilityLookupCall;
 import org.eclipse.scout.widgets.client.services.lookup.ViewButtonLookupCall;
 import org.eclipse.scout.widgets.client.ui.action.view.AbstractViewButtonPropertiesBox;
@@ -344,11 +344,6 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
             return LABEL_POSITION_TOP;
           }
 
-          @Override
-          protected boolean getConfiguredGridUseUiHeight() {
-            return true;
-          }
-
           @Order(50)
           @ClassId("3353d171-c2f7-4035-b1ee-8ba442b6672f")
           public class SeverityField extends AbstractSmartField<Integer> {
@@ -606,7 +601,7 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
 
           @Override
           protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
-            return ImageLookupCall.class;
+            return ImageIdLookupCall.class;
           }
 
           @Override

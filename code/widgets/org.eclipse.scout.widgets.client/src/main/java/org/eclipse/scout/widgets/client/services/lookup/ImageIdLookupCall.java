@@ -1,0 +1,36 @@
+/*
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
+ *
+ * This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License 2.0
+ * which is available at https://www.eclipse.org/legal/epl-2.0/
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ */
+package org.eclipse.scout.widgets.client.services.lookup;
+
+import java.io.Serial;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.eclipse.scout.rt.platform.classid.ClassId;
+import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
+import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
+
+/**
+ * Images that can be found by `IconLocator` (images under `icons`).
+ */
+@ClassId("9d68e30d-9529-48f6-b6ca-707e45bef7a7")
+public class ImageIdLookupCall extends LocalLookupCall<String> {
+
+  @Serial
+  private static final long serialVersionUID = 1L;
+
+  @Override
+  protected List<LookupRow<String>> execCreateLookupRows() {
+    ArrayList<LookupRow<String>> rows = new ArrayList<>();
+    rows.add(new LookupRow<>("application_logo.png", "application_logo.png"));
+    rows.add(new LookupRow<>("fish.jpg", "fish.jpg"));
+    return rows;
+  }
+}
