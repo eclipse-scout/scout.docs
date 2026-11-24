@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -10,8 +10,6 @@
 package org.eclipse.scout.widgets.client.ui.forms.imagefield;
 
 import java.io.InputStream;
-import java.net.URI;
-import java.net.URL;
 import java.util.List;
 
 import org.eclipse.scout.rt.client.dto.FormData;
@@ -25,10 +23,9 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.imagefield.AbstractImageField;
-import org.eclipse.scout.rt.client.ui.form.fields.imagefield.IImageField;
 import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractProposalField;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
-import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.resource.BinaryResource;
@@ -38,6 +35,7 @@ import org.eclipse.scout.rt.platform.util.IOUtility;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.widgets.client.ResourceBase;
 import org.eclipse.scout.widgets.client.services.lookup.IconIdLookupCall;
+import org.eclipse.scout.widgets.client.services.lookup.ImageLookupCall;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipse.scout.widgets.client.ui.forms.imagefield.ImageFieldForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.imagefield.ImageFieldForm.MainBox.ConfigurationBox;
@@ -184,9 +182,6 @@ public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm
 
             if (!resources.isEmpty()) {
               BinaryResource resource = CollectionUtility.firstElement(resources);
-              // if you want to work with buffered images
-              // BufferedImage bi = ImageIO.read(new FileInputStream(fileName[0]));
-              // setImage(bi);
               setImage(resource.getContent());
               setImageId(resource.getFilename());
             }
@@ -201,7 +196,7 @@ public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm
             setImage(new BinaryResource(SCOUT_LOGO_FILENAME, IOUtility.readBytes(in)));
           }
           catch (Exception e) {
-            e.printStackTrace();
+            LOG.warn("Error while setting image", e);
             addErrorStatus(e.getMessage());
           }
         }
@@ -361,13 +356,7 @@ public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm
 
         @Override
         protected void execInitField() {
-          setValueChangeTriggerEnabled(false);
-          try {
-            setValue(getImage1Field().isScrollBarEnabled());
-          }
-          finally {
-            setValueChangeTriggerEnabled(true);
-          }
+          setValue(getImage1Field().isScrollBarEnabled());
         }
       }
 
@@ -387,13 +376,7 @@ public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm
 
         @Override
         protected void execInitField() {
-          setValueChangeTriggerEnabled(false);
-          try {
-            setValue(getImage1Field().isAutoFit());
-          }
-          finally {
-            setValueChangeTriggerEnabled(true);
-          }
+          setValue(getImage1Field().isAutoFit());
         }
       }
 
@@ -448,13 +431,7 @@ public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm
 
         @Override
         protected void execInitField() {
-          setValueChangeTriggerEnabled(false);
-          try {
-            setValue(getImage2Field().isScrollBarEnabled());
-          }
-          finally {
-            setValueChangeTriggerEnabled(true);
-          }
+          setValue(getImage2Field().isScrollBarEnabled());
         }
       }
 
@@ -474,19 +451,13 @@ public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm
 
         @Override
         protected void execInitField() {
-          setValueChangeTriggerEnabled(false);
-          try {
-            setValue(getImage2Field().isAutoFit());
-          }
-          finally {
-            setValueChangeTriggerEnabled(true);
-          }
+          setValue(getImage2Field().isAutoFit());
         }
       }
 
       @Order(30)
       @ClassId("9f2052e0-2ea3-40c4-b508-65ef881c0323")
-      public class ImageURLField extends AbstractStringField {
+      public class ImageURLField extends AbstractProposalField<String> {
 
         @Override
         protected int getConfiguredGridW() {
@@ -495,7 +466,12 @@ public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("ImageURL");
+          return "Image Url";
+        }
+
+        @Override
+        protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
+          return ImageLookupCall.class;
         }
 
         @Override
@@ -505,40 +481,9 @@ public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm
 
         @Override
         protected void execChangedValue() {
-          getImageIdField().clearErrorStatus();
-          getImageIdField().setValueChangeTriggerEnabled(false);
-          try {
-            getImageIdField().setValue(null);
-          }
-          finally {
-            getImageIdField().setValueChangeTriggerEnabled(true);
-          }
-          setImageFromUrl(getImage1Field(), getValue());
-          setImageFromUrl(getImage2Field(), getValue());
-        }
-
-        protected void setImageFromUrl(IImageField field, String urlString) {
-          getImageURLField().clearErrorStatus();
-          byte[] img = null;
-          try {
-            if (urlString != null) {
-              URL url;
-              if (urlString.equals(BIRD)) {
-                url = ResourceBase.class.getResource(BIRD_OFFLINE);
-              }
-              else {
-                url = URI.create(urlString).toURL();
-              }
-              img = IOUtility.readFromUrl(url);
-            }
-          }
-          catch (Exception e) {
-            String errorMsg = "Error while loading image from URL " + urlString;
-            LOG.warn(errorMsg, e);
-            getImageURLField().addErrorStatus(errorMsg);
-          }
-          field.setImageId(null);
-          field.setImage(img);
+          getImageIdField().setValue(null);
+          getImage1Field().setImageUrl(getValue());
+          getImage2Field().setImageUrl(getValue());
         }
       }
 
@@ -553,7 +498,7 @@ public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm
 
         @Override
         protected String getConfiguredLabel() {
-          return "ImageId";
+          return "Image Id";
         }
 
         @Override
@@ -568,18 +513,8 @@ public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm
 
         @Override
         protected void execChangedValue() {
-          getImageURLField().clearErrorStatus();
-          getImageURLField().setValueChangeTriggerEnabled(false);
-          try {
-            getImageURLField().clearErrorStatus();
-            getImageURLField().setValue(null);
-          }
-          finally {
-            getImageURLField().setValueChangeTriggerEnabled(true);
-          }
-          getImage1Field().setImage(null);
+          getImageURLField().setValue(null);
           getImage1Field().setImageId(getValue());
-          getImage2Field().setImage(null);
           getImage2Field().setImageId(getValue());
         }
       }
