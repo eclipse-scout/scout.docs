@@ -7,8 +7,8 @@
     "build-head": "npx antora docs/playbooks/head-eclipse-scout-playbook.yml && start docs/playbooks/build/site/index.html"
   },
   "dependencies": {
-    "@antora/cli": "3.1.14",
-    "@antora/lunr-extension": "1.0.0-alpha.8",
-    "@antora/site-generator": "3.1.14"
+    "@antora/cli": "3.2.3",
+    "@antora/lunr-extension": "1.0.0-alpha.13",
+    "@antora/site-generator": "3.2.3"
   }
 }
