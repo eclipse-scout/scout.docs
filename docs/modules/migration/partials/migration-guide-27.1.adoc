@@ -478,6 +478,16 @@ The `JQuery` interface of Scout no longer extends `Array`, so the TypeScript com
 
 The https://github.com/jquery/jquery-migrate[jQuery Migrate 4.x] plugin logs most of these usages to the console and can help to find them.
 
+[[jquery-naming]]
+== Renamed Properties Holding jQuery Objects (Scout JS)
+
+Properties holding a jQuery object now consistently start with `$`:
+
+* `FatalMessageOptions.entryPoint` has been renamed to `$entryPoint`.
+* `BrowserField._externalWindowTextField` and `BrowserField._externalWindowButton` have been renamed to `_$externalWindowTextField` and `_$externalWindowButton`.
+
+Adjust your code if you pass these options or access these properties in a subclass.
+
 == jquery-scout: oneAnimationEnd Changed
 
 `oneAnimationEnd` has been improved so the callback is now executed even when debugging or if the `animation-duration` is set to 0s.
