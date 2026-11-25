@@ -23,26 +23,28 @@ Other modules are https://www.npmjs.com/package/@eclipse-scout/cli[@eclipse-scou
 [#node-dependency-resolution]
 === Dependency Resolution
 
-https://pnpm.io/[Pnpm] takes care to link all dependencies declared in a `package.json` file to a `node_modules` directory next to it. If it is a 3rd party dependency, it is downloaded to a local store before.
+https://pnpm.io/[Pnpm] takes care to link all dependencies declared in a `package.json` file to a `node_modules` directory next to it.
+If it is a 3rd party dependency, it is downloaded to a local store before.
 
 The dependency version to use is part of the dependency declaration in the `package.json` and follows the https://semver.org/[SemVer] specification.
 This specification allows to declare range dependencies which might match several versions (even versions in the future which have not yet been published).
-When a dependency is installed, pnpm decides which version to use based on the declared SemVer constraint.
+When a dependency is installed, pnpm decides which version to use based on the declared `SemVer` constraint.
 
 Using ranged versions has the benefit that you automatically get newer versions e.g. including bugfixes without changing anything in your dependency declarations.
 On the other hand you also get regressions automatically, and it may prevent reproducible build outputs.
-Furthermore, it increases the risk of supply chain attacks, where an attacker compromises an npm account and publishes a malicious package that will be downloaded automatically.
+Furthermore, it increases the risk of supply chain attacks, where an attacker compromises a npm account and publishes a malicious package that will be downloaded automatically.
 
 To address these issues, Scout 26.2 or newer locks most of the ranged dependencies to a fixed version by default.
 Excluded are `snapshot` dependencies which should always point to the newest available snapshot version.
-These `snapshot` dependencies are the reason Scout cannot use pnpm's default locking mechanism based on a `pnpm-lock.yaml` file. The lock file always pins the entire dependency tree, whereas snapshot dependencies must not be locked.
+These `snapshot` dependencies are the reason Scout cannot use pnpm's default locking mechanism based on a `pnpm-lock.yaml` file.
+The lock file always pins the entire dependency tree, whereas snapshot dependencies must not be locked.
 
 Instead, the locked versions are written to the https://pnpm.io/settings#overrides[pnpm overrides] in the `pnpm-workspace.yaml` file.
 The new `install` command of the `@eclipse-scout/releng` module generates these overrides when dependencies are installed locally during development.
 The Maven build scripts only use the available overrides and therefore exactly use the specified versions.
 The generated overrides contain all dependencies and transitive dependencies that are declared using a ranged non-snapshot version.
 
-While the exact version in the overrides depends on the available versions at the time you execute the install script, the following examples give an idea how the overrides are generated:
+While the exact version in the overrides depends on the available versions at the time you execute the `install` script, the following examples give an idea how the overrides are generated:
 
 * Declaring a dependency `"@eclipse-scout/core": "26.1.16"` will result in no override as the version is already fixed.
 * Declaring a dependency using a ranged version like `"@eclipse-scout/core": "~26.1.0"` will result in an override like `"@eclipse-scout/core": 26.1.16`.
@@ -54,17 +56,16 @@ The `install` command of the `@eclipse-scout/releng` module has the following pa
 * `updateMode`: Specifies which dependencies should be updated during install. Default is `required`. Must be one of the following:
 ** `required`: Update dependencies that do not fulfill the version declaration in the `package.json`.
 This should be used during development so that the overrides are adapted as required in case you modify the dependencies in the `package.json`.
-Running install using this mode is more or less the same as performing `pnpm install` without the previously generated overrides and re-generating new overrides afterward.
-Therefore, only those overrides are updated that do no longer satisfy changed version constraints in your `package.json`.
+Therefore, only those overrides are updated that do no longer satisfy the version constraints in your `package.json`.
 ** `all`: Update all dependencies to the newest possible version that currently exists and matches the version specifiers of the `package.json`.
 This can be used if you want to perform a manual full update of the whole dependency tree.
 The update mode `all` is nearly the same as running `pnpm update` without the previously generated overrides and re-generating new overrides afterward.
-So running install using this mode leads to all overrides being updated to the newest version satisfying the version constraints from the `package.json`.
+So running `install` using this mode leads to all overrides being updated to the newest version satisfying the version constraints from the `package.json`.
 ** `snapshots`: Only `snapshot` dependencies are updated.
 All other dependencies use the version declared in the overrides.
 As only `snapshots` can be updated, and they are never part of the overrides, the overrides will not be touched in this mode.
 This mode is typically used by CI builds.
-Running install using this mode will not change the overrides as it is more or less a `pnpm update` with the previously generated overrides.
+Running `install` using this mode will not change the overrides as it is more or less a `pnpm update` with the previously generated overrides.
 Therefore, only non overridden dependencies (i.e. snapshot dependencies) are updated to their newest version satisfying the version constraints from the `package.json`.
 * `convergenceLogLevel`: Specifies which non-convergent dependencies should be logged. Default is `own`. Must be one of the following:
 ** `all`: Log all dependencies for which several versions are in use (non-unique versions).
@@ -180,7 +181,7 @@ In order to use the latest EcmaScript features like the <<ES6 Modules>> but stil
 
 === CSS Preprocessor
 
-The CSS preprocessor used by Scout is http://lesscss.org/[Less], so the default webpack configuration already supports it by using the `less-loader` plugin. In order to profit from Scout`s Less variables (see xref:technical-guide:user-interface/styling.adoc[]) we recommend to use Less as well. Since it is already configured, you won't have to do anything but to write your CSS rules.
+The CSS preprocessor used by Scout is http://lesscss.org/[Less], so the default webpack configuration already supports it by using the `less-loader` plugin. In order to profit from Scout`s `Less` variables (see xref:technical-guide:user-interface/styling.adoc[]) we recommend to use Less as well. Since it is already configured, you won't have to do anything but to write your CSS rules.
 
 [#test-configuration]
 == Test Configuration
@@ -382,8 +383,8 @@ In order to use the Scout eslint-config, you need to add devDependencies to the 
 .ESLint Dependencies
 ----
 "devDependencies": {
-  "@eclipse-scout/eslint-config": "24.2.17",
-  "eslint": "9.39.2"
+  "@eclipse-scout/eslint-config": "27.1.0",
+  "eslint": "10.15.0"
 }
 ----
 
@@ -418,7 +419,9 @@ To do that, just add the following to your `eslint.config.mjs`:
 .Disabling the linebreak rule
 ----
   {
-    '@stylistic/linebreak-style';: 'off';
+    {
+      '@stylistic/linebreak-style';: 'off';
+    }
   }
 ----
 

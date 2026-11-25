@@ -448,6 +448,13 @@ Remove the dependencies `jasmine-jquery` and `@types/jasmine-jquery` from your `
 The following features of `jasmine-jquery` are not available anymore: `spyOnEvent` and the matchers `toHaveBeenTriggered`, `toHaveBeenTriggeredOn`, `toHaveBeenTriggeredOnAndWith`, `toHaveBeenPrevented`, `toHaveBeenPreventedOn`, `toHaveBeenStopped`, `toHaveBeenStoppedOn`, `toHandle` and `toHandleWith`, as well as loading fixtures from files (`loadFixtures`, `readFixtures`, `getJSONFixture`, style fixtures).
 Replace them with Jasmine spies on the event handlers or with `setFixtures`.
 
+[[eslint-10]]
+== ESLint 10 (Scout JS)
+
+`@eclipse-scout/eslint-config` requires ESLint 10.
+
+Therefore, update `eslint` to `10.15.0` in your `package.json` files.
+
 == jquery-scout: oneAnimationEnd Changed
 
 `oneAnimationEnd` has been improved so the callback is now executed even when debugging or if the `animation-duration` is set to 0s.

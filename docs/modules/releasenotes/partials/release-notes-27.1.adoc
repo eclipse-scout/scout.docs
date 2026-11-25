@@ -197,3 +197,11 @@ Use it in asynchronous code to stop a promise chain before accessing a widget th
 
 
 For details, see xref:technical-guide:user-interface/error-handling.adoc[Error Handling].
+
+[[eslint-10]]
+== ESLint 10 (Scout JS)
+
+Scout now uses ESLint 10 to analyze JavaScript and TypeScript code.
+The shareable config `@eclipse-scout/eslint-config` has been updated accordingly:
+
+To upgrade your application, see the xref:migration:migration-guide.adoc#eslint-10[Migration Guide].

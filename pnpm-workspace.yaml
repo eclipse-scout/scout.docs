@@ -191,7 +191,7 @@ overrides:
   bl@4.1.0: 4.1.0
   boolbase@1.0.0: 1.0.0
   brace-expansion@1.1.22: 1.1.22
-  brace-expansion@5.0.13>balanced-match@4.0.4: 4.0.4
+  brace-expansion@5.1.0>balanced-match@4.0.4: 4.0.4
   braces@3.0.3: 3.0.3
   buffer-crc32@0.2.13: 0.2.13
   buffer-from@1.1.2: 1.1.2
@@ -204,7 +204,7 @@ overrides:
   callsites@3.1.0: 3.1.0
   caniuse-api@3.0.0: 3.0.0
   caniuse-api>browserslist@4.29.6: 4.29.6
-  caniuse-lite@1.0.30001827: 1.0.30001827
+  caniuse-lite@1.0.30001828: 1.0.30001828
   chalk@4.1.2: 4.1.2
   chalk>supports-color@7.2.0: 7.2.0
   cheerio-select@1.6.0: 1.6.0
@@ -264,7 +264,7 @@ overrides:
   dunder-proto@1.0.1: 1.0.1
   eastasianwidth@0.2.0: 0.2.0
   ejs@6.0.1: 6.0.1
-  electron-to-chromium@1.5.492: 1.5.492
+  electron-to-chromium@1.5.493: 1.5.493
   emoji-regex@8.0.0: 8.0.0
   encodeurl@2.0.3: 2.0.3
   encoding@0.1.14: 0.1.14
@@ -409,7 +409,7 @@ overrides:
   mime@1.6.0: 1.6.0
   mimic-response@3.1.0: 3.1.0
   minimatch@10.2.6: 10.2.6
-  minimatch@10.2.6>brace-expansion@5.0.13: 5.0.13
+  minimatch@10.2.6>brace-expansion@5.1.0: 5.1.0
   minimatch@9.0.9>brace-expansion@2.1.8: 2.1.8
   minimist@1.2.8: 1.2.8
   minimisted@2.0.1: 2.0.1
@@ -616,7 +616,7 @@ overrides:
   svgo>css-what@7.0.0: 7.0.0
   svgo>csso@5.0.5: 5.0.5
   tapable@2.3.4: 2.3.4
-  tar-fs@2.1.5: 2.1.5
+  tar-fs@2.1.6: 2.1.6
   tar-stream@2.2.0: 2.2.0
   tar@7.5.23: 7.5.23
   tar>chownr@3.0.0: 3.0.0

@@ -49,7 +49,7 @@ export class FileChooserForm extends Form {
   }
 
   protected _updateChosenFiles(files: File[]) {
-    let chosenFilesText = '';
+    let chosenFilesText: string;
     if (files.length === 0) {
       chosenFilesText = this.session.text('FileChooserNoFilesChosen');
     } else if (files.length === 1) {
