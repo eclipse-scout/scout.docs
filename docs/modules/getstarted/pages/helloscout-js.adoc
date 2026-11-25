@@ -76,7 +76,7 @@ TIP: Use `npm run build:dev:watch` to have these files automatically updated whe
 
 Use the same or start a new terminal in the main folder and execute `**npm run serve**`.
 
-This starts a little development server and opens the URL `http://127.0.0.1:8080/` in your default browser.
+This starts a little development server and opens the URL `http://localhost:8080/` in your default browser.
 The server has live reload capability, that is, as soon as files in the `dist` folder change,
 the browser tab will reload automatically.
 
