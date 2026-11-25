@@ -54,7 +54,7 @@ Usage example in your package.json:
   },
   "dependencies": {
     "@eclipse-scout/core": "{node-version}",
-    "jquery": "3.7.1"
+    "jquery": "4.1.0"
   }
 }
 ----
@@ -454,6 +454,29 @@ Replace them with Jasmine spies on the event handlers or with `setFixtures`.
 `@eclipse-scout/eslint-config` requires ESLint 10.
 
 Therefore, update `eslint` to `10.15.0` in your `package.json` files.
+
+[[jquery-4]]
+== jQuery 4 (Scout JS)
+
+Scout JS now uses jQuery 4.1.0.
+Update `jquery` to `4.1.0` and `@types/jquery` to `4.0.1` in your `package.json` files.
+
+jQuery 4 contains breaking changes, see the https://jquery.com/upgrade-guide/4.0/[jQuery Core 4.0 Upgrade Guide].
+The changes most likely to affect project code:
+
+* Removed APIs: `$.isArray`, `$.isFunction`, `$.isNumeric`, `$.isWindow`, `$.type`, `$.trim`, `$.parseJSON`, `$.now`, `$.nodeName`, `$.camelCase`, `$.cssNumber`, `$.cssProps`, `$.unique` and `$.fx.interval`.
+Use the native equivalents (e.g. `Array.isArray`, `typeof value === 'function'`, `String.prototype.trim`, `JSON.parse`, `Date.now`) or `objects.isFunction`, `objects.isArray` etc.
+* `push`, `sort` and `splice` have been removed from jQuery objects. Use `[].push.call($elems, elem)`, `$elems.add(elem)` or collect the elements in an array first (e.g. `$($elems.toArray().sort(compareFn))`).
+The `JQuery` interface of Scout no longer extends `Array`, so the TypeScript compiler reports calls of array methods on jQuery objects.
+* `$.expr[':']` and `$.expr.filters` are deprecated. Use `$.expr.pseudos`.
+* `.css()` only appends `px` to unitless numbers for a few properties (e.g. `width`, `height`, `top`, `left`, `margin`, `padding`). Specify the unit explicitly for all other properties, e.g. `$elem.css('font-size', size + 'px')`.
+* `.attr(name, false)` removes the attribute for all non-ARIA attributes. Pass the string `'false'` to set the value `false` (e.g. `spellcheck`, `draggable`, `contenteditable`).
+* `.outerWidth(true)` and `.outerHeight(true)` include negative margins.
+* The focus events are fired in the order defined by the W3C specification: `blur`, `focusout`, `focus`, `focusin`.
+* `.css('opacity')` returns an empty string for detached elements.
+* `toggleClass(boolean)` has been removed.
+
+The https://github.com/jquery/jquery-migrate[jQuery Migrate 4.x] plugin logs most of these usages to the console and can help to find them.
 
 == jquery-scout: oneAnimationEnd Changed
 
