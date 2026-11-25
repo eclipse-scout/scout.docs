@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2024 BSI Business Systems Integration AG
+ * Copyright (c) 2010, 2026 BSI Business Systems Integration AG
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -11,6 +11,7 @@ import {Dimension, FormField, graphics, HtmlComponent, ObjectIdProvider} from '@
 import {HeatmapFieldEventMap, HeatmapFieldLayout, HeatmapFieldModel} from '../index';
 import * as L from 'leaflet';
 import {LeafletMouseEvent} from 'leaflet';
+import {HeatLatLng, HeatLayer} from 'leaflet.heat';
 
 export class HeatmapField extends FormField implements HeatmapFieldModel {
   declare model: HeatmapFieldModel;
@@ -20,7 +21,7 @@ export class HeatmapField extends FormField implements HeatmapFieldModel {
   heatPointList: HeatPoint[];
   viewParameter: HeatmapViewParameter;
   heatmap: L.Map;
-  _heatLayer: any;
+  _heatLayer: HeatLayer & L.Layer;
 
   protected override _render() {
     this.addContainer(this.$parent, 'heatmap-field');
@@ -97,7 +98,7 @@ export class HeatmapField extends FormField implements HeatmapFieldModel {
     if (this._heatLayer) {
       this.heatmap.removeLayer(this._heatLayer);
     }
-    let heatPoints = [];
+    let heatPoints: HeatLatLng[] = [];
     if (this.heatPointList) {
       this.heatPointList.forEach(point => {
         heatPoints.push([
@@ -107,14 +108,13 @@ export class HeatmapField extends FormField implements HeatmapFieldModel {
         ]);
       });
     }
-    // @ts-expect-error no types available for leaflet.heat plugin
-    this._heatLayer = L.heatLayer(heatPoints, {
+    this._heatLayer = new HeatLayer(heatPoints, {
       // parameters to control the appearance of heat points
       // see leaflet.heat docs for full spec
       radius: 20,
       blur: 30,
       max: 1.0
-    });
+    }) as HeatLayer & L.Layer;
     this._heatLayer.addTo(this.heatmap);
   }
 
