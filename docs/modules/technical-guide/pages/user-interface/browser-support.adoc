@@ -1,18 +1,20 @@
 = Browser Support
 include::common:partial$_header.adoc[]
 
-The Scout HTML UI requires a web browser with modern built-in technologies: HTML 5, CSS 3, JavaScript (ECMAScript 5). Scout does its best to support all browsers widely in use today by making use of vendor-specific prefixes, polyfills or other workarounds. However, some older or obscure browsers are not supported deliberately, simply because they are lacking basic capabilities or the required effort would be beyond reason.
+The Scout HTML UI requires a web browser with modern built-in technologies: HTML 5, CSS 3, JavaScript (ECMAScript 2023).
+Scout does its best to support all browsers widely in use today by making use of vendor-specific prefixes, polyfills or other workarounds.
+However, some older or obscure browsers are not supported deliberately, simply because they are lacking basic capabilities or the required effort would be beyond reason.
 
 Here is a non-exhaustive list of supported browsers:
 
 Desktop::
-* Mozilla Firefox >= 92
-* Chromium (like Google Chrome, Microsoft Edge, Brave or Opera) >= 93
-* Apple Safari >= 15.4
+* Mozilla Firefox >= 146
+* Chromium (like Google Chrome, Microsoft Edge, Brave or Opera) >= 110
+* Apple Safari >= 16.4
 
 Mobile::
 _(Due to the nature of mobile operating systems, it is hard to specify exact versions of supported browsers. Usually, the screen size and the device speed are the limiting factors.)_
-* iOS >= 15
+* iOS >= 16.4
 * Android >= 9
 
 == HTTP/2

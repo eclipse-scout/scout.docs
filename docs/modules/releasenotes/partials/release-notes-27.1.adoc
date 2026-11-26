@@ -205,3 +205,17 @@ Scout now uses ESLint 10 to analyze JavaScript and TypeScript code.
 The shareable config `@eclipse-scout/eslint-config` has been updated accordingly:
 
 To upgrade your application, see the xref:migration:migration-guide.adoc#eslint-10[Migration Guide].
+
+[[ecmascript-2023]]
+== ECMAScript 2023 (Scout JS)
+
+The full ECMAScript 2023 feature set can now be used, e.g. `Array.prototype.findLast()`, `toSorted()`, `toReversed()`, `toSpliced()` and `with()`.
+The `lib` of `@eclipse-scout/tsconfig` has been raised from `ES2022` to `ES2023`.
+
+The minimum supported browser versions have been raised accordingly:
+
+* Mozilla Firefox >= 146
+* Chromium (like Google Chrome, Microsoft Edge, Brave or Opera) >= 110
+* Apple Safari >= 16.4 (iOS >= 16.4)
+
+For details, see xref:technical-guide:user-interface/browser-support.adoc[Browser Support].
