@@ -225,3 +225,19 @@ As all supported browsers natively support ES2023, Babel has been removed from t
 Webpack configurations which reference `babel-loader` (e.g. to adjust its rules) need to be adjusted.
 
 For details, see xref:technical-guide:user-interface/browser-support.adoc[Browser Support].
+
+[[webpack-build]]
+== Updated Webpack Build (Scout JS)
+
+The webpack build of `@eclipse-scout/cli` has been updated to webpack 5.113 and now uses its built-in features instead of plugins which have been deprecated by the webpack team:
+
+* CSS: The CSS compiled by `less-loader` is processed and extracted by webpack itself (https://webpack.js.org/guides/native-css/[native CSS]).
+`css-loader` and `mini-css-extract-plugin` are no longer used.
+* Static resources: The resources are copied by the `CopyPlugin` built into webpack instead of `copy-webpack-plugin`.
+* Minification: JavaScript and CSS are minified by `minimizer-webpack-plugin` (using esbuild, as before) instead of `terser-webpack-plugin` and `css-minimizer-webpack-plugin`.
+
+The output of the build is unchanged.
+Furthermore, `fork-ts-checker-notifier-webpack-plugin` has been removed, so no desktop notification is shown anymore if the type check fails in watch mode.
+The errors are still printed to the console.
+
+To migrate custom webpack configurations, see the xref:migration:migration-guide.adoc#webpack-build[Migration Guide].

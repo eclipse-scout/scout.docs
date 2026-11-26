@@ -455,6 +455,47 @@ Replace them with Jasmine spies on the event handlers or with `setFixtures`.
 
 Therefore, update `eslint` to `10.15.0` in your `package.json` files.
 
+[[webpack-build]]
+== Updated Webpack Build (Scout JS)
+
+The following dependencies have been removed from `@eclipse-scout/cli`: `copy-webpack-plugin`, `css-loader`, `mini-css-extract-plugin`, `terser-webpack-plugin`, `css-minimizer-webpack-plugin` and `fork-ts-checker-notifier-webpack-plugin`.
+If your webpack configuration (e.g. `webpack.config.js`) uses one of them, migrate it as follows:
+
+* `copy-webpack-plugin`: Use the `CopyPlugin` of webpack instead. It accepts the same patterns.
++
+[source,js]
+----
+const {CopyPlugin} = require('webpack');
+config.plugins.push(new CopyPlugin({patterns: [{from: 'res', to: '.'}]}));
+----
++
+Webpack refuses to copy files outside of `output.path` unless the target directory is allowed by `output.allowOutside`.
+The default configuration of Scout already allows it for Maven modules.
+* `mini-css-extract-plugin` and `css-loader`: Remove them from your rules and plugins.
+Webpack processes CSS natively, so a rule only needs the preprocessor loader and `type: 'css'`.
+The file name is configured by `output.cssFilename`, the options of `css-loader` are available under `module.parser.css` (see https://webpack.js.org/guides/native-css/#migration-guide[Native CSS migration guide]).
+* `terser-webpack-plugin` and `css-minimizer-webpack-plugin`: Use `minimizer-webpack-plugin` instead and pass the options of the minimizer with the `minify` option:
++
+[source,js]
+----
+const MinimizerPlugin = require('minimizer-webpack-plugin');
+new MinimizerPlugin({
+  minify: {
+    implementation: MinimizerPlugin.esbuildMinify,
+    options: {legalComments: 'none'}
+  }
+});
+----
+* `fork-ts-checker-notifier-webpack-plugin`: Removed without replacement.
+If you still want desktop notifications, add the plugin to your own `package.json` and webpack configuration.
+
+Furthermore:
+
+* `less-loader` 13 reports Less warnings as webpack warnings by default.
+To restore the previous behavior, set the option `lessLogAsWarnOrErr` of `less-loader` to `false`.
+* After the build, files matching `*theme*.js` are no longer deleted from the output directory.
+Webpack does not create JavaScript files for entries containing only Less or CSS anymore.
+
 [[jquery-4]]
 == jQuery 4 (Scout JS)
 
