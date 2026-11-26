@@ -175,9 +175,11 @@ In the snippet above the `resDir` array contains a folder of your module and a f
 
 When the build runs all the folders specified by the `resDir` array are visited and the resources collected. These resources are then available under `/` (if you use the Scout backend). If you want to know how to start the build, have a look at the <<Command Line Interface (CLI)>>.
 
-=== EcmaScript Transpiler
+=== EcmaScript Version
 
-In order to use the latest EcmaScript features like the <<ES6 Modules>> but still support older browsers, Scout uses https://babeljs.io/[Babel] to transpile ES6+ code into ES5. The transpiler is enabled by default if you use the Webpack configuration provided by Scout, so you don't have to configure it by yourself.
+Scout targets ECMAScript 2023, which is natively supported by all xref:technical-guide:user-interface/browser-support.adoc[supported browsers].
+TypeScript code is compiled to ES2023 by the `ts-loader` according to the `target` of `@eclipse-scout/tsconfig`.
+JavaScript code is not transpiled.
 
 === CSS Preprocessor
 

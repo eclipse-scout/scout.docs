@@ -7,9 +7,8 @@ A typical approach to work with Scout JS is to use a package manager (e.g. pnpm)
 Thanks to the xref:technical-guide:user-interface/build-stack.adoc#command-line-interface-cli[Scout CLI] this task is straightforward.
 
 The main advantage is the simplified development process.
-You can use Less variables from Scout (e.g. the color palette).
+You can use `Less` variables from Scout (e.g. the color palette).
 Individual source files can be imported directly which facilitates code completion.
-It also enables you to use modern code but still target older browsers by the usage of Babel.
 
 If you don't need all that and just want to include Scout as a script in your html page (as in the early days), you can do so, too!
 This article shows how to achieve this.

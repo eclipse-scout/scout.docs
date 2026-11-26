@@ -218,4 +218,10 @@ The minimum supported browser versions have been raised accordingly:
 * Chromium (like Google Chrome, Microsoft Edge, Brave or Opera) >= 110
 * Apple Safari >= 16.4 (iOS >= 16.4)
 
+As all supported browsers natively support ES2023, Babel has been removed from the build:
+
+* The `target` of `@eclipse-scout/tsconfig` has been changed from `ESNext` to `ES2023`, so TypeScript compiles newer syntax down to ES2023.
+* JavaScript files are no longer transpiled so developers still using JavaScript are encouraged to switch to TypeScript now. Otherwise, they have to ensure browser compatibility themselves.
+Webpack configurations which reference `babel-loader` (e.g. to adjust its rules) need to be adjusted.
+
 For details, see xref:technical-guide:user-interface/browser-support.adoc[Browser Support].
