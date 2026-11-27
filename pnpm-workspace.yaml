@@ -62,7 +62,7 @@ overrides:
   "@types/geojson@7946.0.16": 7946.0.16
   "@types/json-schema@7.0.15": 7.0.15
   "@types/less@3.0.8": 3.0.8
-  "@types/node@26.6.10": 26.6.10
+  "@types/node@26.6.11": 26.6.11
   "@webassemblyjs/ast@1.14.1": 1.14.1
   "@webassemblyjs/wasm-edit@1.14.1": 1.14.1
   "@webassemblyjs/wasm-parser@1.14.1": 1.14.1

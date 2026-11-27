@@ -491,10 +491,12 @@ If you still want desktop notifications, add the plugin to your own `package.jso
 
 Furthermore:
 
-* `less-loader` 13 reports Less warnings as webpack warnings by default.
-To restore the previous behavior, set the option `lessLogAsWarnOrErr` of `less-loader` to `false`.
-* After the build, files matching `*theme*.js` are no longer deleted from the output directory.
-Webpack does not create JavaScript files for entries containing only Less or CSS anymore.
+* `Less` deprecation warnings are no longer suppressed.
+Fix the reported code, e.g. call mixins with parentheses (`.my-mixin();` instead of `.my-mixin;`) and use `@{variable}` interpolation in at-rules (`@keyframes @{name}`).
+* Less math uses the default mode `parens-division` instead of the deprecated mode `always`: divisions are only calculated inside parentheses.
+Wrap divisions in parentheses, e.g. `(@a / 2)` instead of `@a / 2`.
+Parentheses of function calls do not count, so use `ceil((@a / 2))` instead of `ceil(@a / 2)`.
+Otherwise, the division is written to the CSS as it is, or the build fails with "Operation on an invalid type".
 
 [[jquery-4]]
 == jQuery 4 (Scout JS)

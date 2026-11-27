@@ -295,7 +295,7 @@ The build commands accept some arguments you can use to adjust the build without
 
 . mode: `development` or `production`. This argument is set automatically when using build:dev or build:prod.
 . clean: true, to clean the `target/dist` folder before each build. Default is `false` if watcher is enabled (build:dev:watch), otherwise `true`.
-. progress: `true`, to show build progress in percentage. Default is `true`.
+. progress: `true`, to show build progress in percentage. Default is `true` if the output is a terminal, otherwise `false`.
 . profile: `true`, to show timing information for each build step. Default is `false`.
 . resDirArray: an array containing directories which should be copied to `dist/res`.
 . stats: object to control the build output. There are some presets available as shortcuts (e.g. 'detailed' or 'errors-only'), see also: https://webpack.js.org/configuration/stats/.
