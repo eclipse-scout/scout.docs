@@ -206,6 +206,16 @@ The shareable config `@eclipse-scout/eslint-config` has been updated accordingly
 
 To upgrade your application, see the xref:migration:migration-guide.adoc#eslint-10[Migration Guide].
 
+[[typescript-6]]
+== TypeScript 6 (Scout JS)
+
+Scout now uses TypeScript 6.0 (see https://www.typescriptlang.org/docs/handbook/release-notes/typescript-6-0.html[TypeScript 6.0 release notes]).
+
+The Scout modules (e.g. `@eclipse-scout/core`) no longer provide a default export.
+Use named imports instead, e.g. `import {scout} from '@eclipse-scout/core';`.
+
+To upgrade your application, see the xref:migration:migration-guide.adoc#typescript-6[Migration Guide].
+
 [[ecmascript-2023]]
 == ECMAScript 2023 (Scout JS)
 

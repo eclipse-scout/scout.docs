@@ -299,5 +299,4 @@ export * from './wrappedform/WrappedFormFieldForm';
 export * from './wrappedform/WrappedFormFieldFormModel';
 export * from './wrappedform/WrappedFormLookupCall';
 
-export default self;
 ObjectFactory.get().registerNamespace('jswidgets', self);

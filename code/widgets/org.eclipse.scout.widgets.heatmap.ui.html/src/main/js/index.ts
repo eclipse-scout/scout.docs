@@ -17,5 +17,4 @@ export * from './heatmap/HeatmapFieldEventMap';
 export * from './heatmap/HeatmapFieldAdapter';
 export * from './heatmap/HeatmapFieldLayout';
 
-export default self;
 ObjectFactory.get().registerNamespace('widgets', self);

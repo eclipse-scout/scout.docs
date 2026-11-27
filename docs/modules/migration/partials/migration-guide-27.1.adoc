@@ -455,6 +455,42 @@ Replace them with Jasmine spies on the event handlers or with `setFixtures`.
 
 Therefore, update `eslint` to `10.15.0` in your `package.json` files.
 
+[[typescript-6]]
+== TypeScript 6 (Scout JS)
+
+Scout requires TypeScript 6.0.3.
+Therefore, update `typescript` to `6.0.3` in your `package.json` files.
+
+TypeScript 6 changes several defaults and deprecates some options (see https://www.typescriptlang.org/docs/handbook/release-notes/typescript-6-0.html#breaking-changes-and-deprecations-in-typescript-60[Breaking Changes and Deprecations in TypeScript 6.0]).
+For projects extending `@eclipse-scout/tsconfig`, the following changes are relevant:
+
+* `strict` is now `true` by default.
+`@eclipse-scout/tsconfig` sets it to `false`, so the type checks stay the same.
+Projects with their own `tsconfig.json` (not extending `@eclipse-scout/tsconfig`) have to set `"strict": false` explicitly if they don't use strict mode.
+* `rootDir` now defaults to the directory containing the `tsconfig.json` instead of the common directory of all source files.
+The webpack build of Scout sets `rootDir` itself, so don't set it in your `tsconfig.json`:
+** Library builds (`libraryConfig`) use the module directory and emit the declarations if `"declaration": true` is set in the `tsconfig.json`.
+They are now written to a `src/main/js` subfolder of the `outDir`, e.g. `target/dist/d.ts/src/main/js/index.d.ts` instead of `target/dist/d.ts/index.d.ts` or `target/dist/d.ts/main/js/index.d.ts`.
+Adjust the `types` entries in your `package.json` (e.g. in `publishConfig`) accordingly.
+** Application builds use the file system root because they may contain the TypeScript sources of other modules.
+They no longer emit declarations, so `declaration` and `declarationMap` can be removed from the `tsconfig.json` of applications.
+* A module can no longer default export its own namespace (error TS2303 "Circular definition of import alias").
+Remove `export default self;` from your `index.ts` files.
+Keep `import * as self from './index';` if `self` is still used, e.g. for `ObjectFactory.get().registerNamespace('myNamespace', self);`.
++
+The Scout modules no longer provide a default export either.
+Replace default imports like `import scout from '@eclipse-scout/core';` with named imports (e.g. `import {scout} from '@eclipse-scout/core';`) or a namespace import (`import * as scoutCore from '@eclipse-scout/core';`).
++
+[source,typescript,opts=novalidate]
+----
+import {ObjectFactory} from '@eclipse-scout/core';
+import * as self from './index';
+
+export * from './MyWidget';
+
+ObjectFactory.get().registerNamespace('myNamespace', self);
+----
+
 [[webpack-build]]
 == Updated Webpack Build (Scout JS)
 
